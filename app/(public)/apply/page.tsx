@@ -174,7 +174,7 @@ export default function ApplyPage() {
                     <div className="group/upload relative h-40 rounded-[2rem] border-2 border-dashed border-white/5 bg-white/5 flex flex-center hover:border-cyan-500/30 transition-all cursor-pointer">
                       <input
                         type="file"
-                        onChange={(e) => handleFileChange(e, file.id === 'front')}
+                        onChange={(e) => handleFileChange(e, file.id as 'front' | 'back')}
                         className="absolute inset-0 opacity-0 cursor-pointer z-10"
                         accept="image/*"
                       />
