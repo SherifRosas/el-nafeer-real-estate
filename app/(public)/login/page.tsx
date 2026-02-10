@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/components/LanguageContext'
+import NavigationHeader from '@/components/NavigationHeader'
 
 export default function LoginPage() {
   const router = useRouter()
