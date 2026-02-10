@@ -1,3 +1,5 @@
+'use client'
+
 export default function MockPage({ title }: { title: string }) {
     return (
         <div className="h-[60vh] flex flex-col items-center justify-center gap-8 animate-in zoom-in duration-1000">
