@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/components/LanguageContext'
 
 export default function LoginPage() {
