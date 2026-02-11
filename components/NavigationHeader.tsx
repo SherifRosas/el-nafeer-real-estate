@@ -64,20 +64,22 @@ export default function NavigationHeader() {
           <div className="absolute inset-0 liquid-gloss opacity-20 pointer-events-none" />
 
           <div className="flex items-center gap-10 relative z-10">
-            <Link href="/" className="group flex items-center gap-6 relative">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-white/10 to-transparent rounded-2xl md:rounded-[2.5rem] p-4 prestige-card flex items-center justify-center relative">
-                <div className="absolute inset-0 bg-sahara-gold/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-[2.5rem]" />
+            <Link href="/" className="group flex items-center gap-6 relative cursor-pointer">
+              <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-[#00ffff]/20 via-[#a855f7]/10 to-transparent rounded-3xl md:rounded-3xl flex items-center justify-center relative overflow-hidden hover:rounded-2xl transition-all">
+                {/* Animated Glow Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#00ffff]/30 via-transparent to-[#a855f7]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
+                <div className="absolute inset-0 rounded-3xl border-2 border-[#00ffff]/30 group-hover:border-[#00ffff]/60 transition-colors duration-500 animate-[pulse_3s_ease-in-out_infinite]" />
                 <img
                   src={isArabic ? '/logos/logo-ar.png' : '/logos/logo-en.png'}
                   alt="EL-NAFEER Logo"
-                  className="w-full h-full object-contain relative z-10 group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover relative z-10 group-hover:scale-110 group-hover:drop-shadow-[0_0_20px_rgba(0,255,255,0.6)] transition-all duration-700 rounded-3xl"
                 />
               </div>
               <div className="hidden lg:block">
-                <h1 className="text-2xl font-black tracking-tighter italic leading-none text-white group-hover:text-sahara-gold transition-colors">
+                <h1 className="text-3xl md:text-4xl font-black tracking-tighter italic leading-none bg-gradient-to-r from-[#00ffff] via-[#a855f7] to-[#ff00ff] bg-clip-text text-transparent group-hover:drop-shadow-[0_0_20px_rgba(0,255,255,0.8)] transition-all duration-500 animate-[neonFlicker_3s_infinite]">
                   EL-NAFEER
                 </h1>
-                <span className="text-[9px] font-black text-white/40 uppercase tracking-[0.4em] mt-2 block">
+                <span className="text-sm font-black text-[#00ffff]/60 uppercase tracking-[0.4em] mt-2 block group-hover:text-[#00ffff] transition-colors">
                   {isArabic ? 'العقارات الفاخرة' : 'PRESTIGE REAL ESTATE'}
                 </span>
               </div>

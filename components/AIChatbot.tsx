@@ -274,16 +274,23 @@ export default function AIChatbot() {
             </p>
           </div>
         )}
-        <div className={`w-20 h-20 rounded-[2rem] flex items-center justify-center transition-all duration-500 shadow-2xl border ${isOpen ? 'bg-black border-white/10 rotate-180' : 'bg-[#020202] border-cyan-500/20 hover:scale-110 hover:-rotate-6 hover:rounded-3xl shadow-[0_0_30px_rgba(6,182,212,0.2)]'}`}>
+        <div className={`w-24 h-24 rounded-[2.5rem] flex items-center justify-center transition-all duration-500 shadow-2xl border-2 ${isOpen ? 'bg-gradient-to-br from-[#ff0055] to-[#a855f7] border-[#ff0055] rotate-180 shadow-[0_0_40px_rgba(255,0,85,0.6)]' : 'bg-gradient-to-br from-[#0a0e27] to-[#050811] border-[#00ffff] hover:scale-110 hover:-rotate-6 hover:shadow-[0_0_40px_rgba(0,255,255,0.8)] shadow-[0_0_30px_rgba(0,255,255,0.4)] animate-[pulse_2s_ease-in-out_infinite]'}`}>
           {isOpen ? (
-            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
+            <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
-            <div className="relative">
-              <div className="absolute inset-0 bg-cyan-500 blur-xl opacity-20" />
-              <span className="text-3xl relative z-10">🤖</span>
-              <div className="absolute -top-3 -right-3 w-7 h-7 bg-cyan-500 rounded-lg flex items-center justify-center text-black text-[9px] font-black border-2 border-black animate-bounce shadow-xl">
+            <div className="relative flex flex-col items-center justify-center w-full h-full">
+              {/* Outer glow ring */}
+              <div className="absolute inset-0 rounded-full border-2 border-[#00ffff]/30 animate-[spin_4s_linear_infinite]" />
+              {/* Inner glow ring */}
+              <div className="absolute inset-1 rounded-full border border-[#a855f7]/30 animate-[spin_6s_linear_infinite_reverse]" />
+              {/* Chat bubble icon */}
+              <svg className="w-10 h-10 relative z-10 text-[#00ffff] drop-shadow-[0_0_10px_rgba(0,255,255,0.8)]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
+              </svg>
+              {/* NAF Badge */}
+              <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-[#00ffff] to-[#a855f7] rounded-lg flex items-center justify-center text-black text-[9px] font-black border-2 border-[#050811] shadow-[0_0_20px_rgba(0,255,255,0.6)] animate-bounce">
                 NAF
               </div>
             </div>

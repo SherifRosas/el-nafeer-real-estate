@@ -1,30 +1,28 @@
-# Job Advertisement System
+# EL NAFEER - Real Estate Platform
 
-A comprehensive online job advertisement system for the **Financial Accounts Manager** position at the **Egyptian Ministry of Education**.
+A comprehensive real estate marketplace platform for buying, selling, and renting properties with advanced lead management and owner dashboards.
 
 ## Features
 
-- ✅ Gmail authentication with email/phone verification
-- ✅ Application form with National ID upload
-- ✅ AI data verification
-- ✅ Payment processing (1,000 EGP via Paymob)
-- ✅ Downloadable/printable coupon after payment
-- ✅ Interview appointment generation
-- ✅ Admin dashboard with application management
-- ✅ Selection confirmation system
-- ✅ Advertisement closure/reactivation with QR code
-- ✅ Content protection (no copy/paste/screenshot)
+- ✅ Property listings with images and detailed descriptions
+- ✅ Advanced search and filtering
+- ✅ Lead management system
+- ✅ Property owner dashboards
+- ✅ Email notifications
+- ✅ Admin dashboard with full control
+- ✅ User authentication with Gmail
+- ✅ Responsive design
 - ✅ Bilingual support (Arabic/English)
+- ✅ Mobile-friendly interface
 
 ## Technology Stack
 
-- **Framework**: Next.js 14+ with TypeScript
+- **Framework**: Next.js 16+ with TypeScript
 - **Database**: PostgreSQL with Prisma ORM
-- **Payment**: Paymob (Egyptian payment gateway)
-- **Authentication**: NextAuth.js
-- **AI Services**: OpenAI API
+- **Authentication**: NextAuth.js with Gmail OAuth
 - **Styling**: Tailwind CSS with RTL support
 - **Internationalization**: next-intl
+- **Image Handling**: Optimized image uploads
 
 ## Getting Started
 
@@ -39,7 +37,7 @@ A comprehensive online job advertisement system for the **Financial Accounts Man
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd Job-advertisement
+cd el-nafeer-real-estate
 ```
 
 2. Install dependencies:
@@ -69,23 +67,23 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Environment Variables
 
-See `REQUIRED_CONFIGURATION.md` for a complete list of required environment variables.
+See `.env.local` for configuration.
 
 Key variables:
-- `DATABASE_URL` - PostgreSQL connection string
-- `NEXTAUTH_SECRET` - NextAuth secret
-- `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` - Google OAuth
-- `PAYMOB_API_KEY` - Paymob payment gateway
-- `OPENAI_API_KEY` - OpenAI API key
-- `ADMIN_GMAIL` - Admin Gmail for QR code reactivation
+- `DATABASE_URL` - PostgreSQL connection string (Supabase)
+- `NEXTAUTH_SECRET` - NextAuth secret key
+- `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` - Google OAuth credentials
+- `NEXTAUTH_URL` - Your application URL
+- `ADMIN_EMAIL` - Admin contact email
 
 ## Project Structure
 
 ```
-Job-advertisement/
+el-nafeer-real-estate/
 ├── app/
 │   ├── (public)/          # Public pages
-│   ├── admin/             # Admin panel
+│   ├── admin/             # Admin dashboard
+│   ├── owner/             # Property owner dashboard
 │   └── api/               # API routes
 ├── components/            # React components
 ├── lib/                   # Utility functions
@@ -95,19 +93,26 @@ Job-advertisement/
 
 ## Key Features
 
-### For Applicants
-- Login with Gmail
-- Verify email and phone
-- Submit application with National ID
-- Make payment (1,000 EGP)
-- Receive coupon and interview appointment
+### For Buyers/Renters
+- Browse property listings
+- Advanced filters (location, price, features)
+- Contact property owners
+- Save favorite properties
+- View property details and images
+
+### For Property Owners
+- Create and manage property listings
+- Upload multiple property images
+- Track leads and inquiries
+- Manage property status
+- View contact information from interested buyers
 
 ### For Administrators
-- View all applications
-- Track payments and revenue
-- Confirm selections
-- Close/reactivate advertisements
-- Manage settings
+- Full platform control
+- User and property management
+- Analytics and reporting
+- Settings management
+- Support and troubleshooting
 
 ## Admin Access
 
@@ -115,12 +120,14 @@ Default admin credentials (change in production):
 - Email: Set via `ADMIN_EMAIL` env variable
 - Password: Set via `ADMIN_PASSWORD` env variable
 
-## Advertisement Closure & Reactivation
+## Property Management
 
-When an advertisement is closed:
-1. All access and payments are terminated
-2. A QR code is generated and sent to admin Gmail
-3. To reactivate: Login with admin Gmail and enter the QR code
+Property owners can:
+- List new properties with detailed information
+- Upload multiple images
+- Set pricing and availability
+- Track interested buyers
+- Manage property status (available, sold, reserved)
 
 ## Development
 
@@ -142,15 +149,16 @@ npm run db:studio    # Open Prisma Studio
 
 ## Security Notes
 
-- Content protection prevents copying/screenshots
+- Secure user authentication with NextAuth
 - All API routes are protected
-- Payment processing is secure
-- QR codes are encrypted
+- User data encryption
 - Input validation on all forms
+- Secure password hashing
+- Protected admin panel
 
 ## License
 
-This is a proprietary system for the Egyptian Ministry of Education.
+This project is provided as-is for real estate marketplace operations.
 
 ## Support
 
