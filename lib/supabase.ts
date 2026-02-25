@@ -409,6 +409,65 @@ export const db = {
     return data || []
   },
 
+  async getAllPropertyOwners() {
+    const { data, error } = await supabase
+      .from(TABLES.propertyOwners)
+      .select('*, users(email, name)')
+      .order('companyName', { ascending: true })
+
+    if (error) throw error
+    return data || []
+  },
+
+  async createProperty(propertyData: {
+    ownerId: string
+    title: string
+    titleAr?: string
+    description?: string
+    descriptionAr?: string
+    location: string
+    locationAr?: string
+    price: number
+    type: string
+    status: string
+    images?: string[]
+    features?: any
+  }) {
+    const { data, error } = await supabase
+      .from(TABLES.properties)
+      .insert({ ...propertyData, createdAt: new Date().toISOString() })
+      .select()
+      .single()
+
+    if (error) throw error
+    return data
+  },
+
+  /** Public listing: available properties for marketplace (e.g. homepage /properties) */
+  async getPublicProperties(options?: { limit?: number; offset?: number }) {
+    const limit = options?.limit ?? 50
+    const offset = options?.offset ?? 0
+    const { data, error } = await supabase
+      .from(TABLES.properties)
+      .select('*, property_owners(companyName)')
+      .eq('status', 'available')
+      .order('createdAt', { ascending: false })
+      .range(offset, offset + limit - 1)
+
+    if (error) throw error
+    return data || []
+  },
+
+  async getAllProperties() {
+    const { data, error } = await supabase
+      .from(TABLES.properties)
+      .select('*, property_owners(companyName)')
+      .order('createdAt', { ascending: false })
+
+    if (error) throw error
+    return data || []
+  },
+
   async getLeadsByPropertyId(propertyId: string) {
     const { data, error } = await supabase
       .from(TABLES.leads)
@@ -437,11 +496,11 @@ export const db = {
     return data || []
   },
 
-  async getAllPropertyOwners() {
+  async getAllLeads() {
     const { data, error } = await supabase
-      .from(TABLES.propertyOwners)
-      .select('*, users(email, name)')
-      .order('id', { ascending: false })
+      .from(TABLES.leads)
+      .select('*, properties(title)')
+      .order('createdAt', { ascending: false })
 
     if (error) throw error
     return data || []

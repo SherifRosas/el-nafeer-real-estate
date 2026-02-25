@@ -101,61 +101,61 @@ export default function ApplyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#020202] text-white selection:bg-cyan-500/30">
+    <div className="min-h-screen bg-[#020202] text-white selection:bg-sahara-gold/30">
       <NavigationHeader />
 
       <div className="max-w-5xl mx-auto py-20 px-6">
         <ApplicationProgress currentStep="apply" className="mb-12 opacity-50 hover:opacity-100 transition-opacity" />
 
-        <div className="bg-[#050505] rounded-[2.5rem] md:rounded-[3rem] border border-white/5 p-8 md:p-12 relative group overflow-hidden shadow-2xl">
-          {/* Cyber HUD Accents */}
-          <div className="absolute top-6 left-6 w-12 h-12 md:w-20 md:h-20 border-t-2 border-l-2 border-cyan-500/10" />
-          <div className="absolute bottom-6 right-6 w-12 h-12 md:w-20 md:h-20 border-b-2 border-r-2 border-cyan-500/10" />
-          <div className="absolute inset-0 bg-cyan-500/5 translate-y-full group-hover:translate-y-0 transition-transform duration-1000" />
+        <div className="milky-glass rounded-[2.5rem] md:rounded-[4.5rem] border border-white/10 p-8 md:p-20 relative group overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.5)]">
+          {/* Elite HUD Accents */}
+          <div className="absolute top-10 left-10 w-24 h-24 border-t-2 border-l-2 border-sahara-gold/10" />
+          <div className="absolute bottom-10 right-10 w-24 h-24 border-b-2 border-r-2 border-sahara-gold/10" />
+          <div className="absolute inset-0 bg-sahara-gold/[0.02] translate-y-full group-hover:translate-y-0 transition-transform duration-1000" />
 
           <div className="relative z-10">
-            <header className="text-center mb-12 md:mb-16">
-              <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-cyan-500/20 bg-cyan-500/5 mb-6">
-                <span className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(6,182,212,1)]" />
-                <span className="text-[9px] font-black text-cyan-400 uppercase tracking-[0.4em]">Acquisition_Protocol_v4</span>
+            <header className="text-center mb-16 md:mb-24">
+              <div className="inline-flex items-center gap-3 px-6 py-2 rounded-xl border border-sahara-gold/20 bg-sahara-gold/5 mb-10 group/proto">
+                <span className="w-2 h-2 bg-sahara-gold rounded-full animate-pulse shadow-[0_0_15px_rgba(212,175,55,1)]" />
+                <span className="text-[10px] font-black text-gray-400 group-hover:text-sahara-gold transition-colors uppercase tracking-[0.5em] robotic-digits">ACQUISITION_PROTOCOL_v3.5_MASTER</span>
               </div>
-              <h1 className="text-4xl md:text-6xl font-black italic tracking-tighter uppercase mb-4 leading-none">
+              <h1 className="text-5xl md:text-7xl font-black italic tracking-tighter uppercase mb-6 leading-none">
                 {isArabic ? 'بروتوكول الاستحواذ' : 'Acquisition Protocol'}
               </h1>
-              <p className="text-[9px] md:text-[10px] font-black text-gray-500 uppercase tracking-[0.3em] md:tracking-[0.5em]">
-                {isArabic ? 'مزامنة بيانات العميل للتحقق من الأهلية' : 'Identity Synthesis & Eligibility Verification'}
+              <p className="text-[10px] md:text-xs font-black text-gray-600 uppercase tracking-[0.5em] italic">
+                {isArabic ? 'مزامنة بيانات العميل للتحقق من الأهلية' : 'Identity Synthesis // Eligibility Verification'}
               </p>
             </header>
 
             {/* Protocol Meta Info */}
-            <div className="p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] bg-cyan-500/5 border border-cyan-500/10 mb-10 md:mb-12 flex flex-col md:flex-row gap-6 md:gap-8 items-center">
-              <div className="w-14 h-14 md:w-16 md:h-16 bg-cyan-500/10 rounded-2xl flex items-center justify-center text-2xl md:text-3xl">ℹ️</div>
+            <div className="p-8 md:p-12 rounded-[2rem] md:rounded-[3.5rem] bg-white/[0.02] border border-white/5 mb-16 flex flex-col md:flex-row gap-10 items-center milky-glass">
+              <div className="w-20 h-20 md:w-24 md:h-24 bg-sahara-gold/5 border border-sahara-gold/10 rounded-3xl flex items-center justify-center text-3xl md:text-5xl shadow-2xl">🏛️</div>
               <div className="flex-1 text-center md:text-left">
-                <h3 className="text-[12px] md:text-sm font-black uppercase text-cyan-400 mb-1">{isArabic ? 'إجراءات ما بعد التسجيل' : 'Post-Registration Sequence'}</h3>
-                <p className="text-[10px] md:text-[11px] font-medium text-gray-400 leading-relaxed">
+                <h3 className="text-sm md:text-base font-black uppercase text-sahara-gold mb-3 tracking-widest">{isArabic ? 'إجراءات ما بعد التسجيل' : 'POST_REGISTRATION_SEQUENCE'}</h3>
+                <p className="text-xs md:text-sm font-bold text-gray-500 leading-relaxed uppercase tracking-tight italic">
                   {isArabic
-                    ? 'بمجرد تنفيذ البروتوكول، سيتم توليد رمز وصول فريد وجدولة مزامنة جسدية (مقابلة). يرجى تأمين البيانات المدخلة.'
-                    : 'System will generate unique access tokens and schedule physical synchronization (interview) upon successful data entry. Secure your input nodes.'}
+                    ? 'بمجرد تنفيذ البروتوكول، سيتم توليد رمز وصول فريد وجدولة مقابلة شخصية. يرجى تأمين دخلاتك.'
+                    : 'System will generate unique master tokens and schedule physical synchronization nodes upon successful validation. Level 5 clearance required.'}
                 </p>
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-12">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <form onSubmit={handleSubmit} className="space-y-16">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 {/* Inputs */}
                 {[
-                  { id: 'fullName', label: isArabic ? 'الاسم بالكامل' : 'Global Identity (Full Name)', placeholder: 'MASTER USER' },
-                  { id: 'email', label: isArabic ? 'البريد الإلكتروني' : 'Communication Node (Email)', placeholder: 'NODE@ELNAFEER.AI' },
-                  { id: 'phoneNumber', label: isArabic ? 'رقم الهاتف' : 'Contact Frequency (Phone)', placeholder: '+20 XXX XXX XXXX' },
-                  { id: 'address', label: isArabic ? 'العنوان' : 'Geographic Cache (Address)', placeholder: 'CAIRO_SECTOR_7' },
+                  { id: 'fullName', label: isArabic ? 'الاسم بالكامل' : 'GLOBAL_IDENTITY', placeholder: 'MASTER_USER_01' },
+                  { id: 'email', label: isArabic ? 'البريد الإلكتروني' : 'COMMUNICATION_NODE', placeholder: 'MAIL@ELNAFEER.AI' },
+                  { id: 'phoneNumber', label: isArabic ? 'رقم الهاتف' : 'CONTACT_FREQUENCY', placeholder: '+20 XX XXX XXXX' },
+                  { id: 'address', label: isArabic ? 'العنوان' : 'GEOGRAPHIC_CACHE', placeholder: 'SECTOR_07_CAIRO' },
                 ].map((input) => (
-                  <div key={input.id} className="space-y-3">
-                    <label className="text-[10px] font-black text-gray-600 uppercase tracking-widest ml-2">{input.label}</label>
+                  <div key={input.id} className="space-y-4">
+                    <label className="text-[10px] font-black text-gray-600 uppercase tracking-[0.3em] ml-4 robotic-digits">{input.label}</label>
                     <input
                       type={input.id === 'email' ? 'email' : 'text'}
                       value={(formData as any)[input.id]}
                       onChange={(e) => setFormData({ ...formData, [input.id]: e.target.value })}
-                      className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-5 text-white font-bold tracking-tight focus:border-cyan-500/50 outline-none transition-all placeholder:text-gray-800 italic"
+                      className="w-full bg-white/[0.02] border border-white/5 rounded-2xl px-8 py-6 text-white font-black tracking-tight focus:border-sahara-gold/50 outline-none transition-all placeholder:text-gray-800 italic uppercase text-sm"
                       placeholder={input.placeholder}
                       required
                     />
@@ -164,14 +164,14 @@ export default function ApplyPage() {
               </div>
 
               {/* ID Uploads */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 {[
-                  { id: 'front', label: isArabic ? 'الهوية - وجه' : 'ID_IDENT_FRONT', state: nationalIdFront },
-                  { id: 'back', label: isArabic ? 'الهوية - ظهر' : 'ID_IDENT_BACK', state: nationalIdBack },
+                  { id: 'front', label: isArabic ? 'الهوية - وجه' : 'ID_IDENT_FRONT_CORE', state: nationalIdFront },
+                  { id: 'back', label: isArabic ? 'الهوية - ظهر' : 'ID_IDENT_BACK_CORE', state: nationalIdBack },
                 ].map((file) => (
                   <div key={file.id} className="relative">
-                    <label className="text-[10px] font-black text-gray-600 uppercase tracking-widest mb-3 block">{file.label}</label>
-                    <div className="group/upload relative h-40 rounded-[2rem] border-2 border-dashed border-white/5 bg-white/5 flex flex-center hover:border-cyan-500/30 transition-all cursor-pointer">
+                    <label className="text-[10px] font-black text-gray-600 uppercase tracking-[0.3em] mb-4 block robotic-digits">{file.label}</label>
+                    <div className="group/upload relative h-56 rounded-[2.5rem] border-2 border-dashed border-white/5 bg-white/[0.02] flex flex-center hover:border-sahara-gold/30 transition-all cursor-pointer milky-glass shadow-inner">
                       <input
                         type="file"
                         onChange={(e) => handleFileChange(e, file.id as 'front' | 'back')}
@@ -179,8 +179,8 @@ export default function ApplyPage() {
                         accept="image/*"
                       />
                       <div className="w-full h-full flex flex-col items-center justify-center pointer-events-none">
-                        <span className="text-2xl mb-2 opacity-40 group-hover/upload:scale-125 transition-transform">{file.state ? '✅' : '📤'}</span>
-                        <p className="text-[9px] font-black text-gray-500 uppercase tracking-widest">{file.state ? file.state.name : 'Binary_Upload_Link'}</p>
+                        <span className="text-3xl mb-4 grayscale group-hover/upload:grayscale-0 group-hover/upload:scale-125 transition-all">{file.state ? '💎' : '📁'}</span>
+                        <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.5em] robotic-digits">{file.state ? file.state.name : 'BINARY_VUL_LINK'}</p>
                       </div>
                     </div>
                   </div>
@@ -188,12 +188,12 @@ export default function ApplyPage() {
               </div>
 
               {/* Checkboxes */}
-              <div className="space-y-6 pt-8 border-t border-white/5">
+              <div className="space-y-8 pt-12 border-t border-white/5">
                 {[
-                  { id: 'requirementsAgreed', label: isArabic ? 'أوافق على الشروط' : 'Acknowledge System Prerequisites & Legal Bounds' },
-                  { id: 'documentsAgreed', label: isArabic ? 'أقر بصحة البيانات' : 'Verify Data Integrity & Authenticity Signature' },
+                  { id: 'requirementsAgreed', label: isArabic ? 'أوافق على الشروط' : 'ACKNOWLEDGE_ELITE_PREREQUISITES_&_SYSTEM_BOUNDS' },
+                  { id: 'documentsAgreed', label: isArabic ? 'أقر بصحة البيانات' : 'VERIFY_DATA_INTEGRITY_&_MASTER_SIGNATURE' },
                 ].map((check) => (
-                  <label key={check.id} className="flex items-center gap-4 cursor-pointer group/check">
+                  <label key={check.id} className="flex items-center gap-6 cursor-pointer group/check">
                     <div className="relative">
                       <input
                         type="checkbox"
@@ -201,9 +201,11 @@ export default function ApplyPage() {
                         onChange={(e) => setFormData({ ...formData, [check.id]: e.target.checked })}
                         className="peer hidden"
                       />
-                      <div className="w-6 h-6 rounded-lg border-2 border-white/10 peer-checked:bg-cyan-500 peer-checked:border-cyan-500 transition-all shadow-[0_0_10px_rgba(6,182,212,0)] peer-checked:shadow-[0_0_15px_rgba(6,182,212,0.4)]" />
+                      <div className="w-7 h-7 rounded-xl border-2 border-white/10 peer-checked:bg-sahara-gold peer-checked:border-sahara-gold transition-all shadow-[0_0_20px_rgba(212,175,55,0)] peer-checked:shadow-[0_0_30px_rgba(212,175,55,0.4)] flex items-center justify-center">
+                        <span className="text-black text-[10px] font-black opacity-0 peer-checked:opacity-100 italic transition-opacity">OK</span>
+                      </div>
                     </div>
-                    <span className="text-[11px] font-black text-gray-500 group-hover/check:text-white transition-colors uppercase tracking-widest">
+                    <span className="text-[11px] font-black text-gray-500 group-hover/check:text-sahara-gold transition-colors uppercase tracking-[0.2em]">
                       {check.label}
                     </span>
                   </label>
@@ -213,31 +215,30 @@ export default function ApplyPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-cyan-500 text-black font-black py-8 rounded-[2rem] uppercase tracking-[0.5em] text-xs hover:scale-[1.01] transition-all shadow-[0_0_50px_rgba(6,182,212,0.3)] disabled:opacity-50 relative overflow-hidden group/btn"
+                className="w-full bg-white text-black font-black py-10 rounded-[3rem] uppercase tracking-[0.8em] text-[11px] hover:scale-[1.01] hover:bg-sahara-gold transition-all shadow-[0_0_80px_rgba(255,255,255,0.1)] disabled:opacity-50 relative overflow-hidden group/btn"
               >
                 <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
-                <span className="relative z-10">{loading ? 'INITIALIZING_PROTOCOL...' : 'EXECUTE_REGISTRATION'}</span>
+                <span className="relative z-10">{loading ? 'STABILIZING_PROTOCOL...' : 'EXECUTE_MASTER_REGISTRATION'}</span>
               </button>
             </form>
 
             {error && (
-              <div className="mt-8 p-6 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-500 text-[10px] font-black uppercase text-center tracking-widest">
-                ALERT: {error}
+              <div className="mt-12 p-8 rounded-[2.5rem] bg-red-500/10 border border-red-500/20 text-red-500 text-[10px] font-black uppercase text-center tracking-[0.4em] robotic-digits">
+                CRITICAL_ALERT: {error}
               </div>
             )}
 
             {draftSaved && (
-              <div className="fixed bottom-12 left-12 p-4 bg-cyan-500 text-black rounded-xl font-black text-[9px] uppercase tracking-widest shadow-2xl animate-fade-in z-[100]">
-                ✓ Core_Cache_Updated
+              <div className="fixed bottom-12 left-12 p-6 bg-sahara-gold text-black rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-[0_0_40px_rgba(212,175,55,0.4)] animate-fade-in z-[100] robotic-digits">
+                ✓ CACHE_SYNC_STABLE
               </div>
             )}
           </div>
         </div>
       </div>
 
-      {/* HUD footer details */}
-      <footer className="max-w-4xl mx-auto pb-20 text-center opacity-30">
-        <p className="text-[8px] font-black text-gray-600 uppercase tracking-[0.5em]">Auth_Core_v3.3 // Stabilized_Active // Master: Sherif Rosas</p>
+      <footer className="max-w-4xl mx-auto pb-20 text-center opacity-20">
+        <p className="text-[10px] font-black text-gray-600 uppercase tracking-[0.8em] robotic-digits">V3.5_ELITE // AUTH_CORE_MASTER // OPERATIONAL</p>
       </footer>
     </div>
   )

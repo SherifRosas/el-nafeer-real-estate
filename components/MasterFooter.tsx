@@ -8,77 +8,111 @@ export default function MasterFooter() {
     const isArabic = language === 'ar'
 
     return (
-        <footer className="relative bg-[#000408] border-t border-white/5 py-24 overflow-hidden">
-            {/* Glossy Overlay */}
-            <div className="absolute inset-0 liquid-gloss opacity-10 pointer-events-none" />
+        <footer className="relative milky-glass border-t border-white/10 py-24 overflow-hidden">
+            {/* Digital Grid Overlay */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
 
             <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
+                    {/* Unified Logo & Mission */}
                     <div className="lg:col-span-1 space-y-8">
-                        <div className="flex items-center gap-6 group">
-                            <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl p-4 prestige-card flex items-center justify-center relative overflow-hidden">
-                                <div className="absolute inset-0 bg-sahara-gold/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <Link href="/" className="flex items-center gap-4 group cursor-pointer inline-flex">
+                            <div className="w-20 h-20 bg-white shadow-[0_0_30px_rgba(255,255,255,0.1)] rounded-2xl p-2 flex items-center justify-center relative overflow-hidden transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 border border-white/20">
                                 <img
-                                    src={isArabic ? '/logos/logo-ar.png' : '/logos/logo-en.png'}
-                                    alt="EL-NAFEER Logo"
-                                    className="w-full h-full object-contain relative z-10"
+                                    src="/logos/official-logo-dark.jfif"
+                                    alt="EL-NAFEER Official Logo"
+                                    className="w-full h-full object-contain"
                                 />
+                                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                             </div>
-                            <h3 className="text-2xl font-black italic tracking-tighter text-white group-hover:text-sahara-gold transition-colors">
-                                EL-NAFEER
-                            </h3>
-                        </div>
-                        <p className="text-gray-500 font-bold leading-relaxed uppercase tracking-tight">
-                            {isArabic
-                                ? 'التكنولوجيا الرائدة لتجربة عقارية استثنائية في قلب مصر.'
-                                : 'Pioneering technology for an exceptional real estate experience in the heart of Egypt.'}
-                        </p>
-                        <p className="text-gray-400 font-bold uppercase text-[11px] leading-relaxed tracking-wider max-w-md">
-                            {isArabic
-                                ? 'نعيد تعريف الفخامة العقارية من خلال قوة الذكاء الاصطناعي وفن التصميم المعاصر.'
-                                : 'Redefining luxury real estate through the raw power of AI orchestration and contemporary architectural mastery.'}
-                        </p>
-                    </div>
-
-                    {/* Developer Branding */}
-                    <div className="lg:col-span-1 space-y-8">
-                        <h4 className="text-[10px] font-black text-sahara-gold uppercase tracking-[0.4em] mb-4">Developed By</h4>
-                        <div className="space-y-4">
                             <div>
-                                <p className="text-lg font-black tracking-tighter uppercase italic text-white hover:text-sahara-gold transition-colors cursor-default">Sherif Rosas</p>
-                                <p className="text-[10px] font-black text-gray-600 uppercase tracking-widest leading-none mt-2">AI Developer & Platform Master</p>
+                                <h3 className="text-3xl font-black italic tracking-tighter text-white group-hover:text-sahara-gold transition-colors">
+                                    EL-NAFEER
+                                </h3>
+                                <div className="h-1 w-12 bg-sahara-gold mt-1 group-hover:w-20 transition-all duration-500" />
                             </div>
-                            <div className="space-y-2 pt-4">
-                                <a href="mailto:sherifrosas.ai@gmail.com" className="block text-sm font-bold text-gray-400 hover:text-white transition-colors">
-                                    sherifrosas.ai@gmail.com
-                                </a>
-                                <a href="tel:+201065661882" className="block text-sm font-bold text-gray-400 hover:text-white transition-colors" dir="ltr">
-                                    +20 106 566 1882
-                                </a>
+                        </Link>
+                        <div className="space-y-4">
+                            <p className="text-gray-400 font-bold leading-relaxed uppercase tracking-tight text-xs border-l-2 border-sahara-gold/30 pl-4 py-1">
+                                {isArabic
+                                    ? 'التكنولوجيا الرائدة لتجربة عقارية استثنائية في قلب مصر.'
+                                    : 'Pioneering technology for an exceptional real estate experience in the heart of Egypt.'}
+                            </p>
+                            <p className="text-gray-500 font-bold uppercase text-[10px] leading-relaxed tracking-wider max-w-md italic">
+                                {isArabic
+                                    ? 'نعيد تعريف الفخامة العقارية من خلال قوة الذكاء الاصطناعي وفن التصميم المعاصر.'
+                                    : 'Redefining luxury real estate through the raw power of AI orchestration and contemporary architectural mastery.'}
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Project Masters Node */}
+                    <div className="lg:col-span-1 space-y-8">
+                        <h4 className="text-[10px] font-black text-sahara-gold uppercase tracking-[0.4em] mb-4 flex items-center gap-2 rtl:flex-row-reverse">
+                            <span className="w-2 h-2 rounded-full bg-sahara-gold animate-pulse" />
+                            {isArabic ? 'أسياد_المشروع' : 'PROJECT_MASTERS'}
+                        </h4>
+                        <div className="space-y-8">
+                            {/* Master 1: Sherif Rosas */}
+                            <div className="group">
+                                <p className="text-sm font-black tracking-widest uppercase text-white group-hover:text-sahara-gold transition-colors">Sherif Rosas</p>
+                                <p className="text-[9px] font-black text-gray-600 uppercase tracking-widest mt-1 mb-3 italic">
+                                    {isArabic ? 'مطور الذكاء الاصطناعي وماستر المنصة' : 'AI Developer & Platform Master'}
+                                </p>
+                                <div className="flex gap-3">
+                                    <a href="tel:+201065661882" className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-sahara-gold hover:text-black transition-all flex items-center justify-center flex-1 gap-2 rtl:flex-row-reverse">
+                                        <span className="text-xs">📞</span>
+                                        <span className="text-[10px] font-black robotic-digits">+20 106 566 1882</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            {/* Master 2: Ahmed Abdel Sattar */}
+                            <div className="group border-t border-white/5 pt-8">
+                                <p className="text-sm font-black tracking-widest uppercase text-white group-hover:text-sahara-gold transition-colors">Ahmed Abdel Sattar</p>
+                                <p className="text-[9px] font-black text-gray-600 uppercase tracking-widest mt-1 mb-3 italic">
+                                    {isArabic ? 'الماستر التنفيذي والتنسيق العام' : 'Executive Master & Coordination'}
+                                </p>
+                                <div className="flex gap-3">
+                                    <a href="tel:+201055907971" className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-sahara-gold hover:text-black transition-all flex items-center justify-center flex-1 gap-2 rtl:flex-row-reverse">
+                                        <span className="text-xs">📞</span>
+                                        <span className="text-[10px] font-black robotic-digits">+20 10 55907971</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* Navigation */}
-                    <div className="lg:col-span-1 space-y-8 text-left">
-                        <h4 className="text-[10px] font-black text-white/20 uppercase tracking-[0.4em] mb-4">Access Nodes</h4>
-                        <ul className="space-y-4">
-                            {['Properties', 'Applications', 'Support', 'Contact'].map((item) => (
-                                <li key={item}>
-                                    <Link href={`/${item.toLowerCase()}`} className="text-sm font-bold text-gray-500 hover:text-sahara-gold transition-colors uppercase tracking-widest">
-                                        {item}
+                    {/* Navigation Nodes */}
+                    <div className="lg:col-span-1 space-y-8">
+                        <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] mb-4">
+                            {isArabic ? 'نقاط_الوصول' : 'ACCESS_NODES'}
+                        </h4>
+                        <ul className="grid grid-cols-1 gap-4">
+                            {[
+                                { en: 'Properties', ar: 'الأصول_العقارية' },
+                                { en: 'Applications', ar: 'طلبات_المستخدمين' },
+                                { en: 'Support', ar: 'نواة_الدعم' },
+                                { en: 'Contact', ar: 'الاتصال_المباشر' }
+                            ].map((item) => (
+                                <li key={item.en}>
+                                    <Link href={`/${item.en.toLowerCase()}`} className="text-[11px] font-black text-gray-500 hover:text-white hover:pl-2 transition-all uppercase tracking-widest flex items-center gap-2 rtl:flex-row-reverse">
+                                        <span className="w-1.5 h-1.5 bg-sahara-gold/40 rounded-full" />
+                                        {isArabic ? item.ar : item.en}
                                     </Link>
                                 </li>
                             ))}
                         </ul>
                     </div>
 
-                    {/* Social/Secondary */}
+                    {/* Global Data Mesh */}
                     <div className="lg:col-span-1 space-y-8">
-                        <h4 className="text-[10px] font-black text-white/20 uppercase tracking-[0.4em] mb-4">Global Reach</h4>
-                        <div className="flex flex-wrap gap-4">
-                            {['FB', 'TW', 'LI', 'IG', 'WA'].map(social => (
-                                <div key={social} className="w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-[10px] font-black text-gray-400 hover:bg-sahara-gold hover:text-black hover:scale-110 transition-all cursor-pointer">
+                        <h4 className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] mb-4">
+                            {isArabic ? 'الوصول_العالمي' : 'GLOBAL_REACH'}
+                        </h4>
+                        <div className="grid grid-cols-3 gap-3">
+                            {['FB', 'TW', 'LI', 'IG', 'WA', 'YT'].map(social => (
+                                <div key={social} className="aspect-square bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-[10px] font-black text-gray-400 hover:bg-sahara-gold hover:text-black hover:scale-105 transition-all cursor-pointer robotic-digits shadow-lg shadow-black/20">
                                     {social}
                                 </div>
                             ))}
@@ -86,30 +120,36 @@ export default function MasterFooter() {
                     </div>
                 </div>
 
-                <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
-                    <div className="flex flex-col gap-2 text-center md:text-left">
-                        <p className="text-[10px] font-black text-gray-600 uppercase tracking-[0.4em]">
-                            &copy; {new Date().getFullYear()} EL-NAFEER PRESTIGE DOMAINS // ALL RIGHTS RESERVED
+                {/* Final Protocol Row */}
+                <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+                    <div className="space-y-1">
+                        <p className="text-[10px] font-black text-gray-600 uppercase tracking-[0.4em] robotic-digits">
+                            &copy; {new Date().getFullYear()} EL-NAFEER_PRESTIGE_DOMAINS // V3.5_ELITE
                         </p>
-                        <p className="text-[9px] font-bold text-white/10 uppercase tracking-widest">
-                            Proprietary AI Architecture & Cybernetic Design Systems.
+                        <p className="text-[9px] font-bold text-white/5 uppercase tracking-[0.2em] italic">
+                            Proprietary AI Architecture & Robotic Real Estate Orchestration.
                         </p>
                     </div>
 
-                    <div className="flex items-center gap-10">
-                        <Link href="/privacy" className="text-[10px] font-black text-gray-600 hover:text-sahara-gold transition-colors uppercase tracking-[0.3em]">
-                            {isArabic ? 'سياسة الخصوصية' : 'Privacy Protocol'}
-                        </Link>
-                        <div className="w-[1px] h-4 bg-white/10" />
-                        <Link href="/terms" className="text-[10px] font-black text-gray-600 hover:text-sahara-gold transition-colors uppercase tracking-[0.3em]">
-                            {isArabic ? 'الشروط والأحكام' : 'Terms of Engagement'}
-                        </Link>
+                    <div className="flex items-center gap-8">
+                        <a href="mailto:sherifrosas.ai@gmail.com" className="text-[10px] font-black text-gray-500 hover:text-white transition-colors transition-all robotic-digits">
+                            CENTRAL_MAIL@EL_NAFEER.AI
+                        </a>
+                        <div className="w-[1px] h-4 bg-white/10 hidden md:block" />
+                        <div className="flex gap-6">
+                            <Link href="/privacy" className="text-[9px] font-black text-gray-600 hover:text-sahara-gold transition-colors uppercase tracking-widest">
+                                Privacy.exe
+                            </Link>
+                            <Link href="/terms" className="text-[9px] font-black text-gray-600 hover:text-sahara-gold transition-colors uppercase tracking-widest">
+                                Terms.sys
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            {/* Extreme Tail Accent */}
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sahara-gold/20 to-transparent" />
+            {/* Bottom Glow Bar */}
+            <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-sahara-gold to-transparent opacity-50" />
         </footer>
     )
 }

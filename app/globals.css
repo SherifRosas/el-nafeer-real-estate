@@ -35,7 +35,7 @@ body::before {
   width: 100%;
   height: 100%;
   background: radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+    radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
   pointer-events: none;
   z-index: -1;
 }
@@ -119,7 +119,12 @@ body::before {
 }
 
 /* Headers & Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display) !important;
   font-weight: 900 !important;
   letter-spacing: 0.15em !important;
@@ -139,12 +144,35 @@ h2 {
   font-size: clamp(1.5rem, 6vw, 3rem) !important;
 }
 
+/* New Theme Utilities */
+.milky-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.robotic-digits {
+  font-family: var(--font-mono), monospace;
+  letter-spacing: 0.1em;
+}
+
+.clickable-node:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--neon-cyan);
+}
+
 h3 {
   font-size: clamp(1.25rem, 5vw, 2rem) !important;
 }
 
 /* All text elements */
-p, span, div, a, label {
+p,
+span,
+div,
+a,
+label {
   font-family: var(--font-body) !important;
 }
 
@@ -303,7 +331,7 @@ section:hover {
   position: relative;
   border: 1px solid transparent;
   background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
-              var(--gradient-cyber) border-box;
+    var(--gradient-cyber) border-box;
   border-radius: var(--radius-lg);
 }
 
@@ -333,45 +361,67 @@ section:hover {
 
 /* Animations */
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
 }
 
 @keyframes scan {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.3;
   }
+
   50% {
     opacity: 1;
   }
 }
 
 @keyframes neonFlicker {
-  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  57%,
+  100% {
     text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
   }
-  20%, 24%, 55% {
+
+  20%,
+  24%,
+  55% {
     text-shadow: 0 0 20px rgba(0, 255, 255, 0.8), 0 0 30px rgba(168, 85, 247, 0.6);
   }
 }
 
 @keyframes glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
   }
+
   50% {
     box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
   }
 }
 
 @keyframes gradient-shift {
-  0%, 100% {
+
+  0%,
+  100% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
@@ -381,6 +431,7 @@ section:hover {
   0% {
     transform: translateY(-100%);
   }
+
   100% {
     transform: translateY(100vh);
   }
@@ -418,7 +469,7 @@ section:hover {
     border-radius: var(--radius-lg);
     border: 1px solid transparent;
     background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
-                var(--gradient-cyber) border-box;
+      var(--gradient-cyber) border-box;
   }
 
   .glow-on-hover:hover {
@@ -498,6 +549,7 @@ section:hover {
 
 /* High contrast support */
 @media (prefers-contrast: more) {
+
   button,
   input,
   select,

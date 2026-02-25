@@ -40,9 +40,33 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { action, ownerId } = body
+    const { action, ownerId, email, companyName, logoUrl } = body
 
     try {
+        if (action === 'create') {
+            if (!email) return NextResponse.json({ error: 'Email required' }, { status: 400 })
+
+            // 1. Find user by email
+            const user = await db.getUserByEmail(email)
+            if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 })
+
+            // 2. Check if already an owner
+            const existingOwner = await db.getPropertyOwnerByUserId(user.id)
+            if (existingOwner) return NextResponse.json({ error: 'User is already a client' }, { status: 400 })
+
+            // 3. Create owner entry
+            const owner = await db.createPropertyOwner({
+                userId: user.id,
+                companyName: companyName || 'EL-NAFEER Realty Group',
+                logoUrl: logoUrl || ''
+            })
+
+            // 4. Update user role (optional, but good for consistency)
+            // Note: We don't have a specific updateRole helper but we can update any field
+
+            return NextResponse.json({ success: true, owner })
+        }
+
         if (action === 'verify') {
             // Logic to verify/approve an owner
             return NextResponse.json({ success: true, message: 'Owner verified' })

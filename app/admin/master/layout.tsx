@@ -1,20 +1,36 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useLanguage } from '@/components/LanguageContext'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
+import Image from 'next/image'
 
 export default function MasterDashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const { language } = useLanguage()
+  const { language, setLanguage } = useLanguage()
   const isArabic = language === 'ar'
   const pathname = usePathname()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [time, setTime] = useState(new Date())
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000)
+    return () => clearInterval(timer)
+  }, [])
+
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString(isArabic ? 'ar-EG' : 'en-US', {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    })
+  }
 
   const masterMenuItems = [
     {
@@ -50,49 +66,53 @@ export default function MasterDashboardLayout({
   ]
 
   return (
-    <div className="min-h-screen bg-[#020202] text-white flex overflow-hidden font-sans selection:bg-cyan-500/30">
-      {/* Hyper-Tech Grid Overlay */}
-      <div className="fixed inset-0 pointer-events-none opacity-20 cyber-grid" />
+    <div
+      className={`min-h-screen bg-[#020202] text-white flex overflow-hidden font-sans selection:bg-sahara-gold/30 ${isArabic ? 'font-arabic' : ''}`}
+      dir={isArabic ? 'rtl' : 'ltr'}
+    >
+      {/* Hyper-Tech Elite Grid Overlay */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.03] bg-[url('/grid.svg')] bg-repeat shadow-inner" />
 
-      {/* Cyber Glows */}
+      {/* Elite Cyber Glows */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-cyan-500/10 blur-[150px] rounded-full animate-pulse" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-purple-600/10 blur-[150px] rounded-full animate-pulse delay-1000" />
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-sahara-gold/[0.03] blur-[150px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-white/[0.02] blur-[150px] rounded-full animate-pulse delay-1000" />
       </div>
 
       {/* Sidebar Mobile Overlay */}
       <div
-        className={`fixed inset-0 bg-black/60 backdrop-blur-md z-40 lg:hidden transition-opacity duration-500 ${isSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        className={`fixed inset-0 bg-black/80 backdrop-blur-xl z-[60] lg:hidden transition-opacity duration-700 ${isSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         onClick={() => setIsSidebarOpen(false)}
       />
 
-      {/* Master Sidebar */}
-      <aside className={`fixed lg:static inset-y-0 left-0 w-80 h-screen bg-black/40 backdrop-blur-3xl border-r border-cyan-500/10 flex flex-col z-50 transition-transform duration-500 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'} overflow-hidden`}>
+      {/* Master Elite Sidebar */}
+      <aside className={`fixed lg:static inset-y-0 ${isArabic ? 'right-0' : 'left-0'} w-80 h-screen milky-glass border-x border-white/10 flex flex-col z-[70] transition-all duration-700 transform ${isSidebarOpen ? 'translate-x-0 shadow-[0_0_100px_rgba(212,175,55,0.2)]' : (isArabic ? 'translate-x-full lg:translate-x-0' : '-translate-x-full lg:translate-x-0')} overflow-hidden`}>
         {/* Animated Scanline */}
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent h-20 w-full animate-[scan_4s_linear_infinite]" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-sahara-gold/[0.02] to-transparent h-40 w-full animate-[scan_8s_linear_infinite]" />
 
-        <div className="p-8 md:p-10 border-b border-white/5">
-          <Link href="/" className="flex items-center gap-6 group" onClick={() => setIsSidebarOpen(false)}>
-            <div className="w-16 h-16 md:w-20 md:h-20 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center overflow-hidden p-3 shadow-[0_0_40px_rgba(6,182,212,0.2)] group-hover:rotate-[360deg] transition-all duration-1000 relative">
-              <div className={`absolute inset-0 opacity-40 ${isArabic ? 'bg-gradient-to-tr from-yellow-500/20 to-transparent' : 'bg-gradient-to-tr from-cyan-500/20 to-transparent'}`} />
-              <img
-                src={isArabic ? '/logos/logo-ar.png' : '/logos/logo-en.png'}
+        <div className="p-10 md:p-12 border-b border-white/5 relative group">
+          <Link href="/" className="flex flex-col items-center gap-6 group" onClick={() => setIsSidebarOpen(false)}>
+            <div className="w-24 h-24 bg-white rounded-2xl flex items-center justify-center overflow-hidden p-2 transition-all duration-700 group-hover:rotate-6 shadow-[0_0_40px_rgba(255,255,255,0.05)] border border-white/10 relative">
+              <Image
+                src="/logos/official-logo-dark.jfif"
                 alt="EL-NAFEER Logo"
+                width={96}
+                height={96}
                 className="w-full h-full object-contain relative z-10"
               />
             </div>
-            <div>
-              <h2 className="font-black text-xl md:text-2xl tracking-tighter leading-none group-hover:text-cyan-400 transition-all uppercase italic text-white">
-                Sherif Rosas
+            <div className="text-center">
+              <h2 className="font-black text-xl tracking-tighter leading-none group-hover:text-sahara-gold transition-all uppercase italic text-white leading-none">
+                {isArabic ? 'بوابة_الإدارة' : 'MASTER_PORTAL'}
               </h2>
-              <span className="text-[9px] md:text-[10px] text-cyan-500/70 uppercase tracking-[0.3em] font-black mt-2.5 block">
-                Platform Master
+              <span className="text-[10px] text-sahara-gold bg-sahara-gold/5 px-4 py-1.5 rounded-full uppercase tracking-[0.4em] font-black mt-4 block robotic-digits border border-sahara-gold/10 leading-none">
+                ADMIN_v3.5_E
               </span>
             </div>
           </Link>
         </div>
 
-        <nav className="flex-1 px-4 space-y-2 mt-8 overflow-y-auto custom-scrollbar-master">
+        <nav className="flex-1 px-6 space-y-3 mt-10 overflow-y-auto custom-scrollbar-master">
           {masterMenuItems.map((item) => {
             const isActive = pathname === item.href
             return (
@@ -100,85 +120,95 @@ export default function MasterDashboardLayout({
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsSidebarOpen(false)}
-                className={`flex items-center gap-4 px-6 py-4 rounded-2xl md:rounded-[2rem] transition-all duration-500 group relative ${isActive
-                  ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 shadow-[0_0_20px_rgba(6,182,212,0.1)]'
+                className={`flex items-center gap-5 px-6 py-5 rounded-[2rem] transition-all duration-500 group relative ${isActive
+                  ? 'bg-sahara-gold/10 text-sahara-gold border border-sahara-gold/20 shadow-[0_0_30px_rgba(212,175,55,0.05)]'
                   : 'text-gray-500 hover:bg-white/5 hover:text-white'
                   }`}
-                dir={isArabic ? 'rtl' : 'ltr'}
               >
                 {isActive && (
-                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-cyan-500 rounded-r-full shadow-[0_0_15px_rgba(6,182,212,0.8)]" />
+                  <div className={`absolute ${isArabic ? 'right-0' : 'left-0'} top-1/2 -translate-y-1/2 w-1.5 h-10 bg-sahara-gold rounded-full shadow-[0_0_20px_rgba(212,175,55,0.8)]`} />
                 )}
-                <span className={`text-xl md:text-2xl transition-all duration-500 group-hover:scale-125 group-hover:rotate-12 ${isActive ? 'scale-110 drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]' : 'grayscale group-hover:grayscale-0'}`}>
+                <span className={`text-2xl transition-all duration-500 group-hover:scale-125 group-hover:rotate-6 ${isActive ? 'scale-110' : 'grayscale group-hover:grayscale-0'}`}>
                   {item.icon}
                 </span>
-                <span className="font-black tracking-tight text-xs md:text-sm uppercase">{item.title}</span>
+                <span className={`font-black tracking-tighter text-sm uppercase italic ${isArabic ? 'text-lg' : ''}`}>{item.title}</span>
               </Link>
             )
           })}
         </nav>
 
-        <div className="p-8 border-t border-white/5">
-          <div className="bg-white/5 rounded-[1.5rem] md:rounded-3xl p-5 md:p-6 border border-white/5 relative group overflow-hidden">
-            <div className="absolute inset-0 bg-cyan-500/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+        <div className="p-10 border-t border-white/5">
+          <div className="milky-glass rounded-[2rem] p-6 border border-white/5 relative group overflow-hidden">
+            <div className="absolute inset-0 bg-sahara-gold/[0.03] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
             <div className="relative z-10 flex items-center justify-between">
               <div>
-                <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">Status</p>
-                <p className="text-[10px] md:text-xs font-black text-cyan-400 uppercase tracking-tighter">Hyper-Core Active</p>
+                <p className="text-[9px] font-black text-gray-700 uppercase tracking-widest leading-none mb-2 robotic-digits">{isArabic ? 'نبض_النظام' : 'SYS_PULSE'}</p>
+                <p className="text-[10px] font-black text-sahara-gold uppercase tracking-[0.2em] robotic-digits">{isArabic ? 'النواة_مستقرة' : 'ELITE_CORE_STABLE'}</p>
               </div>
-              <div className="w-2.5 h-2.5 bg-cyan-500 rounded-full animate-ping" />
+              <div className="w-2.5 h-2.5 bg-sahara-gold rounded-full animate-pulse shadow-[0_0_15px_rgba(212,175,55,1)]" />
             </div>
           </div>
           <button
             onClick={() => signOut()}
-            className="w-full mt-6 py-4 rounded-xl md:rounded-2xl bg-red-500/5 text-red-400/50 hover:bg-red-500/20 hover:text-red-400 transition-all font-black text-[10px] md:text-xs uppercase tracking-[0.2em]"
+            className="w-full mt-8 py-5 rounded-[2rem] bg-white/5 text-gray-600 hover:bg-red-500 hover:text-black transition-all font-black text-[10px] uppercase tracking-[0.4em] robotic-digits"
           >
-            Terminal Shutdown
+            {isArabic ? 'إنهاء_الجلسة' : 'TERMINATE_SESSION'}
           </button>
         </div>
       </aside>
 
       {/* Main Orchestration Node */}
       <main className="flex-1 h-screen overflow-y-auto relative z-10 custom-scrollbar-master">
-        {/* Hyper Header */}
-        <header className="h-24 md:h-28 px-6 md:px-12 flex items-center justify-between border-b border-white/5 sticky top-0 bg-black/60 backdrop-blur-2xl z-30 overflow-hidden">
-          <div className="absolute inset-x-0 bottom-0 h-[100%] bg-gradient-to-t from-cyan-500/5 to-transparent pointer-events-none" />
+        {/* Elite Header */}
+        <header className="h-28 md:h-32 px-8 md:px-16 flex items-center justify-between border-b border-white/10 sticky top-0 bg-black/44 backdrop-blur-3xl z-[40] overflow-hidden">
+          <div className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-sahara-gold/20 to-transparent shadow-[0_0_20px_rgba(212,175,55,0.2)]" />
 
-          <div className="flex items-center gap-4 md:gap-6 relative z-10">
+          <div className="flex items-center gap-6 md:gap-10 relative z-10">
             {/* Mobile Toggle */}
             <button
               onClick={() => setIsSidebarOpen(true)}
-              className="lg:hidden w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center text-xl hover:bg-white/5 active:scale-95 transition-all"
+              className="lg:hidden w-16 h-16 rounded-2xl milky-glass border border-white/10 flex items-center justify-center text-xl hover:bg-white/5 active:scale-95 transition-all"
             >
               ☰
             </button>
-            <div className="hidden sm:block w-1.5 h-10 bg-gradient-to-b from-cyan-400 to-purple-600 rounded-full" />
-            <h1 className="text-xl md:text-3xl font-black tracking-tighter uppercase italic leading-tight">
-              {masterMenuItems.find((item) => item.href === pathname)?.title || 'Master Command'}
+            <div className="hidden sm:block w-3 h-3 bg-sahara-gold rounded-sm group-hover:rotate-45 transition-transform" />
+            <h1 className="text-2xl md:text-3xl font-black tracking-tighter uppercase italic leading-tight text-white line-clamp-1">
+              {masterMenuItems.find((item) => item.href === pathname)?.title || (isArabic ? 'التحكم_الرئيسي' : 'MASTER_COMMAND')}
             </h1>
           </div>
 
-          <div className="flex items-center gap-4 md:gap-8 relative z-10">
-            <div className="hidden sm:flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 bg-cyan-500/10 rounded-full border border-cyan-500/20">
-              <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
-              <span className="text-[8px] md:text-[10px] font-black text-cyan-400 uppercase tracking-widest">Global Sync</span>
+          <div className="flex items-center gap-6 md:gap-12 relative z-10">
+            {/* Lang Switcher (HUD Style) */}
+            <button
+              onClick={() => setLanguage(isArabic ? 'en' : 'ar')}
+              className="hidden md:flex w-24 h-16 rounded-2xl border border-white/10 items-center justify-center text-[10px] font-black hover:border-sahara-gold/50 transition-all milky-glass group"
+            >
+              <span className="text-gray-500 group-hover:text-sahara-gold transition-colors">{isArabic ? 'ENGLISH' : 'العربية'}</span>
+            </button>
+
+            <div className="hidden xl:flex items-center gap-4 px-8 py-4 milky-glass rounded-[2rem] border border-white/10">
+              <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_15px_rgba(34,197,94,1)]" />
+              <div className="flex flex-col">
+                <span className="text-[8px] font-black text-gray-600 uppercase tracking-[0.4em] robotic-digits line-clamp-1">{isArabic ? 'مزامنة_عالمية' : 'GLOBAL_SYNC'}</span>
+                <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] robotic-digits">{formatTime(time)}</span>
+              </div>
             </div>
 
-            <div className="flex items-center gap-4 md:gap-6">
+            <div className="flex items-center gap-6 md:gap-8">
               <div className="text-right hidden sm:block">
-                <p className="text-[8px] text-gray-500 font-bold uppercase tracking-widest">Master Identity</p>
-                <p className="text-xs md:text-sm font-black text-white italic">Sherif Rosas</p>
+                <p className="text-[9px] text-gray-600 font-black uppercase tracking-[0.3em] robotic-digits mb-1">{isArabic ? 'هوية_الآدمن' : 'MASTER_IDENTITY'}</p>
+                <p className="text-sm font-black text-white italic uppercase leading-none">{isArabic ? 'شريف رصاص' : 'SHERIF_ROSAS'}</p>
               </div>
-              <div className="w-10 h-10 md:w-14 md:h-14 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-xl md:rounded-2xl p-[1px] shadow-[0_0_20px_rgba(6,182,212,0.2)]">
-                <div className="w-full h-full bg-black rounded-[0.7rem] md:rounded-[0.9rem] flex items-center justify-center text-lg md:text-xl">
-                  🎖️
+              <div className="w-16 h-16 bg-white rounded-2xl p-[1px] shadow-[0_0_30px_rgba(255,255,255,0.05)] border border-white/20">
+                <div className="w-full h-full bg-[#050505] rounded-[0.9rem] flex items-center justify-center text-2xl group-hover:rotate-12 transition-transform italic font-black text-sahara-gold">
+                  SR
                 </div>
               </div>
             </div>
           </div>
         </header>
 
-        <div className="p-6 md:p-12 relative">
+        <div className="p-8 md:p-16 relative">
           {children}
         </div>
       </main>
