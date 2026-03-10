@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useLanguage } from '../LanguageContext'
 
 interface ProjectEntry {
-    title: en: string, ar: string
+    title: { en: string, ar: string }
     location: string
     year: string
     images: string[]

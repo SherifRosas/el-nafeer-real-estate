@@ -213,6 +213,8 @@ export default function AIChatbot() {
                   <button
                     onClick={() => setProjectAwareness(!projectAwareness)}
                     className={`w-10 h-5 rounded-full transition-all relative ${projectAwareness ? 'bg-cyan-500' : 'bg-white/10'}`}
+                    aria-label="Toggle Project Awareness"
+                    title="Toggle Project Awareness"
                   >
                     <div className={`absolute top-1 w-3 h-3 bg-black rounded-full transition-all ${projectAwareness ? 'left-6' : 'left-1'}`} />
                   </button>
@@ -230,125 +232,124 @@ export default function AIChatbot() {
               </div>
             )}
 
-            <div className="flex-1 overflow-y-auto p-5 space-y-6 bg-gray-50/50">
-              {messages.map((msg, idx) => {
-                const isUserMsg = msg.role === 'user'
-                const isRtl = /[\u0600-\u06FF]/.test(msg.content)
-                return (
+            {messages.map((msg, idx) => {
+              const isUserMsg = msg.role === 'user'
+              const isRtl = /[\u0600-\u06FF]/.test(msg.content)
+              return (
+                <div
+                  key={idx}
+                  className={`flex ${isUserMsg ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}
+                >
                   <div
-                    key={idx}
-                    className={`flex ${isUserMsg ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}
+                    className={`max-w-[85%] rounded-[2rem] p-4 ${isUserMsg
+                      ? 'bg-gray-900 text-white rounded-tr-none shadow-xl'
+                      : 'bg-white text-gray-800 rounded-tl-none border border-gray-100 shadow-md'
+                      }`}
+                    dir={isRtl ? 'rtl' : 'ltr'}
                   >
-                    <div
-                      className={`max-w-[85%] rounded-[2rem] p-4 ${isUserMsg
-                        ? 'bg-gray-900 text-white rounded-tr-none shadow-xl'
-                        : 'bg-white text-gray-800 rounded-tl-none border border-gray-100 shadow-md'
-                        }`}
-                      dir={isRtl ? 'rtl' : 'ltr'}
-                    >
-                      <p className="text-sm leading-relaxed whitespace-pre-wrap break-words font-medium">
-                        {msg.content}
-                      </p>
-                    </div>
-                  </div>
-                )
-              })}
-              {loading && (
-                <div className="flex justify-start">
-                  <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-md">
-                    <div className="flex space-x-1.5">
-                      <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce delay-75"></div>
-                      <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce delay-150"></div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {showSuggestions && !loading && (
-                <div className="space-y-2 mt-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  <div className="flex items-center justify-between px-2 mb-3">
-                    <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest">
-                      {isArabic ? 'اقتراحات المستشار:' : 'Expert Suggestions:'}
+                    <p className="text-sm leading-relaxed whitespace-pre-wrap break-words font-medium">
+                      {msg.content}
                     </p>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    {suggestedQuestions.map((question, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => handleSuggestedQuestion(question)}
-                        disabled={loading}
-                        className="px-4 py-2 bg-white border border-gray-200 rounded-full hover:border-amber-500 hover:text-amber-600 transition-all text-sm font-bold text-gray-600 shadow-sm hover:shadow-md disabled:opacity-50"
-                        dir={isArabic ? 'rtl' : 'ltr'}
-                      >
-                        {question}
-                      </button>
-                    ))}
+                </div>
+              )
+            })}
+            {loading && (
+              <div className="flex justify-start">
+                <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-md">
+                  <div className="flex space-x-1.5">
+                    <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce delay-75"></div>
+                    <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce delay-150"></div>
                   </div>
                 </div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
-
-            <div className="p-5 bg-white border-t border-gray-100">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleSend()}
-                  placeholder={isArabic ? 'اكتب استفسارك هنا...' : 'Type your inquiry here...'}
-                  className="flex-1 bg-black/40 border-none rounded-2xl px-5 py-4 focus:ring-1 focus:ring-cyan-500/50 transition-all outline-none font-bold text-white placeholder:text-gray-600 italic"
-                  dir={isArabic ? 'rtl' : 'ltr'}
-                />
-                <button
-                  onClick={() => handleSend()}
-                  disabled={loading || !input.trim()}
-                  className="bg-cyan-500 text-black w-14 h-14 rounded-2xl flex items-center justify-center hover:scale-105 active:scale-95 disabled:opacity-50 transition-all shadow-[0_0_20px_rgba(6,182,212,0.4)]"
-                >
-                  <span className="text-xl">⚡</span>
-                </button>
-              </div>
-            </div>
-          </div>
-      )}
-
-          {/* Modern Trigger Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="fixed bottom-8 right-8 group z-50 flex items-center gap-4"
-            aria-label={isArabic ? 'فتح المستشار العقاري' : 'Open Property Consultant'}
-          >
-            {!isOpen && (
-              <div className="hidden md:block bg-white px-6 py-3 rounded-2xl shadow-2xl border border-gray-100 animate-in fade-in slide-in-from-right-4 duration-500">
-                <p className="text-gray-900 font-black text-sm">
-                  {isArabic ? 'تحدث مع مستشارنا العقاري الذكي ✨' : 'Talk to our AI Consultant ✨'}
-                </p>
               </div>
             )}
-            <div className={`w-24 h-24 rounded-[2.5rem] flex items-center justify-center transition-all duration-500 shadow-2xl border-2 ${isOpen ? 'bg-gradient-to-br from-[#ff0055] to-[#a855f7] border-[#ff0055] rotate-180 shadow-[0_0_40px_rgba(255,0,85,0.6)]' : 'bg-gradient-to-br from-[#0a0e27] to-[#050811] border-[#00ffff] hover:scale-110 hover:-rotate-6 hover:shadow-[0_0_40px_rgba(0,255,255,0.8)] shadow-[0_0_30px_rgba(0,255,255,0.4)] animate-[pulse_2s_ease-in-out_infinite]'}`}>
-              {isOpen ? (
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <div className="relative flex flex-col items-center justify-center w-full h-full">
-                  {/* Outer glow ring */}
-                  <div className="absolute inset-0 rounded-full border-2 border-[#00ffff]/30 animate-[spin_4s_linear_infinite]" />
-                  {/* Inner glow ring */}
-                  <div className="absolute inset-1 rounded-full border border-[#a855f7]/30 animate-[spin_6s_linear_infinite_reverse]" />
-                  {/* Chat bubble icon */}
-                  <svg className="w-10 h-10 relative z-10 text-[#00ffff] drop-shadow-[0_0_10px_rgba(0,255,255,0.8)]" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
-                  </svg>
-                  {/* NAF Badge */}
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-[#00ffff] to-[#a855f7] rounded-lg flex items-center justify-center text-black text-[9px] font-black border-2 border-[#050811] shadow-[0_0_20px_rgba(0,255,255,0.6)] animate-bounce">
-                    NAF
-                  </div>
+
+            {showSuggestions && !loading && (
+              <div className="space-y-2 mt-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="flex items-center justify-between px-2 mb-3">
+                  <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest">
+                    {isArabic ? 'اقتراحات المستشار:' : 'Expert Suggestions:'}
+                  </p>
                 </div>
-              )}
+                <div className="flex flex-wrap gap-2">
+                  {suggestedQuestions.map((question, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => handleSuggestedQuestion(question)}
+                      disabled={loading}
+                      className="px-4 py-2 bg-white border border-gray-200 rounded-full hover:border-amber-500 hover:text-amber-600 transition-all text-sm font-bold text-gray-600 shadow-sm hover:shadow-md disabled:opacity-50"
+                      dir={isArabic ? 'rtl' : 'ltr'}
+                    >
+                      {question}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          <div className="p-5 bg-white border-t border-gray-100">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleSend()}
+                placeholder={isArabic ? 'اكتب استفسارك هنا...' : 'Type your inquiry here...'}
+                className="flex-1 bg-black/40 border-none rounded-2xl px-5 py-4 focus:ring-1 focus:ring-cyan-500/50 transition-all outline-none font-bold text-white placeholder:text-gray-600 italic"
+                dir={isArabic ? 'rtl' : 'ltr'}
+              />
+              <button
+                onClick={() => handleSend()}
+                disabled={loading || !input.trim()}
+                className="bg-cyan-500 text-black w-14 h-14 rounded-2xl flex items-center justify-center hover:scale-105 active:scale-95 disabled:opacity-50 transition-all shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+              >
+                <span className="text-xl">⚡</span>
+              </button>
             </div>
-          </button>
-        </>
-      )
-      }
+          </div>
+        </div>
+      )}
+
+      {/* Modern Trigger Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed bottom-8 right-8 group z-50 flex items-center gap-4"
+        aria-label={isArabic ? 'فتح المستشار العقاري' : 'Open Property Consultant'}
+      >
+        {!isOpen && (
+          <div className="hidden md:block bg-white px-6 py-3 rounded-2xl shadow-2xl border border-gray-100 animate-in fade-in slide-in-from-right-4 duration-500">
+            <p className="text-gray-900 font-black text-sm">
+              {isArabic ? 'تحدث مع مستشارنا العقاري الذكي ✨' : 'Talk to our AI Consultant ✨'}
+            </p>
+          </div>
+        )}
+        <div className={`w-24 h-24 rounded-[2.5rem] flex items-center justify-center transition-all duration-500 shadow-2xl border-2 ${isOpen ? 'bg-gradient-to-br from-[#ff0055] to-[#a855f7] border-[#ff0055] rotate-180 shadow-[0_0_40px_rgba(255,0,85,0.6)]' : 'bg-gradient-to-br from-[#0a0e27] to-[#050811] border-[#00ffff] hover:scale-110 hover:-rotate-6 hover:shadow-[0_0_40px_rgba(0,255,255,0.8)] shadow-[0_0_30px_rgba(0,255,255,0.4)] animate-[pulse_2s_ease-in-out_infinite]'}`}>
+          {isOpen ? (
+            <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <div className="relative flex flex-col items-center justify-center w-full h-full">
+              {/* Outer glow ring */}
+              <div className="absolute inset-0 rounded-full border-2 border-[#00ffff]/30 animate-[spin_4s_linear_infinite]" />
+              {/* Inner glow ring */}
+              <div className="absolute inset-1 rounded-full border border-[#a855f7]/30 animate-[spin_6s_linear_infinite_reverse]" />
+              {/* Chat bubble icon */}
+              <svg className="w-10 h-10 relative z-10 text-[#00ffff] drop-shadow-[0_0_10px_rgba(0,255,255,0.8)]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
+              </svg>
+              {/* NAF Badge */}
+              <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-[#00ffff] to-[#a855f7] rounded-lg flex items-center justify-center text-black text-[9px] font-black border-2 border-[#050811] shadow-[0_0_20px_rgba(0,255,255,0.6)] animate-bounce">
+                NAF
+              </div>
+            </div>
+          )}
+        </div>
+      </button>
+    </>
+  )
+}
