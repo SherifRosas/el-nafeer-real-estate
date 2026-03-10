@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
     }
 
     // 2. Retrieve Past Conversations
-    let historyContext = []
+    let historyContext: any[] = []
     if (sessionId) {
       const pastMessages = await prisma.chatMessage.findMany({
         where: { sessionId },
