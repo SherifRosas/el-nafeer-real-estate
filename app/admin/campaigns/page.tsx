@@ -93,7 +93,7 @@ export default function CampaignsPage() {
             if (data.success) {
                 setCampaigns([data.campaign, ...campaigns])
                 setShowCreateModal(false)
-                setForm({ name: '', type: 'social_post', platforms: [], propertyId: '', description: '' })
+                setForm({ name: '', type: 'social_post', platforms: [], propertyId: '', brandProfileId: '', description: '' })
             } else {
                 alert(data.error)
             }
