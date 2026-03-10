@@ -24,9 +24,15 @@ interface Property {
     }
 }
 
+interface Brand {
+    id: string
+    companyName: string
+}
+
 export default function CampaignsPage() {
     const [campaigns, setCampaigns] = useState<Campaign[]>([])
     const [properties, setProperties] = useState<Property[]>([])
+    const [brands, setBrands] = useState<Brand[]>([])
     const [loading, setLoading] = useState(true)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [showCreateModal, setShowCreateModal] = useState(false)
@@ -38,6 +44,7 @@ export default function CampaignsPage() {
         type: 'social_post',
         platforms: [] as string[],
         propertyId: '',
+        brandProfileId: '',
         description: ''
     })
 
@@ -47,14 +54,16 @@ export default function CampaignsPage() {
 
     const fetchData = async () => {
         try {
-            const [cRes, pRes] = await Promise.all([
+            const [cRes, pRes, bRes] = await Promise.all([
                 fetch('/api/campaigns'),
-                fetch('/api/properties?all=true')
+                fetch('/api/properties?all=true'),
+                fetch('/api/admin/brands')
             ])
-            const [cData, pData] = await Promise.all([cRes.json(), pRes.json()])
+            const [cData, pData, bData] = await Promise.all([cRes.json(), pRes.json(), bRes.json()])
 
             if (cData.success) setCampaigns(cData.campaigns || [])
             if (pData.success) setProperties(pData.properties || [])
+            if (bData.success) setBrands(bData.brands || [])
         } catch (error) {
             console.error('Error fetching data:', error)
         } finally {
@@ -173,23 +182,40 @@ export default function CampaignsPage() {
 
                                 <div className="space-y-4">
                                     <label className="text-[10px] text-gray-600 font-black uppercase tracking-[0.4em] px-4 robotic-digits">
-                                        {isArabic ? 'الأصل_المستهدف' : 'TARGET_ASSET'}
+                                        {isArabic ? 'العلامة_التجارية' : 'TARGET_BRAND'}
                                     </label>
                                     <select
-                                        required
-                                        value={form.propertyId}
-                                        onChange={(e) => setForm({ ...form, propertyId: e.target.value })}
+                                        value={form.brandProfileId}
+                                        onChange={(e) => setForm({ ...form, brandProfileId: e.target.value, propertyId: '' })}
                                         className="w-full bg-black/40 border border-white/5 rounded-3xl px-8 py-5 text-white font-black italic focus:border-sahara-gold/50 outline-none transition-all appearance-none cursor-pointer"
-                                        title={isArabic ? 'الأصل المستهدف' : 'Target Asset'}
+                                        title={isArabic ? 'العلامة التجارية' : 'Target Brand'}
                                     >
-                                        <option value="">{isArabic ? '--- اختيار الأصل ---' : '--- CHOOSE ASSET ---'}</option>
-                                        {properties.map(p => (
-                                            <option key={p.id} value={p.id}>
-                                                {p.title} ({p.property_owners?.companyName || 'N/A'})
-                                            </option>
+                                        <option value="">{isArabic ? '--- اختيار علامة (اختياري) ---' : '--- CHOOSE BRAND (OPTIONAL) ---'}</option>
+                                        {brands.map(b => (
+                                            <option key={b.id} value={b.id}>{b.companyName}</option>
                                         ))}
                                     </select>
                                 </div>
+                            </div>
+
+                            <div className="space-y-4">
+                                <label className="text-[10px] text-gray-600 font-black uppercase tracking-[0.4em] px-4 robotic-digits">
+                                    {isArabic ? 'الأصل_المستهدف' : 'TARGET_ASSET'}
+                                </label>
+                                <select
+                                    disabled={!!form.brandProfileId}
+                                    value={form.propertyId}
+                                    onChange={(e) => setForm({ ...form, propertyId: e.target.value })}
+                                    className="w-full bg-black/40 border border-white/5 rounded-3xl px-8 py-5 text-white font-black italic focus:border-sahara-gold/50 outline-none transition-all appearance-none cursor-pointer disabled:opacity-30"
+                                    title={isArabic ? 'الأصل المستهدف' : 'Target Asset'}
+                                >
+                                    <option value="">{isArabic ? '--- اختيار أصل ---' : '--- CHOOSE ASSET ---'}</option>
+                                    {properties.map(p => (
+                                        <option key={p.id} value={p.id}>
+                                            {p.title} ({p.property_owners?.companyName || 'N/A'})
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
 
                             <div className="space-y-4">
@@ -203,8 +229,8 @@ export default function CampaignsPage() {
                                             type="button"
                                             onClick={() => togglePlatform(p)}
                                             className={`px-6 py-3 rounded-2xl border text-[9px] font-black uppercase tracking-widest transition-all ${form.platforms.includes(p)
-                                                    ? 'bg-sahara-gold text-black border-sahara-gold shadow-[0_0_20px_rgba(212,175,55,0.4)]'
-                                                    : 'bg-white/5 border-white/5 text-gray-600 hover:border-white/20'
+                                                ? 'bg-sahara-gold text-black border-sahara-gold shadow-[0_0_20px_rgba(212,175,55,0.4)]'
+                                                : 'bg-white/5 border-white/5 text-gray-600 hover:border-white/20'
                                                 }`}
                                         >
                                             {p}

@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("EL_NAFEER_DB_URL")
 }
 
 model User {
@@ -27,6 +27,8 @@ model User {
   applications      Application[]
   messages          Message[]
   propertyOwner     PropertyOwner?
+  brandProfile      BrandProfile?
+  chatSessions      ChatSession[]
 
   @@map("users")
 }
@@ -221,8 +223,29 @@ model Campaign {
   updatedAt       DateTime            @updatedAt
 
   executions      CampaignExecution[]
+  brandProfile    BrandProfile?    @relation(fields: [brandProfileId], references: [id], onDelete: SetNull)
+  brandProfileId  String?
 
   @@map("campaigns")
+}
+
+model BrandProfile {
+  id              String      @id @default(cuid())
+  userId          String      @unique
+  companyName     String
+  industry        String?     // e.g., "Electric & Hydraulic Elevators"
+  serviceArea     String?     // e.g., "Egypt"
+  location        String?     // e.g., "Al-Ahram Garden, Fourth Gate"
+  logoUrl         String?
+  portfolio       Json?       // Array of projects {title, images, location, year}
+  contactDetails  Json?       // {phone, whatsapp, email}
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  campaigns       Campaign[]
+  
+  @@map("brand_profiles")
 }
 
 model CampaignExecution {
@@ -244,6 +267,45 @@ model CampaignExecution {
   campaign        Campaign    @relation(fields: [campaignId], references: [id], onDelete: Cascade)
 
   @@map("campaign_executions")
+}
+
+model ChatSession {
+  id              String        @id @default(cuid())
+  userId          String?
+  title           String?
+  isActive        Boolean       @default(true)
+  metadata        Json?         // e.g., { "projectAwareness": true }
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  
+  messages        ChatMessage[]
+  user            User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id              String        @id @default(cuid())
+  sessionId       String
+  role            String        // "user", "assistant", "system"
+  content         String
+  metadata        Json?         // e.g., { "tokens": 150, "contextUsed": true }
+  createdAt       DateTime      @default(now())
+  
+  session         ChatSession   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@map("chat_messages")
+}
+
+model ContextMetadata {
+  id              String        @id @default(cuid())
+  filePath        String        @unique
+  lastIndexed     DateTime
+  hash            String?       // For change detection
+  chunkCount      Int?
+  status          String        @default("indexed") // indexed, pending, error
+
+  @@map("context_metadata")
 }
 
 model AgentTask {

@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Removed @xenova/transformers to allow Vercel Serverless deployment without OOM crashes
   images: {
     remotePatterns: [
       {

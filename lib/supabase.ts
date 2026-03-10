@@ -23,6 +23,7 @@ export const TABLES = {
   propertyOwners: 'property_owners',
   properties: 'properties',
   leads: 'leads',
+  brandProfiles: 'brand_profiles',
 } as const
 
 // Helper functions for common operations
@@ -504,6 +505,50 @@ export const db = {
 
     if (error) throw error
     return data || []
+  },
+
+  // Brand Profile operations
+  async getBrandProfileByUserId(userId: string) {
+    const { data, error } = await supabase
+      .from(TABLES.brandProfiles)
+      .select('*')
+      .eq('userId', userId)
+      .single()
+
+    if (error && error.code !== 'PGRST116') throw error
+    return data
+  },
+
+  async createBrandProfile(profileData: {
+    userId: string
+    companyName: string
+    industry?: string
+    serviceArea?: string
+    location?: string
+    logoUrl?: string
+    portfolio?: any
+    contactDetails?: any
+  }) {
+    const { data, error } = await supabase
+      .from(TABLES.brandProfiles)
+      .insert({ ...profileData, createdAt: new Date().toISOString() })
+      .select()
+      .single()
+
+    if (error) throw error
+    return data
+  },
+
+  async updateBrandProfile(id: string, updates: any) {
+    const { data, error } = await supabase
+      .from(TABLES.brandProfiles)
+      .update({ ...updates, updatedAt: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single()
+
+    if (error) throw error
+    return data
   },
 }
 

@@ -1,10 +1,6 @@
-/**
- * Marketing Campaign Management System
- * Handles campaign creation, scheduling, execution, and analytics
- */
-
 import { prisma } from '@/lib/db'
 import { getAIAgent } from './ai-agent'
+import { MarketingEngine } from './marketing-engine'
 
 export interface CreateCampaignInput {
   name: string
@@ -21,7 +17,8 @@ export interface CreateCampaignInput {
   autoGenerate?: boolean
   config?: Record<string, any>
   createdBy?: string
-  subAdminId?: string // Optional sub-admin ID (defaults to main admin if not provided)
+  subAdminId?: string
+  brandProfileId?: string // Link to special industry verticals
 }
 
 export interface CampaignMetrics {
@@ -38,27 +35,50 @@ export interface CampaignMetrics {
  * Create a new marketing campaign
  */
 export async function createCampaign(input: CreateCampaignInput) {
-  // Generate content if auto-generate is enabled
   let content = input.content
+  let brandProfile = null
+
+  // Fetch brand profile if provided
+  if (input.brandProfileId) {
+    brandProfile = await prisma.brandProfile.findUnique({
+      where: { id: input.brandProfileId }
+    })
+  }
+
+  // Generate content if auto-generate is enabled
   if (input.autoGenerate && !content) {
-    const agent = getAIAgent()
-    const platform = input.platforms[0] && input.platforms[0] !== 'email' 
-      ? input.platforms[0] 
-      : undefined
-    const language = input.language === 'both' ? 'ar' : (input.language || 'ar')
-    
-    try {
-      // Try AI generation, but fallback gracefully if it fails
-      content = await agent.generateContent('social_post', platform, language as 'ar' | 'en')
-    } catch (error) {
-      console.warn('AI content generation failed (quota exceeded or API error), using fallback content:', error)
-      // Use fallback content - this is fine, campaigns can work without AI
-      content = agent.getFallbackContent('social_post', platform, language as 'ar' | 'en')
+    if (brandProfile) {
+      // Use specialized industry marketing engine
+      const promo = MarketingEngine.generateElevatorPromo({
+        companyName: brandProfile.companyName,
+        location: brandProfile.location || 'Egypt',
+        serviceArea: brandProfile.serviceArea || 'Egypt',
+        portfolioHighlights: [],
+        industry: brandProfile.industry || 'Elevators',
+        contact: {
+          phone: (brandProfile.contactDetails as any)?.phone || '',
+          whatsapp: (brandProfile.contactDetails as any)?.whatsapp || ''
+        }
+      })
+      // Use the first selected platform's content as base
+      content = promo[input.platforms[0] as keyof typeof promo] || promo.facebook
+    } else {
+      const agent = getAIAgent()
+      const platform = input.platforms[0] && input.platforms[0] !== 'email'
+        ? input.platforms[0]
+        : undefined
+      const language = input.language === 'both' ? 'ar' : (input.language || 'ar')
+
+      try {
+        content = await agent.generateContent('social_post', platform, language as 'ar' | 'en')
+      } catch (error) {
+        console.warn('AI content generation failed, using fallback:', error)
+        content = agent.getFallbackContent('social_post', platform, language as 'ar' | 'en')
+      }
     }
   }
 
-  // Get main admin ID to assign as default sub-admin (account manager)
-  // Make this optional - don't fail campaign creation if admin lookup fails
+  // Get main admin ID to assign as default sub-admin
   let mainAdminId: string | undefined = undefined
   try {
     const mainAdmin = await prisma.admin.findFirst({
@@ -72,11 +92,10 @@ export async function createCampaign(input: CreateCampaignInput) {
       mainAdminId = mainAdmin.id
     }
   } catch (error) {
-    console.warn('Could not fetch main admin (database may not be fully set up):', error)
-    // Continue without sub-admin assignment - this is not critical for campaign creation
+    console.warn('Could not fetch main admin:', error)
   }
 
-  // Create the campaign - handle database connection errors gracefully
+  // Create the campaign
   let campaign
   try {
     campaign = await prisma.campaign.create({
@@ -95,22 +114,12 @@ export async function createCampaign(input: CreateCampaignInput) {
         autoGenerate: input.autoGenerate ?? true,
         config: input.config || {},
         createdBy: input.createdBy,
-        subAdminId: input.subAdminId || mainAdminId, // Use provided sub-admin or default to main admin
-        status: input.startDate && input.startDate > new Date() ? 'scheduled' : 'draft',
+        subAdminId: input.subAdminId || mainAdminId,
+        brandProfileId: input.brandProfileId,
+        status: input.startDate && input.startDate > new Date() ? 'scheduled' : 'active',
       },
     })
   } catch (dbError: any) {
-    // If database connection fails, provide a helpful error message
-    if (dbError.message?.includes('Tenant or user not found') || 
-        dbError.message?.includes('FATAL') ||
-        dbError.code === 'P1001') {
-      throw new Error(
-        'Database connection failed. Please verify your DATABASE_URL in .env.local. ' +
-        'The database credentials may be incorrect or the database may not exist. ' +
-        'Error: ' + dbError.message
-      )
-    }
-    // Re-throw other database errors
     throw dbError
   }
 
@@ -276,15 +285,15 @@ export async function executeCampaignExecution(executionId: string) {
 
   try {
     const agent = getAIAgent()
-    
+
     // Generate content if needed
     let content = execution.content
     if (!content && execution.campaign.autoGenerate) {
-      const platform = execution.platform !== 'email' 
+      const platform = execution.platform !== 'email'
         ? execution.platform as 'facebook' | 'twitter' | 'linkedin' | 'whatsapp'
         : undefined
-      const language = execution.campaign.language === 'both' 
-        ? 'ar' 
+      const language = execution.campaign.language === 'both'
+        ? 'ar'
         : (execution.campaign.language as 'ar' | 'en')
       content = await agent.generateContent('social_post', platform, language)
     }
@@ -436,8 +445,8 @@ export async function resumeCampaign(campaignId: string) {
     throw new Error('Campaign not found')
   }
 
-  const newStatus = campaign.startDate && campaign.startDate > new Date() 
-    ? 'scheduled' 
+  const newStatus = campaign.startDate && campaign.startDate > new Date()
+    ? 'scheduled'
     : 'active'
 
   return prisma.campaign.update({
@@ -461,7 +470,7 @@ export async function cancelCampaign(campaignId: string) {
  */
 export async function processScheduledCampaigns() {
   const now = new Date()
-  
+
   // Find pending executions that should be executed
   const pendingExecutions = await prisma.campaignExecution.findMany({
     where: {
