@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic'
 
 export default async function AdminDashboard() {
   const session = await getServerSession(authOptions)
-  
+
   // Debug logging
   console.log('Admin Dashboard - Session check:', {
     hasSession: !!session,
@@ -17,12 +17,12 @@ export default async function AdminDashboard() {
     userRole: (session?.user as any)?.role,
     userId: (session?.user as any)?.id,
   })
-  
+
   if (!session) {
     console.log('No session found, redirecting to login')
     redirect('/admin/login')
   }
-  
+
   const userRole = (session.user as any)?.role
   // Allow both 'admin' and 'main-admin' roles
   if (userRole !== 'admin' && userRole !== 'main-admin') {
@@ -61,7 +61,7 @@ export default async function AdminDashboard() {
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold">Admin Dashboard</h1>
             <Link
-              href="/admin/applications"
+              href="/admin/master/applications"
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
             >
               View Applications
