@@ -73,9 +73,9 @@ export default function MasterDashboardContent({ globalStats, subsystems }: Dash
                             <button className="px-12 py-6 bg-white text-black font-black text-[10px] uppercase tracking-[0.4em] rounded-[2rem] shadow-[0_0_50px_rgba(255,255,255,0.1)] hover:bg-sahara-gold transition-all hover:scale-105 active:scale-95 leading-none">
                                 {isArabic ? 'تنفيذ_مستأجر_جديد' : 'EXECUTE_NEW_TENANT'}
                             </button>
-                            <button className="px-12 py-6 bg-white/5 border border-white/10 text-white font-black text-[10px] uppercase tracking-[0.4em] rounded-[2rem] hover:bg-white/10 transition-all hover:border-sahara-gold/30 leading-none">
+                            <Link href="/admin/master/properties" className="px-12 py-6 bg-white/5 border border-white/10 text-white font-black text-[10px] uppercase tracking-[0.4em] rounded-[2rem] hover:bg-white/10 transition-all hover:border-sahara-gold/30 leading-none">
                                 {isArabic ? 'الوصول_للسجلات_العالمية' : 'ACCESS_GLOBAL_LOGS'}
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

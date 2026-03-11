@@ -64,10 +64,10 @@ export default function MasterApplicationsContent({ applications, filterStatus }
                         return (
                             <Link
                                 key={item.value}
-                                href={item.value === 'all' ? '/admin/applications' : `/admin/applications?status=${item.value}`}
+                                href={item.value === 'all' ? '/admin/master/applications' : `/admin/master/applications?status=${item.value}`}
                                 className={`px-8 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${isActive
-                                        ? 'bg-sahara-gold text-black shadow-[0_0_20px_rgba(212,175,55,0.3)]'
-                                        : 'text-gray-500 hover:text-white hover:bg-white/5'
+                                    ? 'bg-sahara-gold text-black shadow-[0_0_20px_rgba(212,175,55,0.3)]'
+                                    : 'text-gray-500 hover:text-white hover:bg-white/5'
                                     }`}
                             >
                                 {item.label}
@@ -116,7 +116,7 @@ export default function MasterApplicationsContent({ applications, filterStatus }
                                         </td>
                                         <td className="p-10">
                                             <span className={`px-5 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest robotic-digits ${app.selectionStatus === 'selected' ? 'bg-sahara-gold text-black shadow-lg' :
-                                                    app.selectionStatus === 'rejected' ? 'bg-white/5 text-gray-700' : 'bg-white/5 text-white/40'
+                                                app.selectionStatus === 'rejected' ? 'bg-white/5 text-gray-700' : 'bg-white/5 text-white/40'
                                                 }`}>
                                                 {app.selectionStatus}
                                             </span>
