@@ -102,7 +102,7 @@ export default async function AdminDashboard() {
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
           <Link
-            href="/admin/applications"
+            href="/admin/master/applications"
             className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition"
           >
             <h3 className="text-lg font-bold mb-2">Manage Applications</h3>
