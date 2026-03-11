@@ -52,7 +52,7 @@ export async function GET() {
 
         // 3. Generate Promotional Content via Marketing Engine (Groq AI)
         const contact = brandProfile.contactDetails as any;
-        const content = await MarketingEngine.generateElevatorPromo({
+        const promo = await MarketingEngine.generateElevatorPromo({
             companyName: brandProfile.companyName,
             industry: brandProfile.industry || '',
             location: brandProfile.location || '',
@@ -60,6 +60,9 @@ export async function GET() {
             contact: { phone: contact.phone, whatsapp: contact.whatsapp },
             portfolioHighlights: ['Luxury Villa Lifts', 'High-Speed Commercial Elevators']
         })
+
+        // Use the first selected platform's content as base
+        const content = typeof promo === 'object' && promo !== null ? promo : {}
 
         // 4. Create the Campaign
         const campaign = await prisma.campaign.create({
@@ -86,21 +89,21 @@ export async function GET() {
                 platform: 'facebook',
                 scheduledAt: new Date(Date.now() + 1000 * 60 * 5),
                 status: 'pending',
-                content: content.facebook
+                content: (content as any).facebook || ''
             },
             {
                 type: 'social_post',
                 platform: 'linkedin',
                 scheduledAt: new Date(Date.now() + 1000 * 60 * 60),
                 status: 'pending',
-                content: content.linkedin
+                content: (content as any).linkedin || ''
             },
             {
                 type: 'social_post',
                 platform: 'whatsapp',
                 scheduledAt: new Date(Date.now() + 1000 * 60 * 120),
                 status: 'pending',
-                content: (content as any).twitter || content.facebook
+                content: (content as any).twitter || (content as any).whatsapp || (content as any).facebook || ''
             }
         ]
 
