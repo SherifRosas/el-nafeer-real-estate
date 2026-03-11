@@ -20,7 +20,7 @@ export class ProjectIndexer {
         this.indexPath = path.join(process.cwd(), 'lib/ai/project_index.json')
         // We use OpenAI specifically for the embeddings (`text-embedding-3-small`)
         // because it is extremely cheap/fast and offloads the calculation from Vercel's serverless RAM.
-        this.openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+        this.openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY || 'dummy_key_for_build' })
     }
 
     private async getFiles(dir: string): Promise<string[]> {

@@ -14,7 +14,7 @@ export class ContextRetriever {
 
     constructor() {
         this.indexPath = path.join(process.cwd(), 'lib/ai/project_index.json')
-        this.openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+        this.openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY || 'dummy_key_for_build' })
     }
 
     private cosineSimilarity(vecA: number[], vecB: number[]): number {
