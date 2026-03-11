@@ -40,7 +40,7 @@ export default function HomeContent() {
         {/* Action Node Buttons */}
         <div className="flex flex-wrap justify-center gap-10 mb-32 relative z-20">
           <Link
-            href="/properties"
+            href="/admin/login"
             className="group relative px-16 py-10 bg-white text-black rounded-2xl font-black text-xs uppercase tracking-[0.4em] overflow-hidden transition-all hover:scale-110 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.2)]"
           >
             <div className="absolute inset-0 bg-sahara-gold translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
