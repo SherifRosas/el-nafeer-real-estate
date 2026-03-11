@@ -1,6 +1,7 @@
 'use client'
 
 import { useLanguage } from '../LanguageContext'
+import Link from 'next/link'
 
 interface DashboardProps {
     globalStats: any[]
