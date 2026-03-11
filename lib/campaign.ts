@@ -49,7 +49,7 @@ export async function createCampaign(input: CreateCampaignInput) {
   if (input.autoGenerate && !content) {
     if (brandProfile) {
       // Use specialized industry marketing engine
-      const promo = MarketingEngine.generateElevatorPromo({
+      const promo = await MarketingEngine.generateElevatorPromo({
         companyName: brandProfile.companyName,
         location: brandProfile.location || 'Egypt',
         serviceArea: brandProfile.serviceArea || 'Egypt',
