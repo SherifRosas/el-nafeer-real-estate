@@ -90,13 +90,13 @@ export default function MasterFooter() {
                         </h4>
                         <ul className="grid grid-cols-1 gap-4">
                             {[
-                                { en: 'Properties', ar: 'الأصول_العقارية' },
-                                { en: 'Applications', ar: 'طلبات_المستخدمين' },
-                                { en: 'Support', ar: 'نواة_الدعم' },
-                                { en: 'Contact', ar: 'الاتصال_المباشر' }
+                                { en: 'Properties', ar: 'الأصول_العقارية', href: '/admin/master/properties' },
+                                { en: 'Applications', ar: 'طلبات_المستخدمين', href: '/admin/master/applications' },
+                                { en: 'Support', ar: 'نواة_الدعم', href: '/admin/login' },
+                                { en: 'Contact', ar: 'الاتصال_المباشر', href: '/admin/login' }
                             ].map((item) => (
                                 <li key={item.en}>
-                                    <Link href={`/${item.en.toLowerCase()}`} className="text-[11px] font-black text-gray-500 hover:text-white hover:pl-2 transition-all uppercase tracking-widest flex items-center gap-2 rtl:flex-row-reverse">
+                                    <Link href={item.href} className="text-[11px] font-black text-gray-500 hover:text-white hover:pl-2 transition-all uppercase tracking-widest flex items-center gap-2 rtl:flex-row-reverse">
                                         <span className="w-1.5 h-1.5 bg-sahara-gold/40 rounded-full" />
                                         {isArabic ? item.ar : item.en}
                                     </Link>
