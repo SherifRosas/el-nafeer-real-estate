@@ -483,6 +483,28 @@ section:hover {
   [dir="ltr"] {
     direction: ltr;
   }
+  /* Coin Flip Animation */
+  .coin-perspective {
+    perspective: 1200px;
+  }
+
+  .coin-inner {
+    transform-style: preserve-3d;
+    transition: transform 1s ease-in-out;
+  }
+
+  .coin-inner.flipped {
+    transform: rotateY(180deg);
+  }
+
+  .coin-face {
+    backface-visibility: hidden;
+  }
+
+  .coin-face-back {
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+  }
 }
 
 /* Responsive Design */

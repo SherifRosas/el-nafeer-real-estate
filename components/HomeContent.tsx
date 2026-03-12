@@ -3,29 +3,99 @@
 import Link from 'next/link'
 import SocialShare from '@/components/SocialShare'
 import { useLanguage } from './LanguageContext'
+import { useState, useEffect } from 'react'
 
 export default function HomeContent() {
   const { language } = useLanguage()
   const isArabic = language === 'ar'
+  const [isFlipped, setIsFlipped] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    // Auto-flip the coin every 4 seconds
+    const flipTimer = setInterval(() => {
+      setIsFlipped(prev => !prev)
+    }, 4000)
+    return () => clearInterval(flipTimer)
+  }, [])
+
+  const logoSrc = isArabic ? '/logos/logo-ar.png' : '/logos/logo-en.png'
 
   return (
     <div className="relative z-10 px-6 md:px-12 py-16 lg:py-32 overflow-hidden max-w-full">
       {/* Dynamic Background Mesh */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[url('/grid.svg')] bg-repeat" />
 
       {/* Background Cyber Glows */}
       <div className="absolute top-0 right-0 w-[400px] md:w-[700px] h-[400px] md:h-[700px] bg-sahara-gold/[0.03] blur-[120px] -mr-32 -mt-32 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] md:w-[700px] h-[400px] md:h-[700px] bg-cyan-500/[0.03] blur-[120px] -ml-32 -mb-32 pointer-events-none" />
 
-      {/* Hero Section */}
+      {/* Hero Section with Coin Logos */}
       <div className="max-w-7xl mx-auto text-center mb-32 relative">
+        
+        {/* === COIN FLIP LOGO SHOWCASE === */}
+        <div className="mb-20 flex justify-center">
+          <div 
+            className="relative cursor-pointer group coin-perspective"
+            onClick={() => setIsFlipped(prev => !prev)}
+          >
+            {/* Outer Glow Ring */}
+            <div className="absolute inset-[-20px] rounded-full border border-sahara-gold/20 animate-[spin_20s_linear_infinite] group-hover:border-sahara-gold/40 transition-all" />
+            <div className="absolute inset-[-35px] rounded-full border border-cyan-500/10 animate-[spin_30s_linear_infinite_reverse]" />
+            
+            {/* Pulsing Glow Behind Coin */}
+            <div className="absolute inset-[-10px] bg-sahara-gold/10 rounded-full blur-[60px] animate-pulse" />
+            <div className="absolute inset-[-10px] bg-cyan-500/5 rounded-full blur-[80px] animate-pulse delay-500" />
+
+            {/* The Coin Container */}
+            <div 
+              className={`w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 relative coin-inner ${isFlipped ? 'flipped' : ''}`}
+            >
+              {/* Front Face - English Logo */}
+              <div 
+                className="absolute inset-0 rounded-full overflow-hidden border-2 border-sahara-gold/30 shadow-[0_0_60px_rgba(212,175,55,0.15),inset_0_0_30px_rgba(212,175,55,0.05)] coin-face"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111] to-[#0a0a0a]" />
+                <img 
+                  src="/logos/logo-en.png" 
+                  alt="EL-NAFEER English Logo"
+                  className="w-full h-full object-contain p-4 relative z-10 drop-shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+                />
+                {/* Coin Edge Shimmer */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent rounded-full pointer-events-none" />
+              </div>
+
+              {/* Back Face - Arabic Logo */}
+              <div 
+                className="absolute inset-0 rounded-full overflow-hidden border-2 border-cyan-500/30 shadow-[0_0_60px_rgba(6,182,212,0.15),inset_0_0_30px_rgba(6,182,212,0.05)] coin-face-back"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111] to-[#0a0a0a]" />
+                <img 
+                  src="/logos/logo-ar.png" 
+                  alt="EL-NAFEER Arabic Logo"
+                  className="w-full h-full object-contain p-6 relative z-10 drop-shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+                />
+                {/* Coin Edge Shimmer */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent rounded-full pointer-events-none" />
+              </div>
+            </div>
+
+            {/* Tap to Flip Hint */}
+            <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-[9px] font-black text-gray-700 uppercase tracking-[0.5em] opacity-0 group-hover:opacity-100 transition-opacity robotic-digits whitespace-nowrap">
+              {isArabic ? 'اضغط_للتبديل' : 'TAP_TO_FLIP'}
+            </div>
+          </div>
+        </div>
+
+        {/* Version Badge */}
         <div className="inline-flex items-center gap-3 px-6 py-2 rounded-xl border border-white/10 milky-glass mb-10 liquid-gloss prestige-card group">
           <span className="w-2 h-2 bg-sahara-gold rounded-full animate-pulse shadow-[0_0_15px_rgba(212,175,55,1)]" />
           <span className="text-[10px] font-black text-gray-300 group-hover:text-sahara-gold transition-colors uppercase tracking-[0.4em] robotic-digits">ESTABLISHMENT_PROTOCOL_v3.5_RELEASE</span>
         </div>
 
         <h1 className="text-5xl md:text-[clamp(3rem,8vw,9rem)] font-black mb-12 tracking-tighter uppercase italic leading-[0.85] animate-in fade-in transition-all duration-700">
-          <span className="text-white block mb-6">{isArabic ? 'قيادة' : 'MASTER'}</span>
+          <span className="text-white block mb-6">{isArabic ? 'النفير' : 'EL-NAFEER'}</span>
           <span className="block transition-all duration-1000 text-sahara-gold drop-shadow-[0_0_50px_rgba(212,175,55,0.3)] hover:scale-105 transform cursor-default">
             {isArabic ? 'العقارات النخبة' : 'ELITE_PROPERTIES'}
           </span>
@@ -40,7 +110,7 @@ export default function HomeContent() {
         {/* Action Node Buttons */}
         <div className="flex flex-wrap justify-center gap-10 mb-32 relative z-20">
           <Link
-            href="/admin/login"
+            href="/properties"
             className="group relative px-16 py-10 bg-white text-black rounded-2xl font-black text-xs uppercase tracking-[0.4em] overflow-hidden transition-all hover:scale-110 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.2)]"
           >
             <div className="absolute inset-0 bg-sahara-gold translate-y-full group-hover:translate-y-0 transition-transform duration-500" />

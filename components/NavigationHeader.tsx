@@ -60,11 +60,11 @@ export default function NavigationHeader() {
         {/* Brand Node */}
         <div className="flex items-center gap-8 relative z-10">
           <Link href="/" className="group flex items-center gap-6 relative cursor-pointer">
-            <div className="w-20 h-20 md:w-24 md:h-24 bg-white rounded-2xl flex items-center justify-center relative overflow-hidden transition-all duration-500 group-hover:rotate-3 shadow-[0_0_30px_rgba(255,255,255,0.05)] border border-white/20">
+            <div className="w-20 h-20 md:w-24 md:h-24 bg-[#0a0a0a] rounded-2xl flex items-center justify-center relative overflow-hidden transition-all duration-500 group-hover:rotate-3 shadow-[0_0_30px_rgba(212,175,55,0.1)] border border-sahara-gold/20">
               <img
-                src="/logos/official-logo-dark.jfif"
+                src={isArabic ? '/logos/logo-ar.png' : '/logos/logo-en.png'}
                 alt="EL-NAFEER Logo"
-                className="w-full h-full object-contain p-2"
+                className="w-full h-full object-contain p-1"
               />
             </div>
             <div className="hidden lg:block">

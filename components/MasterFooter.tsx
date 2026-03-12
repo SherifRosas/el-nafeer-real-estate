@@ -17,10 +17,10 @@ export default function MasterFooter() {
                     {/* Unified Logo & Mission */}
                     <div className="lg:col-span-1 space-y-8">
                         <Link href="/" className="flex items-center gap-4 group cursor-pointer inline-flex">
-                            <div className="w-20 h-20 bg-white shadow-[0_0_30px_rgba(255,255,255,0.1)] rounded-2xl p-2 flex items-center justify-center relative overflow-hidden transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 border border-white/20">
+                            <div className="w-20 h-20 bg-[#0a0a0a] shadow-[0_0_30px_rgba(212,175,55,0.1)] rounded-2xl p-2 flex items-center justify-center relative overflow-hidden transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 border border-sahara-gold/20">
                                 <img
-                                    src="/logos/official-logo-dark.jfif"
-                                    alt="EL-NAFEER Official Logo"
+                                    src={isArabic ? '/logos/logo-ar.png' : '/logos/logo-en.png'}
+                                    alt="EL-NAFEER Logo"
                                     className="w-full h-full object-contain"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />

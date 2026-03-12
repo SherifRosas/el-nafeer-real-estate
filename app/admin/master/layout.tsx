@@ -95,9 +95,9 @@ export default function MasterDashboardLayout({
 
         <div className="p-10 md:p-12 border-b border-white/5 relative group">
           <Link href="/" className="flex flex-col items-center gap-6 group" onClick={() => setIsSidebarOpen(false)}>
-            <div className="w-24 h-24 bg-white rounded-2xl flex items-center justify-center overflow-hidden p-2 transition-all duration-700 group-hover:rotate-6 shadow-[0_0_40px_rgba(255,255,255,0.05)] border border-white/10 relative">
+            <div className="w-24 h-24 bg-[#0a0a0a] rounded-2xl flex items-center justify-center overflow-hidden p-2 transition-all duration-700 group-hover:rotate-6 shadow-[0_0_40px_rgba(212,175,55,0.1)] border border-sahara-gold/20 relative">
               <img
-                src="/logos/official-logo-dark.jfif"
+                src={isArabic ? '/logos/logo-ar.png' : '/logos/logo-en.png'}
                 alt="EL-NAFEER Logo"
                 className="w-full h-full object-contain relative z-10"
               />
