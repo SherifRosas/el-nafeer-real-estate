@@ -13,9 +13,22 @@ export default async function MasterCommandCenter() {
   }
 
   // Global Data Aggregation (Server-Side)
-  const allApplications = await db.getAllApplications() || []
-  const allRevenue = await db.getAllRevenue() || []
-  const totalRevenue = allRevenue.reduce((sum, rev) => sum + (rev.amount || 0), 0)
+  let allApplications: any[] = []
+  let allRevenue: any[] = []
+  let totalRevenue = 0
+
+  try {
+    allApplications = await db.getAllApplications() || []
+  } catch (error) {
+    console.error('Master Dashboard - Error fetching applications:', error)
+  }
+
+  try {
+    allRevenue = await db.getAllRevenue() || []
+    totalRevenue = allRevenue.reduce((sum, rev) => sum + (rev.amount || 0), 0)
+  } catch (error) {
+    console.error('Master Dashboard - Error fetching revenue:', error)
+  }
 
   // Subsystems data (Mocked or fetched)
   const subsystems = [
