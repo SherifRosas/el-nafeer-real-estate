@@ -7,7 +7,8 @@ import MasterDashboardContent from '@/components/admin/MasterDashboardContent'
 export default async function MasterCommandCenter() {
   const session = await getServerSession(authOptions)
 
-  if (!session || (session.user as any)?.role !== 'main-admin') {
+  const userRole = (session?.user as any)?.role
+  if (!session || (userRole !== 'main-admin' && userRole !== 'admin')) {
     redirect('/admin/login')
   }
 

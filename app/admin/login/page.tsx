@@ -41,7 +41,7 @@ export default function AdminLoginPage() {
         setLoading(false)
       } else if (result?.ok) {
         setTimeout(() => {
-          window.location.replace('/admin')
+          window.location.replace('/admin/master')
         }, 800)
       }
     } catch (err) {
