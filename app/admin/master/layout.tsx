@@ -5,7 +5,7 @@ import { useLanguage } from '@/components/LanguageContext'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
-import Image from 'next/image'
+
 
 export default function MasterDashboardLayout({
   children,
@@ -17,13 +17,16 @@ export default function MasterDashboardLayout({
   const pathname = usePathname()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [time, setTime] = useState(new Date())
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const timer = setInterval(() => setTime(new Date()), 1000)
     return () => clearInterval(timer)
   }, [])
 
   const formatTime = (date: Date) => {
+    if (!mounted) return '--:--:--'
     return date.toLocaleTimeString(isArabic ? 'ar-EG' : 'en-US', {
       hour12: false,
       hour: '2-digit',
@@ -93,11 +96,9 @@ export default function MasterDashboardLayout({
         <div className="p-10 md:p-12 border-b border-white/5 relative group">
           <Link href="/" className="flex flex-col items-center gap-6 group" onClick={() => setIsSidebarOpen(false)}>
             <div className="w-24 h-24 bg-white rounded-2xl flex items-center justify-center overflow-hidden p-2 transition-all duration-700 group-hover:rotate-6 shadow-[0_0_40px_rgba(255,255,255,0.05)] border border-white/10 relative">
-              <Image
+              <img
                 src="/logos/official-logo-dark.jfif"
                 alt="EL-NAFEER Logo"
-                width={96}
-                height={96}
                 className="w-full h-full object-contain relative z-10"
               />
             </div>
