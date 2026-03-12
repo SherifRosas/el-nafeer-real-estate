@@ -1,6 +1,6 @@
 {
   "name": "el-nafeer-real-estate",
-  "version": "3.0.0-real-estate",
+  "version": "4.0.0-production-launch",
   "private": true,
   "scripts": {
     "dev": "next dev",

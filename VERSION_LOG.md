@@ -52,4 +52,40 @@ This version signifies the launch of the **Al-Nafeer Elite Elevators** division,
 - Static page generation compatibility achieved by injecting fallback API keys.
 
 ---
+## [4.0.0-production-launch] - 2026-03-12
+
+### 🚀 Production Authentication & Brand Identity Overhaul
+
+This version marks the first **fully functional Vercel Production deployment** with working authentication, zero console errors, and the new EL-NAFEER eagle brand identity.
+
+### Fixed
+
+- **Authentication Cookie Mismatch** (CRITICAL): Removed custom cookie configuration in `lib/auth.ts` that was forcing the session token name to `next-auth.session-token` while Vercel HTTPS expected `__Secure-next-auth.session-token`. This was the root cause of the login redirect loop on production.
+- **Admin Role Gate**: Master Dashboard (`/admin/master`) was blocking `admin` role logins — only `main-admin` was permitted. Updated to accept both roles.
+- **Login Redirect Target**: Changed post-login redirect from `/admin` (legacy page) to `/admin/master` (actual dashboard).
+- **Database Error Handling**: Wrapped all DB calls in `/admin/master/page.tsx` with try/catch to prevent page crashes when Supabase is slow or unavailable.
+- **Missing `EL_NAFEER_DB_URL`**: Identified that Prisma schema uses `EL_NAFEER_DB_URL` while Vercel only had `DATABASE_URL`. Added the correct env variable.
+- **Logo 400 Error**: Replaced Next.js `<Image>` component with `<img>` for `.jfif` format logos unsupported by the optimizer.
+- **React Hydration Error #418**: Added `mounted` state guard to the real-time clock in the admin sidebar.
+- **Vercel Deployment Pipeline**: Fixed Preview vs Production deployment workflow.
+- **Missing `grid.svg`**: Created the background grid texture asset.
+- **Footer 404 Errors**: Fixed all broken footer links to point to valid routes.
+
+### Added
+
+- **EL-NAFEER Eagle Brand Identity**:
+  - `logo-en.png` — English golden eagle with "N" circuit board motif and "EL-NAFEER" text.
+  - `logo-ar.png` — Arabic calligraphic eagle with teal circuit accents.
+  - Language-aware logo switching across ALL pages (Navigation, Footer, Admin Sidebar).
+- **Coin-Flip Homepage Animation**: 3D coin auto-flips every 4 seconds showing EN/AR logos. Click to manually flip. Orbiting glow rings and pulsing effects.
+- **`/admin/master/properties` Page**: Full property inventory page with dark glassmorphic design, property cards, status badges, and pricing.
+- **CSS Utilities**: `.coin-perspective`, `.coin-inner`, `.coin-face`, `.coin-face-back` for reusable 3D flip animations.
+
+### Technical Notes
+
+- NextAuth cookie handling now uses framework defaults — no custom cookie config.
+- All `<img>` tags use dynamic `src` based on `useLanguage()` context for bilingual logo support.
+- Vercel Production deployments require manual "Promote to Production" from the Deployments tab.
+
+---
 *Created by Antigravity (Advanced Agentic Coding)*
