@@ -47,9 +47,24 @@ export default function MasterDashboardLayout({
       href: '/admin/master/owners',
     },
     {
+      title: isArabic ? 'طلبات التقديم' : 'Asset Applications',
+      icon: '📝',
+      href: '/admin/master/applications',
+    },
+    {
       title: isArabic ? 'تحليلات العملاء' : 'Global Leads',
       icon: '🎯',
       href: '/admin/master/leads',
+    },
+    {
+      title: isArabic ? 'حملات الترويح' : 'Promo Protocols',
+      icon: '🚀',
+      href: '/admin/master/campaigns',
+    },
+    {
+      title: isArabic ? 'مراسل النفير' : 'Al-Nafeer Comms',
+      icon: '📨',
+      href: '/admin/master/messages',
     },
     {
       title: isArabic ? 'مراقبة الذكاء الاصطناعي' : 'AI Agent Monitor',
