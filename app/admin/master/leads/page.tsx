@@ -7,12 +7,18 @@ import MasterLeadsDashboard from '@/components/admin/MasterLeadsDashboard'
 export default async function MasterLeadsPage() {
     const session = await getServerSession(authOptions)
 
-    if (!session || (session.user as any)?.role !== 'main-admin') {
+    const userRole = (session?.user as any)?.role
+    if (!session || (userRole !== 'main-admin' && userRole !== 'admin')) {
         redirect('/admin/login')
     }
 
     // Fetch all global leads from the system
-    const leads = await db.getAllLeads()
+    let leads: any[] = []
+    try {
+        leads = await db.getAllLeads() || []
+    } catch (error) {
+        console.error('Leads page - DB error:', error)
+    }
 
     return (
         <div className="space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">

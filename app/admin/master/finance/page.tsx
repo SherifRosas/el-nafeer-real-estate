@@ -7,12 +7,19 @@ import MasterFinanceContent from '@/components/admin/MasterFinanceContent'
 export default async function MasterFinancePage() {
     const session = await getServerSession(authOptions)
 
-    if (!session || (session.user as any)?.role !== 'main-admin') {
+    const userRole = (session?.user as any)?.role
+    if (!session || (userRole !== 'main-admin' && userRole !== 'admin')) {
         redirect('/admin/login')
     }
 
-    const transactions = await db.getAllRevenue() || []
-    const totalRevenue = transactions.reduce((sum, txn) => sum + (txn.amount || 0), 0)
+    let transactions: any[] = []
+    let totalRevenue = 0
+    try {
+        transactions = await db.getAllRevenue() || []
+        totalRevenue = transactions.reduce((sum, txn) => sum + (txn.amount || 0), 0)
+    } catch (error) {
+        console.error('Finance page - DB error:', error)
+    }
 
     return <MasterFinanceContent transactions={transactions} totalRevenue={totalRevenue} />
 }

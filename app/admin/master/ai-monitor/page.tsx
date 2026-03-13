@@ -7,13 +7,24 @@ import MasterAIMonitorContent from '@/components/admin/MasterAIMonitorContent'
 export default async function MasterAIMonitorPage() {
     const session = await getServerSession(authOptions)
 
-    if (!session || (session.user as any)?.role !== 'main-admin') {
+    const userRole = (session?.user as any)?.role
+    if (!session || (userRole !== 'main-admin' && userRole !== 'admin')) {
         redirect('/admin/login')
     }
 
     // Fetch recent activity data
-    const recentLeads = await db.getAllLeads() || []
-    const recentMessages = await db.getAllMessages(10) || []
+    let recentLeads: any[] = []
+    let recentMessages: any[] = []
+    try {
+        recentLeads = await db.getAllLeads() || []
+    } catch (error) {
+        console.error('AI Monitor - DB error fetching leads:', error)
+    }
+    try {
+        recentMessages = await db.getAllMessages(10) || []
+    } catch (error) {
+        console.error('AI Monitor - DB error fetching messages:', error)
+    }
 
     const events = [
         ...recentLeads.slice(0, 5).map(lead => ({

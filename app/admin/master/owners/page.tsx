@@ -7,12 +7,18 @@ import MasterOwnersContent from '@/components/admin/MasterOwnersContent'
 export default async function MasterOwnersPage() {
     const session = await getServerSession(authOptions)
 
-    if (!session || (session.user as any)?.role !== 'main-admin') {
+    const userRole = (session?.user as any)?.role
+    if (!session || (userRole !== 'main-admin' && userRole !== 'admin')) {
         redirect('/admin/login')
     }
 
     // Fetch all registered property owners
-    const owners = await db.getAllPropertyOwners() || []
+    let owners: any[] = []
+    try {
+        owners = await db.getAllPropertyOwners() || []
+    } catch (error) {
+        console.error('Owners page - DB error:', error)
+    }
 
     return <MasterOwnersContent owners={owners} />
 }
