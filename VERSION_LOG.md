@@ -88,4 +88,30 @@ This version marks the first **fully functional Vercel Production deployment** w
 - Vercel Production deployments require manual "Promote to Production" from the Deployments tab.
 
 ---
+## [4.1.0-client-onboarding] - 2026-03-14
+
+### 🚀 Lever Pioneer Deployment & Lead Architecture
+
+This update marks the successful onboarding of the first external client (**Lever Pioneer Elevators**) and the activation of the end-to-end lead generation pipeline.
+
+### Added
+
+- **Lever Pioneer Microsite**: High-fidelity landing page at `/lever-pioneer` featuring industrial-luxe design and bilingual support.
+- **Client Tracker HUB**: Specialized dashboard at `/admin/master/tracker/[id]` for real-time tracking of lead capture signals.
+- **Lead Capture API**: Functional `/api/leads` endpoint for persistent storage of prospect data into Supabase.
+- **Tracking Scripts Integration**: Global deployment of Google Analytics 4 and Facebook Pixel components.
+- **AI Content Portfolio**: Generated multi-channel advertising assets for Facebook, LinkedIn, and Twitter/X for the elevator vertical.
+
+### Fixed
+
+- **Supabase Constraint Violations**: Resolved `not-null` constraint errors for `createdAt`, `updatedAt`, and `id` in `createUser` and `createBrandProfile` methods.
+- **Marketing Engine Fallbacks**: Fixed mapping errors in the static content fallback logic when `GROQ_API_KEY` is not present.
+- **TSX JSX Warnings**: Escaped double forward-slashes in paragraph tags to prevent JSX parsing warnings in admin components.
+
+### Technical Notes
+
+- Client ID: `62c38934-4c4b-42be-98c9-06cbbee1af19`.
+- Dashboard metrics now aggregate real data from the `leads` table filtered by `brandProfileId`.
+
+---
 *Created by Antigravity (Advanced Agentic Coding)*

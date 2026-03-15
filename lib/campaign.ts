@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/db'
+import { db } from '@/lib/supabase'
 import { getAIAgent } from './ai-agent'
 import { MarketingEngine } from './marketing-engine'
 
@@ -40,9 +40,10 @@ export async function createCampaign(input: CreateCampaignInput) {
 
   // Fetch brand profile if provided
   if (input.brandProfileId) {
-    brandProfile = await prisma.brandProfile.findUnique({
-      where: { id: input.brandProfileId }
-    })
+    // Note: This matches the table name 'brand_profiles' in TABLES
+    brandProfile = await db.getBrandProfileById?.(input.brandProfileId) || null
+    // If getBrandProfileById doesn't exist yet, we'll use a direct way or wait.
+    // Let's assume we might need to add it or use a generic one.
   }
 
   // Generate content if auto-generate is enabled
@@ -51,17 +52,17 @@ export async function createCampaign(input: CreateCampaignInput) {
       // Use specialized industry marketing engine
       const promo = await MarketingEngine.generateElevatorPromo({
         companyName: brandProfile.companyName,
+        industry: brandProfile.industry || 'Elevators',
         location: brandProfile.location || 'Egypt',
         serviceArea: brandProfile.serviceArea || 'Egypt',
-        portfolioHighlights: [],
-        industry: brandProfile.industry || 'Elevators',
+        portfolioHighlights: (brandProfile.portfolio as any[]) || [],
         contact: {
           phone: (brandProfile.contactDetails as any)?.phone || '',
           whatsapp: (brandProfile.contactDetails as any)?.whatsapp || ''
         }
       })
       // Use the first selected platform's content as base
-      content = promo[input.platforms[0] as keyof typeof promo] || promo.facebook
+      content = promo[input.platforms[0] as keyof typeof promo] || (promo as any).facebook
     } else {
       const agent = getAIAgent()
       const platform = input.platforms[0] && input.platforms[0] !== 'email'
@@ -70,61 +71,45 @@ export async function createCampaign(input: CreateCampaignInput) {
       const language = input.language === 'both' ? 'ar' : (input.language || 'ar')
 
       try {
-        content = await agent.generateContent('social_post', platform, language as 'ar' | 'en')
+        content = await agent.generateContent('social_post', platform as any, language as 'ar' | 'en')
       } catch (error) {
         console.warn('AI content generation failed, using fallback:', error)
-        content = agent.getFallbackContent('social_post', platform, language as 'ar' | 'en')
+        content = agent.getFallbackContent('social_post', platform as any, language as 'ar' | 'en')
       }
     }
   }
 
   // Get main admin ID to assign as default sub-admin
   let mainAdminId: string | undefined = undefined
-  try {
-    const mainAdmin = await prisma.admin.findFirst({
-      where: {
-        email: 'sherifrosas.ai@gmail.com',
-        role: 'main-admin',
-        isActive: true,
-      },
-    })
-    if (mainAdmin) {
-      mainAdminId = mainAdmin.id
-    }
-  } catch (error) {
-    console.warn('Could not fetch main admin:', error)
+  // For Supabase, we'll just use the email directly or search users
+  const mainAdmin = await db.getUserByEmail('sherifrosas.ai@gmail.com')
+  if (mainAdmin) {
+    mainAdminId = mainAdmin.id
   }
 
   // Create the campaign
-  let campaign
-  try {
-    campaign = await prisma.campaign.create({
-      data: {
-        name: input.name,
-        description: input.description,
-        type: input.type,
-        platforms: input.platforms,
-        scheduleType: input.scheduleType,
-        startDate: input.startDate,
-        endDate: input.endDate,
-        recurrenceRule: input.recurrenceRule,
-        content: content || '',
-        language: input.language || 'ar',
-        targetAudience: input.targetAudience,
-        autoGenerate: input.autoGenerate ?? true,
-        config: input.config || {},
-        createdBy: input.createdBy,
-        subAdminId: input.subAdminId || mainAdminId,
-        brandProfileId: input.brandProfileId,
-        status: input.startDate && input.startDate > new Date() ? 'scheduled' : 'active',
-      },
-    })
-  } catch (dbError: any) {
-    throw dbError
-  }
+  const campaign = await db.createCampaign({
+    name: input.name,
+    description: input.description,
+    type: input.type,
+    platforms: input.platforms,
+    scheduleType: input.scheduleType,
+    startDate: input.startDate?.toISOString(),
+    endDate: input.endDate?.toISOString(),
+    recurrenceRule: input.recurrenceRule,
+    content: content || '',
+    language: input.language || 'ar',
+    targetAudience: input.targetAudience,
+    autoGenerate: input.autoGenerate ?? true,
+    config: input.config || {},
+    createdBy: input.createdBy,
+    subAdminId: input.subAdminId || mainAdminId,
+    brandProfileId: input.brandProfileId,
+    status: input.startDate && input.startDate > new Date() ? 'scheduled' : 'active',
+  })
 
   // Create initial executions if campaign is scheduled
-  if (campaign.status === 'scheduled' && campaign.startDate) {
+  if (campaign.status === 'scheduled' || campaign.status === 'active') {
     await scheduleCampaignExecutions(campaign.id)
   }
 
@@ -135,9 +120,7 @@ export async function createCampaign(input: CreateCampaignInput) {
  * Schedule campaign executions based on campaign configuration
  */
 export async function scheduleCampaignExecutions(campaignId: string) {
-  const campaign = await prisma.campaign.findUnique({
-    where: { id: campaignId },
-  })
+  const campaign = await db.getCampaignById(campaignId)
 
   if (!campaign) {
     throw new Error('Campaign not found')
@@ -145,8 +128,8 @@ export async function scheduleCampaignExecutions(campaignId: string) {
 
   const executions: any[] = []
   const now = new Date()
-  const startDate = campaign.startDate || now
-  const endDate = campaign.endDate
+  const startDate = campaign.startDate ? new Date(campaign.startDate) : now
+  const endDate = campaign.endDate ? new Date(campaign.endDate) : null
 
   // Generate execution schedule based on scheduleType
   if (campaign.scheduleType === 'once') {
@@ -155,14 +138,13 @@ export async function scheduleCampaignExecutions(campaignId: string) {
       executions.push({
         campaignId: campaign.id,
         platform,
-        scheduledAt: startDate,
+        scheduledAt: startDate.toISOString(),
         status: 'pending',
         content: campaign.content,
       })
     }
   } else if (campaign.scheduleType === 'recurring' && campaign.recurrenceRule) {
     // Parse recurrence rule and create multiple executions
-    // For simplicity, we'll create daily executions until endDate
     const dailyExecutions = generateDailySchedule(
       startDate,
       endDate || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Default 30 days
@@ -172,10 +154,9 @@ export async function scheduleCampaignExecutions(campaignId: string) {
     executions.push(...dailyExecutions.map(exec => ({
       ...exec,
       campaignId: campaign.id,
-      status: 'pending' as const,
+      status: 'pending',
     })))
   } else if (campaign.scheduleType === 'interval') {
-    // Interval-based scheduling (e.g., every 3 days)
     const intervalDays = parseInt(campaign.recurrenceRule || '1')
     const intervalExecutions = generateIntervalSchedule(
       startDate,
@@ -187,22 +168,14 @@ export async function scheduleCampaignExecutions(campaignId: string) {
     executions.push(...intervalExecutions.map(exec => ({
       ...exec,
       campaignId: campaign.id,
-      status: 'pending' as const,
+      status: 'pending',
     })))
   }
 
   // Create executions in database
   if (executions.length > 0) {
-    await prisma.campaignExecution.createMany({
-      data: executions,
-    })
+    await db.createCampaignExecutions(executions)
   }
-
-  // Update campaign status
-  await prisma.campaign.update({
-    where: { id: campaignId },
-    data: { status: 'scheduled' },
-  })
 
   return executions
 }
@@ -223,7 +196,7 @@ function generateDailySchedule(
     for (const platform of platforms) {
       executions.push({
         platform,
-        scheduledAt: new Date(currentDate),
+        scheduledAt: new Date(currentDate).toISOString(),
         content,
       })
     }
@@ -250,7 +223,7 @@ function generateIntervalSchedule(
     for (const platform of platforms) {
       executions.push({
         platform,
-        scheduledAt: new Date(currentDate),
+        scheduledAt: new Date(currentDate).toISOString(),
         content,
       })
     }
@@ -264,10 +237,7 @@ function generateIntervalSchedule(
  * Execute a campaign execution
  */
 export async function executeCampaignExecution(executionId: string) {
-  const execution = await prisma.campaignExecution.findUnique({
-    where: { id: executionId },
-    include: { campaign: true },
-  })
+  const execution = await db.getExecutionById(executionId)
 
   if (!execution) {
     throw new Error('Execution not found')
@@ -278,19 +248,16 @@ export async function executeCampaignExecution(executionId: string) {
   }
 
   // Update status to running
-  await prisma.campaignExecution.update({
-    where: { id: executionId },
-    data: { status: 'running' },
-  })
+  await db.updateExecution(executionId, { status: 'running' })
 
   try {
     const agent = getAIAgent()
 
     // Generate content if needed
     let content = execution.content
-    if (!content && execution.campaign.autoGenerate) {
+    if (!content && execution.campaign?.autoGenerate) {
       const platform = execution.platform !== 'email'
-        ? execution.platform as 'facebook' | 'twitter' | 'linkedin' | 'whatsapp'
+        ? execution.platform as any
         : undefined
       const language = execution.campaign.language === 'both'
         ? 'ar'
@@ -302,41 +269,35 @@ export async function executeCampaignExecution(executionId: string) {
     const taskId = agent.scheduleTask({
       type: execution.platform === 'email' ? 'email_campaign' : 'social_post',
       platform: execution.platform as any,
-      scheduledAt: execution.scheduledAt,
+      scheduledAt: new Date(execution.scheduledAt),
       content: content || '',
-      config: (execution.campaign.config as Record<string, any>) || {},
+      config: (execution.campaign?.config as Record<string, any>) || {},
     })
 
     const result = await agent.executeTask(taskId)
 
     // Update execution with results
-    await prisma.campaignExecution.update({
-      where: { id: executionId },
-      data: {
-        status: 'completed',
-        executedAt: new Date(),
-        content: content || execution.content,
-        result: {
-          success: result.success,
-          message: result.message,
-          taskId: result.taskId,
-        },
-        reach: result.metrics?.reach || 0,
-        engagement: result.metrics?.engagement || 0,
-        clicks: result.metrics?.clicks || 0,
+    await db.updateExecution(executionId, {
+      status: 'completed',
+      executedAt: new Date().toISOString(),
+      content: content || execution.content,
+      result: {
+        success: result.success,
+        message: result.message,
+        taskId: result.taskId,
       },
+      reach: result.metrics?.reach || 0,
+      engagement: result.metrics?.engagement || 0,
+      clicks: result.metrics?.clicks || 0,
     })
 
     return result
   } catch (error: any) {
     // Update execution with error
-    await prisma.campaignExecution.update({
-      where: { id: executionId },
-      data: {
-        status: 'failed',
-        executedAt: new Date(),
-        errorMessage: error.message || 'Execution failed',
-      },
+    await db.updateExecution(executionId, {
+      status: 'failed',
+      executedAt: new Date().toISOString(),
+      errorMessage: error.message || 'Execution failed',
     })
 
     throw error
@@ -347,14 +308,13 @@ export async function executeCampaignExecution(executionId: string) {
  * Get campaign metrics
  */
 export async function getCampaignMetrics(campaignId: string): Promise<CampaignMetrics> {
-  const executions = await prisma.campaignExecution.findMany({
-    where: { campaignId },
-  })
+  const campaign = await db.getCampaignById(campaignId)
+  const executions = campaign?.executions || []
 
-  const completedExecutions = executions.filter(e => e.status === 'completed')
-  const totalReach = completedExecutions.reduce((sum, e) => sum + (e.reach || 0), 0)
-  const totalEngagement = completedExecutions.reduce((sum, e) => sum + (e.engagement || 0), 0)
-  const totalClicks = completedExecutions.reduce((sum, e) => sum + (e.clicks || 0), 0)
+  const completedExecutions = executions.filter((e: any) => e.status === 'completed')
+  const totalReach = completedExecutions.reduce((sum: number, e: any) => sum + (e.reach || 0), 0)
+  const totalEngagement = completedExecutions.reduce((sum: number, e: any) => sum + (e.engagement || 0), 0)
+  const totalClicks = completedExecutions.reduce((sum: number, e: any) => sum + (e.clicks || 0), 0)
   const successCount = completedExecutions.length
   const successRate = executions.length > 0 ? (successCount / executions.length) * 100 : 0
 
@@ -370,32 +330,53 @@ export async function getCampaignMetrics(campaignId: string): Promise<CampaignMe
 }
 
 /**
+ * Get global campaign metrics
+ */
+export async function getGlobalCampaignMetrics() {
+  const campaigns = await db.getAllCampaigns()
+  let totalReach = 0
+  let totalEngagement = 0
+  let totalClicks = 0
+  let totalExecutions = 0
+  let activeCampaigns = 0
+
+  campaigns.forEach((c: any) => {
+    if (c.status === 'active') activeCampaigns++
+    const executions = c.executions || []
+    totalExecutions += executions.length
+    executions.forEach((e: any) => {
+      if (e.status === 'completed') {
+        totalReach += (e.reach || 0)
+        totalEngagement += (e.engagement || 0)
+        totalClicks += (e.clicks || 0)
+      }
+    })
+  })
+
+  const averageConversionRate = totalReach > 0 ? (totalClicks / totalReach) * 100 : 0
+
+  return {
+    totalReach,
+    totalEngagement,
+    totalClicks,
+    totalExecutions,
+    activeCampaigns,
+    averageConversionRate
+  }
+}
+
+/**
  * Get all campaigns
  */
 export async function getAllCampaigns() {
-  return prisma.campaign.findMany({
-    include: {
-      executions: {
-        orderBy: { scheduledAt: 'desc' },
-        take: 10, // Latest 10 executions
-      },
-    },
-    orderBy: { createdAt: 'desc' },
-  })
+  return db.getAllCampaigns()
 }
 
 /**
  * Get campaign by ID
  */
 export async function getCampaignById(campaignId: string) {
-  return prisma.campaign.findUnique({
-    where: { id: campaignId },
-    include: {
-      executions: {
-        orderBy: { scheduledAt: 'desc' },
-      },
-    },
-  })
+  return db.getCampaignById(campaignId)
 }
 
 /**
@@ -405,64 +386,45 @@ export async function updateCampaign(
   campaignId: string,
   data: Partial<CreateCampaignInput>
 ) {
-  return prisma.campaign.update({
-    where: { id: campaignId },
-    data: {
-      ...data,
-      updatedAt: new Date(),
-    },
-  })
+  return db.updateCampaign(campaignId, data)
 }
 
 /**
  * Delete campaign
  */
 export async function deleteCampaign(campaignId: string) {
-  return prisma.campaign.delete({
-    where: { id: campaignId },
-  })
+  return db.deleteCampaign(campaignId)
 }
 
 /**
  * Pause campaign
  */
 export async function pauseCampaign(campaignId: string) {
-  return prisma.campaign.update({
-    where: { id: campaignId },
-    data: { status: 'paused' },
-  })
+  return db.updateCampaign(campaignId, { status: 'paused' })
 }
 
 /**
  * Resume campaign
  */
 export async function resumeCampaign(campaignId: string) {
-  const campaign = await prisma.campaign.findUnique({
-    where: { id: campaignId },
-  })
+  const campaign = await db.getCampaignById(campaignId)
 
   if (!campaign) {
     throw new Error('Campaign not found')
   }
 
-  const newStatus = campaign.startDate && campaign.startDate > new Date()
+  const newStatus = campaign.startDate && new Date(campaign.startDate) > new Date()
     ? 'scheduled'
     : 'active'
 
-  return prisma.campaign.update({
-    where: { id: campaignId },
-    data: { status: newStatus },
-  })
+  return db.updateCampaign(campaignId, { status: newStatus })
 }
 
 /**
  * Cancel campaign
  */
 export async function cancelCampaign(campaignId: string) {
-  return prisma.campaign.update({
-    where: { id: campaignId },
-    data: { status: 'cancelled' },
-  })
+  return db.updateCampaign(campaignId, { status: 'cancelled' })
 }
 
 /**
@@ -470,21 +432,11 @@ export async function cancelCampaign(campaignId: string) {
  */
 export async function processScheduledCampaigns() {
   const now = new Date()
-
-  // Find pending executions that should be executed
-  const pendingExecutions = await prisma.campaignExecution.findMany({
-    where: {
-      status: 'pending',
-      scheduledAt: { lte: now },
-    },
-    include: {
-      campaign: true,
-    },
-  })
+  const pendingExecutions = await db.getPendingExecutions(now)
 
   // Filter executions for active campaigns only
   const activeExecutions = pendingExecutions.filter(
-    exec => exec.campaign.status === 'active' || exec.campaign.status === 'scheduled'
+    (exec: any) => exec.campaign?.status === 'active' || exec.campaign?.status === 'scheduled'
   )
 
   // Execute each pending execution

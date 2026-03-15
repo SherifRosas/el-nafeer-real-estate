@@ -20,7 +20,7 @@ export default function AdminLoginPage() {
   useEffect(() => {
     const userRole = (session?.user as any)?.role
     if (status === 'authenticated' && (userRole === 'admin' || userRole === 'main-admin')) {
-      router.push('/admin')
+      router.push('/admin/master')
     }
   }, [session, status, router])
 

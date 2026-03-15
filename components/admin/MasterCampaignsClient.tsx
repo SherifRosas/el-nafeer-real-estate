@@ -29,18 +29,30 @@ interface Brand {
     companyName: string
 }
 
+interface GlobalMetrics {
+    totalReach: number
+    totalEngagement: number
+    totalClicks: number
+    totalExecutions: number
+    activeCampaigns: number
+    averageConversionRate: number
+}
+
 interface MasterCampaignsClientProps {
     initialCampaigns: Campaign[]
     initialProperties: Property[]
     initialBrands: Brand[]
+    globalMetrics: GlobalMetrics
 }
 
 export default function MasterCampaignsClient({ 
     initialCampaigns, 
     initialProperties, 
-    initialBrands 
+    initialBrands,
+    globalMetrics: initialMetrics
 }: MasterCampaignsClientProps) {
     const [campaigns, setCampaigns] = useState<Campaign[]>(initialCampaigns)
+    const [metrics, setMetrics] = useState<GlobalMetrics>(initialMetrics)
     const [properties] = useState<Property[]>(initialProperties)
     const [brands] = useState<Brand[]>(initialBrands)
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -104,6 +116,7 @@ export default function MasterCampaignsClient({
         <div className="text-white">
             <MasterCampaignsContent
                 initialCampaigns={campaigns}
+                globalMetrics={metrics}
                 onCreateRequest={() => setShowCreateModal(true)}
             />
 

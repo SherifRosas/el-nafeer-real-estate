@@ -44,9 +44,17 @@ export default function LoginPage() {
               <p className="text-xs font-black text-gray-500 uppercase tracking-widest mb-4">Protocol: Direct Entry</p>
               <button
                 onClick={() => router.push('/real-estate')}
-                className="w-full bg-cyan-500 text-black font-black py-5 rounded-2xl uppercase tracking-widest text-xs hover:scale-[1.02] transition-all shadow-[0_0_30px_rgba(6,182,212,0.3)]"
+                className="w-full bg-cyan-500 text-black font-black py-5 rounded-2xl uppercase tracking-widest text-xs hover:scale-[1.02] transition-all shadow-[0_0_30px_rgba(6,182,212,0.3)] mb-4"
               >
                 Proceed to Domain
+              </button>
+              
+              <p className="text-[10px] font-black text-gray-700 uppercase tracking-widest mb-4 mt-8 text-center">Protocol: QA_TEST_BYPASS</p>
+              <button
+                onClick={() => router.push('/apply?test=true')}
+                className="w-full bg-sahara-gold text-black font-black py-5 rounded-2xl uppercase tracking-widest text-xs hover:scale-[1.02] transition-all shadow-[0_0_30px_rgba(212,175,55,0.3)]"
+              >
+                Access_Test_Node
               </button>
             </div>
 

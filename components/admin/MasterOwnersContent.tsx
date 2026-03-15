@@ -17,9 +17,9 @@ export default function MasterOwnersContent({ owners }: MasterOwnersContentProps
                 <div>
                     <h2 className="text-5xl md:text-6xl font-black tracking-tighter mb-4 italic uppercase text-white leading-none">
                         {isArabic ? (
-                            <>تنسيق <span className="text-sahara-gold">المستأجرين</span></>
+                            <>تنسيق <span className="text-sahara-gold">العقارات</span></>
                         ) : (
-                            <>TENANT_<span className="text-sahara-gold">ORCHESTRATION</span></>
+                            <>BRAND_<span className="text-sahara-gold">ORCHESTRATION</span></>
                         )}
                     </h2>
                     <p className="text-gray-500 font-bold text-lg uppercase tracking-tight">

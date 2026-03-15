@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import { randomUUID } from 'crypto'
 
 // Supabase configuration
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://qtmaaomweaqoumbclpox.supabase.co'
@@ -24,6 +25,8 @@ export const TABLES = {
   properties: 'properties',
   leads: 'leads',
   brandProfiles: 'brand_profiles',
+  campaigns: 'campaigns',
+  campaignExecutions: 'campaign_executions',
 } as const
 
 // Helper functions for common operations
@@ -72,9 +75,10 @@ export const db = {
     nationalIdFront?: string
     nationalIdBack?: string
   }) {
+    const now = new Date().toISOString()
     const { data, error } = await supabase
       .from(TABLES.users)
-      .insert(userData)
+      .insert({ ...userData, createdAt: now, updatedAt: now })
       .select()
       .single()
 
@@ -480,6 +484,42 @@ export const db = {
     return data || []
   },
 
+  async createLead(leadData: {
+    name: string
+    email?: string
+    phone: string
+    propertyId?: string
+    brandProfileId?: string
+    notes?: string
+    status?: string
+  }) {
+    const now = new Date().toISOString()
+    const { data, error } = await supabase
+      .from(TABLES.leads)
+      .insert({
+        id: randomUUID(),
+        ...leadData,
+        status: leadData.status || 'new',
+        createdAt: now,
+        updatedAt: now
+      })
+      .select()
+      .single()
+    if (error) throw error
+    return data
+  },
+
+  async getLeadsByBrandProfileId(brandProfileId: string) {
+    const { data, error } = await supabase
+      .from(TABLES.leads)
+      .select('*')
+      .eq('brandProfileId', brandProfileId)
+      .order('createdAt', { ascending: false })
+
+    if (error) throw error
+    return data || []
+  },
+
   async getAllLeadsForOwner(ownerId: string) {
     // This requires a join or two queries. For simplicity, we'll fetch properties first.
     const properties = await this.getPropertiesByOwnerId(ownerId)
@@ -519,6 +559,28 @@ export const db = {
     return data
   },
 
+  async getBrandProfileById(id: string) {
+    const { data, error } = await supabase
+      .from(TABLES.brandProfiles)
+      .select('*')
+      .eq('id', id)
+      .single()
+
+    if (error && error.code !== 'PGRST116') throw error
+    return data
+  },
+
+  async getAllBrandProfiles() {
+    const { data, error } = await supabase
+      .from(TABLES.brandProfiles)
+      .select('*, users(email, name)')
+      .order('companyName', { ascending: true })
+
+    if (error) throw error
+    return data || []
+  },
+
+
   async createBrandProfile(profileData: {
     userId: string
     companyName: string
@@ -529,9 +591,10 @@ export const db = {
     portfolio?: any
     contactDetails?: any
   }) {
+    const now = new Date().toISOString()
     const { data, error } = await supabase
       .from(TABLES.brandProfiles)
-      .insert({ ...profileData, createdAt: new Date().toISOString() })
+      .insert({ id: randomUUID(), ...profileData, createdAt: now, updatedAt: now })
       .select()
       .single()
 
@@ -549,6 +612,113 @@ export const db = {
 
     if (error) throw error
     return data
+  },
+
+  // Campaign operations
+  async getAllCampaigns() {
+    const { data, error } = await supabase
+      .from(TABLES.campaigns)
+      .select('*, executions:campaign_executions(*)')
+      .order('createdAt', { ascending: false })
+
+    if (error) throw error
+    return data || []
+  },
+
+  async getCampaignById(id: string) {
+    const { data, error } = await supabase
+      .from(TABLES.campaigns)
+      .select('*, executions:campaign_executions(*)')
+      .eq('id', id)
+      .single()
+
+    if (error && error.code !== 'PGRST116') throw error
+    return data
+  },
+
+  async createCampaign(campaignData: any) {
+    const now = new Date().toISOString()
+    const { data, error } = await supabase
+      .from(TABLES.campaigns)
+      .insert({ id: randomUUID(), ...campaignData, createdAt: now, updatedAt: now })
+      .select()
+      .single()
+
+    if (error) throw error
+    return data
+  },
+
+  async updateCampaign(id: string, updates: any) {
+    const { data, error } = await supabase
+      .from(TABLES.campaigns)
+      .update({ ...updates, updatedAt: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single()
+
+    if (error) throw error
+    return data
+  },
+
+  async deleteCampaign(id: string) {
+    const { error } = await supabase
+      .from(TABLES.campaigns)
+      .delete()
+      .eq('id', id)
+
+    if (error) throw error
+    return true
+  },
+
+  // Campaign Execution operations
+  async createCampaignExecutions(executions: any[]) {
+    const now = new Date().toISOString()
+    const { data, error } = await supabase
+      .from(TABLES.campaignExecutions)
+      .insert(executions.map(e => ({ 
+        id: randomUUID(), 
+        ...e, 
+        createdAt: now, 
+        updatedAt: now 
+      })))
+      .select()
+
+    if (error) throw error
+    return data
+  },
+
+  async getExecutionById(id: string) {
+    const { data, error } = await supabase
+      .from(TABLES.campaignExecutions)
+      .select('*, campaign:campaigns(*)')
+      .eq('id', id)
+      .single()
+
+    if (error && error.code !== 'PGRST116') throw error
+    return data
+  },
+
+  async updateExecution(id: string, updates: any) {
+    const { data, error } = await supabase
+      .from(TABLES.campaignExecutions)
+      .update({ ...updates, updatedAt: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single()
+
+    if (error) throw error
+    return data
+  },
+
+  async getPendingExecutions(before: Date) {
+    const { data, error } = await supabase
+      .from(TABLES.campaignExecutions)
+      .select('*, campaign:campaigns(*)')
+      .eq('status', 'pending')
+      .lte('scheduledAt', before.toISOString())
+
+    if (error) throw error
+    return data || []
   },
 }
 

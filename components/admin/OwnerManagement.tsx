@@ -53,9 +53,9 @@ export default function OwnerManagement({ initialOwners }: { initialOwners: Owne
         <div>
           <h2 className="text-5xl md:text-6xl font-black tracking-tighter mb-4 italic uppercase text-white leading-none">
             {isArabic ? (
-              <>تنسيق <span className="text-sahara-gold">المستأجرين</span></>
+              <>تنسيق <span className="text-sahara-gold">العلامات التجارية</span></>
             ) : (
-              <>TENANT_<span className="text-sahara-gold">ORCHESTRATION</span></>
+              <>BRAND_<span className="text-sahara-gold">ORCHESTRATION</span></>
             )}
           </h2>
           <p className="text-gray-500 font-bold text-lg uppercase tracking-tight">
@@ -77,7 +77,7 @@ export default function OwnerManagement({ initialOwners }: { initialOwners: Owne
             <span className="text-9xl grayscale opacity-10 filter blur-[2px]">🏢</span>
             <div className="space-y-4">
               <p className="font-black uppercase tracking-[0.6em] text-[12px] robotic-digits text-gray-700">
-                {isArabic ? 'لم_يتم_رصد_أنظمة_فرعية' : 'NO_TENANT_SUBSYSTEMS_DETECTED'}
+                {isArabic ? 'لم_يتم_رصد_أنظمة_فرعية' : 'NO_BRAND_SUBSYSTEMS_DETECTED'}
               </p>
               <p className="text-[10px] text-white/10 font-black uppercase tracking-[0.4em]">INITIATE_CLIENT_PROTOCOL_TO_BEGIN</p>
             </div>

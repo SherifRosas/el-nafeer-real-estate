@@ -25,9 +25,15 @@ export class MarketingEngine {
         console.log(`[ORCHESTRATOR] Generating AI marketing content for ${companyName} via Groq...`)
 
         const apiKey = process.env.GROQ_API_KEY
+        const fallback = this.generateStaticFallback({ companyName, industry, location, serviceArea, portfolioHighlights, contact })
+
         if (!apiKey) {
             console.warn('[ORCHESTRATOR] GROQ_API_KEY not found. Falling back to static templates.')
-            return this.generateStaticFallback({ companyName, industry, location, serviceArea, portfolioHighlights, contact })
+            return {
+                facebook: fallback.facebook,
+                linkedin: fallback.linkedin,
+                twitter: fallback.instagram
+            }
         }
 
         const groq = new Groq({ apiKey })
@@ -60,13 +66,17 @@ Rules:
             const twMatch = responseText.match(/TWITTER:([\s\S]*?)$/i)
 
             return {
-                facebook: fbMatch ? fbMatch[1].trim() : this.generateStaticFallback({ companyName, industry, location, serviceArea, portfolioHighlights, contact }).facebook,
-                linkedin: liMatch ? liMatch[1].trim() : this.generateStaticFallback({ companyName, industry, location, serviceArea, portfolioHighlights, contact }).linkedin,
-                twitter: twMatch ? twMatch[1].trim() : this.generateStaticFallback({ companyName, industry, location, serviceArea, portfolioHighlights, contact }).instagram
+                facebook: fbMatch ? fbMatch[1].trim() : fallback.facebook,
+                linkedin: liMatch ? liMatch[1].trim() : fallback.linkedin,
+                twitter: twMatch ? twMatch[1].trim() : fallback.instagram
             }
         } catch (error) {
             console.error('[ORCHESTRATOR] Groq Generation Failed:', error)
-            return this.generateStaticFallback({ companyName, industry, location, serviceArea, portfolioHighlights, contact })
+            return {
+                facebook: fallback.facebook,
+                linkedin: fallback.linkedin,
+                twitter: fallback.instagram
+            }
         }
     }
 

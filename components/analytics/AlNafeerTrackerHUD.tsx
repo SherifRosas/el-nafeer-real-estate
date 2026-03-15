@@ -37,8 +37,10 @@ export default function AlNafeerTrackerHUD({ clientName }: { clientName: string 
     const { language } = useLanguage()
     const isArabic = language === 'ar'
     const [currentTime, setCurrentTime] = useState(new Date())
+    const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
+        setMounted(true)
         const timer = setInterval(() => setCurrentTime(new Date()), 1000)
         return () => clearInterval(timer)
     }, [])
@@ -62,7 +64,9 @@ export default function AlNafeerTrackerHUD({ clientName }: { clientName: string 
                 <div className="flex gap-8 milky-glass p-6 rounded-3xl border border-white/10 robotic-digits">
                     <div className="text-right">
                         <p className="text-[9px] text-gray-600 font-black uppercase tracking-widest mb-1">SYSTEM_TIME</p>
-                        <p className="text-xl font-black text-white">{currentTime.toLocaleTimeString()}</p>
+                        <p className="text-xl font-black text-white">
+                            {mounted ? currentTime.toLocaleTimeString() : 'SYNCING...'}
+                        </p>
                     </div>
                     <div className="w-[1px] bg-white/10" />
                     <div>

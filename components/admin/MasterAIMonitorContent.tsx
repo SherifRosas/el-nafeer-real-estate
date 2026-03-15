@@ -2,6 +2,7 @@
 
 import { useLanguage } from '../LanguageContext'
 import { useState, useEffect } from 'react'
+import { supabase, TABLES } from '@/lib/supabase'
 
 interface Event {
     id: string
@@ -24,7 +25,40 @@ export default function MasterAIMonitorContent({ initialEvents }: AIMonitorProps
         const interval = setInterval(() => {
             setLatency((2 + Math.random()).toFixed(1) + 'ms')
         }, 3000)
-        return () => clearInterval(interval)
+        
+        // Subscribe to NEW LEADS
+        const leadsChannel = supabase
+            .channel('public:leads')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: TABLES.leads }, (payload) => {
+                const newLead = payload.new as any
+                setEvents(prev => [{
+                    id: `lead-${newLead.id}`,
+                    type: 'LEAD' as const,
+                    content: `NEW_ACQUISITION_SIGNAL: ${newLead.name}`,
+                    timestamp: newLead.createdAt
+                }, ...prev].slice(0, 20))
+            })
+            .subscribe()
+
+        // Subscribe to NEW MESSAGES
+        const messagesChannel = supabase
+            .channel('public:messages')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: TABLES.messages }, (payload) => {
+                const newMsg = payload.new as any
+                setEvents(prev => [{
+                    id: `msg-${newMsg.id}`,
+                    type: 'MESSAGE' as const,
+                    content: `INBOUND_ENCRYPTED_QUERY: ${newMsg.type}`,
+                    timestamp: newMsg.sentAt
+                }, ...prev].slice(0, 20))
+            })
+            .subscribe()
+
+        return () => {
+            clearInterval(interval)
+            supabase.removeChannel(leadsChannel)
+            supabase.removeChannel(messagesChannel)
+        }
     }, [])
 
     const agents = [

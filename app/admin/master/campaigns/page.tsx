@@ -2,7 +2,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { db } from '@/lib/supabase'
-import { getAllCampaigns } from '@/lib/campaign'
+import { getAllCampaigns, getGlobalCampaignMetrics } from '@/lib/campaign'
 import MasterCampaignsClient from '@/components/admin/MasterCampaignsClient'
 
 export default async function MasterCampaignsPage() {
@@ -17,17 +17,29 @@ export default async function MasterCampaignsPage() {
     let campaigns: any[] = []
     let properties: any[] = []
     let brands: any[] = []
+    let globalMetrics = {
+        totalReach: 0,
+        totalEngagement: 0,
+        totalClicks: 0,
+        totalExecutions: 0,
+        activeCampaigns: 0,
+        averageConversionRate: 0
+    }
 
     try {
-        const [cData, pData, bData] = await Promise.all([
+        const [cData, pData, poData, bData, mData] = await Promise.all([
             getAllCampaigns(),
             db.getAllProperties(),
-            db.getAllPropertyOwners()
+            db.getAllPropertyOwners(),
+            db.getAllBrandProfiles(),
+            getGlobalCampaignMetrics()
         ])
         
         campaigns = cData || []
         properties = pData || []
-        brands = bData || []
+        // Merge property owners and brand profiles for the brand selection
+        brands = [...(poData || []), ...(bData || [])]
+        globalMetrics = mData
     } catch (error) {
         console.error('Master Campaigns page - DB error:', error)
     }
@@ -37,6 +49,7 @@ export default async function MasterCampaignsPage() {
             initialCampaigns={campaigns}
             initialProperties={properties}
             initialBrands={brands}
+            globalMetrics={globalMetrics}
         />
     )
 }

@@ -42,7 +42,7 @@ export default function MasterDashboardLayout({
       href: '/admin/master',
     },
     {
-      title: isArabic ? 'إدارة الملاك' : 'Owner Orchestration',
+      title: isArabic ? 'إدارة البرندات' : 'Brand Orchestration',
       icon: '🏢',
       href: '/admin/master/owners',
     },
@@ -52,12 +52,17 @@ export default function MasterDashboardLayout({
       href: '/admin/master/applications',
     },
     {
+      title: isArabic ? 'جرد الأصول' : 'Inventory Nodes',
+      icon: '🏠',
+      href: '/admin/master/properties',
+    },
+    {
       title: isArabic ? 'تحليلات العملاء' : 'Global Leads',
       icon: '🎯',
       href: '/admin/master/leads',
     },
     {
-      title: isArabic ? 'حملات الترويح' : 'Promo Protocols',
+      title: isArabic ? 'حملات الترويج' : 'Promo Protocols',
       icon: '🚀',
       href: '/admin/master/campaigns',
     },
@@ -67,7 +72,12 @@ export default function MasterDashboardLayout({
       href: '/admin/master/messages',
     },
     {
-      title: isArabic ? 'مراقبة الذكاء الاصطناعي' : 'AI Agent Monitor',
+      title: isArabic ? 'تفعيل البرندات' : 'Client Onboarding',
+      icon: '🛰️',
+      href: '/admin/master/onboarding',
+    },
+    {
+      title: isArabic ? 'مراقبة الذكاء الاصطناعي' : 'Neural Monitor',
       icon: '🤖',
       href: '/admin/master/ai-monitor',
     },

@@ -1,7 +1,8 @@
 'use client'
 
 import { useLanguage } from '../LanguageContext'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { supabase, TABLES } from '@/lib/supabase'
 
 interface Transaction {
     id: string
@@ -16,9 +17,26 @@ interface FinanceProps {
     totalRevenue: number
 }
 
-export default function MasterFinanceContent({ transactions, totalRevenue }: FinanceProps) {
+export default function MasterFinanceContent({ transactions: initialTransactions, totalRevenue: initialRevenue }: FinanceProps) {
     const { language } = useLanguage()
     const isArabic = language === 'ar'
+    const [transactions, setTransactions] = useState(initialTransactions)
+    const [totalRevenue, setTotalRevenue] = useState(initialRevenue)
+
+    useEffect(() => {
+        const revenueChannel = supabase
+            .channel('public:revenue')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: TABLES.revenue }, (payload) => {
+                const newRevenue = payload.new as Transaction
+                setTransactions(prev => [newRevenue, ...prev])
+                setTotalRevenue(prev => prev + newRevenue.amount)
+            })
+            .subscribe()
+
+        return () => {
+            supabase.removeChannel(revenueChannel)
+        }
+    }, [])
 
     return (
         <div className="space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">

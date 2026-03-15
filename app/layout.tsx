@@ -3,6 +3,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 
 import MasterFooter from "@/components/MasterFooter";
+import TrackingScripts from "@/components/analytics/TrackingScripts";
 
 export const metadata: Metadata = {
   title: "EL-NAFEER | Luxury Real Estate AI Orchestration - Sherif Rosas",
@@ -36,6 +37,7 @@ export default function RootLayout({
       </head>
       <body className="bg-black text-white antialiased">
         <Providers>
+          <TrackingScripts />
           {children}
           <MasterFooter />
         </Providers>

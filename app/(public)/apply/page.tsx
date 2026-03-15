@@ -138,6 +138,24 @@ export default function ApplyPage() {
                     : 'System will generate unique master tokens and schedule physical synchronization nodes upon successful validation. Level 5 clearance required.'}
                 </p>
               </div>
+              
+              {/* Test Bypass Trigger */}
+              <button
+                type="button"
+                onClick={() => {
+                  setFormData({
+                    fullName: 'Sherif Rosas (QA)',
+                    email: 'test-user@elnafeer.pro',
+                    address: 'Nexus District 01, Cairo',
+                    phoneNumber: '+201147558500',
+                    requirementsAgreed: true,
+                    documentsAgreed: true,
+                  })
+                }}
+                className="px-6 py-4 bg-sahara-gold/10 border border-sahara-gold/20 text-sahara-gold rounded-2xl font-black text-[9px] uppercase tracking-widest hover:bg-sahara-gold hover:text-black transition-all"
+              >
+                Inject_Test_Load
+              </button>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-16">

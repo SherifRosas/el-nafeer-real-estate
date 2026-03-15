@@ -15,12 +15,22 @@ interface Campaign {
     executions?: any[]
 }
 
+interface GlobalMetrics {
+    totalReach: number
+    totalEngagement: number
+    totalClicks: number
+    totalExecutions: number
+    activeCampaigns: number
+    averageConversionRate: number
+}
+
 interface MasterCampaignsContentProps {
     initialCampaigns: Campaign[]
+    globalMetrics: GlobalMetrics
     onCreateRequest: () => void
 }
 
-export default function MasterCampaignsContent({ initialCampaigns, onCreateRequest }: MasterCampaignsContentProps) {
+export default function MasterCampaignsContent({ initialCampaigns, globalMetrics, onCreateRequest }: MasterCampaignsContentProps) {
     const { language } = useLanguage()
     const isArabic = language === 'ar'
 
@@ -53,23 +63,36 @@ export default function MasterCampaignsContent({ initialCampaigns, onCreateReque
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <div className="milky-glass rounded-[3.5rem] p-12 border border-white/10 relative overflow-hidden group">
                     <p className="text-[9px] text-gray-600 font-black uppercase tracking-[0.5em] mb-4 robotic-digits">{isArabic ? 'الوصول_الإجمالي' : 'TOTAL_REACH'}</p>
-                    <h4 className="text-4xl font-black text-white italic robotic-digits">1.2M+</h4>
+                    <h4 className="text-4xl font-black text-white italic robotic-digits">
+                        {globalMetrics.totalReach > 1000000 
+                            ? `${(globalMetrics.totalReach / 1000000).toFixed(1)}M+` 
+                            : globalMetrics.totalReach > 1000 
+                                ? `${(globalMetrics.totalReach / 1000).toFixed(1)}K+` 
+                                : globalMetrics.totalReach}
+                    </h4>
                     <div className="mt-6 flex gap-1">
-                        {[1, 2, 3, 4, 5].map(i => <div key={i} className="h-1 flex-1 bg-sahara-gold animate-pulse" style={{ animationDelay: `${i * 0.1}s` }} />)}
+                        {[1, 2, 3, 4, 5].map(i => <div key={i} className="h-1 flex-1 bg-sahara-gold animate-pulse" />)}
                     </div>
                 </div>
                 <div className="milky-glass rounded-[3.5rem] p-12 border border-white/10 relative overflow-hidden group">
                     <p className="text-[9px] text-gray-600 font-black uppercase tracking-[0.5em] mb-4 robotic-digits">{isArabic ? 'معدل_التحويل' : 'CONVERSION_RATE'}</p>
-                    <h4 className="text-4xl font-black text-sahara-gold italic robotic-digits">4.8%</h4>
-                    <div className="mt-6 h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                        <div className="h-full bg-sahara-gold w-[48%]" />
+                    <h4 className="text-4xl font-black text-sahara-gold italic robotic-digits">{globalMetrics.averageConversionRate.toFixed(1)}%</h4>
+                    <div className="mt-6 h-1 w-full bg-white/5 rounded-full overflow-hidden flex items-center justify-between gap-4">
+                        <div className="h-full bg-sahara-gold transition-all duration-1000" style={{ width: `${Math.min(globalMetrics.averageConversionRate * 10, 100)}%` }} />
+                        <button 
+                            onClick={() => fetch('/api/campaigns/process', { method: 'POST' }).then(() => window.location.reload())}
+                            className="bg-sahara-gold text-black rounded-full p-2 text-[8px] font-black animate-pulse hover:scale-110 transition-all"
+                            title={isArabic ? 'تحديث الإشارات' : 'SYNC_SIGNALS_NOW'}
+                        >
+                            ⚡
+                        </button>
                     </div>
                 </div>
                 <div className="milky-glass rounded-[3.5rem] p-12 border border-white/10 relative overflow-hidden group">
                     <p className="text-[9px] text-gray-600 font-black uppercase tracking-[0.5em] mb-4 robotic-digits">{isArabic ? 'الحملات_النشطة' : 'ACTIVE_CAMPAIGNS'}</p>
-                    <h4 className="text-4xl font-black text-white italic robotic-digits">{initialCampaigns.filter(c => c.status === 'active').length}</h4>
+                    <h4 className="text-4xl font-black text-white italic robotic-digits">{globalMetrics.activeCampaigns}</h4>
                     <div className="mt-6 flex justify-between gap-2">
-                        {[1, 2, 3, 4, 5, 6, 7].map(i => <div key={i} className="w-1.5 h-1.5 rounded-full bg-sahara-gold/30" />)}
+                        {[1, 2, 3, 4, 5, 6, 7].map(i => <div key={i} className={`w-1.5 h-1.5 rounded-full ${i <= globalMetrics.activeCampaigns ? 'bg-sahara-gold' : 'bg-white/10'}`} />)}
                     </div>
                 </div>
             </div>
@@ -93,7 +116,7 @@ export default function MasterCampaignsContent({ initialCampaigns, onCreateReque
                                     <h3 className="text-3xl font-black italic uppercase tracking-tighter text-white group-hover:text-sahara-gold transition-colors mb-2">
                                         {campaign.name}
                                     </h3>
-                                    <p className="text-[10px] text-gray-600 font-bold uppercase tracking-widest robotic-digits">{campaign.type} // {campaign.scheduleType}</p>
+                                    <p className="text-[10px] text-gray-600 font-bold uppercase tracking-widest robotic-digits">{campaign.type} {" // "} {campaign.scheduleType}</p>
                                 </div>
                                 <span className={`px-5 py-2 rounded-full border text-[9px] font-black uppercase tracking-widest robotic-digits ${campaign.status === 'active' ? 'bg-green-500/10 text-green-500 border-green-500/20 shadow-[0_0_15px_rgba(34,197,94,0.2)]' : 'bg-white/5 text-gray-500 border-white/10'
                                     }`}>
