@@ -18,14 +18,14 @@ async function launchCampaign() {
     console.log('Target Brand:', brand.companyName)
 
     const campaignInput = {
-        name: 'Lever Pioneer - Ramadan Ascent 2026',
-        description: 'Multi-channel awareness and lead generation at Giza Pyramids region.',
+        name: 'Lever Pioneer - Elite Solo Pulse 2026',
+        description: 'Synchronized weekly single-pulse elite ad campaign focusing on high-conversion signals in Cairo & Giza.',
         type: 'multi_channel' as const,
         platforms: ['facebook', 'whatsapp', 'linkedin'] as ('facebook' | 'whatsapp' | 'linkedin')[],
         scheduleType: 'once' as const,
         startDate: new Date(),
         language: 'ar' as const,
-        autoGenerate: true,
+        autoGenerate: false, // We use the finalized animated ad
         brandProfileId: brandId
     }
 

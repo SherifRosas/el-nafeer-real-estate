@@ -1,4 +1,4 @@
-# 📝 Lever Pioneer: Neural Distribution Tier 1
+# 📝 Lever Pioneer: Neural Distribution Tier 2 (Optimized)
 
 ## 📍 Geographical Targeting Lock
 
@@ -13,7 +13,10 @@
 
 - **AR**: "ليفر الرائدة للمصاعد.. شريكك المثالي لحلول الصيانة والتركيب في القاهرة والجيزة. هندسة دقيقة، أداء فائق، وتقنية ألمانية في قلب مصر. 🚀"
 - **EN**: "Level up your building's vertical mobility. Lever Pioneer Elevators now operational across Cairo & Giza. Precision engineering for elite towers. 🏗️"
-- **CTA**: [Send WhatsApp]
+- **WA_SIGNAL**: +201111171368
+- **VOICE_SIGNAL**: +201070615372
+- **CTA**: [Send WhatsApp / Direct Call]
+- **Frequency**: 1 Elite Pulsed Ad per Week
 - **Tags**: #LeverPioneer #ElevatorsEgypt #GizaIndustrial #CairoRealEstate
 
 ### 2. LinkedIn (The B2B Pulse) 💼

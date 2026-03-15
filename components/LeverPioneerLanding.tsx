@@ -68,12 +68,18 @@ export default function LeverPioneerLanding() {
                             </div>
                         </div>
 
-                        <div className="pt-2 pb-8 flex flex-wrap gap-6 justify-center lg:justify-start">
-                            <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest hover:bg-sahara-gold hover:text-black transition-all flex items-center gap-3">
+                        <div className="pt-2 pb-8 flex flex-wrap gap-4 justify-center lg:justify-start">
+                            <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" rel="noopener noreferrer" className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-widest hover:bg-sahara-gold hover:text-black transition-all flex items-center gap-2">
                                 📍 {isArabic ? 'القاهرة والجيزة' : 'CAIRO_&_GIZA'}
                             </a>
-                            <a href="https://www.facebook.com/mohamed.sanad.473555" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all flex items-center gap-3">
-                                👤 {isArabic ? 'تواصل مع المؤسس' : 'OWNER_PROFILE'}
+                            <a href="https://wa.me/201111171368" target="_blank" rel="noopener noreferrer" className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-widest hover:bg-green-600 hover:text-white transition-all flex items-center gap-2">
+                                💬 {isArabic ? 'واتساب' : 'WHATSAPP_SIGNAL'}
+                            </a>
+                            <a href="tel:+201070615372" className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all flex items-center gap-2">
+                                📞 {isArabic ? 'اتصل الآن' : 'DIRECT_COMM'}
+                            </a>
+                            <a href="https://www.facebook.com/mohamed.sanad.473555" target="_blank" rel="noopener noreferrer" className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all flex items-center gap-2">
+                                👤 {isArabic ? 'المؤسس' : 'OWNER_NODE'}
                             </a>
                         </div>
                         
@@ -201,6 +207,21 @@ export default function LeverPioneerLanding() {
                     LEVER_PIONEER_SYSTEMS // POWERED_BY_EL_NAFEER_PRO
                 </p>
             </footer>
+            {/* Floating Communication Bar */}
+            <div className="fixed bottom-8 right-8 z-[100] flex flex-col gap-4 animate-in slide-in-from-bottom-10 duration-1000 delay-1000 mb-safe">
+                <a href="https://wa.me/201111171368" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-green-600 flex items-center justify-center text-2xl shadow-[0_10px_30px_rgba(22,163,74,0.4)] hover:scale-110 active:scale-95 transition-all group relative">
+                    <span className="absolute right-full mr-4 px-4 py-2 rounded-xl bg-black/80 border border-white/10 text-[9px] font-black uppercase tracking-widest text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">WHATSAPP</span>
+                    💬
+                </a>
+                <a href="tel:+201070615372" className="w-14 h-14 rounded-full bg-white flex items-center justify-center text-2xl shadow-[0_10px_30px_rgba(255,255,255,0.2)] hover:scale-110 active:scale-95 transition-all group relative">
+                    <span className="absolute right-full mr-4 px-4 py-2 rounded-xl bg-black/80 border border-white/10 text-[9px] font-black uppercase tracking-widest text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">CALL_DIRECT</span>
+                    📞
+                </a>
+                <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-sahara-gold flex items-center justify-center text-2xl shadow-[0_10px_30px_rgba(212,175,55,0.4)] hover:scale-110 active:scale-95 transition-all group relative">
+                    <span className="absolute right-full mr-4 px-4 py-2 rounded-xl bg-black/80 border border-white/10 text-[9px] font-black uppercase tracking-widest text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">GEOLOCATION</span>
+                    📍
+                </a>
+            </div>
         </div>
     )
 }
