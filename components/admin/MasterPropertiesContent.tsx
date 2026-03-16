@@ -97,7 +97,7 @@ export default function MasterPropertiesContent({ initialProperties }: MasterPro
               <div className="p-12 space-y-8 flex-1 flex flex-col">
                 <div className="space-y-2">
                   <p className="text-[10px] font-black text-gray-600 uppercase tracking-widest robotic-digits">
-                    ID_#{p.id.substring(0, 8).toUpperCase()} // NODE_{String(i + 1).padStart(3, '0')}
+                    ID_#{p.id.substring(0, 8).toUpperCase()} {' // '} NODE_{String(i + 1).padStart(3, '0')}
                   </p>
                   <h4 className="text-3xl font-black text-white uppercase italic tracking-tighter truncate group-hover:text-sahara-gold transition-colors">
                     {p.title}
