@@ -224,13 +224,13 @@ export default function AdV2UltimaSensoryUpdate() {
                         {/* SIGNALS */}
                         <motion.div initial={{ opacity: 0 }} animate={step >= 2 ? { opacity: 1 } : {}} className="absolute inset-0 z-40 pointer-events-none">
                             <div className="absolute top-[8%] left-[7%] w-[35%] h-[35%] cursor-pointer pointer-events-auto">
-                                <a href="https://wa.me/201111171368" target="_blank" className="block w-full h-full relative">
+                                <a href="https://wa.me/201111171368" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Contact" className="block w-full h-full relative">
                                     <motion.div animate={{ scale: [1, 2, 1], opacity: [0.1, 0.4, 0.1] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute inset-4 rounded-full border-4 border-green-500" />
                                     <MessageCircle className="absolute top-[35%] left-[35%] w-8 h-8 text-green-500 drop-shadow-xl" />
                                 </a>
                             </div>
                             <div className="absolute top-[8%] right-[7%] w-[35%] h-[35%] cursor-pointer pointer-events-auto">
-                                <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" className="block w-full h-full relative">
+                                <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" rel="noopener noreferrer" aria-label="Google Maps Location" className="block w-full h-full relative">
                                     <motion.div animate={{ scale: [1, 2, 1], opacity: [0.1, 0.3, 0.1] }} transition={{ repeat: Infinity, duration: 3 }} className="absolute inset-8 rounded-full border-4 border-sahara-gold" />
                                     <MapPin className="absolute top-[30%] right-[30%] w-8 h-8 text-sahara-gold drop-shadow-xl" />
                                 </a>
@@ -295,9 +295,9 @@ export default function AdV2UltimaSensoryUpdate() {
                         <h1 className="text-white font-black text-4xl tracking-tighter uppercase">{isArabic ? "محاكاة النفير: المرحلة النهائية" : "EL NAFEER: ULTIMA SIMULATION"}</h1>
                         <p className="text-sahara-gold font-mono text-xs tracking-[0.5em] animate-pulse">{isArabic ? "اضغط لتفعيل تجربة الحواس المتكاملة" : "ACTIVATE MULTI-SENSORY BROADCAST"}</p>
                         <div className="flex justify-center gap-6 pt-6 opacity-40">
-                             <Waves className="w-6 h-6 text-white" title="Audio Sync" />
-                             <Zap className="w-6 h-6 text-white" title="Haptic Neural" />
-                             <Globe className="w-6 h-6 text-white" title="Global Zoom" />
+                             <Waves className="w-6 h-6 text-white" />
+                             <Zap className="w-6 h-6 text-white" />
+                             <Globe className="w-6 h-6 text-white" />
                         </div>
                     </div>
                 </div>
