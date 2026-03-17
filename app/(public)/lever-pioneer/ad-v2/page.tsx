@@ -2,291 +2,375 @@
 
 import NextImage from 'next/image'
 import { useLanguage } from '@/components/LanguageContext'
-import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Phone, MessageCircle, MapPin, Zap, Play, ShieldAlert, Cpu, Radio } from 'lucide-react'
+import { useState, useEffect, useRef, Suspense } from 'react'
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { 
+    Phone, MessageCircle, MapPin, Zap, Play, 
+    ShieldCheck, Cpu, Radio, Globe, Crosshair, 
+    Terminal, Activity, Lock, Layers
+} from 'lucide-react'
 
-export default function AdV2CinematicExperience() {
+// --- ULTIMA CINEMATIC PORTAL v10.0 ---
+
+export default function AdV2UltimaUpdate() {
     const { language } = useLanguage()
     const isArabic = language === 'ar'
-    const [step, setStep] = useState(0) // 0: Start, 1: Intro/Pyramids, 2: Eagle Sync, 3: Signal Lock, 4: Global Protocol
-    const [isPlaying, setIsPlaying] = useState(false)
-    const [hasVoice, setHasVoice] = useState(false)
+    
+    // Timeline States
+    const [phase, setPhase] = useState<'idle' | 'descent' | 'stabilizing' | 'active'>('idle')
+    const [step, setStep] = useState(0) // 0-4 cinematic sub-steps
+    const [isNarrating, setIsNarrating] = useState(false)
+    
     const synth = typeof window !== 'undefined' ? window.speechSynthesis : null
+    const audioRef = useRef<HTMLAudioElement | null>(null)
 
-    const script = "الآن من قلب مصر.. من الجيزة، حدائق الأهرام.. تدشن شركة ليفر الرائدة للمصاعد مقرها الجديد. للتواصل، اضغط على الأيقونات: واتساب، أو الاتصال، أو الموقع. وللتواصل مع منصة النفير العالمية للإعلان، اضغط على صقر النفير."
+    const script = "الآن من قلب مصر.. نطلق المرحلة القصوى. من الجيزة، حدائق الأهرام.. شركة ليفر الرائدة للمصاعد تبدأ التحليق الكامل. سيطر على تجربتك من خلال أيقونات التواصل، وارتبط بمنصة النفير العالمية عبر صقر النفير الرقمي. النظام جاهز للتحليق."
 
-    const startSequence = () => {
-        setIsPlaying(true)
-        setStep(1)
+    const startUltimaSequence = () => {
+        setPhase('descent')
         
-        // --- High-Fidelity Voiceover Protocol ---
-        if (synth) {
-            synth.cancel()
-            const voices = synth.getVoices()
-            const arabicVoice = voices.find(v => v.lang.includes('ar')) || voices.find(v => v.lang.includes('EG'))
-            
-            const utterance = new SpeechSynthesisUtterance(script)
-            if (arabicVoice) utterance.voice = arabicVoice
-            utterance.lang = 'ar-EG'
-            utterance.rate = 0.85
-            utterance.pitch = 1.0
-            
-            // Interaction ensures audio context
-            synth.speak(utterance)
-            setHasVoice(true)
-        }
+        // --- Phase 0: The Satellite Descent (0-4s) ---
+        setTimeout(() => {
+            setPhase('stabilizing')
+        }, 4000)
 
-        // --- Imperial Timeline (30s) ---
-        setTimeout(() => setStep(2), 6000)  // Eagle Takes Flight from Pyramids
-        setTimeout(() => setStep(3), 16000) // Signal Hotspots Activation
-        setTimeout(() => setStep(4), 26000) // Global Platform Lock-on
+        // --- Phase 1: Landing & Initialization (4-8s) ---
+        setTimeout(() => {
+            setPhase('active')
+            setStep(1)
+            triggerVoiceover()
+        }, 8000)
+
+        // --- Phase 2: The Eagle Quest (8-18s) ---
+        setTimeout(() => setStep(2), 12000)
+        
+        // --- Phase 3: Signal Lock (18-25s) ---
+        setTimeout(() => setStep(3), 22000)
+        
+        // --- Phase 4: Extreme platform deployment (25s+) ---
+        setTimeout(() => setStep(4), 28000)
     }
 
-    // Effect to pre-load voices
-    useEffect(() => {
+    const triggerVoiceover = () => {
         if (synth) {
-            synth.getVoices()
+            synth.cancel()
+            const utterance = new SpeechSynthesisUtterance(script)
+            utterance.lang = 'ar-EG'
+            utterance.rate = 0.8
+            utterance.pitch = 0.95
+            synth.speak(utterance)
+            setIsNarrating(true)
         }
-    }, [synth])
+    }
 
     return (
-        <div className="min-h-screen bg-black flex items-center justify-center p-0 m-0 overflow-hidden relative cursor-crosshair select-none">
+        <div className="min-h-screen bg-black flex items-center justify-center p-0 m-0 overflow-hidden relative cursor-crosshair font-sans">
             
-            {/* --- LAYER 0: CINEMATIC GIZA ATMOSPHERE --- */}
-            <div className="absolute inset-0 z-0">
-                <motion.div 
-                    initial={{ scale: 1.5, opacity: 0 }}
-                    animate={isPlaying ? { scale: 1.1, opacity: 0.5 } : { opacity: 0.2 }}
-                    transition={{ duration: 40, ease: "linear" }}
-                    className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center grayscale-[40%] brightness-[0.2]"
-                />
-                
-                {/* Neural Dust Particles */}
-                <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(20)].map((_, i) => (
-                        <motion.div 
-                            key={i}
-                            animate={{ 
-                                y: [-10, -1200], 
-                                opacity: [0, 0.4, 0],
-                                x: [0, (Math.random() - 0.5) * 400]
-                            }}
-                            transition={{ duration: 15 + Math.random() * 15, repeat: Infinity, delay: Math.random() * 5 }}
-                            className="absolute w-1 h-1 bg-sahara-gold rounded-full blur-[1px]"
-                            style={{ 
-                                bottom: `${Math.random() * 20}%`, 
-                                left: `${Math.random() * 100}%` 
-                            }}
-                        />
-                    ))}
-                </div>
-            </div>
-
-            {/* --- LAYER 1: INITIATION PORTAL (High Security) --- */}
+            {/* --- 1. THE SPACE DEPTH LAYER (Satellite Zoom) --- */}
             <AnimatePresence>
-                {step === 0 && (
+                {phase === 'descent' && (
                     <motion.div 
-                        exit={{ opacity: 0, scale: 1.3, filter: 'blur(30px)' }}
-                        className="absolute inset-0 z-[100] flex flex-col items-center justify-center bg-black/95 backdrop-blur-3xl p-6"
+                        initial={{ scale: 50, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.5, opacity: 0 }}
+                        transition={{ duration: 4, ease: "circIn" }}
+                        className="absolute inset-0 z-[200] bg-black flex items-center justify-center overflow-hidden"
                     >
-                        <motion.div 
-                            initial={{ scale: 0.8, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            className="text-center space-y-12"
-                        >
-                            {/* The Eagle Pulse Button */}
-                            <div className="relative group cursor-pointer" onClick={startSequence}>
-                                <motion.div 
-                                    animate={{ scale: [1, 1.1, 1], rotate: [0, 2, -2, 0] }}
-                                    transition={{ repeat: Infinity, duration: 4 }}
-                                    className="relative w-40 h-40 bg-zinc-900 border-2 border-sahara-gold/30 rounded-full flex items-center justify-center overflow-hidden"
-                                >
-                                    <NextImage 
-                                        src="/logos/logo-en.png" 
-                                        alt="El Nafeer Eagle" 
-                                        width={100} 
-                                        height={100}
-                                        className="z-10 opacity-80 group-hover:scale-110 transition-transform"
-                                    />
-                                    <div className="absolute inset-0 bg-sahara-gold/5 animate-pulse" />
-                                </motion.div>
-                                <motion.div 
-                                    animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
-                                    transition={{ repeat: Infinity, duration: 2 }}
-                                    className="absolute inset-0 border-2 border-sahara-gold rounded-full"
-                                />
-                            </div>
-
-                            <div className="space-y-4">
-                                <h2 className="text-sahara-gold font-black tracking-[0.8em] uppercase text-xs mb-2 animate-pulse">EL_NAFEER_SYSTEM_ENGAGE</h2>
-                                <h1 className="text-white font-black text-2xl tracking-tighter uppercase mb-6">
-                                    {isArabic ? "اضغط لبدء تجربة الإطلاق" : "INITIATE BROADCAST"}
-                                </h1>
-                                <p className="text-gray-500 text-[9px] font-bold uppercase tracking-widest max-w-sm mx-auto leading-relaxed">
-                                    {isArabic ? "بروتوكول النفير: تفعيل النظام الصوتي والخرائط الجغرافية" : "PROTOCOL: ENABLE AUDIO_VISUAL_SYNC & GEO_MAPS"}
-                                </p>
-                            </div>
-                        </motion.div>
+                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center brightness-[0.4]" />
+                        <div className="relative z-10 flex flex-col items-center gap-6">
+                            <motion.div 
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                                className="w-96 h-96 border-4 border-sahara-gold/20 rounded-full flex items-center justify-center"
+                            >
+                                <Globe className="w-24 h-24 text-sahara-gold animate-pulse" />
+                            </motion.div>
+                            <h2 className="text-white font-black text-4xl tracking-[1em] robotic-digits">DESCENDING_GIZA_NODE</h2>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* --- LAYER 2: IMPERIAL AD CANVAS --- */}
-            <div className="relative w-full max-w-[850px] aspect-square z-10 perspective-1000">
-                <motion.div 
-                    animate={isPlaying ? { 
-                        scale: [1, 1.1, 1.15],
-                        y: [0, -20, -40]
-                    } : {}}
-                    transition={{ duration: 30, ease: "easeInOut" }}
-                    className="relative w-full h-full shadow-[0_0_150px_rgba(0,0,0,1)] rounded-[4rem] overflow-hidden"
-                >
-                    {/* The Base Creative */}
-                    <NextImage 
-                        src="/campaigns/lever-pioneer/ad-v2.png" 
-                        alt="Lever Pioneer Ad v2" 
-                        fill
-                        className="object-contain"
-                        priority
-                    />
-
-                    {/* --- KINETIC ANIMATIONS --- */}
-                    
-                    {/* 1. The Official Eagle Flight (صقر النفير) */}
-                    <AnimatePresence>
-                        {step >= 1 && (
-                            <motion.div 
-                                initial={{ top: "-30%", left: "50%", scale: 0.2, rotate: 45, opacity: 0 }}
-                                animate={
-                                    step === 1 ? { top: "15%", left: "15%", scale: 1.2, rotate: 0, opacity: 1 } :
-                                    step === 2 ? { top: "12%", left: "75%", scale: 1.4, rotate: 5, opacity: 1 } :
-                                    step === 3 ? { top: "45%", left: "20%", scale: 1.1, rotate: -5, opacity: 1 } :
-                                    { top: "72%", left: "72%", scale: 1.6, rotate: 0, opacity: 1 }
-                                }
-                                transition={{ duration: 4, type: "spring", stiffness: 30 }}
-                                className="absolute z-[100] pointer-events-none drop-shadow-[0_0_40px_rgba(212,175,55,1)]"
-                            >
-                                <div className="relative w-32 h-32">
-                                    <NextImage 
-                                        src="/logos/logo-en.png" 
-                                        alt="Cinematic Eagle" 
-                                        fill
-                                        className="object-contain animate-[float_4s_infinite]"
-                                    />
-                                    <div className="absolute inset-x-0 -bottom-4 text-center">
-                                        <span className="text-[8px] text-sahara-gold font-black uppercase tracking-[0.4em] drop-shadow-md">
-                                            {isArabic ? "صقر النفير" : "EAGLE_PROTOCOL"}
-                                        </span>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-
-                    {/* 2. Tactical Contact Pulses (Level 3-4) */}
+            {/* --- 2. THE STABILIZATION GRID --- */}
+            <AnimatePresence>
+                {phase === 'stabilizing' && (
                     <motion.div 
                         initial={{ opacity: 0 }}
-                        animate={step >= 2 ? { opacity: 1 } : {}}
-                        className="absolute inset-0 z-40 pointer-events-none"
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute inset-0 z-[150] bg-black flex flex-col items-center justify-center"
                     >
-                         {/* WhatsApp Beacon */}
-                        <div className="absolute top-[8%] left-[7%] w-[35%] h-[35%]">
-                            <motion.div animate={{ scale: [1, 1.4, 1], opacity: [0, 0.4, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute inset-4 rounded-full border-2 border-green-500" />
-                            <div className="absolute top-[35%] left-[35%] w-8 h-8 bg-green-500/10 rounded-full animate-pulse flex items-center justify-center">
-                                <MessageCircle className="w-4 h-4 text-green-500/60" />
+                        <div className="w-full max-w-4xl space-y-8 px-12">
+                            <div className="flex justify-between items-center text-sahara-gold font-mono text-xs">
+                                <motion.span animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 0.5 }}>SIGNAL_STABILIZING...</motion.span>
+                                <span>PROTOCOL_V10.ULTIMA</span>
                             </div>
-                        </div>
-
-                        {/* Location Beacon */}
-                        <div className="absolute top-[8%] right-[7%] w-[35%] h-[35%]">
-                            <motion.div animate={{ scale: [1, 1.8, 1], opacity: [0, 0.3, 0] }} transition={{ repeat: Infinity, duration: 3 }} className="absolute inset-8 rounded-full border-2 border-sahara-gold" />
-                            <div className="absolute top-[30%] right-[30%] w-10 h-10 bg-sahara-gold/10 rounded-full animate-pulse flex items-center justify-center">
-                                <MapPin className="w-4 h-4 text-sahara-gold/60" />
+                            <div className="h-[2px] w-full bg-zinc-800 relative overflow-hidden">
+                                <motion.div 
+                                    initial={{ width: 0 }}
+                                    animate={{ width: "100%" }}
+                                    transition={{ duration: 4, ease: "linear" }}
+                                    className="h-full bg-sahara-gold shadow-[0_0_20px_rgba(212,175,55,1)]"
+                                />
+                            </div>
+                            <div className="grid grid-cols-3 gap-8 opacity-40">
+                                {[...Array(3)].map((_, i) => (
+                                    <div key={i} className="h-32 border border-sahara-gold/30 rounded-xl flex items-center justify-center">
+                                        <Activity className="w-8 h-8 text-sahara-gold animate-pulse" />
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </motion.div>
+                )}
+            </AnimatePresence>
 
-                    {/* 3. Global Platform Call Node (Level 6) */}
+            {/* --- 3. MAIN CINEMATIC CANVAS (Active Phase) --- */}
+            <div className={`relative w-full h-screen transition-opacity duration-1000 ${phase === 'active' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                
+                {/* Background Layer: The Hyper-Giza */}
+                <div className="absolute inset-0 z-0">
                     <motion.div 
-                        initial={{ opacity: 0, y: 100, scale: 0.8 }}
-                        animate={step >= 4 ? { opacity: 1, y: 0, scale: 1 } : {}}
-                        className="absolute bottom-[6%] right-[6%] w-[50%] h-[24%] z-[120]"
-                    >
-                        <a 
-                            href="tel:01065661882" 
-                            className="block w-full h-full bg-zinc-950/80 backdrop-blur-3xl border-2 border-sahara-gold/40 rounded-[3rem] p-6 hover:bg-sahara-gold/20 transition-all cursor-pointer relative overflow-hidden group shadow-[0_0_60px_rgba(0,0,0,1)]"
+                        animate={phase === 'active' ? { scale: [1.1, 1], rotate: [0, 1, 0, -1, 0] } : {}}
+                        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                        className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center brightness-[0.2] saturate-150"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
+                </div>
+
+                {/* --- THE HOLOGRAPHIC HUD (Layered Over Ad) --- */}
+                <div className="absolute inset-0 z-50 pointer-events-none">
+                    {/* Top Ticker: Real-time Simulation Feed */}
+                    <div className="absolute top-0 w-full h-20 bg-black/40 backdrop-blur-md border-b border-white/5 flex items-center px-12 overflow-hidden">
+                        <motion.div 
+                            animate={{ x: [1000, -2000] }}
+                            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                            className="flex gap-20 whitespace-nowrap text-[10px] items-center"
                         >
-                            <div className="flex items-center gap-6 h-full relative z-10">
-                                <div className="p-4 bg-sahara-gold rounded-3xl shadow-[0_0_40px_rgba(212,175,55,0.6)] group-hover:scale-110 transition-transform">
-                                    <Phone className="w-6 h-6 text-black" />
-                                </div>
-                                <div className="space-y-1">
-                                    <span className="text-[14px] text-sahara-gold font-black uppercase tracking-[0.4em] block">
-                                        {isArabic ? "نفير العالمية" : "NAFEER_GLOBAL"}
+                            {[...Array(5)].map((_, i) => (
+                                <div key={i} className="flex gap-4 items-center">
+                                    <div className="w-2 h-2 rounded-full bg-sahara-gold animate-pulse" />
+                                    <span className="text-sahara-gold font-black uppercase tracking-[0.3em]">
+                                        ELEVATOR_SPEED: 4.5M/S | GPS: 29.9792° N, 31.1342° E | BRAND_POWER: 100% | BROADCAST_ACTIVE_H_AHRAM
                                     </span>
-                                    <span className="text-white font-black text-2xl tracking-tight robotic-digits">01065661882</span>
                                 </div>
+                            ))}
+                        </motion.div>
+                    </div>
+
+                    {/* Left Panel: Diagnostic Feed */}
+                    <div className="absolute left-10 top-1/2 -translate-y-1/2 flex flex-col gap-6 opacity-60">
+                        <div className="p-4 bg-zinc-900/50 border border-white/10 rounded-2xl backdrop-blur-xl">
+                            <Terminal className="w-5 h-5 text-sahara-gold mb-4" />
+                            <div className="space-y-2 font-mono text-[8px] text-gray-400">
+                                <p>_INITIALIZING_EAGLE...</p>
+                                <p className="text-green-500">_SYNC_SUCCESSFUL</p>
+                                <p>_VOICE_STREAM_ACTIVE</p>
+                                <p>_GEO_LOCK: AHRAM_GATE_4</p>
                             </div>
-                            
-                            {/* Scanning Light Sweep */}
-                            <motion.div 
-                                animate={{ left: ["-100%", "250%"] }}
-                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                className="absolute top-0 h-full w-40 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-30"
-                            />
-                        </a>
-                    </motion.div>
-
-                    {/* Cinematic Capion Overlay */}
-                    <motion.div 
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={isPlaying ? { opacity: 1, y: 0 } : {}}
-                        className="absolute top-10 left-0 w-full z-50 flex justify-center pointer-events-none"
-                    >
-                        <div className="bg-black/70 backdrop-blur-xl px-10 py-3 border border-sahara-gold/20 rounded-full flex items-center gap-4 shadow-2xl">
-                            <Radio className="w-3 h-3 text-red-600 animate-pulse" />
-                            <span className="text-[10px] text-white font-black tracking-[0.6em] uppercase">
-                                {step === 1 ? (isArabic ? "دفق الإشارة: صقر النفير" : "SIGNAL_STREAM: EAGLE_SYNC") :
-                                 step === 2 ? (isArabic ? "تمركز جغرافي: حدائق الأهرام" : "GEO_LOCK: HADAYEK_AHRAM") :
-                                 step === 3 ? (isArabic ? "شركة ليفر: التدشين الرسمي" : "OFFICIAL_LAUNCH: LEVER_PIONEER") :
-                                 (isArabic ? "النفير العالمية: النشر الكامل" : "NAFEER_GLOBAL: FULL_SYNC")}
-                            </span>
                         </div>
+                        <div className="flex flex-col items-center gap-1">
+                            <Crosshair className="w-6 h-6 text-sahara-gold/40 animate-spin-slow" />
+                            <div className="w-[1px] h-20 bg-gradient-to-b from-sahara-gold/40 to-transparent" />
+                        </div>
+                    </div>
+
+                    {/* Right Panel: Performance Nodes */}
+                    <div className="absolute right-10 top-1/2 -translate-y-1/2 flex flex-col gap-8 items-end">
+                        <div className="text-right space-y-4">
+                            <div className="inline-block px-4 py-2 bg-sahara-gold/10 border border-sahara-gold/30 rounded-lg">
+                                <span className="text-sahara-gold font-black robotic-digits text-xl">v10.0</span>
+                            </div>
+                            <div className="flex gap-4">
+                                <Layers className="w-5 h-5 text-gray-700" />
+                                <Lock className="w-5 h-5 text-gray-700" />
+                                <ShieldCheck className="w-5 h-5 text-green-600" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* --- CENTRAL AD PERSPECTIVE CANVAS --- */}
+                <div className="absolute inset-0 flex items-center justify-center p-20 z-10">
+                    <motion.div 
+                        animate={{ 
+                            rotateX: [0, 2, -2, 0],
+                            rotateY: [0, -2, 2, 0],
+                            z: [0, 50, 0]
+                        }}
+                        transition={{ duration: 15, repeat: Infinity }}
+                        className="relative w-full max-w-[800px] aspect-square rounded-[3.5rem] overflow-hidden shadow-[0_0_100px_rgba(0,0,0,1)] perspective-1000"
+                    >
+                        <NextImage 
+                            src="/campaigns/lever-pioneer/ad-v2.png" 
+                            alt="Lever Pioneer Ad v2" 
+                            fill
+                            className="object-cover"
+                            priority
+                        />
+
+                        {/* --- DYNAMIC ULTIMA LAYER: THE FALCON QUEST --- */}
+                        <AnimatePresence>
+                            {(step >= 1) && (
+                                <motion.div 
+                                    initial={{ top: "-50%", left: "50%", scale: 5, rotate: 90, opacity: 0 }}
+                                    animate={
+                                        step === 1 ? { top: "15%", left: "15%", scale: 1.2, rotate: 0, opacity: 1 } :
+                                        step === 2 ? { top: "10%", left: "70%", scale: 1.4, rotate: 5, opacity: 1 } :
+                                        step === 3 ? { top: "45%", left: "15%", scale: 1.3, rotate: -5, opacity: 1 } :
+                                        { top: "72%", left: "70%", scale: 1.8, rotate: 0, opacity: 1 }
+                                    }
+                                    transition={{ duration: 4, type: "spring", stiffness: 20 }}
+                                    className="absolute z-[100] pointer-events-none drop-shadow-[0_0_50px_rgba(212,175,55,1)]"
+                                >
+                                    <div className="relative w-40 h-40 group">
+                                        <NextImage 
+                                            src="/logos/logo-en.png" 
+                                            alt="Falcon Ultima" 
+                                            fill
+                                            className="object-contain animate-float"
+                                        />
+                                        <motion.div 
+                                            animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0.1, 0.3] }}
+                                            transition={{ repeat: Infinity, duration: 2 }}
+                                            className="absolute -inset-10 border-2 border-sahara-gold rounded-full"
+                                        />
+                                        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                                            <span className="text-[9px] text-sahara-gold font-black uppercase tracking-[0.5em]">{isArabic ? "صقر النفير" : "EAGLE_NAFEER"}</span>
+                                            <span className="text-[6px] text-white/40 tracking-widest robotic-digits mt-1">STATUS: BROADCASTING</span>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+
+                        {/* --- INTERACTIVE TACTICAL HOTSPOTS --- */}
+                        
+                        {/* WhatsApp Portal */}
+                        <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={step >= 2 ? { opacity: 1 } : {}}
+                            className="absolute top-[8%] left-[7%] w-[35%] h-[35%] z-[60]"
+                        >
+                            <a href="https://wa.me/201111171368" target="_blank" className="block w-full h-full relative cursor-pointer group">
+                                <motion.div animate={{ scale: [1, 2, 1], opacity: [0.1, 0.4, 0.1] }} transition={{ repeat: Infinity, duration: 4 }} className="absolute inset-0 bg-green-500 rounded-full blur-2xl" />
+                                <div className="absolute inset-4 rounded-full border-2 border-green-500/50 group-hover:border-green-400 transition-colors" />
+                                <MessageCircle className="absolute top-[35%] left-[35%] w-8 h-8 text-green-400 drop-shadow-[0_0_10px_rgba(74,222,128,0.5)]" />
+                            </a>
+                        </motion.div>
+
+                        {/* Location Command */}
+                        <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={step >= 2 ? { opacity: 1 } : {}}
+                            className="absolute top-[8%] right-[7%] w-[35%] h-[35%] z-[60]"
+                        >
+                            <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" className="block w-full h-full relative cursor-pointer group">
+                                <motion.div animate={{ scale: [1, 2, 1], opacity: [0.1, 0.3, 0.1] }} transition={{ repeat: Infinity, duration: 5 }} className="absolute inset-0 bg-sahara-gold rounded-full blur-2xl" />
+                                <div className="absolute inset-4 rounded-full border-2 border-sahara-gold/50 group-hover:border-sahara-gold transition-colors" />
+                                <MapPin className="absolute top-[30%] right-[30%] w-8 h-8 text-sahara-gold drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]" />
+                            </a>
+                        </motion.div>
+
+                        {/* --- THE ULTIMA NODE: EL NAFEER GLOBAL --- */}
+                        <motion.div 
+                            initial={{ opacity: 0, x: 200, skewX: 20 }}
+                            animate={step >= 4 ? { opacity: 1, x: 0, skewX: 0 } : {}}
+                            className="absolute bottom-[4%] right-[4%] w-[55%] h-[24%] z-[150]"
+                        >
+                            <a 
+                                href="tel:01065661882" 
+                                className="block w-full h-full bg-gradient-to-br from-zinc-900 to-black/80 backdrop-blur-3xl border-2 border-sahara-gold/60 rounded-[3.5rem] p-8 hover:bg-sahara-gold/10 transition-all cursor-pointer group shadow-[0_0_100px_rgba(0,0,0,1)] relative overflow-hidden"
+                            >
+                                <div className="flex items-center gap-8 h-full relative z-20">
+                                    <div className="p-5 bg-sahara-gold rounded-3xl shadow-[0_0_50px_rgba(212,175,55,0.7)] group-hover:scale-110 transition-transform">
+                                        <Phone className="w-8 h-8 text-black" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <span className="text-[14px] text-sahara-gold font-black uppercase tracking-[0.5em] block">{isArabic ? "نفير العالمية" : "EL_NAFEER_GLOBAL"}</span>
+                                        <span className="text-white font-black text-3xl tracking-tighter robotic-digits">01065661882</span>
+                                    </div>
+                                </div>
+                                
+                                {/* Energy Pulse Line */}
+                                <motion.div 
+                                    animate={{ left: ["-100%", "300%"] }}
+                                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                                    className="absolute top-0 h-full w-40 bg-gradient-to-r from-transparent via-sahara-gold/20 to-transparent skew-x-12 z-0"
+                                />
+                            </a>
+                        </motion.div>
                     </motion.div>
-                </motion.div>
+                </div>
+
+                {/* Bottom Cinematic Captains Overlay */}
+                <div className="absolute bottom-12 w-full z-50 flex justify-center pointer-events-none">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={phase === 'active' ? { opacity: 1, y: 0 } : {}}
+                        className="bg-black/80 backdrop-blur-2xl px-12 py-4 border border-white/10 rounded-full flex items-center gap-8 shadow-[0_0_80px_rgba(0,0,0,0.5)]"
+                    >
+                        <Radio className="w-5 h-5 text-red-600 animate-pulse" />
+                        <span className="text-[12px] text-white font-black tracking-[0.8em] uppercase">
+                            {step < 2 ? (isArabic ? "المحاكاة مفعلة: صقر النفير في سماء الجيزة" : "SIMULATION_INIT: EAGLE_OVER_GIZA") :
+                             step < 4 ? (isArabic ? "تأمين الاتصال: ليفر الرائدة للمصاعد" : "COMMS_SECURED: LEVER_PIONEER_HQ") :
+                             (isArabic ? "المرحلة القصوى: النفير العالمية - النشر الكامل" : "ULTIMA_PHASE: NAFEER_GLOBAL_SYNC")}
+                        </span>
+                    </motion.div>
+                </div>
             </div>
 
-            {/* --- LAYER 3: PERIMETER HUD FRAME --- */}
-            <div className="absolute inset-10 border border-white/5 rounded-[6rem] pointer-events-none z-50 p-12 flex flex-col justify-between">
-                <div className="flex justify-between items-start opacity-30">
-                     <div className="space-y-2">
-                         <div className="text-[10px] text-sahara-gold font-black tracking-widest robotic-digits uppercase">NAFEER_CINEMATIC_v6.0</div>
-                         <div className="text-[7px] text-gray-500 uppercase">Status: Broadcasting_Giza_Node</div>
-                     </div>
-                     <div className="text-right">
-                         <Zap className="w-5 h-5 text-sahara-gold ml-auto mb-2 animate-pulse" />
-                         <div className="text-[7px] text-gray-600 robotic-digits tracking-[1em]">IMPERIAL_SYNC</div>
-                     </div>
+            {/* --- ULTIMA START TRIGGER (Chrome Compliance) --- */}
+            {phase === 'idle' && (
+                <div className="absolute inset-0 z-[300] bg-black flex flex-col items-center justify-center p-12">
+                    <motion.div 
+                        initial={{ scale: 0, rotate: -180 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        onClick={startUltimaSequence}
+                        className="group relative cursor-pointer"
+                    >
+                        <div className="w-48 h-48 bg-sahara-gold rounded-full flex items-center justify-center shadow-[0_0_100px_rgba(212,175,55,0.4)] group-hover:scale-110 transition-transform">
+                            <Play className="w-16 h-16 text-black fill-current ml-2" />
+                        </div>
+                        <motion.div 
+                            animate={{ scale: [1, 1.4], opacity: [0.5, 0] }}
+                            transition={{ repeat: Infinity, duration: 2 }}
+                            className="absolute inset-0 border-4 border-sahara-gold rounded-full"
+                        />
+                    </motion.div>
+                    
+                    <div className="mt-16 text-center space-y-4">
+                        <h1 className="text-white font-black text-4xl tracking-tighter uppercase">{isArabic ? "بوابة النفير: المرحلة القصوى" : "EL NAFEER PORTAL: ULTIMA"}</h1>
+                        <p className="text-sahara-gold font-mono text-xs tracking-widest uppercase animate-pulse">{isArabic ? "اضغط لبدء بروتوكول الهبوط والتحليق الكامل" : "CLICK TO INITIATE DESCENT & GLOBAL SYNC"}</p>
+                    </div>
                 </div>
-                <div className="flex justify-between items-end opacity-20">
-                     <div className="flex gap-4">
-                         <div className="w-8 h-1 bg-sahara-gold/20" />
-                         <div className="w-8 h-1 bg-blue-500/20" />
-                         <div className="w-8 h-1 bg-sahara-gold/20" />
-                     </div>
-                     <div className="text-[6px] tracking-[2em] text-white/50 uppercase">© 2026_EL_NAFEER_GLOBAL_PLATFORM</div>
-                </div>
-            </div>
+            )}
 
             <style jsx global>{`
-                @keyframes float {
-                    0%, 100% { transform: translateY(0) rotate(0); }
-                    50% { transform: translateY(-30px) rotate(3deg); }
+                @font-face {
+                    font-family: 'RoboticDigits';
+                    src: url('https://fonts.cdnfonts.com/css/digital-numbers');
                 }
                 .robotic-digits {
                     font-family: 'Courier New', Courier, monospace;
-                    letter-spacing: 0.15rem;
+                    letter-spacing: 0.2rem;
+                }
+                .perspective-1000 {
+                    perspective: 1000px;
+                }
+                @keyframes float {
+                    0%, 100% { transform: translateY(0px) rotate(0deg); }
+                    50% { transform: translateY(-40px) rotate(2deg); }
+                }
+                .animate-float {
+                    animation: float 5s ease-in-out infinite;
+                }
+                .animate-spin-slow {
+                    animation: spin 8s linear infinite;
+                }
+                @keyframes spin {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
                 }
             `}</style>
         </div>
