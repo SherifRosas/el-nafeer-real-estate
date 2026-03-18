@@ -11,11 +11,10 @@ import {
     CloudHail, Waves, Box
 } from 'lucide-react'
 
-// --- IMPERIAL ULTIMA V10.2 (FULL SENSORY SYNC) ---
+// --- IMPERIAL KINETIC CINEMA V12.8 (FINAL REVISION) ---
 
-export default function AdV2UltimaSensoryUpdate() {
+export default function AdV2UltimaKineticCinema() {
     const { language } = useLanguage()
-    const isArabic = language === 'ar'
     
     // Timeline States
     const [phase, setPhase] = useState<'idle' | 'descent' | 'stabilizing' | 'active'>('idle')
@@ -24,80 +23,83 @@ export default function AdV2UltimaSensoryUpdate() {
     const [showRipple, setShowRipple] = useState(false)
     
     // Audio References
-    const synth = typeof window !== 'undefined' ? window.speechSynthesis : null
     const bgMusicRef = useRef<HTMLAudioElement | null>(null)
-    const sfxRef = useRef<HTMLAudioElement | null>(null)
 
-    const script = "الآن من قلب مصر.. نطلق المرحلة القصوى. من الجيزة، حدائق الأهرام.. شركة ليفر الرائدة للمصاعد تبدأ التحليق الكامل. سيطر على تجربتك من خلال أيقونات التواصل، وارتبط بمنصة النفير العالمية عبر صقر النفير الرقمي. النظام جاهز للتحليق."
+    // --- INITIALIZATION (AUTOPLAY PROTOCOL) ---
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            startUltimaSequence()
+        }, 1000)
+        return () => clearTimeout(timer)
+    }, [])
 
-    // --- SENSORY TRIGGER: START ---
     const startUltimaSequence = () => {
-        // 1. Haptic Feedback (Tactile Start)
+        // 1. Haptic Feedback
         if (typeof window !== 'undefined' && navigator.vibrate) {
-            navigator.vibrate([100, 50, 200]) // Tactical "Thump"
+            navigator.vibrate([50, 50, 50]) 
         }
 
         setPhase('descent')
         
-        // 2. Play Cinematic Score (Music)
-        // Note: Using a public cinematic loop for demonstration
+        // 2. Play Cinematic Score
         if (bgMusicRef.current) {
             bgMusicRef.current.volume = 0.3
-            bgMusicRef.current.play().catch(() => console.log('Music blocked by browser - Click to bypass'))
+            bgMusicRef.current.play().catch(() => console.log('Autoplay audio requires interaction in some browsers.'))
         }
 
-        // --- Timeline Management ---
-        setTimeout(() => setPhase('stabilizing'), 4000)
+        // --- Cinematic Timeline ---
+        setTimeout(() => setPhase('stabilizing'), 3000)
         setTimeout(() => {
             setPhase('active')
             setStep(1)
-            triggerVoiceover()
-        }, 8000)
+            const msg = "شركة ليفر الرائدة للمصاعد تهنئكم بحلول عيد الفطر المبارك بمناسبة تدشين مقرها الجديد من قلب مصر من الجيزة حدائق الاهرام للتواصل أضغط على الأيقونات"
+            speak(msg)
+        }, 6000)
         
-        // Eagle Transitions with Ripples
-        setTimeout(() => { setStep(2); triggerRipple(); }, 12000)
-        setTimeout(() => { setStep(3); triggerRipple(); }, 22000)
-        setTimeout(() => { setStep(4); triggerRipple(); }, 28000)
+        // Final Node Activations
+        setTimeout(() => setStep(2), 8000)
+        setTimeout(() => setStep(3), 10000)
+        setTimeout(() => setStep(4), 13000)
+    }
+
+    const speak = (text: string) => {
+        if (typeof window === 'undefined') return
+        window.speechSynthesis.cancel()
+        const utterance = new SpeechSynthesisUtterance(text)
+        utterance.lang = 'ar-EG' // Egyptian Arabic
+        utterance.pitch = 1.05
+        utterance.rate = 0.9
+        window.speechSynthesis.speak(utterance)
+        setIsNarrating(true)
+        utterance.onend = () => setIsNarrating(false)
     }
 
     const triggerRipple = () => {
         setShowRipple(true)
-        if (typeof window !== 'undefined' && navigator.vibrate) navigator.vibrate(50)
         setTimeout(() => setShowRipple(false), 1000)
-    }
-
-    const triggerVoiceover = () => {
-        if (synth) {
-            synth.cancel()
-            const utterance = new SpeechSynthesisUtterance(script)
-            utterance.lang = 'ar-EG'
-            utterance.rate = 0.85
-            synth.speak(utterance)
-            setIsNarrating(true)
-        }
     }
 
     return (
         <div className="min-h-screen bg-black flex items-center justify-center p-0 m-0 overflow-hidden relative cursor-crosshair font-sans select-none noise-overlay">
             <div className="scanline" />
             
-            {/* AUDIO NODES */}
+            {/* AUDIO NODE */}
             <audio ref={bgMusicRef} loop src="https://assets.mixkit.co/music/preview/mixkit-sci-fi-drone-ambience-925.mp3" />
             
             {/* --- 1. GLOBAL DESCENT LAYER --- */}
             <AnimatePresence>
                 {phase === 'descent' && (
                     <motion.div 
-                        initial={{ scale: 50, opacity: 0 }}
+                        initial={{ scale: 20, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.5, opacity: 0 }}
-                        transition={{ duration: 4, ease: "circIn" }}
+                        transition={{ duration: 3, ease: "circIn" }}
                         className="absolute inset-0 z-[200] bg-black flex items-center justify-center"
                     >
-                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center brightness-[0.4]" />
+                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center brightness-[0.3]" />
                         <div className="relative z-10 flex flex-col items-center gap-6">
-                            <motion.div animate={{ rotate: 360 }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }} className="w-96 h-96 border border-sahara-gold/40 rounded-full flex items-center justify-center border-dashed" />
-                            <Globe className="absolute w-20 h-20 text-sahara-gold animate-pulse" />
+                            <motion.div animate={{ rotate: 360 }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }} className="w-96 h-96 border border-cyan-500/40 rounded-full flex items-center justify-center border-dashed" />
+                            <Globe className="absolute w-20 h-20 text-cyan-400 animate-pulse" />
                             <h2 className="text-white font-black text-2xl tracking-[1.5em] robotic-digits">DESCENDING_GIZA_NODE</h2>
                         </div>
                     </motion.div>
@@ -114,48 +116,40 @@ export default function AdV2UltimaSensoryUpdate() {
                         className="absolute inset-0 z-[150] bg-black flex flex-col items-center justify-center"
                     >
                         <div className="w-full max-w-4xl space-y-12 px-12">
-                            <div className="flex justify-between items-center text-sahara-gold font-mono text-xs">
+                            <div className="flex justify-between items-center text-cyan-400 font-mono text-xs">
                                 <span className="animate-pulse">_SENSORY_CALIBRATION_ACTIVE_</span>
-                                <span>PHASE: QUANTUM_FUSION_v11.0</span>
+                                <span>PHASE: KINETIC_CINEMA_v12.8</span>
                             </div>
-                            <div className="h-[3px] w-full bg-zinc-900 rounded-full overflow-hidden shadow-[0_0_20px_rgba(0,255,255,0.2)]">
+                            <div className="h-[4px] w-full bg-zinc-900 rounded-full overflow-hidden shadow-[0_0_30px_rgba(0,255,255,0.3)]">
                                 <motion.div 
                                     initial={{ width: 0 }} 
                                     animate={{ width: "100%" }} 
-                                    transition={{ duration: 4 }} 
-                                    className="h-full bg-gradient-to-r from-teal-500 via-cyan-400 to-sahara-gold" 
+                                    transition={{ duration: 3 }} 
+                                    className="h-full bg-gradient-to-r from-teal-500 via-cyan-400 to-red-500" 
                                 />
                             </div>
                             <div className="flex justify-center gap-20">
-                                <Waves className="w-10 h-10 text-sahara-gold/20 animate-bounce" />
-                                <CloudHail className="w-10 h-10 text-sahara-gold/20 animate-bounce delay-100" />
-                                <Activity className="w-10 h-10 text-sahara-gold/20 animate-bounce delay-200" />
+                                <Waves className="w-10 h-10 text-cyan-500/20 animate-bounce" />
+                                <Activity className="w-10 h-10 text-cyan-500/20 animate-bounce delay-100" />
+                                <Zap className="w-10 h-10 text-cyan-500/20 animate-bounce delay-200" />
                             </div>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* --- 3. ACTIVE IMPERIAL SIMULATION --- */}
+            {/* --- 3. ACTIVE KINETIC CINEMA --- */}
             <div className={`relative w-full h-screen transition-opacity duration-1000 ${phase === 'active' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                 
                 {/* --- BACKGROUND: CINEMATIC PARALLAX --- */}
                 <div className="absolute inset-0 z-0 overflow-hidden">
-                    {/* LAYER 1: Deep Sky & Pyramids (Slow Parallax) */}
                     <motion.div 
                         animate={{ scale: [1, 1.05], x: [-5, 5] }} 
                         transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
                         className="absolute inset-x-[-5%] inset-y-[-5%] bg-[url('https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center" 
                     />
                     
-                    {/* LAYER 2: City Lights & Horizon (Pulse) */}
-                    <motion.div 
-                        animate={{ opacity: [0.1, 0.3, 0.1] }}
-                        transition={{ duration: 5, repeat: Infinity }}
-                        className="absolute inset-0 bg-gradient-to-t from-cyan-900/40 via-transparent to-transparent mix-blend-screen" 
-                    />
-
-                    {/* LAYER 3: Floating Neon Particles (CGI Depth) */}
+                    {/* FLOATING NEON PARTICLES */}
                     {[...Array(30)].map((_, i) => (
                         <motion.div 
                             key={`p-${i}`}
@@ -166,12 +160,11 @@ export default function AdV2UltimaSensoryUpdate() {
                                 scale: [0, 1, 0]
                             }}
                             transition={{ duration: 10 + Math.random() * 20, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute w-1 h-1 bg-cyan-400 rounded-full blur-[2px] shadow-[0_0_10px_cyan]"
+                            className="absolute w-1 h-1 bg-cyan-400 rounded-full blur-[2px]"
                             style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
                         />
                     ))}
                     
-                    {/* GOD RAYS / FLUID ELECTRICITY */}
                     <motion.div 
                         animate={{ x: [-200, 200], opacity: [0.1, 0.3, 0.1] }}
                         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
@@ -179,49 +172,8 @@ export default function AdV2UltimaSensoryUpdate() {
                     />
                 </div>
 
-                {/* --- THE SHOCKWAVE LAYER --- */}
-                <AnimatePresence>
-                    {showRipple && (
-                        <motion.div 
-                            initial={{ scale: 0, opacity: 1 }}
-                            animate={{ scale: 4, opacity: 0 }}
-                            exit={{ opacity: 0 }}
-                            className="absolute z-50 pointer-events-none inset-0 flex items-center justify-center"
-                        >
-                            <div className="w-[800px] h-[800px] border-[50px] border-sahara-gold/30 rounded-full blur-xl" />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-
-                {/* --- THE HOLOGRAPHIC ASSISTANT (AI Node) --- */}
-                <div className="absolute left-12 top-1/2 -translate-y-1/2 z-40 hidden lg:block">
-                    <motion.div 
-                         animate={{ y: [0, -20, 0] }}
-                         transition={{ duration: 4, repeat: Infinity }}
-                         className="relative w-40 h-64 border-l-2 border-sahara-gold/20 flex flex-col justify-end p-6 gap-4"
-                    >
-                        <div className="w-12 h-12 bg-cyan-500/10 rounded-full flex items-center justify-center border border-cyan-400/40 shadow-[0_0_20px_rgba(34,211,238,0.3)]">
-                             <Cpu className="w-5 h-5 text-cyan-400 animate-spin-slow" />
-                        </div>
-                        <div className="space-y-1 font-mono text-[8px] text-cyan-400/80">
-                            <p className="font-black text-[10px] text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,1)]">_QUANTUM_HUD_</p>
-                            <p>MODE: INITIALIZING_STUDIO</p>
-                            <p>SYMMETRY: ACTIVE</p>
-                        </div>
-                        <div className="flex gap-1 h-8 items-end">
-                            {[...Array(8)].map((_, i) => (
-                                <motion.div 
-                                    key={i} 
-                                    animate={{ height: [4, 16, 8, 20, 4] }}
-                                    transition={{ duration: 1 + Math.random(), repeat: Infinity }}
-                                    className="w-1 bg-sahara-gold" 
-                                />
-                            ))}
-                        </div>
-                    </motion.div>
-                </div>
-
-                <div className="absolute inset-0 flex items-center justify-center p-20 z-10 perspective-1000">
+                {/* --- THE CENTRAL CINEMATIC CANVAS --- */}
+                <div className="absolute inset-0 flex items-center justify-center p-4 lg:p-20 z-10 perspective-1000">
                     <motion.div 
                         animate={{ 
                             scale: [1, 1.15],
@@ -232,203 +184,145 @@ export default function AdV2UltimaSensoryUpdate() {
                             scale: { duration: 40, repeat: Infinity, ease: "linear" },
                             default: { duration: 10, repeat: Infinity }
                         }}
-                        className="relative w-full max-w-[800px] aspect-square rounded-[4rem] overflow-hidden shadow-[0_0_150px_rgba(0,0,0,0.8)]"
+                        className="relative w-full max-w-[800px] aspect-square rounded-[3rem] lg:rounded-[4rem] overflow-hidden shadow-[0_0_150px_rgba(0,0,0,0.9)]"
                     >
                         <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad v2 Quantum" fill className="object-cover" priority />
 
-                        {/* THE EAGLE (3D Banking & Shadow Update) */}
-                        <AnimatePresence>
-                            {step >= 1 && (
-                                <motion.div 
-                                    initial={{ top: "-30%", left: "50%", scale: 0.5, rotateY: 45, opacity: 0 }}
-                                    animate={
-                                        step === 1 ? { top: "15%", left: "15%", scale: 1.2, rotateZ: -15, rotateY: 10, z: 50, opacity: 1 } :
-                                        step === 2 ? { top: "12%", left: "75%", scale: 1.4, rotateZ: 20, rotateY: -10, z: 100, opacity: 1 } :
-                                        step === 3 ? { top: "42%", left: "22%", scale: 1.1, rotateZ: -10, rotateY: 15, z: 200, opacity: 1 } :
-                                        { top: "70%", left: "72%", scale: 1.8, rotateZ: 0, rotateY: 0, z: 300, opacity: 1, filter: ["none", "contrast(2) hue-rotate(90deg)", "none"] }
-                                    }
-                                    transition={{ duration: 4, type: "spring", stiffness: 30 }}
-                                    className="absolute z-[100] pointer-events-none drop-shadow-[0_0_80px_rgba(0,255,255,0.8)]"
-                                >
-                                    <div className="relative w-36 h-36">
-                                        <NextImage src="/logos/logo-en.png" alt="Eagle" fill className="object-contain animate-float" />
-                                        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap">
-                                            <span className="text-[8px] text-sahara-gold font-black uppercase tracking-[0.5em]">{isArabic ? "صقر النفير الرقمي" : "CORE_NAFEER_EAGLE"}</span>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-
-                        {/* SIGNALS (High-Fidelity 3D Coin-Flip Nodes) */}
-                        <motion.div initial={{ opacity: 0 }} animate={step >= 2 ? { opacity: 1 } : {}} className="absolute inset-0 z-40 p-10 pointer-events-none flex flex-col gap-6 justify-end items-start pb-40">
+                        {/* --- 3D FLIPPING HUD BOXES (RESPONSIVE GRID) --- */}
+                        <motion.div initial={{ opacity: 0 }} animate={step >= 2 ? { opacity: 1 } : {}} className="absolute inset-x-0 bottom-4 lg:bottom-12 z-40 p-4 lg:p-6 pointer-events-none grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 items-end">
                             
-                            {/* WHATSAPP NODE */}
+                            {/* WHATSAPP */}
                             <motion.div 
                                 animate={{ rotateY: 360 }} 
                                 transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
-                                className="w-80 h-24 bg-black/60 backdrop-blur-xl border-2 border-green-500/50 rounded-3xl flex items-center px-6 gap-6 shadow-[0_0_30px_rgba(34,197,94,0.3)] pointer-events-auto"
+                                className="h-16 lg:h-20 bg-black/60 backdrop-blur-xl border border-green-500/40 rounded-2xl flex items-center px-3 lg:px-4 gap-2 lg:gap-4 shadow-[0_0_20px_rgba(34,197,94,0.3)] pointer-events-auto cursor-pointer"
+                                onClick={() => window.open('https://wa.me/201111171368', '_blank')}
                             >
-                                <div className="w-14 h-14 rounded-full border-2 border-green-500 flex items-center justify-center shadow-[0_0_15px_rgba(34,197,94,0.6)]">
-                                    <MessageCircle className="w-8 h-8 text-green-500" />
+                                <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-green-500 flex items-center justify-center">
+                                    <MessageCircle className="w-4 h-4 lg:w-6 lg:h-6 text-green-500" />
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="text-[12px] text-green-500 font-black uppercase tracking-[0.2em]">WHATSAPP</span>
-                                    <span className="text-[18px] text-white font-black italic">+20 111 117 1368</span>
+                                    <span className="text-[8px] lg:text-[10px] text-green-500 font-black uppercase">WHATSAPP</span>
+                                    <span className="text-[10px] lg:text-[14px] text-white font-black italic">+20 111 117</span>
                                 </div>
                             </motion.div>
 
-                            {/* CALLING NODE */}
+                            {/* CALLING */}
                             <motion.div 
                                 animate={{ rotateY: 360 }} 
                                 transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                                className="w-80 h-24 bg-black/60 backdrop-blur-xl border-2 border-cyan-400/50 rounded-3xl flex items-center px-6 gap-6 shadow-[0_0_30px_rgba(34,211,238,0.3)] pointer-events-auto"
+                                className="h-16 lg:h-20 bg-black/60 backdrop-blur-xl border border-cyan-400/40 rounded-2xl flex items-center px-3 lg:px-4 gap-2 lg:gap-4 shadow-[0_0_20px_rgba(34,211,238,0.3)] pointer-events-auto cursor-pointer"
+                                onClick={() => window.open('tel:19XXX', '_self')}
                             >
-                                <div className="w-14 h-14 rounded-full border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.6)]">
-                                    <Phone className="w-8 h-8 text-cyan-400" />
+                                <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-cyan-400 flex items-center justify-center">
+                                    <Phone className="w-4 h-4 lg:w-6 lg:h-6 text-cyan-400" />
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="text-[12px] text-cyan-400 font-black uppercase tracking-[0.2em]">CALL_US</span>
-                                    <span className="text-[18px] text-white font-black italic">19XXX</span>
+                                    <span className="text-[8px] lg:text-[10px] text-cyan-400 font-black uppercase">CALL_US</span>
+                                    <span className="text-[10px] lg:text-[14px] text-white font-black italic">19XXX</span>
                                 </div>
                             </motion.div>
 
-                            {/* LOCATION NODE */}
+                            {/* LOCATION */}
                             <motion.div 
                                 animate={{ rotateY: 360 }} 
                                 transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
-                                className="w-80 h-24 bg-black/60 backdrop-blur-xl border-2 border-sahara-gold/50 rounded-3xl flex items-center px-6 gap-6 shadow-[0_0_30px_rgba(212,175,55,0.3)] pointer-events-auto"
+                                className="h-16 lg:h-20 bg-black/60 backdrop-blur-xl border border-sahara-gold/40 rounded-2xl flex items-center px-3 lg:px-4 gap-2 lg:gap-4 shadow-[0_0_20px_rgba(212,175,55,0.3)] pointer-events-auto cursor-pointer"
+                                onClick={() => window.open('https://www.google.com/maps?q=29.9656242,31.0922895', '_blank')}
                             >
-                                <div className="w-14 h-14 rounded-full border-2 border-sahara-gold flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.6)]">
-                                    <MapPin className="w-8 h-8 text-sahara-gold" />
+                                <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-sahara-gold flex items-center justify-center">
+                                    <MapPin className="w-4 h-4 lg:w-6 lg:h-6 text-sahara-gold" />
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="text-[12px] text-sahara-gold font-black uppercase tracking-[0.2em]">LOCATION</span>
-                                    <span className="text-[18px] text-white font-black italic">GIZA, EGYPT</span>
+                                    <span className="text-[8px] lg:text-[10px] text-sahara-gold font-black uppercase">LOCATION</span>
+                                    <span className="text-[10px] lg:text-[14px] text-white font-black italic">GIZA_SAINT</span>
                                 </div>
                             </motion.div>
 
+                            {/* EL NAFEER GLOBAL (EAGLE & RED NODE) */}
+                            <motion.div 
+                                animate={{ rotateY: 360 }} 
+                                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                                className="h-16 lg:h-20 bg-black/80 backdrop-blur-3xl border border-red-500/60 rounded-2xl flex items-center px-3 lg:px-4 gap-2 lg:gap-4 shadow-[0_0_40px_rgba(239,68,68,0.4)] pointer-events-auto"
+                            >
+                                <div className="w-10 h-10 lg:w-12 lg:h-12 relative">
+                                    <NextImage src="/logos/logo-en.png" alt="El Nafeer" fill className="object-contain" />
+                                </div>
+                                <div className="flex flex-col">
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-[7px] lg:text-[9px] text-red-500 font-black">منصة النفير العالمية</span>
+                                        <div className="w-2 h-2 bg-red-600 rounded-full animate-ping" />
+                                    </div>
+                                    <span className="text-[9px] lg:text-[11px] text-white font-black leading-none uppercase">ADVERTISING</span>
+                                </div>
+                            </motion.div>
                         </motion.div>
 
-                        {/* GLOBAL NODE */}
-                        <motion.div initial={{ opacity: 0, x: 200 }} animate={step >= 4 ? { opacity: 1, x: 0 } : {}} className="absolute bottom-[5%] right-[5%] w-[58%] h-[24%] z-[150]">
-                            <a href="tel:01065661882" aria-label="Call El Nafeer Global" className="block w-full h-full bg-black/80 backdrop-blur-3xl border-2 border-sahara-gold rounded-[3rem] p-8 hover:bg-sahara-gold/10 transition-all cursor-pointer group shadow-[0_0_100px_rgba(0,0,0,1)] relative overflow-hidden">
-                                <div className="flex items-center gap-8 h-full relative z-20">
-                                    <div className="p-5 bg-sahara-gold rounded-3xl shadow-[0_0_50px_rgba(212,175,55,0.7)] group-hover:scale-110 transition-transform">
+                        {/* FINAL GLOBAL CALL ACTION */}
+                        <motion.div initial={{ opacity: 0, y: 100 }} animate={step >= 4 ? { opacity: 1, y: 0 } : {}} className="absolute bottom-[-10%] right-[-10%] w-[120%] h-[40%] z-[150] pointer-events-auto hidden lg:flex">
+                             <a href="tel:01065661882" className="block w-full h-full bg-black/95 backdrop-blur-3xl border-2 border-sahara-gold rounded-[4rem] p-12 hover:bg-sahara-gold/10 transition-all cursor-pointer group shadow-[0_0_200px_rgba(0,0,0,1)] relative overflow-hidden">
+                                <div className="flex items-center gap-12 h-full relative z-20">
+                                    <div className="p-10 bg-sahara-gold rounded-[2rem] shadow-[0_0_100px_rgba(212,175,55,0.8)] group-hover:scale-110 transition-transform">
                                         <motion.div animate={{ rotateY: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }}>
-                                            <Phone className="w-8 h-8 text-black" />
+                                            <Phone className="w-16 h-16 text-black" />
                                         </motion.div>
                                     </div>
-                                    <div className="space-y-2">
-                                        <span className="text-[14px] text-sahara-gold font-black uppercase tracking-[0.5em] block">{isArabic ? "منصة النفير العالمية" : "NAFEER_GLOBAL_SIM"}</span>
-                                        <span className="text-white font-black text-3xl tracking-tighter robotic-digits">01065661882</span>
+                                    <div className="space-y-4">
+                                        <span className="text-[20px] text-sahara-gold font-black uppercase tracking-[0.5em] block">NAFEER_GLOBAL_SIM</span>
+                                        <span className="text-white font-black text-6xl tracking-tighter robotic-digits">01065661882</span>
                                     </div>
                                 </div>
-                                <motion.div animate={{ left: ["-100%", "300%"] }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} className="absolute top-0 h-full w-40 bg-gradient-to-r from-transparent via-sahara-gold/30 to-transparent skew-x-30" />
-                            </a>
+                             </a>
                         </motion.div>
                     </motion.div>
                 </div>
 
-                {/* HUD FRAME: ULTIMA COMMAND */}
-                <div className="absolute inset-10 border border-white/10 rounded-[6rem] pointer-events-none z-50 p-16 flex flex-col justify-between">
-                     <div className="flex justify-between text-cyan-400 opacity-80 font-black tracking-widest text-[9px] drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]">
+                {/* HUD FRAME: ULTIMA COMMAND (No Headers/Footers) */}
+                <div className="absolute inset-4 lg:inset-10 border border-white/5 rounded-[3rem] lg:rounded-[6rem] pointer-events-none z-50 p-6 lg:p-16 flex flex-col justify-between">
+                     <div className="flex justify-between text-cyan-400 opacity-60 font-black tracking-widest text-[8px] lg:text-[9px]">
                          <div className="flex gap-4 items-center">
                               <Box className="w-4 h-4 animate-pulse" />
-                              <span className="robotic-digits">QUANTUM_DESIGN_BROADCAST // SIM_11_LOCKED</span>
+                              <span className="robotic-digits">QUANTUM_CINEMA // LEV_12.8</span>
                          </div>
-                         <div className="flex gap-10">
-                              <span className="robotic-digits">COORD: 29.98N 31.13E</span>
-                               <Radio className="w-4 h-4 animate-pulse text-cyan-300" />
+                         <div className="flex gap-6 lg:gap-10">
+                              <span className="robotic-digits">29.98N 31.13E</span>
+                               <Radio className="w-4 h-4 animate-pulse" />
                          </div>
                      </div>
                      <div className="flex justify-between items-end opacity-20">
                          <div className="flex flex-col gap-2">
-                             <div className="w-40 h-1 bg-sahara-gold/40" />
-                             <div className="w-60 h-[1px] bg-sahara-gold/20" />
+                             <div className="w-20 lg:w-40 h-[1px] bg-sahara-gold/40" />
                          </div>
-                         <div className="text-[7px] text-white tracking-[1.5em] italic">© TACTICAL_MARKETING_EL_NAFEER_2026</div>
+                         <div className="text-[6px] lg:text-[7px] text-white tracking-[1em] italic">© TACTICAL_CINEMA_2026</div>
                      </div>
                 </div>
             </div>
 
-            {/* INITIAL START OVERLAY */}
+            {/* AUTOPLAY INITIAL SEED (Hidden) */}
             {phase === 'idle' && (
-                <div className="absolute inset-0 z-[300] bg-black flex flex-col items-center justify-center gap-12 text-center p-10">
-                    <motion.div 
-                        initial={{ scale: 0.5, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        onClick={startUltimaSequence}
-                        className="group relative cursor-pointer"
-                    >
-                        <div className="w-48 h-48 bg-sahara-gold rounded-full flex items-center justify-center shadow-[0_0_120px_rgba(212,175,55,0.5)] group-hover:scale-110 transition-transform">
-                             <Play className="w-16 h-16 text-black fill-current ml-2" />
-                        </div>
-                        <motion.div animate={{ scale: [1, 1.5], opacity: [0.5, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute inset-0 border-4 border-sahara-gold rounded-full" />
-                    </motion.div>
-                    <div className="space-y-4">
-                        <h1 className="text-white font-black text-4xl tracking-tighter uppercase drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">{isArabic ? "محاكاة النفير: الاندماج الكمي" : "EL NAFEER: QUANTUM FUSION"}</h1>
-                        <p className="text-cyan-400 font-mono text-xs tracking-[0.5em] animate-pulse drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]">{isArabic ? "تهيئة استوديو التصميم الكمي..." : "INITIALIZING QUANTUM DESIGN STUDIO..."}</p>
-                        <div className="flex justify-center gap-6 pt-6 opacity-60">
-                             <Waves className="w-6 h-6 text-white" />
-                             <Zap className="w-6 h-6 text-white" />
-                             <Globe className="w-6 h-6 text-white" />
-                        </div>
-                    </div>
-                </div>
+                <div className="absolute inset-0 z-[300] bg-black opacity-100 pointer-events-none" />
             )}
 
             <style jsx global>{`
-                .robotic-digits {
-                    font-family: 'Courier New', Courier, monospace;
-                    letter-spacing: 0.1rem;
-                }
+                .robotic-digits { font-family: 'Courier New', Courier, monospace; letter-spacing: 0.1rem; }
                 .perspective-1000 { perspective: 1000px; }
-                @keyframes float {
-                    0%, 100% { transform: translateY(0) rotate(0); }
-                    50% { transform: translateY(-40px) rotate(3deg); }
-                }
-                .animate-float { animation: float 5s ease-in-out infinite; }
-                .animate-spin-slow { animation: spin 10s linear infinite; }
-                @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-                /* ULTIMA ATMOSPHERICS */
                 .noise-overlay::before {
-                    content: "";
-                    position: absolute;
-                    inset: -100%;
+                    content: ""; position: absolute; inset: -100%;
                     background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-                    opacity: 0.1;
-                    pointer-events: none;
-                    animation: noise 0.2s infinite;
-                    z-index: 1000;
+                    opacity: 0.1; pointer-events: none; animation: noise 0.2s infinite; z-index: 1000;
                 }
                 .scanline {
-                    width: 100%;
-                    height: 100px;
-                    z-index: 1001;
-                    background: linear-gradient(0deg, rgba(0, 255, 255, 0) 0%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 255, 255, 0) 100%);
-                    opacity: 0.1;
-                    position: absolute;
-                    bottom: 100%;
-                    animation: scanline 6s linear infinite;
+                    width: 100%; height: 100px; z-index: 1001; pointer-events: none;
+                    background: linear-gradient(0deg, rgba(0, 255, 255, 0) 0%, rgba(0, 255, 255, 0.05) 50%, rgba(0, 255, 255, 0) 100%);
+                    position: absolute; bottom: 100%; animation: scanline 8s linear infinite;
                 }
-                @keyframes scanline {
-                    0% { bottom: 100%; }
-                    100% { bottom: -100px; }
-                }
+                @keyframes scanline { 0% { bottom: 100%; } 100% { bottom: -100px; } }
                 @keyframes noise {
                     0% { transform: translate(0, 0); }
-                    10% { transform: translate(-5%, -5%); }
-                    20% { transform: translate(-10%, 5%); }
-                    30% { transform: translate(5%, -10%); }
-                    40% { transform: translate(-5%, 15%); }
-                    50% { transform: translate(-10%, 5%); }
-                    60% { transform: translate(15%, 0); }
-                    70% { transform: translate(0, 10%); }
-                    80% { transform: translate(-15%, 0); }
-                    90% { transform: translate(10%, 5%); }
-                    100% { transform: translate(5%, 0); }
+                    10% { transform: translate(-2%, -2%); }
+                    20% { transform: translate(-4%, 2%); }
+                    30% { transform: translate(2%, -4%); }
+                    100% { transform: translate(0, 0); }
                 }
             `}</style>
         </div>
