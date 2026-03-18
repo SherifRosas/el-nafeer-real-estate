@@ -188,80 +188,64 @@ export default function AdV2UltimaKineticCinema() {
                     >
                         <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad v2 Quantum" fill className="object-cover" priority />
 
-                        {/* THE UNIFIED QUANTUM HUD (STATIC BOX, KINETIC ICONS) */}
-                        <div className="absolute inset-x-0 bottom-10 lg:bottom-20 z-40 p-4 lg:p-10 pointer-events-none flex flex-col items-start pb-20 lg:pb-32">
+                        {/* THE UNIFIED QUANTUM HUD (MASTER ALIGNED) */}
+                        <div className="absolute left-[8%] bottom-[12%] lg:left-[5%] lg:bottom-[15%] z-40 pointer-events-none flex flex-col items-start translate-x-[-15%] lg:translate-x-0 scale-[0.85] lg:scale-100 origin-bottom-left">
                             <motion.div 
-                                initial={{ opacity: 0, x: -100 }}
-                                animate={step >= 2 ? { opacity: 1, x: 0 } : {}}
+                                initial={{ opacity: 0, scale: 0.5 }}
+                                animate={step >= 2 ? { opacity: 1, scale: 1 } : {}}
                                 transition={{ duration: 1 }}
-                                className="w-full max-w-[420px] bg-black/80 backdrop-blur-3xl border-2 border-cyan-400/50 rounded-[3rem] p-6 lg:p-8 flex flex-col gap-6 shadow-[0_0_100px_rgba(0,0,0,1)] pointer-events-auto"
+                                className="w-[380px] lg:w-[440px] bg-black/90 backdrop-blur-3xl border-2 border-cyan-400/60 rounded-[2.5rem] lg:rounded-[3rem] p-6 lg:p-8 flex flex-col gap-5 lg:gap-7 shadow-[0_0_120px_rgba(0,0,0,1)] pointer-events-auto"
                             >
-                                {/* ROW 1: WHATSAPP */}
+                                {/* WHATSAPP */}
                                 <div className="flex items-center gap-6 cursor-pointer group" onClick={() => window.open('https://wa.me/201111171368', '_blank')}>
-                                    <motion.div 
-                                        animate={{ rotateY: 360 }}
-                                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                                        className="w-16 h-16 rounded-full border-2 border-green-500 flex items-center justify-center shadow-[0_0_20px_rgba(34,197,94,0.4)] group-hover:scale-110 transition-transform"
-                                    >
+                                    <motion.div animate={{ rotateY: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} className="w-14 h-14 lg:w-16 lg:h-16 rounded-full border-2 border-green-500 flex items-center justify-center shadow-[0_0_20px_rgba(34,197,94,0.4)]">
                                         <MessageCircle className="w-8 h-8 text-green-500" />
                                     </motion.div>
                                     <div className="flex flex-col">
-                                        <span className="text-[12px] text-green-500 font-black uppercase tracking-[0.2em]">WHATSAPP</span>
-                                        <span className="text-[18px] text-white font-black italic">+20 111 117 1368</span>
+                                        <span className="text-[10px] lg:text-[12px] text-green-500 font-black uppercase tracking-[0.2em]">WHATSAPP</span>
+                                        <span className="text-[16px] lg:text-[18px] text-white font-black italic">+20 111 117 1368</span>
                                     </div>
                                 </div>
 
                                 <div className="h-[1px] w-full bg-white/10" />
 
-                                {/* ROW 2: CALL US */}
+                                {/* CALL US */}
                                 <div className="flex items-center gap-6 cursor-pointer group" onClick={() => window.open('tel:19XXX', '_self')}>
-                                    <motion.div 
-                                        animate={{ rotateY: 360 }}
-                                        transition={{ duration: 4.5, repeat: Infinity, ease: "linear" }}
-                                        className="w-16 h-16 rounded-full border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.4)] group-hover:scale-110 transition-transform"
-                                    >
+                                    <motion.div animate={{ rotateY: 360 }} transition={{ duration: 4.5, repeat: Infinity, ease: "linear" }} className="w-14 h-14 lg:w-16 lg:h-16 rounded-full border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.4)]">
                                         <Phone className="w-8 h-8 text-cyan-400" />
                                     </motion.div>
                                     <div className="flex flex-col">
-                                        <span className="text-[12px] text-cyan-400 font-black uppercase tracking-[0.2em]">CALL_US</span>
-                                        <span className="text-[18px] text-white font-black italic">19XXX</span>
+                                        <span className="text-[10px] lg:text-[12px] text-cyan-400 font-black uppercase tracking-[0.2em]">CALL_US</span>
+                                        <span className="text-[16px] lg:text-[18px] text-white font-black italic">19XXX</span>
                                     </div>
                                 </div>
 
                                 <div className="h-[1px] w-full bg-white/10" />
 
-                                {/* ROW 3: LOCATION */}
+                                {/* LOCATION */}
                                 <div className="flex items-center gap-6 cursor-pointer group" onClick={() => window.open('https://www.google.com/maps?q=29.9656242,31.0922895', '_blank')}>
-                                    <motion.div 
-                                        animate={{ rotateY: 360 }}
-                                        transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                                        className="w-16 h-16 rounded-full border-2 border-sahara-gold flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.4)] group-hover:scale-110 transition-transform"
-                                    >
+                                    <motion.div animate={{ rotateY: 360 }} transition={{ duration: 5, repeat: Infinity, ease: "linear" }} className="w-14 h-14 lg:w-16 lg:h-16 rounded-full border-2 border-sahara-gold flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.4)]">
                                         <MapPin className="w-8 h-8 text-sahara-gold" />
                                     </motion.div>
                                     <div className="flex flex-col">
-                                        <span className="text-[12px] text-sahara-gold font-black uppercase tracking-[0.2em]">LOCATION</span>
-                                        <span className="text-[18px] text-white font-black italic truncate">GIZA, حدائق الأهرام</span>
+                                        <span className="text-[10px] lg:text-[12px] text-sahara-gold font-black uppercase tracking-[0.2em]">LOCATION</span>
+                                        <span className="text-[16px] lg:text-[18px] text-white font-black italic">GIZA, حدائق الأهرام</span>
                                     </div>
                                 </div>
 
                                 <div className="h-[1px] w-full bg-white/10" />
 
-                                {/* ROW 4: EL NAFEER GLOBAL */}
+                                {/* EL NAFEER GLOBAL */}
                                 <div className="flex items-center gap-6 cursor-pointer group">
-                                    <motion.div 
-                                        animate={{ rotateY: 360 }}
-                                        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-                                        className="w-16 h-16 relative group-hover:scale-110 transition-transform"
-                                    >
+                                    <motion.div animate={{ rotateY: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} className="w-14 h-14 lg:w-16 lg:h-16 relative">
                                         <NextImage src="/logos/logo-en.png" alt="El Nafeer" fill className="object-contain" />
                                     </motion.div>
                                     <div className="flex flex-col">
                                         <div className="flex items-center gap-2">
-                                            <span className="text-[13px] text-red-500 font-black">منصة النفير العالمية</span>
+                                            <span className="text-[11px] lg:text-[13px] text-red-500 font-black tracking-tight">منصة النفير العالمية</span>
                                             <div className="w-2 h-2 bg-red-600 rounded-full animate-ping" />
                                         </div>
-                                        <span className="text-[11px] text-white/80 font-black italic uppercase leading-none">للدعايه و الاعلان</span>
+                                        <span className="text-[10px] lg:text-[11px] text-white/80 font-black italic uppercase leading-none">Global Advertising</span>
                                     </div>
                                 </div>
                             </motion.div>
