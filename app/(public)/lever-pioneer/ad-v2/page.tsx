@@ -188,13 +188,13 @@ export default function AdV2UltimaKineticCinema() {
                     >
                         <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad v2 Quantum" fill className="object-cover" priority />
 
-                        {/* THE UNIFIED QUANTUM HUD (MASTER ALIGNED) */}
+                        {/* THE UNIFIED QUANTUM HUD (MASTER ALIGNED: 3 ROWS) */}
                         <div className="absolute left-[8%] bottom-[12%] lg:left-[5%] lg:bottom-[15%] z-40 pointer-events-none flex flex-col items-start translate-x-[-15%] lg:translate-x-0 scale-[0.85] lg:scale-100 origin-bottom-left">
                             <motion.div 
                                 initial={{ opacity: 0, scale: 0.5 }}
                                 animate={step >= 2 ? { opacity: 1, scale: 1 } : {}}
                                 transition={{ duration: 1 }}
-                                className="w-[380px] lg:w-[440px] bg-black/90 backdrop-blur-3xl border-2 border-cyan-400/60 rounded-[2.5rem] lg:rounded-[3rem] p-6 lg:p-8 flex flex-col gap-5 lg:gap-7 shadow-[0_0_120px_rgba(0,0,0,1)] pointer-events-auto"
+                                className="w-[380px] lg:w-[440px] bg-black/95 backdrop-blur-3xl border-2 border-cyan-400/60 rounded-[2.5rem] lg:rounded-[3rem] p-6 lg:p-8 flex flex-col gap-5 lg:gap-7 shadow-[0_0_120px_rgba(0,0,0,1)] pointer-events-auto"
                             >
                                 {/* WHATSAPP */}
                                 <div className="flex items-center gap-6 cursor-pointer group" onClick={() => window.open('https://wa.me/201111171368', '_blank')}>
@@ -215,7 +215,7 @@ export default function AdV2UltimaKineticCinema() {
                                         <Phone className="w-8 h-8 text-cyan-400" />
                                     </motion.div>
                                     <div className="flex flex-col">
-                                        <span className="text-[10px] lg:text-[12px] text-cyan-400 font-black uppercase tracking-[0.2em]">CALL_US</span>
+                                        <span className="text-[20px] lg:text-[12px] text-cyan-400 font-black uppercase tracking-[0.2em]">CALL_US</span>
                                         <span className="text-[16px] lg:text-[18px] text-white font-black italic">19XXX</span>
                                     </div>
                                 </div>
@@ -229,23 +229,7 @@ export default function AdV2UltimaKineticCinema() {
                                     </motion.div>
                                     <div className="flex flex-col">
                                         <span className="text-[10px] lg:text-[12px] text-sahara-gold font-black uppercase tracking-[0.2em]">LOCATION</span>
-                                        <span className="text-[16px] lg:text-[18px] text-white font-black italic">GIZA, حدائق الأهرام</span>
-                                    </div>
-                                </div>
-
-                                <div className="h-[1px] w-full bg-white/10" />
-
-                                {/* EL NAFEER GLOBAL */}
-                                <div className="flex items-center gap-6 cursor-pointer group">
-                                    <motion.div animate={{ rotateY: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} className="w-14 h-14 lg:w-16 lg:h-16 relative">
-                                        <NextImage src="/logos/logo-en.png" alt="El Nafeer" fill className="object-contain" />
-                                    </motion.div>
-                                    <div className="flex flex-col">
-                                        <div className="flex items-center gap-2">
-                                            <span className="text-[11px] lg:text-[13px] text-red-500 font-black tracking-tight">منصة النفير العالمية</span>
-                                            <div className="w-2 h-2 bg-red-600 rounded-full animate-ping" />
-                                        </div>
-                                        <span className="text-[10px] lg:text-[11px] text-white/80 font-black italic uppercase leading-none">Global Advertising</span>
+                                        <span className="text-[16px] lg:text-[18px] text-white font-black italic">حدائق الأهرام</span>
                                     </div>
                                 </div>
                             </motion.div>
@@ -253,33 +237,31 @@ export default function AdV2UltimaKineticCinema() {
                     </motion.div>
                 </div>
 
-                {/* HUD FRAME: ULTIMA COMMAND (No Headers/Footers) */}
+                {/* HUD FRAME (No Headers/Footers) */}
                 <div className="absolute inset-4 lg:inset-10 border border-white/5 rounded-[3rem] lg:rounded-[6rem] pointer-events-none z-50 p-6 lg:p-16 flex flex-col justify-between">
                      <div className="flex justify-between text-cyan-400 opacity-60 font-black tracking-widest text-[8px] lg:text-[9px]">
                          <div className="flex gap-4 items-center">
                               <Box className="w-4 h-4 animate-pulse" />
-                              <span className="robotic-digits">QUANTUM_CINEMA // LEV_13.5_KINETIC</span>
+                              <span className="robotic-digits">QUANTUM_CINEMA // LEV_14.0_FOCUS</span>
                          </div>
                          <div className="flex gap-6 lg:gap-10">
-                              <span className="robotic-digits">29.98N 31.13E</span>
                                <Radio className="w-4 h-4 animate-pulse" />
                          </div>
                      </div>
                      <div className="flex justify-between items-end opacity-20">
-                         <div className="flex flex-col gap-2">
-                             <div className="w-20 lg:w-40 h-[1px] bg-sahara-gold/40" />
-                         </div>
-                         <div className="text-[6px] lg:text-[7px] text-white tracking-[1em] italic">© TACTICAL_CINEMA_2026</div>
+                         <div className="text-[6px] lg:text-[7px] text-white tracking-[0.5em] italic uppercase">© LEVER_PIONEER_2026</div>
                      </div>
                 </div>
             </div>
 
-            {/* AUTOPLAY INITIAL SEED (Hidden) */}
-            {phase === 'idle' && (
-                <div className="absolute inset-0 z-[300] bg-black opacity-100 pointer-events-none" />
-            )}
+            {/* AUTOPLAY INITIAL SEED (Force Full Page Black Overlay) */}
+            <div className={`fixed inset-0 z-[500] bg-black transition-opacity duration-1000 ${phase === 'idle' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} />
 
             <style jsx global>{`
+                /* FORCE HIDE FOOTER/HEADER */
+                footer, header { display: none !important; }
+                body { background-color: black !important; overflow: hidden; }
+
                 .robotic-digits { font-family: 'Courier New', Courier, monospace; letter-spacing: 0.1rem; }
                 .perspective-1000 { perspective: 1000px; }
                 .noise-overlay::before {
