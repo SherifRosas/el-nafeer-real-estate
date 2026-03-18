@@ -139,16 +139,43 @@ export default function AdV2UltimaSensoryUpdate() {
             {/* --- 3. ACTIVE IMPERIAL SIMULATION --- */}
             <div className={`relative w-full h-screen transition-opacity duration-1000 ${phase === 'active' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                 
-                {/* --- BACKGROUND: GIZA NEURAL --- */}
-                <div className="absolute inset-0 z-0">
-                    <motion.div animate={{ scale: [1.05, 1], filter: ['brightness(0.3)', 'brightness(0.2)'] }} transition={{ duration: 20, repeat: Infinity }} className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center" />
-                    
-                    {/* GOD RAYS FX */}
-                    <div className="absolute inset-0 pointer-events-none opacity-20 bg-gradient-to-br from-sahara-gold/40 via-transparent to-transparent mix-blend-screen" />
+                {/* --- BACKGROUND: CINEMATIC PARALLAX --- */}
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                    {/* LAYER 1: Deep Sky & Pyramids (Slow Parallax) */}
                     <motion.div 
-                        animate={{ x: [-100, 100], opacity: [0.1, 0.3, 0.1] }}
+                        animate={{ scale: [1, 1.05], x: [-5, 5] }} 
+                        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                        className="absolute inset-x-[-5%] inset-y-[-5%] bg-[url('https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center" 
+                    />
+                    
+                    {/* LAYER 2: City Lights & Horizon (Pulse) */}
+                    <motion.div 
+                        animate={{ opacity: [0.1, 0.3, 0.1] }}
+                        transition={{ duration: 5, repeat: Infinity }}
+                        className="absolute inset-0 bg-gradient-to-t from-cyan-900/40 via-transparent to-transparent mix-blend-screen" 
+                    />
+
+                    {/* LAYER 3: Floating Neon Particles (CGI Depth) */}
+                    {[...Array(30)].map((_, i) => (
+                        <motion.div 
+                            key={`p-${i}`}
+                            initial={{ x: Math.random() * 2000 - 1000, y: Math.random() * 2000 - 1000, scale: Math.random() }}
+                            animate={{ 
+                                y: [null, Math.random() * -500], 
+                                opacity: [0, 0.6, 0],
+                                scale: [0, 1, 0]
+                            }}
+                            transition={{ duration: 10 + Math.random() * 20, repeat: Infinity, ease: "easeInOut" }}
+                            className="absolute w-1 h-1 bg-cyan-400 rounded-full blur-[2px] shadow-[0_0_10px_cyan]"
+                            style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
+                        />
+                    ))}
+                    
+                    {/* GOD RAYS / FLUID ELECTRICITY */}
+                    <motion.div 
+                        animate={{ x: [-200, 200], opacity: [0.1, 0.3, 0.1] }}
                         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute inset-0 bg-[linear-gradient(110deg,transparent_40%,rgba(212,175,55,0.4)_50%,transparent_60%)] bg-[length:200%_100%]"
+                        className="absolute inset-0 bg-[linear-gradient(110deg,transparent_40%,rgba(34,211,238,0.2)_50%,transparent_60%)] bg-[length:200%_100%] pointer-events-none"
                     />
                 </div>
 
@@ -194,11 +221,17 @@ export default function AdV2UltimaSensoryUpdate() {
                     </motion.div>
                 </div>
 
-                {/* --- CENTRAL CANVAS --- */}
                 <div className="absolute inset-0 flex items-center justify-center p-20 z-10 perspective-1000">
                     <motion.div 
-                        animate={{ rotateX: [0, 1, -1, 0], rotateY: [0, -1, 1, 0] }}
-                        transition={{ duration: 10, repeat: Infinity }}
+                        animate={{ 
+                            scale: [1, 1.15],
+                            rotateX: [0, 1, -1, 0], 
+                            rotateY: [0, -1, 1, 0] 
+                        }}
+                        transition={{ 
+                            scale: { duration: 40, repeat: Infinity, ease: "linear" },
+                            default: { duration: 10, repeat: Infinity }
+                        }}
                         className="relative w-full max-w-[800px] aspect-square rounded-[4rem] overflow-hidden shadow-[0_0_150px_rgba(0,0,0,0.8)]"
                     >
                         <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad v2 Quantum" fill className="object-cover" priority />
@@ -227,18 +260,30 @@ export default function AdV2UltimaSensoryUpdate() {
                             )}
                         </AnimatePresence>
 
-                        {/* SIGNALS */}
+                        {/* SIGNALS (3D Coin-Flip Icons) */}
                         <motion.div initial={{ opacity: 0 }} animate={step >= 2 ? { opacity: 1 } : {}} className="absolute inset-0 z-40 pointer-events-none">
                             <div className="absolute top-[8%] left-[7%] w-[35%] h-[35%] cursor-pointer pointer-events-auto">
                                 <a href="https://wa.me/201111171368" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Contact" className="block w-full h-full relative">
                                     <motion.div animate={{ scale: [1, 2, 1], opacity: [0.1, 0.4, 0.1] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute inset-4 rounded-full border-4 border-green-500" />
-                                    <MessageCircle className="absolute top-[35%] left-[35%] w-8 h-8 text-green-500 drop-shadow-xl" />
+                                    <motion.div 
+                                        animate={{ rotateY: 360 }} 
+                                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                                        className="absolute top-[35%] left-[35%]"
+                                    >
+                                        <MessageCircle className="w-8 h-8 text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.8)]" />
+                                    </motion.div>
                                 </a>
                             </div>
                             <div className="absolute top-[8%] right-[7%] w-[35%] h-[35%] cursor-pointer pointer-events-auto">
                                 <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" rel="noopener noreferrer" aria-label="Google Maps Location" className="block w-full h-full relative">
                                     <motion.div animate={{ scale: [1, 2, 1], opacity: [0.1, 0.3, 0.1] }} transition={{ repeat: Infinity, duration: 3 }} className="absolute inset-8 rounded-full border-4 border-sahara-gold" />
-                                    <MapPin className="absolute top-[30%] right-[30%] w-8 h-8 text-sahara-gold drop-shadow-xl" />
+                                    <motion.div 
+                                        animate={{ rotateY: 360 }} 
+                                        transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                                        className="absolute top-[30%] right-[30%]"
+                                    >
+                                        <MapPin className="w-8 h-8 text-sahara-gold drop-shadow-[0_0_15px_rgba(212,175,55,0.8)]" />
+                                    </motion.div>
                                 </a>
                             </div>
                         </motion.div>
@@ -248,7 +293,9 @@ export default function AdV2UltimaSensoryUpdate() {
                             <a href="tel:01065661882" aria-label="Call El Nafeer Global" className="block w-full h-full bg-black/80 backdrop-blur-3xl border-2 border-sahara-gold rounded-[3rem] p-8 hover:bg-sahara-gold/10 transition-all cursor-pointer group shadow-[0_0_100px_rgba(0,0,0,1)] relative overflow-hidden">
                                 <div className="flex items-center gap-8 h-full relative z-20">
                                     <div className="p-5 bg-sahara-gold rounded-3xl shadow-[0_0_50px_rgba(212,175,55,0.7)] group-hover:scale-110 transition-transform">
-                                        <Phone className="w-8 h-8 text-black" />
+                                        <motion.div animate={{ rotateY: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }}>
+                                            <Phone className="w-8 h-8 text-black" />
+                                        </motion.div>
                                     </div>
                                     <div className="space-y-2">
                                         <span className="text-[14px] text-sahara-gold font-black uppercase tracking-[0.5em] block">{isArabic ? "منصة النفير العالمية" : "NAFEER_GLOBAL_SIM"}</span>
