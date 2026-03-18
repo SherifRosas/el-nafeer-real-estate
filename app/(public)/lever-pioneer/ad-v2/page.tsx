@@ -260,32 +260,54 @@ export default function AdV2UltimaSensoryUpdate() {
                             )}
                         </AnimatePresence>
 
-                        {/* SIGNALS (3D Coin-Flip Icons) */}
-                        <motion.div initial={{ opacity: 0 }} animate={step >= 2 ? { opacity: 1 } : {}} className="absolute inset-0 z-40 pointer-events-none">
-                            <div className="absolute top-[8%] left-[7%] w-[35%] h-[35%] cursor-pointer pointer-events-auto">
-                                <a href="https://wa.me/201111171368" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Contact" className="block w-full h-full relative">
-                                    <motion.div animate={{ scale: [1, 2, 1], opacity: [0.1, 0.4, 0.1] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute inset-4 rounded-full border-4 border-green-500" />
-                                    <motion.div 
-                                        animate={{ rotateY: 360 }} 
-                                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                                        className="absolute top-[35%] left-[35%]"
-                                    >
-                                        <MessageCircle className="w-8 h-8 text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.8)]" />
-                                    </motion.div>
-                                </a>
-                            </div>
-                            <div className="absolute top-[8%] right-[7%] w-[35%] h-[35%] cursor-pointer pointer-events-auto">
-                                <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" rel="noopener noreferrer" aria-label="Google Maps Location" className="block w-full h-full relative">
-                                    <motion.div animate={{ scale: [1, 2, 1], opacity: [0.1, 0.3, 0.1] }} transition={{ repeat: Infinity, duration: 3 }} className="absolute inset-8 rounded-full border-4 border-sahara-gold" />
-                                    <motion.div 
-                                        animate={{ rotateY: 360 }} 
-                                        transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                                        className="absolute top-[30%] right-[30%]"
-                                    >
-                                        <MapPin className="w-8 h-8 text-sahara-gold drop-shadow-[0_0_15px_rgba(212,175,55,0.8)]" />
-                                    </motion.div>
-                                </a>
-                            </div>
+                        {/* SIGNALS (High-Fidelity 3D Coin-Flip Nodes) */}
+                        <motion.div initial={{ opacity: 0 }} animate={step >= 2 ? { opacity: 1 } : {}} className="absolute inset-0 z-40 p-10 pointer-events-none flex flex-col gap-6 justify-end items-start pb-40">
+                            
+                            {/* WHATSAPP NODE */}
+                            <motion.div 
+                                animate={{ rotateY: 360 }} 
+                                transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
+                                className="w-80 h-24 bg-black/60 backdrop-blur-xl border-2 border-green-500/50 rounded-3xl flex items-center px-6 gap-6 shadow-[0_0_30px_rgba(34,197,94,0.3)] pointer-events-auto"
+                            >
+                                <div className="w-14 h-14 rounded-full border-2 border-green-500 flex items-center justify-center shadow-[0_0_15px_rgba(34,197,94,0.6)]">
+                                    <MessageCircle className="w-8 h-8 text-green-500" />
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-[12px] text-green-500 font-black uppercase tracking-[0.2em]">WHATSAPP</span>
+                                    <span className="text-[18px] text-white font-black italic">+20 111 117 1368</span>
+                                </div>
+                            </motion.div>
+
+                            {/* CALLING NODE */}
+                            <motion.div 
+                                animate={{ rotateY: 360 }} 
+                                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                                className="w-80 h-24 bg-black/60 backdrop-blur-xl border-2 border-cyan-400/50 rounded-3xl flex items-center px-6 gap-6 shadow-[0_0_30px_rgba(34,211,238,0.3)] pointer-events-auto"
+                            >
+                                <div className="w-14 h-14 rounded-full border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.6)]">
+                                    <Phone className="w-8 h-8 text-cyan-400" />
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-[12px] text-cyan-400 font-black uppercase tracking-[0.2em]">CALL_US</span>
+                                    <span className="text-[18px] text-white font-black italic">19XXX</span>
+                                </div>
+                            </motion.div>
+
+                            {/* LOCATION NODE */}
+                            <motion.div 
+                                animate={{ rotateY: 360 }} 
+                                transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
+                                className="w-80 h-24 bg-black/60 backdrop-blur-xl border-2 border-sahara-gold/50 rounded-3xl flex items-center px-6 gap-6 shadow-[0_0_30px_rgba(212,175,55,0.3)] pointer-events-auto"
+                            >
+                                <div className="w-14 h-14 rounded-full border-2 border-sahara-gold flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.6)]">
+                                    <MapPin className="w-8 h-8 text-sahara-gold" />
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-[12px] text-sahara-gold font-black uppercase tracking-[0.2em]">LOCATION</span>
+                                    <span className="text-[18px] text-white font-black italic">GIZA, EGYPT</span>
+                                </div>
+                            </motion.div>
+
                         </motion.div>
 
                         {/* GLOBAL NODE */}
