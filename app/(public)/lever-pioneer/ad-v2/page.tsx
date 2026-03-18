@@ -11,7 +11,7 @@ import {
     CloudHail, Waves, Box
 } from 'lucide-react'
 
-// --- IMPERIAL KINETIC CINEMA V12.8 (FINAL REVISION) ---
+// --- IMPERIAL KINETIC CINEMA V13.5 (PRODUCTION FINAL) ---
 
 export default function AdV2UltimaKineticCinema() {
     const { language } = useLanguage()
@@ -274,7 +274,7 @@ export default function AdV2UltimaKineticCinema() {
                      <div className="flex justify-between text-cyan-400 opacity-60 font-black tracking-widest text-[8px] lg:text-[9px]">
                          <div className="flex gap-4 items-center">
                               <Box className="w-4 h-4 animate-pulse" />
-                              <span className="robotic-digits">QUANTUM_CINEMA // LEV_12.8</span>
+                              <span className="robotic-digits">QUANTUM_CINEMA // LEV_13.5_KINETIC</span>
                          </div>
                          <div className="flex gap-6 lg:gap-10">
                               <span className="robotic-digits">29.98N 31.13E</span>
