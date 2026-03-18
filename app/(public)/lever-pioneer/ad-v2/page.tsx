@@ -79,6 +79,7 @@ export default function AdV2UltimaSensoryUpdate() {
 
     return (
         <div className="min-h-screen bg-black flex items-center justify-center p-0 m-0 overflow-hidden relative cursor-crosshair font-sans select-none noise-overlay">
+            <div className="scanline" />
             
             {/* AUDIO NODES */}
             <audio ref={bgMusicRef} loop src="https://assets.mixkit.co/music/preview/mixkit-sci-fi-drone-ambience-925.mp3" />
@@ -328,10 +329,24 @@ export default function AdV2UltimaSensoryUpdate() {
                     position: absolute;
                     inset: -100%;
                     background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-                    opacity: 0.05;
+                    opacity: 0.1;
                     pointer-events: none;
                     animation: noise 0.2s infinite;
                     z-index: 1000;
+                }
+                .scanline {
+                    width: 100%;
+                    height: 100px;
+                    z-index: 1001;
+                    background: linear-gradient(0deg, rgba(0, 255, 255, 0) 0%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 255, 255, 0) 100%);
+                    opacity: 0.1;
+                    position: absolute;
+                    bottom: 100%;
+                    animation: scanline 6s linear infinite;
+                }
+                @keyframes scanline {
+                    0% { bottom: 100%; }
+                    100% { bottom: -100px; }
                 }
                 @keyframes noise {
                     0% { transform: translate(0, 0); }
