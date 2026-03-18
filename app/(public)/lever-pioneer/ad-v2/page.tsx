@@ -93,7 +93,7 @@ export default function AdV2UltimaSensoryUpdate() {
                         transition={{ duration: 4, ease: "circIn" }}
                         className="absolute inset-0 z-[200] bg-black flex items-center justify-center"
                     >
-                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center brightness-[0.4]" />
+                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center brightness-[0.4]" />
                         <div className="relative z-10 flex flex-col items-center gap-6">
                             <motion.div animate={{ rotate: 360 }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }} className="w-96 h-96 border border-sahara-gold/40 rounded-full flex items-center justify-center border-dashed" />
                             <Globe className="absolute w-20 h-20 text-sahara-gold animate-pulse" />
@@ -135,7 +135,7 @@ export default function AdV2UltimaSensoryUpdate() {
                 
                 {/* --- BACKGROUND: GIZA NEURAL --- */}
                 <div className="absolute inset-0 z-0">
-                    <motion.div animate={{ scale: [1.05, 1], filter: ['brightness(0.3)', 'brightness(0.2)'] }} transition={{ duration: 20, repeat: Infinity }} className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center" />
+                    <motion.div animate={{ scale: [1.05, 1], filter: ['brightness(0.3)', 'brightness(0.2)'] }} transition={{ duration: 20, repeat: Infinity }} className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center" />
                     
                     {/* GOD RAYS FX */}
                     <div className="absolute inset-0 pointer-events-none opacity-20 bg-gradient-to-br from-sahara-gold/40 via-transparent to-transparent mix-blend-screen" />
