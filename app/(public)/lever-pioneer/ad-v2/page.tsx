@@ -8,7 +8,7 @@ import {
     Phone, MessageCircle, MapPin, Zap, Play, 
     ShieldCheck, Cpu, Radio, Globe, Crosshair, 
     Terminal, Activity, Lock, Layers, FastForward,
-    CloudHail, Waves, Box, Zap2
+    CloudHail, Waves, Box
 } from 'lucide-react'
 
 // --- IMPERIAL ULTIMA V10.2 (FULL SENSORY SYNC) ---
