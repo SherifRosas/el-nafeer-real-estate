@@ -188,93 +188,84 @@ export default function AdV2UltimaKineticCinema() {
                     >
                         <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad v2 Quantum" fill className="object-cover" priority />
 
-                        {/* UNIFIED QUANTUM HUD (One Single 3D Flipping Block) */}
+                        {/* THE UNIFIED QUANTUM HUD (STATIC BOX, KINETIC ICONS) */}
                         <div className="absolute inset-x-0 bottom-10 lg:bottom-20 z-40 p-4 lg:p-10 pointer-events-none flex flex-col items-start pb-20 lg:pb-32">
                             <motion.div 
                                 initial={{ opacity: 0, x: -100 }}
-                                animate={step >= 2 ? { 
-                                    opacity: 1, 
-                                    x: 0,
-                                    rotateY: 360 
-                                } : {}}
-                                transition={{ 
-                                    opacity: { duration: 1 },
-                                    x: { duration: 1 },
-                                    rotateY: { duration: 8, repeat: Infinity, ease: "linear" }
-                                }}
-                                className="w-full max-w-[400px] bg-black/70 backdrop-blur-3xl border-2 border-cyan-400/60 rounded-[3rem] p-6 lg:p-8 flex flex-col gap-6 shadow-[0_0_100px_rgba(34,211,238,0.4)] pointer-events-auto"
+                                animate={step >= 2 ? { opacity: 1, x: 0 } : {}}
+                                transition={{ duration: 1 }}
+                                className="w-full max-w-[420px] bg-black/80 backdrop-blur-3xl border-2 border-cyan-400/50 rounded-[3rem] p-6 lg:p-8 flex flex-col gap-6 shadow-[0_0_100px_rgba(0,0,0,1)] pointer-events-auto"
                             >
                                 {/* ROW 1: WHATSAPP */}
                                 <div className="flex items-center gap-6 cursor-pointer group" onClick={() => window.open('https://wa.me/201111171368', '_blank')}>
-                                    <div className="w-14 h-14 rounded-full border-2 border-green-500/80 flex items-center justify-center shadow-[0_0_15px_rgba(34,197,94,0.5)] group-hover:scale-110 transition-transform">
+                                    <motion.div 
+                                        animate={{ rotateY: 360 }}
+                                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                                        className="w-16 h-16 rounded-full border-2 border-green-500 flex items-center justify-center shadow-[0_0_20px_rgba(34,197,94,0.4)] group-hover:scale-110 transition-transform"
+                                    >
                                         <MessageCircle className="w-8 h-8 text-green-500" />
-                                    </div>
+                                    </motion.div>
                                     <div className="flex flex-col">
                                         <span className="text-[12px] text-green-500 font-black uppercase tracking-[0.2em]">WHATSAPP</span>
                                         <span className="text-[18px] text-white font-black italic">+20 111 117 1368</span>
                                     </div>
                                 </div>
 
-                                <div className="h-[1px] w-full bg-cyan-400/20" />
+                                <div className="h-[1px] w-full bg-white/10" />
 
                                 {/* ROW 2: CALL US */}
                                 <div className="flex items-center gap-6 cursor-pointer group" onClick={() => window.open('tel:19XXX', '_self')}>
-                                    <div className="w-14 h-14 rounded-full border-2 border-cyan-400/80 flex items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.5)] group-hover:scale-110 transition-transform">
+                                    <motion.div 
+                                        animate={{ rotateY: 360 }}
+                                        transition={{ duration: 4.5, repeat: Infinity, ease: "linear" }}
+                                        className="w-16 h-16 rounded-full border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.4)] group-hover:scale-110 transition-transform"
+                                    >
                                         <Phone className="w-8 h-8 text-cyan-400" />
-                                    </div>
+                                    </motion.div>
                                     <div className="flex flex-col">
                                         <span className="text-[12px] text-cyan-400 font-black uppercase tracking-[0.2em]">CALL_US</span>
                                         <span className="text-[18px] text-white font-black italic">19XXX</span>
                                     </div>
                                 </div>
 
-                                <div className="h-[1px] w-full bg-cyan-400/20" />
+                                <div className="h-[1px] w-full bg-white/10" />
 
                                 {/* ROW 3: LOCATION */}
                                 <div className="flex items-center gap-6 cursor-pointer group" onClick={() => window.open('https://www.google.com/maps?q=29.9656242,31.0922895', '_blank')}>
-                                    <div className="w-14 h-14 rounded-full border-2 border-sahara-gold/80 flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.5)] group-hover:scale-110 transition-transform">
+                                    <motion.div 
+                                        animate={{ rotateY: 360 }}
+                                        transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                                        className="w-16 h-16 rounded-full border-2 border-sahara-gold flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.4)] group-hover:scale-110 transition-transform"
+                                    >
                                         <MapPin className="w-8 h-8 text-sahara-gold" />
-                                    </div>
+                                    </motion.div>
                                     <div className="flex flex-col">
                                         <span className="text-[12px] text-sahara-gold font-black uppercase tracking-[0.2em]">LOCATION</span>
-                                        <span className="text-[18px] text-white font-black italic">GIZA, حدائق الأهرام</span>
+                                        <span className="text-[18px] text-white font-black italic truncate">GIZA, حدائق الأهرام</span>
                                     </div>
                                 </div>
 
-                                <div className="h-[1px] w-full bg-red-500/20" />
+                                <div className="h-[1px] w-full bg-white/10" />
 
-                                {/* ROW 4: EL NAFEER GLOBAL PLATFORM */}
+                                {/* ROW 4: EL NAFEER GLOBAL */}
                                 <div className="flex items-center gap-6 cursor-pointer group">
-                                    <div className="w-16 h-16 relative group-hover:scale-110 transition-transform">
+                                    <motion.div 
+                                        animate={{ rotateY: 360 }}
+                                        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                                        className="w-16 h-16 relative group-hover:scale-110 transition-transform"
+                                    >
                                         <NextImage src="/logos/logo-en.png" alt="El Nafeer" fill className="object-contain" />
-                                    </div>
+                                    </motion.div>
                                     <div className="flex flex-col">
                                         <div className="flex items-center gap-2">
                                             <span className="text-[13px] text-red-500 font-black">منصة النفير العالمية</span>
                                             <div className="w-2 h-2 bg-red-600 rounded-full animate-ping" />
                                         </div>
-                                        <span className="text-[12px] text-white font-black italic uppercase leading-none">للدعايه و الاعلان</span>
+                                        <span className="text-[11px] text-white/80 font-black italic uppercase leading-none">للدعايه و الاعلان</span>
                                     </div>
                                 </div>
                             </motion.div>
                         </div>
-
-                        {/* FINAL GLOBAL CALL ACTION */}
-                        <motion.div initial={{ opacity: 0, y: 100 }} animate={step >= 4 ? { opacity: 1, y: 0 } : {}} className="absolute bottom-[-10%] right-[-10%] w-[120%] h-[40%] z-[150] pointer-events-auto hidden lg:flex">
-                             <a href="tel:01065661882" className="block w-full h-full bg-black/95 backdrop-blur-3xl border-2 border-sahara-gold rounded-[4rem] p-12 hover:bg-sahara-gold/10 transition-all cursor-pointer group shadow-[0_0_200px_rgba(0,0,0,1)] relative overflow-hidden">
-                                <div className="flex items-center gap-12 h-full relative z-20">
-                                    <div className="p-10 bg-sahara-gold rounded-[2rem] shadow-[0_0_100px_rgba(212,175,55,0.8)] group-hover:scale-110 transition-transform">
-                                        <motion.div animate={{ rotateY: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }}>
-                                            <Phone className="w-16 h-16 text-black" />
-                                        </motion.div>
-                                    </div>
-                                    <div className="space-y-4">
-                                        <span className="text-[20px] text-sahara-gold font-black uppercase tracking-[0.5em] block">NAFEER_GLOBAL_SIM</span>
-                                        <span className="text-white font-black text-6xl tracking-tighter robotic-digits">01065661882</span>
-                                    </div>
-                                </div>
-                             </a>
-                        </motion.div>
                     </motion.div>
                 </div>
 
