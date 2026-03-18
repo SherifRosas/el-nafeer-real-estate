@@ -239,7 +239,7 @@ export default function AdV2UltimaSensoryUpdate() {
 
                         {/* GLOBAL NODE */}
                         <motion.div initial={{ opacity: 0, x: 200 }} animate={step >= 4 ? { opacity: 1, x: 0 } : {}} className="absolute bottom-[5%] right-[5%] w-[58%] h-[24%] z-[150]">
-                            <a href="tel:01065661882" className="block w-full h-full bg-black/80 backdrop-blur-3xl border-2 border-sahara-gold rounded-[3rem] p-8 hover:bg-sahara-gold/10 transition-all cursor-pointer group shadow-[0_0_100px_rgba(0,0,0,1)] relative overflow-hidden">
+                            <a href="tel:01065661882" aria-label="Call El Nafeer Global" className="block w-full h-full bg-black/80 backdrop-blur-3xl border-2 border-sahara-gold rounded-[3rem] p-8 hover:bg-sahara-gold/10 transition-all cursor-pointer group shadow-[0_0_100px_rgba(0,0,0,1)] relative overflow-hidden">
                                 <div className="flex items-center gap-8 h-full relative z-20">
                                     <div className="p-5 bg-sahara-gold rounded-3xl shadow-[0_0_50px_rgba(212,175,55,0.7)] group-hover:scale-110 transition-transform">
                                         <Phone className="w-8 h-8 text-black" />
