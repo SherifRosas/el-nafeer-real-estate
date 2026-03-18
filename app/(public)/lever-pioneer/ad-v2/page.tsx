@@ -8,7 +8,7 @@ import {
     Phone, MessageCircle, MapPin, Zap, Play, 
     ShieldCheck, Cpu, Radio, Globe, Crosshair, 
     Terminal, Activity, Lock, Layers, FastForward,
-    CloudHail, Waves
+    CloudHail, Waves, Box, Zap2
 } from 'lucide-react'
 
 // --- IMPERIAL ULTIMA V10.2 (FULL SENSORY SYNC) ---
@@ -78,7 +78,7 @@ export default function AdV2UltimaSensoryUpdate() {
     }
 
     return (
-        <div className="min-h-screen bg-black flex items-center justify-center p-0 m-0 overflow-hidden relative cursor-crosshair font-sans select-none">
+        <div className="min-h-screen bg-black flex items-center justify-center p-0 m-0 overflow-hidden relative cursor-crosshair font-sans select-none noise-overlay">
             
             {/* AUDIO NODES */}
             <audio ref={bgMusicRef} loop src="https://assets.mixkit.co/music/preview/mixkit-sci-fi-drone-ambience-925.mp3" />
@@ -115,10 +115,15 @@ export default function AdV2UltimaSensoryUpdate() {
                         <div className="w-full max-w-4xl space-y-12 px-12">
                             <div className="flex justify-between items-center text-sahara-gold font-mono text-xs">
                                 <span className="animate-pulse">_SENSORY_CALIBRATION_ACTIVE_</span>
-                                <span>PHASE: ALPHA_ULTIMA</span>
+                                <span>PHASE: QUANTUM_FUSION_v11.0</span>
                             </div>
-                            <div className="h-[2px] w-full bg-zinc-900 overflow-hidden">
-                                <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 4 }} className="h-full bg-sahara-gold" />
+                            <div className="h-[3px] w-full bg-zinc-900 rounded-full overflow-hidden shadow-[0_0_20px_rgba(0,255,255,0.2)]">
+                                <motion.div 
+                                    initial={{ width: 0 }} 
+                                    animate={{ width: "100%" }} 
+                                    transition={{ duration: 4 }} 
+                                    className="h-full bg-gradient-to-r from-teal-500 via-cyan-400 to-sahara-gold" 
+                                />
                             </div>
                             <div className="flex justify-center gap-20">
                                 <Waves className="w-10 h-10 text-sahara-gold/20 animate-bounce" />
@@ -167,13 +172,13 @@ export default function AdV2UltimaSensoryUpdate() {
                          transition={{ duration: 4, repeat: Infinity }}
                          className="relative w-40 h-64 border-l-2 border-sahara-gold/20 flex flex-col justify-end p-6 gap-4"
                     >
-                        <div className="w-12 h-12 bg-sahara-gold/10 rounded-full flex items-center justify-center border border-sahara-gold/40">
-                             <Cpu className="w-5 h-5 text-sahara-gold animate-spin-slow" />
+                        <div className="w-12 h-12 bg-cyan-500/10 rounded-full flex items-center justify-center border border-cyan-400/40 shadow-[0_0_20px_rgba(34,211,238,0.3)]">
+                             <Cpu className="w-5 h-5 text-cyan-400 animate-spin-slow" />
                         </div>
-                        <div className="space-y-1 font-mono text-[8px] text-sahara-gold/60">
-                            <p className="font-black text-[10px] text-sahara-gold">_AI_ASSISTANT_</p>
-                            <p>MODE: BROADCASTING</p>
-                            <p>VOICE: ENABLED_EG</p>
+                        <div className="space-y-1 font-mono text-[8px] text-cyan-400/80">
+                            <p className="font-black text-[10px] text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,1)]">_QUANTUM_HUD_</p>
+                            <p>MODE: INITIALIZING_STUDIO</p>
+                            <p>SYMMETRY: ACTIVE</p>
                         </div>
                         <div className="flex gap-1 h-8 items-end">
                             {[...Array(8)].map((_, i) => (
@@ -257,14 +262,14 @@ export default function AdV2UltimaSensoryUpdate() {
 
                 {/* HUD FRAME: ULTIMA COMMAND */}
                 <div className="absolute inset-10 border border-white/10 rounded-[6rem] pointer-events-none z-50 p-16 flex flex-col justify-between">
-                     <div className="flex justify-between text-sahara-gold opacity-50 font-black tracking-widest text-[9px]">
+                     <div className="flex justify-between text-cyan-400 opacity-80 font-black tracking-widest text-[9px] drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]">
                          <div className="flex gap-4 items-center">
-                              <Zap className="w-4 h-4 animate-pulse" />
-                              <span>LEVEL_10_ULTIMA_BROADCAST // SIM_01</span>
+                              <Box className="w-4 h-4 animate-pulse" />
+                              <span className="robotic-digits">QUANTUM_DESIGN_BROADCAST // SIM_11_LOCKED</span>
                          </div>
                          <div className="flex gap-10">
-                              <span>COORD: 29.98N 31.13E</span>
-                               <Radio className="w-4 h-4 animate-pulse text-red-600" />
+                              <span className="robotic-digits">COORD: 29.98N 31.13E</span>
+                               <Radio className="w-4 h-4 animate-pulse text-cyan-300" />
                          </div>
                      </div>
                      <div className="flex justify-between items-end opacity-20">
@@ -292,9 +297,9 @@ export default function AdV2UltimaSensoryUpdate() {
                         <motion.div animate={{ scale: [1, 1.5], opacity: [0.5, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute inset-0 border-4 border-sahara-gold rounded-full" />
                     </motion.div>
                     <div className="space-y-4">
-                        <h1 className="text-white font-black text-4xl tracking-tighter uppercase">{isArabic ? "محاكاة النفير: المرحلة النهائية" : "EL NAFEER: ULTIMA SIMULATION"}</h1>
-                        <p className="text-sahara-gold font-mono text-xs tracking-[0.5em] animate-pulse">{isArabic ? "اضغط لتفعيل تجربة الحواس المتكاملة" : "ACTIVATE MULTI-SENSORY BROADCAST"}</p>
-                        <div className="flex justify-center gap-6 pt-6 opacity-40">
+                        <h1 className="text-white font-black text-4xl tracking-tighter uppercase drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">{isArabic ? "محاكاة النفير: الاندماج الكمي" : "EL NAFEER: QUANTUM FUSION"}</h1>
+                        <p className="text-cyan-400 font-mono text-xs tracking-[0.5em] animate-pulse drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]">{isArabic ? "تهيئة استوديو التصميم الكمي..." : "INITIALIZING QUANTUM DESIGN STUDIO..."}</p>
+                        <div className="flex justify-center gap-6 pt-6 opacity-60">
                              <Waves className="w-6 h-6 text-white" />
                              <Zap className="w-6 h-6 text-white" />
                              <Globe className="w-6 h-6 text-white" />
@@ -316,6 +321,31 @@ export default function AdV2UltimaSensoryUpdate() {
                 .animate-float { animation: float 5s ease-in-out infinite; }
                 .animate-spin-slow { animation: spin 10s linear infinite; }
                 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+                /* ULTIMA ATMOSPHERICS */
+                .noise-overlay::before {
+                    content: "";
+                    position: absolute;
+                    inset: -100%;
+                    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+                    opacity: 0.05;
+                    pointer-events: none;
+                    animation: noise 0.2s infinite;
+                    z-index: 1000;
+                }
+                @keyframes noise {
+                    0% { transform: translate(0, 0); }
+                    10% { transform: translate(-5%, -5%); }
+                    20% { transform: translate(-10%, 5%); }
+                    30% { transform: translate(5%, -10%); }
+                    40% { transform: translate(-5%, 15%); }
+                    50% { transform: translate(-10%, 5%); }
+                    60% { transform: translate(15%, 0); }
+                    70% { transform: translate(0, 10%); }
+                    80% { transform: translate(-15%, 0); }
+                    90% { transform: translate(10%, 5%); }
+                    100% { transform: translate(5%, 0); }
+                }
             `}</style>
         </div>
     )

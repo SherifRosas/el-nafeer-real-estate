@@ -81,6 +81,9 @@ export default function LeverPioneerLanding() {
                             <a href="https://www.facebook.com/mohamed.sanad.473555" target="_blank" rel="noopener noreferrer" className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all flex items-center gap-2">
                                 👤 {isArabic ? 'المؤسس' : 'OWNER_NODE'}
                             </a>
+                            <a href="/lever-pioneer/ad-v2" className="px-5 py-3 rounded-2xl bg-sahara-gold/10 border border-sahara-gold/30 text-[9px] font-black uppercase tracking-[0.3em] hover:bg-sahara-gold hover:text-black transition-all flex items-center gap-2 group">
+                                📡 <span className="animate-pulse">{isArabic ? 'مشاهدة البث السينمائي' : 'VIEW_CINEMATIC_BROADCAST'}</span>
+                            </a>
                         </div>
                         
                         <p className="text-lg md:text-xl text-gray-500 font-bold uppercase tracking-tight max-w-2xl leading-relaxed">
