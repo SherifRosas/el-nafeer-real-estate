@@ -201,7 +201,7 @@ export default function AdV2UltimaSensoryUpdate() {
                         transition={{ duration: 10, repeat: Infinity }}
                         className="relative w-full max-w-[800px] aspect-square rounded-[4rem] overflow-hidden shadow-[0_0_150px_rgba(0,0,0,0.8)]"
                     >
-                        <NextImage src="/campaigns/lever-pioneer/ad-v2.png" alt="Ad v2" fill className="object-cover" priority />
+                        <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad v2 Quantum" fill className="object-cover" priority />
 
                         {/* THE EAGLE (3D Banking & Shadow Update) */}
                         <AnimatePresence>
@@ -212,10 +212,10 @@ export default function AdV2UltimaSensoryUpdate() {
                                         step === 1 ? { top: "15%", left: "15%", scale: 1.2, rotateZ: -15, rotateY: 10, z: 50, opacity: 1 } :
                                         step === 2 ? { top: "12%", left: "75%", scale: 1.4, rotateZ: 20, rotateY: -10, z: 100, opacity: 1 } :
                                         step === 3 ? { top: "42%", left: "22%", scale: 1.1, rotateZ: -10, rotateY: 15, z: 200, opacity: 1 } :
-                                        { top: "70%", left: "72%", scale: 1.8, rotateZ: 0, rotateY: 0, z: 300, opacity: 1 }
+                                        { top: "70%", left: "72%", scale: 1.8, rotateZ: 0, rotateY: 0, z: 300, opacity: 1, filter: ["none", "contrast(2) hue-rotate(90deg)", "none"] }
                                     }
                                     transition={{ duration: 4, type: "spring", stiffness: 30 }}
-                                    className="absolute z-[100] pointer-events-none drop-shadow-[20px_40px_60px_rgba(0,0,0,0.8)]"
+                                    className="absolute z-[100] pointer-events-none drop-shadow-[0_0_80px_rgba(0,255,255,0.8)]"
                                 >
                                     <div className="relative w-36 h-36">
                                         <NextImage src="/logos/logo-en.png" alt="Eagle" fill className="object-contain animate-float" />
