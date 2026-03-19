@@ -138,7 +138,7 @@ export default function AdV2UltimaKineticCinema() {
                     className="relative w-full h-full max-w-full max-h-full flex items-center justify-center perspective-1000"
                 >
                     {/* THE AD IMAGE: 100% CONTAINED (Zero Crop) */}
-                    <div className="relative w-full h-full max-w-[1200px] max-h-[1200px] aspect-square flex items-center justify-center shadow-[0_0_100px_rgba(34,211,238,0.2)]">
+                    <div className="relative w-full h-[85vh] lg:h-full max-w-[1400px] max-h-[1400px] aspect-square flex items-center justify-center shadow-[0_0_100px_rgba(34,211,238,0.2)]">
                         <NextImage 
                             src="/campaigns/lever-pioneer/ad-v2-quantum.png" 
                             alt="Ad v2 Quantum" 
@@ -148,12 +148,12 @@ export default function AdV2UltimaKineticCinema() {
                         />
 
                         {/* PHANTOM HUD - RELATIVE TO AD BOUNDARIES */}
-                        <div className="absolute left-[5%] bottom-[12%] lg:left-[8%] lg:bottom-[15%] z-40 pointer-events-none flex flex-col items-start scale-[0.65] lg:scale-100 origin-bottom-left">
+                        <div className="absolute left-[5%] bottom-[8%] lg:left-[8%] lg:bottom-[15%] z-40 pointer-events-none flex flex-col items-start scale-[0.6] lg:scale-100 origin-bottom-left">
                             <motion.div 
                                 initial={{ opacity: 0 }}
                                 animate={step >= 2 ? { opacity: 1 } : {}}
                                 transition={{ duration: 1.5 }}
-                                className="w-[380px] lg:w-[440px] flex flex-col gap-10 lg:gap-14 pointer-events-auto"
+                                className="w-[380px] lg:w-[440px] flex flex-col gap-32 lg:gap-14 pointer-events-auto"
                             >
                                 {/* WHATSAPP */}
                                 <div className="flex items-center gap-6 cursor-pointer" onClick={() => window.open('https://wa.me/201111171368', '_blank')}>
@@ -197,7 +197,7 @@ export default function AdV2UltimaKineticCinema() {
                      <div className="flex justify-between items-start text-cyan-400/40 text-[9px] robotic-digits tracking-[3px]">
                          <div className="flex gap-4 items-center">
                               <Box className="w-3 h-3" />
-                              <span>LEVEL_15.2_BRAND_SYNC</span>
+                              <span>LEVEL_15.3_HUD_EXPAND</span>
                          </div>
                          <Radio className="w-3 h-3 animate-pulse" />
                      </div>
