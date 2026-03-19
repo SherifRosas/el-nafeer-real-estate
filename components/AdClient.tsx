@@ -68,6 +68,9 @@ export default function AdClient() {
         const yPercent = ((clientY - rect.top) / rect.height) * 100;
 
         // Visual Feedback (Pulse)
+        const feedbackX = clientX - rect.left;
+        const feedbackY = clientY - rect.top;
+
         setLastClick({ x: clientX, y: clientY });
         setTimeout(() => setLastClick(null), 400);
         if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate(80); }
@@ -132,16 +135,16 @@ export default function AdClient() {
 
             {/* --- OMNI-TOUCH CONTROLLER SURFACE (Z-1000) --- */}
             {phase === 'active' && (
-                <div onMouseDown={handleOmniTouch} onTouchStart={handleOmniTouch} className="fixed bottom-0 left-0 right-0 h-[45%] z-[1000] cursor-pointer pointer-events-auto bg-black/0 select-none">
+                <div onMouseDown={handleOmniTouch} onTouchStart={handleOmniTouch} className="fixed bottom-0 left-0 right-0 h-[45%] z-[1000] cursor-pointer pointer-events-auto bg-black/0 select-none overflow-hidden">
                     
                     {/* FEEDBACK PING */}
                     {lastClick && (
-                        <motion.div initial={{ scale: 0, opacity: 0.8 }} animate={{ scale: 2, opacity: 0 }} className="absolute w-12 h-12 bg-cyan-400 rounded-full blur-xl pointer-events-none" style={{ left: lastClick.x - 24, top: lastClick.y - (window.innerHeight - (window.innerHeight * 0.45)) - 24 }} />
+                        <motion.div initial={{ scale: 0, opacity: 0.8 }} animate={{ scale: 2, opacity: 0 }} className="absolute w-12 h-12 bg-cyan-400 rounded-full blur-xl pointer-events-none" style={{ left: lastClick.x - 24, top: lastClick.y - ((typeof window !== 'undefined' ? window.innerHeight : 1000) * 0.55) - 24 }} />
                     )}
 
                     {/* VISUAL OVERLAYS (STILL PURE, BUT STRUCTURALLY LOCKED) */}
                     <div className="absolute left-[8%] bottom-[8%] flex flex-col pointer-events-none opacity-50">
-                         <div className="robotic-digits text-cyan-400/40 text-[8px] tracking-[4px] uppercase mb-16">v42.0_SUPREME</div>
+                         <div className="robotic-digits text-cyan-400/40 text-[8px] tracking-[4px] uppercase mb-16">v42.1_SUPREME_FIX</div>
                     </div>
 
                     <div className="absolute right-[5%] bottom-[12%] pointer-events-none flex items-center gap-4">
