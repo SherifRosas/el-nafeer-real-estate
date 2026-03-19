@@ -124,13 +124,13 @@ export default function AdClient() {
                              <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen" />
                         </div>
 
-                        {/* --- ART-LOCKED INTERACTION (LEVEL 45.7) --- */}
+                        {/* --- ART-LOCKED INTERACTION (LEVEL 45.8 - YELLOW FORCE) --- */}
                         {phase === 'active' && (
                             <div className="absolute inset-0 z-[99999999] pointer-events-none">
-                                {/* INDEPENDENT HITBOXES - ZERO OVERLAP CALIBRATION */}
-                                <motion.div onTap={() => handleAction('https://wa.me/201111171368')} className="absolute left-[6%] bottom-[31%] w-[32%] h-[13%] cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
-                                <motion.div onTap={() => handleAction('tel:+201070615372', true)} className="absolute left-[6%] bottom-[18%] w-[32%] h-[13%] cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
-                                <motion.div onTap={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')} className="absolute left-[6%] bottom-[5%] w-[32%] h-[13%] cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
+                                {/* INDEPENDENT HITBOXES - WIDENED FOR RELIABILITY */}
+                                <motion.div onTap={() => handleAction('https://wa.me/201111171368')} className="absolute left-[5%] bottom-[32%] w-[40%] h-[15%] cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
+                                <motion.div onTap={() => handleAction('tel:+201070615372', true)} className="absolute left-[5%] bottom-[17%] w-[40%] h-[15%] cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
+                                <motion.div onTap={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')} className="absolute left-[5%] bottom-[2%] w-[40%] h-[15%] cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
 
                                 {/* SIGNATURE ZONE (ABSOLUTE EXTERIOR CORNER) */}
                                 <motion.div 
@@ -153,10 +153,10 @@ export default function AdClient() {
                 </div>
             </div>
 
-            {/* --- HUD OVERLAY --- */}
+            {/* --- HUD OVERLAY (FORCE SYNC) --- */}
             {phase === 'active' && (
-                <div className="fixed left-[8%] bottom-[8%] z-[99999999] flex flex-col pointer-events-none opacity-50">
-                    <div className="robotic-digits text-cyan-400/40 text-[8px] uppercase mb-16 font-bold tracking-[10px]">v45.7_ABSOLUTE_FINAL</div>
+                <div className="fixed left-[8%] bottom-[8%] z-[99999999] flex flex-col pointer-events-none opacity-90">
+                    <div className="bg-yellow-400 text-black px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase">v45.8_YELLOW_FORCE</div>
                 </div>
             )}
         </div>
