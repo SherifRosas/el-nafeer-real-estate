@@ -90,7 +90,7 @@ export default function AdV2UltimaKineticCinema() {
                         <motion.div 
                             animate={{ 
                                 scale: [1, 1.05, 1],
-                                shadow: [
+                                boxShadow: [
                                     "0 0 20px rgba(34,211,238,0.2)",
                                     "0 0 60px rgba(34,211,238,0.4)",
                                     "0 0 20px rgba(34,211,238,0.2)"
@@ -197,7 +197,7 @@ export default function AdV2UltimaKineticCinema() {
                      <div className="flex justify-between items-start text-cyan-400/40 text-[9px] robotic-digits tracking-[3px]">
                          <div className="flex gap-4 items-center">
                               <Box className="w-3 h-3" />
-                              <span>LEVEL_15.1_LOGOFF_FIT</span>
+                              <span>LEVEL_15.2_BRAND_SYNC</span>
                          </div>
                          <Radio className="w-3 h-3 animate-pulse" />
                      </div>
