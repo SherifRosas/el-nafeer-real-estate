@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Box, Radio, UserCheck, Activity } from 'lucide-react'
 
-// --- IMPERIAL CLIENT CORE V33.0 (FINALITY) ---
+// --- IMPERIAL ABSOLUTE SOVEREIGNTY V34.0 (ISOLATION) ---
 
 const CELEBRATION_SCRIPT = [
     "شركة ليفر الرائدة للمصاعد",
@@ -25,6 +25,7 @@ export default function AdClient() {
     const bgMusicRef = useRef<HTMLAudioElement | null>(null)
     const animationFrameRef = useRef<number | null>(null)
 
+    // THE SOVEREIGN ENGINE
     const startInteractionEngine = () => {
         if (!bgMusicRef.current) return;
         const update = () => {
@@ -44,7 +45,10 @@ export default function AdClient() {
         startInteractionEngine()
         if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate([100, 50, 100]); }
         setTimeout(() => setPhase('stabilizing'), 3000)
-        setTimeout(() => { setPhase('active'); playNarrative(0); }, 6500)
+        setTimeout(() => {
+            setPhase('active');
+            playNarrative(0);
+        }, 6500)
     }
 
     const playNarrative = (index: number) => {
@@ -57,20 +61,46 @@ export default function AdClient() {
     }
 
     return (
-        <div className="fixed inset-0 bg-black flex items-center justify-center p-0 m-0 overflow-hidden select-none font-sans">
+        <div className="fixed inset-0 z-[99999] bg-black flex items-center justify-center p-0 m-0 overflow-hidden select-none font-sans">
             <audio ref={bgMusicRef} loop playsInline src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" />
+
+            {/* MASTER-KILL STYLE (Forces any main-site components to vanish) */}
+            <style jsx global>{`
+                footer, header, nav, #main-nav, .site-footer, div[data-footer], #footer { 
+                    display: none !important; 
+                    visibility: hidden !important; 
+                    opacity: 0 !important;
+                    pointer-events: none !important;
+                }
+                body { 
+                    background: black !important; 
+                    overflow: hidden !important; 
+                    position: fixed !important; 
+                    width: 100% !important; 
+                    height: 100% !important; 
+                }
+                .robotic-digits { font-family: 'Courier New', Courier, monospace; }
+                .animate-spin-slow { animation: spin 25s linear infinite; }
+                @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+            `}</style>
 
             {!isAudioUnlocked && (
                 <div onClick={startUltimaSequence} className="fixed inset-0 z-[1000] bg-black flex flex-col items-center justify-center cursor-pointer p-6">
                     <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center gap-24">
                         <div className="relative w-64 h-64 flex items-center justify-center">
                              <div className="w-full h-full relative rounded-full bg-white flex items-center justify-center overflow-hidden shadow-[0_0_80px_rgba(34,211,238,0.3)]">
-                                <NextImage src="/clients/lever-pioneer/logo_mimic.png" alt="Logo" width={400} height={400} className="object-contain mix-blend-multiply scale-[1.1]" />
+                                <NextImage 
+                                    src="/clients/lever-pioneer/logo_mimic.png" 
+                                    alt="Logo" 
+                                    width={400} 
+                                    height={400} 
+                                    className="object-contain mix-blend-multiply scale-[1.05]" 
+                                />
                              </div>
                         </div>
                         <div className="flex flex-col items-center gap-6 text-center">
-                             <h1 className="text-white font-black text-4xl lg:text-6xl tracking-[0.2em] uppercase">SYSTEM_INIT</h1>
-                             <p className="text-sahara-gold font-bold text-xl tracking-[0.3em] animate-pulse">[ TAP TO CELEBRATE ]</p>
+                             <h1 className="text-white font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase">SYSTEM_READY</h1>
+                             <p className="text-sahara-gold font-bold text-xl tracking-[0.3em] animate-pulse">[ TOUCH TO CELEBRATE ]</p>
                         </div>
                     </motion.div>
                 </div>
@@ -106,7 +136,7 @@ export default function AdClient() {
                          <div className="flex justify-between items-start text-cyan-400/40 text-[10px] robotic-digits tracking-[5px] uppercase font-black">
                               <div className="flex gap-4 items-center">
                                    <Activity className="w-5 h-5 animate-pulse" />
-                                   <span>v33.0_FINALITY</span>
+                                   <span>v34.0_SOVEREIGNTY</span>
                               </div>
                               <Radio className="w-6 h-6 animate-pulse text-red-500" />
                          </div>
