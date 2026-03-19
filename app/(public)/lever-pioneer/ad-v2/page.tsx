@@ -237,7 +237,7 @@ export default function AdV2UltimaKineticCinema() {
                      <div className="flex justify-between text-cyan-400 opacity-60 font-black tracking-widest text-[8px] lg:text-[9px]">
                          <div className="flex gap-4 items-center">
                               <Box className="w-4 h-4 animate-pulse" />
-                              <span className="robotic-digits">QUANTUM_CINEMA // LEV_14.0_FOCUS</span>
+                              <span className="robotic-digits">QUANTUM_CINEMA // LEV_14.5_GHOST</span>
                          </div>
                          <div className="flex gap-6 lg:gap-10">
                                <Radio className="w-4 h-4 animate-pulse" />
@@ -247,37 +247,37 @@ export default function AdV2UltimaKineticCinema() {
                          <div className="text-[6px] lg:text-[7px] text-white tracking-[0.5em] italic uppercase">© LEVER_PIONEER_2026</div>
                      </div>
                 </div>
+
+                {/* AUTOPLAY INITIAL SEED (Force Full Page Black Overlay) */}
+                <div className={`fixed inset-0 z-[500] bg-black transition-opacity duration-1000 ${phase === 'idle' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} />
+
+                <style jsx global>{`
+                    /* FORCE HIDE FOOTER/HEADER */
+                    footer, header { display: none !important; }
+                    body { background-color: black !important; overflow: hidden; }
+
+                    .robotic-digits { font-family: 'Courier New', Courier, monospace; letter-spacing: 0.1rem; }
+                    .perspective-1000 { perspective: 1000px; }
+                    .noise-overlay::before {
+                        content: ""; position: absolute; inset: -100%;
+                        background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+                        opacity: 0.1; pointer-events: none; animation: noise 0.2s infinite; z-index: 1000;
+                    }
+                    .scanline {
+                        width: 100%; height: 100px; z-index: 1001; pointer-events: none;
+                        background: linear-gradient(0deg, rgba(0, 255, 255, 0) 0%, rgba(0, 255, 255, 0.05) 50%, rgba(0, 255, 255, 0) 100%);
+                        position: absolute; bottom: 100%; animation: scanline 8s linear infinite;
+                    }
+                    @keyframes scanline { 0% { bottom: 100%; } 100% { bottom: -100px; } }
+                    @keyframes noise {
+                        0% { transform: translate(0, 0); }
+                        10% { transform: translate(-2%, -2%); }
+                        20% { transform: translate(-4%, 2%); }
+                        30% { transform: translate(2%, -4%); }
+                        100% { transform: translate(0, 0); }
+                    }
+                `}</style>
             </div>
-
-            {/* AUTOPLAY INITIAL SEED (Force Full Page Black Overlay) */}
-            <div className={`fixed inset-0 z-[500] bg-black transition-opacity duration-1000 ${phase === 'idle' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} />
-
-            <style jsx global>{`
-                /* FORCE HIDE FOOTER/HEADER */
-                footer, header { display: none !important; }
-                body { background-color: black !important; overflow: hidden; }
-
-                .robotic-digits { font-family: 'Courier New', Courier, monospace; letter-spacing: 0.1rem; }
-                .perspective-1000 { perspective: 1000px; }
-                .noise-overlay::before {
-                    content: ""; position: absolute; inset: -100%;
-                    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-                    opacity: 0.1; pointer-events: none; animation: noise 0.2s infinite; z-index: 1000;
-                }
-                .scanline {
-                    width: 100%; height: 100px; z-index: 1001; pointer-events: none;
-                    background: linear-gradient(0deg, rgba(0, 255, 255, 0) 0%, rgba(0, 255, 255, 0.05) 50%, rgba(0, 255, 255, 0) 100%);
-                    position: absolute; bottom: 100%; animation: scanline 8s linear infinite;
-                }
-                @keyframes scanline { 0% { bottom: 100%; } 100% { bottom: -100px; } }
-                @keyframes noise {
-                    0% { transform: translate(0, 0); }
-                    10% { transform: translate(-2%, -2%); }
-                    20% { transform: translate(-4%, 2%); }
-                    30% { transform: translate(2%, -4%); }
-                    100% { transform: translate(0, 0); }
-                }
-            `}</style>
         </div>
     )
 }
