@@ -61,7 +61,8 @@ export default function AdClient() {
     const handleAction = (url: string) => {
         if (typeof window !== 'undefined') {
              if (window.navigator?.vibrate) { window.navigator.vibrate(80); }
-             window.location.href = url;
+             console.log('Interaction_LOG: ', url);
+             // alert('LINK_PROCESSED: ' + url); // Temporary diagnostic removed to avoid interrupting the <a> tag flow
         }
     }
 
@@ -153,38 +154,44 @@ export default function AdClient() {
                         animate={{ y: 0, opacity: 1 }}
                         className="bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-2xl p-4 shadow-[0_0_30px_rgba(6,182,212,0.15)] flex justify-around items-center gap-2"
                     >
-                        <motion.button 
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => handleAction('tel:+201070615372')}
-                            className="flex flex-col items-center gap-1 group"
-                        >
-                            <div className="w-12 h-12 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:bg-cyan-500/30 transition-colors shadow-[0_0_15px_rgba(6,182,212,0.1)]">
-                                <Phone className="w-5 h-5 text-cyan-400" />
-                            </div>
-                            <span className="text-[8px] robotic-digits text-cyan-400/60 uppercase tracking-widest font-bold">Call</span>
-                        </motion.button>
+                        <a href="tel:+201070615372" className="block pointer-events-auto">
+                            <motion.div 
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => handleAction('tel:+201070615372')}
+                                className="flex flex-col items-center gap-1 group"
+                            >
+                                <div className="w-12 h-12 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:bg-cyan-500/30 transition-colors shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+                                    <Phone className="w-5 h-5 text-cyan-400" />
+                                </div>
+                                <span className="text-[8px] robotic-digits text-cyan-400/60 uppercase tracking-widest font-bold">Call</span>
+                            </motion.div>
+                        </a>
 
-                        <motion.button 
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => handleAction('https://wa.me/201111171368')}
-                            className="flex flex-col items-center gap-1 group"
-                        >
-                            <div className="w-14 h-14 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center group-hover:bg-green-500/30 transition-colors shadow-[0_0_20px_rgba(34,197,94,0.15)]">
-                                <MessageCircle className="w-6 h-6 text-green-400" />
-                            </div>
-                            <span className="text-[9px] robotic-digits text-green-400 font-black uppercase tracking-[3px]">WhatsApp</span>
-                        </motion.button>
+                        <a href="https://wa.me/201111171368" target="_blank" rel="noopener noreferrer" className="block pointer-events-auto">
+                            <motion.div 
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => handleAction('https://wa.me/201111171368')}
+                                className="flex flex-col items-center gap-1 group"
+                            >
+                                <div className="w-14 h-14 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center group-hover:bg-green-500/30 transition-colors shadow-[0_0_20px_rgba(34,197,94,0.15)]">
+                                    <MessageCircle className="w-6 h-6 text-green-400" />
+                                </div>
+                                <span className="text-[9px] robotic-digits text-green-400 font-black uppercase tracking-[3px]">WhatsApp</span>
+                            </motion.div>
+                        </a>
 
-                        <motion.button 
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')}
-                            className="flex flex-col items-center gap-1 group"
-                        >
-                            <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/30 transition-colors shadow-[0_0_15px_rgba(59,130,246,0.1)]">
-                                <MapPin className="w-5 h-5 text-blue-400" />
-                            </div>
-                            <span className="text-[8px] robotic-digits text-blue-400/60 uppercase tracking-widest font-bold">Location</span>
-                        </motion.button>
+                        <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" rel="noopener noreferrer" className="block pointer-events-auto">
+                            <motion.div 
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')}
+                                className="flex flex-col items-center gap-1 group"
+                            >
+                                <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/30 transition-colors shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+                                    <MapPin className="w-5 h-5 text-blue-400" />
+                                </div>
+                                <span className="text-[8px] robotic-digits text-blue-400/60 uppercase tracking-widest font-bold">Location</span>
+                            </motion.div>
+                        </a>
                     </motion.div>
                 </div>
             )}
@@ -192,33 +199,29 @@ export default function AdClient() {
             {/* --- EXTERIOR SIGNATURE (BOTTOM RIGHT - STABLE) --- */}
             {phase === 'active' && (
                 <div className="fixed right-[6%] bottom-[8%] z-[2147483647]">
-                    <motion.div 
-                         onClick={() => handleAction('tel:+201065661882')} 
-                         className="cursor-pointer bg-black/40 backdrop-blur-md rounded-lg p-2 border border-white/5 hover:bg-white/5 transition-colors flex items-center gap-3"
-                    >
-                         <div className="flex flex-col text-right">
-                              <span className="text-[6px] text-cyan-400/40 tracking-[4px] uppercase font-bold italic line-clamp-1">MASTER_DESIGNER</span>
-                              <span style={{ color: GOLD, fontFamily: 'Georgia, serif' }} className="font-medium text-sm italic tracking-wide">
-                                   Sherif Rosas
-                              </span>
-                         </div>
-                         <div className="w-8 h-8 rounded-full border border-[#c5a059]/40 flex items-center justify-center p-2 bg-black/40">
-                              <Phone className="w-3 h-3 text-[#c5a059]" />
-                         </div>
-                    </motion.div>
+                    <a href="tel:+201065661882" className="block pointer-events-auto">
+                        <motion.div 
+                             onClick={() => handleAction('tel:+201065661882')} 
+                             className="cursor-pointer bg-black/40 backdrop-blur-md rounded-lg p-2 border border-white/5 hover:bg-white/5 transition-colors flex items-center gap-3"
+                        >
+                             <div className="flex flex-col text-right">
+                                  <span className="text-[6px] text-cyan-400/40 tracking-[4px] uppercase font-bold italic line-clamp-1">MASTER_DESIGNER</span>
+                                  <span style={{ color: GOLD, fontFamily: 'Georgia, serif' }} className="font-medium text-sm italic tracking-wide">
+                                       Sherif Rosas
+                                  </span>
+                             </div>
+                             <div className="w-8 h-8 rounded-full border border-[#c5a059]/40 flex items-center justify-center p-2 bg-black/40">
+                                  <Phone className="w-3 h-3 text-[#c5a059]" />
+                             </div>
+                        </motion.div>
+                    </a>
                 </div>
             )}
 
             {/* --- HUD OVERLAY (FORCE SYNC) --- */}
             {phase === 'active' && (
                 <div className="fixed left-[8%] bottom-[2%] z-[99999999] flex flex-col pointer-events-none opacity-100">
-                    <div className="bg-indigo-900 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-cyan-400">v48.3_DESIGNER_DIRECT</div>
-                </div>
-            )}
-            {/* --- HUD OVERLAY (FORCE SYNC) --- */}
-            {phase === 'active' && (
-                <div className="fixed left-[8%] bottom-[2%] z-[99999999] flex flex-col pointer-events-none opacity-100">
-                    <div className="bg-green-900 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-cyan-400">v49.0_RESONANCE</div>
+                    <div className="bg-blue-600 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-white">v49.1_SUPREMACY</div>
                 </div>
             )}
         </div>
