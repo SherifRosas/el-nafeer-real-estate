@@ -8,10 +8,10 @@ import {
     Phone, MessageCircle, MapPin, Zap, Play, 
     ShieldCheck, Cpu, Radio, Globe, Crosshair, 
     Terminal, Activity, Lock, Layers, FastForward,
-    CloudHail, Waves, Box
+    CloudHail, Waves, Box, Volume2
 } from 'lucide-react'
 
-// --- IMPERIAL KINETIC CINEMA V14.6 (BUILD RESCUE) ---
+// --- IMPERIAL KINETIC CINEMA V14.7 (AUDIO BROADCASTER) ---
 
 export default function AdV2UltimaKineticCinema() {
     const { language } = useLanguage()
@@ -20,20 +20,14 @@ export default function AdV2UltimaKineticCinema() {
     const [phase, setPhase] = useState<'idle' | 'descent' | 'stabilizing' | 'active'>('idle')
     const [step, setStep] = useState(0) 
     const [isNarrating, setIsNarrating] = useState(false)
-    const [showRipple, setShowRipple] = useState(false)
+    const [isAudioUnlocked, setIsAudioUnlocked] = useState(false)
     
     // Audio References
     const bgMusicRef = useRef<HTMLAudioElement | null>(null)
 
-    // --- INITIALIZATION (AUTOPLAY PROTOCOL) ---
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            startUltimaSequence()
-        }, 1000)
-        return () => clearTimeout(timer)
-    }, [])
-
     const startUltimaSequence = () => {
+        setIsAudioUnlocked(true)
+        
         // 1. Haptic Feedback
         if (typeof window !== 'undefined' && navigator.vibrate) {
             navigator.vibrate([50, 50, 50]) 
@@ -41,10 +35,10 @@ export default function AdV2UltimaKineticCinema() {
 
         setPhase('descent')
         
-        // 2. Play Cinematic Score
+        // 2. Play Cinematic Score (Now Unlocked by interaction)
         if (bgMusicRef.current) {
             bgMusicRef.current.volume = 0.3
-            bgMusicRef.current.play().catch(() => console.log('Autoplay audio requires interaction in some browsers.'))
+            bgMusicRef.current.play().catch(e => console.log('Audio Blocked:', e))
         }
 
         // --- Cinematic Timeline ---
@@ -56,17 +50,15 @@ export default function AdV2UltimaKineticCinema() {
             speak(msg)
         }, 6000)
         
-        // Final Node Activations
         setTimeout(() => setStep(2), 8000)
         setTimeout(() => setStep(3), 10000)
-        setTimeout(() => setStep(4), 13000)
     }
 
     const speak = (text: string) => {
         if (typeof window === 'undefined') return
         window.speechSynthesis.cancel()
         const utterance = new SpeechSynthesisUtterance(text)
-        utterance.lang = 'ar-EG' // Egyptian Arabic
+        utterance.lang = 'ar-EG'
         utterance.pitch = 1.05
         utterance.rate = 0.9
         window.speechSynthesis.speak(utterance)
@@ -78,6 +70,25 @@ export default function AdV2UltimaKineticCinema() {
         <div className="min-h-screen bg-black flex items-center justify-center p-0 m-0 overflow-hidden relative cursor-crosshair font-sans select-none noise-overlay">
             <div className="scanline" />
             <audio ref={bgMusicRef} loop src="https://assets.mixkit.co/music/preview/mixkit-sci-fi-drone-ambience-925.mp3" />
+
+            {/* INITIAL BROADCAST SENSOR (Fixes Autoplay Audio Restrictions) */}
+            {!isAudioUnlocked && (
+                <div onClick={startUltimaSequence} className="fixed inset-0 z-[1000] bg-black/95 flex flex-col items-center justify-center cursor-pointer group">
+                    <motion.div 
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="flex flex-col items-center gap-8"
+                    >
+                        <div className="w-32 h-32 rounded-full border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_50px_rgba(34,211,238,0.3)] group-hover:scale-110 transition-transform">
+                            <Volume2 className="w-16 h-16 text-cyan-400 animate-pulse" />
+                        </div>
+                        <div className="text-center space-y-2">
+                             <h1 className="text-white font-black text-2xl tracking-[0.5em] uppercase robotic-digits animate-pulse">Enter Ad Experience</h1>
+                             <p className="text-cyan-400/60 font-mono text-xs tracking-widest">[ Tap to Enable Egypt Cinematic Audio ]</p>
+                        </div>
+                    </motion.div>
+                </div>
+            )}
             
             <AnimatePresence>
                 {phase === 'descent' && (
@@ -109,7 +120,7 @@ export default function AdV2UltimaKineticCinema() {
                         <div className="w-full max-w-4xl space-y-12 px-12">
                             <div className="flex justify-between items-center text-cyan-400 font-mono text-xs">
                                 <span className="animate-pulse">_SENSORY_CALIBRATION_ACTIVE_</span>
-                                <span>PHASE: KINETIC_CINEMA_v14.6</span>
+                                <span>PHASE: KINETIC_CINEMA_v14.7</span>
                             </div>
                             <div className="h-[4px] w-full bg-zinc-900 rounded-full overflow-hidden shadow-[0_0_30px_rgba(0,255,255,0.3)]">
                                 <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 3 }} className="h-full bg-gradient-to-r from-teal-500 via-cyan-400 to-red-500" />
@@ -121,20 +132,10 @@ export default function AdV2UltimaKineticCinema() {
 
             <div className={`relative w-full h-screen transition-opacity duration-1000 ${phase === 'active' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                 <div className="absolute inset-0 z-0 bg-black">
-                    {[...Array(30)].map((_, i) => (
-                        <motion.div 
-                            key={`p-${i}`}
-                            initial={{ x: Math.random() * 2000 - 1000, y: Math.random() * 2000 - 1000, scale: Math.random() }}
-                            animate={{ y: [null, Math.random() * -500], opacity: [0, 0.6, 0], scale: [0, 1, 0] }}
-                            transition={{ duration: 10 + Math.random() * 20, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute w-1 h-1 bg-cyan-400 rounded-full blur-[2px]"
-                            style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
-                        />
-                    ))}
                     <motion.div 
-                        animate={{ x: [-200, 200], opacity: [0.1, 0.3, 0.1] }}
+                        animate={{ x: [-200, 200], opacity: [0.1, 0.2, 0.1] }}
                         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute inset-0 bg-[linear-gradient(110deg,transparent_40%,rgba(34,211,238,0.2)_50%,transparent_60%)] bg-[length:200%_100%] pointer-events-none"
+                        className="absolute inset-0 bg-[linear-gradient(110deg,transparent_40%,rgba(34,211,238,0.1)_50%,transparent_60%)] bg-[length:200%_100%] pointer-events-none"
                     />
                 </div>
 
@@ -195,7 +196,7 @@ export default function AdV2UltimaKineticCinema() {
                      <div className="flex justify-between text-cyan-400 opacity-60 font-black tracking-widest text-[8px] lg:text-[9px]">
                          <div className="flex gap-4 items-center">
                               <Box className="w-4 h-4 animate-pulse" />
-                              <span className="robotic-digits">QUANTUM_CINEMA // LEV_14.6_FIXED</span>
+                              <span className="robotic-digits">QUANTUM_CINEMA // LEV_14.7_BROADCAST</span>
                          </div>
                          <Radio className="w-4 h-4 animate-pulse" />
                      </div>
@@ -203,8 +204,6 @@ export default function AdV2UltimaKineticCinema() {
                          <div className="text-[6px] lg:text-[7px] text-white tracking-[0.5em] italic uppercase">© LEVER_PIONEER_2026</div>
                      </div>
                 </div>
-
-                <div className={`fixed inset-0 z-[500] bg-black transition-opacity duration-1000 ${phase === 'idle' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} />
 
                 <style jsx global>{`
                     footer, header { display: none !important; }
