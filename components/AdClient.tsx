@@ -218,12 +218,6 @@ export default function AdClient() {
                 </div>
             )}
 
-            {/* --- HUD OVERLAY (FORCE SYNC) --- */}
-            {phase === 'active' && (
-                <div className="fixed left-[8%] bottom-[2%] z-[99999999] flex flex-col pointer-events-none opacity-100">
-                    <div className="bg-blue-600 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-white">v49.1_SUPREMACY</div>
-                </div>
-            )}
         </div>
     )
 }
