@@ -141,13 +141,8 @@ export default function AdV2UltimaKineticCinema() {
             {/* --- 3. ACTIVE KINETIC CINEMA --- */}
             <div className={`relative w-full h-screen transition-opacity duration-1000 ${phase === 'active' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                 
-                {/* --- BACKGROUND: CINEMATIC PARALLAX --- */}
-                <div className="absolute inset-0 z-0 overflow-hidden">
-                    <motion.div 
-                        animate={{ scale: [1, 1.05], x: [-5, 5] }} 
-                        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                        className="absolute inset-x-[-5%] inset-y-[-5%] bg-[url('https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center" 
-                    />
+                {/* --- BACKGROUND: CLEAN BLACK VOID --- */}
+                <div className="absolute inset-0 z-0 bg-black" />
                     
                     {/* FLOATING NEON PARTICLES */}
                     {[...Array(30)].map((_, i) => (
