@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Box, Radio, UserCheck, Activity } from 'lucide-react'
 
-// --- IMPERIAL HYPER-SOVEREIGN TOUCH V37.0 (FINAL SOVEREIGNTY) ---
+// --- IMPERIAL OMNI-TOUCH SOVEREIGNTY V38.0 (PC & MOBILE) ---
 
 const CELEBRATION_SCRIPT = [
     "شركة ليفر الرائدة للمصاعد",
@@ -64,7 +64,7 @@ export default function AdClient() {
     }
 
     return (
-        <div className="fixed inset-0 z-[999999] bg-black flex items-center justify-center p-0 m-0 overflow-hidden select-none font-sans">
+        <div className="fixed inset-0 z-[999999] bg-black flex items-center justify-center p-0 m-0 overflow-hidden select-none font-sans cursor-default">
             <audio ref={bgMusicRef} loop playsInline preload="auto">
                 <source src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" type="audio/mpeg" />
                 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg" />
@@ -73,6 +73,8 @@ export default function AdClient() {
             <style jsx global>{`
                 footer, header, nav, #main-nav, .site-footer, div[data-footer], #footer { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
                 body { background: black !important; overflow: hidden !important; position: fixed !important; width: 100% !important; height: 100% !important; }
+                * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
+                *::-webkit-scrollbar { display: none !important; }
                 .robotic-digits { font-family: 'Courier New', Courier, monospace; }
                 .animate-spin-slow { animation: spin 25s linear infinite; }
                 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -111,30 +113,29 @@ export default function AdClient() {
                      </motion.div>
                 </div>
 
-                {/* --- HYPER-SOVEREIGN TOTAL OVERLAY GRID (V37) --- */}
+                {/* --- OMNI-TOUCH OVERLAY (PC HOVER SUPPORT) --- */}
                 {phase === 'active' && (
                     <div className="fixed inset-0 z-[1000000] h-full w-full pointer-events-none flex flex-col justify-between">
                          
-                         {/* GLOBAL TOP-LEVEL HUD */}
                          <div className="p-8 flex justify-between items-start text-cyan-400/40 text-[10px] robotic-digits tracking-[5px] uppercase font-black">
                               <div className="flex gap-4 items-center">
                                    <Activity className="w-5 h-5 animate-pulse" />
-                                   <span>v37.0_HYPER_SOVEREIGN</span>
+                                   <span>v38.0_OMNI_TOUCH</span>
                               </div>
                               <Radio className="w-6 h-6 animate-pulse text-red-500" />
                          </div>
 
-                         {/* ABSOLUTE CONTACT GRID (Safe for thumb reach) */}
-                         <div className="absolute left-[5%] bottom-[8%] w-[45%] h-[35%] pointer-events-auto flex flex-col">
-                              <div onClick={() => handleAction('https://wa.me/201111171368')} className="h-1/3 w-full cursor-pointer bg-white/0" />
-                              <div onClick={() => handleAction('tel:+201111171368', true)} className="h-1/3 w-full cursor-pointer bg-white/0" />
-                              <div onClick={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')} className="h-1/3 w-full cursor-pointer bg-white/0" />
+                         {/* ABSOLUTE CONTACT GRID (PC HOVER ACTIVE) */}
+                         <div className="absolute left-[5%] bottom-[8%] w-[45%] h-[35%] pointer-events-auto flex flex-col group">
+                              <div onClick={() => handleAction('https://wa.me/201111171368')} className="h-1/3 w-full cursor-pointer transition-colors duration-300 hover:bg-cyan-400/5 rounded-t-xl" />
+                              <div onClick={() => handleAction('tel:+201111171368', true)} className="h-1/3 w-full cursor-pointer transition-colors duration-300 hover:bg-cyan-400/5" />
+                              <div onClick={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')} className="h-1/3 w-full cursor-pointer transition-colors duration-300 hover:bg-cyan-400/5 rounded-b-xl" />
                          </div>
 
-                         {/* SHERIF ROSAS SIGNATURE & SOVEREIGN ORB (+20 106 566 1882) */}
+                         {/* SHERIF ROSAS SIGNATURE & ORB */}
                          <div className="flex justify-end p-8 pb-16">
-                              <div onClick={() => handleAction('tel:+201065661882', true)} className="flex items-center gap-4 cursor-pointer pointer-events-auto">
-                                   <div className="flex flex-col text-right">
+                              <div onClick={() => handleAction('tel:+201065661882', true)} className="flex items-center gap-4 cursor-pointer pointer-events-auto group">
+                                   <div className="flex flex-col text-right transition-opacity duration-300 group-hover:opacity-100">
                                         <span className="text-[7px] text-cyan-400/20 tracking-[4px] uppercase font-bold italic">MASTER_DESIGNER</span>
                                         <span className="text-sahara-gold font-medium text-xl lg:text-2xl italic tracking-wide" style={{ fontFamily: 'Georgia, serif' }}>
                                              Sherif Rosas
