@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Box, Radio, UserCheck, Activity } from 'lucide-react'
 
-// --- IMPERIAL RAPID RESPONSE V36.0 (FINAL TUNING) ---
+// --- IMPERIAL HYPER-SOVEREIGN TOUCH V37.0 (FINAL SOVEREIGNTY) ---
 
 const CELEBRATION_SCRIPT = [
     "شركة ليفر الرائدة للمصاعد",
@@ -42,26 +42,29 @@ export default function AdClient() {
         setPhase('descent')
         startSurvivorEngine()
         if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate([200, 100, 200]); }
-        
-        // --- FASTER TIMING (No more waiting too long) ---
-        setTimeout(() => setPhase('stabilizing'), 1500) // Reduced from 3000
+        setTimeout(() => setPhase('stabilizing'), 1500)
         setTimeout(() => {
             setPhase('active');
             playNarrative(0);
-        }, 3500) // Reduced from 6500 for immediate voice impact
+        }, 3500)
     }
 
     const playNarrative = (index: number) => {
         if (index >= CELEBRATION_SCRIPT.length) return;
         const utterance = new SpeechSynthesisUtterance(CELEBRATION_SCRIPT[index])
         utterance.lang = 'ar-EG'
-        utterance.pitch = 0.95; utterance.rate = 0.85; // Slightly faster professional rate
+        utterance.pitch = 0.95; utterance.rate = 0.85;
         utterance.onend = () => setTimeout(() => playNarrative(index + 1), 1800);
         window.speechSynthesis.speak(utterance)
     }
 
+    const handleAction = (url: string, isTel: boolean = false) => {
+        if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate([100]); }
+        window.open(url, isTel ? '_self' : '_blank');
+    }
+
     return (
-        <div className="fixed inset-0 z-[99999] bg-black flex items-center justify-center p-0 m-0 overflow-hidden select-none font-sans">
+        <div className="fixed inset-0 z-[999999] bg-black flex items-center justify-center p-0 m-0 overflow-hidden select-none font-sans">
             <audio ref={bgMusicRef} loop playsInline preload="auto">
                 <source src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" type="audio/mpeg" />
                 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg" />
@@ -79,7 +82,7 @@ export default function AdClient() {
                 <div onClick={startUltimaSequence} className="fixed inset-0 z-[1000] bg-black flex flex-col items-center justify-center cursor-pointer p-6">
                     <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center gap-24">
                         <div className="relative w-64 h-64 flex items-center justify-center">
-                             <div className="w-full h-full relative rounded-full bg-white flex items-center justify-center overflow-hidden shadow-[0_0_80px_rgba(34,211,238,0.3)] border-2 border-cyan-400/20">
+                             <div className="w-full h-full relative rounded-full bg-white flex items-center justify-center overflow-hidden shadow-[0_0_80px_rgba(34,211,238,0.3)]">
                                 <NextImage src="/clients/lever-pioneer/logo_mimic.png" alt="Logo" width={400} height={400} className="object-contain mix-blend-multiply scale-[1.05]" />
                              </div>
                         </div>
@@ -101,37 +104,36 @@ export default function AdClient() {
                      <motion.div animate={{ scale: [1, 1.04 + (audioIntensity * 0.02), 1] }} className="relative w-full h-full z-10 flex items-center justify-center">
                          <div className="relative w-full h-auto max-h-[96vh] aspect-square flex items-center justify-center px-4 overflow-hidden">
                             <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad" fill className="object-contain" priority />
-                            
                             <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
                                  <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen" />
                             </div>
-
-                            {/* --- EXPANDED ARTWORK HOTSPOTS (V36) --- */}
-                            {phase === 'active' && (
-                                <div className="absolute left-[0%] bottom-[0%] w-[50%] h-[40%] z-[999] pointer-events-auto flex flex-col cursor-pointer">
-                                     <div onClick={(e) => { e.stopPropagation(); window.open('https://wa.me/201111171368', '_blank'); }} className="h-1/3 w-full" />
-                                     <div onClick={(e) => { e.stopPropagation(); window.open('tel:+201111171368', '_self'); }} className="h-1/3 w-full" />
-                                     <div onClick={(e) => { e.stopPropagation(); window.open('https://www.google.com/maps?q=29.9656242,31.0922895', '_blank'); }} className="h-1/3 w-full" />
-                                </div>
-                            )}
                          </div>
                      </motion.div>
                 </div>
 
-                {/* HUD */}
+                {/* --- HYPER-SOVEREIGN TOTAL OVERLAY GRID (V37) --- */}
                 {phase === 'active' && (
-                    <div className="fixed inset-0 z-[100] h-full w-full pointer-events-none p-8 flex flex-col justify-between">
-                         <div className="flex justify-between items-start text-cyan-400/40 text-[10px] robotic-digits tracking-[5px] uppercase font-black">
+                    <div className="fixed inset-0 z-[1000000] h-full w-full pointer-events-none flex flex-col justify-between">
+                         
+                         {/* GLOBAL TOP-LEVEL HUD */}
+                         <div className="p-8 flex justify-between items-start text-cyan-400/40 text-[10px] robotic-digits tracking-[5px] uppercase font-black">
                               <div className="flex gap-4 items-center">
                                    <Activity className="w-5 h-5 animate-pulse" />
-                                   <span>v36.0_RAPID_SYNC</span>
+                                   <span>v37.0_HYPER_SOVEREIGN</span>
                               </div>
                               <Radio className="w-6 h-6 animate-pulse text-red-500" />
                          </div>
 
-                         {/* SIGNATURE & SOVEREIGN ORB (+20 106 566 1882) */}
-                         <div className="flex justify-end p-2 pb-16">
-                              <div onClick={() => window.open('tel:+201065661882', '_self')} className="flex items-center gap-4 cursor-pointer pointer-events-auto">
+                         {/* ABSOLUTE CONTACT GRID (Safe for thumb reach) */}
+                         <div className="absolute left-[5%] bottom-[8%] w-[45%] h-[35%] pointer-events-auto flex flex-col">
+                              <div onClick={() => handleAction('https://wa.me/201111171368')} className="h-1/3 w-full cursor-pointer bg-white/0" />
+                              <div onClick={() => handleAction('tel:+201111171368', true)} className="h-1/3 w-full cursor-pointer bg-white/0" />
+                              <div onClick={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')} className="h-1/3 w-full cursor-pointer bg-white/0" />
+                         </div>
+
+                         {/* SHERIF ROSAS SIGNATURE & SOVEREIGN ORB (+20 106 566 1882) */}
+                         <div className="flex justify-end p-8 pb-16">
+                              <div onClick={() => handleAction('tel:+201065661882', true)} className="flex items-center gap-4 cursor-pointer pointer-events-auto">
                                    <div className="flex flex-col text-right">
                                         <span className="text-[7px] text-cyan-400/20 tracking-[4px] uppercase font-bold italic">MASTER_DESIGNER</span>
                                         <span className="text-sahara-gold font-medium text-xl lg:text-2xl italic tracking-wide" style={{ fontFamily: 'Georgia, serif' }}>
