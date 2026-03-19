@@ -130,7 +130,7 @@ export default function AdClient() {
                                 {/* ICON ZONE (LEFT SIDE) - PRECISE ALIGNMENT */}
                                 <div className="absolute left-[6%] bottom-[5%] w-[32%] h-[40%] flex flex-col pointer-events-none">
                                      <motion.div onTap={() => handleAction('https://wa.me/201111171368')} className="flex-1 cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
-                                     <motion.div onTap={() => handleAction('tel:+201111171368', true)} className="flex-1 cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
+                                     <motion.div onTap={() => handleAction('tel:+201070615372', true)} className="flex-1 cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
                                      <motion.div onTap={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')} className="flex-1 cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
                                 </div>
 
@@ -158,7 +158,7 @@ export default function AdClient() {
             {/* --- HUD OVERLAY --- */}
             {phase === 'active' && (
                 <div className="fixed left-[8%] bottom-[8%] z-[99999999] flex flex-col pointer-events-none opacity-50">
-                    <div className="robotic-digits text-cyan-400/40 text-[8px] uppercase mb-16 font-bold tracking-[10px]">v45.5_MASTER_SYNC</div>
+                    <div className="robotic-digits text-cyan-400/40 text-[8px] uppercase mb-16 font-bold tracking-[10px]">v45.6_LIVE_FINAL</div>
                 </div>
             )}
         </div>
