@@ -63,6 +63,7 @@ export default function AdClient() {
              if (window.navigator?.vibrate) { window.navigator.vibrate(80); }
              alert('ACTION_TRIGGERED: ' + url);
              window.location.href = url;
+             setTimeout(() => { alert('IF_NOT_MOVED_STAYED_ON: ' + url); }, 500);
         }
     }
 
@@ -127,17 +128,17 @@ export default function AdClient() {
                              <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen" />
                         </div>
 
-                        {/* --- ART-LOCKED INTERACTION (LEVEL 46.1 - BUILD FIXED) --- */}
+                        {/* --- ART-LOCKED INTERACTION (LEVEL 46.2 - VISIBLE DEBUG) --- */}
                         {phase === 'active' && (
-                            <div className="absolute inset-0 z-[99999999] pointer-events-none">
-                                {/* INDEPENDENT HITBOXES - EXPLICIT GAPS TO PREVENT OVERLAP */}
-                                <motion.div onTap={() => handleAction('https://wa.me/201111171368')} className="absolute left-0 bottom-[35%] w-[45%] h-[12%] cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
-                                <motion.div onTap={() => handleAction('tel:+201070615372')} className="absolute left-0 bottom-[18%] w-[45%] h-[12%] cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
-                                <motion.div onTap={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')} className="absolute left-0 bottom-[1%] w-[45%] h-[12%] cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
+                            <div className="absolute inset-0 z-[2147483647] pointer-events-none">
+                                {/* INDEPENDENT HITBOXES - VISIBLE FOR DEBUGGING */}
+                                <motion.div onClick={() => handleAction('https://wa.me/201111171368')} className="absolute left-0 bottom-[35%] w-[45%] h-[12%] cursor-pointer bg-red-500/20 border-2 border-red-500/30 hover:bg-red-500/40 transition-colors pointer-events-auto touch-none" />
+                                <motion.div onClick={() => handleAction('tel:+201070615372')} className="absolute left-0 bottom-[18%] w-[45%] h-[12%] cursor-pointer bg-blue-500/20 border-2 border-blue-500/30 hover:bg-blue-500/40 transition-colors pointer-events-auto touch-none" />
+                                <motion.div onClick={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')} className="absolute left-0 bottom-[1%] w-[45%] h-[12%] cursor-pointer bg-green-500/10 border-2 border-green-500/20 hover:bg-green-500/40 transition-colors pointer-events-auto touch-none" />
 
                                 {/* SIGNATURE ZONE (ABSOLUTE EXTERIOR CORNER) */}
                                 <motion.div 
-                                     onTap={() => handleAction('tel:+201065661882')} 
+                                     onClick={() => handleAction('tel:+201065661882')} 
                                      className="absolute right-[4%] bottom-[4%] cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors flex items-end justify-end gap-6 pointer-events-auto touch-none p-2"
                                 >
                                      <div className="flex flex-col text-right pointer-events-none">
@@ -158,8 +159,8 @@ export default function AdClient() {
 
             {/* --- HUD OVERLAY (FORCE SYNC) --- */}
             {phase === 'active' && (
-                <div className="fixed left-[8%] bottom-[8%] z-[99999999] flex flex-col pointer-events-none opacity-90">
-                    <div className="bg-orange-500 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase">v46.1_BUILD_FIX</div>
+                <div className="fixed left-[8%] bottom-[8%] z-[99999999] flex flex-col pointer-events-none opacity-100">
+                    <div className="bg-purple-600 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-white/50">v46.2_VISIBLE_Z</div>
                 </div>
             )}
         </div>
