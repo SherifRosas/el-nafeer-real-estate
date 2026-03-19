@@ -6,8 +6,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Box, Radio, UserCheck, Activity } from 'lucide-react'
 
-// --- IMPERIAL ABSOLUTE SOVEREIGNTY V34.1 (DEPLOYMENT_SYNC) ---
-// Note: This version includes the Master-Kill script for parent-site elements.
+// --- IMPERIAL ACOUSTIC SOVEREIGNTY V35.0 (FINALITY) ---
 
 const CELEBRATION_SCRIPT = [
     "شركة ليفر الرائدة للمصاعد",
@@ -26,23 +25,30 @@ export default function AdClient() {
     const bgMusicRef = useRef<HTMLAudioElement | null>(null)
     const animationFrameRef = useRef<number | null>(null)
 
-    const startInteractionEngine = () => {
+    // THE SOVEREIGN SURVIVOR ENGINE
+    const startSurvivorEngine = () => {
         if (!bgMusicRef.current) return;
-        const update = () => {
-            const pulse = 0.4 + Math.sin(Date.now() / 250) * 0.4;
+        
+        // 1. VISUAL PULSE - Decoupled and guaranteed
+        const updateVisuals = () => {
+            const pulse = 0.4 + Math.sin(Date.now() / 240) * 0.45;
             setAudioIntensity(pulse);
-            animationFrameRef.current = requestAnimationFrame(update);
+            animationFrameRef.current = requestAnimationFrame(updateVisuals);
         };
-        update();
+        updateVisuals();
+
+        // 2. AUDIO BROADCAST - Redundant and Protected
         bgMusicRef.current.muted = false;
         bgMusicRef.current.volume = 1.0;
-        bgMusicRef.current.play().catch(() => {});
+        bgMusicRef.current.play().catch(() => {
+            console.log("Awaiting user confirmation for music broadcast.");
+        });
     }
 
     const startUltimaSequence = () => {
         setIsAudioUnlocked(true)
         setPhase('descent')
-        startInteractionEngine()
+        startSurvivorEngine()
         if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate([100, 50, 100]); }
         setTimeout(() => setPhase('stabilizing'), 3000)
         setTimeout(() => {
@@ -62,7 +68,12 @@ export default function AdClient() {
 
     return (
         <div className="fixed inset-0 z-[99999] bg-black flex items-center justify-center p-0 m-0 overflow-hidden select-none font-sans">
-            <audio ref={bgMusicRef} loop playsInline src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" />
+            {/* TRIPLE REDUNDANT AUDIO PROTECTOR */}
+            <audio ref={bgMusicRef} loop playsInline preload="auto">
+                <source src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" type="audio/mpeg" />
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg" />
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" type="audio/mpeg" />
+            </audio>
 
             <style jsx global>{`
                 footer, header, nav, #main-nav, .site-footer, div[data-footer], #footer { 
@@ -87,7 +98,7 @@ export default function AdClient() {
                 <div onClick={startUltimaSequence} className="fixed inset-0 z-[1000] bg-black flex flex-col items-center justify-center cursor-pointer p-6">
                     <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center gap-24">
                         <div className="relative w-64 h-64 flex items-center justify-center">
-                             <div className="w-full h-full relative rounded-full bg-white flex items-center justify-center overflow-hidden shadow-[0_0_80px_rgba(34,211,238,0.3)]">
+                             <div className="w-full h-full relative rounded-full bg-white flex items-center justify-center overflow-hidden shadow-[0_0_80px_rgba(34,211,238,0.3)] border-2 border-cyan-400/20">
                                 <NextImage 
                                     src="/clients/lever-pioneer/logo_mimic.png" 
                                     alt="Logo" 
@@ -99,7 +110,7 @@ export default function AdClient() {
                         </div>
                         <div className="flex flex-col items-center gap-6 text-center">
                              <h1 className="text-white font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase">SYSTEM_READY</h1>
-                             <p className="text-sahara-gold font-bold text-xl tracking-[0.3em] animate-pulse">[ TOUCH TO CELEBRATE ]</p>
+                             <p className="text-sahara-gold font-bold text-xl tracking-[0.3em] animate-pulse">[ PRESS TO BROADCAST ]</p>
                         </div>
                     </motion.div>
                 </div>
@@ -135,12 +146,12 @@ export default function AdClient() {
                          <div className="flex justify-between items-start text-cyan-400/40 text-[10px] robotic-digits tracking-[5px] uppercase font-black">
                               <div className="flex gap-4 items-center">
                                    <Activity className="w-5 h-5 animate-pulse" />
-                                   <span>v34.1_SYNCED</span>
+                                   <span>v35.0_ACOUSTIC</span>
                               </div>
                               <Radio className="w-6 h-6 animate-pulse text-red-500" />
                          </div>
 
-                         {/* SIGNATURE */}
+                         {/* MASTER SIGNATURE & SOVEREIGN ORB */}
                          <div className="flex justify-end p-2 pb-16">
                               <div onClick={() => window.open('tel:+201065661882', '_self')} className="flex items-center gap-4 cursor-pointer pointer-events-auto">
                                    <div className="flex flex-col text-right">
