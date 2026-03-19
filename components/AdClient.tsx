@@ -60,26 +60,38 @@ export default function AdClient() {
 
     const playNarrative = (index: number) => {
         if (index >= CELEBRATION_SCRIPT.length) return;
-        if (!window.speechSynthesis) return;
+        if (typeof window === 'undefined' || !window.speechSynthesis) return;
 
-        const utterance = new SpeechSynthesisUtterance(CELEBRATION_SCRIPT[index])
-        
-        // --- MULTI-VOICE ARABIC FALLBACK ---
-        const voices = window.speechSynthesis.getVoices();
-        const preferredVoice = voices.find(v => v.lang === 'ar-EG') || 
-                               voices.find(v => v.lang.startsWith('ar')) ||
-                               null;
-        
-        if (preferredVoice) {
-            utterance.voice = preferredVoice;
-            utterance.lang = preferredVoice.lang;
-        } else {
-            utterance.lang = 'ar-EG';
+        const startSpeech = () => {
+            const utterance = new SpeechSynthesisUtterance(CELEBRATION_SCRIPT[index])
+            const voices = window.speechSynthesis.getVoices();
+            const preferredVoice = voices.find(v => v.lang === 'ar-EG') || 
+                                   voices.find(v => v.lang.startsWith('ar')) ||
+                                   null;
+            
+            if (preferredVoice) {
+                utterance.voice = preferredVoice;
+                utterance.lang = preferredVoice.lang;
+            } else {
+                utterance.lang = 'ar-EG';
+            }
+
+            utterance.volume = 1; // FORCE MAX VOLUME
+            utterance.pitch = 0.95; 
+            utterance.rate = 0.85;
+            utterance.onend = () => setTimeout(() => playNarrative(index + 1), 1800);
+            window.speechSynthesis.speak(utterance)
         }
 
-        utterance.pitch = 0.95; utterance.rate = 0.85;
-        utterance.onend = () => setTimeout(() => playNarrative(index + 1), 1800);
-        window.speechSynthesis.speak(utterance)
+        // --- ASYNC VOICE DISCOVERY ---
+        if (window.speechSynthesis.getVoices().length === 0) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                window.speechSynthesis.onvoiceschanged = null;
+                startSpeech();
+            };
+        } else {
+            startSpeech();
+        }
     }
 
     const handleAction = (url: string) => {
@@ -245,7 +257,7 @@ export default function AdClient() {
             {/* --- HUD OVERLAY (FORCE SYNC) --- */}
             {phase === 'active' && (
                 <div className="fixed left-[8%] bottom-[2%] z-[99999999] flex flex-col pointer-events-none opacity-100">
-                    <div className="bg-orange-600 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-white">v52.0_ORACLE</div>
+                    <div className="bg-red-900 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-white">v52.1_RESONANCE</div>
                 </div>
             )}
         </div>
