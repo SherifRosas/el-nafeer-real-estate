@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Box, Radio, UserCheck, Activity } from 'lucide-react'
 
-// --- IMPERIAL TRANSCENDENCE V41.0 (FLAT SOVEREIGN ARCHITECTURE) ---
+// --- IMPERIAL OMNI-SURFACE SUPREMACIST V42.0 (COORDINATE MAPPING) ---
 
 const CELEBRATION_SCRIPT = [
     "شركة ليفر الرائدة للمصاعد",
@@ -16,13 +16,14 @@ const CELEBRATION_SCRIPT = [
     "للتواصل... أضغط على الأيقونات"
 ];
 
-const GOLD = "#c5a059"; // Imperial Sahara Gold
+const GOLD = "#c5a059"; 
 
 export default function AdClient() {
     const { language } = useLanguage()
     const [phase, setPhase] = useState<'idle' | 'descent' | 'stabilizing' | 'active'>('idle')
     const [isAudioUnlocked, setIsAudioUnlocked] = useState(false)
     const [audioIntensity, setAudioIntensity] = useState(0)
+    const [lastClick, setLastClick] = useState<{ x: number, y: number } | null>(null)
 
     const bgMusicRef = useRef<HTMLAudioElement | null>(null)
     const animationFrameRef = useRef<number | null>(null)
@@ -43,7 +44,7 @@ export default function AdClient() {
         setIsAudioUnlocked(true)
         setPhase('descent')
         startInteractionEngine()
-        if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate([200, 100, 200]); }
+        if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate([100, 50, 100]); }
         setTimeout(() => setPhase('stabilizing'), 1000)
         setTimeout(() => { setPhase('active'); playNarrative(0); }, 3000)
     }
@@ -57,14 +58,38 @@ export default function AdClient() {
         window.speechSynthesis.speak(utterance)
     }
 
+    // THE OMNI-PROCESSOR (Maps screen coordinates to actions)
+    const handleOmniTouch = (e: React.MouseEvent | React.TouchEvent) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const clientX = 'touches' in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
+        const clientY = 'touches' in e ? e.touches[0].clientY : (e as React.MouseEvent).clientY;
+        
+        const xPercent = ((clientX - rect.left) / rect.width) * 100;
+        const yPercent = ((clientY - rect.top) / rect.height) * 100;
+
+        // Visual Feedback (Pulse)
+        setLastClick({ x: clientX, y: clientY });
+        setTimeout(() => setLastClick(null), 400);
+        if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate(80); }
+
+        // MAPPING LOGIC
+        if (xPercent < 50) {
+            // LEFT SIDE (Artwork Box Region)
+            if (yPercent < 33) handleAction('https://wa.me/201111171368');
+            else if (yPercent < 66) handleAction('tel:+201111171368', true);
+            else handleAction('https://www.google.com/maps?q=29.9656242,31.0922895');
+        } else {
+            // RIGHT SIDE (Signature Region)
+            if (yPercent > 50) handleAction('tel:+201065661882', true);
+        }
+    }
+
     const handleAction = (url: string, isTel: boolean = false) => {
-        if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate([100, 50, 100]); }
         window.open(url, isTel ? '_self' : '_blank');
     }
 
     return (
         <div className="fixed inset-0 z-[1] bg-black flex items-center justify-center p-0 m-0 overflow-hidden select-none font-sans">
-            
             <audio ref={bgMusicRef} loop playsInline preload="auto">
                 <source src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" type="audio/mpeg" />
                 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg" />
@@ -73,11 +98,9 @@ export default function AdClient() {
             <style jsx global>{`
                 footer, header, nav, #main-nav, .site-footer, div[data-footer], #footer { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
                 body { background: black !important; overflow: hidden !important; position: fixed !important; width: 100% !important; height: 100% !important; cursor: default; }
-                * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
-                *::-webkit-scrollbar { display: none !important; }
             `}</style>
-
-            {/* --- INITIALIZATION (ROOT SIBLING Z-9999) --- */}
+            
+            {/* --- INITIALIZATION (Z-9999) --- */}
             {!isAudioUnlocked && (
                 <div onClick={startUltimaSequence} className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center cursor-pointer p-6">
                     <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center gap-24">
@@ -86,53 +109,42 @@ export default function AdClient() {
                                 <NextImage src="/clients/lever-pioneer/logo_mimic.png" alt="Logo" width={400} height={400} className="object-contain mix-blend-multiply scale-[1.05]" />
                              </div>
                         </div>
-                        <div className="flex flex-col items-center gap-6 text-center text-white">
+                        <div className="text-white text-center">
                              <h1 className="font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase italic">SYSTEM</h1>
-                             <p className="text-sahara-gold font-bold text-xl tracking-[0.3em] animate-pulse uppercase cursor-pointer">[ BROADCAST CELEBRATION ]</p>
+                             <p className="text-sahara-gold font-bold text-xl tracking-[0.3em] animate-pulse uppercase cursor-pointer">[ ACTIVATE ]</p>
                         </div>
                     </motion.div>
                 </div>
             )}
             
-            {/* --- ARTWORK BACKGROUND (ROOT SIBLING Z-5) --- */}
-            <div className={`fixed inset-0 z-[5] bg-black transition-opacity duration-1500 pointer-events-none ${phase === 'active' || phase === 'stabilizing' ? 'opacity-100' : 'opacity-0'}`}>
+            {/* --- ARTWORK & LIGHTS (Z-10) --- */}
+            <div className={`fixed inset-0 z-[10] transition-opacity duration-1500 pointer-events-none ${phase === 'active' || phase === 'stabilizing' ? 'opacity-100' : 'opacity-0'}`}>
                 <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="BG" fill className="object-cover scale-150 blur-3xl opacity-40 brightness-[0.25]" />
+                <div className="relative w-full h-full flex items-center justify-center">
+                    <motion.div animate={{ scale: [1, 1.04 + (audioIntensity * 0.02), 1] }} className="relative w-full h-auto max-h-[96vh] aspect-square flex items-center justify-center px-4 overflow-hidden">
+                        <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad" fill className="object-contain" priority />
+                        <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
+                             <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen" />
+                        </div>
+                    </motion.div>
+                </div>
             </div>
 
-            {/* --- MAIN AD ARTWORK (ROOT SIBLING Z-10) --- */}
-            <div className={`fixed inset-0 z-[10] pointer-events-none flex items-center justify-center transition-opacity duration-1500 ${phase === 'active' || phase === 'stabilizing' ? 'opacity-100' : 'opacity-0'}`}>
-                <motion.div animate={{ scale: [1, 1.04 + (audioIntensity * 0.02), 1] }} className="relative w-full h-auto max-h-[96vh] aspect-square flex items-center justify-center px-4 overflow-hidden">
-                    <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad" fill className="object-contain" priority />
-                    <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
-                         <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen" />
-                    </div>
-                </motion.div>
-            </div>
-
-            {/* --- FLAT INTERACTION SURFACE GRID (ROOT SIBLING Z-100) --- */}
+            {/* --- OMNI-TOUCH CONTROLLER SURFACE (Z-1000) --- */}
             {phase === 'active' && (
-                <>
-                    {/* HUD METADATA (ROOT Z-100) */}
-                    <div className="fixed top-8 left-8 right-8 z-[100] flex justify-between items-start text-cyan-400/40 text-[10px] robotic-digits tracking-[5px] uppercase font-black pointer-events-none">
-                         <div className="flex gap-4 items-center">
-                              <Activity className="w-5 h-5 animate-pulse" />
-                              <span>v41.0_TRANSCENDENCE</span>
-                         </div>
-                         <Radio className="w-6 h-6 animate-pulse text-red-500" />
+                <div onMouseDown={handleOmniTouch} onTouchStart={handleOmniTouch} className="fixed bottom-0 left-0 right-0 h-[45%] z-[1000] cursor-pointer pointer-events-auto bg-black/0 select-none">
+                    
+                    {/* FEEDBACK PING */}
+                    {lastClick && (
+                        <motion.div initial={{ scale: 0, opacity: 0.8 }} animate={{ scale: 2, opacity: 0 }} className="absolute w-12 h-12 bg-cyan-400 rounded-full blur-xl pointer-events-none" style={{ left: lastClick.x - 24, top: lastClick.y - (window.innerHeight - (window.innerHeight * 0.45)) - 24 }} />
+                    )}
+
+                    {/* VISUAL OVERLAYS (STILL PURE, BUT STRUCTURALLY LOCKED) */}
+                    <div className="absolute left-[8%] bottom-[8%] flex flex-col pointer-events-none opacity-50">
+                         <div className="robotic-digits text-cyan-400/40 text-[8px] tracking-[4px] uppercase mb-16">v42.0_SUPREME</div>
                     </div>
 
-                    {/* --- THE SUPREME FLAT HOTSPOTS (ROOT SIBLINGS Z-500) --- */}
-                    {/* WhatsApp */}
-                    <div onClick={() => handleAction('https://wa.me/201111171368')} className="fixed left-[2.5%] bottom-[29%] w-[45%] h-[11%] z-[500] cursor-pointer hover:bg-cyan-400/5 transition-colors duration-300" />
-                    
-                    {/* Call */}
-                    <div onClick={() => handleAction('tel:+201111171368', true)} className="fixed left-[2.5%] bottom-[17%] w-[45%] h-[11%] z-[500] cursor-pointer hover:bg-cyan-400/5 transition-colors duration-300" />
-                    
-                    {/* Location */}
-                    <div onClick={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')} className="fixed left-[2.5%] bottom-[5%] w-[45%] h-[11%] z-[500] cursor-pointer hover:bg-cyan-400/5 transition-colors duration-300" />
-
-                    {/* SIGNATURE & SOVEREIGN ORB (ROOT Z-500) */}
-                    <div onClick={() => handleAction('tel:+201065661882', true)} className="fixed right-[5%] bottom-[8%] z-[500] cursor-pointer group flex items-center gap-4">
+                    <div className="absolute right-[5%] bottom-[12%] pointer-events-none flex items-center gap-4">
                          <div className="flex flex-col text-right">
                               <span className="text-[7px] text-cyan-400/20 tracking-[4px] uppercase font-bold italic">MASTER_DESIGNER</span>
                               <span style={{ color: GOLD, fontFamily: 'Georgia, serif' }} className="font-medium text-xl lg:text-2xl italic tracking-wide">
@@ -143,7 +155,7 @@ export default function AdClient() {
                               <UserCheck className="w-5 h-5 text-[#c5a059]" />
                          </motion.div>
                     </div>
-                </>
+                </div>
             )}
         </div>
     )
