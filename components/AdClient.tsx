@@ -76,10 +76,10 @@ export default function AdClient() {
         if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate(80); }
 
         // MAPPING LOGIC
-        if (xPercent < 50) {
+        if (xPercent < 45) {
             // LEFT SIDE (Artwork Box Region)
-            if (yPercent < 33) handleAction('https://wa.me/201111171368');
-            else if (yPercent < 66) handleAction('tel:+201111171368', true);
+            if (yPercent < 28) handleAction('https://wa.me/201111171368');
+            else if (yPercent < 60) handleAction('tel:+201111171368', true);
             else handleAction('https://www.google.com/maps?q=29.9656242,31.0922895');
         } else {
             // RIGHT SIDE (Signature Region)
@@ -144,7 +144,7 @@ export default function AdClient() {
 
                     {/* VISUAL OVERLAYS (STILL PURE, BUT STRUCTURALLY LOCKED) */}
                     <div className="absolute left-[8%] bottom-[8%] flex flex-col pointer-events-none opacity-50">
-                         <div className="robotic-digits text-cyan-400/40 text-[8px] tracking-[4px] uppercase mb-16">v42.1_SUPREME_FIX</div>
+                         <div className="robotic-digits text-cyan-400/40 text-[8px] tracking-[4px] uppercase mb-16">v42.2_PRECISION_FIX</div>
                     </div>
 
                     <div className="absolute right-[5%] bottom-[12%] pointer-events-none flex items-center gap-4">
