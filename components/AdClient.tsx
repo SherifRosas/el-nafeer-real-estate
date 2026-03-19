@@ -131,9 +131,9 @@ export default function AdClient() {
                 </div>
             </div>
 
-            {/* --- IMPERIAL ACTION HUD (LEVEL 47.1 - TOP MOUNTED) --- */}
+            {/* --- IMPERIAL ACTION HUD (LEVEL 48.1 - ULTRA TOP) --- */}
             {phase === 'active' && (
-                <div className="fixed left-1/2 -translate-x-1/2 top-[8%] z-[2147483647] w-[90%] max-w-[400px]">
+                <div className="fixed left-1/2 -translate-x-1/2 top-[2%] z-[2147483647] w-[90%] max-w-[400px]">
                     <motion.div 
                         initial={{ y: -20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
@@ -175,9 +175,9 @@ export default function AdClient() {
                 </div>
             )}
 
-            {/* --- EXTERIOR SIGNATURE (BOTTOM RIGHT) --- */}
+            {/* --- EXTERIOR SIGNATURE (BOTTOM RIGHT - ELEVATED) --- */}
             {phase === 'active' && (
-                <div className="fixed right-[6%] bottom-[5%] z-[2147483647]">
+                <div className="fixed right-[6%] bottom-[15%] z-[2147483647]">
                     <motion.div 
                          onClick={() => handleAction('tel:+201065661882')} 
                          className="cursor-pointer bg-black/40 backdrop-blur-md rounded-lg p-2 border border-white/5 hover:bg-white/5 transition-colors flex items-center gap-3"
@@ -195,6 +195,12 @@ export default function AdClient() {
                 </div>
             )}
 
+            {/* --- HUD OVERLAY (FORCE SYNC) --- */}
+            {phase === 'active' && (
+                <div className="fixed left-[8%] bottom-[8%] z-[99999999] flex flex-col pointer-events-none opacity-100">
+                    <div className="bg-yellow-600 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-white">v48.1_ULTRA_VIEW</div>
+                </div>
+            )}
         </div>
     )
 }
