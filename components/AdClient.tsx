@@ -189,12 +189,18 @@ export default function AdClient() {
                               </span>
                          </div>
                          <div className="w-8 h-8 rounded-full border border-[#c5a059]/40 flex items-center justify-center p-2 bg-black/40">
-                              <ExternalLink className="w-3 h-3 text-[#c5a059]" />
+                              <Phone className="w-3 h-3 text-[#c5a059]" />
                          </div>
                     </motion.div>
                 </div>
             )}
 
+            {/* --- HUD OVERLAY (FORCE SYNC) --- */}
+            {phase === 'active' && (
+                <div className="fixed left-[8%] bottom-[2%] z-[99999999] flex flex-col pointer-events-none opacity-100">
+                    <div className="bg-indigo-900 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-cyan-400">v48.3_DESIGNER_DIRECT</div>
+                </div>
+            )}
         </div>
     )
 }
