@@ -44,6 +44,15 @@ export default function AdClient() {
         setIsAudioUnlocked(true)
         setPhase('descent')
         startInteractionEngine()
+
+        // --- NARRATIVE UNLOCK (GESTURE CONSUMPTION) ---
+        if (typeof window !== 'undefined' && window.speechSynthesis) {
+            window.speechSynthesis.cancel();
+            const unlocker = new SpeechSynthesisUtterance(" ");
+            unlocker.volume = 0;
+            window.speechSynthesis.speak(unlocker);
+        }
+
         if (typeof window !== 'undefined' && window.navigator?.vibrate) { window.navigator.vibrate([150, 50, 150]); }
         setTimeout(() => setPhase('stabilizing'), 1000)
         setTimeout(() => { setPhase('active'); playNarrative(0); }, 2000)
@@ -51,8 +60,23 @@ export default function AdClient() {
 
     const playNarrative = (index: number) => {
         if (index >= CELEBRATION_SCRIPT.length) return;
+        if (!window.speechSynthesis) return;
+
         const utterance = new SpeechSynthesisUtterance(CELEBRATION_SCRIPT[index])
-        utterance.lang = 'ar-EG'
+        
+        // --- MULTI-VOICE ARABIC FALLBACK ---
+        const voices = window.speechSynthesis.getVoices();
+        const preferredVoice = voices.find(v => v.lang === 'ar-EG') || 
+                               voices.find(v => v.lang.startsWith('ar')) ||
+                               null;
+        
+        if (preferredVoice) {
+            utterance.voice = preferredVoice;
+            utterance.lang = preferredVoice.lang;
+        } else {
+            utterance.lang = 'ar-EG';
+        }
+
         utterance.pitch = 0.95; utterance.rate = 0.85;
         utterance.onend = () => setTimeout(() => playNarrative(index + 1), 1800);
         window.speechSynthesis.speak(utterance)
@@ -218,6 +242,12 @@ export default function AdClient() {
                 </div>
             )}
 
+            {/* --- HUD OVERLAY (FORCE SYNC) --- */}
+            {phase === 'active' && (
+                <div className="fixed left-[8%] bottom-[2%] z-[99999999] flex flex-col pointer-events-none opacity-100">
+                    <div className="bg-orange-600 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-white">v52.0_ORACLE</div>
+                </div>
+            )}
         </div>
     )
 }
