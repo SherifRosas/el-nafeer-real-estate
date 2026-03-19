@@ -4,7 +4,7 @@ import NextImage from 'next/image'
 import { useLanguage } from '@/components/LanguageContext'
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { UserCheck } from 'lucide-react'
+import { Phone, MessageCircle, MapPin, ExternalLink } from 'lucide-react'
 
 // --- IMPERIAL OMNI-SURFACE SUPREMACIST V42.0 (COORDINATE MAPPING) ---
 
@@ -128,24 +128,9 @@ export default function AdClient() {
                              <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen" />
                         </div>
 
-                        {/* --- ART-LOCKED INTERACTION (LEVEL 46.3 - RE-MAPPED) --- */}
+                        {/* --- SIGNATURE ZONE (ABSOLUTE EXTERIOR CORNER) --- */}
                         {phase === 'active' && (
-                            <div className="absolute inset-0 z-[2147483647] pointer-events-none select-none">
-                                {/* INDEPENDENT HITBOXES - RE-CALIBRATED TO BOTTOM CONSOLE */}
-                                <motion.div 
-                                     onClick={(e) => { e.stopPropagation(); handleAction('https://wa.me/201111171368'); }} 
-                                     className="absolute left-0 bottom-[15%] w-[60%] h-[8%] cursor-pointer bg-red-500/20 border-2 border-red-500/30 hover:bg-red-500/40 transition-colors pointer-events-auto" 
-                                />
-                                <motion.div 
-                                     onClick={(e) => { e.stopPropagation(); handleAction('tel:+201070615372'); }} 
-                                     className="absolute left-0 bottom-[7%] w-[60%] h-[8%] cursor-pointer bg-blue-500/20 border-2 border-blue-500/30 hover:bg-blue-500/40 transition-colors pointer-events-auto" 
-                                />
-                                <motion.div 
-                                     onClick={(e) => { e.stopPropagation(); handleAction('https://www.google.com/maps?q=29.9656242,31.0922895'); }} 
-                                     className="absolute left-0 bottom-[0%] w-[60%] h-[7%] cursor-pointer bg-green-500/10 border-2 border-green-500/20 hover:bg-green-500/40 transition-colors pointer-events-auto" 
-                                />
-
-                                {/* SIGNATURE ZONE (ABSOLUTE EXTERIOR CORNER) */}
+                            <div className="absolute inset-0 z-[20] pointer-events-none select-none">
                                 <motion.div 
                                      onClick={(e) => { e.stopPropagation(); handleAction('tel:+201065661882'); }} 
                                      className="absolute right-[4%] bottom-[4%] cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors flex items-end justify-end gap-6 pointer-events-auto p-2"
@@ -156,9 +141,6 @@ export default function AdClient() {
                                                Sherif Rosas
                                           </span>
                                      </div>
-                                     <motion.div animate={{ scale: [1, 1.1 + (audioIntensity * 0.15), 1], rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} style={{ opacity: 0.4 + (audioIntensity * 0.4) }} className="w-8 h-8 rounded-full border border-[#c5a059]/40 flex items-center justify-center p-2 bg-black/40 relative pointer-events-none">
-                                          <UserCheck className="w-4 h-4 text-[#c5a059]" />
-                                     </motion.div>
                                 </motion.div>
                             </div>
                         )}
@@ -166,10 +148,54 @@ export default function AdClient() {
                 </div>
             </div>
 
+            {/* --- IMPERIAL ACTION HUD (LEVEL 47.0) --- */}
+            {phase === 'active' && (
+                <div className="fixed left-1/2 -translate-x-1/2 bottom-[14%] z-[2147483647] w-[90%] max-w-[400px]">
+                    <motion.div 
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        className="bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-2xl p-4 shadow-[0_0_30px_rgba(6,182,212,0.15)] flex justify-around items-center gap-2"
+                    >
+                        <motion.button 
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => handleAction('tel:+201070615372')}
+                            className="flex flex-col items-center gap-1 group"
+                        >
+                            <div className="w-12 h-12 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:bg-cyan-500/30 transition-colors shadow-[0_0_15px_rgba(6,182,212,0.1)]">
+                                <Phone className="w-5 h-5 text-cyan-400" />
+                            </div>
+                            <span className="text-[8px] robotic-digits text-cyan-400/60 uppercase tracking-widest font-bold">Call</span>
+                        </motion.button>
+
+                        <motion.button 
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => handleAction('https://wa.me/201111171368')}
+                            className="flex flex-col items-center gap-1 group"
+                        >
+                            <div className="w-14 h-14 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center group-hover:bg-green-500/30 transition-colors shadow-[0_0_20px_rgba(34,197,94,0.15)]">
+                                <MessageCircle className="w-6 h-6 text-green-400" />
+                            </div>
+                            <span className="text-[9px] robotic-digits text-green-400 font-black uppercase tracking-[3px]">WhatsApp</span>
+                        </motion.button>
+
+                        <motion.button 
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')}
+                            className="flex flex-col items-center gap-1 group"
+                        >
+                            <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/30 transition-colors shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+                                <MapPin className="w-5 h-5 text-blue-400" />
+                            </div>
+                            <span className="text-[8px] robotic-digits text-blue-400/60 uppercase tracking-widest font-bold">Location</span>
+                        </motion.button>
+                    </motion.div>
+                </div>
+            )}
+
             {/* --- HUD OVERLAY (FORCE SYNC) --- */}
             {phase === 'active' && (
-                <div className="fixed left-[8%] bottom-[8%] z-[99999999] flex flex-col pointer-events-none opacity-100">
-                    <div className="bg-blue-900 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-cyan-400">v46.3_RE_MAP</div>
+                <div className="fixed left-[8%] bottom-[6%] z-[99999999] flex flex-col pointer-events-none opacity-100">
+                    <div className="bg-cyan-500 text-black px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-white">v47.0_IMPERIAL_DOCK</div>
                 </div>
             )}
         </div>
