@@ -128,18 +128,27 @@ export default function AdClient() {
                              <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen" />
                         </div>
 
-                        {/* --- ART-LOCKED INTERACTION (LEVEL 46.2 - VISIBLE DEBUG) --- */}
+                        {/* --- ART-LOCKED INTERACTION (LEVEL 46.3 - RE-MAPPED) --- */}
                         {phase === 'active' && (
-                            <div className="absolute inset-0 z-[2147483647] pointer-events-none">
-                                {/* INDEPENDENT HITBOXES - VISIBLE FOR DEBUGGING */}
-                                <motion.div onClick={() => handleAction('https://wa.me/201111171368')} className="absolute left-0 bottom-[35%] w-[45%] h-[12%] cursor-pointer bg-red-500/20 border-2 border-red-500/30 hover:bg-red-500/40 transition-colors pointer-events-auto touch-none" />
-                                <motion.div onClick={() => handleAction('tel:+201070615372')} className="absolute left-0 bottom-[18%] w-[45%] h-[12%] cursor-pointer bg-blue-500/20 border-2 border-blue-500/30 hover:bg-blue-500/40 transition-colors pointer-events-auto touch-none" />
-                                <motion.div onClick={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')} className="absolute left-0 bottom-[1%] w-[45%] h-[12%] cursor-pointer bg-green-500/10 border-2 border-green-500/20 hover:bg-green-500/40 transition-colors pointer-events-auto touch-none" />
+                            <div className="absolute inset-0 z-[2147483647] pointer-events-none select-none">
+                                {/* INDEPENDENT HITBOXES - RE-CALIBRATED TO BOTTOM CONSOLE */}
+                                <motion.div 
+                                     onClick={(e) => { e.stopPropagation(); handleAction('https://wa.me/201111171368'); }} 
+                                     className="absolute left-0 bottom-[15%] w-[60%] h-[8%] cursor-pointer bg-red-500/20 border-2 border-red-500/30 hover:bg-red-500/40 transition-colors pointer-events-auto" 
+                                />
+                                <motion.div 
+                                     onClick={(e) => { e.stopPropagation(); handleAction('tel:+201070615372'); }} 
+                                     className="absolute left-0 bottom-[7%] w-[60%] h-[8%] cursor-pointer bg-blue-500/20 border-2 border-blue-500/30 hover:bg-blue-500/40 transition-colors pointer-events-auto" 
+                                />
+                                <motion.div 
+                                     onClick={(e) => { e.stopPropagation(); handleAction('https://www.google.com/maps?q=29.9656242,31.0922895'); }} 
+                                     className="absolute left-0 bottom-[0%] w-[60%] h-[7%] cursor-pointer bg-green-500/10 border-2 border-green-500/20 hover:bg-green-500/40 transition-colors pointer-events-auto" 
+                                />
 
                                 {/* SIGNATURE ZONE (ABSOLUTE EXTERIOR CORNER) */}
                                 <motion.div 
-                                     onClick={() => handleAction('tel:+201065661882')} 
-                                     className="absolute right-[4%] bottom-[4%] cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors flex items-end justify-end gap-6 pointer-events-auto touch-none p-2"
+                                     onClick={(e) => { e.stopPropagation(); handleAction('tel:+201065661882'); }} 
+                                     className="absolute right-[4%] bottom-[4%] cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors flex items-end justify-end gap-6 pointer-events-auto p-2"
                                 >
                                      <div className="flex flex-col text-right pointer-events-none">
                                           <span className="text-[6px] text-cyan-400/20 tracking-[4px] uppercase font-bold italic line-clamp-1">MASTER_DESIGNER</span>
@@ -160,7 +169,7 @@ export default function AdClient() {
             {/* --- HUD OVERLAY (FORCE SYNC) --- */}
             {phase === 'active' && (
                 <div className="fixed left-[8%] bottom-[8%] z-[99999999] flex flex-col pointer-events-none opacity-100">
-                    <div className="bg-purple-600 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-white/50">v46.2_VISIBLE_Z</div>
+                    <div className="bg-blue-900 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-cyan-400">v46.3_RE_MAP</div>
                 </div>
             )}
         </div>
