@@ -61,9 +61,7 @@ export default function AdClient() {
     const handleAction = (url: string) => {
         if (typeof window !== 'undefined') {
              if (window.navigator?.vibrate) { window.navigator.vibrate(80); }
-             alert('ACTION_TRIGGERED: ' + url);
              window.location.href = url;
-             setTimeout(() => { alert('IF_NOT_MOVED_STAYED_ON: ' + url); }, 500);
         }
     }
 
@@ -197,12 +195,6 @@ export default function AdClient() {
                 </div>
             )}
 
-            {/* --- HUD OVERLAY (FORCE SYNC) --- */}
-            {phase === 'active' && (
-                <div className="fixed left-[8%] bottom-[2%] z-[99999999] flex flex-col pointer-events-none opacity-100">
-                    <div className="bg-purple-900 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-cyan-400">v47.1_ORBITAL</div>
-                </div>
-            )}
         </div>
     )
 }
