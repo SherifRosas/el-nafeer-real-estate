@@ -118,7 +118,7 @@ export default function AdClient() {
             <div className={`fixed inset-0 z-[10] transition-opacity duration-1500 pointer-events-none ${phase === 'active' || phase === 'stabilizing' ? 'opacity-100' : 'opacity-0'}`}>
                 <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="BG" fill className="object-cover scale-150 blur-3xl opacity-40 brightness-[0.25]" />
                 <div className="relative w-full h-full flex items-center justify-center">
-                    <motion.div animate={{ scale: [1, 1.04 + (audioIntensity * 0.02), 1] }} className="relative w-full h-auto max-h-[96vh] aspect-square flex items-center justify-center px-4 overflow-hidden pointer-events-none">
+                    <motion.div animate={{ scale: [1, 1.04 + (audioIntensity * 0.02), 1] }} className="relative w-full h-auto max-h-[96vh] aspect-square flex items-center justify-center px-4 overflow-hidden pointer-events-auto">
                         <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad" fill className="object-contain" priority />
                         <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
                              <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen" />
@@ -137,7 +137,7 @@ export default function AdClient() {
                                 {/* RIGHT COLUMN: SIGNATURE (60% Width) */}
                                 <div className="w-[60%] h-full flex flex-col pointer-events-none relative">
                                      <div className="flex-[2] pointer-events-none" />
-                                     <motion.div onTap={() => handleAction('tel:+201111171368', true)} className="flex-1 cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors flex items-end justify-end pr-12 pb-12 gap-4 pointer-events-auto touch-none">
+                                     <motion.div onTap={() => handleAction('tel:+201065661882', true)} className="flex-1 cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors flex items-end justify-end pr-12 pb-12 gap-4 pointer-events-auto touch-none">
                                           <div className="flex flex-col text-right pointer-events-none">
                                                <span className="text-[7px] text-cyan-400/20 tracking-[4px] uppercase font-bold italic">MASTER_DESIGNER</span>
                                                <span style={{ color: GOLD, fontFamily: 'Georgia, serif' }} className="font-medium text-xl lg:text-2xl italic tracking-wide">
@@ -158,7 +158,7 @@ export default function AdClient() {
             {/* --- HUD OVERLAY --- */}
             {phase === 'active' && (
                 <div className="fixed left-[8%] bottom-[8%] z-[99999999] flex flex-col pointer-events-none opacity-50">
-                    <div className="robotic-digits text-cyan-400/40 text-[8px] uppercase mb-16 font-bold tracking-[10px]">v45.1_SINGLE_SYNC</div>
+                    <div className="robotic-digits text-cyan-400/40 text-[8px] uppercase mb-16 font-bold tracking-[10px]">v45.2_RESTORATION</div>
                 </div>
             )}
         </div>
