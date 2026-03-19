@@ -4,9 +4,9 @@ import NextImage from 'next/image'
 import { useLanguage } from '@/components/LanguageContext'
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Box, Radio, UserCheck } from 'lucide-react'
+import { Box, Radio, UserCheck, Activity } from 'lucide-react'
 
-// --- IMPERIAL KINETIC CINEMA V31.0 (SENTIENT SURVIVOR) ---
+// --- IMPERIAL KINETIC CINEMA V32.0 (IMPERIAL ANNIVERSARY) ---
 
 const CELEBRATION_SCRIPT = [
     "شركة ليفر الرائدة للمصاعد",
@@ -25,31 +25,23 @@ export default function AdV2UltimaKineticCinema() {
     const bgMusicRef = useRef<HTMLAudioElement | null>(null)
     const animationFrameRef = useRef<number | null>(null)
 
-    // THE SURVIVOR ENGINE: Decoupled visual pulsing for 100% reliability
-    const startSurvivorEngine = () => {
+    const startInteractionEngine = () => {
         if (!bgMusicRef.current) return;
-        
-        // VISUAL PULSE - Guaranteed to run regardless of music status
-        const updateVisuals = () => {
-            // Heartbeat Logic: 120BPM sine wave pulse
-            const pulse = 0.4 + Math.sin(Date.now() / 240) * 0.45;
+        const update = () => {
+            const pulse = 0.4 + Math.sin(Date.now() / 250) * 0.4;
             setAudioIntensity(pulse);
-            animationFrameRef.current = requestAnimationFrame(updateVisuals);
+            animationFrameRef.current = requestAnimationFrame(update);
         };
-        updateVisuals();
-
-        // AUDIO BROADCAST - Redundant Attempt
+        update();
         bgMusicRef.current.muted = false;
         bgMusicRef.current.volume = 1.0;
-        bgMusicRef.current.play().catch(() => {
-            console.log("Waiting for Master Acoustic Unlock...");
-        });
+        bgMusicRef.current.play().catch(() => {});
     }
 
     const startUltimaSequence = () => {
         setIsAudioUnlocked(true)
         setPhase('descent')
-        startSurvivorEngine()
+        startInteractionEngine()
         if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate([100, 50, 100]); }
         setTimeout(() => setPhase('stabilizing'), 3000)
         setTimeout(() => {
@@ -69,22 +61,34 @@ export default function AdV2UltimaKineticCinema() {
 
     return (
         <div className="fixed inset-0 bg-black flex items-center justify-center p-0 m-0 overflow-hidden select-none font-sans">
-            {/* TRIPLE REDUNDANT AUDIO SOURCES */}
-            <audio ref={bgMusicRef} loop playsInline>
-                <source src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" type="audio/mpeg" />
-                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg" />
-            </audio>
+            <audio ref={bgMusicRef} loop playsInline src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" />
 
+            {/* --- MASTER PORTAL (ELEGANT INITIALIZATION) --- */}
             {!isAudioUnlocked && (
                 <div onClick={startUltimaSequence} className="fixed inset-0 z-[1000] bg-black flex flex-col items-center justify-center cursor-pointer p-6">
                     <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center gap-24">
+                        
+                        {/* ELEGANT LOGO ORB (No white square inside) */}
                         <div className="relative w-72 h-72 flex items-center justify-center">
-                             <div className="w-full h-full relative rounded-full bg-white flex items-center justify-center p-12 shadow-[0_0_80px_rgba(34,211,238,0.3)] border-2 border-cyan-400/20">
-                                <NextImage src="/clients/lever-pioneer/logo_mimic.png" alt="Logo" width={500} height={500} className="object-contain p-2 mix-blend-multiply" />
+                             <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute inset-[-40px] border border-cyan-400/20 rounded-full" />
+                             <div className="w-full h-full relative rounded-full bg-white flex items-center justify-center overflow-hidden shadow-[0_0_80px_rgba(34,211,238,0.3)] border-2 border-cyan-400/20">
+                                <NextImage 
+                                    src="/clients/lever-pioneer/logo_mimic.png" 
+                                    alt="Logo" 
+                                    width={400} 
+                                    height={400} 
+                                    className="object-contain mix-blend-multiply scale-[1.15]" // Multiply erases the white square background of the JPG
+                                />
                              </div>
                         </div>
-                        <h1 className="text-white font-black text-4xl lg:text-7xl tracking-[0.2em] robotic-digits uppercase">SURVIVOR</h1>
-                        <p className="text-sahara-gold font-black text-xl tracking-[0.2em] animate-pulse">[ BROADCAST_SURVIVOR_v31 ]</p>
+
+                        <div className="flex flex-col items-center gap-12 text-center">
+                             <h1 className="text-white font-black text-5xl lg:text-7xl tracking-[0.2em] uppercase italic">SYSTEM_INIT</h1>
+                             <div className="h-[1px] w-64 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
+                             <p className="text-sahara-gold font-bold text-xl tracking-[0.3em] animate-pulse">
+                                 [ TOUCH TO CELEBRATE ]
+                             </p>
+                        </div>
                     </motion.div>
                 </div>
             )}
@@ -93,27 +97,19 @@ export default function AdV2UltimaKineticCinema() {
                 
                 <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
                      <div className="absolute inset-0 z-0 bg-black">
-                         <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="BG" fill className="object-cover scale-150 blur-3xl opacity-40 brightness-[0.2]" />
+                         <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="BG" fill className="object-cover scale-150 blur-3xl opacity-40 brightness-[0.25]" />
                      </div>
 
                      <motion.div animate={{ scale: [1, 1.04 + (audioIntensity * 0.02), 1] }} className="relative w-full h-full z-10 flex items-center justify-center">
                          <div className="relative w-full h-auto max-h-[96vh] aspect-square flex items-center justify-center px-4">
                             <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad" fill className="object-contain" priority />
 
-                            {/* --- GUARANTEED KINETIC PULSE (Time-Based Fallback) --- */}
+                            {/* KINETIC LIGHT PULSE */}
                             <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
-                                 <motion.div 
-                                    style={{ 
-                                        left: '59.5%', 
-                                        top: '47.5%', 
-                                        opacity: audioIntensity * 0.7, 
-                                        scale: 0.8 + (audioIntensity * 3.5) 
-                                    }} 
-                                    className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[40px] mix-blend-screen" 
-                                 />
+                                 <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen" />
                             </div>
 
-                            {/* HOTSPOTS */}
+                            {/* INVISIBLE ACTION HOTSPOTS */}
                             {phase === 'active' && (
                                 <div className="absolute left-[3%] bottom-[5%] w-[42%] h-[28%] z-50 pointer-events-auto flex flex-col">
                                      <div onClick={(e) => { e.stopPropagation(); window.open('https://wa.me/201111171368', '_blank'); }} className="h-1/3 w-full cursor-pointer" />
@@ -125,49 +121,40 @@ export default function AdV2UltimaKineticCinema() {
                      </motion.div>
                 </div>
 
-                {/* --- SOVEREIGN HUD --- */}
+                {/* --- IMPERIAL HUD (ELEGANT BALANCE) --- */}
                 {phase === 'active' && (
-                    <div className="fixed inset-0 z-[100] h-full w-full pointer-events-none p-6 flex flex-col justify-between">
-                         <div className="flex justify-between items-start text-cyan-400/50 text-[10px] robotic-digits tracking-[5px] uppercase font-black">
+                    <div className="fixed inset-0 z-[100] h-full w-full pointer-events-none p-8 flex flex-col justify-between">
+                         <div className="flex justify-between items-start text-cyan-400/40 text-[10px] robotic-digits tracking-[5px] uppercase font-black">
                               <div className="flex gap-4 items-center">
-                                   <Box className="w-8 h-8 animate-spin-slow" />
-                                   <span>v31_SURVIVOR_BUILD</span>
+                                   <Activity className="w-5 h-5 animate-pulse" />
+                                   <span>SYSTEM_v32.0_IMPERIAL</span>
                               </div>
                               <Radio className="w-6 h-6 animate-pulse text-red-500" />
                          </div>
 
-                         {/* SHERIF ROSAS SIGNATURE & CONTACT (Guaranteed Pulse) */}
+                         {/* SHERIF ROSAS SIGNATURE & SOVEREIGN ORB (Refined) */}
                          <div className="flex justify-end p-2 pb-16">
                               <div onClick={() => window.open('tel:+201065661882', '_self')} className="flex items-center gap-4 cursor-pointer pointer-events-auto">
                                    <div className="flex flex-col text-right">
-                                        <span className="text-[7px] text-cyan-400/30 tracking-[4px] uppercase font-bold">SOVEREIGN_ARCHITECT</span>
-                                        <span className="text-sahara-gold font-medium text-xl italic tracking-wide" style={{ fontFamily: 'Georgia, serif' }}>
+                                        <span className="text-[7px] text-cyan-400/20 tracking-[4px] uppercase font-bold italic">DESIGNER_MASTER</span>
+                                        <span className="text-sahara-gold font-medium text-xl lg:text-2xl italic tracking-wide" style={{ fontFamily: 'Georgia, serif' }}>
                                              Sherif Rosas
                                         </span>
                                    </div>
-                                   <motion.div animate={{ scale: [1, 1.1 + (audioIntensity * 0.2), 1], rotate: 360 }} transition={{ duration: 4, repeat: Infinity }} style={{ opacity: 0.4 + (audioIntensity * 0.4) }} className="w-10 h-10 rounded-full border border-sahara-gold/40 flex items-center justify-center p-2 bg-black/40 relative">
+                                   <motion.div animate={{ scale: [1, 1.1 + (audioIntensity * 0.15), 1], rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} style={{ opacity: 0.4 + (audioIntensity * 0.4) }} className="w-10 h-10 rounded-full border border-sahara-gold/40 flex items-center justify-center p-2 bg-black/40 relative">
                                         <UserCheck className="w-5 h-5 text-sahara-gold" />
-                                        <motion.div animate={{ scale: [1, 2], opacity: [0.3, 0] }} transition={{ duration: 3, repeat: Infinity }} className="absolute inset-0 border border-sahara-gold rounded-full" />
+                                        <motion.div animate={{ scale: [1, 2.5], opacity: [0.3, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute inset-0 border border-sahara-gold rounded-full" />
                                    </motion.div>
                               </div>
                          </div>
                     </div>
                 )}
 
-                {/* DATA STREAM (Bottom Shadow) */}
-                <div className="fixed inset-x-0 bottom-0 pointer-events-none z-[90] h-12 flex items-center justify-center opacity-10">
-                     <div className="flex gap-1 h-full items-end">
-                          {[...Array(40)].map((_, i) => (
-                               <motion.div key={i} style={{ height: (audioIntensity * 20) + 4 + 'px' }} className="w-1 bg-cyan-400 rounded-full" />
-                          ))}
-                     </div>
-                </div>
-
                 <style jsx global>{`
                     footer, header { display: none !important; }
                     body { background-color: black !important; overflow: hidden; position: fixed; width: 100%; height: 100%; }
                     .robotic-digits { font-family: 'Courier New', Courier, monospace; }
-                    .animate-spin-slow { animation: spin 20s linear infinite; }
+                    .animate-spin-slow { animation: spin 25s linear infinite; }
                     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
                 `}</style>
             </div>
