@@ -58,9 +58,12 @@ export default function AdClient() {
         window.speechSynthesis.speak(utterance)
     }
 
-    const handleAction = (url: string, isTel: boolean = false) => {
-        if (typeof window !== 'undefined' && window.navigator?.vibrate) { window.navigator.vibrate(80); }
-        window.open(url, isTel ? '_self' : '_blank');
+    const handleAction = (url: string) => {
+        if (typeof window !== 'undefined') {
+             if (window.navigator?.vibrate) { window.navigator.vibrate(80); }
+             alert('ACTION_TRIGGERED: ' + url);
+             window.location.href = url;
+        }
     }
 
     return (
@@ -156,7 +159,7 @@ export default function AdClient() {
             {/* --- HUD OVERLAY (FORCE SYNC) --- */}
             {phase === 'active' && (
                 <div className="fixed left-[8%] bottom-[8%] z-[99999999] flex flex-col pointer-events-none opacity-90">
-                    <div className="bg-green-500 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase">v45.9_DEEP_GAP</div>
+                    <div className="bg-orange-500 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase">v46.0_ALERT_DEBUG</div>
                 </div>
             )}
         </div>
