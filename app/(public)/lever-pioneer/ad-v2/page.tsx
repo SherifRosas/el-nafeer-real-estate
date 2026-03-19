@@ -81,34 +81,50 @@ export default function AdV2UltimaKineticCinema() {
 
             {/* BROADCAST SENSOR: Tap to UNLOCK */}
             {!isAudioUnlocked && (
-                <div onClick={startUltimaSequence} className="fixed inset-0 z-[1000] bg-black/98 flex flex-col items-center justify-center cursor-pointer">
+                <div onClick={startUltimaSequence} className="fixed inset-0 z-[1000] bg-black/98 flex flex-col items-center justify-center cursor-pointer overflow-hidden">
+                    {/* RADAR WAVES (To guide the user to touch) */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        {[1, 2, 3].map((i) => (
+                            <motion.div 
+                                key={`radar-${i}`}
+                                initial={{ scale: 0.5, opacity: 0.6 }}
+                                animate={{ scale: 2.5, opacity: 0 }}
+                                transition={{ duration: 3, repeat: Infinity, delay: i * 0.8, ease: "easeOut" }}
+                                className="absolute w-64 h-64 rounded-full border border-cyan-400/30"
+                            />
+                        ))}
+                    </div>
+
                     <motion.div 
                         initial={{ scale: 0.5, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        className="flex flex-col items-center gap-12"
+                        className="relative z-10 flex flex-col items-center gap-12"
                     >
                         <motion.div 
                             animate={{ 
                                 scale: [1, 1.05, 1],
                                 boxShadow: [
                                     "0 0 20px rgba(34,211,238,0.2)",
-                                    "0 0 60px rgba(34,211,238,0.4)",
+                                    "0 0 80px rgba(34,211,238,0.5)",
                                     "0 0 20px rgba(34,211,238,0.2)"
                                 ]
                             }}
-                            transition={{ duration: 3, repeat: Infinity }}
-                            className="w-56 h-56 relative rounded-full border border-cyan-400/20 p-8 bg-black/40 backdrop-blur-xl"
+                            transition={{ duration: 4, repeat: Infinity }}
+                            className="w-56 h-56 relative rounded-full border-2 border-cyan-400/40 bg-white overflow-hidden p-0 shadow-2xl"
                         >
                             <NextImage 
                                 src="/clients/lever-pioneer/logo_mimic.png" 
                                 alt="Lever Pioneer" 
                                 fill 
-                                className="object-contain p-4"
+                                className="object-cover p-2 scale-110"
                             />
                         </motion.div>
-                        <div className="text-center space-y-4">
-                             <h1 className="text-white font-black text-3xl tracking-widest uppercase robotic-digits">START BROADCAST</h1>
-                             <p className="text-sahara-gold font-black animate-pulse">[ TAP LOGO TO ENABLE CINEMATIC AUDIO ]</p>
+                        <div className="text-center space-y-6">
+                             <h1 className="text-white font-black text-3xl tracking-[0.5em] uppercase robotic-digits">SYSTEM_READY</h1>
+                             <div className="flex flex-col items-center gap-2">
+                                <p className="text-sahara-gold font-black tracking-widest animate-pulse">[ INITIATE NEURAL BROADCAST ]</p>
+                                <p className="text-cyan-400/40 text-[10px] robotic-digits uppercase tracking-widest">( Touch Logo to Link )</p>
+                             </div>
                         </div>
                     </motion.div>
                 </div>
@@ -197,7 +213,7 @@ export default function AdV2UltimaKineticCinema() {
                      <div className="flex justify-between items-start text-cyan-400/40 text-[9px] robotic-digits tracking-[3px]">
                          <div className="flex gap-4 items-center">
                               <Box className="w-3 h-3" />
-                              <span>LEVEL_15.3_HUD_EXPAND</span>
+                              <span>LEVEL_15.4_NEURAL_LINK</span>
                          </div>
                          <Radio className="w-3 h-3 animate-pulse" />
                      </div>
