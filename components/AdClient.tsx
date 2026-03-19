@@ -124,31 +124,31 @@ export default function AdClient() {
                              <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen" />
                         </div>
 
-                        {/* --- ART-LOCKED INTERACTION GRID --- */}
+                        {/* --- ART-LOCKED INTERACTION GRID (LEVEL 45.4) --- */}
                         {phase === 'active' && (
-                            <div className="absolute bottom-0 left-0 right-0 h-[45%] z-[99999999] pointer-events-none flex">
-                                {/* LEFT COLUMN: ICONS (33% Width) */}
-                                <div className="w-[33%] h-full flex flex-col pointer-events-none">
+                            <div className="absolute inset-0 z-[99999999] pointer-events-none">
+                                {/* ICON ZONE (LEFT SIDE) */}
+                                <div className="absolute left-0 bottom-0 w-[40%] h-[45%] flex flex-col pointer-events-none">
                                      <motion.div onTap={() => handleAction('https://wa.me/201111171368')} className="flex-1 cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
                                      <motion.div onTap={() => handleAction('tel:+201111171368', true)} className="flex-1 cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
                                      <motion.div onTap={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')} className="flex-1 cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
                                 </div>
 
-                                {/* RIGHT COLUMN: SIGNATURE (67% Width) */}
-                                <div className="w-[67%] h-full flex flex-col pointer-events-none relative">
-                                     <div className="flex-[2] pointer-events-none" />
-                                     <motion.div onTap={() => handleAction('tel:+201065661882', true)} className="flex-1 cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors flex items-end justify-end pr-6 pb-12 gap-4 pointer-events-auto touch-none">
-                                          <div className="flex flex-col text-right pointer-events-none">
-                                               <span className="text-[7px] text-cyan-400/20 tracking-[4px] uppercase font-bold italic">MASTER_DESIGNER</span>
-                                               <span style={{ color: GOLD, fontFamily: 'Georgia, serif' }} className="font-medium text-xl lg:text-2xl italic tracking-wide">
-                                                    Sherif Rosas
-                                               </span>
-                                          </div>
-                                          <motion.div animate={{ scale: [1, 1.1 + (audioIntensity * 0.15), 1], rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} style={{ opacity: 0.4 + (audioIntensity * 0.4) }} className="w-10 h-10 rounded-full border border-[#c5a059]/40 flex items-center justify-center p-2 bg-black/40 relative pointer-events-none">
-                                               <UserCheck className="w-5 h-5 text-[#c5a059]" />
-                                          </motion.div>
+                                {/* SIGNATURE ZONE (ISOLATED BOTTOM RIGHT) */}
+                                <motion.div 
+                                     onTap={() => handleAction('tel:+201065661882', true)} 
+                                     className="absolute right-6 bottom-12 cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors flex items-end justify-end gap-12 pointer-events-auto touch-none p-4"
+                                >
+                                     <div className="flex flex-col text-right pointer-events-none">
+                                          <span className="text-[7px] text-cyan-400/20 tracking-[4px] uppercase font-bold italic">MASTER_DESIGNER</span>
+                                          <span style={{ color: GOLD, fontFamily: 'Georgia, serif' }} className="font-medium text-xl lg:text-2xl italic tracking-wide">
+                                               Sherif Rosas
+                                          </span>
+                                     </div>
+                                     <motion.div animate={{ scale: [1, 1.1 + (audioIntensity * 0.15), 1], rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} style={{ opacity: 0.4 + (audioIntensity * 0.4) }} className="w-10 h-10 rounded-full border border-[#c5a059]/40 flex items-center justify-center p-2 bg-black/40 relative pointer-events-none">
+                                          <UserCheck className="w-5 h-5 text-[#c5a059]" />
                                      </motion.div>
-                                </div>
+                                </motion.div>
                             </div>
                         )}
                     </motion.div>
@@ -158,7 +158,7 @@ export default function AdClient() {
             {/* --- HUD OVERLAY --- */}
             {phase === 'active' && (
                 <div className="fixed left-[8%] bottom-[8%] z-[99999999] flex flex-col pointer-events-none opacity-50">
-                    <div className="robotic-digits text-cyan-400/40 text-[8px] uppercase mb-16 font-bold tracking-[10px]">v45.3_AESTHETIC_SYNC</div>
+                    <div className="robotic-digits text-red-500 text-[10px] uppercase mb-16 font-bold tracking-[10px]">v45.4_RED_SYNC</div>
                 </div>
             )}
         </div>
