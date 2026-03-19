@@ -46,7 +46,7 @@ export default function AdClient() {
         startInteractionEngine()
         if (typeof window !== 'undefined' && window.navigator?.vibrate) { window.navigator.vibrate([150, 50, 150]); }
         setTimeout(() => setPhase('stabilizing'), 1000)
-        setTimeout(() => { setPhase('active'); playNarrative(0); }, 3000)
+        setTimeout(() => { setPhase('active'); playNarrative(0); }, 2000)
     }
 
     const playNarrative = (index: number) => {
@@ -80,10 +80,10 @@ export default function AdClient() {
                 <div className="fixed inset-0 z-[5000] bg-black flex flex-col items-center justify-center p-6">
                     <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center gap-24">
                         <motion.div 
-                            onClick={startUltimaSequence}
+                            onTap={startUltimaSequence}
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.95, y: 5 }}
-                            className="relative w-72 h-72 flex items-center justify-center cursor-pointer group"
+                            className="relative w-72 h-72 flex items-center justify-center cursor-pointer group pointer-events-auto"
                         >
                              <div 
                                  style={{ boxShadow: '0 25px 50px -12px rgba(0,0,0,0.7), inset 0 -10px 20px rgba(0,0,0,0.2), inset 0 10px 20px rgba(255,255,255,0.8)' }}
@@ -127,40 +127,40 @@ export default function AdClient() {
                 </div>
             </div>
 
-            {/* --- GRID-LOCKED INTERACTION CONTROLLER (Z-1000) --- */}
+            {/* --- GRID-LOCKED INTERACTION CONTROLLER (Z-99999999) --- */}
             {phase === 'active' && (
-                <div className="fixed bottom-0 left-0 right-0 h-[45%] z-[1000] pointer-events-none select-none overflow-hidden flex">
+                <div className="fixed bottom-0 left-0 right-0 h-[45%] z-[99999999] pointer-events-none select-none overflow-hidden flex">
                     
                     {/* LEFT COLUMN: ICONS (45% Width) */}
-                    <div className="w-[45%] h-full flex flex-col pointer-events-auto">
+                    <div className="w-[45%] h-full flex flex-col pointer-events-none">
                          {/* TOP: WHATSAPP */}
-                         <div onClick={() => handleAction('https://wa.me/201111171368')} className="flex-1 cursor-pointer hover:bg-white/5 active:bg-white/10 transition-colors" />
+                         <motion.div onTap={() => handleAction('https://wa.me/201111171368')} className="flex-1 cursor-pointer hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
                          {/* MID: CALL */}
-                         <div onClick={() => handleAction('tel:+201111171368', true)} className="flex-1 cursor-pointer hover:bg-white/5 active:bg-white/10 transition-colors" />
+                         <motion.div onTap={() => handleAction('tel:+201111171368', true)} className="flex-1 cursor-pointer hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
                          {/* BOTTOM: LOCATION */}
-                         <div onClick={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')} className="flex-1 cursor-pointer hover:bg-white/5 active:bg-white/10 transition-colors" />
+                         <motion.div onTap={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')} className="flex-1 cursor-pointer hover:bg-white/5 active:bg-white/10 transition-colors pointer-events-auto touch-none" />
                     </div>
 
                     {/* RIGHT COLUMN: SIGNATURE (55% Width) */}
-                    <div className="w-[55%] h-full flex flex-col pointer-events-auto relative">
-                         <div className="flex-[2]" /> {/* Empty Top/Mid Space */}
+                    <div className="w-[55%] h-full flex flex-col pointer-events-none relative">
+                         <div className="flex-[2] pointer-events-none" /> {/* Empty Top/Mid Space */}
                          {/* BOTTOM: SIGNATURE TRIGGER */}
-                         <div onClick={() => handleAction('tel:+201065661882', true)} className="flex-1 cursor-pointer hover:bg-white/5 active:bg-white/10 transition-colors flex items-end justify-end p-8 gap-4">
-                              <div className="flex flex-col text-right">
+                         <motion.div onTap={() => handleAction('tel:+201065661882', true)} className="flex-1 cursor-pointer hover:bg-white/5 active:bg-white/10 transition-colors flex items-end justify-end p-8 gap-4 pointer-events-auto touch-none">
+                              <div className="flex flex-col text-right pointer-events-none">
                                    <span className="text-[7px] text-cyan-400/20 tracking-[4px] uppercase font-bold italic">MASTER_DESIGNER</span>
                                    <span style={{ color: GOLD, fontFamily: 'Georgia, serif' }} className="font-medium text-xl lg:text-2xl italic tracking-wide">
                                         Sherif Rosas
                                    </span>
                               </div>
-                              <motion.div animate={{ scale: [1, 1.1 + (audioIntensity * 0.15), 1], rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} style={{ opacity: 0.4 + (audioIntensity * 0.4) }} className="w-10 h-10 rounded-full border border-[#c5a059]/40 flex items-center justify-center p-2 bg-black/40 relative">
+                              <motion.div animate={{ scale: [1, 1.1 + (audioIntensity * 0.15), 1], rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} style={{ opacity: 0.4 + (audioIntensity * 0.4) }} className="w-10 h-10 rounded-full border border-[#c5a059]/40 flex items-center justify-center p-2 bg-black/40 relative pointer-events-none">
                                    <UserCheck className="w-5 h-5 text-[#c5a059]" />
                               </motion.div>
-                         </div>
+                         </motion.div>
                     </div>
 
                     {/* HUD OVERLAY (POINTER-EVENTS-NONE) */}
                     <div className="absolute left-[8%] bottom-[8%] flex flex-col pointer-events-none opacity-50">
-                         <div className="robotic-digits text-cyan-400/40 text-[8px] uppercase mb-16 font-bold tracking-[10px]">v43.2.1_STABLE_EXTRACT</div>
+                         <div className="robotic-digits text-cyan-400/40 text-[8px] uppercase mb-16 font-bold tracking-[10px]">v44.0_OVERLORD_SYNC</div>
                     </div>
                 </div>
             )}
