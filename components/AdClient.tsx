@@ -91,7 +91,7 @@ export default function AdClient() {
                                  style={{ boxShadow: '0 25px 50px -12px rgba(0,0,0,0.7), inset 0 -10px 20px rgba(0,0,0,0.2), inset 0 10px 20px rgba(255,255,255,0.8)' }}
                                  className="w-full h-full relative rounded-full bg-white flex items-center justify-center overflow-hidden p-10 border-4 border-white/50"
                              >
-                                <NextImage 
+                              <NextImage 
                                     src="/clients/lever-pioneer/logo_mimic.png" 
                                     alt="Logo" 
                                     width={350} 
@@ -99,17 +99,31 @@ export default function AdClient() {
                                     className="object-contain mix-blend-multiply scale-[0.85] transition-transform duration-300 group-hover:scale-[0.9]" 
                                 />
                              </div>
-                             {/* GLOW RING */}
+                             {/* MULTI-STAGE RIPPLE ENGINE */}
+                             {[1, 1.5, 2].map((s, i) => (
+                                 <motion.div 
+                                    key={i}
+                                    animate={{ scale: [1, 1.4 + (i * 0.2)], opacity: [0.6, 0] }} 
+                                    transition={{ duration: 3, repeat: Infinity, delay: i * 1, ease: "easeOut" }} 
+                                    className="absolute inset-0 rounded-full border-2 border-cyan-400/40 -z-10" 
+                                 />
+                             ))}
                              <motion.div 
-                                animate={{ scale: [1, 1.25], opacity: [0.5, 0] }} 
-                                transition={{ duration: 2, repeat: Infinity }} 
-                                className="absolute inset-0 rounded-full border-2 border-cyan-400/30 -z-10" 
+                                animate={{ scale: [1, 1.1], opacity: [0.3, 0.6, 0.3] }} 
+                                transition={{ duration: 1.5, repeat: Infinity }} 
+                                className="absolute -inset-4 rounded-full bg-cyan-400/5 blur-2xl -z-20" 
                              />
                         </motion.div>
                         <div className="flex flex-col items-center gap-6 text-center text-white">
-                             <h1 className="font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase italic">SYSTEM</h1>
-                             <p className="text-sahara-gold font-bold text-xl tracking-[0.3em] animate-pulse uppercase">
-                                 [ PRESS TO ACTIVATE ]
+                             <motion.h1 
+                                animate={{ textShadow: ["0 0 10px rgba(6,182,212,0.4)", "0 0 30px rgba(6,182,212,0.8)", "0 0 10px rgba(6,182,212,0.4)"] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                                className="font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase italic"
+                             >
+                                 SYSTEM
+                             </motion.h1>
+                             <p className="text-sahara-gold font-bold text-lg lg:text-xl tracking-[0.15em] whitespace-nowrap uppercase">
+                                  [ PRESS TO ACTIVATE ]
                              </p>
                         </div>
                     </motion.div>
@@ -199,6 +213,12 @@ export default function AdClient() {
             {phase === 'active' && (
                 <div className="fixed left-[8%] bottom-[2%] z-[99999999] flex flex-col pointer-events-none opacity-100">
                     <div className="bg-indigo-900 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-cyan-400">v48.3_DESIGNER_DIRECT</div>
+                </div>
+            )}
+            {/* --- HUD OVERLAY (FORCE SYNC) --- */}
+            {phase === 'active' && (
+                <div className="fixed left-[8%] bottom-[2%] z-[99999999] flex flex-col pointer-events-none opacity-100">
+                    <div className="bg-green-900 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-cyan-400">v49.0_RESONANCE</div>
                 </div>
             )}
         </div>
