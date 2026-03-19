@@ -11,7 +11,7 @@ import {
     CloudHail, Waves, Box
 } from 'lucide-react'
 
-// --- IMPERIAL KINETIC CINEMA V13.5 (PRODUCTION FINAL) ---
+// --- IMPERIAL KINETIC CINEMA V14.6 (BUILD RESCUE) ---
 
 export default function AdV2UltimaKineticCinema() {
     const { language } = useLanguage()
@@ -74,19 +74,11 @@ export default function AdV2UltimaKineticCinema() {
         utterance.onend = () => setIsNarrating(false)
     }
 
-    const triggerRipple = () => {
-        setShowRipple(true)
-        setTimeout(() => setShowRipple(false), 1000)
-    }
-
     return (
         <div className="min-h-screen bg-black flex items-center justify-center p-0 m-0 overflow-hidden relative cursor-crosshair font-sans select-none noise-overlay">
             <div className="scanline" />
-            
-            {/* AUDIO NODE */}
             <audio ref={bgMusicRef} loop src="https://assets.mixkit.co/music/preview/mixkit-sci-fi-drone-ambience-925.mp3" />
             
-            {/* --- 1. GLOBAL DESCENT LAYER --- */}
             <AnimatePresence>
                 {phase === 'descent' && (
                     <motion.div 
@@ -106,7 +98,6 @@ export default function AdV2UltimaKineticCinema() {
                 )}
             </AnimatePresence>
 
-            {/* --- 2. STABILIZATION GRID --- */}
             <AnimatePresence>
                 {phase === 'stabilizing' && (
                     <motion.div 
@@ -118,48 +109,28 @@ export default function AdV2UltimaKineticCinema() {
                         <div className="w-full max-w-4xl space-y-12 px-12">
                             <div className="flex justify-between items-center text-cyan-400 font-mono text-xs">
                                 <span className="animate-pulse">_SENSORY_CALIBRATION_ACTIVE_</span>
-                                <span>PHASE: KINETIC_CINEMA_v12.8</span>
+                                <span>PHASE: KINETIC_CINEMA_v14.6</span>
                             </div>
                             <div className="h-[4px] w-full bg-zinc-900 rounded-full overflow-hidden shadow-[0_0_30px_rgba(0,255,255,0.3)]">
-                                <motion.div 
-                                    initial={{ width: 0 }} 
-                                    animate={{ width: "100%" }} 
-                                    transition={{ duration: 3 }} 
-                                    className="h-full bg-gradient-to-r from-teal-500 via-cyan-400 to-red-500" 
-                                />
-                            </div>
-                            <div className="flex justify-center gap-20">
-                                <Waves className="w-10 h-10 text-cyan-500/20 animate-bounce" />
-                                <Activity className="w-10 h-10 text-cyan-500/20 animate-bounce delay-100" />
-                                <Zap className="w-10 h-10 text-cyan-500/20 animate-bounce delay-200" />
+                                <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 3 }} className="h-full bg-gradient-to-r from-teal-500 via-cyan-400 to-red-500" />
                             </div>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* --- 3. ACTIVE KINETIC CINEMA --- */}
             <div className={`relative w-full h-screen transition-opacity duration-1000 ${phase === 'active' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                
-                {/* --- BACKGROUND: CLEAN BLACK VOID --- */}
-                <div className="absolute inset-0 z-0 bg-black" />
-                    
-                    {/* FLOATING NEON PARTICLES */}
+                <div className="absolute inset-0 z-0 bg-black">
                     {[...Array(30)].map((_, i) => (
                         <motion.div 
                             key={`p-${i}`}
                             initial={{ x: Math.random() * 2000 - 1000, y: Math.random() * 2000 - 1000, scale: Math.random() }}
-                            animate={{ 
-                                y: [null, Math.random() * -500], 
-                                opacity: [0, 0.6, 0],
-                                scale: [0, 1, 0]
-                            }}
+                            animate={{ y: [null, Math.random() * -500], opacity: [0, 0.6, 0], scale: [0, 1, 0] }}
                             transition={{ duration: 10 + Math.random() * 20, repeat: Infinity, ease: "easeInOut" }}
                             className="absolute w-1 h-1 bg-cyan-400 rounded-full blur-[2px]"
                             style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
                         />
                     ))}
-                    
                     <motion.div 
                         animate={{ x: [-200, 200], opacity: [0.1, 0.3, 0.1] }}
                         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
@@ -167,18 +138,10 @@ export default function AdV2UltimaKineticCinema() {
                     />
                 </div>
 
-                {/* --- THE CENTRAL CINEMATIC CANVAS --- */}
                 <div className="absolute inset-0 flex items-center justify-center p-4 lg:p-20 z-10 perspective-1000">
                     <motion.div 
-                        animate={{ 
-                            scale: [1, 1.15],
-                            rotateX: [0, 1, -1, 0], 
-                            rotateY: [0, -1, 1, 0] 
-                        }}
-                        transition={{ 
-                            scale: { duration: 40, repeat: Infinity, ease: "linear" },
-                            default: { duration: 10, repeat: Infinity }
-                        }}
+                        animate={{ scale: [1, 1.15], rotateX: [0, 1, -1, 0], rotateY: [0, -1, 1, 0] }}
+                        transition={{ scale: { duration: 40, repeat: Infinity, ease: "linear" }, default: { duration: 10, repeat: Infinity } }}
                         className="relative w-full max-w-[800px] aspect-square rounded-[3rem] lg:rounded-[4rem] overflow-hidden shadow-[0_0_150px_rgba(0,0,0,0.9)]"
                     >
                         <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad v2 Quantum" fill className="object-cover" priority />
@@ -201,9 +164,7 @@ export default function AdV2UltimaKineticCinema() {
                                         <span className="text-[16px] lg:text-[18px] text-white font-black italic">+20 111 117 1368</span>
                                     </div>
                                 </div>
-
                                 <div className="h-[1px] w-full bg-white/10" />
-
                                 {/* CALL US */}
                                 <div className="flex items-center gap-6 cursor-pointer group" onClick={() => window.open('tel:19XXX', '_self')}>
                                     <motion.div animate={{ rotateY: 360 }} transition={{ duration: 4.5, repeat: Infinity, ease: "linear" }} className="w-14 h-14 lg:w-16 lg:h-16 rounded-full border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.4)]">
@@ -214,9 +175,7 @@ export default function AdV2UltimaKineticCinema() {
                                         <span className="text-[16px] lg:text-[18px] text-white font-black italic">19XXX</span>
                                     </div>
                                 </div>
-
                                 <div className="h-[1px] w-full bg-white/10" />
-
                                 {/* LOCATION */}
                                 <div className="flex items-center gap-6 cursor-pointer group" onClick={() => window.open('https://www.google.com/maps?q=29.9656242,31.0922895', '_blank')}>
                                     <motion.div animate={{ rotateY: 360 }} transition={{ duration: 5, repeat: Infinity, ease: "linear" }} className="w-14 h-14 lg:w-16 lg:h-16 rounded-full border-2 border-sahara-gold flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.4)]">
@@ -224,7 +183,7 @@ export default function AdV2UltimaKineticCinema() {
                                     </motion.div>
                                     <div className="flex flex-col">
                                         <span className="text-[10px] lg:text-[12px] text-sahara-gold font-black uppercase tracking-[0.2em]">LOCATION</span>
-                                        <span className="text-[16px] lg:text-[18px] text-white font-black italic">حدائق الأهرام</span>
+                                        <span className="text-[16px] lg:text-[18px] text-white font-black italic text-right">حدائق الأهرام</span>
                                     </div>
                                 </div>
                             </motion.div>
@@ -232,30 +191,24 @@ export default function AdV2UltimaKineticCinema() {
                     </motion.div>
                 </div>
 
-                {/* HUD FRAME (No Headers/Footers) */}
                 <div className="absolute inset-4 lg:inset-10 border border-white/5 rounded-[3rem] lg:rounded-[6rem] pointer-events-none z-50 p-6 lg:p-16 flex flex-col justify-between">
                      <div className="flex justify-between text-cyan-400 opacity-60 font-black tracking-widest text-[8px] lg:text-[9px]">
                          <div className="flex gap-4 items-center">
                               <Box className="w-4 h-4 animate-pulse" />
-                              <span className="robotic-digits">QUANTUM_CINEMA // LEV_14.5_GHOST</span>
+                              <span className="robotic-digits">QUANTUM_CINEMA // LEV_14.6_FIXED</span>
                          </div>
-                         <div className="flex gap-6 lg:gap-10">
-                               <Radio className="w-4 h-4 animate-pulse" />
-                         </div>
+                         <Radio className="w-4 h-4 animate-pulse" />
                      </div>
                      <div className="flex justify-between items-end opacity-20">
                          <div className="text-[6px] lg:text-[7px] text-white tracking-[0.5em] italic uppercase">© LEVER_PIONEER_2026</div>
                      </div>
                 </div>
 
-                {/* AUTOPLAY INITIAL SEED (Force Full Page Black Overlay) */}
                 <div className={`fixed inset-0 z-[500] bg-black transition-opacity duration-1000 ${phase === 'idle' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} />
 
                 <style jsx global>{`
-                    /* FORCE HIDE FOOTER/HEADER */
                     footer, header { display: none !important; }
                     body { background-color: black !important; overflow: hidden; }
-
                     .robotic-digits { font-family: 'Courier New', Courier, monospace; letter-spacing: 0.1rem; }
                     .perspective-1000 { perspective: 1000px; }
                     .noise-overlay::before {
