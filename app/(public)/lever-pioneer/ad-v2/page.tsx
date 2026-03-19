@@ -183,13 +183,13 @@ export default function AdV2UltimaKineticCinema() {
                     >
                         <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad v2 Quantum" fill className="object-cover" priority />
 
-                        {/* THE UNIFIED QUANTUM HUD (MASTER ALIGNED: 3 ROWS) */}
+                        {/* THE UNIFIED QUANTUM HUD (PHANTOM MODE: NO BOX) */}
                         <div className="absolute left-[8%] bottom-[12%] lg:left-[5%] lg:bottom-[15%] z-40 pointer-events-none flex flex-col items-start translate-x-[-15%] lg:translate-x-0 scale-[0.85] lg:scale-100 origin-bottom-left">
                             <motion.div 
-                                initial={{ opacity: 0, scale: 0.5 }}
-                                animate={step >= 2 ? { opacity: 1, scale: 1 } : {}}
+                                initial={{ opacity: 0 }}
+                                animate={step >= 2 ? { opacity: 1 } : {}}
                                 transition={{ duration: 1 }}
-                                className="w-[380px] lg:w-[440px] bg-black/95 backdrop-blur-3xl border-2 border-cyan-400/60 rounded-[2.5rem] lg:rounded-[3rem] p-6 lg:p-8 flex flex-col gap-5 lg:gap-7 shadow-[0_0_120px_rgba(0,0,0,1)] pointer-events-auto"
+                                className="w-[380px] lg:w-[440px] p-6 lg:p-8 flex flex-col gap-8 lg:gap-10 pointer-events-auto"
                             >
                                 {/* WHATSAPP */}
                                 <div className="flex items-center gap-6 cursor-pointer group" onClick={() => window.open('https://wa.me/201111171368', '_blank')}>
