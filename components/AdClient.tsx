@@ -58,36 +58,8 @@ export default function AdClient() {
         window.speechSynthesis.speak(utterance)
     }
 
-    // THE OMNI-PROCESSOR (Maps screen coordinates to actions)
-    const handleOmniTouch = (e: React.MouseEvent | React.TouchEvent) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const clientX = 'touches' in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
-        const clientY = 'touches' in e ? e.touches[0].clientY : (e as React.MouseEvent).clientY;
-        
-        const xPercent = ((clientX - rect.left) / rect.width) * 100;
-        const yPercent = ((clientY - rect.top) / rect.height) * 100;
-
-        // Visual Feedback (Pulse)
-        const feedbackX = clientX - rect.left;
-        const feedbackY = clientY - rect.top;
-
-        setLastClick({ x: clientX, y: clientY });
-        setTimeout(() => setLastClick(null), 400);
-        if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate(80); }
-
-        // MAPPING LOGIC
-        if (xPercent < 45) {
-            // LEFT SIDE (Artwork Box Region)
-            if (yPercent < 28) handleAction('https://wa.me/201111171368');
-            else if (yPercent < 60) handleAction('tel:+201111171368', true);
-            else handleAction('https://www.google.com/maps?q=29.9656242,31.0922895');
-        } else {
-            // RIGHT SIDE (Signature Region)
-            if (yPercent > 50) handleAction('tel:+201065661882', true);
-        }
-    }
-
     const handleAction = (url: string, isTel: boolean = false) => {
+        if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate(80); }
         window.open(url, isTel ? '_self' : '_blank');
     }
 
@@ -155,37 +127,40 @@ export default function AdClient() {
                 </div>
             </div>
 
-            {/* --- OMNI-TOUCH CONTROLLER SURFACE (Z-1000) --- */}
+            {/* --- GRID-LOCKED INTERACTION CONTROLLER (Z-1000) --- */}
             {phase === 'active' && (
-                <div onMouseDown={handleOmniTouch} onTouchStart={handleOmniTouch} className="fixed bottom-0 left-0 right-0 h-[45%] z-[1000] cursor-pointer pointer-events-auto bg-black/0 select-none overflow-hidden">
+                <div className="fixed bottom-0 left-0 right-0 h-[45%] z-[1000] pointer-events-none select-none overflow-hidden flex">
                     
-                    {/* FEEDBACK PING */}
-                    {lastClick && (
-                        <motion.div initial={{ scale: 0, opacity: 0.8 }} animate={{ scale: 2, opacity: 0 }} className="absolute w-12 h-12 bg-cyan-400 rounded-full blur-xl pointer-events-none" style={{ left: lastClick.x - 24, top: lastClick.y - ((typeof window !== 'undefined' ? window.innerHeight : 1000) * 0.55) - 24 }} />
-                    )}
-
-                    {/* VISUAL OVERLAYS (STILL PURE, BUT STRUCTURALLY LOCKED) */}
-                    <div className="absolute left-[8%] bottom-[8%] flex flex-col pointer-events-none opacity-50">
-                         <div className="robotic-digits text-cyan-400/40 text-[8px] tracking-[4px] uppercase mb-16">v42.2_PRECISION_FIX</div>
+                    {/* LEFT COLUMN: ICONS (45% Width) */}
+                    <div className="w-[45%] h-full flex flex-col pointer-events-auto">
+                         {/* TOP: WHATSAPP */}
+                         <div onClick={() => handleAction('https://wa.me/201111171368')} className="flex-1 cursor-pointer hover:bg-white/5 active:bg-white/10 transition-colors" />
+                         {/* MID: CALL */}
+                         <div onClick={() => handleAction('tel:+201111171368', true)} className="flex-1 cursor-pointer hover:bg-white/5 active:bg-white/10 transition-colors" />
+                         {/* BOTTOM: LOCATION */}
+                         <div onClick={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')} className="flex-1 cursor-pointer hover:bg-white/5 active:bg-white/10 transition-colors" />
                     </div>
 
-                    <div className="absolute right-[5%] bottom-[12%] pointer-events-none flex items-center gap-4">
-                         <div className="flex flex-col text-right">
-                              <span className="text-[7px] text-cyan-400/20 tracking-[4px] uppercase font-bold italic">MASTER_DESIGNER</span>
-                              <span style={{ color: GOLD, fontFamily: 'Georgia, serif' }} className="font-medium text-xl lg:text-2xl italic tracking-wide">
-                                   Sherif Rosas
-                              </span>
-                         </div>
-                         <div className="p-8 flex justify-between items-start text-cyan-400/40 text-[10px] robotic-digits tracking-[5px] uppercase font-black pointer-events-none">
-                              <div className="flex gap-4 items-center">
-                                   <Activity className="w-5 h-5 animate-pulse" />
-                                   <span>v43.0_IMPERIAL_3D</span>
+                    {/* RIGHT COLUMN: SIGNATURE (55% Width) */}
+                    <div className="w-[55%] h-full flex flex-col pointer-events-auto relative">
+                         <div className="flex-[2]" /> {/* Empty Top/Mid Space */}
+                         {/* BOTTOM: SIGNATURE TRIGGER */}
+                         <div onClick={() => handleAction('tel:+201065661882', true)} className="flex-1 cursor-pointer hover:bg-white/5 active:bg-white/10 transition-colors flex items-end justify-end p-8 gap-4">
+                              <div className="flex flex-col text-right">
+                                   <span className="text-[7px] text-cyan-400/20 tracking-[4px] uppercase font-bold italic">MASTER_DESIGNER</span>
+                                   <span style={{ color: GOLD, fontFamily: 'Georgia, serif' }} className="font-medium text-xl lg:text-2xl italic tracking-wide">
+                                        Sherif Rosas
+                                   </span>
                               </div>
-                              <Radio className="w-6 h-6 animate-pulse text-red-500" />
+                              <motion.div animate={{ scale: [1, 1.1 + (audioIntensity * 0.15), 1], rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} style={{ opacity: 0.4 + (audioIntensity * 0.4) }} className="w-10 h-10 rounded-full border border-[#c5a059]/40 flex items-center justify-center p-2 bg-black/40 relative">
+                                   <UserCheck className="w-5 h-5 text-[#c5a059]" />
+                              </motion.div>
                          </div>
-                         <motion.div animate={{ scale: [1, 1.1 + (audioIntensity * 0.15), 1], rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} style={{ opacity: 0.4 + (audioIntensity * 0.4) }} className="w-10 h-10 rounded-full border border-[#c5a059]/40 flex items-center justify-center p-2 bg-black/40 relative">
-                              <UserCheck className="w-5 h-5 text-[#c5a059]" />
-                         </motion.div>
+                    </div>
+
+                    {/* HUD OVERLAY (POINTER-EVENTS-NONE) */}
+                    <div className="absolute left-[8%] bottom-[8%] flex flex-col pointer-events-none opacity-50">
+                         <div className="robotic-digits text-cyan-400/40 text-[8px] tracking-[4px] uppercase mb-16 font-bold tracking-[10px]">v43.1_PRECISION_FIX</div>
                     </div>
                 </div>
             )}
