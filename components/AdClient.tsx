@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Box, Radio, UserCheck, Activity } from 'lucide-react'
 
-// --- IMPERIAL ACOUSTIC SOVEREIGNTY V35.0 (FINALITY) ---
+// --- IMPERIAL RAPID RESPONSE V36.0 (FINAL TUNING) ---
 
 const CELEBRATION_SCRIPT = [
     "شركة ليفر الرائدة للمصاعد",
@@ -25,70 +25,51 @@ export default function AdClient() {
     const bgMusicRef = useRef<HTMLAudioElement | null>(null)
     const animationFrameRef = useRef<number | null>(null)
 
-    // THE SOVEREIGN SURVIVOR ENGINE
     const startSurvivorEngine = () => {
         if (!bgMusicRef.current) return;
-        
-        // 1. VISUAL PULSE - Decoupled and guaranteed
         const updateVisuals = () => {
             const pulse = 0.4 + Math.sin(Date.now() / 240) * 0.45;
             setAudioIntensity(pulse);
             animationFrameRef.current = requestAnimationFrame(updateVisuals);
         };
         updateVisuals();
-
-        // 2. AUDIO BROADCAST - Redundant and Protected
-        bgMusicRef.current.muted = false;
-        bgMusicRef.current.volume = 1.0;
-        bgMusicRef.current.play().catch(() => {
-            console.log("Awaiting user confirmation for music broadcast.");
-        });
+        bgMusicRef.current.muted = false; bgMusicRef.current.volume = 1.0;
+        bgMusicRef.current.play().catch(() => {});
     }
 
     const startUltimaSequence = () => {
         setIsAudioUnlocked(true)
         setPhase('descent')
         startSurvivorEngine()
-        if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate([100, 50, 100]); }
-        setTimeout(() => setPhase('stabilizing'), 3000)
+        if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate([200, 100, 200]); }
+        
+        // --- FASTER TIMING (No more waiting too long) ---
+        setTimeout(() => setPhase('stabilizing'), 1500) // Reduced from 3000
         setTimeout(() => {
             setPhase('active');
             playNarrative(0);
-        }, 6500)
+        }, 3500) // Reduced from 6500 for immediate voice impact
     }
 
     const playNarrative = (index: number) => {
         if (index >= CELEBRATION_SCRIPT.length) return;
         const utterance = new SpeechSynthesisUtterance(CELEBRATION_SCRIPT[index])
         utterance.lang = 'ar-EG'
-        utterance.pitch = 0.95; utterance.rate = 0.82;
-        utterance.onend = () => setTimeout(() => playNarrative(index + 1), 2200);
+        utterance.pitch = 0.95; utterance.rate = 0.85; // Slightly faster professional rate
+        utterance.onend = () => setTimeout(() => playNarrative(index + 1), 1800);
         window.speechSynthesis.speak(utterance)
     }
 
     return (
         <div className="fixed inset-0 z-[99999] bg-black flex items-center justify-center p-0 m-0 overflow-hidden select-none font-sans">
-            {/* TRIPLE REDUNDANT AUDIO PROTECTOR */}
             <audio ref={bgMusicRef} loop playsInline preload="auto">
                 <source src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" type="audio/mpeg" />
                 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg" />
-                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" type="audio/mpeg" />
             </audio>
 
             <style jsx global>{`
-                footer, header, nav, #main-nav, .site-footer, div[data-footer], #footer { 
-                    display: none !important; 
-                    visibility: hidden !important; 
-                    opacity: 0 !important;
-                    pointer-events: none !important;
-                }
-                body { 
-                    background: black !important; 
-                    overflow: hidden !important; 
-                    position: fixed !important; 
-                    width: 100% !important; 
-                    height: 100% !important; 
-                }
+                footer, header, nav, #main-nav, .site-footer, div[data-footer], #footer { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
+                body { background: black !important; overflow: hidden !important; position: fixed !important; width: 100% !important; height: 100% !important; }
                 .robotic-digits { font-family: 'Courier New', Courier, monospace; }
                 .animate-spin-slow { animation: spin 25s linear infinite; }
                 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -99,18 +80,14 @@ export default function AdClient() {
                     <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center gap-24">
                         <div className="relative w-64 h-64 flex items-center justify-center">
                              <div className="w-full h-full relative rounded-full bg-white flex items-center justify-center overflow-hidden shadow-[0_0_80px_rgba(34,211,238,0.3)] border-2 border-cyan-400/20">
-                                <NextImage 
-                                    src="/clients/lever-pioneer/logo_mimic.png" 
-                                    alt="Logo" 
-                                    width={400} 
-                                    height={400} 
-                                    className="object-contain mix-blend-multiply scale-[1.05]" 
-                                />
+                                <NextImage src="/clients/lever-pioneer/logo_mimic.png" alt="Logo" width={400} height={400} className="object-contain mix-blend-multiply scale-[1.05]" />
                              </div>
                         </div>
-                        <div className="flex flex-col items-center gap-6 text-center">
-                             <h1 className="text-white font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase">SYSTEM_READY</h1>
-                             <p className="text-sahara-gold font-bold text-xl tracking-[0.3em] animate-pulse">[ PRESS TO BROADCAST ]</p>
+                        <div className="flex flex-col items-center gap-6 text-center text-white">
+                             <h1 className="font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase">SYSTEM</h1>
+                             <p className="text-sahara-gold font-bold text-xl tracking-[0.3em] animate-pulse uppercase cursor-pointer pointer-events-auto">
+                                 [ CLICK TO BROADCAST ]
+                             </p>
                         </div>
                     </motion.div>
                 </div>
@@ -122,18 +99,19 @@ export default function AdClient() {
                          <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="BG" fill className="object-cover scale-150 blur-3xl opacity-40 brightness-[0.25]" />
                      </div>
                      <motion.div animate={{ scale: [1, 1.04 + (audioIntensity * 0.02), 1] }} className="relative w-full h-full z-10 flex items-center justify-center">
-                         <div className="relative w-full h-auto max-h-[96vh] aspect-square flex items-center justify-center px-4">
+                         <div className="relative w-full h-auto max-h-[96vh] aspect-square flex items-center justify-center px-4 overflow-hidden">
                             <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad" fill className="object-contain" priority />
+                            
                             <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
                                  <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen" />
                             </div>
 
-                            {/* HOTSPOTS */}
+                            {/* --- EXPANDED ARTWORK HOTSPOTS (V36) --- */}
                             {phase === 'active' && (
-                                <div className="absolute left-[3%] bottom-[5%] w-[42%] h-[28%] z-50 pointer-events-auto flex flex-col">
-                                     <div onClick={(e) => { e.stopPropagation(); window.open('https://wa.me/201111171368', '_blank'); }} className="h-1/3 w-full cursor-pointer" />
-                                     <div onClick={(e) => { e.stopPropagation(); window.open('tel:+201111171368', '_self'); }} className="h-1/3 w-full cursor-pointer" />
-                                     <div onClick={(e) => { e.stopPropagation(); window.open('https://www.google.com/maps?q=29.9656242,31.0922895', '_blank'); }} className="h-1/3 w-full cursor-pointer" />
+                                <div className="absolute left-[0%] bottom-[0%] w-[50%] h-[40%] z-[999] pointer-events-auto flex flex-col cursor-pointer">
+                                     <div onClick={(e) => { e.stopPropagation(); window.open('https://wa.me/201111171368', '_blank'); }} className="h-1/3 w-full" />
+                                     <div onClick={(e) => { e.stopPropagation(); window.open('tel:+201111171368', '_self'); }} className="h-1/3 w-full" />
+                                     <div onClick={(e) => { e.stopPropagation(); window.open('https://www.google.com/maps?q=29.9656242,31.0922895', '_blank'); }} className="h-1/3 w-full" />
                                 </div>
                             )}
                          </div>
@@ -146,16 +124,16 @@ export default function AdClient() {
                          <div className="flex justify-between items-start text-cyan-400/40 text-[10px] robotic-digits tracking-[5px] uppercase font-black">
                               <div className="flex gap-4 items-center">
                                    <Activity className="w-5 h-5 animate-pulse" />
-                                   <span>v35.0_ACOUSTIC</span>
+                                   <span>v36.0_RAPID_SYNC</span>
                               </div>
                               <Radio className="w-6 h-6 animate-pulse text-red-500" />
                          </div>
 
-                         {/* MASTER SIGNATURE & SOVEREIGN ORB */}
+                         {/* SIGNATURE & SOVEREIGN ORB (+20 106 566 1882) */}
                          <div className="flex justify-end p-2 pb-16">
                               <div onClick={() => window.open('tel:+201065661882', '_self')} className="flex items-center gap-4 cursor-pointer pointer-events-auto">
                                    <div className="flex flex-col text-right">
-                                        <span className="text-[7px] text-cyan-400/20 tracking-[4px] uppercase font-bold italic">DESIGNER_MASTER</span>
+                                        <span className="text-[7px] text-cyan-400/20 tracking-[4px] uppercase font-bold italic">MASTER_DESIGNER</span>
                                         <span className="text-sahara-gold font-medium text-xl lg:text-2xl italic tracking-wide" style={{ fontFamily: 'Georgia, serif' }}>
                                              Sherif Rosas
                                         </span>
