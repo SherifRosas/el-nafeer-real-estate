@@ -85,9 +85,9 @@ export default function AdClient() {
                             whileTap={{ scale: 0.95, y: 5 }}
                             className="relative w-72 h-72 flex items-center justify-center cursor-pointer group"
                         >
-                             <div className="w-full h-full relative rounded-full bg-white flex items-center justify-center overflow-hidden p-10
-                                 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.7),_inset_0_-10px_20px_rgba(0,0,0,0.2),_inset_0_10px_20px_rgba(255,255,255,0.8)]
-                                 border-4 border-white/50"
+                             <div 
+                                 style={{ boxShadow: '0 25px 50px -12px rgba(0,0,0,0.7), inset 0 -10px 20px rgba(0,0,0,0.2), inset 0 10px 20px rgba(255,255,255,0.8)' }}
+                                 className="w-full h-full relative rounded-full bg-white flex items-center justify-center overflow-hidden p-10 border-4 border-white/50"
                              >
                                 <NextImage 
                                     src="/clients/lever-pioneer/logo_mimic.png" 
@@ -160,7 +160,7 @@ export default function AdClient() {
 
                     {/* HUD OVERLAY (POINTER-EVENTS-NONE) */}
                     <div className="absolute left-[8%] bottom-[8%] flex flex-col pointer-events-none opacity-50">
-                         <div className="robotic-digits text-cyan-400/40 text-[8px] uppercase mb-16 font-bold tracking-[10px]">v43.2_SOVEREIGN_FIX</div>
+                         <div className="robotic-digits text-cyan-400/40 text-[8px] uppercase mb-16 font-bold tracking-[10px]">v43.2.1_STABLE_EXTRACT</div>
                     </div>
                 </div>
             )}
