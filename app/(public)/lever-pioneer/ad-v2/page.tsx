@@ -8,19 +8,19 @@ import AdClient from '@/components/AdClient'
 const TITLE = "Lever Pioneer Elevators | The Ascension of Luxury"
 const DESC = "Celebrating the launch of the new headquarters. Experience the future of vertical mobility with Lever Pioneer."
 const IMG = "https://el-nafeer-real-estate.vercel.app/campaigns/lever-pioneer/ad-v2-quantum.png"
-const URL = "https://el-nafeer-real-estate.vercel.app/lever-pioneer/ad-v2"
+const PAGE_URL = "https://el-nafeer-real-estate.vercel.app/lever-pioneer/ad-v2"
 
 export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
   metadataBase: new URL('https://el-nafeer-real-estate.vercel.app'),
   alternates: {
-    canonical: URL,
+    canonical: PAGE_URL,
   },
   openGraph: {
     title: TITLE,
     description: DESC,
-    url: URL,
+    url: PAGE_URL,
     siteName: 'Lever Pioneer',
     images: [
       {
