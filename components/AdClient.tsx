@@ -4,7 +4,7 @@ import NextImage from 'next/image'
 import { useLanguage } from '@/components/LanguageContext'
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Box, Radio, UserCheck, Activity } from 'lucide-react'
+import { UserCheck } from 'lucide-react'
 
 // --- IMPERIAL OMNI-SURFACE SUPREMACIST V42.0 (COORDINATE MAPPING) ---
 
@@ -44,7 +44,7 @@ export default function AdClient() {
         setIsAudioUnlocked(true)
         setPhase('descent')
         startInteractionEngine()
-        if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate([150, 50, 150]); }
+        if (typeof window !== 'undefined' && window.navigator?.vibrate) { window.navigator.vibrate([150, 50, 150]); }
         setTimeout(() => setPhase('stabilizing'), 1000)
         setTimeout(() => { setPhase('active'); playNarrative(0); }, 3000)
     }
@@ -59,7 +59,7 @@ export default function AdClient() {
     }
 
     const handleAction = (url: string, isTel: boolean = false) => {
-        if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate(80); }
+        if (typeof window !== 'undefined' && window.navigator?.vibrate) { window.navigator.vibrate(80); }
         window.open(url, isTel ? '_self' : '_blank');
     }
 
@@ -86,7 +86,7 @@ export default function AdClient() {
                             className="relative w-72 h-72 flex items-center justify-center cursor-pointer group"
                         >
                              <div className="w-full h-full relative rounded-full bg-white flex items-center justify-center overflow-hidden p-10
-                                 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.7),inset_0_-10px_20px_rgba(0,0,0,0.2),inset_0_10px_20px_rgba(255,255,255,0.8)]
+                                 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.7),_inset_0_-10px_20px_rgba(0,0,0,0.2),_inset_0_10px_20px_rgba(255,255,255,0.8)]
                                  border-4 border-white/50"
                              >
                                 <NextImage 
@@ -160,7 +160,7 @@ export default function AdClient() {
 
                     {/* HUD OVERLAY (POINTER-EVENTS-NONE) */}
                     <div className="absolute left-[8%] bottom-[8%] flex flex-col pointer-events-none opacity-50">
-                         <div className="robotic-digits text-cyan-400/40 text-[8px] tracking-[4px] uppercase mb-16 font-bold tracking-[10px]">v43.1_PRECISION_FIX</div>
+                         <div className="robotic-digits text-cyan-400/40 text-[8px] uppercase mb-16 font-bold tracking-[10px]">v43.2_SOVEREIGN_FIX</div>
                     </div>
                 </div>
             )}
