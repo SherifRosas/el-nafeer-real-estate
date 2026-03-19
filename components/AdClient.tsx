@@ -44,7 +44,7 @@ export default function AdClient() {
         setIsAudioUnlocked(true)
         setPhase('descent')
         startInteractionEngine()
-        if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate([100, 50, 100]); }
+        if (typeof window !== 'undefined' && navigator.vibrate) { navigator.vibrate([150, 50, 150]); }
         setTimeout(() => setPhase('stabilizing'), 1000)
         setTimeout(() => { setPhase('active'); playNarrative(0); }, 3000)
     }
@@ -105,16 +105,38 @@ export default function AdClient() {
             
             {/* --- INITIALIZATION (Z-9999) --- */}
             {!isAudioUnlocked && (
-                <div onClick={startUltimaSequence} className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center cursor-pointer p-6">
+                <div className="fixed inset-0 z-[5000] bg-black flex flex-col items-center justify-center p-6">
                     <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center gap-24">
-                        <div className="relative w-64 h-64 flex items-center justify-center">
-                             <div className="w-full h-full relative rounded-full bg-white flex items-center justify-center overflow-hidden shadow-[0_0_80px_rgba(34,211,238,0.3)]">
-                                <NextImage src="/clients/lever-pioneer/logo_mimic.png" alt="Logo" width={400} height={400} className="object-contain mix-blend-multiply scale-[1.05]" />
+                        <motion.div 
+                            onClick={startUltimaSequence}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.95, y: 5 }}
+                            className="relative w-72 h-72 flex items-center justify-center cursor-pointer group"
+                        >
+                             <div className="w-full h-full relative rounded-full bg-white flex items-center justify-center overflow-hidden p-10
+                                 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.7),inset_0_-10px_20px_rgba(0,0,0,0.2),inset_0_10px_20px_rgba(255,255,255,0.8)]
+                                 border-4 border-white/50"
+                             >
+                                <NextImage 
+                                    src="/clients/lever-pioneer/logo_mimic.png" 
+                                    alt="Logo" 
+                                    width={350} 
+                                    height={350} 
+                                    className="object-contain mix-blend-multiply scale-[0.85] transition-transform duration-300 group-hover:scale-[0.9]" 
+                                />
                              </div>
-                        </div>
-                        <div className="text-white text-center">
+                             {/* GLOW RING */}
+                             <motion.div 
+                                animate={{ scale: [1, 1.25], opacity: [0.5, 0] }} 
+                                transition={{ duration: 2, repeat: Infinity }} 
+                                className="absolute inset-0 rounded-full border-2 border-cyan-400/30 -z-10" 
+                             />
+                        </motion.div>
+                        <div className="flex flex-col items-center gap-6 text-center text-white">
                              <h1 className="font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase italic">SYSTEM</h1>
-                             <p className="text-sahara-gold font-bold text-xl tracking-[0.3em] animate-pulse uppercase cursor-pointer">[ ACTIVATE ]</p>
+                             <p className="text-sahara-gold font-bold text-xl tracking-[0.3em] animate-pulse uppercase">
+                                 [ PRESS TO ACTIVATE ]
+                             </p>
                         </div>
                     </motion.div>
                 </div>
@@ -153,6 +175,13 @@ export default function AdClient() {
                               <span style={{ color: GOLD, fontFamily: 'Georgia, serif' }} className="font-medium text-xl lg:text-2xl italic tracking-wide">
                                    Sherif Rosas
                               </span>
+                         </div>
+                         <div className="p-8 flex justify-between items-start text-cyan-400/40 text-[10px] robotic-digits tracking-[5px] uppercase font-black pointer-events-none">
+                              <div className="flex gap-4 items-center">
+                                   <Activity className="w-5 h-5 animate-pulse" />
+                                   <span>v43.0_IMPERIAL_3D</span>
+                              </div>
+                              <Radio className="w-6 h-6 animate-pulse text-red-500" />
                          </div>
                          <motion.div animate={{ scale: [1, 1.1 + (audioIntensity * 0.15), 1], rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} style={{ opacity: 0.4 + (audioIntensity * 0.4) }} className="w-10 h-10 rounded-full border border-[#c5a059]/40 flex items-center justify-center p-2 bg-black/40 relative">
                               <UserCheck className="w-5 h-5 text-[#c5a059]" />
