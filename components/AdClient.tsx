@@ -128,31 +128,16 @@ export default function AdClient() {
                              <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen" />
                         </div>
 
-                        {/* --- SIGNATURE ZONE (ABSOLUTE EXTERIOR CORNER) --- */}
-                        {phase === 'active' && (
-                            <div className="absolute inset-0 z-[20] pointer-events-none select-none">
-                                <motion.div 
-                                     onClick={(e) => { e.stopPropagation(); handleAction('tel:+201065661882'); }} 
-                                     className="absolute right-[4%] bottom-[4%] cursor-pointer bg-white/0 hover:bg-white/5 active:bg-white/10 transition-colors flex items-end justify-end gap-6 pointer-events-auto p-2"
-                                >
-                                     <div className="flex flex-col text-right pointer-events-none">
-                                          <span className="text-[6px] text-cyan-400/20 tracking-[4px] uppercase font-bold italic line-clamp-1">MASTER_DESIGNER</span>
-                                          <span style={{ color: GOLD, fontFamily: 'Georgia, serif' }} className="font-medium text-lg italic tracking-wide">
-                                               Sherif Rosas
-                                          </span>
-                                     </div>
-                                </motion.div>
-                            </div>
-                        )}
+                        {/* --- ARTWORK CONTAINER (CENTRAL SQUARE) --- */}
                     </motion.div>
                 </div>
             </div>
 
-            {/* --- IMPERIAL ACTION HUD (LEVEL 47.0) --- */}
+            {/* --- IMPERIAL ACTION HUD (LEVEL 47.1 - TOP MOUNTED) --- */}
             {phase === 'active' && (
-                <div className="fixed left-1/2 -translate-x-1/2 bottom-[14%] z-[2147483647] w-[90%] max-w-[400px]">
+                <div className="fixed left-1/2 -translate-x-1/2 top-[8%] z-[2147483647] w-[90%] max-w-[400px]">
                     <motion.div 
-                        initial={{ y: 20, opacity: 0 }}
+                        initial={{ y: -20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         className="bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-2xl p-4 shadow-[0_0_30px_rgba(6,182,212,0.15)] flex justify-around items-center gap-2"
                     >
@@ -192,10 +177,30 @@ export default function AdClient() {
                 </div>
             )}
 
+            {/* --- EXTERIOR SIGNATURE (BOTTOM RIGHT) --- */}
+            {phase === 'active' && (
+                <div className="fixed right-[6%] bottom-[5%] z-[2147483647]">
+                    <motion.div 
+                         onClick={() => handleAction('tel:+201065661882')} 
+                         className="cursor-pointer bg-black/40 backdrop-blur-md rounded-lg p-2 border border-white/5 hover:bg-white/5 transition-colors flex items-center gap-3"
+                    >
+                         <div className="flex flex-col text-right">
+                              <span className="text-[6px] text-cyan-400/40 tracking-[4px] uppercase font-bold italic line-clamp-1">MASTER_DESIGNER</span>
+                              <span style={{ color: GOLD, fontFamily: 'Georgia, serif' }} className="font-medium text-sm italic tracking-wide">
+                                   Sherif Rosas
+                              </span>
+                         </div>
+                         <div className="w-8 h-8 rounded-full border border-[#c5a059]/40 flex items-center justify-center p-2 bg-black/40">
+                              <ExternalLink className="w-3 h-3 text-[#c5a059]" />
+                         </div>
+                    </motion.div>
+                </div>
+            )}
+
             {/* --- HUD OVERLAY (FORCE SYNC) --- */}
             {phase === 'active' && (
-                <div className="fixed left-[8%] bottom-[6%] z-[99999999] flex flex-col pointer-events-none opacity-100">
-                    <div className="bg-cyan-500 text-black px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-white">v47.0_IMPERIAL_DOCK</div>
+                <div className="fixed left-[8%] bottom-[2%] z-[99999999] flex flex-col pointer-events-none opacity-100">
+                    <div className="bg-purple-900 text-white px-6 py-1 font-black text-[12px] tracking-[4px] rounded-sm shadow-2xl uppercase border-2 border-cyan-400">v47.1_ORBITAL</div>
                 </div>
             )}
         </div>
