@@ -1,23 +1,23 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Lever Pioneer | The Ascension of Luxury',
-  description: 'Celebrating the launch of the new headquarters. Experience the future of vertical mobility with Lever Pioneer.',
-  keywords: ['Lever Pioneer', 'Elevators', 'Giza', 'Luxury', 'Anniversary'],
+  title: '🏆 LEVER PIONEER | The Future of Vertical Mobility',
+  description: 'Celebrating the Giza Headquarters launch. Experience the interactive Quantum Imperial ad by Sherif Rosas.',
+  keywords: ['Lever Pioneer', 'Elevators', 'Giza', 'Luxury', 'Innovation', 'Sherif Rosas'],
   alternates: {
     canonical: 'https://el-nafeer-real-estate.vercel.app/lever-pioneer/ad-v2',
   },
   openGraph: {
-    title: 'Lever Pioneer | The Ascension of Luxury',
-    description: 'Celebrating the launch of the new headquarters in Giza. Powered by AI.',
+    title: '🏆 LEVER PIONEER | Quantum Imperial Edition',
+    description: 'The Future of Vertical Mobility is here. Explore the interactive campaign for the new Giza Headquarters.',
     url: 'https://el-nafeer-real-estate.vercel.app/lever-pioneer/ad-v2',
-    siteName: 'Lever Pioneer Luxury',
+    siteName: 'Sherif Rosas | Master Designer',
     images: [
       {
         url: 'https://el-nafeer-real-estate.vercel.app/campaigns/lever-pioneer/ad-v2-quantum.png',
         width: 1200,
-        height: 1200,
-        alt: 'Lever Pioneer Cinematic Ad',
+        height: 630,
+        alt: 'Lever Pioneer Quantum Ad',
       },
     ],
     locale: 'ar_EG',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Lever Pioneer | The Ascension of Luxury',
-    description: 'Experience the future of vertical mobility.',
+    title: '🏆 LEVER PIONEER | The Future of Vertical Mobility',
+    description: 'Experience the interactive campaign by Sherif Rosas.',
     images: ['https://el-nafeer-real-estate.vercel.app/campaigns/lever-pioneer/ad-v2-quantum.png'],
   },
 }
