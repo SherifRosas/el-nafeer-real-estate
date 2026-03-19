@@ -6,7 +6,8 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Box, Radio, UserCheck, Activity } from 'lucide-react'
 
-// --- IMPERIAL ABSOLUTE SOVEREIGNTY V34.0 (ISOLATION) ---
+// --- IMPERIAL ABSOLUTE SOVEREIGNTY V34.1 (DEPLOYMENT_SYNC) ---
+// Note: This version includes the Master-Kill script for parent-site elements.
 
 const CELEBRATION_SCRIPT = [
     "شركة ليفر الرائدة للمصاعد",
@@ -25,7 +26,6 @@ export default function AdClient() {
     const bgMusicRef = useRef<HTMLAudioElement | null>(null)
     const animationFrameRef = useRef<number | null>(null)
 
-    // THE SOVEREIGN ENGINE
     const startInteractionEngine = () => {
         if (!bgMusicRef.current) return;
         const update = () => {
@@ -64,7 +64,6 @@ export default function AdClient() {
         <div className="fixed inset-0 z-[99999] bg-black flex items-center justify-center p-0 m-0 overflow-hidden select-none font-sans">
             <audio ref={bgMusicRef} loop playsInline src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" />
 
-            {/* MASTER-KILL STYLE (Forces any main-site components to vanish) */}
             <style jsx global>{`
                 footer, header, nav, #main-nav, .site-footer, div[data-footer], #footer { 
                     display: none !important; 
@@ -136,7 +135,7 @@ export default function AdClient() {
                          <div className="flex justify-between items-start text-cyan-400/40 text-[10px] robotic-digits tracking-[5px] uppercase font-black">
                               <div className="flex gap-4 items-center">
                                    <Activity className="w-5 h-5 animate-pulse" />
-                                   <span>v34.0_SOVEREIGNTY</span>
+                                   <span>v34.1_SYNCED</span>
                               </div>
                               <Radio className="w-6 h-6 animate-pulse text-red-500" />
                          </div>
