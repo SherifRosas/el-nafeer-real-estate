@@ -53,6 +53,9 @@ export default function AdClient() {
             window.speechSynthesis.speak(unlocker);
         }
 
+        // --- CAMPAIGN ANALYTICS (OPEN EVENT) ---
+        trackInteraction('OPEN', window.location.href);
+
         if (typeof window !== 'undefined' && window.navigator?.vibrate) { window.navigator.vibrate([150, 50, 150]); }
         setTimeout(() => setPhase('stabilizing'), 1000)
         setTimeout(() => { setPhase('active'); playNarrative(0); }, 2000)
@@ -94,11 +97,31 @@ export default function AdClient() {
         }
     }
 
-    const handleAction = (url: string) => {
+    const trackInteraction = async (action: string, url: string) => {
+        try {
+            const searchParams = new URLSearchParams(window.location.search);
+            const source = searchParams.get('src') || 'direct';
+            
+            await fetch('/api/campaign/track', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    campaignId: 'lever-pioneer-v2',
+                    action,
+                    url,
+                    source
+                })
+            });
+        } catch (error) {
+            console.warn('Track Error:', error);
+        }
+    }
+
+    const handleAction = (actionType: string, url: string) => {
         if (typeof window !== 'undefined') {
              if (window.navigator?.vibrate) { window.navigator.vibrate(80); }
-             console.log('Interaction_LOG: ', url);
-             // alert('LINK_PROCESSED: ' + url); // Temporary diagnostic removed to avoid interrupting the <a> tag flow
+             console.log(`Interaction_[${actionType}]_LOG: `, url);
+             trackInteraction(actionType, url);
         }
     }
 
@@ -193,10 +216,10 @@ export default function AdClient() {
                         <a href="tel:+201070615372" className="block pointer-events-auto">
                             <motion.div 
                                 whileTap={{ scale: 0.9 }}
-                                onClick={() => handleAction('tel:+201070615372')}
+                                onClick={() => handleAction('CALLING', 'tel:+201070615372')}
                                 className="flex flex-col items-center gap-1 group"
                             >
-                                <div className="w-12 h-12 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:bg-cyan-500/30 transition-colors shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+                                <div className="w-12 h-12 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:bg-cyan-500/30 transition-colors shadow-[0_0_15px_rgba(34,211,238,0.1)]">
                                     <Phone className="w-5 h-5 text-cyan-400" />
                                 </div>
                                 <span className="text-[8px] robotic-digits text-cyan-400/60 uppercase tracking-widest font-bold">Call</span>
@@ -206,20 +229,20 @@ export default function AdClient() {
                         <a href="https://wa.me/201111171368" target="_blank" rel="noopener noreferrer" className="block pointer-events-auto">
                             <motion.div 
                                 whileTap={{ scale: 0.9 }}
-                                onClick={() => handleAction('https://wa.me/201111171368')}
+                                onClick={() => handleAction('WHATSAPP', 'https://wa.me/201111171368')}
                                 className="flex flex-col items-center gap-1 group"
                             >
-                                <div className="w-14 h-14 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center group-hover:bg-green-500/30 transition-colors shadow-[0_0_20px_rgba(34,197,94,0.15)]">
-                                    <MessageCircle className="w-6 h-6 text-green-400" />
+                                <div className="w-12 h-12 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center group-hover:bg-green-500/30 transition-colors shadow-[0_0_15px_rgba(34,197,94,0.1)]">
+                                    <MessageCircle className="w-5 h-5 text-green-400" />
                                 </div>
-                                <span className="text-[9px] robotic-digits text-green-400 font-black uppercase tracking-[3px]">WhatsApp</span>
+                                <span className="text-[8px] robotic-digits text-green-400/60 uppercase tracking-widest font-bold">WhatsApp</span>
                             </motion.div>
                         </a>
 
                         <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" rel="noopener noreferrer" className="block pointer-events-auto">
                             <motion.div 
                                 whileTap={{ scale: 0.9 }}
-                                onClick={() => handleAction('https://www.google.com/maps?q=29.9656242,31.0922895')}
+                                onClick={() => handleAction('LOCATION', 'https://www.google.com/maps?q=29.9656242,31.0922895')}
                                 className="flex flex-col items-center gap-1 group"
                             >
                                 <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/30 transition-colors shadow-[0_0_15px_rgba(59,130,246,0.1)]">
@@ -237,7 +260,7 @@ export default function AdClient() {
                 <div className="fixed right-[6%] bottom-[8%] z-[2147483647]">
                     <a href="tel:+201065661882" className="block pointer-events-auto">
                         <motion.div 
-                             onClick={() => handleAction('tel:+201065661882')} 
+                             onClick={() => handleAction('SIGNATURE_DIRECT', 'tel:+201065661882')} 
                              className="cursor-pointer bg-black/40 backdrop-blur-md rounded-lg p-2 border border-white/5 hover:bg-white/5 transition-colors flex items-center gap-3"
                         >
                              <div className="flex flex-col text-right">
