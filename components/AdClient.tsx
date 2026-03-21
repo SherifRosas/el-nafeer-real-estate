@@ -206,44 +206,44 @@ export default function AdClient() {
                 </div>
             </div>
 
-            {/* --- IMPERIAL ACTION HUD (MOBILE FORTRESS V103.0) --- */}
+            {/* --- IMPERIAL ACTION HUD (MOBILE LEGACY SHIELD V103.1) --- */}
             {phase === 'active' && (
-                <div className="fixed left-1/2 -translate-x-1/2 top-[5%] mobile:top-[8%] z-[9999] w-[92%] max-w-[450px] pointer-events-auto">
+                <div className="fixed left-1/2 -translate-x-1/2 top-[6%] z-[999999] w-[92%] max-w-[450px] pointer-events-auto">
                     <motion.div 
                         initial={{ y: -30, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        className="bg-black/80 backdrop-blur-2xl border border-cyan-500/40 rounded-[2rem] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_20px_rgba(6,182,212,0.2)] flex justify-around items-center gap-4"
+                        className="bg-black/95 border-2 border-cyan-500/40 rounded-[2.5rem] p-6 shadow-[0_25px_60px_rgba(0,0,0,0.8)] flex justify-around items-center gap-4"
                     >
-                        <a href="tel:+201070615372" className="block transform-gpu active:scale-90 transition-transform">
+                        <a href="tel:+201070615372" className="block active:scale-90 transition-transform">
                             <div 
                                 onClick={() => handleAction('CALLING', 'tel:+201070615372')}
                                 className="flex flex-col items-center gap-2 group"
                             >
-                                <div className="w-16 h-16 rounded-full bg-cyan-500/20 border-2 border-cyan-500/30 flex items-center justify-center group-hover:bg-cyan-500/40 transition-colors shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+                                <div className="w-16 h-16 rounded-full bg-cyan-950/40 border-2 border-cyan-500/30 flex items-center justify-center group-hover:bg-cyan-500/40 transition-colors">
                                     <Phone className="w-7 h-7 text-cyan-400" />
                                 </div>
                                 <span className="text-[10px] robotic-digits text-cyan-400 font-bold uppercase tracking-[0.2em]">Call</span>
                             </div>
                         </a>
 
-                        <a href="https://wa.me/201111171368" target="_blank" rel="noopener noreferrer" className="block transform-gpu active:scale-90 transition-transform">
+                        <a href="https://wa.me/201111171368" target="_blank" rel="noopener noreferrer" className="block active:scale-90 transition-transform">
                             <div 
                                 onClick={() => handleAction('WHATSAPP', 'https://wa.me/201111171368')}
                                 className="flex flex-col items-center gap-2 group"
                             >
-                                <div className="w-16 h-16 rounded-full bg-green-500/20 border-2 border-green-500/30 flex items-center justify-center group-hover:bg-green-500/40 transition-colors shadow-[0_0_20px_rgba(34,197,94,0.2)]">
+                                <div className="w-16 h-16 rounded-full bg-green-950/40 border-2 border-green-500/30 flex items-center justify-center group-hover:bg-green-500/40 transition-colors">
                                     <MessageCircle className="w-7 h-7 text-green-400" />
                                 </div>
                                 <span className="text-[10px] robotic-digits text-green-400 font-bold uppercase tracking-[0.2em]">WhatsApp</span>
                             </div>
                         </a>
 
-                        <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" rel="noopener noreferrer" className="block transform-gpu active:scale-90 transition-transform">
+                        <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" rel="noopener noreferrer" className="block active:scale-90 transition-transform">
                             <div 
                                 onClick={() => handleAction('LOCATION', 'https://www.google.com/maps?q=29.9656242,31.0922895')}
                                 className="flex flex-col items-center gap-2 group"
                             >
-                                <div className="w-16 h-16 rounded-full bg-blue-500/20 border-2 border-blue-500/30 flex items-center justify-center group-hover:bg-blue-500/40 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                                <div className="w-16 h-16 rounded-full bg-blue-950/40 border-2 border-blue-500/30 flex items-center justify-center group-hover:bg-blue-500/40 transition-colors">
                                     <MapPin className="w-7 h-7 text-blue-400" />
                                 </div>
                                 <span className="text-[10px] robotic-digits text-blue-400 font-bold uppercase tracking-[0.2em]">Location</span>
@@ -251,22 +251,22 @@ export default function AdClient() {
                         </a>
                     </motion.div>
 
-                    {/* --- DIAGNOSTIC WATERMARK (MOBILE FORTRESS) --- */}
+                    {/* --- DIAGNOSTIC WATERMARK (LEGACY SHIELD) --- */}
                     <div className="mt-4 flex justify-center">
-                        <span className="bg-green-900/80 text-white text-[8px] px-3 py-1 rounded-full font-black tracking-widest uppercase italic animate-pulse">
-                            v103.0_FORTRESS
+                        <span className="bg-yellow-900/90 text-white text-[8px] px-3 py-1 rounded-full font-black tracking-widest uppercase italic border border-yellow-500/40 mb-2">
+                            v103.1_LEGACY_SHIELD_ACTIVE
                         </span>
                     </div>
                 </div>
             )}
 
-            {/* --- EXTERIOR SIGNATURE (MOBILE OPTIMIZED TOUCH TARGET) --- */}
+            {/* --- EXTERIOR SIGNATURE (LEGACY SHIELD - NO BLUR) --- */}
             {phase === 'active' && (
-                <div className="fixed right-[4%] bottom-[4%] z-[99999] pointer-events-auto">
-                    <a href="tel:+201065661882" className="block transform-gpu active:scale-95 transition-transform">
+                <div className="fixed right-[4%] bottom-[4%] z-[999999]">
+                    <a href="tel:+201065661882" className="block active:scale-95 transition-transform">
                         <div 
                              onClick={() => handleAction('SIGNATURE_DIRECT', 'tel:+201065661882')} 
-                             className="cursor-pointer bg-black/60 backdrop-blur-xl rounded-2xl p-4 border border-white/10 hover:bg-white/20 transition-all flex items-center gap-4 shadow-2xl"
+                             className="cursor-pointer bg-black/90 rounded-2xl p-4 border border-white/20 transition-all flex items-center gap-4 shadow-2xl"
                         >
                              <div className="flex flex-col text-right">
                                   <span className="text-[7px] text-cyan-400/60 tracking-[4px] uppercase font-black italic">DESIGNER</span>
@@ -274,7 +274,7 @@ export default function AdClient() {
                                        Sherif Rosas
                                   </span>
                              </div>
-                             <div className="w-10 h-10 rounded-full border-2 border-[#c5a059]/50 flex items-center justify-center bg-black/40 shadow-[0_0_15px_rgba(197,160,89,0.3)]">
+                             <div className="w-10 h-10 rounded-full border-2 border-[#c5a059]/50 flex items-center justify-center bg-black/40">
                                   <Phone className="w-4 h-4 text-[#c5a059]" />
                              </div>
                         </div>
