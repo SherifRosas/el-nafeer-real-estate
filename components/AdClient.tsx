@@ -194,85 +194,90 @@ export default function AdClient() {
             <div className={`fixed inset-0 z-[10] transition-opacity duration-1500 pointer-events-none ${phase === 'active' || phase === 'stabilizing' ? 'opacity-100' : 'opacity-0'}`}>
                 <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="BG" fill className="object-cover scale-150 blur-3xl opacity-40 brightness-[0.25]" />
                 <div className="relative w-full h-full flex items-center justify-center">
-                    <motion.div animate={{ scale: [1, 1.04 + (audioIntensity * 0.02), 1] }} className="relative w-full h-auto max-h-[96vh] aspect-square flex items-center justify-center overflow-hidden pointer-events-auto">
+                    <motion.div 
+                        animate={{ scale: [1, 1.04 + (audioIntensity * 0.02), 1] }} 
+                        className="relative w-full h-auto max-h-[96vh] aspect-square flex items-center justify-center overflow-hidden pointer-events-auto transform-gpu"
+                    >
                         <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad" fill className="object-contain" priority />
                         <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
-                             <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen" />
+                             <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen transform-gpu" />
                         </div>
-
-                        {/* --- ARTWORK CONTAINER (CENTRAL SQUARE) --- */}
                     </motion.div>
                 </div>
             </div>
 
-            {/* --- IMPERIAL ACTION HUD (LEVEL 48.1 - ULTRA TOP) --- */}
+            {/* --- IMPERIAL ACTION HUD (MOBILE FORTRESS V103.0) --- */}
             {phase === 'active' && (
-                <div className="fixed left-1/2 -translate-x-1/2 top-[2%] z-[2147483647] w-[90%] max-w-[400px]">
+                <div className="fixed left-1/2 -translate-x-1/2 top-[5%] mobile:top-[8%] z-[9999] w-[92%] max-w-[450px] pointer-events-auto">
                     <motion.div 
-                        initial={{ y: -20, opacity: 0 }}
+                        initial={{ y: -30, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        className="bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-2xl p-4 shadow-[0_0_30px_rgba(6,182,212,0.15)] flex justify-around items-center gap-2"
+                        className="bg-black/80 backdrop-blur-2xl border border-cyan-500/40 rounded-[2rem] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_20px_rgba(6,182,212,0.2)] flex justify-around items-center gap-4"
                     >
-                        <a href="tel:+201070615372" className="block pointer-events-auto">
-                            <motion.div 
-                                whileTap={{ scale: 0.9 }}
+                        <a href="tel:+201070615372" className="block transform-gpu active:scale-90 transition-transform">
+                            <div 
                                 onClick={() => handleAction('CALLING', 'tel:+201070615372')}
-                                className="flex flex-col items-center gap-1 group"
+                                className="flex flex-col items-center gap-2 group"
                             >
-                                <div className="w-12 h-12 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:bg-cyan-500/30 transition-colors shadow-[0_0_15px_rgba(34,211,238,0.1)]">
-                                    <Phone className="w-5 h-5 text-cyan-400" />
+                                <div className="w-16 h-16 rounded-full bg-cyan-500/20 border-2 border-cyan-500/30 flex items-center justify-center group-hover:bg-cyan-500/40 transition-colors shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+                                    <Phone className="w-7 h-7 text-cyan-400" />
                                 </div>
-                                <span className="text-[8px] robotic-digits text-cyan-400/60 uppercase tracking-widest font-bold">Call</span>
-                            </motion.div>
+                                <span className="text-[10px] robotic-digits text-cyan-400 font-bold uppercase tracking-[0.2em]">Call</span>
+                            </div>
                         </a>
 
-                        <a href="https://wa.me/201111171368" target="_blank" rel="noopener noreferrer" className="block pointer-events-auto">
-                            <motion.div 
-                                whileTap={{ scale: 0.9 }}
+                        <a href="https://wa.me/201111171368" target="_blank" rel="noopener noreferrer" className="block transform-gpu active:scale-90 transition-transform">
+                            <div 
                                 onClick={() => handleAction('WHATSAPP', 'https://wa.me/201111171368')}
-                                className="flex flex-col items-center gap-1 group"
+                                className="flex flex-col items-center gap-2 group"
                             >
-                                <div className="w-12 h-12 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center group-hover:bg-green-500/30 transition-colors shadow-[0_0_15px_rgba(34,197,94,0.1)]">
-                                    <MessageCircle className="w-5 h-5 text-green-400" />
+                                <div className="w-16 h-16 rounded-full bg-green-500/20 border-2 border-green-500/30 flex items-center justify-center group-hover:bg-green-500/40 transition-colors shadow-[0_0_20px_rgba(34,197,94,0.2)]">
+                                    <MessageCircle className="w-7 h-7 text-green-400" />
                                 </div>
-                                <span className="text-[8px] robotic-digits text-green-400/60 uppercase tracking-widest font-bold">WhatsApp</span>
-                            </motion.div>
+                                <span className="text-[10px] robotic-digits text-green-400 font-bold uppercase tracking-[0.2em]">WhatsApp</span>
+                            </div>
                         </a>
 
-                        <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" rel="noopener noreferrer" className="block pointer-events-auto">
-                            <motion.div 
-                                whileTap={{ scale: 0.9 }}
+                        <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" rel="noopener noreferrer" className="block transform-gpu active:scale-90 transition-transform">
+                            <div 
                                 onClick={() => handleAction('LOCATION', 'https://www.google.com/maps?q=29.9656242,31.0922895')}
-                                className="flex flex-col items-center gap-1 group"
+                                className="flex flex-col items-center gap-2 group"
                             >
-                                <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/30 transition-colors shadow-[0_0_15px_rgba(59,130,246,0.1)]">
-                                    <MapPin className="w-5 h-5 text-blue-400" />
+                                <div className="w-16 h-16 rounded-full bg-blue-500/20 border-2 border-blue-500/30 flex items-center justify-center group-hover:bg-blue-500/40 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                                    <MapPin className="w-7 h-7 text-blue-400" />
                                 </div>
-                                <span className="text-[8px] robotic-digits text-blue-400/60 uppercase tracking-widest font-bold">Location</span>
-                            </motion.div>
+                                <span className="text-[10px] robotic-digits text-blue-400 font-bold uppercase tracking-[0.2em]">Location</span>
+                            </div>
                         </a>
                     </motion.div>
+
+                    {/* --- DIAGNOSTIC WATERMARK (MOBILE FORTRESS) --- */}
+                    <div className="mt-4 flex justify-center">
+                        <span className="bg-green-900/80 text-white text-[8px] px-3 py-1 rounded-full font-black tracking-widest uppercase italic animate-pulse">
+                            v103.0_FORTRESS
+                        </span>
+                    </div>
                 </div>
             )}
 
-            {/* --- EXTERIOR SIGNATURE (BOTTOM RIGHT - STABLE) --- */}
+            {/* --- EXTERIOR SIGNATURE (MOBILE OPTIMIZED TOUCH TARGET) --- */}
             {phase === 'active' && (
-                <div className="fixed right-[6%] bottom-[8%] z-[2147483647]">
-                    <a href="tel:+201065661882" className="block pointer-events-auto">
-                        <motion.div 
+                <div className="fixed right-[4%] bottom-[4%] z-[99999] pointer-events-auto">
+                    <a href="tel:+201065661882" className="block transform-gpu active:scale-95 transition-transform">
+                        <div 
                              onClick={() => handleAction('SIGNATURE_DIRECT', 'tel:+201065661882')} 
-                             className="cursor-pointer bg-black/40 backdrop-blur-md rounded-lg p-2 border border-white/5 hover:bg-white/5 transition-colors flex items-center gap-3"
+                             className="cursor-pointer bg-black/60 backdrop-blur-xl rounded-2xl p-4 border border-white/10 hover:bg-white/20 transition-all flex items-center gap-4 shadow-2xl"
                         >
                              <div className="flex flex-col text-right">
-                                  <span className="text-[6px] text-cyan-400/40 tracking-[4px] uppercase font-bold italic line-clamp-1">MASTER_DESIGNER</span>
-                                  <span style={{ color: GOLD, fontFamily: 'Georgia, serif' }} className="font-medium text-sm italic tracking-wide">
+                                  <span className="text-[7px] text-cyan-400/60 tracking-[4px] uppercase font-black italic">DESIGNER</span>
+                                  <span style={{ color: GOLD, fontFamily: 'Georgia, serif' }} className="font-bold text-base italic tracking-wide">
                                        Sherif Rosas
                                   </span>
                              </div>
-                             <div className="w-8 h-8 rounded-full border border-[#c5a059]/40 flex items-center justify-center p-2 bg-black/40">
-                                  <Phone className="w-3 h-3 text-[#c5a059]" />
+                             <div className="w-10 h-10 rounded-full border-2 border-[#c5a059]/50 flex items-center justify-center bg-black/40 shadow-[0_0_15px_rgba(197,160,89,0.3)]">
+                                  <Phone className="w-4 h-4 text-[#c5a059]" />
                              </div>
-                        </motion.div>
+                        </div>
                     </a>
                 </div>
             )}
