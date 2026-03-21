@@ -152,7 +152,7 @@ export default function AdClient() {
                                  className="w-full h-full relative rounded-full bg-white flex items-center justify-center overflow-hidden p-10 border-4 border-white/50"
                              >
                               <NextImage 
-                                    src="/clients/lever-pioneer/logo_mimic.png" 
+                                    src="/clients/lever-pioneer/logo_mimic.png?v=105" 
                                     alt="Logo" 
                                     width={350} 
                                     height={350} 
@@ -191,14 +191,14 @@ export default function AdClient() {
             )}
             
             {/* --- ARTWORK & LIGHTS & INTERACTION (Z-10) --- */}
-            <div className={`fixed inset-0 z-[10] transition-opacity duration-1500 pointer-events-none ${phase === 'active' || phase === 'stabilizing' ? 'opacity-100' : 'opacity-0'}`}>
-                <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="BG" fill className="object-cover scale-150 blur-3xl opacity-40 brightness-[0.25]" />
+            <div className={`fixed inset-0 z-[10] transition-opacity duration-[1500ms] pointer-events-none ${phase === 'active' || phase === 'stabilizing' ? 'opacity-100' : 'opacity-0'}`}>
+                <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png?v=105" alt="BG" fill className="object-cover scale-150 blur-3xl opacity-40 brightness-[0.25]" />
                 <div className="relative w-full h-full flex items-center justify-center">
                     <motion.div 
                         animate={{ scale: [1, 1.04 + (audioIntensity * 0.02), 1] }} 
                         className="relative w-full h-auto max-h-[96vh] aspect-square flex items-center justify-center overflow-hidden pointer-events-auto transform-gpu"
                     >
-                        <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad" fill className="object-contain" priority />
+                        <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png?v=105" alt="Ad" fill className="object-contain" priority />
                         <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
                              <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen transform-gpu" />
                         </div>
@@ -206,9 +206,9 @@ export default function AdClient() {
                 </div>
             </div>
 
-            {/* --- IMPERIAL ACTION HUD (MOBILE LEGACY SHIELD V103.1) --- */}
+            {/* --- IMPERIAL ACTION HUD (MOBILE EMERGENCY V103.2) --- */}
             {phase === 'active' && (
-                <div className="fixed left-1/2 -translate-x-1/2 top-[6%] z-[999999] w-[92%] max-w-[450px] pointer-events-auto">
+                <div className="fixed left-1/2 -translate-x-1/2 top-10 md:top-20 z-[999999] w-[95%] max-w-[450px] pointer-events-auto">
                     <motion.div 
                         initial={{ y: -30, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
