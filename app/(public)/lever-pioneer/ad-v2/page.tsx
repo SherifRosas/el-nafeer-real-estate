@@ -73,27 +73,66 @@ export default function AdMasterPage() {
           0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255,255,255,0.2); }
           50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(255,255,255,0.4); }
         }
+        /* --- NO-JS INTERACTION ENGINE --- */
+        #activate-ad:checked ~ .ssr-initialization { 
+          display: none !important; 
+        }
+        #activate-ad:checked ~ .ssr-active-hud { 
+          display: flex !important; 
+          animation: fade-in-hud 0.5s forwards;
+        }
+        #activate-ad:checked ~ .ssr-artwork-bg {
+          opacity: 1 !important;
+          filter: blur(0px) !important;
+        }
+        @keyframes fade-in-hud {
+          from { opacity: 0; transform: translate(-50%, -20px); }
+          to { opacity: 1; transform: translate(-50%, 0); }
+        }
       `}} />
       
-      {/* --- SHADOW HYDRATION LAYER (SSR FALLBACK) --- */}
-      <div className="fixed inset-0 z-0 bg-black flex flex-col items-center justify-center pointer-events-none">
-          <div className="flex flex-col items-center gap-24">
+      {/* Hidden State Controller */}
+      <input type="checkbox" id="activate-ad" className="hidden peer" />
+
+      {/* --- SSR BACKGROUND FALLBACK --- */}
+      <div className="fixed inset-0 z-0 bg-black ssr-artwork-bg opacity-40 transition-all duration-1000">
+          <img src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="BG" className="w-full h-full object-cover blur-3xl opacity-30" />
+      </div>
+
+      {/* --- SSR INITIALIZATION LAYER (CLICKABLE VIA LABEL) --- */}
+      <label htmlFor="activate-ad" className="fixed inset-0 z-[6000] bg-black/40 ssr-initialization flex flex-col items-center justify-center p-6 cursor-pointer">
+          <div className="flex flex-col items-center gap-24 pointer-events-none">
               <div 
                   className="w-56 h-56 md:w-80 md:h-80 rounded-full bg-white flex items-center justify-center p-10 border-4 border-white/50 relative"
                   style={{ animation: 'ssr-pulse 2s infinite ease-in-out' }}
               >
                   <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden p-10 shadow-2xl">
-                      <img src="/clients/lever-pioneer/logo_mimic.png?v=105" alt="Loading..." className="w-full h-full object-contain mix-blend-multiply opacity-80" />
+                      <img src="/clients/lever-pioneer/logo_mimic.png?v=105" alt="Click to Activate" className="w-full h-full object-contain mix-blend-multiply opacity-80" />
                   </div>
-                  {/* Static Ripples */}
                   <div className="absolute inset-0 rounded-full border-2 border-white/20" style={{ animation: 'ssr-ripple 3s infinite', animationDelay: '0s' }} />
                   <div className="absolute inset-0 rounded-full border-2 border-white/20" style={{ animation: 'ssr-ripple 3s infinite', animationDelay: '1.5s' }} />
               </div>
               <div className="flex flex-col items-center gap-6 text-center">
                   <h1 className="text-white font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase italic opacity-80">SYSTEM</h1>
-                  <p className="text-sahara-gold font-bold text-lg lg:text-xl tracking-[0.15em] opacity-60 uppercase">[ INITIALIZING ]</p>
+                  <p className="text-sahara-gold font-bold text-lg lg:text-xl tracking-[0.15em] uppercase">[ TAP TO ACTIVATE DIRECT ]</p>
               </div>
           </div>
+      </label>
+
+      {/* --- SSR PURE-CSS HUD (FALLBACK FOR SLOW JS) --- */}
+      <div className="fixed left-1/2 -translate-x-1/2 top-10 z-[6001] w-[95%] max-w-[450px] hidden ssr-active-hud flex-col gap-4">
+          <div className="bg-black border-2 border-cyan-500 rounded-[2.5rem] p-6 shadow-2xl flex justify-around items-center">
+              <a href="tel:+201065661882" className="w-16 h-16 rounded-full bg-cyan-500 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.5)]">
+                  <span className="text-white text-3xl">📞</span>
+              </a>
+              <a href="https://wa.me/201065661882" className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center shadow-[0_0_20px_rgba(34,197,94,0.5)]">
+                  <span className="text-white text-3xl">💬</span>
+              </a>
+              <a href="https://maps.app.goo.gl/r6vGf" className="w-16 h-16 rounded-full bg-sahara-gold flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.5)]">
+                  <span className="text-white text-3xl">📍</span>
+              </a>
+          </div>
+          <p className="text-white/40 text-[10px] text-center font-black uppercase tracking-widest">Legacy Interaction Mode Active</p>
       </div>
 
       <AdClient />
