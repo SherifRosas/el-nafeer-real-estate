@@ -23,6 +23,17 @@ export default function AdClient() {
     const [phase, setPhase] = useState<'idle' | 'descent' | 'stabilizing' | 'active'>('idle')
     const [isAudioUnlocked, setIsAudioUnlocked] = useState(false)
     const [audioIntensity, setAudioIntensity] = useState(0)
+
+    useEffect(() => {
+        // --- UNIFIED HANDOVER (LEVEL 103.7) ---
+        setTimeout(() => {
+            const shadow = document.getElementById('ssr-shadow-layer');
+            if (shadow) {
+                shadow.style.opacity = '0';
+                setTimeout(() => shadow.style.display = 'none', 500);
+            }
+        }, 800);
+    }, []);
     const [lastClick, setLastClick] = useState<{ x: number, y: number } | null>(null)
 
     const bgMusicRef = useRef<HTMLAudioElement | null>(null)
@@ -185,18 +196,18 @@ export default function AdClient() {
                                 className="absolute -inset-4 rounded-full bg-cyan-400/5 blur-2xl -z-20" 
                              />
                         </div>
-                        <div className="flex flex-col items-center gap-6 text-center text-white">
-                             <motion.h1 
-                                animate={{ textShadow: ["0 0 10px rgba(6,182,212,0.4)", "0 0 30px rgba(6,182,212,0.8)", "0 0 10px rgba(6,182,212,0.4)"] }}
-                                transition={{ duration: 2, repeat: Infinity }}
-                                className="font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase italic"
-                             >
-                                 SYSTEM
-                             </motion.h1>
-                             <p className="text-sahara-gold font-bold text-lg lg:text-xl tracking-[0.15em] whitespace-nowrap uppercase">
-                                  [ PRESS TO ACTIVATE ]
-                             </p>
-                        </div>
+                         <div className="flex flex-col items-center gap-6 text-center text-white">
+                              <motion.h1 
+                                 animate={{ textShadow: ["0 0 10px rgba(6,182,212,0.4)", "0 0 30px rgba(6,182,212,0.8)", "0 0 10px rgba(6,182,212,0.4)"] }}
+                                 transition={{ duration: 2, repeat: Infinity }}
+                                 className="font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase italic"
+                              >
+                                  SYSTEM
+                              </motion.h1>
+                              <p className="text-sahara-gold font-bold text-lg lg:text-xl tracking-[0.15em] whitespace-nowrap uppercase">
+                                   [ TAP TO ACTIVATE ]
+                              </p>
+                         </div>
                     </div>
                 </div>
             )}

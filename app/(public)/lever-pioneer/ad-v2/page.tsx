@@ -94,30 +94,27 @@ export default function AdMasterPage() {
       {/* Hidden State Controller */}
       <input type="checkbox" id="activate-ad" className="hidden peer" />
 
-      {/* --- SSR BACKGROUND FALLBACK --- */}
-      <div className="fixed inset-0 z-0 bg-black ssr-artwork-bg opacity-40 transition-all duration-1000">
-          <img src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="BG" className="w-full h-full object-cover blur-3xl opacity-30" />
-      </div>
-
-      {/* --- SSR INITIALIZATION LAYER (CLICKABLE VIA LABEL) --- */}
-      <label htmlFor="activate-ad" className="fixed inset-0 z-[6000] bg-black/40 ssr-initialization flex flex-col items-center justify-center p-6 cursor-pointer">
-          <div className="flex flex-col items-center gap-24 pointer-events-none">
-              <div 
-                  className="w-56 h-56 md:w-80 md:h-80 rounded-full bg-white flex items-center justify-center p-10 border-4 border-white/50 relative"
-                  style={{ animation: 'ssr-pulse 2s infinite ease-in-out' }}
-              >
-                  <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden p-10 shadow-2xl">
-                      <img src="/clients/lever-pioneer/logo_mimic.png?v=105" alt="Click to Activate" className="w-full h-full object-contain mix-blend-multiply opacity-80" />
-                  </div>
-                  <div className="absolute inset-0 rounded-full border-2 border-white/20" style={{ animation: 'ssr-ripple 3s infinite', animationDelay: '0s' }} />
-                  <div className="absolute inset-0 rounded-full border-2 border-white/20" style={{ animation: 'ssr-ripple 3s infinite', animationDelay: '1.5s' }} />
-              </div>
+      {/* --- SHADOW HYDRATION LAYER (SSR FALLBACK) --- */}
+      <div id="ssr-shadow-layer" className="fixed inset-0 z-[5999] bg-black flex flex-col items-center justify-center pointer-events-none transition-opacity duration-500">
+          <div className="flex flex-col items-center gap-20">
+              <label htmlFor="activate-ad" className="pointer-events-auto">
+                <div 
+                    className="w-56 h-56 md:w-80 md:h-80 rounded-full bg-white flex items-center justify-center p-10 border-4 border-white/50 relative cursor-pointer"
+                    style={{ animation: 'ssr-pulse 2s infinite ease-in-out' }}
+                >
+                    <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden p-10 shadow-2xl">
+                        <img src="/clients/lever-pioneer/logo_mimic.png?v=105" alt="Activate" className="w-full h-full object-contain mix-blend-multiply opacity-80" />
+                    </div>
+                    <div className="absolute inset-0 rounded-full border-2 border-white/20" style={{ animation: 'ssr-ripple 3s infinite', animationDelay: '0s' }} />
+                    <div className="absolute inset-0 rounded-full border-2 border-white/20" style={{ animation: 'ssr-ripple 3s infinite', animationDelay: '1.5s' }} />
+                </div>
+              </label>
               <div className="flex flex-col items-center gap-6 text-center">
                   <h1 className="text-white font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase italic opacity-80">SYSTEM</h1>
-                  <p className="text-sahara-gold font-bold text-lg lg:text-xl tracking-[0.15em] uppercase">[ TAP TO ACTIVATE DIRECT ]</p>
+                  <p className="text-sahara-gold font-bold text-lg lg:text-xl tracking-[0.15em] uppercase">[ TAP TO ACTIVATE ]</p>
               </div>
           </div>
-      </label>
+      </div>
 
       {/* --- SSR PURE-CSS HUD (FALLBACK FOR SLOW JS) --- */}
       <div className="fixed left-1/2 -translate-x-1/2 top-10 z-[6001] w-[95%] max-w-[450px] hidden ssr-active-hud flex-col gap-4">
