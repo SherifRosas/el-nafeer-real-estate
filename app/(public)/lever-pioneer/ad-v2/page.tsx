@@ -47,5 +47,26 @@ export const metadata: Metadata = {
 }
 
 export default function AdMasterPage() {
-  return <AdClient />
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: `
+        footer, header, nav, #main-nav, .site-footer, div[data-footer], #footer, .root-footer { 
+          display: none !important; 
+          visibility: hidden !important; 
+          opacity: 0 !important; 
+          pointer-events: none !important; 
+          height: 0 !important;
+          overflow: hidden !important;
+        }
+        body { 
+          background: black !important; 
+          overflow: hidden !important; 
+          position: fixed !important; 
+          width: 100% !important; 
+          height: 100% !important; 
+        }
+      `}} />
+      <AdClient />
+    </>
+  )
 }

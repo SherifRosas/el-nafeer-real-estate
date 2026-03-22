@@ -29,15 +29,23 @@ export default function AdClient() {
     const animationFrameRef = useRef<number | null>(null)
 
     const startInteractionEngine = () => {
-        if (!bgMusicRef.current) return;
-        const update = () => {
-            const pulse = 0.4 + Math.sin(Date.now() / 240) * 0.45;
-            setAudioIntensity(pulse);
-            animationFrameRef.current = requestAnimationFrame(update);
-        };
-        update();
-        bgMusicRef.current.muted = false; bgMusicRef.current.volume = 1.0;
-        bgMusicRef.current.play().catch(() => {});
+        try {
+            if (!bgMusicRef.current) return;
+            const update = () => {
+                try {
+                    const pulse = 0.4 + Math.sin(Date.now() / 240) * 0.45;
+                    setAudioIntensity(pulse);
+                    animationFrameRef.current = requestAnimationFrame(update);
+                } catch (e) {
+                    console.error("Pulse Engine Error:", e);
+                }
+            };
+            update();
+            bgMusicRef.current.muted = false; bgMusicRef.current.volume = 1.0;
+            bgMusicRef.current.play().catch((e) => console.warn("Audio Play Blocked:", e));
+        } catch (error) {
+            console.error("Interaction Engine Failure:", error);
+        }
     }
 
     const startUltimaSequence = () => {
@@ -65,35 +73,41 @@ export default function AdClient() {
         if (index >= CELEBRATION_SCRIPT.length) return;
         if (typeof window === 'undefined' || !window.speechSynthesis) return;
 
-        const startSpeech = () => {
-            const utterance = new SpeechSynthesisUtterance(CELEBRATION_SCRIPT[index])
-            const voices = window.speechSynthesis.getVoices();
-            const preferredVoice = voices.find(v => v.lang === 'ar-EG') || 
-                                   voices.find(v => v.lang.startsWith('ar')) ||
-                                   null;
-            
-            if (preferredVoice) {
-                utterance.voice = preferredVoice;
-                utterance.lang = preferredVoice.lang;
-            } else {
-                utterance.lang = 'ar-EG';
+        try {
+            const startSpeech = () => {
+                try {
+                    const utterance = new SpeechSynthesisUtterance(CELEBRATION_SCRIPT[index])
+                    const voices = window.speechSynthesis.getVoices();
+                    const preferredVoice = voices.find(v => v.lang === 'ar-EG') || 
+                                           voices.find(v => v.lang.startsWith('ar')) ||
+                                           null;
+                    
+                    if (preferredVoice) {
+                        utterance.voice = preferredVoice;
+                        utterance.lang = preferredVoice.lang;
+                    } else {
+                        utterance.lang = 'ar-EG';
+                    }
+
+                    utterance.volume = 1; utterance.pitch = 0.95; utterance.rate = 0.85;
+                    utterance.onend = () => setTimeout(() => playNarrative(index + 1), 1800);
+                    window.speechSynthesis.speak(utterance)
+                } catch (e) {
+                    console.error("Voice Track Error:", e);
+                    setTimeout(() => playNarrative(index + 1), 2000); // Fallback to next track
+                }
             }
 
-            utterance.volume = 1; // FORCE MAX VOLUME
-            utterance.pitch = 0.95; 
-            utterance.rate = 0.85;
-            utterance.onend = () => setTimeout(() => playNarrative(index + 1), 1800);
-            window.speechSynthesis.speak(utterance)
-        }
-
-        // --- ASYNC VOICE DISCOVERY ---
-        if (window.speechSynthesis.getVoices().length === 0) {
-            window.speechSynthesis.onvoiceschanged = () => {
-                window.speechSynthesis.onvoiceschanged = null;
+            if (window.speechSynthesis.getVoices().length === 0) {
+                window.speechSynthesis.onvoiceschanged = () => {
+                    window.speechSynthesis.onvoiceschanged = null;
+                    startSpeech();
+                };
+            } else {
                 startSpeech();
-            };
-        } else {
-            startSpeech();
+            }
+        } catch (error) {
+            console.error("Speech Engine Error:", error);
         }
     }
 
@@ -133,19 +147,16 @@ export default function AdClient() {
             </audio>
 
             <style jsx global>{`
-                footer, header, nav, #main-nav, .site-footer, div[data-footer], #footer { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
-                body { background: black !important; overflow: hidden !important; position: fixed !important; width: 100% !important; height: 100% !important; cursor: default; }
+                body { background: black !important; overflow: hidden !important; position: fixed !important; width: 100% !important; height: 100% !important; }
             `}</style>
             
             {/* --- INITIALIZATION (Z-9999) --- */}
             {!isAudioUnlocked && (
                 <div className="fixed inset-0 z-[5000] bg-black flex flex-col items-center justify-center p-6">
-                    <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center gap-24">
-                        <motion.div 
-                            onTap={startUltimaSequence}
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.95, y: 5 }}
-                            className="relative w-72 h-72 flex items-center justify-center cursor-pointer group pointer-events-auto"
+                    <div className="flex flex-col items-center gap-24">
+                        <div 
+                            onClick={startUltimaSequence}
+                            className="w-56 h-56 md:w-80 md:h-80 rounded-full bg-white flex items-center justify-center p-10 border-4 border-white/50 cursor-pointer shadow-[0_0_50px_rgba(255,255,255,0.3)] transition-transform active:scale-95"
                         >
                              <div 
                                  style={{ boxShadow: '0 25px 50px -12px rgba(0,0,0,0.7), inset 0 -10px 20px rgba(0,0,0,0.2), inset 0 10px 20px rgba(255,255,255,0.8)' }}
@@ -173,7 +184,7 @@ export default function AdClient() {
                                 transition={{ duration: 1.5, repeat: Infinity }} 
                                 className="absolute -inset-4 rounded-full bg-cyan-400/5 blur-2xl -z-20" 
                              />
-                        </motion.div>
+                        </div>
                         <div className="flex flex-col items-center gap-6 text-center text-white">
                              <motion.h1 
                                 animate={{ textShadow: ["0 0 10px rgba(6,182,212,0.4)", "0 0 30px rgba(6,182,212,0.8)", "0 0 10px rgba(6,182,212,0.4)"] }}
@@ -186,7 +197,7 @@ export default function AdClient() {
                                   [ PRESS TO ACTIVATE ]
                              </p>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             )}
             
