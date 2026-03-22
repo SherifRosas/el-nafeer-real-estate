@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import AdClient from '@/components/AdClient'
+import AdClient from '@/components/QuantumAd'
 
 // --- IMPERIAL SERVER-SIDE METADATA (THE WHATSAPP FIX) ---
 // By using a Server Component for the page, WhatsApp will definitively find 

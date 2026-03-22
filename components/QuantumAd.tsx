@@ -18,7 +18,7 @@ const CELEBRATION_SCRIPT = [
 
 const GOLD = "#c5a059"; 
 
-export default function AdClient() {
+export default function QuantumAd() {
     const { language } = useLanguage()
     const [phase, setPhase] = useState<'idle' | 'descent' | 'stabilizing' | 'active'>('idle')
     const [isAudioUnlocked, setIsAudioUnlocked] = useState(false)
