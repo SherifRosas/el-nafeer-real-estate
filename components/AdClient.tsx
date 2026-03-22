@@ -25,8 +25,18 @@ export default function AdClient() {
     const [audioIntensity, setAudioIntensity] = useState(0)
 
     useEffect(() => {
+        // --- ATOMIC ACTIVATION SYNC (LEVEL 103.9) ---
+        const checkbox = document.getElementById('activate-ad') as HTMLInputElement;
+        
+        const syncState = () => {
+            if (checkbox?.checked && !isAudioUnlocked) {
+                startUltimaSequence();
+            }
+        };
+
         // --- UNIFIED HANDOVER (LEVEL 103.8) ---
         setTimeout(() => {
+            syncState();
             const shadow = document.getElementById('ssr-shadow-layer');
             const shadowHud = document.getElementById('ssr-active-hud-layer');
             if (shadow) {
