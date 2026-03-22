@@ -25,12 +25,17 @@ export default function AdClient() {
     const [audioIntensity, setAudioIntensity] = useState(0)
 
     useEffect(() => {
-        // --- UNIFIED HANDOVER (LEVEL 103.7) ---
+        // --- UNIFIED HANDOVER (LEVEL 103.8) ---
         setTimeout(() => {
             const shadow = document.getElementById('ssr-shadow-layer');
+            const shadowHud = document.getElementById('ssr-active-hud-layer');
             if (shadow) {
                 shadow.style.opacity = '0';
                 setTimeout(() => shadow.style.display = 'none', 500);
+            }
+            if (shadowHud) {
+                shadowHud.style.opacity = '0';
+                setTimeout(() => shadowHud.style.display = 'none', 500);
             }
         }, 800);
     }, []);

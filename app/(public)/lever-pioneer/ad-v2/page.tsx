@@ -117,7 +117,7 @@ export default function AdMasterPage() {
       </div>
 
       {/* --- SSR PURE-CSS HUD (FALLBACK FOR SLOW JS) --- */}
-      <div className="fixed left-1/2 -translate-x-1/2 top-10 z-[6001] w-[95%] max-w-[450px] hidden ssr-active-hud flex-col gap-4">
+      <div id="ssr-active-hud-layer" className="fixed left-1/2 -translate-x-1/2 top-10 z-[6001] w-[95%] max-w-[450px] hidden ssr-active-hud flex-col gap-4 transition-opacity duration-500">
           <div className="bg-black border-2 border-cyan-500 rounded-[2.5rem] p-6 shadow-2xl flex justify-around items-center">
               <a href="tel:+201065661882" className="w-16 h-16 rounded-full bg-cyan-500 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.5)]">
                   <span className="text-white text-3xl">📞</span>
