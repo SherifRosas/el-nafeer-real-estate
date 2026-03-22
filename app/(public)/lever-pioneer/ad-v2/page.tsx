@@ -91,33 +91,33 @@ export default function AdMasterPage() {
         }
       `}} />
       
-      {/* Hidden State Controller */}
-      <input type="checkbox" id="activate-ad" className="hidden peer" />
+      {/* Hidden State Controller (Safari 12 Compatible) */}
+      <input type="checkbox" id="activate-ad" style={{ opacity: 0, position: 'absolute', pointerEvents: 'none' }} className="peer" />
 
       {/* --- SHADOW HYDRATION LAYER (SSR FALLBACK) --- */}
-      <div id="ssr-shadow-layer" className="fixed inset-0 z-[5999] bg-black flex flex-col items-center justify-center pointer-events-none transition-opacity duration-500">
-          <div className="flex flex-col items-center gap-20">
-              <label htmlFor="activate-ad" className="pointer-events-auto">
-                <div 
-                    className="w-56 h-56 md:w-80 md:h-80 rounded-full bg-white flex items-center justify-center p-10 border-4 border-white/50 relative cursor-pointer"
-                    style={{ animation: 'ssr-pulse 2s infinite ease-in-out' }}
-                >
-                    <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden p-10 shadow-2xl">
-                        <img src="/clients/lever-pioneer/logo_mimic.png?v=105" alt="Activate" className="w-full h-full object-contain mix-blend-multiply opacity-80" />
-                    </div>
-                    <div className="absolute inset-0 rounded-full border-2 border-white/20" style={{ animation: 'ssr-ripple 3s infinite', animationDelay: '0s' }} />
-                    <div className="absolute inset-0 rounded-full border-2 border-white/20" style={{ animation: 'ssr-ripple 3s infinite', animationDelay: '1.5s' }} />
-                </div>
-              </label>
-              <div className="flex flex-col items-center gap-6 text-center">
-                  <h1 className="text-white font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase italic opacity-80">SYSTEM</h1>
-                  <p className="text-sahara-gold font-bold text-lg lg:text-xl tracking-[0.15em] uppercase">[ TAP TO ACTIVATE ]</p>
+      <div id="ssr-shadow-layer" className="fixed inset-0 z-[99999] bg-black flex flex-col items-center justify-center transition-opacity duration-500">
+          <label htmlFor="activate-ad" className="flex flex-col items-center justify-center w-full h-full cursor-pointer">
+              <div className="flex flex-col items-center gap-20 pointer-events-none">
+                  <div 
+                      className="w-56 h-56 md:w-80 md:h-80 rounded-full bg-white flex items-center justify-center p-10 border-4 border-white/50 relative"
+                      style={{ animation: 'ssr-pulse 2s infinite ease-in-out' }}
+                  >
+                      <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden p-10 shadow-2xl">
+                          <img src="/clients/lever-pioneer/logo_mimic.png?v=105" alt="Activate" className="w-full h-full object-contain mix-blend-multiply opacity-80" />
+                      </div>
+                      <div className="absolute inset-0 rounded-full border-2 border-white/20" style={{ animation: 'ssr-ripple 3s infinite', animationDelay: '0s' }} />
+                      <div className="absolute inset-0 rounded-full border-2 border-white/20" style={{ animation: 'ssr-ripple 3s infinite', animationDelay: '1.5s' }} />
+                  </div>
+                  <div className="flex flex-col items-center gap-6 text-center">
+                      <h1 className="text-white font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase italic opacity-80">SYSTEM</h1>
+                      <p className="text-sahara-gold font-bold text-lg lg:text-xl tracking-[0.15em] uppercase">[ TAP TO ACTIVATE ]</p>
+                  </div>
               </div>
-          </div>
+          </label>
       </div>
 
       {/* --- SSR PURE-CSS HUD (FALLBACK FOR SLOW JS) --- */}
-      <div id="ssr-active-hud-layer" className="fixed left-1/2 -translate-x-1/2 top-10 z-[6001] w-[95%] max-w-[450px] hidden ssr-active-hud flex-col gap-4 transition-opacity duration-500">
+      <div id="ssr-active-hud-layer" className="fixed left-1/2 -translate-x-1/2 top-10 z-[100000] w-[95%] max-w-[450px] hidden ssr-active-hud flex-col gap-4 transition-opacity duration-500">
           <div className="bg-black border-2 border-cyan-500 rounded-[2.5rem] p-6 shadow-2xl flex justify-around items-center">
               <a href="tel:+201065661882" className="w-16 h-16 rounded-full bg-cyan-500 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.5)]">
                   <span className="text-white text-3xl">📞</span>

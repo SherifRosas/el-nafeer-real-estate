@@ -34,7 +34,7 @@ export default function AdClient() {
             }
         };
 
-        // --- UNIFIED HANDOVER (LEVEL 103.8) ---
+        // --- UNIFIED HANDOVER (LEVEL 104.1) ---
         setTimeout(() => {
             syncState();
             const shadow = document.getElementById('ssr-shadow-layer');
@@ -47,7 +47,7 @@ export default function AdClient() {
                 shadowHud.style.opacity = '0';
                 setTimeout(() => shadowHud.style.display = 'none', 500);
             }
-        }, 800);
+        }, 1500);
     }, []);
     const [lastClick, setLastClick] = useState<{ x: number, y: number } | null>(null)
 
