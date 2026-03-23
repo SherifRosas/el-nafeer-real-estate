@@ -74,7 +74,7 @@ export default function AdMasterPage() {
           50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(255,255,255,0.4); }
         }
         /* --- NO-JS INTERACTION ENGINE --- */
-        #activate-ad:checked ~ .ssr-initialization { 
+        #activate-ad:checked ~ #ssr-shadow-layer .ssr-initialization { 
           display: none !important; 
         }
         #activate-ad:checked ~ .ssr-active-hud { 
@@ -97,7 +97,7 @@ export default function AdMasterPage() {
       {/* --- SHADOW HYDRATION LAYER (SSR FALLBACK) --- */}
       <div id="ssr-shadow-layer" className="fixed inset-0 z-[99999] bg-[#020617] flex flex-col items-center justify-center transition-opacity duration-500">
           <label htmlFor="activate-ad" className="flex flex-col items-center justify-center w-full h-full cursor-pointer">
-              <div className="flex flex-col items-center gap-20 pointer-events-none">
+              <div className="flex flex-col items-center gap-20 pointer-events-none ssr-initialization">
                   <div 
                       className="w-56 h-56 md:w-80 md:h-80 rounded-full bg-white flex items-center justify-center p-10 border-4 border-white/50 relative"
                       style={{ animation: 'ssr-pulse 2s infinite ease-in-out' }}
