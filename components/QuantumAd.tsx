@@ -161,13 +161,6 @@ export default function QuantumAd() {
                             </div>
                         </a>
                     </motion.div>
-
-                    {/* --- DIAGNOSTIC WATERMARK (LEGACY SHIELD) --- */}
-                    <div className="mt-4 flex justify-center">
-                        <span className="bg-yellow-900/90 text-white text-[8px] px-3 py-1 rounded-full font-black tracking-widest uppercase italic border border-yellow-500/40 mb-2">
-                            v103.1_LEGACY_SHIELD_ACTIVE
-                        </span>
-                    </div>
                 </div>
             )}
 

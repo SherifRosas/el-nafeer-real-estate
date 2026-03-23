@@ -78,6 +78,10 @@ export default function AdMasterPage() {
           display: flex !important; 
           animation: fade-in-hud 0.5s forwards;
         }
+        #ssr-artwork-bg {
+          opacity: 1 !important;
+          filter: blur(0px) !important;
+        }
         @keyframes fade-in-hud {
           from { opacity: 0; transform: translate(-50%, -20px); }
           to { opacity: 1; transform: translate(-50%, 0); }
@@ -98,7 +102,11 @@ export default function AdMasterPage() {
                   <span className="text-white text-3xl">📍</span>
               </a>
           </div>
-          <p className="text-white/40 text-[10px] text-center font-black uppercase tracking-widest">Legacy Interaction Mode Active</p>
+      </div>
+
+      {/* --- CINEMATIC BACKGROUND ARTWORK (LEVEL 110.2 RESTORED) --- */}
+      <div id="ssr-artwork-bg" className="fixed inset-0 z-[5] opacity-0 ssr-artwork-bg pointer-events-none flex items-center justify-center">
+          <img src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Artwork" className="w-full h-auto max-h-[90vh] object-contain" />
       </div>
 
       <AdClient />
