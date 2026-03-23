@@ -54,33 +54,32 @@ export default function QuantumAd() {
         }
     }
 
-    useEffect(() => {
-        // --- STEALTH MUSIC UNLOCKER (LEVEL 110.3) ---
-        const unlockMusic = () => {
-            if (bgMusicRef.current && !isAudioUnlocked) {
-                // Ensure audio is ready to fire
-                bgMusicRef.current.muted = false;
-                bgMusicRef.current.volume = 1.0;
-                
-                const playPromise = bgMusicRef.current.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise
-                        .then(() => {
-                            setIsAudioUnlocked(true);
-                            setIsMuted(false);
-                            startInteractionEngine();
-                            // Only remove listeners if play succeeded
-                            window.removeEventListener('click', unlockMusic);
-                            window.removeEventListener('touchstart', unlockMusic);
-                        })
-                        .catch(e => {
-                            console.warn("Music Play Still Blocked - Retrying on next touch:", e);
-                        });
-                }
+    const unlockMusic = () => {
+        if (bgMusicRef.current && !isAudioUnlocked) {
+            // Ensure audio is ready to fire
+            bgMusicRef.current.muted = false;
+            bgMusicRef.current.volume = 1.0;
+            
+            const playPromise = bgMusicRef.current.play();
+            
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        setIsAudioUnlocked(true);
+                        setIsMuted(false);
+                        startInteractionEngine();
+                        // Only remove listeners if play succeeded
+                        window.removeEventListener('click', unlockMusic);
+                        window.removeEventListener('touchstart', unlockMusic);
+                    })
+                    .catch(e => {
+                        console.warn("Music Play Still Blocked - Retrying on next touch:", e);
+                    });
             }
-        };
+        }
+    };
 
+    useEffect(() => {
         window.addEventListener('click', unlockMusic);
         window.addEventListener('touchstart', unlockMusic);
 
