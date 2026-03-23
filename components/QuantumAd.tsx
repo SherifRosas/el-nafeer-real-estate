@@ -2,7 +2,7 @@
 
 import NextImage from 'next/image'
 import { useLanguage } from '@/components/LanguageContext'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Phone, MessageCircle, MapPin, ExternalLink } from 'lucide-react'
 
@@ -40,7 +40,7 @@ export default function QuantumAd() {
         }
     }
 
-    const startInteractionEngine = () => {
+    const startInteractionEngine = useCallback(() => {
         try {
             if (!bgMusicRef.current) return;
             const update = () => {
@@ -52,9 +52,9 @@ export default function QuantumAd() {
         } catch (error) {
             console.error("Interaction Engine Failure:", error);
         }
-    }
+    }, []);
 
-    const unlockMusic = () => {
+    const unlockMusic = useCallback(() => {
         if (bgMusicRef.current && !isAudioUnlocked) {
             // Ensure audio is ready to fire
             bgMusicRef.current.muted = false;
@@ -77,7 +77,7 @@ export default function QuantumAd() {
                     });
             }
         }
-    };
+    }, [isAudioUnlocked, startInteractionEngine]);
 
     useEffect(() => {
         window.addEventListener('click', unlockMusic);
@@ -104,7 +104,7 @@ export default function QuantumAd() {
             window.removeEventListener('click', unlockMusic);
             window.removeEventListener('touchstart', unlockMusic);
         };
-    }, []);
+    }, [unlockMusic]);
 
     const handleAction = (actionType: string, url: string) => {
         if (typeof window !== 'undefined') {
@@ -127,7 +127,7 @@ export default function QuantumAd() {
             {/* --- ARTWORK & LIGHTS & INTERACTION (Z-10) --- */}
             <div className={`fixed inset-0 z-[10] transition-opacity duration-[1500ms] pointer-events-none ${phase === 'active' || phase === 'stabilizing' ? 'opacity-100' : 'opacity-0'}`}>
                 <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="BG" fill className="object-cover scale-150 blur-3xl opacity-40 brightness-[0.25]" />
-                <div className="relative w-full h-full flex items-center justify-center">
+                <div className="relative w-full h-full flex items-center justify-center translate-y-[40px]">
                     <motion.div 
                         animate={{ scale: [1, 1.04 + (audioIntensity * 0.02), 1] }} 
                         className="relative w-full h-auto max-h-[96vh] aspect-square flex items-center justify-center overflow-hidden pointer-events-auto transform-gpu"

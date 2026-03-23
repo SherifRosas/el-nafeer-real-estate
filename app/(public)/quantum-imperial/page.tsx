@@ -139,7 +139,7 @@ export default function AdMasterPage() {
       `}} />
 
       {/* --- CINEMATIC BACKGROUND ARTWORK (LEVEL 110.2 RESTORED) --- */}
-      <div id="ssr-artwork-bg" className="fixed inset-0 z-[5] opacity-0 ssr-artwork-bg pointer-events-none flex items-center justify-center">
+      <div id="ssr-artwork-bg" className="fixed inset-0 z-[5] opacity-0 ssr-artwork-bg pointer-events-none flex items-center justify-center translate-y-[40px]">
           <img src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Artwork" className="w-full h-auto max-h-[90vh] object-contain" />
       </div>
 
