@@ -142,7 +142,7 @@ export default function QuantumAd() {
 
             {/* --- IMPERIAL ACTION HUD (COMPACT CALIBRATION V110.5) --- */}
             {phase === 'active' && (
-                <div className="fixed left-1/2 -translate-x-1/2 top-[130px] z-[999999] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4 pointer-events-auto">
+                <div className="fixed left-1/2 -translate-x-1/2 top-[130px] sm:top-[200px] z-[999999] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4 pointer-events-auto">
                     <motion.a 
                         href="tel:+201070615372" 
                         initial={{ scale: 0, opacity: 0 }}
