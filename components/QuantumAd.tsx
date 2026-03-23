@@ -29,7 +29,7 @@ export default function QuantumAd() {
         const checkbox = document.getElementById('activate-ad') as HTMLInputElement;
         
         const syncState = () => {
-            if (checkbox?.checked && !isAudioUnlocked) {
+            if (checkbox && checkbox.checked && !isAudioUnlocked) {
                 startUltimaSequence();
             }
         };
@@ -90,7 +90,7 @@ export default function QuantumAd() {
         // --- CAMPAIGN ANALYTICS (OPEN EVENT) ---
         trackInteraction('OPEN', window.location.href);
 
-        if (typeof window !== 'undefined' && window.navigator?.vibrate) { window.navigator.vibrate([150, 50, 150]); }
+        if (typeof window !== 'undefined' && window.navigator && window.navigator.vibrate) { window.navigator.vibrate([150, 50, 150]); }
         setTimeout(() => setPhase('stabilizing'), 1000)
         setTimeout(() => { setPhase('active'); playNarrative(0); }, 2000)
     }
@@ -159,7 +159,7 @@ export default function QuantumAd() {
 
     const handleAction = (actionType: string, url: string) => {
         if (typeof window !== 'undefined') {
-             if (window.navigator?.vibrate) { window.navigator.vibrate(80); }
+             if (window.navigator && window.navigator.vibrate) { window.navigator.vibrate(80); }
              console.log(`Interaction_[${actionType}]_LOG: `, url);
              trackInteraction(actionType, url);
         }
