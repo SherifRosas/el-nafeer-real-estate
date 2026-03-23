@@ -54,30 +54,50 @@ export default function QuantumAd() {
     }
 
     useEffect(() => {
-        // --- STEALTH MUSIC UNLOCKER (LEVEL 110.1) ---
+        // --- STEALTH MUSIC UNLOCKER (LEVEL 110.3) ---
         const unlockMusic = () => {
             if (bgMusicRef.current && !isAudioUnlocked) {
+                // Ensure audio is ready to fire
                 bgMusicRef.current.muted = false;
                 bgMusicRef.current.volume = 1.0;
-                bgMusicRef.current.play().catch(e => console.warn("Music Play Blocked:", e));
-                setIsAudioUnlocked(true);
-                startInteractionEngine();
-                window.removeEventListener('click', unlockMusic);
-                window.removeEventListener('touchstart', unlockMusic);
+                
+                const playPromise = bgMusicRef.current.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            setIsAudioUnlocked(true);
+                            startInteractionEngine();
+                            // Only remove listeners if play succeeded
+                            window.removeEventListener('click', unlockMusic);
+                            window.removeEventListener('touchstart', unlockMusic);
+                        })
+                        .catch(e => {
+                            console.warn("Music Play Still Blocked - Retrying on next touch:", e);
+                        });
+                }
             }
         };
 
         window.addEventListener('click', unlockMusic);
         window.addEventListener('touchstart', unlockMusic);
 
-        const shadow = document.getElementById('ssr-shadow-layer');
-        const shadowHud = document.getElementById('ssr-active-hud-layer');
-        if (shadow) { shadow.style.display = 'none'; }
-        if (shadowHud) { shadowHud.style.display = 'none'; }
-
         trackInteraction('OPEN_INSTANT', window.location.href);
 
+        // --- HUD TAKEOVER (LEVEL 110.3) ---
+        // Forcefully remove SSR fallback elements to prevent overlap
+        const cleanupSSR = () => {
+            const ssrHud = document.getElementById('ssr-active-hud-layer');
+            const ssrBg = document.getElementById('ssr-artwork-bg');
+            if (ssrHud) ssrHud.remove();
+            if (ssrBg) ssrBg.remove();
+        };
+
+        // Delay slightly to ensure React has painted its own HUD
+        const timer = setTimeout(cleanupSSR, 100);
+
         return () => {
+            clearTimeout(timer);
             window.removeEventListener('click', unlockMusic);
             window.removeEventListener('touchstart', unlockMusic);
         };
@@ -92,7 +112,7 @@ export default function QuantumAd() {
 
     return (
         <div className="fixed inset-0 z-[1] bg-black flex items-center justify-center p-0 m-0 overflow-hidden select-none font-sans">
-            <audio ref={bgMusicRef} loop playsInline preload="auto">
+            <audio ref={bgMusicRef} loop playsInline preload="auto" muted>
                 <source src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" type="audio/mpeg" />
                 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg" />
             </audio>
@@ -119,7 +139,7 @@ export default function QuantumAd() {
 
             {/* --- IMPERIAL ACTION HUD (MOBILE EMERGENCY V103.2) --- */}
             {phase === 'active' && (
-                <div className="fixed left-1/2 -translate-x-1/2 top-10 md:top-20 z-[999999] w-[95%] max-w-[450px] pointer-events-auto">
+                <div className="fixed left-1/2 -translate-x-1/2 top-10 z-[999999] w-[95%] max-w-[450px] pointer-events-auto">
                     <motion.div 
                         initial={{ y: -30, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
