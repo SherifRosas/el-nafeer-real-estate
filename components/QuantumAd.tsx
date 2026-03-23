@@ -139,48 +139,55 @@ export default function QuantumAd() {
 
             {/* --- IMPERIAL ACTION HUD (MOBILE EMERGENCY V103.2) --- */}
             {phase === 'active' && (
-                <div className="fixed left-1/2 -translate-x-1/2 top-10 z-[999999] w-[95%] max-w-[450px] pointer-events-auto">
-                    <motion.div 
-                        initial={{ y: -30, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        className="bg-black/95 border-2 border-cyan-500/40 rounded-[2.5rem] p-6 shadow-[0_25px_60px_rgba(0,0,0,0.8)] flex justify-around items-center gap-4"
+                <div className="fixed left-1/2 -translate-x-1/2 top-10 z-[999999] w-[95%] max-w-[450px] flex justify-around items-center gap-6 pointer-events-auto">
+                    <motion.a 
+                        href="tel:+201070615372" 
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.1 }}
+                        className="block active:scale-90 transition-transform"
                     >
-                        <a href="tel:+201070615372" className="block active:scale-90 transition-transform">
-                            <div 
-                                onClick={() => handleAction('CALLING', 'tel:+201070615372')}
-                                className="flex flex-col items-center gap-2 group"
-                            >
-                                <div className="w-16 h-16 rounded-full bg-cyan-950/40 border-2 border-cyan-500/30 flex items-center justify-center group-hover:bg-cyan-500/40 transition-colors">
-                                    <Phone className="w-7 h-7 text-cyan-400" />
-                                </div>
-                                <span className="text-[10px] robotic-digits text-cyan-400 font-bold uppercase tracking-[0.2em]">Call</span>
-                            </div>
-                        </a>
+                        <div 
+                            onClick={() => handleAction('CALLING', 'tel:+201070615372')}
+                            className="w-16 h-16 rounded-full bg-black/40 backdrop-blur-md border-2 border-cyan-500/40 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.3)] hover:bg-cyan-500/20 transition-colors group"
+                        >
+                            <Phone className="w-8 h-8 text-cyan-400" />
+                        </div>
+                    </motion.a>
 
-                        <a href="https://wa.me/201111171368" target="_blank" rel="noopener noreferrer" className="block active:scale-90 transition-transform">
-                            <div 
-                                onClick={() => handleAction('WHATSAPP', 'https://wa.me/201111171368')}
-                                className="flex flex-col items-center gap-2 group"
-                            >
-                                <div className="w-16 h-16 rounded-full bg-green-950/40 border-2 border-green-500/30 flex items-center justify-center group-hover:bg-green-500/40 transition-colors">
-                                    <MessageCircle className="w-7 h-7 text-green-400" />
-                                </div>
-                                <span className="text-[10px] robotic-digits text-green-400 font-bold uppercase tracking-[0.2em]">WhatsApp</span>
-                            </div>
-                        </a>
+                    <motion.a 
+                        href="https://wa.me/201111171368" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                        className="block active:scale-90 transition-transform"
+                    >
+                        <div 
+                            onClick={() => handleAction('WHATSAPP', 'https://wa.me/201111171368')}
+                            className="w-16 h-16 rounded-full bg-black/40 backdrop-blur-md border-2 border-green-500/40 flex items-center justify-center shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:bg-green-500/20 transition-colors group"
+                        >
+                            <MessageCircle className="w-8 h-8 text-green-400" />
+                        </div>
+                    </motion.a>
 
-                        <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" rel="noopener noreferrer" className="block active:scale-90 transition-transform">
-                            <div 
-                                onClick={() => handleAction('LOCATION', 'https://www.google.com/maps?q=29.9656242,31.0922895')}
-                                className="flex flex-col items-center gap-2 group"
-                            >
-                                <div className="w-16 h-16 rounded-full bg-blue-950/40 border-2 border-blue-500/30 flex items-center justify-center group-hover:bg-blue-500/40 transition-colors">
-                                    <MapPin className="w-7 h-7 text-blue-400" />
-                                </div>
-                                <span className="text-[10px] robotic-digits text-blue-400 font-bold uppercase tracking-[0.2em]">Location</span>
-                            </div>
-                        </a>
-                    </motion.div>
+                    <motion.a 
+                        href="https://www.google.com/maps?q=29.9656242,31.0922895" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                        className="block active:scale-90 transition-transform"
+                    >
+                        <div 
+                            onClick={() => handleAction('LOCATION', 'https://www.google.com/maps?q=29.9656242,31.0922895')}
+                            className="w-16 h-16 rounded-full bg-black/40 backdrop-blur-md border-2 border-[#c5a059]/40 flex items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.3)] hover:bg-[#c5a059]/20 transition-colors group"
+                        >
+                            <MapPin className="w-8 h-8 text-[#c5a059]" />
+                        </div>
+                    </motion.a>
                 </div>
             )}
 
