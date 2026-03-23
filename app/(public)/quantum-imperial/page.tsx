@@ -112,7 +112,6 @@ export default function AdMasterPage() {
       {/* --- SSR MUTE RING (VISUAL CUE) --- */}
       <div 
           id="ssr-mute-ring" 
-          onclick="const a=document.querySelector('audio'); if(a){a.muted=false; a.play();} this.style.display='none';"
           className="fixed bottom-6 left-6 z-[100000] w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center animate-pulse cursor-pointer"
       >
           <svg className="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,6 +119,18 @@ export default function AdMasterPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
           </svg>
       </div>
+      <script dangerouslySetInnerHTML={{ __html: `
+          (function() {
+              var btn = document.getElementById('ssr-mute-ring');
+              if (btn) {
+                  btn.onclick = function() {
+                      var a = document.querySelector('audio');
+                      if (a) { a.muted = false; a.play().catch(function(e){ console.log(e); }); }
+                      btn.style.display = 'none';
+                  };
+              }
+          })();
+      `}} />
 
       {/* --- CINEMATIC BACKGROUND ARTWORK (LEVEL 110.2 RESTORED) --- */}
       <div id="ssr-artwork-bg" className="fixed inset-0 z-[5] opacity-0 ssr-artwork-bg pointer-events-none flex items-center justify-center">
