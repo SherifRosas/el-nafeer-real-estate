@@ -15,6 +15,7 @@ export default function QuantumAd() {
     const [phase, setPhase] = useState<'active'>('active')
     const [isAudioUnlocked, setIsAudioUnlocked] = useState(false)
     const [audioIntensity, setAudioIntensity] = useState(0)
+    const [isMuted, setIsMuted] = useState(true)
 
     const bgMusicRef = useRef<HTMLAudioElement | null>(null)
     const animationFrameRef = useRef<number | null>(null)
@@ -67,6 +68,7 @@ export default function QuantumAd() {
                     playPromise
                         .then(() => {
                             setIsAudioUnlocked(true);
+                            setIsMuted(false);
                             startInteractionEngine();
                             // Only remove listeners if play succeeded
                             window.removeEventListener('click', unlockMusic);
@@ -84,13 +86,15 @@ export default function QuantumAd() {
 
         trackInteraction('OPEN_INSTANT', window.location.href);
 
-        // --- HUD TAKEOVER (LEVEL 110.3) ---
+        // --- HUD TAKEOVER (LEVEL 110.5) ---
         // Forcefully remove SSR fallback elements to prevent overlap
         const cleanupSSR = () => {
             const ssrHud = document.getElementById('ssr-active-hud-layer');
             const ssrBg = document.getElementById('ssr-artwork-bg');
+            const ssrMute = document.getElementById('ssr-mute-ring');
             if (ssrHud) ssrHud.remove();
             if (ssrBg) ssrBg.remove();
+            if (ssrMute) ssrMute.remove();
         };
 
         // Delay slightly to ensure React has painted its own HUD
@@ -137,9 +141,9 @@ export default function QuantumAd() {
                 </div>
             </div>
 
-            {/* --- IMPERIAL ACTION HUD (MOBILE EMERGENCY V103.2) --- */}
+            {/* --- IMPERIAL ACTION HUD (COMPACT CALIBRATION V110.5) --- */}
             {phase === 'active' && (
-                <div className="fixed left-1/2 -translate-x-1/2 top-10 z-[999999] w-[95%] max-w-[450px] flex justify-around items-center gap-6 pointer-events-auto">
+                <div className="fixed left-1/2 -translate-x-1/2 top-10 z-[999999] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4 pointer-events-auto">
                     <motion.a 
                         href="tel:+201070615372" 
                         initial={{ scale: 0, opacity: 0 }}
@@ -148,10 +152,13 @@ export default function QuantumAd() {
                         className="block active:scale-90 transition-transform"
                     >
                         <div 
-                            onClick={() => handleAction('CALLING', 'tel:+201070615372')}
-                            className="w-16 h-16 rounded-full bg-black/40 backdrop-blur-md border-2 border-cyan-500/40 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.3)] hover:bg-cyan-500/20 transition-colors group"
+                            onClick={(e) => {
+                                handleAction('CALLING', 'tel:+201070615372');
+                                unlockMusic();
+                            }}
+                            className="w-14 h-14 rounded-full bg-black/40 backdrop-blur-md border border-cyan-500/40 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.3)] hover:bg-cyan-500/20 transition-colors group"
                         >
-                            <Phone className="w-8 h-8 text-cyan-400" />
+                            <Phone className="w-7 h-7 text-cyan-400" />
                         </div>
                     </motion.a>
 
@@ -165,10 +172,13 @@ export default function QuantumAd() {
                         className="block active:scale-90 transition-transform"
                     >
                         <div 
-                            onClick={() => handleAction('WHATSAPP', 'https://wa.me/201111171368')}
-                            className="w-16 h-16 rounded-full bg-black/40 backdrop-blur-md border-2 border-green-500/40 flex items-center justify-center shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:bg-green-500/20 transition-colors group"
+                            onClick={(e) => {
+                                handleAction('WHATSAPP', 'https://wa.me/201111171368');
+                                unlockMusic();
+                            }}
+                            className="w-14 h-14 rounded-full bg-black/40 backdrop-blur-md border border-green-500/40 flex items-center justify-center shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:bg-green-500/20 transition-colors group"
                         >
-                            <MessageCircle className="w-8 h-8 text-green-400" />
+                            <MessageCircle className="w-7 h-7 text-green-400" />
                         </div>
                     </motion.a>
 
@@ -182,13 +192,50 @@ export default function QuantumAd() {
                         className="block active:scale-90 transition-transform"
                     >
                         <div 
-                            onClick={() => handleAction('LOCATION', 'https://www.google.com/maps?q=29.9656242,31.0922895')}
-                            className="w-16 h-16 rounded-full bg-black/40 backdrop-blur-md border-2 border-[#c5a059]/40 flex items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.3)] hover:bg-[#c5a059]/20 transition-colors group"
+                            onClick={(e) => {
+                                handleAction('LOCATION', 'https://www.google.com/maps?q=29.9656242,31.0922895');
+                                unlockMusic();
+                            }}
+                            className="w-14 h-14 rounded-full bg-black/40 backdrop-blur-md border border-[#c5a059]/40 flex items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.3)] hover:bg-[#c5a059]/20 transition-colors group"
                         >
-                            <MapPin className="w-8 h-8 text-[#c5a059]" />
+                            <MapPin className="w-7 h-7 text-[#c5a059]" />
                         </div>
                     </motion.a>
                 </div>
+            )}
+
+            {/* --- MUTE RING (AUDIO TOGGLE V110.5) --- */}
+            {phase === 'active' && (
+                <motion.div 
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="fixed bottom-6 left-6 z-[999999]"
+                >
+                    <div 
+                        onClick={() => {
+                            if (!isAudioUnlocked) {
+                                unlockMusic();
+                            } else {
+                                if (bgMusicRef.current) {
+                                    bgMusicRef.current.muted = !isMuted;
+                                    setIsMuted(!isMuted);
+                                }
+                            }
+                        }}
+                        className={`w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center cursor-pointer transition-all ${!isAudioUnlocked ? 'animate-pulse' : ''} hover:bg-white/10`}
+                    >
+                        {!isAudioUnlocked || isMuted ? (
+                            <svg className="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                            </svg>
+                        ) : (
+                            <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                            </svg>
+                        )}
+                    </div>
+                </motion.div>
             )}
 
             {/* --- EXTERIOR SIGNATURE (LEGACY SHIELD - NO BLUR) --- */}
