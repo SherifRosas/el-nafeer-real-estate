@@ -129,9 +129,9 @@ export default function QuantumAd() {
                 <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="BG" fill className="object-cover scale-150 blur-3xl opacity-40 brightness-[0.25]" />
                 <div className="relative w-full h-full flex items-center justify-center">
                     <motion.div 
-                        initial={{ y: 40 }}
+                        initial={{ y: 160 }}
                         animate={{ 
-                            y: 40,
+                            y: 160,
                             scale: [1, 1.04 + (audioIntensity * 0.02), 1] 
                         }} 
                         transition={{ 
@@ -148,9 +148,9 @@ export default function QuantumAd() {
                 </div>
             </div>
 
-            {/* --- IMPERIAL ACTION HUD (COMPACT CALIBRATION V110.5) --- */}
+            {/* --- IMPERIAL ACTION HUD (ANDROID MASTER STANDARD V110.12) --- */}
             {phase === 'active' && (
-                <div className="fixed left-1/2 -translate-x-1/2 top-[130px] sm:top-[200px] z-[999999] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4 pointer-events-auto">
+                <div className="fixed left-1/2 -translate-x-1/2 top-[60px] z-[999999] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4 pointer-events-auto">
                     <motion.a 
                         href="tel:+201070615372" 
                         initial={{ scale: 0, opacity: 0 }}
@@ -163,16 +163,14 @@ export default function QuantumAd() {
                                 handleAction('CALLING', 'tel:+201070615372');
                                 unlockMusic();
                             }}
-                            className="w-14 h-14 rounded-full bg-black/40 backdrop-blur-md border border-cyan-500/40 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.3)] hover:bg-cyan-500/20 transition-colors group"
+                            className="w-16 h-16 rounded-full bg-black/40 backdrop-blur-md border border-cyan-500/40 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.3)] hover:bg-cyan-500/20 transition-colors group"
                         >
-                            <Phone className="w-7 h-7 text-cyan-400" />
+                            <Phone className="w-8 h-8 text-cyan-400" />
                         </div>
                     </motion.a>
 
                     <motion.a 
-                        href="https://wa.me/201111171368" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
+                        href="https://wa.me/201070615372" 
                         initial={{ scale: 0, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ delay: 0.2 }}
@@ -180,12 +178,12 @@ export default function QuantumAd() {
                     >
                         <div 
                             onClick={(e) => {
-                                handleAction('WHATSAPP', 'https://wa.me/201111171368');
+                                handleAction('WHATSAPP', 'https://wa.me/201070615372');
                                 unlockMusic();
                             }}
-                            className="w-14 h-14 rounded-full bg-black/40 backdrop-blur-md border border-green-500/40 flex items-center justify-center shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:bg-green-500/20 transition-colors group"
+                            className="w-16 h-16 rounded-full bg-black/40 backdrop-blur-md border border-green-500/40 flex items-center justify-center shadow-[0_0_30px_rgba(34,197,94,0.3)] hover:bg-green-500/20 transition-colors group"
                         >
-                            <MessageCircle className="w-7 h-7 text-green-400" />
+                            <MessageCircle className="w-8 h-8 text-green-400" />
                         </div>
                     </motion.a>
 
@@ -203,9 +201,9 @@ export default function QuantumAd() {
                                 handleAction('LOCATION', 'https://www.google.com/maps?q=29.9656242,31.0922895');
                                 unlockMusic();
                             }}
-                            className="w-14 h-14 rounded-full bg-black/40 backdrop-blur-md border border-[#c5a059]/40 flex items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.3)] hover:bg-[#c5a059]/20 transition-colors group"
+                            className="w-16 h-16 rounded-full bg-black/40 backdrop-blur-md border border-[#c5a059]/40 flex items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.3)] hover:bg-[#c5a059]/20 transition-colors group"
                         >
-                            <MapPin className="w-7 h-7 text-[#c5a059]" />
+                            <MapPin className="w-8 h-8 text-[#c5a059]" />
                         </div>
                     </motion.a>
                 </div>
