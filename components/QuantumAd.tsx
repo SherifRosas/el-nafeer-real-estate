@@ -8,134 +8,16 @@ import { Phone, MessageCircle, MapPin, ExternalLink } from 'lucide-react'
 
 // --- IMPERIAL OMNI-SURFACE SUPREMACIST V42.0 (COORDINATE MAPPING) ---
 
-const CELEBRATION_SCRIPT = [
-    "شركة ليفر الرائدة للمصاعد",
-    "تهنئكم بحلول عيد الفطر المبارك",
-    "بمناسبة تدشين مقرها الجديد",
-    "من قلب مصر... من الجيزة... حدائق الاهرام",
-    "للتواصل... أضغط على الأيقونات"
-];
-
-const GOLD = "#c5a059"; 
+const GOLD = "#c5a059";
 
 export default function QuantumAd() {
     const { language } = useLanguage()
-    const [phase, setPhase] = useState<'idle' | 'descent' | 'stabilizing' | 'active'>('idle')
+    const [phase, setPhase] = useState<'active'>('active')
     const [isAudioUnlocked, setIsAudioUnlocked] = useState(false)
     const [audioIntensity, setAudioIntensity] = useState(0)
 
-    useEffect(() => {
-        // --- ATOMIC ACTIVATION SYNC (LEVEL 103.9) ---
-        const checkbox = document.getElementById('activate-ad') as HTMLInputElement;
-        
-        const syncState = () => {
-            if (checkbox && checkbox.checked && !isAudioUnlocked) {
-                startUltimaSequence();
-            }
-        };
-
-        // --- UNIFIED HANDOVER (LEVEL 104.1) ---
-        setTimeout(() => {
-            syncState();
-            const shadow = document.getElementById('ssr-shadow-layer');
-            const shadowHud = document.getElementById('ssr-active-hud-layer');
-            if (shadow) {
-                shadow.style.opacity = '0';
-                setTimeout(() => shadow.style.display = 'none', 500);
-            }
-            if (shadowHud) {
-                shadowHud.style.opacity = '0';
-                setTimeout(() => shadowHud.style.display = 'none', 500);
-            }
-        }, 1500);
-    }, []);
-    const [lastClick, setLastClick] = useState<{ x: number, y: number } | null>(null)
-
     const bgMusicRef = useRef<HTMLAudioElement | null>(null)
     const animationFrameRef = useRef<number | null>(null)
-
-    const startInteractionEngine = () => {
-        try {
-            if (!bgMusicRef.current) return;
-            const update = () => {
-                try {
-                    const pulse = 0.4 + Math.sin(Date.now() / 240) * 0.45;
-                    setAudioIntensity(pulse);
-                    animationFrameRef.current = requestAnimationFrame(update);
-                } catch (e) {
-                    console.error("Pulse Engine Error:", e);
-                }
-            };
-            update();
-            bgMusicRef.current.muted = false; bgMusicRef.current.volume = 1.0;
-            bgMusicRef.current.play().catch((e) => console.warn("Audio Play Blocked:", e));
-        } catch (error) {
-            console.error("Interaction Engine Failure:", error);
-        }
-    }
-
-    const startUltimaSequence = () => {
-        setIsAudioUnlocked(true)
-        setPhase('descent')
-        startInteractionEngine()
-
-        // --- NARRATIVE UNLOCK (GESTURE CONSUMPTION) ---
-        if (typeof window !== 'undefined' && window.speechSynthesis) {
-            window.speechSynthesis.cancel();
-            const unlocker = new SpeechSynthesisUtterance(" ");
-            unlocker.volume = 0;
-            window.speechSynthesis.speak(unlocker);
-        }
-
-        // --- CAMPAIGN ANALYTICS (OPEN EVENT) ---
-        trackInteraction('OPEN', window.location.href);
-
-        if (typeof window !== 'undefined' && window.navigator && window.navigator.vibrate) { window.navigator.vibrate([150, 50, 150]); }
-        setTimeout(() => setPhase('stabilizing'), 1000)
-        setTimeout(() => { setPhase('active'); playNarrative(0); }, 2000)
-    }
-
-    const playNarrative = (index: number) => {
-        if (index >= CELEBRATION_SCRIPT.length) return;
-        if (typeof window === 'undefined' || !window.speechSynthesis) return;
-
-        try {
-            const startSpeech = () => {
-                try {
-                    const utterance = new SpeechSynthesisUtterance(CELEBRATION_SCRIPT[index])
-                    const voices = window.speechSynthesis.getVoices();
-                    const preferredVoice = voices.find(v => v.lang === 'ar-EG') || 
-                                           voices.find(v => v.lang.startsWith('ar')) ||
-                                           null;
-                    
-                    if (preferredVoice) {
-                        utterance.voice = preferredVoice;
-                        utterance.lang = preferredVoice.lang;
-                    } else {
-                        utterance.lang = 'ar-EG';
-                    }
-
-                    utterance.volume = 1; utterance.pitch = 0.95; utterance.rate = 0.85;
-                    utterance.onend = () => setTimeout(() => playNarrative(index + 1), 1800);
-                    window.speechSynthesis.speak(utterance)
-                } catch (e) {
-                    console.error("Voice Track Error:", e);
-                    setTimeout(() => playNarrative(index + 1), 2000); // Fallback to next track
-                }
-            }
-
-            if (window.speechSynthesis.getVoices().length === 0) {
-                window.speechSynthesis.onvoiceschanged = () => {
-                    window.speechSynthesis.onvoiceschanged = null;
-                    startSpeech();
-                };
-            } else {
-                startSpeech();
-            }
-        } catch (error) {
-            console.error("Speech Engine Error:", error);
-        }
-    }
 
     const trackInteraction = async (action: string, url: string) => {
         try {
@@ -157,10 +39,53 @@ export default function QuantumAd() {
         }
     }
 
+    const startInteractionEngine = () => {
+        try {
+            if (!bgMusicRef.current) return;
+            const update = () => {
+                const pulse = 0.4 + Math.sin(Date.now() / 240) * 0.45;
+                setAudioIntensity(pulse);
+                animationFrameRef.current = requestAnimationFrame(update);
+            };
+            update();
+        } catch (error) {
+            console.error("Interaction Engine Failure:", error);
+        }
+    }
+
+    useEffect(() => {
+        // --- STEALTH MUSIC UNLOCKER (LEVEL 110.1) ---
+        const unlockMusic = () => {
+            if (bgMusicRef.current && !isAudioUnlocked) {
+                bgMusicRef.current.muted = false;
+                bgMusicRef.current.volume = 1.0;
+                bgMusicRef.current.play().catch(e => console.warn("Music Play Blocked:", e));
+                setIsAudioUnlocked(true);
+                startInteractionEngine();
+                window.removeEventListener('click', unlockMusic);
+                window.removeEventListener('touchstart', unlockMusic);
+            }
+        };
+
+        window.addEventListener('click', unlockMusic);
+        window.addEventListener('touchstart', unlockMusic);
+
+        const shadow = document.getElementById('ssr-shadow-layer');
+        const shadowHud = document.getElementById('ssr-active-hud-layer');
+        if (shadow) { shadow.style.display = 'none'; }
+        if (shadowHud) { shadowHud.style.display = 'none'; }
+
+        trackInteraction('OPEN_INSTANT', window.location.href);
+
+        return () => {
+            window.removeEventListener('click', unlockMusic);
+            window.removeEventListener('touchstart', unlockMusic);
+        };
+    }, []);
+
     const handleAction = (actionType: string, url: string) => {
         if (typeof window !== 'undefined') {
              if (window.navigator && window.navigator.vibrate) { window.navigator.vibrate(80); }
-             console.log(`Interaction_[${actionType}]_LOG: `, url);
              trackInteraction(actionType, url);
         }
     }
@@ -175,57 +100,6 @@ export default function QuantumAd() {
             <style jsx global>{`
                 body { background: black !important; overflow: hidden !important; position: fixed !important; width: 100% !important; height: 100% !important; }
             `}</style>
-            
-            {/* --- INITIALIZATION (Z-9999) --- */}
-            {!isAudioUnlocked && (
-                <div className="fixed inset-0 z-[5000] bg-black flex flex-col items-center justify-center p-6">
-                    <div className="flex flex-col items-center gap-24">
-                        <div 
-                            onClick={startUltimaSequence}
-                            className="w-56 h-56 md:w-80 md:h-80 rounded-full bg-white flex items-center justify-center p-10 border-4 border-white/50 cursor-pointer shadow-[0_0_50px_rgba(255,255,255,0.3)] transition-transform active:scale-95"
-                        >
-                             <div 
-                                 style={{ boxShadow: '0 25px 50px -12px rgba(0,0,0,0.7), inset 0 -10px 20px rgba(0,0,0,0.2), inset 0 10px 20px rgba(255,255,255,0.8)' }}
-                                 className="w-full h-full relative rounded-full bg-white flex items-center justify-center overflow-hidden p-10 border-4 border-white/50"
-                             >
-                              <NextImage 
-                                    src="/clients/lever-pioneer/logo_mimic.png" 
-                                    alt="Logo" 
-                                    width={350} 
-                                    height={350} 
-                                    className="object-contain mix-blend-multiply scale-[0.85] transition-transform duration-300 group-hover:scale-[0.9]" 
-                                />
-                             </div>
-                             {/* MULTI-STAGE RIPPLE ENGINE */}
-                             {[1, 1.5, 2].map((s, i) => (
-                                 <motion.div 
-                                    key={i}
-                                    animate={{ scale: [1, 1.4 + (i * 0.2)], opacity: [0.6, 0] }} 
-                                    transition={{ duration: 3, repeat: Infinity, delay: i * 1, ease: "easeOut" }} 
-                                    className="absolute inset-0 rounded-full border-2 border-cyan-400/40 -z-10" 
-                                 />
-                             ))}
-                             <motion.div 
-                                animate={{ scale: [1, 1.1], opacity: [0.3, 0.6, 0.3] }} 
-                                transition={{ duration: 1.5, repeat: Infinity }} 
-                                className="absolute -inset-4 rounded-full bg-cyan-400/5 blur-2xl -z-20" 
-                             />
-                        </div>
-                         <div className="flex flex-col items-center gap-6 text-center text-white">
-                              <motion.h1 
-                                 animate={{ textShadow: ["0 0 10px rgba(6,182,212,0.4)", "0 0 30px rgba(6,182,212,0.8)", "0 0 10px rgba(6,182,212,0.4)"] }}
-                                 transition={{ duration: 2, repeat: Infinity }}
-                                 className="font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase italic"
-                              >
-                                  SYSTEM
-                              </motion.h1>
-                              <p className="text-sahara-gold font-bold text-lg lg:text-xl tracking-[0.15em] whitespace-nowrap uppercase">
-                                   [ TAP TO ACTIVATE ]
-                              </p>
-                         </div>
-                    </div>
-                </div>
-            )}
             
             {/* --- ARTWORK & LIGHTS & INTERACTION (Z-10) --- */}
             <div className={`fixed inset-0 z-[10] transition-opacity duration-[1500ms] pointer-events-none ${phase === 'active' || phase === 'stabilizing' ? 'opacity-100' : 'opacity-0'}`}>

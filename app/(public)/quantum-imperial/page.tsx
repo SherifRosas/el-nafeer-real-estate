@@ -74,16 +74,9 @@ export default function AdMasterPage() {
           50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(255,255,255,0.4); }
         }
         /* --- NO-JS INTERACTION ENGINE --- */
-        #activate-ad:checked ~ #ssr-shadow-layer .ssr-initialization { 
-          display: none !important; 
-        }
-        #activate-ad:checked ~ .ssr-active-hud { 
+        #ssr-active-hud-layer { 
           display: flex !important; 
           animation: fade-in-hud 0.5s forwards;
-        }
-        #activate-ad:checked ~ .ssr-artwork-bg {
-          opacity: 1 !important;
-          filter: blur(0px) !important;
         }
         @keyframes fade-in-hud {
           from { opacity: 0; transform: translate(-50%, -20px); }
@@ -91,34 +84,9 @@ export default function AdMasterPage() {
         }
       `}} />
       
-      {/* Hidden State Controller (Safari 12 Compatible) */}
-      <input type="checkbox" id="activate-ad" style={{ opacity: 0, position: 'absolute', pointerEvents: 'none' }} className="peer" />
-
-      {/* --- SHADOW HYDRATION LAYER (SSR FALLBACK) --- */}
-      <div id="ssr-shadow-layer" className="fixed inset-0 z-[99999] bg-[#020617] flex flex-col items-center justify-center transition-opacity duration-500">
-          <label htmlFor="activate-ad" className="flex flex-col items-center justify-center w-full h-full cursor-pointer">
-              <div className="flex flex-col items-center gap-20 pointer-events-none ssr-initialization">
-                  <div 
-                      className="w-56 h-56 md:w-80 md:h-80 rounded-full bg-white flex items-center justify-center p-10 border-4 border-white/50 relative"
-                      style={{ animation: 'ssr-pulse 2s infinite ease-in-out' }}
-                  >
-                      <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden p-10 shadow-2xl">
-                          <img src="/clients/lever-pioneer/logo_mimic.png?v=105" alt="Activate" className="w-full h-full object-contain mix-blend-multiply opacity-80" />
-                      </div>
-                      <div className="absolute inset-0 rounded-full border-2 border-white/20" style={{ animation: 'ssr-ripple 3s infinite', animationDelay: '0s' }} />
-                      <div className="absolute inset-0 rounded-full border-2 border-white/20" style={{ animation: 'ssr-ripple 3s infinite', animationDelay: '1.5s' }} />
-                  </div>
-                  <div className="flex flex-col items-center gap-6 text-center">
-                      <h1 className="text-white font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase italic opacity-80">SYSTEM</h1>
-                      <p className="text-sahara-gold font-bold text-lg lg:text-xl tracking-[0.15em] uppercase">[ TAP TO ACTIVATE ]</p>
-                      <span className="text-[10px] text-white/30 tracking-[4px] font-mono mt-4">v6.0-ULTIMA</span>
-                  </div>
-              </div>
-          </label>
-      </div>
 
       {/* --- SSR PURE-CSS HUD (FALLBACK FOR SLOW JS) --- */}
-      <div id="ssr-active-hud-layer" className="fixed left-1/2 -translate-x-1/2 top-10 z-[100000] w-[95%] max-w-[450px] hidden ssr-active-hud flex-col gap-4 transition-opacity duration-500">
+      <div id="ssr-active-hud-layer" className="fixed left-1/2 -translate-x-1/2 top-10 z-[100000] w-[95%] max-w-[450px] flex flex-col gap-4 transition-opacity duration-500">
           <div className="bg-black border-2 border-cyan-500 rounded-[2.5rem] p-6 shadow-2xl flex justify-around items-center">
               <a href="tel:+201065661882" className="w-16 h-16 rounded-full bg-cyan-500 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.5)]">
                   <span className="text-white text-3xl">📞</span>
