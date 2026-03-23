@@ -18,6 +18,11 @@ const nextConfig = {
         destination: '/apply',
         permanent: true,
       },
+      {
+        source: '/lever-pioneer/:path*',
+        destination: '/quantum-imperial',
+        permanent: false,
+      },
     ]
   },
 }

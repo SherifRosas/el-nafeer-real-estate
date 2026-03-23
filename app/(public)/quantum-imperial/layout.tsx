@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   description: 'Celebrating the Giza Headquarters launch. Experience the interactive Quantum Imperial ad by Sherif Rosas.',
   keywords: ['Lever Pioneer', 'Elevators', 'Giza', 'Luxury', 'Innovation', 'Sherif Rosas'],
   alternates: {
-    canonical: 'https://el-nafeer-real-estate.vercel.app/lever-pioneer/ad-v5',
+    canonical: 'https://el-nafeer-real-estate.vercel.app/quantum-imperial',
   },
   openGraph: {
-    title: '🏆 LEVER PIONEER | V5 DEFIANT',
-    description: 'The definitive ad experience. Clean, fast, and optimized.',
-    url: 'https://el-nafeer-real-estate.vercel.app/lever-pioneer/ad-v5',
+    title: '🏆 LEVER PIONEER | ULTIMA EDITION',
+    description: 'The definitive experience. Clean, fast, and optimized.',
+    url: 'https://el-nafeer-real-estate.vercel.app/quantum-imperial',
     siteName: 'Sherif Rosas | Master Designer',
     images: [
       {

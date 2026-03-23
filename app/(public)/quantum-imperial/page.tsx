@@ -5,10 +5,10 @@ import AdClient from '@/components/QuantumAd'
 // By using a Server Component for the page, WhatsApp will definitively find 
 // the Lever Pioneer branding before the client-side code even runs.
 
-const TITLE = "Lever Pioneer Elevators | The Ascension of Luxury"
-const DESC = "Celebrating the launch of the new headquarters. Experience the future of vertical mobility with Lever Pioneer."
+const TITLE = "🏆 LEVER PIONEER | ULTIMA EDITION"
+const DESC = "The definitive ad experience. Clean, fast, and optimized."
 const IMG = "https://el-nafeer-real-estate.vercel.app/campaigns/lever-pioneer/ad-v2-quantum.png"
-const PAGE_URL = "https://el-nafeer-real-estate.vercel.app/lever-pioneer/ad-v2"
+const PAGE_URL = "https://el-nafeer-real-estate.vercel.app/quantum-imperial"
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -95,7 +95,7 @@ export default function AdMasterPage() {
       <input type="checkbox" id="activate-ad" style={{ opacity: 0, position: 'absolute', pointerEvents: 'none' }} className="peer" />
 
       {/* --- SHADOW HYDRATION LAYER (SSR FALLBACK) --- */}
-      <div id="ssr-shadow-layer" className="fixed inset-0 z-[99999] bg-black flex flex-col items-center justify-center transition-opacity duration-500">
+      <div id="ssr-shadow-layer" className="fixed inset-0 z-[99999] bg-[#020617] flex flex-col items-center justify-center transition-opacity duration-500">
           <label htmlFor="activate-ad" className="flex flex-col items-center justify-center w-full h-full cursor-pointer">
               <div className="flex flex-col items-center gap-20 pointer-events-none">
                   <div 
@@ -111,7 +111,7 @@ export default function AdMasterPage() {
                   <div className="flex flex-col items-center gap-6 text-center">
                       <h1 className="text-white font-black text-4xl lg:text-7xl tracking-[0.2em] uppercase italic opacity-80">SYSTEM</h1>
                       <p className="text-sahara-gold font-bold text-lg lg:text-xl tracking-[0.15em] uppercase">[ TAP TO ACTIVATE ]</p>
-                      <span className="text-[10px] text-white/30 tracking-[4px] font-mono mt-4">v5.0-DEFIANT</span>
+                      <span className="text-[10px] text-white/30 tracking-[4px] font-mono mt-4">v6.0-ULTIMA</span>
                   </div>
               </div>
           </label>
