@@ -127,9 +127,17 @@ export default function QuantumAd() {
             {/* --- ARTWORK & LIGHTS & INTERACTION (Z-10) --- */}
             <div className={`fixed inset-0 z-[10] transition-opacity duration-[1500ms] pointer-events-none ${phase === 'active' || phase === 'stabilizing' ? 'opacity-100' : 'opacity-0'}`}>
                 <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="BG" fill className="object-cover scale-150 blur-3xl opacity-40 brightness-[0.25]" />
-                <div className="relative w-full h-full flex items-center justify-center translate-y-[40px]">
+                <div className="relative w-full h-full flex items-center justify-center">
                     <motion.div 
-                        animate={{ scale: [1, 1.04 + (audioIntensity * 0.02), 1] }} 
+                        initial={{ y: 40 }}
+                        animate={{ 
+                            y: 40,
+                            scale: [1, 1.04 + (audioIntensity * 0.02), 1] 
+                        }} 
+                        transition={{ 
+                            scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                            y: { duration: 0 } // Static offset
+                        }}
                         className="relative w-full h-auto max-h-[96vh] aspect-square flex items-center justify-center overflow-hidden pointer-events-auto transform-gpu"
                     >
                         <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad" fill className="object-contain" priority />
