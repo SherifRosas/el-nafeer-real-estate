@@ -90,7 +90,7 @@ export default function AdMasterPage() {
       
 
       {/* --- SSR PURE-CSS HUD (FALLBACK FOR SLOW JS) --- */}
-      <div id="ssr-active-hud-layer" className="fixed left-1/2 -translate-x-1/2 top-20 z-[100000] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4 transition-opacity duration-500">
+      <div id="ssr-active-hud-layer" className="fixed left-1/2 -translate-x-1/2 top-[90px] z-[100000] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4 transition-opacity duration-500">
           <a href="tel:+201065661882" className="w-14 h-14 rounded-full bg-black/40 backdrop-blur-md border border-cyan-500/50 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.3)]">
               <svg className="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -124,9 +124,15 @@ export default function AdMasterPage() {
               var btn = document.getElementById('ssr-mute-ring');
               if (btn) {
                   btn.onclick = function() {
-                      var a = document.querySelector('audio');
-                      if (a) { a.muted = false; a.play().catch(function(e){ console.log(e); }); }
-                      btn.style.display = 'none';
+                      var a = document.getElementById('quantum-bg-audio');
+                      if (a) { 
+                          a.muted = false; 
+                          a.play().then(function(){ 
+                              btn.style.display = 'none'; 
+                          }).catch(function(e){ 
+                              console.log(e); 
+                          }); 
+                      }
                   };
               }
           })();

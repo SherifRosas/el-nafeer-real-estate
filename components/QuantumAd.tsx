@@ -115,7 +115,7 @@ export default function QuantumAd() {
 
     return (
         <div className="fixed inset-0 z-[1] bg-black flex items-center justify-center p-0 m-0 overflow-hidden select-none font-sans">
-            <audio ref={bgMusicRef} loop playsInline preload="auto" muted>
+            <audio id="quantum-bg-audio" ref={bgMusicRef} loop playsInline preload="auto" muted>
                 <source src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" type="audio/mpeg" />
                 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg" />
             </audio>
@@ -142,7 +142,7 @@ export default function QuantumAd() {
 
             {/* --- IMPERIAL ACTION HUD (COMPACT CALIBRATION V110.5) --- */}
             {phase === 'active' && (
-                <div className="fixed left-1/2 -translate-x-1/2 top-20 z-[999999] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4 pointer-events-auto">
+                <div className="fixed left-1/2 -translate-x-1/2 top-[90px] z-[999999] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4 pointer-events-auto">
                     <motion.a 
                         href="tel:+201070615372" 
                         initial={{ scale: 0, opacity: 0 }}
