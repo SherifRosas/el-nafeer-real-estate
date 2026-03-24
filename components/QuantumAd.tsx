@@ -129,16 +129,16 @@ export default function QuantumAd() {
                 <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="BG" fill className="object-cover scale-150 blur-3xl opacity-40 brightness-[0.25]" />
                 <div className="relative w-full h-full flex items-center justify-center">
                     <motion.div 
-                        initial={{ y: 180 }}
+                        initial={{ y: '12vh' }}
                         animate={{ 
-                            y: 180,
+                            y: '12vh',
                             scale: [1, 1.04 + (audioIntensity * 0.02), 1] 
                         }} 
                         transition={{ 
                             scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
                             y: { duration: 0 } // Static offset
                         }}
-                        className="relative w-full h-auto max-h-[72vh] aspect-square flex items-center justify-center overflow-hidden pointer-events-auto transform-gpu"
+                        className="relative w-full h-auto max-h-[68vh] aspect-square flex items-center justify-center overflow-hidden pointer-events-auto transform-gpu"
                     >
                         <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad" fill className="object-contain" priority />
                         <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
@@ -148,9 +148,9 @@ export default function QuantumAd() {
                 </div>
             </div>
 
-            {/* --- IMPERIAL ACTION HUD (ANDROID MASTER STANDARD V110.12) --- */}
+            {/* --- IMPERIAL ACTION HUD (RELATIVE CALIBRATION V110.14) --- */}
             {phase === 'active' && (
-                <div className="fixed left-1/2 -translate-x-1/2 top-[40px] z-[999999] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4 pointer-events-auto">
+                <div className="fixed left-1/2 -translate-x-1/2 top-[5vh] z-[999999] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4 pointer-events-auto">
                     <motion.a 
                         href="tel:+201070615372" 
                         initial={{ scale: 0, opacity: 0 }}
@@ -228,7 +228,7 @@ export default function QuantumAd() {
                                 }
                             }
                         }}
-                        className={`group relative w-16 h-16 rounded-full bg-black/60 backdrop-blur-xl border-2 flex items-center justify-center cursor-pointer transition-all duration-500 ${!isAudioUnlocked || isMuted ? 'border-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.3)] animate-pulse' : 'border-cyan-500/50 shadow-[0_0_20px_rgba(6,182,212,0.3)]'} hover:scale-110 active:scale-90`}
+                        className={`group relative w-14 h-14 rounded-full bg-black/60 backdrop-blur-xl border-2 flex items-center justify-center cursor-pointer transition-all duration-500 ${!isAudioUnlocked || isMuted ? 'border-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.3)] animate-pulse' : 'border-cyan-500/50 shadow-[0_0_20px_rgba(6,182,212,0.3)]'} hover:scale-110 active:scale-90`}
                     >
                         {/* Pulse Ring */}
                         {(!isAudioUnlocked || isMuted) && (

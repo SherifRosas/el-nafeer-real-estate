@@ -89,8 +89,8 @@ export default function AdMasterPage() {
       `}} />
       
 
-      {/* --- SSR PURE-CSS HUD (FALLBACK FOR SLOW JS) --- */}
-      <div id="ssr-active-hud-layer" className="fixed left-1/2 -translate-x-1/2 top-[40px] z-[100000] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4 transition-opacity duration-500">
+      {/* --- SSR PURE-CSS HUD (FALLBACK FOR SLOW JS V110.14) --- */}
+      <div id="ssr-active-hud-layer" className="fixed left-1/2 -translate-x-1/2 top-[5vh] z-[100000] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4 transition-opacity duration-500">
           <a href="tel:+201070615372" className="w-16 h-16 rounded-full bg-black/40 backdrop-blur-md border border-cyan-500/50 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.3)]">
               <svg className="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -138,9 +138,9 @@ export default function AdMasterPage() {
           })();
       `}} />
 
-      {/* --- CINEMATIC BACKGROUND ARTWORK (LEVEL 110.13) --- */}
-      <div id="ssr-artwork-bg" className="fixed inset-0 z-[5] opacity-0 ssr-artwork-bg pointer-events-none flex items-center justify-center translate-y-[180px]">
-          <img src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Artwork" className="w-full h-auto max-h-[72vh] object-contain" />
+      {/* --- CINEMATIC BACKGROUND ARTWORK (RELATIVE CALIBRATION V110.14) --- */}
+      <div id="ssr-artwork-bg" className="fixed inset-0 z-[5] opacity-0 ssr-artwork-bg pointer-events-none flex items-center justify-center translate-y-[13vh]">
+          <img src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Artwork" className="w-full h-auto max-h-[68vh] object-contain" />
       </div>
 
       <AdClient />
