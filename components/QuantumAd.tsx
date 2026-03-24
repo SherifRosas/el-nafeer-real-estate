@@ -129,16 +129,16 @@ export default function QuantumAd() {
                 <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="BG" fill className="object-cover scale-150 blur-3xl opacity-40 brightness-[0.25]" />
                 <div className="relative w-full h-full flex items-center justify-center">
                     <motion.div 
-                        initial={{ y: 160 }}
+                        initial={{ y: 180 }}
                         animate={{ 
-                            y: 160,
+                            y: 180,
                             scale: [1, 1.04 + (audioIntensity * 0.02), 1] 
                         }} 
                         transition={{ 
                             scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
                             y: { duration: 0 } // Static offset
                         }}
-                        className="relative w-full h-auto max-h-[96vh] aspect-square flex items-center justify-center overflow-hidden pointer-events-auto transform-gpu"
+                        className="relative w-full h-auto max-h-[72vh] aspect-square flex items-center justify-center overflow-hidden pointer-events-auto transform-gpu"
                     >
                         <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad" fill className="object-contain" priority />
                         <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
@@ -150,7 +150,7 @@ export default function QuantumAd() {
 
             {/* --- IMPERIAL ACTION HUD (ANDROID MASTER STANDARD V110.12) --- */}
             {phase === 'active' && (
-                <div className="fixed left-1/2 -translate-x-1/2 top-[60px] z-[999999] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4 pointer-events-auto">
+                <div className="fixed left-1/2 -translate-x-1/2 top-[40px] z-[999999] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4 pointer-events-auto">
                     <motion.a 
                         href="tel:+201070615372" 
                         initial={{ scale: 0, opacity: 0 }}
@@ -209,11 +209,11 @@ export default function QuantumAd() {
                 </div>
             )}
 
-            {/* --- MUTE RING (AUDIO TOGGLE V110.5) --- */}
+            {/* --- MUTE RING (AUDIO TOGGLE V110.13) --- */}
             {phase === 'active' && (
                 <motion.div 
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
+                    initial={{ scale: 0, x: -20 }}
+                    animate={{ scale: 1, x: 0 }}
                     className="fixed bottom-6 left-6 z-[999999]"
                 >
                     <div 
@@ -222,23 +222,34 @@ export default function QuantumAd() {
                                 unlockMusic();
                             } else {
                                 if (bgMusicRef.current) {
-                                    bgMusicRef.current.muted = !isMuted;
-                                    setIsMuted(!isMuted);
+                                    const newMuted = !isMuted;
+                                    bgMusicRef.current.muted = newMuted;
+                                    setIsMuted(newMuted);
                                 }
                             }
                         }}
-                        className={`w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center cursor-pointer transition-all ${!isAudioUnlocked ? 'animate-pulse' : ''} hover:bg-white/10`}
+                        className={`group relative w-16 h-16 rounded-full bg-black/60 backdrop-blur-xl border-2 flex items-center justify-center cursor-pointer transition-all duration-500 ${!isAudioUnlocked || isMuted ? 'border-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.3)] animate-pulse' : 'border-cyan-500/50 shadow-[0_0_20px_rgba(6,182,212,0.3)]'} hover:scale-110 active:scale-90`}
                     >
+                        {/* Pulse Ring */}
+                        {(!isAudioUnlocked || isMuted) && (
+                            <div className="absolute inset-0 rounded-full border-2 border-red-500 animate-[ping_2s_infinite] opacity-20" />
+                        )}
+
                         {!isAudioUnlocked || isMuted ? (
-                            <svg className="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-8 h-8 text-red-400 group-hover:text-red-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
                             </svg>
                         ) : (
-                            <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-8 h-8 text-cyan-400 group-hover:text-cyan-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                             </svg>
                         )}
+                        
+                        {/* Interactive Tooltip */}
+                        <div className="absolute left-full ml-4 whitespace-nowrap bg-black/80 px-3 py-1 rounded border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-[10px] tracking-widest text-white/70 uppercase">
+                           {!isAudioUnlocked ? 'Unlock Experience' : isMuted ? 'Unmute Audio' : 'Mute Audio'}
+                        </div>
                     </div>
                 </motion.div>
             )}
