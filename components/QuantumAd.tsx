@@ -142,7 +142,13 @@ export default function QuantumAd() {
                     >
                         <NextImage src="/campaigns/lever-pioneer/ad-v2-quantum.png" alt="Ad" fill className="object-contain" priority />
                         <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
-                             <motion.div style={{ left: '59.5%', top: '47.5%', opacity: audioIntensity * 0.7, scale: 0.8 + (audioIntensity * 3.5) }} className="absolute w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen transform-gpu" />
+                             <motion.div 
+                                animate={{ 
+                                    opacity: audioIntensity * 0.7, 
+                                    scale: 0.8 + (audioIntensity * 3.5) 
+                                }} 
+                                className="absolute left-[59.5%] top-[47.5%] w-20 h-20 bg-cyan-400 rounded-full blur-[45px] mix-blend-screen transform-gpu" 
+                             />
                         </div>
                     </motion.div>
                 </div>
@@ -264,7 +270,7 @@ export default function QuantumAd() {
                         >
                              <div className="flex flex-col text-right">
                                   <span className="text-[7px] text-cyan-400/60 tracking-[4px] uppercase font-black italic">DESIGNER</span>
-                                  <span style={{ color: GOLD, fontFamily: 'Georgia, serif' }} className="font-bold text-base italic tracking-wide">
+                                  <span className="font-bold text-base italic tracking-wide text-[#c5a059] font-serif">
                                        Sherif Rosas
                                   </span>
                              </div>
