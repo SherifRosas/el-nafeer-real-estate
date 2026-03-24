@@ -141,52 +141,42 @@ export default function QuantumLegendAd() {
                              />
                         </div>
 
-                        {/* --- UNIFIED BOX-HUD HOTSPOTS (LEVEL 110.17) --- */}
-                        <div className="absolute left-[4.5%] bottom-[8%] w-[32%] h-[28%] z-30 flex flex-col pointer-events-none">
+                        {/* --- UNIFIED BOX-HUD HOTSPOTS (LEVEL 110.18) --- */}
+                        <div className="absolute left-[4.8%] bottom-[10%] w-[27%] h-[24%] z-30 flex flex-col pointer-events-none">
                             {/* WhatsApp Hotspot */}
-                            <div className="w-full h-1/4 flex items-center pl-[5%] pointer-events-auto cursor-pointer group"
+                            <div className="w-full h-1/3 flex items-center pl-[2%] pointer-events-auto cursor-pointer group"
                                  onClick={() => {
                                      handleAction('WHATSAPP_EMBEDDED', 'https://wa.me/201070615372');
                                      unlockMusic();
                                  }}>
-                                <div className="w-12 h-12 rounded-full group-hover:bg-green-500/10 transition-all group-active:scale-95 flex items-center justify-center">
-                                    <div className="w-9 h-9 rounded-full border-2 border-green-500/0 group-hover:border-green-500/40 group-hover:shadow-[0_0_15px_rgba(34,197,94,0.4)] transition-all" />
+                                <div className="w-10 h-10 rounded-full group-hover:bg-green-500/10 transition-all group-active:scale-90 flex items-center justify-center">
+                                    <div className="w-8 h-8 rounded-full border border-green-500/0 group-hover:border-green-500/40 group-hover:shadow-[0_0_15px_rgba(34,197,94,0.4)] transition-all" />
                                 </div>
+                                <span className="ml-2 text-[0px] opacity-0 group-hover:text-[10px] group-hover:opacity-40 text-green-400 transition-all uppercase tracking-tighter invisible sm:visible">WhatsApp</span>
                             </div>
 
                             {/* Call Hotspot */}
-                            <div className="w-full h-1/4 flex items-center pl-[5%] pointer-events-auto cursor-pointer group"
+                            <div className="w-full h-1/3 flex items-center pl-[2%] pointer-events-auto cursor-pointer group"
                                  onClick={() => {
                                      handleAction('CALL_EMBEDDED', 'tel:+201070615372');
                                      unlockMusic();
                                  }}>
-                                <div className="w-12 h-12 rounded-full group-hover:bg-cyan-500/10 transition-all group-active:scale-95 flex items-center justify-center">
-                                    <div className="w-9 h-9 rounded-full border-2 border-cyan-500/40 group-hover:border-cyan-500/60 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all" />
+                                <div className="w-10 h-10 rounded-full group-hover:bg-cyan-500/10 transition-all group-active:scale-90 flex items-center justify-center">
+                                    <div className="w-8 h-8 rounded-full border border-cyan-500/40 group-hover:border-cyan-500/60 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all" />
                                 </div>
+                                <span className="ml-2 text-[0px] opacity-0 group-hover:text-[10px] group-hover:opacity-40 text-cyan-400 transition-all uppercase tracking-tighter invisible sm:visible">Call Us</span>
                             </div>
 
                             {/* Location Hotspot */}
-                            <div className="w-full h-1/4 flex items-center pl-[5%] pointer-events-auto cursor-pointer group"
+                            <div className="w-full h-1/3 flex items-center pl-[2%] pointer-events-auto cursor-pointer group"
                                  onClick={() => {
                                      handleAction('LOCATION_EMBEDDED', 'https://maps.app.goo.gl/r6vGf');
                                      unlockMusic();
                                  }}>
                                 <div className="w-12 h-12 rounded-full group-hover:bg-[#c5a059]/10 transition-all group-active:scale-95 flex items-center justify-center">
-                                    <div className="w-9 h-9 rounded-full border-2 border-[#c5a059]/0 group-hover:border-[#c5a059]/40 group-hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all" />
+                                    <div className="w-8 h-8 rounded-full border border-[#c5a059]/0 group-hover:border-[#c5a059]/40 group-hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all" />
                                 </div>
-                            </div>
-
-                            {/* QR Hotspot (Unified Row 4) */}
-                            <div className="w-full h-1/4 flex items-center pl-[5%] pointer-events-auto cursor-pointer group"
-                                 onClick={() => {
-                                     setShowQR(true);
-                                     unlockMusic();
-                                 }}>
-                                <div className="w-12 h-12 rounded-full group-hover:bg-white/10 transition-all group-active:scale-95 flex items-center justify-center">
-                                    <div className="w-9 h-9 rounded-full border-2 border-white/0 group-hover:border-white/30 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all flex items-center justify-center">
-                                         <QrCode className="w-4 h-4 text-white/0 group-hover:text-white/60 transition-opacity" />
-                                    </div>
-                                </div>
+                                <span className="ml-2 text-[0px] opacity-0 group-hover:text-[10px] group-hover:opacity-40 text-[#c5a059] transition-all uppercase tracking-tighter invisible sm:visible">Location</span>
                             </div>
                         </div>
                     </motion.div>

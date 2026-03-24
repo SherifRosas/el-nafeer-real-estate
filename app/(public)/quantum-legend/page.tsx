@@ -28,19 +28,16 @@ export default function QuantumLegendPage() {
           />
       </div>
 
-      {/* UNIFIED BOX-HUD FALLBACK (4-ROW) */}
-      <div id="ssr-active-hud-layer" className="fixed left-[4.5%] bottom-[8%] w-[32%] h-[28%] z-[100000] flex flex-col pointer-events-none transition-opacity duration-700">
-          <div className="w-full h-1/4 flex items-center pl-[5%]">
-              <div className="w-9 h-9 rounded-full border border-white/10 bg-black/40" />
+      {/* UNIFIED BOX-HUD FALLBACK (3-ROW) */}
+      <div id="ssr-active-hud-layer" className="fixed left-[4.8%] bottom-[10%] w-[27%] h-[24%] z-[100000] flex flex-col pointer-events-none transition-opacity duration-700">
+          <div className="w-full h-1/3 flex items-center pl-[5%]">
+              <div className="w-8 h-8 rounded-full border border-white/10 bg-black/40" />
           </div>
-          <div className="w-full h-1/4 flex items-center pl-[5%]">
-              <div className="w-9 h-9 rounded-full border border-white/10 bg-black/40" />
+          <div className="w-full h-1/3 flex items-center pl-[5%]">
+              <div className="w-8 h-8 rounded-full border border-white/10 bg-black/40" />
           </div>
-          <div className="w-full h-1/4 flex items-center pl-[5%]">
-              <div className="w-9 h-9 rounded-full border border-white/10 bg-black/40" />
-          </div>
-          <div className="w-full h-1/4 flex items-center pl-[5%]">
-              <div className="w-9 h-9 rounded-full border border-white/10 bg-black/40" />
+          <div className="w-full h-1/3 flex items-center pl-[5%]">
+              <div className="w-8 h-8 rounded-full border border-white/10 bg-black/40" />
           </div>
       </div>
 
