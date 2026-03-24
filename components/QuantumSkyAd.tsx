@@ -142,6 +142,42 @@ export default function QuantumSkyAd() {
                              />
                         </div>
 
+                        {/* --- EMBEDDED BOX-HUD HOTSPOTS (LEVEL 110.16) --- */}
+                        <div className="absolute left-[4.5%] bottom-[8%] w-[28%] h-[28%] z-30 flex flex-col pointer-events-none">
+                            {/* WhatsApp Hotspot */}
+                            <div className="w-full h-1/3 flex items-center pl-[5%] pointer-events-auto cursor-pointer group"
+                                 onClick={() => {
+                                     handleAction('WHATSAPP_EMBEDDED', 'https://wa.me/201070615372');
+                                     unlockMusic();
+                                 }}>
+                                <div className="w-12 h-12 rounded-full group-hover:bg-green-500/10 transition-all group-active:scale-95 flex items-center justify-center">
+                                    <div className="w-9 h-9 rounded-full border border-green-500/0 group-hover:border-green-500/30 group-hover:shadow-[0_0_15px_rgba(34,197,94,0.4)] transition-all" />
+                                </div>
+                            </div>
+
+                            {/* Call Hotspot */}
+                            <div className="w-full h-1/3 flex items-center pl-[5%] pointer-events-auto cursor-pointer group"
+                                 onClick={() => {
+                                     handleAction('CALL_EMBEDDED', 'tel:+201070615372');
+                                     unlockMusic();
+                                 }}>
+                                <div className="w-12 h-12 rounded-full group-hover:bg-cyan-500/10 transition-all group-active:scale-95 flex items-center justify-center">
+                                    <div className="w-9 h-9 rounded-full border border-cyan-500/0 group-hover:border-cyan-500/30 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all" />
+                                </div>
+                            </div>
+
+                            {/* Location Hotspot */}
+                            <div className="w-full h-1/3 flex items-center pl-[5%] pointer-events-auto cursor-pointer group"
+                                 onClick={() => {
+                                     handleAction('LOCATION_EMBEDDED', 'https://maps.app.goo.gl/r6vGf');
+                                     unlockMusic();
+                                 }}>
+                                <div className="w-12 h-12 rounded-full group-hover:bg-[#c5a059]/10 transition-all group-active:scale-95 flex items-center justify-center">
+                                    <div className="w-9 h-9 rounded-full border border-[#c5a059]/0 group-hover:border-[#c5a059]/30 group-hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all" />
+                                </div>
+                            </div>
+                        </div>
+
                         {/* --- INTEGRATED SKY-ZONE HUD --- */}
                         <div className="absolute left-1/2 -translate-x-1/2 top-[4vh] z-[999999] w-[95%] max-w-[450px] px-4 flex justify-around items-center gap-4">
                             <motion.a href="tel:+201070615372" title="Call Us" initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }}>
