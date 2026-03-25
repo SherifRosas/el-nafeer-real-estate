@@ -189,7 +189,7 @@ export default function QuantumPortalAd() {
                     className="object-cover transition-all duration-1000"
                     priority
                 />
-                <div className={`absolute inset-0 bg-black/10 transition-opacity duration-1000 ${isStarted ? 'opacity-40' : 'opacity-0'}`} />
+                <div className={`absolute inset-0 bg-black/10 transition-opacity duration-1000 ${isStarted ? 'opacity-30' : 'opacity-0'}`} />
             </div>
 
             {/* --- INTERACTIVE 3D ENGINE (CENTERED FOCUS) --- */}
@@ -205,7 +205,7 @@ export default function QuantumPortalAd() {
                         
                         <Suspense fallback={null}>
                             {/* Centered Focus Portal mapped to the Elevator Pod area */}
-                            <group position={[1.4, 0, -2]}>
+                            <group position={[0, 0.4, 0]}>
                                 <PortalGate />
                                 <ElevatorBeams />
                             </group>

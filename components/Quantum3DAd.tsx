@@ -96,7 +96,7 @@ function Building() {
             {/* Point Cloud Windows (Digital Overlay) */}
             <points position={[0, 0, 0]}>
                 <bufferGeometry>
-                    <bufferAttribute attach="attributes-position" count={points.length / 3} array={points} itemSize={3} />
+                    <bufferAttribute attach="attributes-position" args={[points, 3]} />
                 </bufferGeometry>
                 <pointsMaterial size={0.006} color="#ffffff" transparent opacity={0.3} />
             </points>
