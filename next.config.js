@@ -20,7 +20,7 @@ const nextConfig = {
       },
       {
         source: '/lever-pioneer/:path*',
-        destination: '/quantum-imperial',
+        destination: '/portal/lever-pioneer',
         permanent: false,
       },
     ]

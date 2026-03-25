@@ -182,6 +182,29 @@ export default function HomeContent() {
             </p>
           </div>
         </div>
+
+        {/* Node C: Neural Real Estate AI (Quantum-9) */}
+        <Link href="/quantum-9" className="col-span-1 md:col-span-2 rounded-[2.5rem] p-16 md:p-24 relative group overflow-hidden bg-black/40 border-2 border-emerald-500/10 hover:border-emerald-500/40 transition-all duration-700 shadow-[0_0_50px_rgba(16,185,129,0.05)] hover:shadow-[0_0_100px_rgba(16,185,129,0.1)]">
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/[0.05] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+          <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
+            <div className="w-24 h-24 bg-emerald-500/10 rounded-full flex items-center justify-center text-emerald-400 border border-emerald-500/20 group-hover:scale-110 transition-transform duration-700 shadow-2xl">
+              <span className="text-4xl animate-pulse">💎</span>
+            </div>
+            <div className="flex-1 text-center md:text-left">
+                <h2 className="text-4xl md:text-5xl font-black italic tracking-tighter uppercase text-white group-hover:text-emerald-400 transition-colors mb-4">
+                    {isArabic ? 'الذكاء الاصطناعي العقاري' : 'NEURAL_REAL_ESTATE_AI'}
+                </h2>
+                <p className="text-sm text-gray-400 font-bold leading-relaxed uppercase tracking-[0.3em] font-mono opacity-60">
+                    {isArabic 
+                        ? 'نظام ترويج عقاري متصل بالجيل التاسع من واجهة كوانتم التفاعلية.'
+                        : 'Proprietary property promotion protocol connected to Quantum-9 interactive interfaces.'}
+                </p>
+            </div>
+            <div className="px-10 py-5 bg-white text-black rounded-full font-black text-xs uppercase tracking-[0.5em] group-hover:bg-emerald-500 group-hover:text-white transition-all shadow-xl">
+                 {isArabic ? 'فتح النواة' : 'OPEN_NODE'}
+            </div>
+          </div>
+        </Link>
       </div>
 
       {/* Global Status Bar */}
