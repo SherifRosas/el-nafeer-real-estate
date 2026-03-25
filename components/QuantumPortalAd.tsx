@@ -173,10 +173,15 @@ export default function QuantumPortalAd() {
         )
     }
 
+    const CACHE_V = "?v=121.3";
+
     return (
         <div style={{
             position: 'fixed',
-            inset: 0,
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
             backgroundColor: 'black',
             color: 'white',
             fontFamily: 'sans-serif',
@@ -195,11 +200,14 @@ export default function QuantumPortalAd() {
             {/* --- ARTWORK DEPTH LAYER (ULTRA RESILIENT) --- */}
             <div style={{
                 position: 'absolute',
-                inset: 0,
-                zIndex: 0
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                zIndex: 1
             }}>
                 <img 
-                    src={AD_IMAGE} 
+                    src={AD_IMAGE + CACHE_V} 
                     alt="Lever Pioneer" 
                     style={{
                         width: '100%',
@@ -213,7 +221,10 @@ export default function QuantumPortalAd() {
                 {!isStarted && (
                     <div style={{
                         position: 'absolute',
-                        inset: 0,
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
                         backgroundColor: 'rgba(0,0,0,0.5)',
                         transition: 'opacity 1s'
                     }} />
@@ -223,7 +234,10 @@ export default function QuantumPortalAd() {
             {/* --- INTERACTIVE 3D ENGINE (CENTERED FOCUS) --- */}
             <div style={{
                 position: 'absolute',
-                inset: 0,
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
                 zIndex: 10,
                 opacity: isStarted ? 1 : 0,
                 pointerEvents: isStarted ? 'auto' : 'none',
@@ -263,7 +277,7 @@ export default function QuantumPortalAd() {
 
             {/* --- CINEMATIC HUD (LOTTIE-LIKE) --- */}
             {isStarted && (
-                <div style={{ position: 'absolute', inset: 0, zIndex: 20, pointerEvents: 'none' }}>
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 20, pointerEvents: 'none' }}>
                     {/* MOBILE PRIMARY HUD (BOTTOM ACTION BAR) */}
                     <div style={{
                         position: 'absolute',
@@ -347,7 +361,10 @@ export default function QuantumPortalAd() {
                 <div 
                     style={{
                         position: 'absolute',
-                        inset: 0,
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
                         zIndex: 100,
                         display: 'flex',
                         alignItems: 'center',
@@ -363,7 +380,7 @@ export default function QuantumPortalAd() {
                         </h1>
 
                         <p style={{ fontSize: '14px', color: '#6b7280', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '4px', margin: '0 0 60px 0' }}>
-                            VERTICAL_EXPERIENCE_v121.1
+                            VERTICAL_EXPERIENCE_v121.3
                         </p>
 
                         <button 
@@ -391,7 +408,7 @@ export default function QuantumPortalAd() {
 
             {/* --- GLOBAL SIGNATURE --- */}
             <div style={{ position: 'fixed', bottom: '40px', right: '40px', zIndex: 100, opacity: 0.2, pointerEvents: 'none', textAlign: 'right' }}>
-                <span style={{ fontSize: '8px', fontWeight: 900, letterSpacing: '4px', color: '#06b6d4', display: 'block', marginBottom: '4px' }}>DESIGN_ENGINE_v121.1</span>
+                <span style={{ fontSize: '8px', fontWeight: 900, letterSpacing: '4px', color: '#06b6d4', display: 'block', marginBottom: '4px' }}>DESIGN_ENGINE_v121.3</span>
                 <span style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', letterSpacing: '2px', display: 'block' }}>Sherif Rosas</span>
             </div>
 
