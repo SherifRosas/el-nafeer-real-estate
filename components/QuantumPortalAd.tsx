@@ -48,7 +48,6 @@ function SpeechHUD({ isStarted }: { isStarted: boolean }) {
 export default function QuantumPortalAd() {
     const [isMounted, setIsMounted] = useState(false)
     const [isStarted, setIsStarted] = useState(false)
-    const [isMuted, setIsMuted] = useState(true)
     const audioRef = useRef<HTMLAudioElement>(null)
 
     useEffect(() => {
@@ -57,21 +56,26 @@ export default function QuantumPortalAd() {
 
     const initiateExperience = () => {
         setIsStarted(true)
+        
+        // 1. MUSIC INITIATION
         if (audioRef.current) {
             audioRef.current.muted = false;
-            // Force play on interaction
-            const playPromise = audioRef.current.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    setIsMuted(false);
-                }).catch(e => console.warn("Audio Context Wait:", e));
-            }
+            audioRef.current.play().catch(e => console.warn("Music play failed:", e));
+        }
+
+        // 2. SPEECH INITIATION (WEB SPEECH API - ARABIC)
+        if ('speechSynthesis' in window) {
+            const text = "الان من قلب مصر من الجيزة - حدائق الأهرام، تدشن شركة ليفر الرائدة للمصاعد مقرها الجديد. للتواصل اضغط على الأيقونات (واتساب - اتصال - الموقع). للتواصل مع منصة النفير العالمية للاعلان اضغط على صقر النفير.";
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'ar-SA'; // Arabic Saudi Arabia
+            utterance.rate = 0.9;
+            window.speechSynthesis.speak(utterance);
         }
     }
 
     if (!isMounted) return <div style={{ backgroundColor: 'black', width: '100vw', height: '100dvh' }} />;
 
-    const CACHE_V = "?v=121.7";
+    const CACHE_V = "?v=121.8";
 
     return (
         <div style={{
@@ -84,8 +88,18 @@ export default function QuantumPortalAd() {
             color: '#fff',
             zIndex: 99999,
             overflow: 'hidden',
-            touchAction: 'none'
         }}>
+            {/* --- RIGID VIEWPORT OVERRIDE --- */}
+            <style dangerouslySetInnerHTML={{ __html: `
+                html, body, #__next, main { 
+                    height: 100dvh !important; 
+                    width: 100vw !important; 
+                    overflow: hidden !important; 
+                    margin: 0 !important; 
+                    padding: 0 !important;
+                    position: fixed !important;
+                }
+            `}} />
             
             <audio ref={audioRef} loop playsInline preload="auto">
                  <source src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" type="audio/mpeg" />
@@ -117,7 +131,7 @@ export default function QuantumPortalAd() {
                         LEVER<br/><span style={{ color: '#06b6d4' }}>PIONEER</span>
                     </h1>
                     <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#6b7280', letterSpacing: '4px', margin: '0 0 40px 0' }}>
-                        ULTIMA_EXPERIENCE_v121.7
+                        ULTIMATUM_ASCENSION_v121.8
                     </p>
                     <button 
                         onClick={initiateExperience}
@@ -135,7 +149,7 @@ export default function QuantumPortalAd() {
                     >
                         BEGIN_ASCENT
                     </button>
-                    <span style={{ fontSize: '8px', color: '#444', marginTop: '40px', letterSpacing: '2px' }}>DESIGNED BY SHERIF ROSAS</span>
+                    <span style={{ fontSize: '8px', color: '#444', marginTop: '40px', letterSpacing: '2px' }}>FOR THE VISIONARY</span>
                 </div>
             )}
 
@@ -145,7 +159,7 @@ export default function QuantumPortalAd() {
                     <Quantum3DLayer />
                     
                     <div style={{ position: 'absolute', top: '40px', left: '40px', zIndex: 50 }}>
-                        <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '8px', color: '#06b6d4', opacity: 0.6 }}>LEVER PIONEER</span>
+                        <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '8px', color: '#06b6d4', opacity: 0.4 }}>LEVER PIONEER</span>
                     </div>
 
                     <div style={{ 
@@ -164,24 +178,6 @@ export default function QuantumPortalAd() {
                         <a href={WHATSAPP_URL} style={{ width: '64px', height: '64px', borderRadius: '50%', backgroundColor: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 20px rgba(0,0,0,0.5)' }}>
                             <MessageCircle style={{ width: '28px', height: '28px', color: '#fff' }} />
                         </a>
-                    </div>
-
-                    <div 
-                        onClick={() => { if (audioRef.current) { audioRef.current.muted = !isMuted; setIsMuted(!isMuted); } }}
-                        style={{ position: 'absolute', top: '40px', right: '40px', zIndex: 100, cursor: 'pointer' }}
-                    >
-                        <div style={{ 
-                            width: '48px', 
-                            height: '48px', 
-                            borderRadius: '50%', 
-                            border: `2px solid ${isMuted ? '#ef4444' : '#06b6d4'}`, 
-                            display: 'flex', 
-                            alignItems: 'center', 
-                            justifyContent: 'center',
-                            backgroundColor: 'rgba(0,0,0,0.5)'
-                        }}>
-                            {isMuted ? <X size={20} color="#ef4444" /> : <Activity size={20} color="#06b6d4" />}
-                        </div>
                     </div>
                 </>
             )}
