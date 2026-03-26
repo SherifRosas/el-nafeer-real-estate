@@ -1,4 +1,8 @@
+'use client'
+
+import React, { useState, useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap } from 'lucide-react'
 
 // Dynamically import the heavy 3D engine to prevent bundle crashes on legacy devices
