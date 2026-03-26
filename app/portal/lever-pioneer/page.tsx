@@ -45,19 +45,7 @@ export const metadata: Metadata = {
 
 export default function PortalPage() {
   return (
-    <main className="min-h-screen bg-black overflow-hidden relative">
-      <style dangerouslySetInnerHTML={{ __html: `
-        footer, header, nav, #main-nav, .site-footer, div[data-footer], #footer { 
-          display: none !important; 
-        }
-        body { 
-          background: black !important; 
-          overflow: hidden !important; 
-          position: fixed !important; 
-          width: 100% !important; 
-          height: 100% !important; 
-        }
-      `}} />
+    <main style={{ backgroundColor: '#000', width: '100%', height: '100vh', overflow: 'hidden', position: 'relative' }}>
       <QuantumPortalAd />
     </main>
   )

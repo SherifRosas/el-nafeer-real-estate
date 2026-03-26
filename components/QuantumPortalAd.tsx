@@ -2,13 +2,12 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
-import { motion, AnimatePresence } from 'framer-motion'
 import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap } from 'lucide-react'
 
-// Dynamically import the heavy 3D engine to prevent bundle crashes on legacy devices
+// Dynamically import the heavy 3D engine
 const Quantum3DLayer = dynamic(() => import('./Quantum3DLayer'), { 
     ssr: false,
-    loading: () => <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div className="w-8 h-8 border-2 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin" /></div>
+    loading: () => <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div className="w-8 h-8 border-2 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin" /></div>
 })
 
 const AD_IMAGE = "/campaigns/lever-pioneer/ad-v2-quantum.png";
@@ -16,24 +15,33 @@ const WHATSAPP_URL = "https://wa.me/201111171368";
 const CALL_URL = "tel:+201070615372";
 const LOCATION_URL = "https://maps.app.goo.gl/r6vGf";
 
-// --- CINEMATIC SPEECH HUD ---
+// --- CINEMATIC SPEECH HUD (PURE CSS) ---
 function SpeechHUD({ isStarted }: { isStarted: boolean }) {
     const text = "الان من قلب مصر من الجيزة - حدائق الأهرام، تدشن شركة ليفر الرائدة للمصاعد مقرها الجديد. للتواصل اضغط على الأيقونات (واتساب - اتصال - الموقع). للتواصل مع منصة النفير العالمية للاعلان اضغط على صقر النفير.";
+    
+    if (!isStarted) return null;
+
     return (
-        <AnimatePresence>
-            {isStarted && (
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="absolute top-[18vh] left-1/2 -translate-x-1/2 z-[100] w-[90%] max-w-[600px] text-center bg-black/40 backdrop-blur-xl border border-cyan-500/20 p-6 rounded-3xl"
-                    style={{ direction: 'rtl' }}
-                >
-                    <p className="text-lg md:text-xl font-bold text-white leading-relaxed dir-rtl text-right font-sans">
-                        {text}
-                    </p>
-                </motion.div>
-            )}
-        </AnimatePresence>
+        <div style={{
+            position: 'absolute',
+            top: '18vh',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            WebkitTransform: 'translateX(-50%)',
+            zIndex: 100,
+            width: '90%',
+            maxWidth: '600px',
+            backgroundColor: 'rgba(0,0,0,0.6)',
+            padding: '20px',
+            borderRadius: '20px',
+            border: '1px solid rgba(6,182,212,0.2)',
+            textAlign: 'right',
+            direction: 'rtl'
+        }}>
+            <p style={{ fontSize: '18px', fontWeight: 'bold', color: 'white', margin: 0 }}>
+                {text}
+            </p>
+        </div>
     )
 }
 
@@ -55,7 +63,7 @@ export default function QuantumPortalAd() {
         }
     }
 
-    if (!isMounted) return null;
+    if (!isMounted) return <div style={{ backgroundColor: 'black', width: '100%', height: '100vh' }} />;
 
     const CACHE_V = "?v=121.5";
 
@@ -97,7 +105,7 @@ export default function QuantumPortalAd() {
                         LEVER<br/><span style={{ color: '#06b6d4' }}>PIONEER</span>
                     </h1>
                     <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#6b7280', letterSpacing: '4px', margin: '0 0 40px 0' }}>
-                        VERSION_v121.5_HYBRID_SPLIT
+                        VERSION_v121.6_BULLETPROOF
                     </p>
                     <button 
                         onClick={initiateExperience}
