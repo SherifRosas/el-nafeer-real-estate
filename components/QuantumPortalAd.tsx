@@ -120,7 +120,7 @@ export default function QuantumPortalAd() {
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
-                    <div style={{ position: 'absolute', top: '10px', right: '10px', fontSize: '8px', color: 'rgba(255,255,255,0.2)' }}>v121.10</div>
+                    <div style={{ position: 'absolute', top: '10px', right: '10px', fontSize: '8px', color: 'rgba(255,255,255,0.2)' }}>v121.11</div>
                     
                     {/* The Hotspot Button - Positioned exactly over the artwork button area */}
                     <button 

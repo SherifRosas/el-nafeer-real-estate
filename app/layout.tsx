@@ -1,32 +1,22 @@
+'use client'
+
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
+import { usePathname } from 'next/navigation';
 
 import MasterFooter from "@/components/MasterFooter";
 import TrackingScripts from "@/components/analytics/TrackingScripts";
-
-export const metadata: Metadata = {
-  title: "EL-NAFEER | Luxury Real Estate AI Orchestration - Sherif Rosas",
-  description: "Advanced Real Estate Marketing Platform powered by AI Agent Orchestration, developed and owned by Sherif Rosas AI Dev.",
-  icons: {
-    icon: '/favicon.svg',
-  },
-};
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 5,
-  userScalable: true,
-  themeColor: '#000000',
-  viewportFit: 'cover',
-};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+  // Cinematic Portals should be exclusive and full-screen without the global footer
+  const isPortal = pathname?.includes('/portal/') || pathname?.includes('/lever-pioneer/');
+
   return (
     <html lang="ar" dir="rtl">
       <head>
@@ -40,7 +30,7 @@ export default function RootLayout({
         <Providers>
           <TrackingScripts />
           {children}
-          <MasterFooter />
+          {!isPortal && <MasterFooter />}
         </Providers>
       </body>
     </html>
