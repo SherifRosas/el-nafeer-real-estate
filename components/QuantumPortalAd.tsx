@@ -59,26 +59,38 @@ export default function QuantumPortalAd() {
         setIsStarted(true)
         if (audioRef.current) {
             audioRef.current.muted = false;
-            audioRef.current.play().catch(e => console.warn(e));
+            // Force play on interaction
+            const playPromise = audioRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    setIsMuted(false);
+                }).catch(e => console.warn("Audio Context Wait:", e));
+            }
         }
     }
 
-    if (!isMounted) return <div style={{ backgroundColor: 'black', width: '100%', height: '100vh' }} />;
+    if (!isMounted) return <div style={{ backgroundColor: 'black', width: '100vw', height: '100dvh' }} />;
 
-    const CACHE_V = "?v=121.5";
+    const CACHE_V = "?v=121.7";
 
     return (
         <div style={{
             position: 'fixed',
             top: 0,
             left: 0,
-            width: '100%',
-            height: '100%',
+            width: '100dvw',
+            height: '100dvh',
             backgroundColor: '#000',
             color: '#fff',
             zIndex: 99999,
-            overflow: 'hidden'
+            overflow: 'hidden',
+            touchAction: 'none'
         }}>
+            
+            <audio ref={audioRef} loop playsInline preload="auto">
+                 <source src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" type="audio/mpeg" />
+            </audio>
+
             {/* --- ARTWORK LAYER --- */}
             <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
                 <img src={AD_IMAGE + CACHE_V} alt="Lever Pioneer" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -93,7 +105,7 @@ export default function QuantumPortalAd() {
                     width: '100%',
                     height: '100%',
                     zIndex: 100,
-                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    backgroundColor: 'rgba(0,0,0,0.85)',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -101,48 +113,74 @@ export default function QuantumPortalAd() {
                     textAlign: 'center',
                     padding: '20px'
                 }}>
-                    <h1 style={{ fontSize: '48px', fontWeight: 900, fontStyle: 'italic', margin: '0 0 20px 0' }}>
+                    <h1 style={{ fontSize: '48px', fontWeight: 900, fontStyle: 'italic', margin: '0 0 20px 0', letterSpacing: '-2px' }}>
                         LEVER<br/><span style={{ color: '#06b6d4' }}>PIONEER</span>
                     </h1>
                     <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#6b7280', letterSpacing: '4px', margin: '0 0 40px 0' }}>
-                        VERSION_v121.6_BULLETPROOF
+                        ULTIMA_EXPERIENCE_v121.7
                     </p>
                     <button 
                         onClick={initiateExperience}
-                        style={{ padding: '25px 50px', backgroundColor: '#fff', color: '#000', borderRadius: '40px', fontWeight: 900, fontSize: '10px', letterSpacing: '4px', border: 'none' }}
+                        style={{ 
+                            padding: '30px 60px', 
+                            backgroundColor: '#fff', 
+                            color: '#000', 
+                            borderRadius: '50px', 
+                            fontWeight: 900, 
+                            fontSize: '12px', 
+                            letterSpacing: '6px', 
+                            border: 'none',
+                            boxShadow: '0 0 40px rgba(6,182,212,0.3)'
+                        }}
                     >
                         BEGIN_ASCENT
                     </button>
-                    <span style={{ fontSize: '8px', color: '#333', marginTop: '40px' }}>OPTIMIZED FOR LEGACY TERMINALS</span>
+                    <span style={{ fontSize: '8px', color: '#444', marginTop: '40px', letterSpacing: '2px' }}>DESIGNED BY SHERIF ROSAS</span>
                 </div>
             )}
 
             {/* --- CONTENT LAYER --- */}
             {isStarted && (
                 <>
-                    <audio ref={audioRef} loop playsInline src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" />
                     <Quantum3DLayer />
-                    <SpeechHUD isStarted={isStarted} />
-
-                    <div style={{ position: 'absolute', top: '30px', left: '30px', zIndex: 50 }}>
-                        <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '5px', color: '#06b6d4' }}>LEVER PIONEER</span>
+                    
+                    <div style={{ position: 'absolute', top: '40px', left: '40px', zIndex: 50 }}>
+                        <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '8px', color: '#06b6d4', opacity: 0.6 }}>LEVER PIONEER</span>
                     </div>
 
-                    <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', WebkitTransform: 'translateX(-50%)', width: '100%', display: 'flex', justifyContent: 'center', gap: '30px', zIndex: 50 }}>
-                        <a href={CALL_URL} style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <Phone style={{ width: '24px', height: '24px', color: '#000' }} />
+                    <div style={{ 
+                        position: 'absolute', 
+                        bottom: '50px', 
+                        left: '0', 
+                        width: '100%', 
+                        display: 'flex', 
+                        justifyContent: 'center', 
+                        gap: '30px', 
+                        zIndex: 50 
+                    }}>
+                        <a href={CALL_URL} style={{ width: '64px', height: '64px', borderRadius: '50%', backgroundColor: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 20px rgba(0,0,0,0.5)' }}>
+                            <Phone style={{ width: '28px', height: '28px', color: '#000' }} />
                         </a>
-                        <a href={WHATSAPP_URL} style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <MessageCircle style={{ width: '24px', height: '24px', color: '#fff' }} />
+                        <a href={WHATSAPP_URL} style={{ width: '64px', height: '64px', borderRadius: '50%', backgroundColor: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 20px rgba(0,0,0,0.5)' }}>
+                            <MessageCircle style={{ width: '28px', height: '28px', color: '#fff' }} />
                         </a>
                     </div>
 
                     <div 
                         onClick={() => { if (audioRef.current) { audioRef.current.muted = !isMuted; setIsMuted(!isMuted); } }}
-                        style={{ position: 'absolute', top: '30px', right: '30px', zIndex: 100, cursor: 'pointer' }}
+                        style={{ position: 'absolute', top: '40px', right: '40px', zIndex: 100, cursor: 'pointer' }}
                     >
-                        <div style={{ width: '40px', height: '40px', borderRadius: '50%', border: '1px solid #fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            {isMuted ? <X size={16} color="#ef4444" /> : <Activity size={16} color="#06b6d4" />}
+                        <div style={{ 
+                            width: '48px', 
+                            height: '48px', 
+                            borderRadius: '50%', 
+                            border: `2px solid ${isMuted ? '#ef4444' : '#06b6d4'}`, 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            justifyContent: 'center',
+                            backgroundColor: 'rgba(0,0,0,0.5)'
+                        }}>
+                            {isMuted ? <X size={20} color="#ef4444" /> : <Activity size={20} color="#06b6d4" />}
                         </div>
                     </div>
                 </>
