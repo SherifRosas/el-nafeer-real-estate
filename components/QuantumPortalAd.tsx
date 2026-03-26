@@ -170,40 +170,27 @@ export default function QuantumPortalAd() {
                     <div className="w-16 h-16 border-2 border-cyan-500/20 rounded-full animate-spin border-t-cyan-500 mx-auto opacity-40" />
                 </div>
             </div>
-        )
-    }
-
-    const CACHE_V = "?v=121.3";
+    const CACHE_V = "?v=121.4";
 
     return (
         <div style={{
             position: 'fixed',
             top: 0,
             left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'black',
-            color: 'white',
-            fontFamily: 'sans-serif',
-            overflow: 'hidden',
-            userSelect: 'none',
-            touchAction: 'none',
             width: '100%',
             height: '100%',
-            zIndex: 9999
+            backgroundColor: '#000',
+            color: '#fff',
+            zIndex: 99999,
+            overflow: 'hidden'
         }}>
-            
-            <audio ref={audioRef} loop playsInline preload="auto">
-                 <source src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" type="audio/mpeg" />
-            </audio>
-
-            {/* --- ARTWORK DEPTH LAYER (ULTRA RESILIENT) --- */}
+            {/* --- ARTWORK DEPTH LAYER --- */}
             <div style={{
                 position: 'absolute',
                 top: 0,
                 left: 0,
-                right: 0,
-                bottom: 0,
+                width: '100%',
+                height: '100%',
                 zIndex: 1
             }}>
                 <img 
@@ -212,73 +199,87 @@ export default function QuantumPortalAd() {
                     style={{
                         width: '100%',
                         height: '100%',
-                        objectFit: 'cover',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0
+                        objectFit: 'cover'
                     }}
                 />
-                {!isStarted && (
-                    <div style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        backgroundColor: 'rgba(0,0,0,0.5)',
-                        transition: 'opacity 1s'
-                    }} />
-                )}
             </div>
 
-            {/* --- INTERACTIVE 3D ENGINE (CENTERED FOCUS) --- */}
-            <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                zIndex: 10,
-                opacity: isStarted ? 1 : 0,
-                pointerEvents: isStarted ? 'auto' : 'none',
-                transition: 'opacity 1s'
-            }}>
-                {isStarted && (
-                    <Canvas 
-                        dpr={[1, 1]} 
-                        camera={{ position: [0, 0, 5], fov: 40 }}
-                        gl={{ powerPreference: "high-performance", alpha: true }}
+            {/* --- THE CINEMATIC GATE --- */}
+            {!isStarted && (
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    zIndex: 100,
+                    backgroundColor: 'rgba(0,0,0,0.7)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    padding: '20px'
+                }}>
+                    <h1 style={{ fontSize: '48px', fontWeight: 900, fontStyle: 'italic', margin: '0 0 20px 0' }}>
+                        LEVER<br/>
+                        <span style={{ color: '#06b6d4' }}>PIONEER</span>
+                    </h1>
+
+                    <p style={{ fontSize: '10px', fontWeight: 'bold', color: '#6b7280', letterSpacing: '4px', margin: '0 0 40px 0' }}>
+                        VERSION_v121.4_STABLE
+                    </p>
+
+                    <button 
+                        onClick={initiateExperience}
+                        style={{
+                            padding: '25px 50px',
+                            backgroundColor: '#fff',
+                            color: '#000',
+                            borderRadius: '40px',
+                            fontWeight: 900,
+                            fontSize: '10px',
+                            letterSpacing: '4px',
+                            border: 'none',
+                            cursor: 'pointer'
+                        }}
                     >
-                        <ambientLight intensity={1.5} />
-                        <pointLight position={[0, 0, 2]} intensity={2} color={CYAN} />
-                        
-                        <Suspense fallback={null}>
-                            {/* Centered Focus Portal mapped to the Elevator Pod area */}
-                            <group position={[0, 0.4, 0]}>
-                                <PortalGate />
-                                <ElevatorBeams />
-                            </group>
-                            
-                            <Stars radius={100} depth={50} count={100} factor={4} saturation={0} fade speed={0.5} />
-                        </Suspense>
+                        BEGIN_ASCENT
+                    </button>
+                    
+                    <span style={{ fontSize: '8px', color: '#333', marginTop: '40px' }}>DESIGN BY SHERIF ROSAS</span>
+                </div>
+            )}
 
-                        <OrbitControls 
-                            enableZoom={false} 
-                            enablePan={false}
-                            autoRotate 
-                            autoRotateSpeed={0.3}
-                        />
-                    </Canvas>
-                )}
-            </div>
-
-            {/* --- SENSORY HUD LAYERS --- */}
-            <SpeechHUD isStarted={isStarted} />
-
-            {/* --- CINEMATIC HUD (LOTTIE-LIKE) --- */}
+            {/* --- CONTENT LAYER (LOADS AFTER START) --- */}
             {isStarted && (
-                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 20, pointerEvents: 'none' }}>
-                    {/* MOBILE PRIMARY HUD (BOTTOM ACTION BAR) */}
+                <>
+                    <audio ref={audioRef} loop playsInline>
+                         <source src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" type="audio/mpeg" />
+                    </audio>
+
+                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 10 }}>
+                         <Canvas dpr={1} camera={{ position: [0, 0, 5], fov: 40 }}>
+                            <ambientLight intensity={1.5} />
+                            <Suspense fallback={null}>
+                                <group position={[0, 0.4, 0]}>
+                                    <PortalGate />
+                                    <ElevatorBeams />
+                                </group>
+                                <Stars radius={50} count={50} />
+                            </Suspense>
+                            <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
+                        </Canvas>
+                    </div>
+
+                    <SpeechHUD isStarted={isStarted} />
+
+                    {/* TOP BRANDING */}
+                    <div style={{ position: 'absolute', top: '30px', left: '30px', zIndex: 50 }}>
+                        <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '5px', color: '#06b6d4' }}>LEVER PIONEER</span>
+                    </div>
+
+                    {/* ACTION HUD */}
                     <div style={{
                         position: 'absolute',
                         bottom: '40px',
@@ -286,157 +287,30 @@ export default function QuantumPortalAd() {
                         transform: 'translateX(-50%)',
                         WebkitTransform: 'translateX(-50%)',
                         width: '100%',
-                        maxWidth: '400px',
-                        padding: '0 24px',
-                        pointerEvents: 'auto'
+                        display: 'flex',
+                        justifyContent: 'center',
+                        gap: '30px',
+                        zIndex: 50
                     }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '24px' }}>
-                            <a 
-                                href={CALL_URL}
-                                style={{
-                                    width: '64px',
-                                    height: '64px',
-                                    borderRadius: '50%',
-                                    backgroundColor: 'rgba(255,255,255,0.05)',
-                                    border: '1px solid rgba(6,182,212,0.3)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    boxShadow: '0 0 20px rgba(0,0,0,0.5)'
-                                }}
-                            >
-                                <Phone style={{ width: '28px', height: '28px', color: '#06b6d4' }} />
-                            </a>
+                        <a href={CALL_URL} style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <Phone style={{ width: '24px', height: '24px', color: '#000' }} />
+                        </a>
+                        <a href={WHATSAPP_URL} style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <MessageCircle style={{ width: '24px', height: '24px', color: '#fff' }} />
+                        </a>
+                    </div>
 
-                            <a 
-                                href={WHATSAPP_URL}
-                                style={{
-                                    width: '64px',
-                                    height: '64px',
-                                    borderRadius: '50%',
-                                    backgroundColor: 'rgba(255,255,255,0.05)',
-                                    border: '1px solid rgba(16,185,129,0.3)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    boxShadow: '0 0 20px rgba(0,0,0,0.5)'
-                                }}
-                            >
-                                <MessageCircle style={{ width: '28px', height: '28px', color: '#10b981' }} />
-                                
-                            </a>
-
-                            <a 
-                                href={LOCATION_URL}
-                                target="_blank"
-                                style={{
-                                    width: '64px',
-                                    height: '64px',
-                                    borderRadius: '50%',
-                                    backgroundColor: 'rgba(255,255,255,0.05)',
-                                    border: '1px solid rgba(197,160,89,0.3)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    boxShadow: '0 0 20px rgba(0,0,0,0.5)'
-                                }}
-                            >
-                                <MapPin style={{ width: '28px', height: '28px', color: '#c5a059' }} />
-                            </a>
+                    {/* AUDIO TOGGLE */}
+                    <div 
+                        onClick={() => { if (audioRef.current) { audioRef.current.muted = !isMuted; setIsMuted(!isMuted); } }}
+                        style={{ position: 'absolute', top: '30px', right: '30px', zIndex: 100, cursor: 'pointer' }}
+                    >
+                        <div style={{ width: '40px', height: '40px', borderRadius: '50%', border: '1px solid #fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            {isMuted ? <X size={16} color="#ef4444" /> : <Activity size={16} color="#06b6d4" />}
                         </div>
                     </div>
-
-                    {/* TOP BRANDING HUD */}
-                    <div style={{ position: 'absolute', top: '40px', left: '40px', textAlign: 'left' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '8px', color: 'rgba(6,182,212,0.6)', textTransform: 'uppercase' }}>LEVER PIONEER</span>
-                            <span style={{ fontSize: '32px', fontWeight: 900, letterSpacing: '-2px', color: 'white', textTransform: 'uppercase', fontStyle: 'italic', marginTop: '4px' }}>THE ASCENT</span>
-                        </div>
-                    </div>
-                </div>
+                </>
             )}
-
-            {/* --- THE CINEMATIC GATE (ABSOLUTE STABILITY) --- */}
-            {!isStarted && (
-                <div 
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        zIndex: 100,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: 'rgba(0,0,0,0.85)',
-                        padding: '40px'
-                    }}
-                >
-                    <div style={{ maxWidth: '600px', textAlign: 'center' }}>
-                        <h1 style={{ fontSize: '60px', fontWeight: 900, textTransform: 'uppercase', fontStyle: 'italic', lineHeight: 1, margin: '0 0 40px 0' }}>
-                            LEVER<br/>
-                            <span style={{ color: '#06b6d4' }}>PIONEER</span>
-                        </h1>
-
-                        <p style={{ fontSize: '14px', color: '#6b7280', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '4px', margin: '0 0 60px 0' }}>
-                            VERTICAL_EXPERIENCE_v121.3
-                        </p>
-
-                        <button 
-                            onClick={initiateExperience}
-                            style={{
-                                position: 'relative',
-                                padding: '30px 60px',
-                                backgroundColor: 'white',
-                                color: 'black',
-                                borderRadius: '50px',
-                                fontWeight: 900,
-                                fontSize: '12px',
-                                textTransform: 'uppercase',
-                                letterSpacing: '6px',
-                                border: 'none',
-                                cursor: 'pointer',
-                                boxShadow: '0 0 30px rgba(255,255,255,0.2)'
-                            }}
-                        >
-                            BEGIN_ASCENT
-                        </button>
-                    </div>
-                </div>
-            )}
-
-            {/* --- GLOBAL SIGNATURE --- */}
-            <div style={{ position: 'fixed', bottom: '40px', right: '40px', zIndex: 100, opacity: 0.2, pointerEvents: 'none', textAlign: 'right' }}>
-                <span style={{ fontSize: '8px', fontWeight: 900, letterSpacing: '4px', color: '#06b6d4', display: 'block', marginBottom: '4px' }}>DESIGN_ENGINE_v121.3</span>
-                <span style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', letterSpacing: '2px', display: 'block' }}>Sherif Rosas</span>
-            </div>
-
-            {/* --- AUDIO TOGGLE --- */}
-            {isStarted && (
-                <div 
-                    onClick={() => { if (audioRef.current) { audioRef.current.muted = !isMuted; setIsMuted(!isMuted); } }}
-                    style={{ position: 'fixed', top: '40px', right: '40px', zIndex: 100, cursor: 'pointer' }}
-                >
-                    <div style={{
-                        width: '48px',
-                        height: '48px',
-                        borderRadius: '50%',
-                        border: `2px solid ${isMuted ? 'rgba(239,68,68,0.5)' : 'rgba(6,182,212,0.5)'}`,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: 'rgba(0,0,0,0.5)'
-                    }}>
-                        {isMuted ? (
-                             <X style={{ width: '20px', height: '20px', color: '#ef4444' }} />
-                        ) : (
-                             <Activity style={{ width: '20px', height: '20px', color: '#06b6d4' }} />
-                        )}
-                    </div>
-                </div>
-            )}
-            
         </div>
     )
 }
