@@ -170,6 +170,9 @@ export default function QuantumPortalAd() {
                     <div className="w-16 h-16 border-2 border-cyan-500/20 rounded-full animate-spin border-t-cyan-500 mx-auto opacity-40" />
                 </div>
             </div>
+        )
+    }
+
     const CACHE_V = "?v=121.4";
 
     return (
