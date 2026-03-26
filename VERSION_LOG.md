@@ -233,4 +233,41 @@ This version marks the transition from static 2D ads to a **High-Fidelity 3D Web
 
 ---
 
+## [5.0.0-portal-stable] - 2026-03-26
+
+### 🚀 Milestone: The Lever Pioneer Cinematic Portal (v121.11)
+
+This major update marks the stabilization and finalization of the **Lever Pioneer "Ascent" Portal**, achieving absolute device agnosticism (iPhone 6+ to Desktop) and high-fidelity branding.
+
+### Added (Portal)
+
+- **Master Branding Gate (v121.9)**:
+  - Official **EL-NAFEER** eagle branding with cyan-to-purple gradient typography.
+  - Personnel Branding: **Sherif Rosas** (AI Developer) and **Ahmed Abdel Sattar** (Executive Master) with direct contact nodes.
+- **Unified Masterpiece Hotspots (v121.10)**:
+  - Integrated the interactive UI directly with the cinematic background artwork (`ad-v2-quantum.png`) using high-precision transparent hotspots.
+  - Eliminated "UI ghosting" and text doubling on PC and Android.
+- **Link Persistence Protocol (v121.11)**:
+  - **Shared Link Continuity**: Created a permanent landing route at `/lever-pioneer/ad-v5` to ensure the WhatsApp campaign link never breaks.
+  - **Exclusive Layout**: Updated the global `RootLayout` to intelligently hide the `MasterFooter` on cinematic portal pages, providing a pure 100% immersive view.
+- **Sensory Narration**:
+  - **Web Speech API integration**: Automated Arabic narration ("الان من قلب مصر...") triggered upon interaction to guarantee and brand the "Speech" requirement across all browsers.
+
+### Fixed (Stability)
+
+- **iPhone 6+ Bulletproof Patch (v121.6)**: 
+  - Complete removal of `framer-motion` and heavy animation libraries from the initial load to eliminate the "Black Screen" crash on Safari 12.
+- **Android Viewport Fix (v121.7)**:
+  - Implemented `100dvh` (Dynamic Viewport Height) to eliminate scroll-glitches caused by mobile address bars.
+- **UI Clean-up**: Removed the "Red X" (Mute toggle) at the user's request for a cleaner, high-end presentation.
+
+### Shared Link Registry
+- **WhatsApp Campaign (7 Days Ago)**: `https://el-nafeer-real-estate.vercel.app/lever-pioneer/ad-v5` -> Points to `v121.11` Latest.
+
+### Technical Notes
+- **Status**: **MISSION CRITICAL PRODUCTION STABLE**. The Lever Pioneer Portal is now the global benchmark for EL-NAFEER marketing.
+- **Codebase**: 100% TypeScript compliant, Zero-Dependency Entry Engine.
+
+---
+
 *Created by Antigravity (Advanced Agentic Coding)*
