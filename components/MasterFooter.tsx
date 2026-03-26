@@ -2,10 +2,16 @@
 
 import { useLanguage } from './LanguageContext'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export default function MasterFooter() {
     const { language } = useLanguage()
+    const pathname = usePathname()
     const isArabic = language === 'ar'
+
+    // Cinematic Portals should be exclusive and full-screen without the global footer
+    const isPortal = pathname?.includes('/portal/') || pathname?.includes('/lever-pioneer/');
+    if (isPortal) return null;
 
     return (
         <footer className="relative milky-glass border-t border-white/10 py-24 overflow-hidden">
