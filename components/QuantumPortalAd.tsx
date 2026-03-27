@@ -64,29 +64,27 @@ export default function QuantumPortalAd() {
     const initiateExperience = () => {
         setIsStarted(true);
         
-        // Critical: User-triggered sound loop for Apple/Chrome
+        // Critical: Strict Synchronous execution for iOS 12 Safari media unlock
+        // Do NOT use Promises or async callbacks here, Safari will block them.
         if (audioRef.current) {
             audioRef.current.muted = false;
-            audioRef.current.play().catch(() => {
-                // Secondary fallback if first trigger fails
-                audioRef.current?.play();
-            });
+            audioRef.current.volume = 1.0;
+            const playPromise = audioRef.current.play();
+            // We gently catch the promise purely to avoid unhandled rejections in the console, 
+            // but we absolutely do not chain logic off it.
+            if (playPromise !== undefined) {
+                playPromise.catch(() => { /* Silent fallback */ });
+            }
         }
 
-        // Reliable Speech Narration with Voice Discovery
+        // Reliable Speech Narration
         if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
             const text = "الان من قلب مصر من الجيزة - حدائق الأهرام، تدشن شركة ليفر الرائدة للمصاعد مقرها الجديد. للتواصل اضغط على الأيقونات (واتساب - اتصال - الموقع). للتواصل مع منصة النفير العالمية للاعلان اضغط على صقر النفير.";
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'ar-SA';
-            utterance.rate = 0.8; // Further reduced for maximum compatibility
-            
-            // Wait for voices if needed (Legacy Safari)
-            if (window.speechSynthesis.getVoices().length === 0) {
-                window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.speak(utterance);
-            } else {
-                window.speechSynthesis.speak(utterance);
-            }
+            utterance.rate = 0.8;
+            window.speechSynthesis.speak(utterance);
         }
     }
 
@@ -126,8 +124,8 @@ export default function QuantumPortalAd() {
             </audio>
 
             {/* --- PRIMARY ASSET --- */}
-            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
-                <img src={AD_IMAGE + CACHE_V} alt="Lever Pioneer" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#000' }}>
+                <img src={AD_IMAGE + CACHE_V} alt="Lever Pioneer" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                 
                 {/* --- RED X OVERLAY (Digital Patch for Artwork Artifacts) --- */}
                 <div style={{ 
@@ -158,43 +156,42 @@ export default function QuantumPortalAd() {
 
             {/* --- INTERACTIVE HOTSPOT GATE --- */}
             {!isStarted && (
-                <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    zIndex: 100,
-                    backgroundColor: 'rgba(0,0,0,0.1)', 
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}>
-                    <div style={{ position: 'absolute', top: '20px', right: '20px', fontSize: '9px', color: 'rgba(255,255,255,0.3)', fontWeight: 'bold' }}>ULTIMATUM_v121.14</div>
+                <div 
+                    onClick={initiateExperience}
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        zIndex: 100,
+                        cursor: 'pointer',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                        paddingBottom: '8vh',
+                        background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 30%)'
+                    }}
+                >
+                    <div style={{ position: 'absolute', top: '20px', right: '20px', fontSize: '9px', color: 'rgba(255,255,255,0.3)', fontWeight: 'bold' }}>ULTIMATUM_v121.15</div>
                     
-                    <button 
-                        onClick={initiateExperience}
-                        style={{ 
-                            padding: '30px 70px', 
-                            backgroundColor: 'rgba(255,255,255,0.01)', 
-                            color: '#fff', 
-                            borderRadius: '15px', 
-                            fontWeight: 900, 
-                            fontSize: '15px', 
-                            letterSpacing: '6px', 
-                            border: '2px solid #06b6d4',
-                            animation: 'pulse-cyan 3s infinite',
-                            cursor: 'pointer',
-                            marginTop: '220px',
-                            textShadow: '0 0 10px rgba(0,0,0,1)',
-                            WebkitAppearance: 'none'
-                        }}
-                    >
-                        BEGIN_ASCENT
-                    </button>
+                    <div style={{
+                        padding: '15px 40px',
+                        backgroundColor: 'rgba(255,255,255,0.05)',
+                        border: '2px solid rgba(6,182,212,0.5)',
+                        borderRadius: '20px',
+                        color: '#fff',
+                        fontWeight: 900,
+                        fontSize: '14px',
+                        letterSpacing: '8px',
+                        animation: 'pulse-cyan 2s infinite',
+                        textShadow: '0 0 10px rgba(0,0,0,1)'
+                    }}>
+                        TAP_TO_ASCENT
+                    </div>
                     
-                    <div style={{ marginTop: '20px', fontSize: '10px', color: 'rgba(255,255,255,0.5)', letterSpacing: '4px' }}>ACCESSING_CYBER_DOMAIN</div>
+                    <div style={{ marginTop: '15px', fontSize: '9px', color: 'rgba(255,255,255,0.5)', letterSpacing: '4px' }}>INITIALIZE_AUDIO_VISUAL</div>
                 </div>
             )}
 
