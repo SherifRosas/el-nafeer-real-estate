@@ -51,11 +51,8 @@ export default function QuantumPortalAd() {
     const [displayedText, setDisplayedText] = useState("");
     const [isStarted, setIsStarted] = useState(false);
     const [isLegacy, setIsLegacy] = useState(false);
-    // Raw Audio element reference to bypass iOS 12 React-DOM locking
-    const audioInstance = useRef<HTMLAudioElement | null>(null);
 
     useEffect(() => {
-        // Immediate hardware check for legacy survival
         const ua = typeof navigator !== 'undefined' ? navigator.userAgent : "";
         const isOldIOS = /iPhone|iPad|iPod/.test(ua) && /OS (8|9|10|11|12)_/.test(ua);
         const isLowRam = (navigator as any).deviceMemory && (navigator as any).deviceMemory < 2;
@@ -68,20 +65,27 @@ export default function QuantumPortalAd() {
     const initiateExperience = () => {
         setIsStarted(true);
         
-        // --- 1. RAW AUDIO iOS 12 FIX ---
-        // Creating the Audio object instantly inside the native User Gesture handler
-        // ensures Safari unlocks audio without waiting for DOM or Promise queues.
-        if (!audioInstance.current) {
-            audioInstance.current = new Audio("https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3");
-            audioInstance.current.loop = true;
+        // --- 1. PRE-BUFFERED DOM AUDIO iOS 12 FIX ---
+        // By using a <audio> element existing in the DOM, it prebuffers on load.
+        // Clicking calls .play() instantly without network delays breaking the user interaction token.
+        const audioEl = document.getElementById("master-bg-audio") as HTMLAudioElement;
+        if (audioEl) {
+            audioEl.volume = 1.0;
+            const playPromise = audioEl.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(e => {
+                    console.warn("Audio Context locked by browser:", e);
+                    // Single micro-delay fallback
+                    setTimeout(() => audioEl.play().catch(() => {}), 150);
+                });
+            }
         }
-        audioInstance.current.play().catch(e => console.warn("Browser Audio Block:", e));
 
         // --- 2. CINEMATIC TYPEWRITER ---
         let currentWordIndex = 0;
         const words = fullText.split(' ');
         
-        setDisplayedText(words[0]); // Initial print
+        setDisplayedText(words[0]); 
         currentWordIndex++;
 
         const typingInterval = setInterval(() => {
@@ -91,7 +95,7 @@ export default function QuantumPortalAd() {
             } else {
                 clearInterval(typingInterval);
             }
-        }, 350); // 350ms per word gives a reading-speed dramatic deployment
+        }, 350); 
     }
 
     const CACHE_V = "?v=121.16";
@@ -101,20 +105,21 @@ export default function QuantumPortalAd() {
             position: 'absolute', 
             top: 0,
             left: 0,
-            width: '100%',
-            height: '100%',
+            width: '100vw',
+            height: '100dvh', // Guaranteed viewport height
             backgroundColor: '#000',
             color: '#fff',
             zIndex: 99999,
             overflow: 'hidden',
             display: 'flex',
+            flexDirection: 'column', // Force Top/Middle/Bottom structure
             alignItems: 'center',
             justifyContent: 'center'
         }}>
             <style dangerouslySetInnerHTML={{ __html: `
                 html, body, #__next, main { 
-                    height: 100% !important; 
-                    width: 100% !important; 
+                    height: 100dvh !important; 
+                    width: 100vw !important; 
                     overflow: hidden !important; 
                     margin: 0 !important; 
                     padding: 0 !important;
@@ -128,142 +133,148 @@ export default function QuantumPortalAd() {
                 }
             `}} />
             
-            {/* Top Cinematic Typewriter Layer (Outside the 1:1 box, placed in top black space) */}
-            {isStarted && (
-                <div style={{ position: 'absolute', top: '4vh', width: '90%', maxWidth: '800px', textAlign: 'center', zIndex: 150, direction: 'rtl' }}>
-                    <p style={{ color: '#06b6d4', fontSize: '14px', lineHeight: '1.8', fontWeight: 'bold', textShadow: '0 0 10px rgba(6,182,212,0.8)', margin: 0 }}>
+            {/* DOM Audio Element pre-buffers on load */}
+            <audio id="master-bg-audio" loop playsInline preload="auto" src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" style={{ display: 'none' }} />
+
+            {/* --- TOP ZONE (15dvh): Guaranteed text area --- */}
+            <div style={{ height: '15dvh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 20px', zIndex: 150, direction: 'rtl' }}>
+                {isStarted && (
+                    <p style={{ color: '#06b6d4', fontSize: 'clamp(12px, 2vh, 18px)', lineHeight: '1.6', fontWeight: 'bold', textShadow: '0 0 10px rgba(6,182,212,0.8)', margin: 0, textAlign: 'center' }}>
                         {displayedText}
                     </p>
-                </div>
-            )}
+                )}
+            </div>
 
-            {/* Bottom Signature Layer (Placed in bottom black space) */}
-            {(isStarted || !isStarted) && (
-                <div style={{ position: 'absolute', bottom: '3vh', width: '100%', textAlign: 'center', zIndex: 150 }}>
-                    <div style={{ color: '#fff', fontSize: '9px', letterSpacing: '5px', opacity: 0.5, marginBottom: '4px' }}>
-                        ARCHITECTED BY
-                    </div>
-                    <div style={{ color: '#d4af37', fontSize: '14px', fontWeight: '900', letterSpacing: '8px', textShadow: '0 0 20px rgba(212,175,55,0.7)' }}>
-                        SHERIF ROSAS
-                    </div>
-                </div>
-            )}
-
-            {/* --- 100vmin Master Grid --- 
-                This acts as a perfect 1:1 square canvas matching the AI artwork logic.
-                It forces exact coordinate mapping for our invisible CSS hotspots. */}
-            <div style={{
-                position: 'relative',
-                width: '100vmin',
-                height: '100vmin',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-            }}>
-
-                {/* --- PRIMARY ASSET --- */}
-                <img src={AD_IMAGE + CACHE_V} alt="Lever Pioneer" style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'contain', zIndex: 1 }} />
+            {/* --- MIDDLE ZONE (70dvh): Image constraint area --- */}
+            <div style={{ height: '70dvh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
                 
-                {/* --- RED X OVERLAY PATCH --- */}
-                <div style={{ 
-                    position: 'absolute', 
-                    top: '48.5%', 
-                    right: '17.8%', 
-                    width: '3.5%', 
-                    height: '3.5%', 
-                    backgroundColor: '#1a1a1a', 
-                    borderRadius: '50%',
-                    filter: 'blur(5px)',
-                    zIndex: 2,
-                    opacity: 0.95
-                }} />
+                {/* --- 100vmin equivalent Master Grid inside the constraints --- 
+                    This ensures the image never overflows its boundaries and remains perfectly 1:1. */}
+                <div style={{
+                    position: 'relative',
+                    width: 'min(100vw, 70dvh)',
+                    height: 'min(100vw, 70dvh)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
 
-                {isLegacy && isStarted && (
+                    {/* --- PRIMARY ASSET --- */}
+                    <img src={AD_IMAGE + CACHE_V} alt="Lever Pioneer" style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'contain', zIndex: 1 }} />
+                    
+                    {/* --- RED X OVERLAY PATCH --- */}
                     <div style={{ 
                         position: 'absolute', 
-                        top: 0, 
-                        left: 0, 
-                        width: '100%', 
-                        height: '100%', 
-                        background: 'radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 80%)',
-                        zIndex: 3 
+                        top: '48.5%', 
+                        right: '17.8%', 
+                        width: '3.5%', 
+                        height: '3.5%', 
+                        backgroundColor: '#1a1a1a', 
+                        borderRadius: '50%',
+                        filter: 'blur(4px)',
+                        zIndex: 2,
+                        opacity: 0.95
                     }} />
-                )}
 
-                {/* --- INVISIBLE CSS HOTSPOTS (Clickable Artwork Nodes) --- */}
-                {/* These are precisely mapped to the '100vmin' 1:1 ratio. */}
-                {isStarted && (
-                    <>
-                        <a href={WHATSAPP_URL} style={{ position: 'absolute', top: '70%', left: '4%', width: '38%', height: '8%', zIndex: 200, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)' }} />
-                        <a href={CALL_URL} style={{ position: 'absolute', top: '79%', left: '4%', width: '38%', height: '8%', zIndex: 200, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)' }} />
-                        <a href={LOCATION_URL} style={{ position: 'absolute', top: '88%', left: '4%', width: '38%', height: '8%', zIndex: 200, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)' }} />
-                    </>
-                )}
+                    {isLegacy && isStarted && (
+                        <div style={{ 
+                            position: 'absolute', 
+                            top: 0, 
+                            left: 0, 
+                            width: '100%', 
+                            height: '100%', 
+                            background: 'radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 80%)',
+                            zIndex: 3 
+                        }} />
+                    )}
 
-                {/* --- 3D INTERACTIVE ASCENT --- */}
-                {!isLegacy && isStarted && (
-                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 5 }}>
-                        <Quantum3DLayer />
-                    </div>
-                )}
+                    {/* --- INVISIBLE CSS HOTSPOTS (Clickable Artwork Nodes) --- */}
+                    {isStarted && (
+                        <>
+                            <a href={WHATSAPP_URL} style={{ position: 'absolute', top: '70%', left: '4%', width: '38%', height: '8%', zIndex: 200, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)' }} />
+                            <a href={CALL_URL} style={{ position: 'absolute', top: '79%', left: '4%', width: '38%', height: '8%', zIndex: 200, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)' }} />
+                            <a href={LOCATION_URL} style={{ position: 'absolute', top: '88%', left: '4%', width: '38%', height: '8%', zIndex: 200, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)' }} />
+                        </>
+                    )}
 
-                {isLegacy && isStarted && (
-                    <div style={{ 
-                        position: 'absolute', 
-                        top: '15px', 
-                        left: '50%', 
-                        transform: 'translateX(-50%)',
-                        zIndex: 10,
-                        color: '#06b6d4',
-                        fontSize: '10px',
-                        fontWeight: 'bold',
-                        letterSpacing: '3px'
-                    }}>
-                        CINEMATIC_STABILIZED
-                    </div>
-                )}
-
-                {/* --- TRIGGER HOTSPOT OVERLAY --- */}
-                {!isStarted && (
-                    <div 
-                        onClick={initiateExperience}
-                        style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '100%',
-                            height: '100%',
-                            zIndex: 100,
-                            cursor: 'pointer',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'flex-end',
-                            paddingBottom: '10%',
-                            background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 30%)'
-                        }}
-                    >
-                        <div style={{ position: 'absolute', top: '2%', right: '2%', fontSize: '9px', color: 'rgba(255,255,255,0.3)', fontWeight: 'bold' }}>ULTIMATUM_v121.16</div>
-                        
-                        <div style={{
-                            padding: '15px 40px',
-                            backgroundColor: 'rgba(255,255,255,0.05)',
-                            border: '2px solid rgba(6,182,212,0.5)',
-                            borderRadius: '20px',
-                            color: '#fff',
-                            fontWeight: 900,
-                            fontSize: '14px',
-                            letterSpacing: '8px',
-                            animation: 'pulse-cyan 2s infinite',
-                            textShadow: '0 0 10px rgba(0,0,0,1)'
-                        }}>
-                            TAP_TO_ASCENT
+                    {/* --- 3D INTERACTIVE ASCENT --- */}
+                    {!isLegacy && isStarted && (
+                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 5 }}>
+                            <Quantum3DLayer />
                         </div>
-                        
-                        <div style={{ marginTop: '15px', fontSize: '9px', color: 'rgba(255,255,255,0.5)', letterSpacing: '4px' }}>INITIALIZE_AUDIO_VISUAL</div>
-                    </div>
-                )}
+                    )}
 
+                    {isLegacy && isStarted && (
+                        <div style={{ 
+                            position: 'absolute', 
+                            top: '15px', 
+                            left: '50%', 
+                            transform: 'translateX(-50%)',
+                            zIndex: 10,
+                            color: '#06b6d4',
+                            fontSize: 'clamp(8px, 1.2vh, 12px)',
+                            fontWeight: 'bold',
+                            letterSpacing: '3px'
+                        }}>
+                            CINEMATIC_STABILIZED
+                        </div>
+                    )}
+
+                    {/* --- TRIGGER HOTSPOT OVERLAY (Start Button) --- */}
+                    {!isStarted && (
+                        <div 
+                            onClick={initiateExperience}
+                            style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: '100vw', // Spread across entire screen, not just the box
+                                height: '100dvh', // Spread across entire screen
+                                zIndex: 9999, // Super high z-index to guarantee clickability
+                                cursor: 'pointer',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'flex-end',
+                                paddingBottom: '20dvh',
+                                transform: 'translate(-50%, -50%)', // Re-center since parent is 70dvh Box
+                                left: '50%',
+                                top: '50%',
+                                background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 30%)'
+                            }}
+                        >
+                            <div style={{ position: 'absolute', top: '5%', right: '5%', fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: 'bold' }}>ULTIMATUM_v121.16</div>
+                            
+                            <div style={{
+                                padding: '15px 40px',
+                                backgroundColor: 'rgba(255,255,255,0.05)',
+                                border: '2px solid rgba(6,182,212,0.5)',
+                                borderRadius: '20px',
+                                color: '#fff',
+                                fontWeight: 900,
+                                fontSize: '14px',
+                                letterSpacing: '8px',
+                                animation: 'pulse-cyan 2s infinite',
+                                textShadow: '0 0 10px rgba(0,0,0,1)'
+                            }}>
+                                TAP_TO_ASCENT
+                            </div>
+                            
+                            <div style={{ marginTop: '15px', fontSize: '9px', color: 'rgba(255,255,255,0.5)', letterSpacing: '4px' }}>INITIALIZE_AUDIO_VISUAL</div>
+                        </div>
+                    )}
+
+                </div>
+            </div>
+
+            {/* --- BOTTOM ZONE (15dvh): Guaranteed signature area --- */}
+            <div style={{ height: '15dvh', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 150 }}>
+                <div style={{ color: '#fff', fontSize: 'clamp(8px, 1vh, 10px)', letterSpacing: '5px', opacity: 0.5, marginBottom: '4px' }}>
+                    ARCHITECTED BY
+                </div>
+                <div style={{ color: '#d4af37', fontSize: 'clamp(12px, 2vh, 16px)', fontWeight: '900', letterSpacing: '8px', textShadow: '0 0 20px rgba(212,175,55,0.7)' }}>
+                    SHERIF ROSAS
+                </div>
             </div>
         </div>
     )
