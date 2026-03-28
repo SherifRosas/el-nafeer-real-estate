@@ -15,27 +15,9 @@ const WHATSAPP_URL = "https://wa.me/201111171368";
 const CALL_URL = "tel:+201070615372";
 const LOCATION_URL = "https://maps.app.goo.gl/r6vGf";
 
-// --- CINEMATIC SPEECH HUD (PURE CSS) ---
-function SpeechHUD({ isStarted }: { isStarted: boolean }) {
-    const text = "الان من قلب مصر من الجيزة - حدائق الأهرام، تدشن شركة ليفر الرائدة للمصاعد مقرها الجديد. للتواصل اضغط على الأيقونات (واتساب - اتصال - الموقع). للتواصل مع منصة النفير العالمية للاعلان اضغط على صقر النفير.";
-    
-    if (!isStarted) return null;
-
-    return (
-        <div style={{
-            position: 'absolute',
-            top: '18vh',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            WebkitTransform: 'translateX(-50%)',
-            zIndex: 100,
-            width: '90%',
-            maxWidth: '600px',
-
+// --- CAMPAIGN CONSTANTS ---
 const fullText = "الان من قلب مصر من الجيزة - حدائق الأهرام، تدشن شركة ليفر الرائدة للمصاعد مقرها الجديد. للتواصل اضغط على الأيقونات (واتساب - اتصال - الموقع). للتواصل مع منصة النفير العالمية للاعلان اضغط على صقر النفير.";
-
 const LEVER_BRAND_ID = "62c38934-4c4b-42be-98c9-06cbbee1af19";
-
 const LEVER_PROJECTS = [
     { title: "برج الفاتح - القاهرة", year: "2024", type: "Panoramic Elevator", img: "https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&q=80&w=800" },
     { title: "فيلا النرجس - التجمع الخامسة", year: "2023", type: "Home Lift", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800" },
