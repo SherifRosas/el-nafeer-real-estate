@@ -226,8 +226,6 @@ export default function QuantumPortalAd() {
                             onClick={initiateExperience}
                             style={{
                                 position: 'absolute',
-                                top: 0,
-                                left: 0,
                                 width: '100vw', // Spread across entire screen, not just the box
                                 height: '100dvh', // Spread across entire screen
                                 zIndex: 9999, // Super high z-index to guarantee clickability
@@ -237,9 +235,9 @@ export default function QuantumPortalAd() {
                                 alignItems: 'center',
                                 justifyContent: 'flex-end',
                                 paddingBottom: '20dvh',
-                                transform: 'translate(-50%, -50%)', // Re-center since parent is 70dvh Box
                                 left: '50%',
                                 top: '50%',
+                                transform: 'translate(-50%, -50%)', // Re-center since parent is 70dvh Box
                                 background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 30%)'
                             }}
                         >
