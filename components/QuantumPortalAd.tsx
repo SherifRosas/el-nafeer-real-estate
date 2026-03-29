@@ -124,6 +124,9 @@ export default function QuantumPortalAd() {
             - Machine Room: ${machineRoom}
             - Power: ${power}
             - Doors: ${door}
+            - Governorate: ${formData.get('governorate')}
+            - City: ${formData.get('city')}
+            - GeoLink: ${formData.get('locationLink')}
         `.trim();
 
         const payload = {
@@ -234,6 +237,14 @@ export default function QuantumPortalAd() {
                                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
                                             <input name="userName" required placeholder="الاسم / الشركة" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '11px', outline: 'none' }} />
                                             <input name="userPhone" required placeholder="رقم الهاتف" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '11px', outline: 'none' }} />
+                                        </div>
+                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                                            <input name="governorate" required placeholder="المحافظة" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '11px', outline: 'none' }} />
+                                            <input name="city" required placeholder="المدينة / المنطقة" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '11px', outline: 'none' }} />
+                                        </div>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                                            <label style={{ fontSize: '9px', color: '#d4af37', paddingRight: '5px', fontWeight: 900 }}>موقع العقار (رابط Google Maps)</label>
+                                            <input name="locationLink" placeholder="أرفق رابط الموقع هنا" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(212,175,55,0.2)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '11px', outline: 'none' }} />
                                         </div>
                                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
