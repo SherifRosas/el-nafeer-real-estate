@@ -509,6 +509,24 @@ export const db = {
     return data
   },
 
+  async updateLead(id: string, updates: Partial<{
+    name: string
+    email: string
+    phone: string
+    status: string
+    notes: string
+  }>) {
+    const { data, error } = await supabase
+      .from(TABLES.leads)
+      .update({ ...updates, updatedAt: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single()
+
+    if (error) throw error
+    return data
+  },
+
   async getLeadsByBrandProfileId(brandProfileId: string) {
     const { data, error } = await supabase
       .from(TABLES.leads)
