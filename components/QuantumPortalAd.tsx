@@ -46,6 +46,12 @@ export default function QuantumPortalAd() {
         }
     }, [])
 
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.muted = isMuted;
+        }
+    }, [isMuted]);
+
     const initiateExperience = () => {
         setIsStarted(true);
         if (audioRef.current) {
@@ -163,7 +169,7 @@ export default function QuantumPortalAd() {
                 loop 
                 playsInline 
                 preload="auto" 
-                src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" 
+                src="https://cdn.pixabay.com/audio/2022/03/10/audio_c8c8a178e7.mp3" 
                 style={{ display: 'none' }} 
             />
 
