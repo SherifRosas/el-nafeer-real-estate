@@ -403,7 +403,7 @@ export default function QuantumPortalAd() {
             </div>
 
             {!isStarted && (
-                <div 
+                <button 
                     onClick={initiateExperience}
                     onTouchStart={initiateExperience}
                     style={{
@@ -412,7 +412,7 @@ export default function QuantumPortalAd() {
                         left: 0,
                         width: '100vw',
                         height: '100vh',
-                        zIndex: 999999,
+                        zIndex: 9999999,
                         cursor: 'pointer',
                         display: 'flex',
                         flexDirection: 'column',
@@ -420,7 +420,14 @@ export default function QuantumPortalAd() {
                         justifyContent: 'flex-end',
                         paddingBottom: '20vh',
                         background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 30%)',
-                        WebkitTapHighlightColor: 'transparent'
+                        WebkitTapHighlightColor: 'transparent',
+                        border: 'none',
+                        outline: 'none',
+                        padding: 0,
+                        margin: 0,
+                        appearance: 'none',
+                        WebkitAppearance: 'none',
+                        pointerEvents: 'auto'
                     }}
                 >
                     <div style={{ position: 'absolute', top: '5%', right: '5%', fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: 'bold' }}>ULTIMATUM_v121.17</div>
@@ -428,7 +435,7 @@ export default function QuantumPortalAd() {
                         TAP_TO_ASCENT
                     </div>
                     <div style={{ marginTop: '15px', fontSize: '9px', color: 'rgba(255,255,255,0.5)', letterSpacing: '4px' }}>INITIALIZE_PORTFOLIO_NEXUS</div>
-                </div>
+                </button>
             )}
         </div>
     );
