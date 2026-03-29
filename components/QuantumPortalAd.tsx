@@ -354,14 +354,61 @@ export default function QuantumPortalAd() {
                 </div>
             </div>
 
-            <div style={{ height: '15dvh', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 150 }}>
-                <div style={{ color: '#fff', fontSize: 'clamp(8px, 1vh, 10px)', letterSpacing: '5px', opacity: 0.5, marginBottom: '4px' }}>
-                    ARCHITECTED BY
-                </div>
-                <div style={{ color: '#d4af37', fontSize: 'clamp(12px, 2vh, 16px)', fontWeight: '900', letterSpacing: '8px', textShadow: '0 0 20px rgba(212,175,55,0.7)' }}>
-                    SHERIF ROSAS
+            <div style={{ height: '15dvh', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 150, gap: '15px' }}>
+                {isStarted && (
+                    <div style={{ display: 'flex', gap: '15px', direction: 'rtl' }}>
+                        <div 
+                            onClick={() => setActiveModal('quote')}
+                            style={{ 
+                                padding: '12px 25px', 
+                                background: 'rgba(6,182,212,0.1)', 
+                                border: '1px solid rgba(6,182,212,0.4)', 
+                                borderRadius: '15px', 
+                                color: '#06b6d4', 
+                                fontSize: '11px', 
+                                fontWeight: 900, 
+                                cursor: 'pointer',
+                                backdropFilter: 'blur(5px)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px'
+                            }}
+                        >
+                            <Zap size={14} />
+                            طلب عرض سعر
+                        </div>
+                        <div 
+                            onClick={() => setActiveModal('portfolio')}
+                            style={{ 
+                                padding: '12px 25px', 
+                                background: 'rgba(212,175,55,0.05)', 
+                                border: '1px solid rgba(212,175,55,0.3)', 
+                                borderRadius: '15px', 
+                                color: '#d4af37', 
+                                fontSize: '11px', 
+                                fontWeight: 900, 
+                                cursor: 'pointer',
+                                backdropFilter: 'blur(5px)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px'
+                            }}
+                        >
+                            <Activity size={14} />
+                            معرض الأعمال
+                        </div>
+                    </div>
+                )}
+                
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div style={{ color: '#fff', fontSize: '8px', letterSpacing: '5px', opacity: 0.3, marginBottom: '4px' }}>
+                        ARCHITECTED BY
+                    </div>
+                    <div style={{ color: '#d4af37', fontSize: '12px', fontWeight: 900, letterSpacing: '4px', textShadow: '0 0 10px rgba(212,175,55,0.3)' }}>
+                        SHERIF ROSAS
+                    </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
