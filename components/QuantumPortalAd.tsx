@@ -51,7 +51,24 @@ export default function QuantumPortalAd() {
         }
     }, []);
 
+    useEffect(() => {
+        if (!isStarted) {
+            const handleGlobalTouch = () => {
+                initiateExperience();
+                window.removeEventListener('touchstart', handleGlobalTouch);
+                window.removeEventListener('mousedown', handleGlobalTouch);
+            };
+            window.addEventListener('touchstart', handleGlobalTouch);
+            window.addEventListener('mousedown', handleGlobalTouch);
+            return () => {
+                window.removeEventListener('touchstart', handleGlobalTouch);
+                window.removeEventListener('mousedown', handleGlobalTouch);
+            };
+        }
+    }, [isStarted]);
+
     const initiateExperience = () => {
+        if (isStarted) return;
         setIsStarted(true);
         // Fail-Safe Audio Activation (v121.23)
         const playAudio = () => {
@@ -60,11 +77,13 @@ export default function QuantumPortalAd() {
                 audioRef.current.volume = 0.8;
                 audioRef.current.play().catch(e => {
                     console.warn("Retrying Audio Context:", e);
-                    setTimeout(playAudio, 500); // Retry logic for blocked context
+                    setTimeout(playAudio, 1000); // 1s delay for legacy stability
                 });
             }
         };
-        playAudio();
+        // Delay audio on legacy to prioritize UI mount
+        if (isLegacy) setTimeout(playAudio, 500);
+        else playAudio();
 
         const words = fullText.split(' ').filter(w => w.length > 0);
         let currentWordIndex = 0;
