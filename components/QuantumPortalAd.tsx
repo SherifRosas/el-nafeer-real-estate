@@ -341,33 +341,6 @@ export default function QuantumPortalAd() {
                         </div>
                     )}
 
-                    {!isStarted && (
-                        <div 
-                            onClick={initiateExperience}
-                            style={{
-                                position: 'absolute',
-                                width: '100vw',
-                                height: '100vh',
-                                zIndex: 9999,
-                                cursor: 'pointer',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                justifyContent: 'flex-end',
-                                paddingBottom: '20vh',
-                                left: '50%',
-                                top: '50%',
-                                transform: 'translate(-50%, -50%)',
-                                background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 30%)'
-                            }}
-                        >
-                            <div style={{ position: 'absolute', top: '5%', right: '5%', fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: 'bold' }}>ULTIMATUM_v121.17</div>
-                            <div style={{ padding: '15px 40px', backgroundColor: 'rgba(255,255,255,0.05)', border: '2px solid rgba(6,182,212,0.5)', borderRadius: '20px', color: '#fff', fontWeight: 900, fontSize: '14px', letterSpacing: '8px', animation: 'pulse-cyan 2s infinite' }}>
-                                TAP_TO_ASCENT
-                            </div>
-                            <div style={{ marginTop: '15px', fontSize: '9px', color: 'rgba(255,255,255,0.5)', letterSpacing: '4px' }}>INITIALIZE_PORTFOLIO_NEXUS</div>
-                        </div>
-                    )}
                 </div>
             </div>
 
@@ -376,6 +349,7 @@ export default function QuantumPortalAd() {
                     <div style={{ display: 'flex', gap: '15px', direction: 'rtl' }}>
                         <div 
                             onClick={() => setActiveModal('quote')}
+                            onTouchStart={() => setActiveModal('quote')}
                             style={{ 
                                 padding: '12px 25px', 
                                 background: 'rgba(6,182,212,0.1)', 
@@ -396,6 +370,7 @@ export default function QuantumPortalAd() {
                         </div>
                         <div 
                             onClick={() => setActiveModal('portfolio')}
+                            onTouchStart={() => setActiveModal('portfolio')}
                             style={{ 
                                 padding: '12px 25px', 
                                 background: 'rgba(212,175,55,0.05)', 
@@ -426,6 +401,35 @@ export default function QuantumPortalAd() {
                     </div>
                 </div>
             </div>
+
+            {!isStarted && (
+                <div 
+                    onClick={initiateExperience}
+                    onTouchStart={initiateExperience}
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        width: '100vw',
+                        height: '100vh',
+                        zIndex: 999999,
+                        cursor: 'pointer',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                        paddingBottom: '20vh',
+                        background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 30%)',
+                        WebkitTapHighlightColor: 'transparent'
+                    }}
+                >
+                    <div style={{ position: 'absolute', top: '5%', right: '5%', fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: 'bold' }}>ULTIMATUM_v121.17</div>
+                    <div style={{ padding: '15px 40px', backgroundColor: 'rgba(255,255,255,0.05)', border: '2px solid rgba(6,182,212,0.5)', borderRadius: '20px', color: '#fff', fontWeight: 900, fontSize: '14px', letterSpacing: '8px', animation: 'pulse-cyan 2s infinite' }}>
+                        TAP_TO_ASCENT
+                    </div>
+                    <div style={{ marginTop: '15px', fontSize: '9px', color: 'rgba(255,255,255,0.5)', letterSpacing: '4px' }}>INITIALIZE_PORTFOLIO_NEXUS</div>
+                </div>
+            )}
         </div>
     );
 }
