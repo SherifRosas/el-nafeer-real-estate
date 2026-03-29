@@ -72,10 +72,29 @@ export default function QuantumPortalAd() {
         setQuoteLoading(true);
         const formData = new FormData(e.currentTarget);
         
+        const floors = formData.get('floors');
+        const shaft = formData.get('shaft');
+        const foundation = formData.get('foundation');
+        const machineRoom = formData.get('machineRoom');
+        const power = formData.get('power');
+        const door = formData.get('door');
+        const elevatorType = formData.get('elevatorType');
+
+        const technicalNotes = `
+            TECHNICAL_QUOTE_REQUEST:
+            - Type: ${elevatorType}
+            - Floors: ${floors}
+            - Shaft: ${shaft}
+            - Prep/Foundation: ${foundation}
+            - Machine Room: ${machineRoom}
+            - Power: ${power}
+            - Doors: ${door}
+        `.trim();
+
         const payload = {
             name: formData.get('userName'),
             phone: formData.get('userPhone'),
-            notes: `QUOTE_REQUEST: Floors: ${formData.get('floors')} | Type: ${formData.get('elevatorType')}`,
+            notes: technicalNotes,
             brandProfileId: LEVER_BRAND_ID,
             status: 'new'
         };
@@ -90,7 +109,7 @@ export default function QuantumPortalAd() {
             setTimeout(() => {
                 setActiveModal(null);
                 setQuoteSent(false);
-            }, 2500);
+            }, 3000);
         } catch (error) {
             console.error("Lead submission error:", error);
         } finally {
@@ -198,7 +217,7 @@ export default function QuantumPortalAd() {
                             <div style={{ width: '100%', maxWidth: '400px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(6,182,212,0.3)', borderRadius: '30px', padding: '30px', position: 'relative' }}>
                                 <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: '15px', right: '20px', background: 'none', border: 'none', color: '#fff', fontSize: '20px', cursor: 'pointer' }}>×</button>
                                 
-                                <h3 style={{ fontSize: '18px', fontWeight: 900, italic: true, letterSpacing: '2px', color: '#06b6d4', marginBottom: '20px', textAlign: 'center' }}>عرض سعر هندسي</h3>
+                                <h3 style={{ fontSize: '18px', fontWeight: 900, fontStyle: 'italic', letterSpacing: '2px', color: '#06b6d4', marginBottom: '20px', textAlign: 'center' }}>عرض سعر هندسي</h3>
                                 
                                 {quoteSent ? (
                                     <div style={{ textAlign: 'center', padding: '40px 0' }}>
@@ -206,20 +225,69 @@ export default function QuantumPortalAd() {
                                         <p style={{ fontSize: '12px', fontWeight: 'bold' }}>تم إرسال الطلب بنجاح</p>
                                     </div>
                                 ) : (
-                                    <form onSubmit={submitQuoteRequest} style={{ display: 'flex', flexDirection: 'column', gap: '15px', direction: 'rtl' }}>
-                                        <input name="userName" required placeholder="الاسم / الشركة المنفذة" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '12px', outline: 'none' }} />
-                                        <input name="userPhone" required placeholder="رقم الهاتف" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '12px', outline: 'none' }} />
-                                        <div style={{ display: 'flex', gap: '10px' }}>
-                                            <input name="floors" placeholder="عدد الأدوار" style={{ flex: 1, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '12px', outline: 'none' }} />
-                                            <select name="elevatorType" style={{ flex: 2, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '12px', outline: 'none' }}>
-                                                <option>مصعد بانورامي</option>
-                                                <option>مصعد سكني</option>
-                                                <option>مصعد مستشفيات</option>
-                                                <option>مصعد بضائع</option>
-                                            </select>
+                                    <form onSubmit={submitQuoteRequest} style={{ display: 'flex', flexDirection: 'column', gap: '10px', direction: 'rtl' }}>
+                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                                            <input name="userName" required placeholder="الاسم / الشركة" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }} />
+                                            <input name="userPhone" required placeholder="رقم الهاتف" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }} />
                                         </div>
+
+                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                                <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>نوع المصعد</label>
+                                                <select name="elevatorType" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none', width: '100%' }}>
+                                                    <option>بانورامي</option>
+                                                    <option>سكني</option>
+                                                    <option>مستشفيات</option>
+                                                    <option>بضائع</option>
+                                                </select>
+                                            </div>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                                <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>عدد الأدوار</label>
+                                                <input name="floors" placeholder="مثلاً: 5" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }} />
+                                            </div>
+                                        </div>
+
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                            <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>مساحة البير (طول * عرض م)</label>
+                                            <input name="shaft" placeholder="مثلاً: 1.5 * 1.5 م" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }} />
+                                        </div>
+
+                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                                <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>تأسيس المصعد</label>
+                                                <select name="foundation" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }}>
+                                                    <option>يوجد</option>
+                                                    <option>لا يوجد</option>
+                                                </select>
+                                            </div>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                                <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>غرفة ماكينة</label>
+                                                <select name="machineRoom" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }}>
+                                                    <option>موجود</option>
+                                                    <option>غير موجود</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                                <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>نوع الكهرباء</label>
+                                                <select name="power" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }}>
+                                                    <option>380 فولت</option>
+                                                    <option>220 فولت</option>
+                                                </select>
+                                            </div>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                                <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>نوع الأبواب</label>
+                                                <select name="door" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }}>
+                                                    <option>أوتوماتيك</option>
+                                                    <option>نصف أوتوماتيك</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
                                         <button disabled={quoteLoading} type="submit" style={{ background: '#06b6d4', color: '#000', border: 'none', borderRadius: '12px', padding: '15px', fontWeight: '900', fontSize: '14px', cursor: 'pointer', marginTop: '10px' }}>
-                                            {quoteLoading ? 'جاري الإرسال...' : 'إرسال طلب التسعيرة'}
+                                            {quoteLoading ? 'جاري الإرسال...' : 'إرسال طلب التسعيرة النهائى'}
                                         </button>
                                     </form>
                                 )}
