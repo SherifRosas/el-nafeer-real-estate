@@ -242,9 +242,41 @@ export default function QuantumPortalAd() {
                                             <input name="governorate" required placeholder="المحافظة" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '11px', outline: 'none' }} />
                                             <input name="city" required placeholder="المدينة / المنطقة" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '11px', outline: 'none' }} />
                                         </div>
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
-                                            <label style={{ fontSize: '9px', color: '#d4af37', paddingRight: '5px', fontWeight: 900 }}>موقع العقار (رابط Google Maps)</label>
-                                            <input name="locationLink" placeholder="أرفق رابط الموقع هنا" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(212,175,55,0.2)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '11px', outline: 'none' }} />
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', position: 'relative' }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 5px' }}>
+                                                <label style={{ fontSize: '9px', color: '#d4af37', fontWeight: 900 }}>موقع العقار</label>
+                                                <button 
+                                                    type="button"
+                                                    onClick={() => {
+                                                        const btn = document.getElementById('geo-btn');
+                                                        if (btn) btn.innerText = 'جاري التحديد...';
+                                                        navigator.geolocation.getCurrentPosition(
+                                                            (pos) => {
+                                                                const link = `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
+                                                                const input = document.getElementsByName('locationLink')[0] as HTMLInputElement;
+                                                                if (input) input.value = link;
+                                                                if (btn) {
+                                                                    btn.innerText = '✅ تم التحديد';
+                                                                    btn.style.color = '#06b6d4';
+                                                                }
+                                                            },
+                                                            (err) => {
+                                                                console.error(err);
+                                                                if (btn) {
+                                                                    btn.innerText = '❌ فشل التحديد';
+                                                                    btn.style.color = '#ef4444';
+                                                                }
+                                                                alert('يرجى السماح بالوصول للموقع أو إدخال الرابط يدوياً');
+                                                            }
+                                                        );
+                                                    }}
+                                                    id="geo-btn"
+                                                    style={{ background: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.4)', borderRadius: '8px', color: '#d4af37', fontSize: '9px', padding: '4px 10px', cursor: 'pointer', fontWeight: 'bold' }}
+                                                >
+                                                    🚀 تحديد تلقائي
+                                                </button>
+                                            </div>
+                                            <input name="locationLink" placeholder="أدخل الرابط أو استخدم التحديد التلقائي" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(212,175,55,0.2)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '11px', outline: 'none' }} />
                                         </div>
                                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
