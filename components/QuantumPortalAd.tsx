@@ -19,9 +19,9 @@ const LOCATION_URL = "https://maps.app.goo.gl/r6vGf";
 const fullText = "الان من قلب مصر من الجيزة - حدائق الأهرام، تدشن شركة ليفر الرائدة للمصاعد مقرها الجديد. للتواصل اضغط على الأيقونات (واتساب - اتصال - الموقع). للتواصل مع منصة النفير العالمية للاعلان اضغط على صقر النفير.";
 const LEVER_BRAND_ID = "62c38934-4c4b-42be-98c9-06cbbee1af19";
 const LEVER_PROJECTS = [
-    { title: "برج الفاتح - القاهرة", year: "2024", type: "Panoramic Elevator", img: "https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&q=80&w=800" },
-    { title: "فيلا النرجس - التجمع الخامسة", year: "2023", type: "Home Lift", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800" },
-    { title: "مجموعة حدائق الأهرام", year: "2024", type: "Heavy Duty Cargo", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800" }
+    { title: "برج الفاتح - القاهرة", year: "2024", type: "مصعد بانورامي", img: "https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&q=80&w=800" },
+    { title: "فيلا النرجس - التجمع الخامس", year: "2023", type: "مصعد منزلي (فيلات)", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800" },
+    { title: "مجموعة حدائق الأهرام - البوابات", year: "2024", type: "مصعد حمولات ثقيلة", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800" }
 ];
 
 export default function QuantumPortalAd() {
@@ -188,7 +188,7 @@ export default function QuantumPortalAd() {
                                     animation: 'pulse-cyan 2s infinite'
                                 }}
                             >
-                                REQUEST_QUOTE
+                                اطلب تسعيرة
                             </div>
                         </>
                     )}
@@ -198,28 +198,28 @@ export default function QuantumPortalAd() {
                             <div style={{ width: '100%', maxWidth: '400px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(6,182,212,0.3)', borderRadius: '30px', padding: '30px', position: 'relative' }}>
                                 <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: '15px', right: '20px', background: 'none', border: 'none', color: '#fff', fontSize: '20px', cursor: 'pointer' }}>×</button>
                                 
-                                <h3 style={{ fontSize: '18px', fontWeight: 900, fontStyle: 'italic', letterSpacing: '2px', color: '#06b6d4', marginBottom: '20px', textAlign: 'center' }}>ENGINEERING_QUOTE</h3>
+                                <h3 style={{ fontSize: '18px', fontWeight: 900, italic: true, letterSpacing: '2px', color: '#06b6d4', marginBottom: '20px', textAlign: 'center' }}>عرض سعر هندسي</h3>
                                 
                                 {quoteSent ? (
                                     <div style={{ textAlign: 'center', padding: '40px 0' }}>
                                         <div style={{ fontSize: '40px', marginBottom: '10px' }}>✅</div>
-                                        <p style={{ fontSize: '12px', fontWeight: 'bold' }}>REQUEST_TRANSMITTED_SUCCESS</p>
+                                        <p style={{ fontSize: '12px', fontWeight: 'bold' }}>تم إرسال الطلب بنجاح</p>
                                     </div>
                                 ) : (
-                                    <form onSubmit={submitQuoteRequest} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                                        <input name="userName" required placeholder="NAME / CONTRACTOR" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '12px' }} />
-                                        <input name="userPhone" required placeholder="PHONE_NUMBER" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '12px' }} />
+                                    <form onSubmit={submitQuoteRequest} style={{ display: 'flex', flexDirection: 'column', gap: '15px', direction: 'rtl' }}>
+                                        <input name="userName" required placeholder="الاسم / الشركة المنفذة" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '12px', outline: 'none' }} />
+                                        <input name="userPhone" required placeholder="رقم الهاتف" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '12px', outline: 'none' }} />
                                         <div style={{ display: 'flex', gap: '10px' }}>
-                                            <input name="floors" placeholder="FLOORS" style={{ flex: 1, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '12px' }} />
-                                            <select name="elevatorType" style={{ flex: 2, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '12px' }}>
-                                                <option>PANORAMIC</option>
-                                                <option>RESIDENTIAL</option>
-                                                <option>HOSPITAL</option>
-                                                <option>CARGO</option>
+                                            <input name="floors" placeholder="عدد الأدوار" style={{ flex: 1, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '12px', outline: 'none' }} />
+                                            <select name="elevatorType" style={{ flex: 2, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', color: '#fff', fontSize: '12px', outline: 'none' }}>
+                                                <option>مصعد بانورامي</option>
+                                                <option>مصعد سكني</option>
+                                                <option>مصعد مستشفيات</option>
+                                                <option>مصعد بضائع</option>
                                             </select>
                                         </div>
-                                        <button disabled={quoteLoading} type="submit" style={{ background: '#06b6d4', color: '#000', border: 'none', borderRadius: '12px', padding: '15px', fontWeight: '900', fontSize: '12px', cursor: 'pointer', marginTop: '10px' }}>
-                                            {quoteLoading ? 'SIGNAL_SENDING...' : 'INITIATE_PROPOSAL'}
+                                        <button disabled={quoteLoading} type="submit" style={{ background: '#06b6d4', color: '#000', border: 'none', borderRadius: '12px', padding: '15px', fontWeight: '900', fontSize: '14px', cursor: 'pointer', marginTop: '10px' }}>
+                                            {quoteLoading ? 'جاري الإرسال...' : 'إرسال طلب التسعيرة'}
                                         </button>
                                     </form>
                                 )}
@@ -230,7 +230,7 @@ export default function QuantumPortalAd() {
                     {activeModal === 'portfolio' && (
                         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(20px)', zIndex: 1000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
                             <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: '15px', right: '20px', background: 'none', border: 'none', color: '#fff', fontSize: '24px', cursor: 'pointer' }}>×</button>
-                            <h3 style={{ fontSize: '14px', fontWeight: 900, color: '#d4af37', letterSpacing: '5px', marginBottom: '30px' }}>ENGINEERING_EXHIBITION</h3>
+                            <h3 style={{ fontSize: '18px', fontWeight: 900, color: '#d4af37', letterSpacing: '2px', marginBottom: '30px' }}>معرض الأعمال الهندسي</h3>
                             
                             <div style={{ width: '100%', display: 'flex', gap: '15px', overflowX: 'auto', padding: '10px 0' }}>
                                 {LEVER_PROJECTS.map((p, idx) => (
@@ -243,7 +243,7 @@ export default function QuantumPortalAd() {
                                     </div>
                                 ))}
                             </div>
-                            <div style={{ marginTop: '30px', fontSize: '8px', color: 'rgba(255,255,255,0.3)', letterSpacing: '3px' }}>SWIPE_TO_EXPLORE_NEXUS</div>
+                            <div style={{ marginTop: '30px', fontSize: '10px', color: 'rgba(255,255,255,0.5)', letterSpacing: '2px', fontWeight: 'bold' }}>اسحب لاستكشاف المشاريع</div>
                         </div>
                     )}
 
