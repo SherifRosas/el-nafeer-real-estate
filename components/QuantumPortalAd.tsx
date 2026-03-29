@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
-import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap } from 'lucide-react'
+import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap, Volume2, VolumeX } from 'lucide-react'
 
 // Dynamically import the heavy 3D engine
 const Quantum3DLayer = dynamic(() => import('./Quantum3DLayer'), { 
@@ -28,6 +28,8 @@ export default function QuantumPortalAd() {
     const [displayedText, setDisplayedText] = useState("");
     const [isStarted, setIsStarted] = useState(false);
     const [isLegacy, setIsLegacy] = useState(false);
+    const [isMuted, setIsMuted] = useState(false);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
     
     // Feature Modals
     const [activeModal, setActiveModal] = useState<null | 'quote' | 'portfolio'>(null);
@@ -46,10 +48,10 @@ export default function QuantumPortalAd() {
 
     const initiateExperience = () => {
         setIsStarted(true);
-        const audioEl = document.getElementById("master-bg-audio") as HTMLAudioElement;
-        if (audioEl) {
-            audioEl.volume = 1.0;
-            audioEl.play().catch(() => {});
+        if (audioRef.current) {
+            audioRef.current.muted = false;
+            audioRef.current.volume = 0.8;
+            audioRef.current.play().catch(e => console.warn("Audio Context Wait:", e));
         }
 
         const words = fullText.split(' ').filter(w => w.length > 0);
@@ -155,7 +157,15 @@ export default function QuantumPortalAd() {
                 }
             `}} />
             
-            <audio id="master-bg-audio" loop playsInline preload="auto" src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" style={{ display: 'none' }} />
+            <audio 
+                ref={audioRef}
+                id="master-bg-audio" 
+                loop 
+                playsInline 
+                preload="auto" 
+                src="https://assets.mixkit.co/music/preview/mixkit-epic-hero-journey-trailer-104.mp3" 
+                style={{ display: 'none' }} 
+            />
 
             <div style={{ height: '15dvh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 20px', zIndex: 150, direction: 'rtl' }}>
                 {isStarted && (
@@ -166,7 +176,6 @@ export default function QuantumPortalAd() {
             </div>
 
             <div style={{ height: '70dvh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
-                
                 <div style={{
                     position: 'relative',
                     width: 'min(100vw, 70dvh)',
@@ -175,12 +184,10 @@ export default function QuantumPortalAd() {
                     alignItems: 'center',
                     justifyContent: 'center'
                 }}>
-
                     <img src={AD_IMAGE + CACHE_V} alt="Lever Pioneer" style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'contain', zIndex: 1 }} />
-                    
                     <div style={{ position: 'absolute', top: '48.5%', right: '17.8%', width: '3.5%', height: '3.5%', backgroundColor: '#1a1a1a', borderRadius: '50%', filter: 'blur(4px)', zIndex: 2, opacity: 0.95 }} />
                     
-                    {/* Cinematic Ascension Flare - v121.20 (Replaces the black mask) */}
+                    {/* Cinematic Ascension Flare - v121.20 */}
                     <div style={{ 
                         position: 'absolute', 
                         top: '44%', 
@@ -191,12 +198,11 @@ export default function QuantumPortalAd() {
                         background: 'radial-gradient(ellipse at center, rgba(6,182,212,0.8) 0%, rgba(6,182,212,0.4) 30%, transparent 70%)',
                         filter: 'blur(15px)',
                         zIndex: 2,
-                        opacity: 1, // Full masking
+                        opacity: 1, 
                         mixBlendMode: 'screen',
                         pointerEvents: 'none'
                     }} />
                     
-                    {/* Secondary Core Burst */}
                     <div style={{ 
                         position: 'absolute', 
                         top: '44%', 
@@ -216,10 +222,7 @@ export default function QuantumPortalAd() {
                         <>
                             <a href={WHATSAPP_URL} style={{ position: 'absolute', top: '70%', left: '4%', width: '38%', height: '8%', zIndex: 200, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)' }} />
                             <a href={CALL_URL} style={{ position: 'absolute', top: '79%', left: '4%', width: '38%', height: '8%', zIndex: 200, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)' }} />
-                            <div 
-                                onClick={() => setActiveModal('portfolio')}
-                                style={{ position: 'absolute', top: '88%', left: '4%', width: '38%', height: '8%', zIndex: 200, WebkitTapHighlightColor: 'rgba(212,175,55,0.3)', cursor: 'pointer' }} 
-                            />
+                            <div onClick={() => setActiveModal('portfolio')} style={{ position: 'absolute', top: '88%', left: '4%', width: '38%', height: '8%', zIndex: 200, WebkitTapHighlightColor: 'rgba(212,175,55,0.3)', cursor: 'pointer' }} />
                         </>
                     )}
 
@@ -227,9 +230,7 @@ export default function QuantumPortalAd() {
                         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
                             <div style={{ width: '100%', maxWidth: '400px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(6,182,212,0.3)', borderRadius: '30px', padding: '30px', position: 'relative' }}>
                                 <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: '15px', right: '20px', background: 'none', border: 'none', color: '#fff', fontSize: '20px', cursor: 'pointer' }}>×</button>
-                                
                                 <h3 style={{ fontSize: '18px', fontWeight: 900, fontStyle: 'italic', letterSpacing: '2px', color: '#06b6d4', marginBottom: '20px', textAlign: 'center' }}>عرض سعر هندسي</h3>
-                                
                                 {quoteSent ? (
                                     <div style={{ textAlign: 'center', padding: '40px 0' }}>
                                         <div style={{ fontSize: '40px', marginBottom: '10px' }}>✅</div>
@@ -241,7 +242,6 @@ export default function QuantumPortalAd() {
                                             <input name="userName" required placeholder="الاسم / الشركة" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }} />
                                             <input name="userPhone" required placeholder="رقم الهاتف" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }} />
                                         </div>
-
                                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                                                 <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>نوع المصعد</label>
@@ -257,12 +257,10 @@ export default function QuantumPortalAd() {
                                                 <input name="floors" placeholder="مثلاً: 5" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }} />
                                             </div>
                                         </div>
-
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                                             <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>مساحة البير (طول * عرض م)</label>
                                             <input name="shaft" placeholder="مثلاً: 1.5 * 1.5 م" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }} />
                                         </div>
-
                                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                                                 <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>تأسيس المصعد</label>
@@ -279,7 +277,6 @@ export default function QuantumPortalAd() {
                                                 </select>
                                             </div>
                                         </div>
-
                                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                                                 <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>نوع الكهرباء</label>
@@ -296,7 +293,6 @@ export default function QuantumPortalAd() {
                                                 </select>
                                             </div>
                                         </div>
-
                                         <button disabled={quoteLoading} type="submit" style={{ background: '#06b6d4', color: '#000', border: 'none', borderRadius: '12px', padding: '15px', fontWeight: '900', fontSize: '14px', cursor: 'pointer', marginTop: '10px' }}>
                                             {quoteLoading ? 'جاري الإرسال...' : 'إرسال طلب التسعيرة النهائى'}
                                         </button>
@@ -310,7 +306,6 @@ export default function QuantumPortalAd() {
                         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(20px)', zIndex: 1000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
                             <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: '15px', right: '20px', background: 'none', border: 'none', color: '#fff', fontSize: '24px', cursor: 'pointer' }}>×</button>
                             <h3 style={{ fontSize: '18px', fontWeight: 900, color: '#d4af37', letterSpacing: '2px', marginBottom: '30px' }}>معرض الأعمال الهندسي</h3>
-                            
                             <div style={{ width: '100%', display: 'flex', gap: '15px', overflowX: 'auto', padding: '10px 0' }}>
                                 {LEVER_PROJECTS.map((p, idx) => (
                                     <div key={idx} style={{ flexShrink: 0, width: '240px', background: '#111', borderRadius: '20px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.05)' }}>
@@ -359,7 +354,6 @@ export default function QuantumPortalAd() {
                             <div style={{ marginTop: '15px', fontSize: '9px', color: 'rgba(255,255,255,0.5)', letterSpacing: '4px' }}>INITIALIZE_PORTFOLIO_NEXUS</div>
                         </div>
                     )}
-
                 </div>
             </div>
 
@@ -409,6 +403,39 @@ export default function QuantumPortalAd() {
                     </div>
                 )}
                 
+                {/* Visual Mute Control - v121.21 */}
+                {isStarted && (
+                    <div 
+                        onClick={() => {
+                            if (audioRef.current) {
+                                const nextMuted = !isMuted;
+                                audioRef.current.muted = nextMuted;
+                                setIsMuted(nextMuted);
+                            }
+                        }}
+                        style={{
+                            position: 'fixed',
+                            bottom: '25px',
+                            left: '25px',
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '50%',
+                            background: isMuted ? 'rgba(239, 68, 68, 0.1)' : 'rgba(6, 182, 212, 0.1)',
+                            border: `1px solid ${isMuted ? 'rgba(239, 68, 68, 0.3)' : 'rgba(6, 182, 212, 0.3)'}`,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: 'pointer',
+                            zIndex: 1000,
+                            color: isMuted ? '#ef4444' : '#06b6d4',
+                            backdropFilter: 'blur(10px)',
+                            transition: 'all 0.3s ease'
+                        }}
+                    >
+                        {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                    </div>
+                )}
+
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <div style={{ color: '#fff', fontSize: '8px', letterSpacing: '5px', opacity: 0.3, marginBottom: '4px' }}>
                         ARCHITECTED BY
