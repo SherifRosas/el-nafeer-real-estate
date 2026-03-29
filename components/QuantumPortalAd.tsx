@@ -52,14 +52,16 @@ export default function QuantumPortalAd() {
             audioEl.play().catch(() => {});
         }
 
+        const words = fullText.split(' ').filter(w => w.length > 0);
         let currentWordIndex = 0;
-        const words = fullText.split(' ');
-        setDisplayedText(words[0]); 
-        currentWordIndex++;
+        
+        setDisplayedText(words[0] || ""); 
+        currentWordIndex = 1;
 
         const typingInterval = setInterval(() => {
             if (currentWordIndex < words.length) {
-                setDisplayedText(prev => prev + ' ' + words[currentWordIndex]);
+                const word = words[currentWordIndex];
+                if (word) setDisplayedText(prev => prev + ' ' + word);
                 currentWordIndex++;
             } else {
                 clearInterval(typingInterval);
