@@ -339,14 +339,34 @@ export default function QuantumPortalAd() {
                     )}
 
                     {activeModal === 'portfolio' && (
-                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(20px)', zIndex: 2000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-                            <button onClick={() => setActiveModal(null)} onTouchStart={() => setActiveModal(null)} style={{ position: 'absolute', top: '15px', right: '20px', background: 'none', border: 'none', color: '#fff', fontSize: '24px', cursor: 'pointer' }}>×</button>
-                            <h3 style={{ fontSize: '18px', fontWeight: 900, color: '#d4af37', marginBottom: '30px' }}>معرض الأعمال الهندسي</h3>
-                            <div style={{ width: '100%', display: 'flex', gap: '15px', overflowX: 'auto' }}>
-                                {LEVER_PROJECTS.map((p, idx) => (
-                                    <div key={idx} style={{ flexShrink: 0, width: '200px', background: '#111', borderRadius: '15px', overflow: 'hidden' }}>
-                                        <img src={p.img} alt={p.title} style={{ width: '100%', height: '120px', objectFit: 'cover' }} />
-                                        <div style={{ padding: '10px', fontSize: '10px' }}>{p.title}</div>
+                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(20px)', zIndex: 2000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', padding: '10px', overflowY: 'auto' }}>
+                            <button onClick={() => setActiveModal(null)} onTouchStart={() => setActiveModal(null)} style={{ alignSelf: 'flex-end', margin: '10px 10px 0 0', background: 'none', border: 'none', color: '#fff', fontSize: '32px', cursor: 'pointer', zIndex: 10 }}>×</button>
+                            <h3 style={{ fontSize: '20px', fontWeight: 900, color: '#d4af37', marginBottom: '15px', letterSpacing: '2px' }}>مـعـرض الأعـمـال الهنـدسـي</h3>
+                            
+                            {/* Category Filter Tabs */}
+                            <div style={{ display: 'flex', gap: '8px', marginBottom: '20px', overflowX: 'auto', width: '100%', padding: '0 10px', direction: 'rtl' }}>
+                                {['بانوراما خارجية', 'أوتوماتيك', 'نصف أوتوماتيك', 'بانوراما', 'فيلات'].map(cat => (
+                                    <div key={cat} onClick={() => (window as any).LEVER_CAT = cat} style={{ flexShrink: 0, padding: '8px 15px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(212,175,55,0.3)', borderRadius: '12px', fontSize: '11px', fontWeight: 900, color: '#d4af37', cursor: 'pointer' }}>
+                                        {cat}
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'center', paddingBottom: '40px' }}>
+                                {[
+                                    { title: "مصعد بانورامي صاعد - ذهبي", cat: "بانوراما خارجية", img: "/campaigns/lever-pioneer/portfolio/pano-ext/ext-1.jpg" },
+                                    { title: "مصعد خارجي أسود مودرن", cat: "بانوراما خارجية", img: "/campaigns/lever-pioneer/portfolio/pano-ext/ext-2.jpg" },
+                                    { title: "تنفيذ برج بانورامي خارجي", cat: "بانوراما خارجية", img: "/campaigns/lever-pioneer/portfolio/pano-ext/ext-3.jpg" },
+                                    { title: "مصعد بانورامي باب كريمي", cat: "بانوراما خارجية", img: "/campaigns/lever-pioneer/portfolio/pano-ext/ext-4.jpg" },
+                                    { title: "مصعد بباب ذهبي - أوتوماتيك", cat: "أوتوماتيك", img: "/campaigns/lever-pioneer/portfolio/auto/auto-1.jpg" },
+                                    { title: "مصعد نصف أوتوماتيك - كلاسيك", cat: "نصف أوتوماتيك", img: "/campaigns/lever-pioneer/portfolio/semi-auto/semi-1.jpg" }
+                                ].map((p, idx) => (
+                                    <div key={idx} style={{ width: '160px', background: '#050505', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 10px 20px rgba(0,0,0,0.3)' }}>
+                                        <img src={p.img} alt={p.title} style={{ width: '100%', height: '140px', objectFit: 'cover' }} />
+                                        <div style={{ padding: '12px', fontSize: '9px', textAlign: 'center', direction: 'rtl', color: '#ccc' }}>
+                                            <div style={{ color: '#d4af37', fontStyle: 'italic', marginBottom: '4px' }}>{p.cat}</div>
+                                            {p.title}
+                                        </div>
                                     </div>
                                 ))}
                             </div>
