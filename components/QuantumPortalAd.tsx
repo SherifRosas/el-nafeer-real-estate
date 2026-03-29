@@ -141,7 +141,7 @@ export default function QuantumPortalAd() {
             top: 0,
             left: 0,
             width: '100vw',
-            height: '100dvh',
+            height: '100vh',
             backgroundColor: '#000',
             color: '#fff',
             zIndex: 99999,
@@ -154,7 +154,7 @@ export default function QuantumPortalAd() {
         }}>
             <style dangerouslySetInnerHTML={{ __html: `
                 html, body, #__next, main { 
-                    height: 100dvh !important; 
+                    height: 100vh !important; 
                     width: 100vw !important; 
                     overflow: hidden !important; 
                     margin: 0 !important; 
@@ -179,19 +179,21 @@ export default function QuantumPortalAd() {
                 style={{ position: 'fixed', top: -100, left: -100, width: 1, height: 1, visibility: 'hidden' }} 
             />
 
-            <div style={{ height: '15dvh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 20px', zIndex: 150, direction: 'rtl' }}>
+            <div style={{ height: '15vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 20px', zIndex: 150, direction: 'rtl' }}>
                 {isStarted && (
-                    <p style={{ color: '#06b6d4', fontSize: 'clamp(12px, 2.2vh, 18px)', lineHeight: '1.6', fontWeight: 900, textShadow: '0 0 15px rgba(6,182,212,0.7)', margin: 0, textAlign: 'center' }}>
+                    <p style={{ color: '#06b6d4', fontSize: '16px', lineHeight: '1.6', fontWeight: 900, textShadow: '0 0 15px rgba(6,182,212,0.7)', margin: 0, textAlign: 'center' }}>
                         {displayedText}
                     </p>
                 )}
             </div>
 
-            <div style={{ height: '70dvh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+            <div style={{ height: '70vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
                 <div style={{
                     position: 'relative',
-                    width: 'min(100vw, 70dvh)',
-                    height: 'min(100vw, 70dvh)',
+                    width: '70vh', // Fallback for min()
+                    height: '70vh', // Fallback for min()
+                    maxWidth: '100vw',
+                    maxHeight: '100vw',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center'
@@ -345,14 +347,14 @@ export default function QuantumPortalAd() {
                             style={{
                                 position: 'absolute',
                                 width: '100vw',
-                                height: '100dvh',
+                                height: '100vh',
                                 zIndex: 9999,
                                 cursor: 'pointer',
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 justifyContent: 'flex-end',
-                                paddingBottom: '20dvh',
+                                paddingBottom: '20vh',
                                 left: '50%',
                                 top: '50%',
                                 transform: 'translate(-50%, -50%)',
@@ -369,7 +371,7 @@ export default function QuantumPortalAd() {
                 </div>
             </div>
 
-            <div style={{ height: '15dvh', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 150, gap: '15px' }}>
+            <div style={{ height: '15vh', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 150, gap: '15px' }}>
                 {isStarted && (
                     <div style={{ display: 'flex', gap: '15px', direction: 'rtl' }}>
                         <div 
