@@ -180,20 +180,36 @@ export default function QuantumPortalAd() {
                     
                     <div style={{ position: 'absolute', top: '48.5%', right: '17.8%', width: '3.5%', height: '3.5%', backgroundColor: '#1a1a1a', borderRadius: '50%', filter: 'blur(4px)', zIndex: 2, opacity: 0.95 }} />
                     
-                    {/* Surgical Mask for Center Pill (v121.18) */}
+                    {/* Cinematic Ascension Flare - v121.20 (Replaces the black mask) */}
                     <div style={{ 
                         position: 'absolute', 
-                        top: '44.5%', 
+                        top: '44%', 
                         left: '50%', 
-                        transform: 'translateX(-50%)', 
-                        width: '56%', 
-                        height: '11%', 
-                        backgroundColor: '#11152d', // Matches the building's deep indigo/black tint
-                        borderRadius: '40px',
-                        filter: 'blur(8px)',
+                        transform: 'translate(-50%, -50%)', 
+                        width: '70%', 
+                        height: '15%', 
+                        background: 'radial-gradient(ellipse at center, rgba(6,182,212,0.8) 0%, rgba(6,182,212,0.4) 30%, transparent 70%)',
+                        filter: 'blur(15px)',
                         zIndex: 2,
-                        opacity: 0.98,
-                        boxShadow: '0 0 40px rgba(6,182,212,0.15)'
+                        opacity: 1, // Full masking
+                        mixBlendingMode: 'screen',
+                        pointerEvents: 'none'
+                    }} />
+                    
+                    {/* Secondary Core Burst */}
+                    <div style={{ 
+                        position: 'absolute', 
+                        top: '44%', 
+                        left: '50%', 
+                        transform: 'translate(-50%, -50%)', 
+                        width: '30%', 
+                        height: '6%', 
+                        background: 'radial-gradient(circle, #fff 0%, rgba(6,182,212,0.9) 40%, transparent 100%)',
+                        filter: 'blur(5px)',
+                        zIndex: 3,
+                        opacity: 0.9,
+                        mixBlendingMode: 'overlay',
+                        pointerEvents: 'none'
                     }} />
 
                     {isStarted && (

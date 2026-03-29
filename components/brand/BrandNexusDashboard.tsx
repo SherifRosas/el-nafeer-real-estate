@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Zap, Activity, Clock, Phone, LayoutGrid, List } from 'lucide-react'
+import { Zap, Activity, Clock, Phone, LayoutGrid, List, Archive, Trash2, CheckCircle, MessageSquare } from 'lucide-react'
 
 interface Lead {
     id: string
@@ -16,6 +16,22 @@ export default function BrandNexusDashboard({ initialLeads, brandName }: { initi
     const [view, setView] = useState<'grid' | 'list'>('grid')
     const [filter, setFilter] = useState('all')
     const [interceptedLeads, setInterceptedLeads] = useState<Set<string>>(new Set())
+    const [leads, setLeads] = useState<Lead[]>(initialLeads)
+
+    const handleUpdateStatus = async (leadId: string, newStatus: string) => {
+        try {
+            const res = await fetch('/api/leads', {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: leadId, status: newStatus })
+            })
+            if (res.ok) {
+                setLeads(prev => prev.map(l => l.id === leadId ? { ...l, status: newStatus } : l))
+            }
+        } catch (err) {
+            console.error('Status update failed:', err)
+        }
+    }
 
     const handleIntercept = (leadId: string) => {
         setInterceptedLeads(prev => {
@@ -25,8 +41,8 @@ export default function BrandNexusDashboard({ initialLeads, brandName }: { initi
         })
     }
 
-    const filteredLeads = initialLeads.filter(l => {
-        if (filter === 'all') return true
+    const filteredLeads = leads.filter(l => {
+        if (filter === 'all') return l.status !== 'archived'
         return l.status === filter
     })
 
@@ -93,12 +109,38 @@ export default function BrandNexusDashboard({ initialLeads, brandName }: { initi
                             </div>
                             <div className="flex flex-col items-end gap-2">
                                 <span className={`px-4 py-1.5 rounded-full border text-[9px] font-black uppercase tracking-widest robotic-digits ${
-                                    lead.status === 'new' ? 'bg-cyan-500/10 border-cyan-500/20 text-cyan-500' : 'bg-white/5 border-white/10 text-gray-400'
+                                    lead.status === 'new' ? 'bg-cyan-500/10 border-cyan-500/20 text-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.2)]' : 
+                                    lead.status === 'contacted' ? 'bg-amber-500/10 border-amber-500/20 text-amber-500' :
+                                    lead.status === 'converted' ? 'bg-green-500/10 border-green-500/20 text-green-500' :
+                                    'bg-white/5 border-white/10 text-gray-400'
                                 }`}>
                                     {lead.status === 'new' ? 'ELITE_SIGNAL' : lead.status.toUpperCase()}
                                 </span>
+                                <div className="flex gap-2 mt-2">
+                                    <button 
+                                        title="Archive"
+                                        onClick={() => handleUpdateStatus(lead.id, 'archived')}
+                                        className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-gray-500 transition-all"
+                                    >
+                                        <Archive size={12} />
+                                    </button>
+                                    <button 
+                                        title="Mark as Followed Up"
+                                        onClick={() => handleUpdateStatus(lead.id, 'contacted')}
+                                        className="p-2 bg-white/5 hover:bg-amber-500/20 rounded-lg text-gray-500 hover:text-amber-500 transition-all"
+                                    >
+                                        <MessageSquare size={12} />
+                                    </button>
+                                    <button 
+                                        title="Mark as Converted"
+                                        onClick={() => handleUpdateStatus(lead.id, 'converted')}
+                                        className="p-2 bg-white/5 hover:bg-green-500/20 rounded-lg text-gray-500 hover:text-green-500 transition-all"
+                                    >
+                                        <CheckCircle size={12} />
+                                    </button>
+                                </div>
                                 {interceptedLeads.has(lead.id) && (
-                                    <span className="px-3 py-1 bg-green-500/10 border border-green-500/20 text-green-500 text-[8px] font-black uppercase tracking-widest italic animate-pulse">
+                                    <span className="px-3 py-1 bg-green-500/10 border border-green-500/20 text-green-500 text-[8px] font-black uppercase tracking-widest italic animate-pulse mt-2 block">
                                         SIGNAL_INTERCEPTED_READY
                                     </span>
                                 )}
