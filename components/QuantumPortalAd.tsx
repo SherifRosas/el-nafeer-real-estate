@@ -362,7 +362,15 @@ export default function QuantumPortalAd() {
                                     { title: "مصعد نصف أوتوماتيك - كلاسيك", cat: "نصف أوتوماتيك", img: "/campaigns/lever-pioneer/portfolio/semi-auto/semi-1.jpg" }
                                 ].map((p, idx) => (
                                     <div key={idx} style={{ width: '160px', background: '#050505', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 10px 20px rgba(0,0,0,0.3)' }}>
-                                        <img src={p.img} alt={p.title} style={{ width: '100%', height: '140px', objectFit: 'cover' }} />
+                                        {(p as any).vid ? (
+                                            <video 
+                                                src={(p as any).vid} 
+                                                autoPlay muted loop playsInline 
+                                                style={{ width: '100%', height: '140px', objectFit: 'cover' }} 
+                                            />
+                                        ) : (
+                                            <img src={p.img} alt={p.title} style={{ width: '100%', height: '140px', objectFit: 'cover' }} />
+                                        )}
                                         <div style={{ padding: '12px', fontSize: '9px', textAlign: 'center', direction: 'rtl', color: '#ccc' }}>
                                             <div style={{ color: '#d4af37', fontStyle: 'italic', marginBottom: '4px' }}>{p.cat}</div>
                                             {p.title}
