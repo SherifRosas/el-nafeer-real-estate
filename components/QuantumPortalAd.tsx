@@ -192,7 +192,7 @@ export default function QuantumPortalAd() {
                         filter: 'blur(15px)',
                         zIndex: 2,
                         opacity: 1, // Full masking
-                        mixBlendingMode: 'screen',
+                        mixBlendMode: 'screen',
                         pointerEvents: 'none'
                     }} />
                     
@@ -208,7 +208,7 @@ export default function QuantumPortalAd() {
                         filter: 'blur(5px)',
                         zIndex: 3,
                         opacity: 0.9,
-                        mixBlendingMode: 'overlay',
+                        mixBlendMode: 'overlay',
                         pointerEvents: 'none'
                     }} />
 
