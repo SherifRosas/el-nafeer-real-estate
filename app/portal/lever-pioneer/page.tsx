@@ -4,13 +4,14 @@ import QuantumPortalAd from '@/components/QuantumPortalAd'
 // --- PORTAL V120 SERVER METADATA (GLOBAL REACH) ---
 const TITLE = "🏆 LEVER PIONEER | THE ASCENT"
 const DESC = "Unifying Vertical Excellence. The definitive cross-device simulation."
-const IMG = "https://el-nafeer-real-estate.vercel.app/campaigns/lever-pioneer/ad-v2-quantum.png"
-const PAGE_URL = "https://el-nafeer-real-estate.vercel.app/portal/lever-pioneer"
+const DOMAIN = "https://el-nafeer-real-estate.vercel.app"
+const IMG = `${DOMAIN}/campaigns/lever-pioneer/ad-v2-quantum.png?v=121.34`
+const PAGE_URL = `${DOMAIN}/portal/lever-pioneer`
 
 export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
-  metadataBase: new URL('http://localhost:3000'),
+  metadataBase: new URL(DOMAIN),
   alternates: {
     canonical: PAGE_URL,
   },
@@ -40,6 +41,10 @@ export const metadata: Metadata = {
     'whatsapp:image': IMG,
     'whatsapp:title': TITLE,
     'whatsapp:description': DESC,
+    'og:image:secure_url': IMG,
+    'og:image:type': 'image/png',
+    'og:image:width': '1200',
+    'og:image:height': '1200'
   }
 }
 
