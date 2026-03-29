@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 
 export default function PortalPage() {
   return (
-    <main style={{ backgroundColor: '#000', width: '100%', height: '100vh', overflow: 'hidden', position: 'relative' }}>
+    <main style={{ backgroundColor: '#000', width: '100%', minHeight: '100vh', position: 'relative' }}>
       <QuantumPortalAd />
     </main>
   )

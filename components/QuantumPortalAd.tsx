@@ -175,22 +175,23 @@ export default function QuantumPortalAd() {
             `}} />
             
             {!isStarted && (
-                <button 
-                    onClick={initiateExperience}
-                    onTouchStart={initiateExperience}
+                <a 
+                    href="#"
+                    onClick={(e) => { e.preventDefault(); initiateExperience(); }}
+                    onTouchStart={(e) => { e.preventDefault(); initiateExperience(); }}
                     style={{
-                        position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 99999999,
+                        position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 999999999,
                         cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end',
-                        paddingBottom: '20vh', background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 30%)',
+                        paddingBottom: '20vh', background: 'rgba(0,0,0,0.4)',
                         WebkitTapHighlightColor: 'rgba(255,255,255,0.1)', border: 'none', outline: 'none', padding: 0, margin: 0,
-                        appearance: 'none', WebkitAppearance: 'none', pointerEvents: 'auto'
+                        textDecoration: 'none', color: 'inherit', pointerEvents: 'auto'
                     }}
                 >
                     <div style={{ position: 'absolute', top: '5%', right: '5%', fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: 'bold' }}>ULTIMATUM_v121.17</div>
                     <div style={{ padding: '15px 40px', backgroundColor: 'rgba(255,255,255,0.05)', border: '2px solid rgba(6,182,212,0.5)', borderRadius: '20px', color: '#fff', fontWeight: 900, fontSize: '14px', letterSpacing: '8px', animation: 'pulse-cyan 2s infinite' }}>
                         TAP_TO_ASCENT
                     </div>
-                </button>
+                </a>
             )}
 
             <audio ref={audioRef} id="master-bg-audio" loop playsInline preload="auto" 
