@@ -179,6 +179,22 @@ export default function QuantumPortalAd() {
                     <img src={AD_IMAGE + CACHE_V} alt="Lever Pioneer" style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'contain', zIndex: 1 }} />
                     
                     <div style={{ position: 'absolute', top: '48.5%', right: '17.8%', width: '3.5%', height: '3.5%', backgroundColor: '#1a1a1a', borderRadius: '50%', filter: 'blur(4px)', zIndex: 2, opacity: 0.95 }} />
+                    
+                    {/* Surgical Mask for Center Pill (v121.18) */}
+                    <div style={{ 
+                        position: 'absolute', 
+                        top: '44.5%', 
+                        left: '50%', 
+                        transform: 'translateX(-50%)', 
+                        width: '56%', 
+                        height: '11%', 
+                        backgroundColor: '#11152d', // Matches the building's deep indigo/black tint
+                        borderRadius: '40px',
+                        filter: 'blur(8px)',
+                        zIndex: 2,
+                        opacity: 0.98,
+                        boxShadow: '0 0 40px rgba(6,182,212,0.15)'
+                    }} />
 
                     {isStarted && (
                         <>
@@ -188,29 +204,6 @@ export default function QuantumPortalAd() {
                                 onClick={() => setActiveModal('portfolio')}
                                 style={{ position: 'absolute', top: '88%', left: '4%', width: '38%', height: '8%', zIndex: 200, WebkitTapHighlightColor: 'rgba(212,175,55,0.3)', cursor: 'pointer' }} 
                             />
-                            <div 
-                                onClick={() => setActiveModal('quote')}
-                                style={{ 
-                                    position: 'absolute', 
-                                    top: '40%', 
-                                    left: '50%', 
-                                    transform: 'translateX(-50%)',
-                                    zIndex: 250,
-                                    padding: '10px 20px',
-                                    background: 'rgba(6,182,212,0.1)',
-                                    border: '1px solid rgba(6,182,212,0.5)',
-                                    borderRadius: '50px',
-                                    backdropFilter: 'blur(10px)',
-                                    color: '#fff',
-                                    fontSize: '10px',
-                                    fontWeight: 'bold',
-                                    letterSpacing: '2px',
-                                    cursor: 'pointer',
-                                    animation: 'pulse-cyan 2s infinite'
-                                }}
-                            >
-                                اطلب تسعيرة
-                            </div>
                         </>
                     )}
 

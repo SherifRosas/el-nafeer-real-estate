@@ -15,6 +15,15 @@ interface Lead {
 export default function BrandNexusDashboard({ initialLeads, brandName }: { initialLeads: Lead[], brandName: string }) {
     const [view, setView] = useState<'grid' | 'list'>('grid')
     const [filter, setFilter] = useState('all')
+    const [interceptedLeads, setInterceptedLeads] = useState<Set<string>>(new Set())
+
+    const handleIntercept = (leadId: string) => {
+        setInterceptedLeads(prev => {
+            const next = new Set(prev)
+            next.add(leadId)
+            return next
+        })
+    }
 
     const filteredLeads = initialLeads.filter(l => {
         if (filter === 'all') return true
@@ -43,12 +52,14 @@ export default function BrandNexusDashboard({ initialLeads, brandName }: { initi
                     </div>
                     <div className="flex bg-white/5 p-1 rounded-xl border border-white/10">
                         <button 
+                            title="Grid View"
                             onClick={() => setView('grid')}
                             className={`p-3 rounded-lg transition-all ${view === 'grid' ? 'bg-cyan-500 text-black' : 'text-gray-500 hover:text-white'}`}
                         >
                             <LayoutGrid size={18} />
                         </button>
                         <button 
+                            title="List View"
                             onClick={() => setView('list')}
                             className={`p-3 rounded-lg transition-all ${view === 'list' ? 'bg-cyan-500 text-black' : 'text-gray-500 hover:text-white'}`}
                         >
@@ -80,9 +91,18 @@ export default function BrandNexusDashboard({ initialLeads, brandName }: { initi
                                     </div>
                                 </div>
                             </div>
-                            <span className="px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-500 text-[9px] font-black uppercase tracking-widest robotic-digits">
-                                {lead.status === 'new' ? 'ELITE_SIGNAL' : lead.status.toUpperCase()}
-                            </span>
+                            <div className="flex flex-col items-end gap-2">
+                                <span className={`px-4 py-1.5 rounded-full border text-[9px] font-black uppercase tracking-widest robotic-digits ${
+                                    lead.status === 'new' ? 'bg-cyan-500/10 border-cyan-500/20 text-cyan-500' : 'bg-white/5 border-white/10 text-gray-400'
+                                }`}>
+                                    {lead.status === 'new' ? 'ELITE_SIGNAL' : lead.status.toUpperCase()}
+                                </span>
+                                {interceptedLeads.has(lead.id) && (
+                                    <span className="px-3 py-1 bg-green-500/10 border border-green-500/20 text-green-500 text-[8px] font-black uppercase tracking-widest italic animate-pulse">
+                                        SIGNAL_INTERCEPTED_READY
+                                    </span>
+                                )}
+                            </div>
                         </div>
 
                         <div className="space-y-4 mb-8 relative z-10">
@@ -101,13 +121,25 @@ export default function BrandNexusDashboard({ initialLeads, brandName }: { initi
 
                         <div className="flex gap-4 relative z-10">
                             <button 
-                                onClick={() => window.open(`tel:${lead.phone}`)}
-                                className="flex-1 py-4 bg-white text-black font-black text-[10px] uppercase tracking-[0.3em] rounded-xl hover:bg-cyan-500 transition-all font-sans"
+                                onClick={() => {
+                                    handleIntercept(lead.id);
+                                    const waMsg = `مرحباً ${lead.name}، وصلتنا رسالتك بخصوص استفسارك الهندسي عبر منصة النفير. نود البدء في تجهيز عرض السعر الفني لمصعدكم.`;
+                                    window.open(`https://wa.me/${lead.phone.replace(/\+/g, '').replace(/ /g, '')}?text=${encodeURIComponent(waMsg)}`, '_blank');
+                                }}
+                                className="flex-1 py-4 bg-[#25D366]/10 text-[#25D366] font-black text-[10px] uppercase tracking-[0.3em] rounded-xl border border-[#25D366]/20 hover:bg-[#25D366] hover:text-white transition-all font-sans flex items-center justify-center gap-3"
                             >
-                                OPEN_COMM_LINK
+                                <Zap size={14} className="animate-pulse" />
+                                WHATSAPP_RESPONSE
                             </button>
-                            <button className="px-5 py-4 bg-white/5 text-white font-black text-[10px] uppercase tracking-[0.3em] rounded-xl border border-white/10 hover:border-cyan-500/30 transition-all">
-                                DATA_PULSE
+                            <button 
+                                title="Call Lead"
+                                onClick={() => {
+                                    handleIntercept(lead.id);
+                                    window.open(`tel:${lead.phone}`);
+                                }}
+                                className="px-5 py-4 bg-white/5 text-white font-black text-[10px] uppercase tracking-[0.3em] rounded-xl border border-white/10 hover:border-sahara-gold/30 transition-all flex items-center justify-center"
+                            >
+                                <Phone size={14} />
                             </button>
                         </div>
                     </div>
