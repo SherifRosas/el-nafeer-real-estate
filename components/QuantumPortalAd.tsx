@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
-import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap, Volume2, VolumeX } from 'lucide-react'
+import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap } from 'lucide-react'
 
 // Dynamically import the heavy 3D engine
 const Quantum3DLayer = dynamic(() => import('./Quantum3DLayer'), { 
@@ -28,7 +28,6 @@ export default function QuantumPortalAd() {
     const [displayedText, setDisplayedText] = useState("");
     const [isStarted, setIsStarted] = useState(false);
     const [isLegacy, setIsLegacy] = useState(false);
-    const [isMuted, setIsMuted] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
     
     // Feature Modals
@@ -48,9 +47,9 @@ export default function QuantumPortalAd() {
 
     useEffect(() => {
         if (audioRef.current) {
-            audioRef.current.muted = isMuted;
+            audioRef.current.muted = false;
         }
-    }, [isMuted]);
+    }, []);
 
     const initiateExperience = () => {
         setIsStarted(true);
@@ -416,39 +415,6 @@ export default function QuantumPortalAd() {
                     </div>
                 )}
                 
-                {/* Visual Mute Control - v121.21 */}
-                {isStarted && (
-                    <div 
-                        onClick={() => {
-                            if (audioRef.current) {
-                                const nextMuted = !isMuted;
-                                audioRef.current.muted = nextMuted;
-                                setIsMuted(nextMuted);
-                            }
-                        }}
-                        style={{
-                            position: 'fixed',
-                            bottom: '25px',
-                            left: '25px',
-                            width: '40px',
-                            height: '40px',
-                            borderRadius: '50%',
-                            background: isMuted ? 'rgba(239, 68, 68, 0.1)' : 'rgba(6, 182, 212, 0.1)',
-                            border: `1px solid ${isMuted ? 'rgba(239, 68, 68, 0.3)' : 'rgba(6, 182, 212, 0.3)'}`,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            cursor: 'pointer',
-                            zIndex: 1000,
-                            color: isMuted ? '#ef4444' : '#06b6d4',
-                            backdropFilter: 'blur(10px)',
-                            transition: 'all 0.3s ease'
-                        }}
-                    >
-                        {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
-                    </div>
-                )}
-
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <div style={{ color: '#fff', fontSize: '8px', letterSpacing: '5px', opacity: 0.3, marginBottom: '4px' }}>
                         ARCHITECTED BY
