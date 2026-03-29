@@ -54,11 +54,18 @@ export default function QuantumPortalAd() {
 
     const initiateExperience = () => {
         setIsStarted(true);
-        if (audioRef.current) {
-            audioRef.current.muted = false;
-            audioRef.current.volume = 0.8;
-            audioRef.current.play().catch(e => console.warn("Audio Context Wait:", e));
-        }
+        // Fail-Safe Audio Activation (v121.23)
+        const playAudio = () => {
+            if (audioRef.current) {
+                audioRef.current.muted = false;
+                audioRef.current.volume = 0.8;
+                audioRef.current.play().catch(e => {
+                    console.warn("Retrying Audio Context:", e);
+                    setTimeout(playAudio, 500); // Retry logic for blocked context
+                });
+            }
+        };
+        playAudio();
 
         const words = fullText.split(' ').filter(w => w.length > 0);
         let currentWordIndex = 0;
@@ -169,8 +176,8 @@ export default function QuantumPortalAd() {
                 loop 
                 playsInline 
                 preload="auto" 
-                src="https://cdn.pixabay.com/audio/2022/03/10/audio_c8c8a178e7.mp3" 
-                style={{ display: 'none' }} 
+                src="https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg" 
+                style={{ position: 'fixed', top: -100, left: -100, width: 1, height: 1, visibility: 'hidden' }} 
             />
 
             <div style={{ height: '15dvh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 20px', zIndex: 150, direction: 'rtl' }}>
