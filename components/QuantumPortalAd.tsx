@@ -138,29 +138,15 @@ export default function QuantumPortalAd() {
     return (
         <div style={{
             position: 'absolute', 
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            backgroundColor: '#000',
-            color: '#fff',
-            zIndex: 99999,
-            overflow: 'hidden',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
+            top: 0, left: 0, width: '100vw', height: '100vh',
+            backgroundColor: '#000', color: '#fff', zIndex: 99999, overflow: 'hidden',
+            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
             fontFamily: 'Inter, system-ui, sans-serif'
         }}>
             <style dangerouslySetInnerHTML={{ __html: `
                 html, body, #__next, main { 
-                    height: 100vh !important; 
-                    width: 100vw !important; 
-                    overflow: hidden !important; 
-                    margin: 0 !important; 
-                    padding: 0 !important;
-                    position: fixed !important;
-                    background: black !important;
+                    height: 100vh !important; width: 100vw !important; overflow: hidden !important; 
+                    margin: 0 !important; padding: 0 !important; position: fixed !important; background: black !important;
                 }
                 @keyframes pulse-cyan {
                     0% { box-shadow: 0 0 10px rgba(6,182,212,0.3); }
@@ -169,12 +155,26 @@ export default function QuantumPortalAd() {
                 }
             `}} />
             
-            <audio 
-                ref={audioRef}
-                id="master-bg-audio" 
-                loop 
-                playsInline 
-                preload="auto" 
+            {!isStarted && (
+                <button 
+                    onClick={initiateExperience}
+                    onTouchStart={initiateExperience}
+                    style={{
+                        position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 99999999,
+                        cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end',
+                        paddingBottom: '20vh', background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 30%)',
+                        WebkitTapHighlightColor: 'rgba(255,255,255,0.1)', border: 'none', outline: 'none', padding: 0, margin: 0,
+                        appearance: 'none', WebkitAppearance: 'none', pointerEvents: 'auto'
+                    }}
+                >
+                    <div style={{ position: 'absolute', top: '5%', right: '5%', fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: 'bold' }}>ULTIMATUM_v121.17</div>
+                    <div style={{ padding: '15px 40px', backgroundColor: 'rgba(255,255,255,0.05)', border: '2px solid rgba(6,182,212,0.5)', borderRadius: '20px', color: '#fff', fontWeight: 900, fontSize: '14px', letterSpacing: '8px', animation: 'pulse-cyan 2s infinite' }}>
+                        TAP_TO_ASCENT
+                    </div>
+                </button>
+            )}
+
+            <audio ref={audioRef} id="master-bg-audio" loop playsInline preload="auto" 
                 src="https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg" 
                 style={{ position: 'fixed', top: -100, left: -100, width: 1, height: 1, visibility: 'hidden' }} 
             />
@@ -188,127 +188,33 @@ export default function QuantumPortalAd() {
             </div>
 
             <div style={{ height: '70vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
-                <div style={{
-                    position: 'relative',
-                    width: '70vh', // Fallback for min()
-                    height: '70vh', // Fallback for min()
-                    maxWidth: '100vw',
-                    maxHeight: '100vw',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
+                <div style={{ position: 'relative', width: '70vh', height: '70vh', maxWidth: '100vw', maxHeight: '100vw', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img src={AD_IMAGE + CACHE_V} alt="Lever Pioneer" style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'contain', zIndex: 1 }} />
                     <div style={{ position: 'absolute', top: '48.5%', right: '17.8%', width: '3.5%', height: '3.5%', backgroundColor: '#1a1a1a', borderRadius: '50%', filter: 'blur(4px)', zIndex: 2, opacity: 0.95 }} />
                     
-                    {/* Cinematic Ascension Flare - v121.20 */}
-                    <div style={{ 
-                        position: 'absolute', 
-                        top: '44%', 
-                        left: '50%', 
-                        transform: 'translate(-50%, -50%)', 
-                        width: '70%', 
-                        height: '15%', 
-                        background: 'radial-gradient(ellipse at center, rgba(6,182,212,0.8) 0%, rgba(6,182,212,0.4) 30%, transparent 70%)',
-                        filter: 'blur(15px)',
-                        zIndex: 2,
-                        opacity: 1, 
-                        mixBlendMode: 'screen',
-                        pointerEvents: 'none'
-                    }} />
+                    <div style={{ position: 'absolute', top: '44%', left: '50%', transform: 'translate(-50%, -50%)', width: '70%', height: '15%', background: 'radial-gradient(ellipse at center, rgba(6,182,212,0.8) 0%, rgba(6,182,212,0.4) 30%, transparent 70%)', filter: 'blur(15px)', zIndex: 2, opacity: 1, mixBlendMode: 'screen', pointerEvents: 'none' }} />
                     
-                    <div style={{ 
-                        position: 'absolute', 
-                        top: '44%', 
-                        left: '50%', 
-                        transform: 'translate(-50%, -50%)', 
-                        width: '30%', 
-                        height: '6%', 
-                        background: 'radial-gradient(circle, #fff 0%, rgba(6,182,212,0.9) 40%, transparent 100%)',
-                        filter: 'blur(5px)',
-                        zIndex: 3,
-                        opacity: 0.9,
-                        mixBlendMode: 'overlay',
-                        pointerEvents: 'none'
-                    }} />
-
                     {isStarted && (
                         <>
-                            <a href={WHATSAPP_URL} style={{ position: 'absolute', top: '70%', left: '4%', width: '38%', height: '8%', zIndex: 200, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)' }} />
-                            <a href={CALL_URL} style={{ position: 'absolute', top: '79%', left: '4%', width: '38%', height: '8%', zIndex: 200, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)' }} />
-                            <div onClick={() => setActiveModal('portfolio')} style={{ position: 'absolute', top: '88%', left: '4%', width: '38%', height: '8%', zIndex: 200, WebkitTapHighlightColor: 'rgba(212,175,55,0.3)', cursor: 'pointer' }} />
+                            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '65%', left: '3%', width: '40%', height: '10%', zIndex: 1000, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)', background: 'rgba(255,255,255,0.01)', pointerEvents: 'auto' }} />
+                            <a href={CALL_URL} style={{ display: 'block', position: 'absolute', top: '75%', left: '3%', width: '40%', height: '10%', zIndex: 1000, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)', background: 'rgba(255,255,255,0.01)', pointerEvents: 'auto' }} />
+                            <div onClick={() => setActiveModal('portfolio')} onTouchEnd={() => setActiveModal('portfolio')} style={{ display: 'block', position: 'absolute', top: '85%', left: '3%', width: '40%', height: '10%', zIndex: 1000, WebkitTapHighlightColor: 'rgba(212,175,55,0.3)', cursor: 'pointer', background: 'rgba(255,255,255,0.01)', pointerEvents: 'auto' }} />
                         </>
                     )}
 
                     {activeModal === 'quote' && (
-                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-                            <div style={{ width: '100%', maxWidth: '400px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(6,182,212,0.3)', borderRadius: '30px', padding: '30px', position: 'relative' }}>
-                                <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: '15px', right: '20px', background: 'none', border: 'none', color: '#fff', fontSize: '20px', cursor: 'pointer' }}>×</button>
+                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+                            <div style={{ width: '100%', maxWidth: '400px', background: '#111', border: '1px solid rgba(6,182,212,0.3)', borderRadius: '30px', padding: '30px', position: 'relative' }}>
+                                <button onClick={() => setActiveModal(null)} onTouchStart={() => setActiveModal(null)} style={{ position: 'absolute', top: '15px', right: '20px', background: 'none', border: 'none', color: '#fff', fontSize: '20px', cursor: 'pointer' }}>×</button>
                                 <h3 style={{ fontSize: '18px', fontWeight: 900, fontStyle: 'italic', letterSpacing: '2px', color: '#06b6d4', marginBottom: '20px', textAlign: 'center' }}>عرض سعر هندسي</h3>
                                 {quoteSent ? (
-                                    <div style={{ textAlign: 'center', padding: '40px 0' }}>
-                                        <div style={{ fontSize: '40px', marginBottom: '10px' }}>✅</div>
-                                        <p style={{ fontSize: '12px', fontWeight: 'bold' }}>تم إرسال الطلب بنجاح</p>
-                                    </div>
+                                    <div style={{ textAlign: 'center', padding: '40px 0' }}>✅ تم إرسال الطلب</div>
                                 ) : (
                                     <form onSubmit={submitQuoteRequest} style={{ display: 'flex', flexDirection: 'column', gap: '10px', direction: 'rtl' }}>
-                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                                            <input name="userName" required placeholder="الاسم / الشركة" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }} />
-                                            <input name="userPhone" required placeholder="رقم الهاتف" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }} />
-                                        </div>
-                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                                                <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>نوع المصعد</label>
-                                                <select name="elevatorType" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none', width: '100%' }}>
-                                                    <option>بانورامي</option>
-                                                    <option>سكني</option>
-                                                    <option>مستشفيات</option>
-                                                    <option>بضائع</option>
-                                                </select>
-                                            </div>
-                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                                                <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>عدد الأدوار</label>
-                                                <input name="floors" placeholder="مثلاً: 5" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }} />
-                                            </div>
-                                        </div>
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                                            <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>مساحة البير (طول * عرض م)</label>
-                                            <input name="shaft" placeholder="مثلاً: 1.5 * 1.5 م" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }} />
-                                        </div>
-                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                                                <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>تأسيس المصعد</label>
-                                                <select name="foundation" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }}>
-                                                    <option>يوجد</option>
-                                                    <option>لا يوجد</option>
-                                                </select>
-                                            </div>
-                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                                                <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>غرفة ماكينة</label>
-                                                <select name="machineRoom" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }}>
-                                                    <option>موجود</option>
-                                                    <option>غير موجود</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                                                <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>نوع الكهرباء</label>
-                                                <select name="power" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }}>
-                                                    <option>380 فولت</option>
-                                                    <option>220 فولت</option>
-                                                </select>
-                                            </div>
-                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                                                <label style={{ fontSize: '9px', color: '#666', paddingRight: '5px' }}>نوع الأبواب</label>
-                                                <select name="door" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px', outline: 'none' }}>
-                                                    <option>أوتوماتيك</option>
-                                                    <option>نصف أوتوماتيك</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <button disabled={quoteLoading} type="submit" style={{ background: '#06b6d4', color: '#000', border: 'none', borderRadius: '12px', padding: '15px', fontWeight: '900', fontSize: '14px', cursor: 'pointer', marginTop: '10px' }}>
-                                            {quoteLoading ? 'جاري الإرسال...' : 'إرسال طلب التسعيرة النهائى'}
+                                        <input name="userName" required placeholder="الاسم / الشركة" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px' }} />
+                                        <input name="userPhone" required placeholder="رقم الهاتف" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px', color: '#fff', fontSize: '11px' }} />
+                                        <button disabled={quoteLoading} type="submit" style={{ background: '#06b6d4', color: '#000', border: 'none', borderRadius: '12px', padding: '15px', fontWeight: '900', cursor: 'pointer' }}>
+                                            {quoteLoading ? 'جاري الإرسال...' : 'إرسال طلب التسعيرة'}
                                         </button>
                                     </form>
                                 )}
@@ -317,21 +223,17 @@ export default function QuantumPortalAd() {
                     )}
 
                     {activeModal === 'portfolio' && (
-                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(20px)', zIndex: 1000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-                            <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: '15px', right: '20px', background: 'none', border: 'none', color: '#fff', fontSize: '24px', cursor: 'pointer' }}>×</button>
-                            <h3 style={{ fontSize: '18px', fontWeight: 900, color: '#d4af37', letterSpacing: '2px', marginBottom: '30px' }}>معرض الأعمال الهندسي</h3>
-                            <div style={{ width: '100%', display: 'flex', gap: '15px', overflowX: 'auto', padding: '10px 0' }}>
+                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(20px)', zIndex: 2000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+                            <button onClick={() => setActiveModal(null)} onTouchStart={() => setActiveModal(null)} style={{ position: 'absolute', top: '15px', right: '20px', background: 'none', border: 'none', color: '#fff', fontSize: '24px', cursor: 'pointer' }}>×</button>
+                            <h3 style={{ fontSize: '18px', fontWeight: 900, color: '#d4af37', marginBottom: '30px' }}>معرض الأعمال الهندسي</h3>
+                            <div style={{ width: '100%', display: 'flex', gap: '15px', overflowX: 'auto' }}>
                                 {LEVER_PROJECTS.map((p, idx) => (
-                                    <div key={idx} style={{ flexShrink: 0, width: '240px', background: '#111', borderRadius: '20px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.05)' }}>
-                                        <img src={p.img} alt={p.title} style={{ width: '100%', height: '150px', objectFit: 'cover' }} />
-                                        <div style={{ padding: '15px' }}>
-                                            <div style={{ fontSize: '12px', fontWeight: '900', direction: 'rtl', marginBottom: '5px' }}>{p.title}</div>
-                                            <div style={{ fontSize: '9px', color: '#666', letterSpacing: '2px' }}>{p.type} | {p.year}</div>
-                                        </div>
+                                    <div key={idx} style={{ flexShrink: 0, width: '200px', background: '#111', borderRadius: '15px', overflow: 'hidden' }}>
+                                        <img src={p.img} alt={p.title} style={{ width: '100%', height: '120px', objectFit: 'cover' }} />
+                                        <div style={{ padding: '10px', fontSize: '10px' }}>{p.title}</div>
                                     </div>
                                 ))}
                             </div>
-                            <div style={{ marginTop: '30px', fontSize: '10px', color: 'rgba(255,255,255,0.5)', letterSpacing: '2px', fontWeight: 'bold' }}>اسحب لاستكشاف المشاريع</div>
                         </div>
                     )}
 
@@ -340,103 +242,26 @@ export default function QuantumPortalAd() {
                             <Quantum3DLayer />
                         </div>
                     )}
-
                 </div>
             </div>
 
             <div style={{ height: '15vh', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 150, gap: '15px' }}>
                 {isStarted && (
                     <div style={{ display: 'flex', gap: '15px', direction: 'rtl' }}>
-                        <div 
-                            onClick={() => setActiveModal('quote')}
-                            onTouchStart={() => setActiveModal('quote')}
-                            style={{ 
-                                padding: '12px 25px', 
-                                background: 'rgba(6,182,212,0.1)', 
-                                border: '1px solid rgba(6,182,212,0.4)', 
-                                borderRadius: '15px', 
-                                color: '#06b6d4', 
-                                fontSize: '11px', 
-                                fontWeight: 900, 
-                                cursor: 'pointer',
-                                backdropFilter: 'blur(5px)',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px'
-                            }}
-                        >
-                            <Zap size={14} />
-                            طلب عرض سعر
+                        <div onClick={() => setActiveModal('quote')} onTouchEnd={() => setActiveModal('quote')} style={{ padding: '12px 25px', background: 'rgba(6,182,212,0.1)', border: '1px solid rgba(6,182,212,0.4)', borderRadius: '15px', color: '#06b6d4', fontSize: '11px', fontWeight: 900, cursor: 'pointer', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <Zap size={14} /> طلب عرض سعر
                         </div>
-                        <div 
-                            onClick={() => setActiveModal('portfolio')}
-                            onTouchStart={() => setActiveModal('portfolio')}
-                            style={{ 
-                                padding: '12px 25px', 
-                                background: 'rgba(212,175,55,0.05)', 
-                                border: '1px solid rgba(212,175,55,0.3)', 
-                                borderRadius: '15px', 
-                                color: '#d4af37', 
-                                fontSize: '11px', 
-                                fontWeight: 900, 
-                                cursor: 'pointer',
-                                backdropFilter: 'blur(5px)',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px'
-                            }}
-                        >
-                            <Activity size={14} />
-                            معرض الأعمال
+                        <div onClick={() => setActiveModal('portfolio')} onTouchEnd={() => setActiveModal('portfolio')} style={{ padding: '12px 25px', background: 'rgba(212,175,55,0.05)', border: '1px solid rgba(212,175,55,0.3)', borderRadius: '15px', color: '#d4af37', fontSize: '11px', fontWeight: 900, cursor: 'pointer', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <Activity size={14} /> معرض الأعمال
                         </div>
                     </div>
                 )}
                 
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <div style={{ color: '#fff', fontSize: '8px', letterSpacing: '5px', opacity: 0.3, marginBottom: '4px' }}>
-                        ARCHITECTED BY
-                    </div>
-                    <div style={{ color: '#d4af37', fontSize: '12px', fontWeight: 900, letterSpacing: '4px', textShadow: '0 0 10px rgba(212,175,55,0.3)' }}>
-                        SHERIF ROSAS
-                    </div>
+                    <div style={{ color: '#fff', fontSize: '8px', letterSpacing: '5px', opacity: 0.3, marginBottom: '4px' }}>ARCHITECTED BY</div>
+                    <div style={{ color: '#d4af37', fontSize: '12px', fontWeight: 900, letterSpacing: '4px', textShadow: '0 0 10px rgba(212,175,55,0.3)' }}>SHERIF ROSAS</div>
                 </div>
             </div>
-
-            {!isStarted && (
-                <button 
-                    onClick={initiateExperience}
-                    onTouchStart={initiateExperience}
-                    style={{
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        width: '100vw',
-                        height: '100vh',
-                        zIndex: 9999999,
-                        cursor: 'pointer',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        paddingBottom: '20vh',
-                        background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 30%)',
-                        WebkitTapHighlightColor: 'transparent',
-                        border: 'none',
-                        outline: 'none',
-                        padding: 0,
-                        margin: 0,
-                        appearance: 'none',
-                        WebkitAppearance: 'none',
-                        pointerEvents: 'auto'
-                    }}
-                >
-                    <div style={{ position: 'absolute', top: '5%', right: '5%', fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: 'bold' }}>ULTIMATUM_v121.17</div>
-                    <div style={{ padding: '15px 40px', backgroundColor: 'rgba(255,255,255,0.05)', border: '2px solid rgba(6,182,212,0.5)', borderRadius: '20px', color: '#fff', fontWeight: 900, fontSize: '14px', letterSpacing: '8px', animation: 'pulse-cyan 2s infinite' }}>
-                        TAP_TO_ASCENT
-                    </div>
-                    <div style={{ marginTop: '15px', fontSize: '9px', color: 'rgba(255,255,255,0.5)', letterSpacing: '4px' }}>INITIALIZE_PORTFOLIO_NEXUS</div>
-                </button>
-            )}
         </div>
     );
 }
