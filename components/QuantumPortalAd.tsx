@@ -198,7 +198,7 @@ export default function QuantumPortalAd() {
             )}
 
             <audio ref={audioRef} id="master-bg-audio" loop playsInline preload="auto" 
-                src="https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg" 
+                src="https://audio-previews.elements.envatousercontent.com/files/234765669/preview.mp3" 
                 style={{ position: 'fixed', top: -100, left: -100, width: 1, height: 1, visibility: 'hidden' }} 
             />
 
