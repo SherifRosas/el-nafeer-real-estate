@@ -128,11 +128,11 @@ export default function MasterDashboardLayout({
               />
             </div>
             <div className="text-center">
-              <h2 className="font-black text-xl tracking-tighter leading-none group-hover:text-sahara-gold transition-all uppercase italic text-white leading-none">
-                {isArabic ? 'بوابة_الإدارة' : 'MASTER_PORTAL'}
+              <h2 className="font-extrabold text-xl tracking-tight leading-none group-hover:text-sahara-gold transition-all uppercase italic text-white">
+                {isArabic ? 'إدارة النفير' : 'Al-Nafeer Admin'}
               </h2>
-              <span className="text-[10px] text-sahara-gold bg-sahara-gold/5 px-4 py-1.5 rounded-full uppercase tracking-[0.4em] font-black mt-4 block robotic-digits border border-sahara-gold/10 leading-none">
-                ADMIN_v3.5_E
+              <span className="text-[10px] text-sahara-gold bg-sahara-gold/5 px-4 py-1.5 rounded-full uppercase tracking-[0.4em] font-bold mt-4 block border border-sahara-gold/10 leading-none">
+                {isArabic ? 'بوابة النخبة' : 'ELITE_ACCESS'}
               </span>
             </div>
           </Link>
@@ -168,17 +168,17 @@ export default function MasterDashboardLayout({
             <div className="absolute inset-0 bg-sahara-gold/[0.03] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
             <div className="relative z-10 flex items-center justify-between">
               <div>
-                <p className="text-[9px] font-black text-gray-700 uppercase tracking-widest leading-none mb-2 robotic-digits">{isArabic ? 'نبض_النظام' : 'SYS_PULSE'}</p>
-                <p className="text-[10px] font-black text-sahara-gold uppercase tracking-[0.2em] robotic-digits">{isArabic ? 'النواة_مستقرة' : 'ELITE_CORE_STABLE'}</p>
+                <p className="text-[9px] font-bold text-gray-700 uppercase tracking-widest leading-none mb-2">{isArabic ? 'حالة التزامن' : 'DASHBOARD_LIVE'}</p>
+                <p className="text-[10px] font-bold text-sahara-gold uppercase tracking-[0.2em]">{isArabic ? 'اتصال مؤمن' : 'SECURE_CONNECTION'}</p>
               </div>
               <div className="w-2.5 h-2.5 bg-sahara-gold rounded-full animate-pulse shadow-[0_0_15px_rgba(212,175,55,1)]" />
             </div>
           </div>
           <button
             onClick={() => signOut()}
-            className="w-full mt-8 py-5 rounded-[2rem] bg-white/5 text-gray-600 hover:bg-red-500 hover:text-black transition-all font-black text-[10px] uppercase tracking-[0.4em] robotic-digits"
+            className="w-full mt-8 py-5 rounded-[2rem] bg-white/5 text-gray-600 hover:bg-red-500 hover:text-black transition-all font-bold text-[10px] uppercase tracking-[0.4em]"
           >
-            {isArabic ? 'إنهاء_الجلسة' : 'TERMINATE_SESSION'}
+            {isArabic ? 'تسجيل الخروج' : 'SIGN_OUT'}
           </button>
         </div>
       </aside>
@@ -215,14 +215,14 @@ export default function MasterDashboardLayout({
             <div className="hidden xl:flex items-center gap-4 px-8 py-4 milky-glass rounded-[2rem] border border-white/10">
               <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_15px_rgba(34,197,94,1)]" />
               <div className="flex flex-col">
-                <span className="text-[8px] font-black text-gray-600 uppercase tracking-[0.4em] robotic-digits line-clamp-1">{isArabic ? 'مزامنة_عالمية' : 'GLOBAL_SYNC'}</span>
-                <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] robotic-digits">{formatTime(time)}</span>
+                <span className="text-[8px] font-bold text-gray-600 uppercase tracking-[0.4em] line-clamp-1">{isArabic ? 'تحديث مباشر' : 'REALTIME_SYNC'}</span>
+                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">{formatTime(time)}</span>
               </div>
             </div>
 
             <div className="flex items-center gap-6 md:gap-8">
               <div className="text-right hidden sm:block">
-                <p className="text-[9px] text-gray-600 font-black uppercase tracking-[0.3em] robotic-digits mb-1">{isArabic ? 'هوية_الآدمن' : 'MASTER_IDENTITY'}</p>
+                <p className="text-[9px] text-gray-600 font-bold uppercase tracking-[0.3em] mb-1">{isArabic ? 'المستخدم المعتمد' : 'AUTHORIZED_USER'}</p>
                 <p className="text-sm font-black text-white italic uppercase leading-none">{isArabic ? 'شريف رصاص' : 'SHERIF_ROSAS'}</p>
               </div>
               <div className="w-16 h-16 bg-white rounded-2xl p-[1px] shadow-[0_0_30px_rgba(255,255,255,0.05)] border border-white/20">
