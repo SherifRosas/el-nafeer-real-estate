@@ -162,7 +162,7 @@ export default function QuantumPortalAd() {
         }
     }
 
-    const CACHE_V = "?v=121.60";
+    const CACHE_V = "?v=121.85";
 
     return (
         <div style={{
@@ -197,7 +197,7 @@ export default function QuantumPortalAd() {
                         textDecoration: 'none', color: 'inherit', pointerEvents: 'auto'
                     }}
                 >
-                    <div style={{ position: 'absolute', top: '5%', right: '5%', fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: 'bold' }}>ULTIMATUM_v121.17</div>
+                    <div style={{ position: 'absolute', top: '5%', right: '5%', fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: 'bold' }}>ULTIMATUM_v121.85</div>
                     <div style={{ padding: '20px 50px', backgroundColor: 'rgba(255,255,255,0.05)', border: '2px solid rgba(6,182,212,0.5)', borderRadius: '25px', color: '#fff', fontWeight: 900, fontSize: '16px', letterSpacing: '8px', animation: 'pulse-cyan 2s infinite', textAlign: 'center' }}>
                         TAP_TO_ASCENT
                     </div>
@@ -209,6 +209,28 @@ export default function QuantumPortalAd() {
                 style={{ position: 'fixed', top: -100, left: -100, width: 1, height: 1, visibility: 'hidden' }} 
             />
 
+            <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 1, overflow: 'hidden' }}>
+                <img 
+                    src={AD_IMAGE + CACHE_V} 
+                    alt="Lever Pioneer" 
+                    style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover', 
+                        objectPosition: 'center'
+                    }} 
+                />
+                
+                {/* Precision Hotspots Layer (Absolute to Viewport) */}
+                {isStarted && (
+                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
+                        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '65%', left: '5%', width: '35%', height: '10%', pointerEvents: 'auto' }} />
+                        <a href={CALL_URL} style={{ display: 'block', position: 'absolute', top: '75%', left: '5%', width: '35%', height: '10%', pointerEvents: 'auto' }} />
+                        <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '85%', left: '5%', width: '35%', height: '10%', pointerEvents: 'auto' }} />
+                    </div>
+                )}
+            </div>
+
             <div style={{ height: '15vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 20px', zIndex: 150, direction: 'rtl' }}>
                 {isStarted && (
                     <p style={{ color: '#06b6d4', fontSize: '16px', lineHeight: '1.6', fontWeight: 900, textShadow: '0 0 15px rgba(6,182,212,0.7)', margin: 0, textAlign: 'center' }}>
@@ -219,19 +241,7 @@ export default function QuantumPortalAd() {
 
             <div style={{ height: '70vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
                 <div style={{ position: 'relative', width: '70vh', height: '70vh', maxWidth: '100vw', maxHeight: '100vw', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <img src={AD_IMAGE + CACHE_V} alt="Lever Pioneer" style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'cover', zIndex: 1 }} />
-                    <div style={{ position: 'absolute', top: '48.5%', right: '17.8%', width: '3.5%', height: '3.5%', backgroundColor: '#1a1a1a', borderRadius: '50%', filter: 'blur(4px)', zIndex: 2, opacity: 0.95 }} />
                     
-                    <div style={{ position: 'absolute', top: '44%', left: '50%', transform: 'translate(-50%, -50%)', width: '70%', height: '15%', background: 'radial-gradient(ellipse at center, rgba(6,182,212,0.8) 0%, rgba(6,182,212,0.4) 30%, transparent 70%)', filter: 'blur(15px)', zIndex: 2, opacity: 1, mixBlendMode: 'screen', pointerEvents: 'none' }} />
-                    
-                    {isStarted && (
-                        <>
-                            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" title="WhatsApp Hotspot" style={{ display: 'block', position: 'absolute', top: '65%', left: '3%', width: '40%', height: '10%', zIndex: 1000, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)', background: 'rgba(255,255,255,0.01)', pointerEvents: 'auto' }} />
-                            <a href={CALL_URL} title="Call Hotspot" style={{ display: 'block', position: 'absolute', top: '75%', left: '3%', width: '40%', height: '10%', zIndex: 1000, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)', background: 'rgba(255,255,255,0.01)', pointerEvents: 'auto' }} />
-                            <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" title="Location Hotspot" style={{ display: 'block', position: 'absolute', top: '85%', left: '3%', width: '40%', height: '10%', zIndex: 1000, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)', background: 'rgba(255,255,255,0.01)', pointerEvents: 'auto' }} />
-                        </>
-                    )}
-
                     {activeModal === 'quote' && (
                         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
                             <div style={{ width: '100%', maxWidth: '450px', background: '#050505', border: '2px solid rgba(6,182,212,0.4)', borderRadius: '30px', padding: '25px', position: 'relative', boxShadow: '0 0 30px rgba(6,182,212,0.2)', maxHeight: '90vh', overflowY: 'auto' }}>
