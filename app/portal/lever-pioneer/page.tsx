@@ -5,7 +5,7 @@ import QuantumPortalAd from '@/components/QuantumPortalAd'
 const TITLE = "🏆 LEVER PIONEER | THE ASCENT"
 const DESC = "Unifying Vertical Excellence. The definitive cross-device simulation."
 const DOMAIN = "https://el-nafeer-real-estate.vercel.app"
-const IMG = `${DOMAIN}/campaigns/lever-pioneer/ad-v2-quantum.png?v=121.34`
+const IMG = `${DOMAIN}/campaigns/lever-pioneer/ad-v2-quantum.png?v=121.43`
 const PAGE_URL = `${DOMAIN}/portal/lever-pioneer`
 
 export const metadata: Metadata = {
