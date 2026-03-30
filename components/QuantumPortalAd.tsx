@@ -221,7 +221,7 @@ export default function QuantumPortalAd() {
                         <>
                             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" title="WhatsApp Hotspot" style={{ display: 'block', position: 'absolute', top: '65%', left: '3%', width: '40%', height: '10%', zIndex: 1000, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)', background: 'rgba(255,255,255,0.01)', pointerEvents: 'auto' }} />
                             <a href={CALL_URL} title="Call Hotspot" style={{ display: 'block', position: 'absolute', top: '75%', left: '3%', width: '40%', height: '10%', zIndex: 1000, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)', background: 'rgba(255,255,255,0.01)', pointerEvents: 'auto' }} />
-                            <a href={MAP_URL} target="_blank" rel="noopener noreferrer" title="Location Hotspot" style={{ display: 'block', position: 'absolute', top: '85%', left: '3%', width: '40%', height: '10%', zIndex: 1000, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)', background: 'rgba(255,255,255,0.01)', pointerEvents: 'auto' }} />
+                            <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" title="Location Hotspot" style={{ display: 'block', position: 'absolute', top: '85%', left: '3%', width: '40%', height: '10%', zIndex: 1000, WebkitTapHighlightColor: 'rgba(6,182,212,0.3)', background: 'rgba(255,255,255,0.01)', pointerEvents: 'auto' }} />
                         </>
                     )}
 
