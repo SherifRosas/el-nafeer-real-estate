@@ -209,25 +209,52 @@ export default function QuantumPortalAd() {
                 style={{ position: 'fixed', top: -100, left: -100, width: 1, height: 1, visibility: 'hidden' }} 
             />
 
+            {/* HERO TITLE LAYER */}
+            <div style={{ 
+                position: 'fixed', 
+                top: '5%', 
+                left: 0, 
+                width: '100%', 
+                zIndex: 200, 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                pointerEvents: 'none'
+            }}>
+                <h1 style={{ 
+                    color: '#eab308', 
+                    fontSize: 'clamp(24px, 5vw, 42px)', 
+                    fontWeight: 900, 
+                    margin: 0, 
+                    textShadow: '0 0 20px rgba(234,179,8,0.6)', 
+                    letterSpacing: '1px',
+                    fontFamily: 'Inter, sans-serif'
+                }}>
+                    ليفر الرائدة للمصاعد
+                </h1>
+                <div style={{ width: '100px', height: '2px', backgroundColor: '#eab308', marginTop: '10px', boxShadow: '0 0 10px #eab308' }} />
+            </div>
+
             <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', backgroundColor: '#000' }}>
                 <div style={{ position: 'relative', flex: 1, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img 
                         src={AD_IMAGE + CACHE_V} 
                         alt="Lever Pioneer" 
                         style={{ 
-                            maxWidth: '100%', 
-                            maxHeight: '100%', 
+                            maxWidth: '90%', 
+                            maxHeight: '90%', 
                             objectFit: 'contain',
                         }} 
                     />
                     
-                    {/* Precision Hotspots Layer (Absolute to Artwork Container) */}
+                    {/* Precision Hotspots Layer (Invisible but Clickable) */}
                     {isStarted && (
                         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                           <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: 'calc(100vh * 1)', maxHeight: '100vh' }}>
-                                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '70%', left: '8%', width: '30%', height: '8%', pointerEvents: 'auto' }} />
-                                <a href={CALL_URL} style={{ display: 'block', position: 'absolute', top: '78%', left: '8%', width: '30%', height: '8%', pointerEvents: 'auto' }} />
-                                <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '86%', left: '8%', width: '30%', height: '8%', pointerEvents: 'auto' }} />
+                           <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: 'calc(100vh * 0.9)', maxHeight: '90vh' }}>
+                                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '70%', left: '10%', width: '35%', height: '10%', pointerEvents: 'auto', background: 'transparent' }} />
+                                <a href={CALL_URL} style={{ display: 'block', position: 'absolute', top: '80%', left: '10%', width: '35%', height: '10%', pointerEvents: 'auto', background: 'transparent' }} />
+                                <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '90%', left: '10%', width: '35%', height: '10%', pointerEvents: 'auto', background: 'transparent' }} />
                            </div>
                         </div>
                     )}
