@@ -162,7 +162,7 @@ export default function QuantumPortalAd() {
         }
     }
 
-    const CACHE_V = "?v=121.52";
+    const CACHE_V = "?v=121.60";
 
     return (
         <div style={{
