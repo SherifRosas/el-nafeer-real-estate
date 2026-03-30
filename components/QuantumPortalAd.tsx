@@ -10,7 +10,7 @@ const Quantum3DLayer = dynamic(() => import('./Quantum3DLayer'), {
     loading: () => <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div className="w-8 h-8 border-2 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin" /></div>
 })
 
-const AD_IMAGE = "/ad-v2-quantum.png";
+const AD_IMAGE = "/ad-v2-quantum-glow.png";
 const WHATSAPP_URL = "https://wa.me/201111171368";
 const CALL_URL = "tel:+201070615372";
 const LOCATION_URL = "https://www.google.com/maps/place/Al+Omraneya,+Al+Haram,+Giza+Governorate/@29.9656242,31.0922895,17z/data=!3m1!4b1!4m6!3m5!1s0x14584fc2bfbefc07:0x5df1948b27a63882!8m2!3d29.9656242!4d31.0922895!16s%2Fg%2F11c659wy1d?hl=en-EG&entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D";
