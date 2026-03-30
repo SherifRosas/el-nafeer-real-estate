@@ -210,56 +210,14 @@ export default function QuantumPortalAd() {
                 style={{ position: 'fixed', top: -100, left: -100, width: 1, height: 1, visibility: 'hidden' }} 
             />
 
-            <Head>
-                <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet" />
-            </Head>
-
-            {/* IMPERIAL HERO HUD LAYER */}
-            <div style={{ 
-                position: 'fixed', 
-                top: '2%', 
-                left: 0, 
-                width: '100%', 
-                zIndex: 200, 
-                display: 'flex', 
-                flexDirection: 'column', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                pointerEvents: 'none'
-            }}>
-                <div style={{
-                    background: 'rgba(0,0,0,0.6)',
-                    backdropFilter: 'blur(10px)',
-                    borderBottom: '1px solid #eab308',
-                    padding: '10px 40px',
-                    borderRadius: '0 0 30px 30px',
-                    boxShadow: '0 0 20px rgba(234,179,8,0.2)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    <h1 style={{ 
-                        color: '#fbbf24', 
-                        fontSize: 'clamp(18px, 4vw, 32px)', 
-                        fontWeight: 900, 
-                        margin: 0, 
-                        textShadow: '0 0 15px rgba(251,191,36,0.5)', 
-                        fontFamily: "'Cairo', sans-serif",
-                        letterSpacing: '1px'
-                    }}>
-                        ليفر الرائدة للمصاعد
-                    </h1>
-                </div>
-            </div>
-
             <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', backgroundColor: '#000' }}>
                 <div style={{ position: 'relative', flex: 1, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img 
                         src={AD_IMAGE + CACHE_V} 
                         alt="Lever Pioneer" 
                         style={{ 
-                            maxWidth: '90%', 
-                            maxHeight: '90%', 
+                            maxWidth: '95%', 
+                            maxHeight: '95%', 
                             objectFit: 'contain',
                         }} 
                     />
@@ -267,7 +225,7 @@ export default function QuantumPortalAd() {
                     {/* Precision Hotspots Layer (Invisible but Clickable) */}
                     {isStarted && (
                         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                           <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: 'calc(100vh * 0.9)', maxHeight: '90vh' }}>
+                           <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: 'calc(100vh * 0.95)', maxHeight: '95vh' }}>
                                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '70%', left: '10%', width: '35%', height: '10%', pointerEvents: 'auto', background: 'transparent' }} />
                                 <a href={CALL_URL} style={{ display: 'block', position: 'absolute', top: '80%', left: '10%', width: '35%', height: '10%', pointerEvents: 'auto', background: 'transparent' }} />
                                 <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '90%', left: '10%', width: '35%', height: '10%', pointerEvents: 'auto', background: 'transparent' }} />
