@@ -360,16 +360,16 @@ export default function QuantumPortalAd() {
                                     { title: "تجربة فتح نصف أوتوماتيك", cat: "نصف أوتوماتيك", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.40.2522.mp4" },
                                     { title: "برج بانورامي واجهة عرض", cat: "بانوراما خارجية", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.40.2566.mp4" },
                                     { title: "كابينة بانورامية منحنية", cat: "بانوراما خارجية", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.40.2400.mp4" }
-                                ].map((p, idx) => (
+                                ].map((p: any, idx) => (
                                     <div key={idx} style={{ width: '160px', background: '#050505', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 10px 20px rgba(0,0,0,0.3)' }}>
-                                        {(p as any).vid ? (
+                                        {p.vid ? (
                                             <video 
-                                                src={(p as any).vid} 
+                                                src={p.vid} 
                                                 autoPlay muted loop playsInline 
                                                 style={{ width: '100%', height: '140px', objectFit: 'cover' }} 
                                             />
                                         ) : (
-                                            <img src={p.img} alt={p.title} style={{ width: '100%', height: '140px', objectFit: 'cover' }} />
+                                            <img src={p.img || ''} alt={p.title} style={{ width: '100%', height: '140px', objectFit: 'cover' }} />
                                         )}
                                         <div style={{ padding: '12px', fontSize: '9px', textAlign: 'center', direction: 'rtl', color: '#ccc' }}>
                                             <div style={{ color: '#d4af37', fontStyle: 'italic', marginBottom: '4px' }}>{p.cat}</div>
