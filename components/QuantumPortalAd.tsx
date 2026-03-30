@@ -10,7 +10,7 @@ const Quantum3DLayer = dynamic(() => import('./Quantum3DLayer'), {
     loading: () => <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div className="w-8 h-8 border-2 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin" /></div>
 })
 
-const AD_IMAGE = "/ad-v2-quantum.png";
+const AD_IMAGE = "/campaigns/lever-pioneer/ad-v2-quantum (1).png";
 const WHATSAPP_URL = "https://wa.me/201111171368";
 const CALL_URL = "tel:+201070615372";
 const LOCATION_URL = "https://www.google.com/maps/place/Al+Omraneya,+Al+Haram,+Giza+Governorate/@29.9656242,31.0922895,17z/data=!3m1!4b1!4m6!3m5!1s0x14584fc2bfbefc07:0x5df1948b27a63882!8m2!3d29.9656242!4d31.0922895!16s%2Fg%2F11c659wy1d?hl=en-EG&entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D";
@@ -209,26 +209,29 @@ export default function QuantumPortalAd() {
                 style={{ position: 'fixed', top: -100, left: -100, width: 1, height: 1, visibility: 'hidden' }} 
             />
 
-            <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 1, overflow: 'hidden' }}>
-                <img 
-                    src={AD_IMAGE + CACHE_V} 
-                    alt="Lever Pioneer" 
-                    style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover', 
-                        objectPosition: 'center'
-                    }} 
-                />
-                
-                {/* Precision Hotspots Layer (Absolute to Viewport) */}
-                {isStarted && (
-                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
-                        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '65%', left: '5%', width: '35%', height: '10%', pointerEvents: 'auto' }} />
-                        <a href={CALL_URL} style={{ display: 'block', position: 'absolute', top: '75%', left: '5%', width: '35%', height: '10%', pointerEvents: 'auto' }} />
-                        <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '85%', left: '5%', width: '35%', height: '10%', pointerEvents: 'auto' }} />
-                    </div>
-                )}
+            <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', backgroundColor: '#000' }}>
+                <div style={{ position: 'relative', flex: 1, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img 
+                        src={AD_IMAGE + CACHE_V} 
+                        alt="Lever Pioneer" 
+                        style={{ 
+                            maxWidth: '100%', 
+                            maxHeight: '100%', 
+                            objectFit: 'contain',
+                        }} 
+                    />
+                    
+                    {/* Precision Hotspots Layer (Absolute to Artwork Container) */}
+                    {isStarted && (
+                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                           <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: 'calc(100vh * 1)', maxHeight: '100vh' }}>
+                                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '70%', left: '8%', width: '30%', height: '8%', pointerEvents: 'auto' }} />
+                                <a href={CALL_URL} style={{ display: 'block', position: 'absolute', top: '78%', left: '8%', width: '30%', height: '8%', pointerEvents: 'auto' }} />
+                                <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '86%', left: '8%', width: '30%', height: '8%', pointerEvents: 'auto' }} />
+                           </div>
+                        </div>
+                    )}
+                </div>
             </div>
 
             <div style={{ height: '15vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 20px', zIndex: 150, direction: 'rtl' }}>
