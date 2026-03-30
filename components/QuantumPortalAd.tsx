@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
+import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap } from 'lucide-react'
 
@@ -209,10 +210,14 @@ export default function QuantumPortalAd() {
                 style={{ position: 'fixed', top: -100, left: -100, width: 1, height: 1, visibility: 'hidden' }} 
             />
 
-            {/* HERO TITLE LAYER */}
+            <Head>
+                <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet" />
+            </Head>
+
+            {/* IMPERIAL HERO HUD LAYER */}
             <div style={{ 
                 position: 'fixed', 
-                top: '5%', 
+                top: '2%', 
                 left: 0, 
                 width: '100%', 
                 zIndex: 200, 
@@ -222,18 +227,29 @@ export default function QuantumPortalAd() {
                 justifyContent: 'center',
                 pointerEvents: 'none'
             }}>
-                <h1 style={{ 
-                    color: '#eab308', 
-                    fontSize: 'clamp(24px, 5vw, 42px)', 
-                    fontWeight: 900, 
-                    margin: 0, 
-                    textShadow: '0 0 20px rgba(234,179,8,0.6)', 
-                    letterSpacing: '1px',
-                    fontFamily: 'Inter, sans-serif'
+                <div style={{
+                    background: 'rgba(0,0,0,0.6)',
+                    backdropFilter: 'blur(10px)',
+                    borderBottom: '1px solid #eab308',
+                    padding: '10px 40px',
+                    borderRadius: '0 0 30px 30px',
+                    boxShadow: '0 0 20px rgba(234,179,8,0.2)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
                 }}>
-                    ليفر الرائدة للمصاعد
-                </h1>
-                <div style={{ width: '100px', height: '2px', backgroundColor: '#eab308', marginTop: '10px', boxShadow: '0 0 10px #eab308' }} />
+                    <h1 style={{ 
+                        color: '#fbbf24', 
+                        fontSize: 'clamp(18px, 4vw, 32px)', 
+                        fontWeight: 900, 
+                        margin: 0, 
+                        textShadow: '0 0 15px rgba(251,191,36,0.5)', 
+                        fontFamily: "'Cairo', sans-serif",
+                        letterSpacing: '1px'
+                    }}>
+                        ليفر الرائدة للمصاعد
+                    </h1>
+                </div>
             </div>
 
             <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', backgroundColor: '#000' }}>
