@@ -144,10 +144,17 @@ export default function QuantumPortalAd() {
                 body: JSON.stringify(payload)
             });
             setQuoteSent(true);
+            
+            // --- WHATSAPP AUTO-REDIRECT PROTOCOL (v121.50) ---
+            const waMsg = `السلام عليكم شركة ليفر الرائدة للمصاعد.\nأنا: ${payload.name}\nقمت بإرسال طلب عرض سعر فني للمصعد الخاص بي:\n- النوع: ${elevatorType}\n- الأدوار: ${floors}\n- بئر المصعد: ${shaft}\n- الأساسات: ${foundation}\n- الموقع: ${formData.get('governorate')} - ${formData.get('city')}\n- خرائط جوجل: ${formData.get('locationLink')}\nأتمنى التواصل بخصوص المواصفات الفنية.`;
+            const waLink = `https://wa.me/201111171368?text=${encodeURIComponent(waMsg)}`;
+            
             setTimeout(() => {
                 setActiveModal(null);
                 setQuoteSent(false);
-            }, 3000);
+                // Launch WhatsApp automatically
+                window.location.href = waLink;
+            }, 2500);
         } catch (error) {
             console.error("Lead submission error:", error);
         } finally {
