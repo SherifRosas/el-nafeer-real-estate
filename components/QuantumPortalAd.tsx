@@ -354,15 +354,12 @@ export default function QuantumPortalAd() {
 
                             <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'center', paddingBottom: '40px' }}>
                                 {[
-                                    { title: "تنفيذ بانورامي خارجي (فيديو)", cat: "بانوراما خارجية", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.38.50.mp4" },
-                                    { title: "حركة الأبواب الأوتوماتيكية", cat: "أوتوماتيك", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.38.51.mp4" },
-                                    { title: "مصعد أوتوماتيك حديث (MOTION)", cat: "أوتوماتيك", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.40.240.mp4" },
-                                    { title: "تشغيل أبواب نصف أوتوماتيك", cat: "نصف أوتوماتيك", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.40.2522.mp4" },
-                                    { title: "مصعد بانورامي صاعد - ذهبي", cat: "بانوراما خارجية", img: "/campaigns/lever-pioneer/portfolio/pano-ext/ext-1.jpg" },
-                                    { title: "مصعد خارجي أسود مودرن", cat: "بانوراما خارجية", img: "/campaigns/lever-pioneer/portfolio/pano-ext/ext-2.jpg" },
-                                    { title: "مصعد أوتوماتيك - باب ذهبي", cat: "أوتوماتيك", img: "/campaigns/lever-pioneer/portfolio/auto/auto-1.jpg" },
-                                    { title: "تجربة الصعود البانورامي", cat: "بانوراما خارجية", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.40.2566.mp4" },
-                                    { title: "مصعد خدمة شاقة", cat: "أوتوماتيك", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.40.2400.mp4" }
+                                    { title: "تنفيذ بانورامي خارجي صاعد (ذهبي)", cat: "بانوراما خارجية", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.38.50.mp4" },
+                                    { title: "تشغيل الأبواب الأوتوماتيكية - لوكس", cat: "أوتوماتيك", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.38.51.mp4" },
+                                    { title: "مصعد أوتوماتيك حديث (فيديو)", cat: "أوتوماتيك", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.40.240.mp4" },
+                                    { title: "تجربة فتح نصف أوتوماتيك", cat: "نصف أوتوماتيك", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.40.2522.mp4" },
+                                    { title: "برج بانورامي واجهة عرض", cat: "بانوراما خارجية", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.40.2566.mp4" },
+                                    { title: "كابينة بانورامية منحنية", cat: "بانوراما خارجية", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.40.2400.mp4" }
                                 ].map((p, idx) => (
                                     <div key={idx} style={{ width: '160px', background: '#050505', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 10px 20px rgba(0,0,0,0.3)' }}>
                                         {(p as any).vid ? (
