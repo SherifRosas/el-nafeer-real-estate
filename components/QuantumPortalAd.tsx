@@ -184,14 +184,14 @@ export default function QuantumPortalAd() {
                     onTouchStart={(e) => { e.preventDefault(); initiateExperience(); }}
                     style={{
                         position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 999999999,
-                        cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end',
-                        paddingBottom: '20vh', background: 'rgba(0,0,0,0.4)',
+                        cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                        background: 'rgba(0,0,0,0.4)',
                         WebkitTapHighlightColor: 'rgba(255,255,255,0.1)', border: 'none', outline: 'none', padding: 0, margin: 0,
                         textDecoration: 'none', color: 'inherit', pointerEvents: 'auto'
                     }}
                 >
                     <div style={{ position: 'absolute', top: '5%', right: '5%', fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: 'bold' }}>ULTIMATUM_v121.17</div>
-                    <div style={{ padding: '15px 40px', backgroundColor: 'rgba(255,255,255,0.05)', border: '2px solid rgba(6,182,212,0.5)', borderRadius: '20px', color: '#fff', fontWeight: 900, fontSize: '14px', letterSpacing: '8px', animation: 'pulse-cyan 2s infinite' }}>
+                    <div style={{ padding: '20px 50px', backgroundColor: 'rgba(255,255,255,0.05)', border: '2px solid rgba(6,182,212,0.5)', borderRadius: '25px', color: '#fff', fontWeight: 900, fontSize: '16px', letterSpacing: '8px', animation: 'pulse-cyan 2s infinite', textAlign: 'center' }}>
                         TAP_TO_ASCENT
                     </div>
                 </a>
