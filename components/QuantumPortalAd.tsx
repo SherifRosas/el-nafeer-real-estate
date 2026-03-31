@@ -210,32 +210,30 @@ export default function QuantumPortalAd() {
                 style={{ position: 'fixed', top: -100, left: -100, width: 1, height: 1, visibility: 'hidden' }} 
             />
 
-            <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', backgroundColor: '#000' }}>
-                <div style={{ position: 'relative', flex: 1, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <img 
-                        src={AD_IMAGE + CACHE_V} 
-                        alt="Lever Pioneer" 
-                        style={{ 
-                            maxWidth: '95%', 
-                            maxHeight: '95%', 
-                            objectFit: 'contain',
-                        }} 
-                    />
-                    
-                    {/* Precision Hotspots Layer (Invisible but Clickable) */}
-                    {isStarted && (
-                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 5000 }}>
-                           <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: 'calc(100vh * 0.95)', maxHeight: '95vh', pointerEvents: 'none' }}>
-                                {/* WHATSAPP HOTSPOT */}
-                                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '70%', left: '8%', width: '40%', height: '9%', pointerEvents: 'auto', background: 'transparent' }} />
-                                {/* CALL HOTSPOT */}
-                                <a href={CALL_URL} style={{ display: 'block', position: 'absolute', top: '79%', left: '8%', width: '40%', height: '9%', pointerEvents: 'auto', background: 'transparent' }} />
-                                {/* LOCATION HOTSPOT */}
-                                <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '88%', left: '8%', width: '40%', height: '9%', pointerEvents: 'auto', background: 'transparent' }} />
-                           </div>
-                        </div>
-                    )}
-                </div>
+            <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 1, overflow: 'hidden', backgroundColor: '#000' }}>
+                <img 
+                    src={AD_IMAGE + CACHE_V} 
+                    alt="Lever Pioneer" 
+                    style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                        zIndex: 1
+                    }} 
+                />
+                
+                {/* Precision Hotspots Layer (Invisible but Clickable) */}
+                {isStarted && (
+                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 5000 }}>
+                        {/* WhatsApp Area */}
+                        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '70%', left: '5%', width: '45%', height: '8%', pointerEvents: 'auto', background: 'transparent' }} />
+                        {/* Call Area */}
+                        <a href={CALL_URL} style={{ display: 'block', position: 'absolute', top: '78.5%', left: '5%', width: '45%', height: '8%', pointerEvents: 'auto', background: 'transparent' }} />
+                        {/* Location Area */}
+                        <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '87.5%', left: '5%', width: '45%', height: '8%', pointerEvents: 'auto', background: 'transparent' }} />
+                    </div>
+                )}
             </div>
 
             <div style={{ height: '15vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 20px', zIndex: 150, direction: 'rtl' }}>
