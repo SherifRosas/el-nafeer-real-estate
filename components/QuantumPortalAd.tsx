@@ -210,44 +210,52 @@ export default function QuantumPortalAd() {
                 style={{ position: 'fixed', top: -100, left: -100, width: 1, height: 1, visibility: 'hidden' }} 
             />
 
-            <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 1, overflow: 'hidden', backgroundColor: '#000', display: 'flex', flexDirection: 'column', background: 'radial-gradient(circle at center, #0a1a1f 0%, #000 100%)' }}>
-                <div style={{ position: 'relative', flex: 1, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
-                    <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <img 
-                            src={AD_IMAGE + CACHE_V} 
-                            alt="Lever Pioneer" 
-                            style={{ 
-                                maxWidth: '100%', 
-                                maxHeight: '100%', 
-                                objectFit: 'contain',
-                                zIndex: 1,
-                                filter: 'drop-shadow(0 0 30px rgba(6,182,212,0.2))'
-                            }} 
-                        />
-                        
-                        {/* Precision Hotspots Layer (Invisible but Clickable) */}
-                        {isStarted && (
-                            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 5000 }}>
-                               <div style={{ 
-                                   position: 'relative', 
-                                   width: '100%', 
-                                   height: '100%', 
-                                   maxWidth: 'calc(100vh * 1)', 
-                                   maxHeight: '100vh', 
-                                   pointerEvents: 'none',
-                                   display: 'flex',
-                                   alignItems: 'center',
-                                   justifyContent: 'center'
-                               }}>
-                                    <div style={{ width: '100%', aspectRatio: '1/1', position: 'relative', pointerEvents: 'none' }}>
-                                        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '70%', left: '5%', width: '45%', height: '8%', pointerEvents: 'auto', background: 'transparent' }} />
-                                        <a href={CALL_URL} style={{ display: 'block', position: 'absolute', top: '78.5%', left: '5%', width: '45%', height: '8%', pointerEvents: 'auto', background: 'transparent' }} />
-                                        <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '87.5%', left: '5%', width: '45%', height: '8%', pointerEvents: 'auto', background: 'transparent' }} />
-                                    </div>
-                               </div>
-                            </div>
-                        )}
+            {/* MASTER INTERACTION LAYER (v132.0 - Standalone Sensor) */}
+            {isStarted && (
+                <div style={{ 
+                    position: 'fixed', 
+                    top: 0, 
+                    left: 0, 
+                    width: '100vw', 
+                    height: '100vh', 
+                    zIndex: 9999, 
+                    pointerEvents: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    <div style={{ 
+                        position: 'relative', 
+                        width: '100%', 
+                        height: '100%', 
+                        maxWidth: 'calc(100vh * 1)', 
+                        maxHeight: '100vh', 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center'
+                    }}>
+                        <div style={{ width: '100%', aspectRatio: '1/1', position: 'relative' }}>
+                            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '68%', left: '5%', width: '50%', height: '10%', pointerEvents: 'auto', background: 'transparent' }} />
+                            <a href={CALL_URL} style={{ display: 'block', position: 'absolute', top: '78%', left: '5%', width: '50%', height: '10%', pointerEvents: 'auto', background: 'transparent' }} />
+                            <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '88%', left: '5%', width: '50%', height: '10%', pointerEvents: 'auto', background: 'transparent' }} />
+                        </div>
                     </div>
+                </div>
+            )}
+
+            <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 1, overflow: 'hidden', backgroundColor: '#000', display: 'flex', flexDirection: 'column', background: 'radial-gradient(circle at center, #0a1a1f 0%, #000 100%)' }}>
+                <div style={{ position: 'relative', flex: 1, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img 
+                        src={AD_IMAGE + CACHE_V} 
+                        alt="Lever Pioneer" 
+                        style={{ 
+                            maxWidth: '100%', 
+                            maxHeight: '100%', 
+                            objectFit: 'contain',
+                            zIndex: 1,
+                            filter: 'drop-shadow(0 0 30px rgba(6,182,212,0.2))'
+                        }} 
+                    />
                 </div>
             </div>
 
