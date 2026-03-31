@@ -136,8 +136,18 @@ export default function QuantumPortalAd() {
             `}} />
             
             {!isStarted && (
-                <div onClick={initiateExperience} style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 99999, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.6)' }}>
-                    <div style={{ padding: '20px 50px', border: '2px solid #06b6d4', borderRadius: '25px', color: '#fff', fontWeight: 900, animation: 'pulse-cyan 2s infinite' }}>TAP_TO_ASCENT</div>
+                <div 
+                    onClick={initiateExperience} 
+                    style={{ 
+                        position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 99999, 
+                        cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', 
+                        background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(10px)' 
+                    }}
+                >
+                    {/* Atmospheric Preview Background */}
+                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, background: `url(${AD_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(10px) brightness(0.3)' }} />
+                    
+                    <div style={{ padding: '20px 50px', border: '2px solid #06b6d4', borderRadius: '25px', color: '#fff', fontWeight: 900, animation: 'pulse-cyan 2s infinite', background: 'rgba(6,182,212,0.1)' }}>TAP_TO_ASCENT</div>
                 </div>
             )}
 
