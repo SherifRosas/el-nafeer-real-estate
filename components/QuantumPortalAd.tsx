@@ -224,11 +224,14 @@ export default function QuantumPortalAd() {
                     
                     {/* Precision Hotspots Layer (Invisible but Clickable) */}
                     {isStarted && (
-                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                           <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: 'calc(100vh * 0.95)', maxHeight: '95vh' }}>
-                                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '70%', left: '10%', width: '35%', height: '10%', pointerEvents: 'auto', background: 'transparent' }} />
-                                <a href={CALL_URL} style={{ display: 'block', position: 'absolute', top: '80%', left: '10%', width: '35%', height: '10%', pointerEvents: 'auto', background: 'transparent' }} />
-                                <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '90%', left: '10%', width: '35%', height: '10%', pointerEvents: 'auto', background: 'transparent' }} />
+                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 5000 }}>
+                           <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: 'calc(100vh * 0.95)', maxHeight: '95vh', pointerEvents: 'none' }}>
+                                {/* WHATSAPP HOTSPOT */}
+                                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '70%', left: '8%', width: '40%', height: '9%', pointerEvents: 'auto', background: 'transparent' }} />
+                                {/* CALL HOTSPOT */}
+                                <a href={CALL_URL} style={{ display: 'block', position: 'absolute', top: '79%', left: '8%', width: '40%', height: '9%', pointerEvents: 'auto', background: 'transparent' }} />
+                                {/* LOCATION HOTSPOT */}
+                                <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '88%', left: '8%', width: '40%', height: '9%', pointerEvents: 'auto', background: 'transparent' }} />
                            </div>
                         </div>
                     )}
