@@ -191,10 +191,10 @@ export default function QuantumPortalAd() {
                 </button>
             )}
 
-            {/* TICKER AT ABSOLUTE ZERO TOP */}
-            {isStarted && (
-                <div style={{ position: 'absolute', top: '15px', left: '20px', width: 'calc(100% - 80px)', zIndex: 9001, direction: 'rtl', textAlign: 'center' }}>
-                    <div style={{ background: 'rgba(6,182,212,0.02)', border: '1px solid rgba(6,182,212,0.1)', borderRadius: '10px', padding: '10px', fontSize: '13px', fontWeight: 'bold', color: '#fff', lineHeight: '1.4', backdropFilter: 'blur(5px)', textShadow: '0 0 10px rgba(0,0,0,0.8)' }}>
+            {/* TICKER BOX WITH SAFETY BUFFER (80PX RIGHT) */}
+            {isStarted && !activeModal && (
+                <div style={{ position: 'absolute', top: '20px', left: '20px', right: '85px', zIndex: 9001, direction: 'rtl', textAlign: 'center' }}>
+                    <div style={{ background: 'rgba(6,182,212,0.02)', border: '1px solid rgba(6,182,212,0.1)', borderRadius: '10px', padding: '10px', fontSize: '13px', fontWeight: 'bold', color: '#fff', lineHeight: '1.4', backdropFilter: 'blur(10px)', textShadow: '0 0 10px rgba(0,0,0,0.8)' }}>
                         {displayedText}
                     </div>
                 </div>
