@@ -7,7 +7,7 @@ const DESC = "ليفر الرائدة للمصاعد - من قلب الجيزة 
 const DOMAIN = "https://el-nafeer-real-estate.vercel.app"
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=201111171368";
 const IMG_RAW = `/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png`
-const IMG = `${DOMAIN}/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png`
+const IMG = `${DOMAIN}/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png?v=318_ultra_elite_refresh`
 const PAGE_URL = `${DOMAIN}/portal/lever-pioneer-elite`
 
 export const metadata: Metadata = {
