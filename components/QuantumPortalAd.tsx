@@ -259,12 +259,19 @@ export default function QuantumPortalAd() {
                             ))}
                         </div>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '10px', justifyContent: 'center' }}>
-                            {filteredPortfolio.map((p, idx) => (
-                                <div key={idx} onClick={() => setFullScreenVid(p.vid)} style={{ background: '#050505', border: '1px solid #222', borderRadius: '15px', overflow: 'hidden', cursor: 'pointer' }}>
-                                    <video src={p.vid} autoPlay muted loop playsInline style={{ width: '100%', height: '110px', objectFit: 'cover' }} />
-                                    <div style={{ padding: '8px', fontSize: '8px', textAlign: 'center', color: '#ccc' }}>{p.title}</div>
-                                </div>
-                            ))}
+                            {filteredPortfolio.map((p, idx) => {
+                                const isImage = /\.(jpg|jpeg|png|webp|gif|bmp)$/i.test(p.vid);
+                                return (
+                                    <div key={idx} onClick={() => setFullScreenVid(p.vid)} style={{ background: '#050505', border: '1px solid #222', borderRadius: '15px', overflow: 'hidden', cursor: 'pointer' }}>
+                                        {isImage ? (
+                                            <img src={p.vid} alt={p.title} style={{ width: '100%', height: '110px', objectFit: 'cover' }} />
+                                        ) : (
+                                            <video src={p.vid} autoPlay muted loop playsInline style={{ width: '100%', height: '110px', objectFit: 'cover' }} />
+                                        )}
+                                        <div style={{ padding: '8px', fontSize: '8px', textAlign: 'center', color: '#ccc' }}>{p.title}</div>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 )}
@@ -273,7 +280,13 @@ export default function QuantumPortalAd() {
             {fullScreenVid && (
                 <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: '#000', zIndex: 30000, display: 'flex', flexDirection: 'column' }}>
                     <div onClick={() => setFullScreenVid(null)} style={{ padding: '20px', color: '#d4af37', fontSize: '16px', fontWeight: 900, cursor: 'pointer', borderBottom: '1px solid #111', display: 'flex', alignItems: 'center', gap: '10px' }}> <X size={20} /> RETURN | العودة </div>
-                    <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000' }}> <video src={fullScreenVid} controls autoPlay playsInline style={{ maxWidth: '100%', maxHeight: '100%' }} /> </div>
+                    <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000' }}> 
+                        {/\.(jpg|jpeg|png|webp|gif|bmp)$/i.test(fullScreenVid) ? (
+                            <img src={fullScreenVid} alt="Full Screen" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                        ) : (
+                            <video src={fullScreenVid} controls autoPlay playsInline style={{ maxWidth: '100%', maxHeight: '100%' }} /> 
+                        )}
+                    </div>
                 </div>
             )}
 
