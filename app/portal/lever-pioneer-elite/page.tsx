@@ -46,7 +46,8 @@ export const metadata: Metadata = {
     'og:image:type': 'image/png',
     'og:image:width': '1200',
     'og:image:height': '1200',
-    'fb:app_id': '1773861406139'
+    'twitter:image': IMG,
+    'al:web:url': PAGE_URL
   }
 }
 
