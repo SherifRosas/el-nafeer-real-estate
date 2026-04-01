@@ -2,11 +2,11 @@ import { Metadata } from 'next'
 import QuantumPortalAd from '@/components/QuantumPortalAd'
 
 // --- PORTAL V120 SERVER METADATA (GLOBAL REACH) ---
-const TITLE = "🚀 LEVER PIONEER | OFFICIAL ASCENT"
-const DESC = "شركة ليفر الرائدة للمصاعد - هضبة الأهرام - الجيزة. Vertical Excellence Defined."
+const TITLE = "💎 LEVER PIONEER | EXCLUSIVE REVEAL"
+const DESC = "ليفر الرائدة للمصاعد - من قلب الجيزة - هضبة الأهرام. Vertical Excellence Defined."
 const DOMAIN = "https://el-nafeer-real-estate.vercel.app"
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=201111171368";
-const IMG = `${DOMAIN}/campaigns/lever-pioneer/lever_pioneer_ultimate_v159_0.png?v=500.00`
+const IMG = `${DOMAIN}/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png`
 const PAGE_URL = `${DOMAIN}/portal/lever-pioneer`
 
 export const metadata: Metadata = {
