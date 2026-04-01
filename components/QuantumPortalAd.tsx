@@ -184,7 +184,7 @@ export default function QuantumPortalAd() {
                                     
                                     <div onClick={captureUserLocation} style={{ cursor: 'pointer', background: userLocLink ? 'rgba(37,211,102,0.1)' : 'rgba(6,182,212,0.1)', border: `1px solid ${userLocLink ? '#25d366' : '#06b6d4'}`, padding: '10px', borderRadius: '8px', color: userLocLink ? '#25d366' : '#06b6d4', fontSize: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
                                         <MapPin size={16} />
-                                        {locLoading ? 'جاري التحديد...' : userLocLink ? '✅ تم تحديد الموقع بنجاح' : '📍 اضغط لمشاركة موقعك الحالي (خرائط جوجل)'}
+                                        {locLoading ? 'جاري التحديد...' : userLocLink ? '✅ تم تحديد الموقع بنجاح' : 'اضغط لمشاركة موقع العقار (خرائط جوجل)'}
                                     </div>
 
                                     <select name="elevatorType" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }}>
