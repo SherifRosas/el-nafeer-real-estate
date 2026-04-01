@@ -170,11 +170,13 @@ export default function QuantumPortalAd() {
             {/* ELITE EXIT BUTTON */}
             <button 
                 onClick={() => {
-                    if (window.history.length > 1) {
-                        window.history.back();
-                    } else {
-                        window.location.href = "/";
+                    if (audioRef.current) {
+                        audioRef.current.pause();
+                        audioRef.current.currentTime = 0;
                     }
+                    setIsStarted(false);
+                    setDisplayedText("");
+                    setActiveModal(null);
                 }}
                 style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10000, background: 'rgba(0,0,0,0.5)', border: '1.5px solid rgba(255,255,255,0.3)', borderRadius: '15px', padding: '8px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#fff', backdropFilter: 'blur(15px)', transition: 'all 0.3s ease', cursor: 'pointer', gap: '2px' }}
             >
