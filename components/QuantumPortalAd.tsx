@@ -140,6 +140,11 @@ export default function QuantumPortalAd() {
         <div style={{ position: 'relative', width: '100vw', height: '100vh', backgroundColor: '#000', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             <style dangerouslySetInnerHTML={{ __html: `
                 @keyframes pulse-cyan { 0% { box-shadow: 0 0 10px rgba(6,182,212,0.3); } 50% { box-shadow: 0 0 40px rgba(6,182,212,0.6); } 100% { box-shadow: 0 0 10px rgba(6,182,212,0.3); } }
+                @keyframes icon-float { 
+                    0% { transform: translateY(0) scale(1); }
+                    50% { transform: translateY(-5px) scale(1.05); }
+                    100% { transform: translateY(0) scale(1); }
+                }
                 @keyframes shimmer-pulse {
                     0% { filter: brightness(1) contrast(1); }
                     50% { filter: brightness(1.2) contrast(1.1); }
@@ -169,16 +174,18 @@ export default function QuantumPortalAd() {
 
             <audio ref={audioRef} loop src="https://audio-previews.elements.envatousercontent.com/files/234765669/preview.mp3" style={{ display: 'none' }} />
 
-            {/* MASTER INTERACTION LAYER */}
-            {isStarted && (
-                <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 9000, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: 'calc(100vh * 1)', maxHeight: '100vh' }}>
-                        <div style={{ width: '100%', aspectRatio: '1/1', position: 'relative' }}>
-                            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '70%', left: '3%', width: '12%', height: '8%', pointerEvents: 'auto' }} />
-                            <a href={CALL_URL} style={{ display: 'block', position: 'absolute', top: '78%', left: '3%', width: '12%', height: '8%', pointerEvents: 'auto' }} />
-                            <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'block', position: 'absolute', top: '86%', left: '3%', width: '12%', height: '6%', pointerEvents: 'auto' }} />
-                        </div>
-                    </div>
+            {/* MASTER INTERACTION SIDEBAR */}
+            {isStarted && !activeModal && (
+                <div style={{ position: 'fixed', left: '20px', top: '50%', transform: 'translateY(-50%)', zIndex: 9500, display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(37,211,102,0.1)', border: '2px solid #25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#25d366', animation: 'icon-float 3s infinite ease-in-out', boxShadow: '0 0 15px rgba(37,211,102,0.3)' }}>
+                        <MessageCircle size={24} />
+                    </a>
+                    <a href={CALL_URL} style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(6,182,212,0.1)', border: '2px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 3.5s infinite ease-in-out', boxShadow: '0 0 15px rgba(6,182,212,0.3)' }}>
+                        <Phone size={24} />
+                    </a>
+                    <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(212,175,55,0.1)', border: '2px solid #d4af37', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d4af37', animation: 'icon-float 4s infinite ease-in-out', boxShadow: '0 0 15px rgba(212,175,55,0.3)' }}>
+                        <MapPin size={24} />
+                    </a>
                 </div>
             )}
 
