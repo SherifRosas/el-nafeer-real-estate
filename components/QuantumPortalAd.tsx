@@ -84,15 +84,25 @@ export default function QuantumPortalAd() {
         e.preventDefault();
         setQuoteLoading(true);
         const formData = new FormData(e.currentTarget);
-        const payload = { name: formData.get('userName'), phone: formData.get('userPhone'), notes: "QUICK_PORTAL_QUOTE_REQUEST", brandProfileId: LEVER_BRAND_ID, status: 'new' };
+        const userName = formData.get('userName');
+        const userPhone = formData.get('userPhone');
+        const workType = formData.get('workType');
+        const floors = formData.get('floors');
+        const notes = formData.get('notes');
+
+        const fullNotes = `PORTAL_QUOTE: ${workType} | ${floors} Floors | Notes: ${notes}`;
+        
+        const payload = { name: userName, phone: userPhone, notes: fullNotes, brandProfileId: LEVER_BRAND_ID, status: 'new' };
+        
         try {
             await fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
             setQuoteSent(true);
-            setTimeout(() => { setActiveModal(null); setQuoteSent(false); window.location.href = `https://api.whatsapp.com/send?phone=201111171368&text=${encodeURIComponent("طلب عرض سعر جديد من النفير")}`; }, 2500);
+            const waMsg = `طلب عرض سعر جديد من النفير:\nالاسم: ${userName}\nالهاتف: ${userPhone}\nنوع العمل: ${workType}\nعدد الطوابق: ${floors}\nملاحظات: ${notes}`;
+            setTimeout(() => { setActiveModal(null); setQuoteSent(false); window.location.href = `https://api.whatsapp.com/send?phone=201111171368&text=${encodeURIComponent(waMsg)}`; }, 2500);
         } catch (error) { console.error("Lead error:", error); } finally { setQuoteLoading(false); }
     }
 
-    const CACHE_V = "?v=164.0";
+    const CACHE_V = "?v=168.0";
 
     return (
         <div style={{ position: 'relative', width: '100vw', height: '100vh', backgroundColor: '#000', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -112,10 +122,10 @@ export default function QuantumPortalAd() {
 
             <audio ref={audioRef} loop src="https://audio-previews.elements.envatousercontent.com/files/234765669/preview.mp3" style={{ display: 'none' }} />
 
-            {/* TYPING TICKER (FULL DETAILS REVEAL) */}
-            {isStarted && !activeModal && (
+            {/* TYPING TICKER (PERSISTENT HEADER) */}
+            {isStarted && (
                 <div style={{ position: 'absolute', top: '10px', left: '0', width: '100%', padding: '10px 20px', zIndex: 9001, direction: 'rtl', textAlign: 'center' }}>
-                    <div style={{ background: 'rgba(6,182,212,0.1)', border: '1px solid rgba(6,182,212,0.3)', borderRadius: '15px', padding: '12px', fontSize: '10px', color: '#fff', lineHeight: '1.5', backdropFilter: 'blur(10px)', boxShadow: '0 0 20px rgba(0,0,0,0.5)' }}>
+                    <div style={{ background: 'rgba(6,182,212,0.05)', border: '1px solid rgba(6,182,212,0.2)', borderRadius: '15px', padding: '10px', fontSize: '9px', color: '#fff', lineHeight: '1.4', backdropFilter: 'blur(5px)' }}>
                         {displayedText}
                     </div>
                 </div>
@@ -136,14 +146,22 @@ export default function QuantumPortalAd() {
                 
                 {activeModal === 'quote' && (
                     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.9)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
-                        <div style={{ width: '100%', maxWidth: '350px', background: '#0a0a0f', border: '1px solid #06b6d4', borderRadius: '25px', padding: '20px', position: 'relative' }}>
+                        <div style={{ width: '100%', maxWidth: '350px', background: '#0a0a0f', border: '1px solid #06b6d4', borderRadius: '25px', padding: '20px', position: 'relative', overflowY: 'auto', maxHeight: '90vh' }}>
                             <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: 10, right: 15, color: '#666', background: 'none', border: 'none', fontSize: '24px' }}>×</button>
                             <h3 style={{ color: '#06b6d4', textAlign: 'center', fontWeight: 900, marginBottom: '15px' }}>طلب تـسعيرة فـني</h3>
                             {quoteSent ? ( <div style={{ textAlign: 'center', padding: '30px' }}>✅ تم الإرسال</div> ) : (
-                                <form onSubmit={submitQuoteRequest} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                                    <input name="userName" required placeholder="الاسم" style={{ background: '#111', border: '1px solid #333', padding: '12px', borderRadius: '10px', color: '#fff' }} />
-                                    <input name="userPhone" required placeholder="الهاتف" style={{ background: '#111', border: '1px solid #333', padding: '12px', borderRadius: '10px', color: '#fff' }} />
-                                    <button type="submit" style={{ background: '#06b6d4', padding: '15px', borderRadius: '10px', fontWeight: 900 }}>إرسـال</button>
+                                <form onSubmit={submitQuoteRequest} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                    <input name="userName" required placeholder="الاسم" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
+                                    <input name="userPhone" required placeholder="الهاتف" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
+                                    <select name="workType" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }}>
+                                        <option value="بانوراما">بانوراما</option>
+                                        <option value="أوتوماتيك">أوتوماتيك</option>
+                                        <option value="نصف أوتوماتيك">نصف أوتوماتيك</option>
+                                        <option value="صيانة">صيانة وأعطال</option>
+                                    </select>
+                                    <input name="floors" type="number" placeholder="عدد الطوابق" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
+                                    <textarea name="notes" placeholder="ملاحظات الموقع" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px', minHeight: '60px' }} />
+                                    <button type="submit" style={{ background: '#06b6d4', padding: '12px', borderRadius: '10px', fontWeight: 900, color: '#000', fontSize: '14px' }}>تأكـيد الطلـب</button>
                                 </form>
                             )}
                         </div>
@@ -178,7 +196,6 @@ export default function QuantumPortalAd() {
                 </div>
             )}
 
-            {/* COMPACT STICKY FOOTER (15VH) */}
             <div style={{ height: '15vh', width: '100%', background: '#000', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '10px', borderTop: '1px solid #111' }}>
                 {isStarted && (
                     <div style={{ display: 'flex', gap: '12px' }}>
