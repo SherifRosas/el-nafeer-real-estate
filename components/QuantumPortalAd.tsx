@@ -32,6 +32,7 @@ export default function QuantumPortalAd() {
     const [quoteSent, setQuoteSent] = useState(false);
     const [quoteLoading, setQuoteLoading] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('الكل');
+    const [fullScreenVid, setFullScreenVid] = useState<string | null>(null);
 
     const portfolioItems = [
         { title: "تنفيذ بانورامي خارجي صاعد (ذهبي)", cat: "بانوراما خارجية", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.38.50.mp4" },
@@ -77,8 +78,14 @@ export default function QuantumPortalAd() {
         setIsStarted(true);
         if (audioRef.current) {
             audioRef.current.muted = false;
-            audioRef.current.volume = 0.8;
-            audioRef.current.play().catch(e => console.warn("Audio retry:", e));
+            audioRef.current.volume = 0.9;
+            const playPromise = audioRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // Critical fallback for mobile browsers
+                    document.addEventListener('click', () => audioRef.current?.play(), { once: true });
+                });
+            }
         }
 
         const words = fullText.split(' ').filter(w => w.length > 0);
@@ -198,19 +205,31 @@ export default function QuantumPortalAd() {
                     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.95)', zIndex: 2000, display: 'flex', flexDirection: 'column', padding: '10px', overflowY: 'auto' }}>
                         <button onClick={() => setActiveModal(null)} style={{ alignSelf: 'flex-end', color: '#fff', background: 'none', border: 'none', fontSize: '30px' }}>×</button>
                         <h3 style={{ textAlign: 'center', color: '#d4af37', fontWeight: 900, marginBottom: '20px' }}>مـعرض الأعـمال</h3>
-                        <div style={{ display: 'flex', gap: '8px', marginBottom: '20px', overflowX: 'auto', padding: '0 10px', direction: 'rtl' }}>
+                        <div style={{ display: 'flex', gap: '8px', marginBottom: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
                             {['الكل', 'بانوراما خارجية', 'أوتوماتيك', 'نصف أوتوماتيك'].map(cat => (
-                                <div key={cat} onClick={() => setSelectedCategory(cat)} style={{ flexShrink: 0, padding: '8px 15px', background: selectedCategory === cat ? '#d4af37' : '#111', color: selectedCategory === cat ? '#000' : '#d4af37', borderRadius: '10px', fontSize: '11px', fontWeight: 900, cursor: 'pointer' }}>{cat}</div>
+                                <div key={cat} onClick={() => setSelectedCategory(cat)} style={{ padding: '8px 15px', background: selectedCategory === cat ? '#d4af37' : '#111', color: selectedCategory === cat ? '#000' : '#d4af37', borderRadius: '10px', fontSize: '11px', fontWeight: 900, cursor: 'pointer', border: `1px solid ${selectedCategory === cat ? '#d4af37' : '#333'}` }}>{cat}</div>
                             ))}
                         </div>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'center' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '15px', justifyContent: 'center' }}>
                             {filteredPortfolio.map((p, idx) => (
-                                <div key={idx} style={{ width: '150px', background: '#050505', border: '1px solid #222', borderRadius: '15px', overflow: 'hidden' }}>
+                                <div key={idx} onClick={() => setFullScreenVid(p.vid)} style={{ background: '#050505', border: '1px solid #222', borderRadius: '15px', overflow: 'hidden', cursor: 'pointer' }}>
                                     <video src={p.vid} autoPlay muted loop playsInline style={{ width: '100%', height: '120px', objectFit: 'cover' }} />
                                     <div style={{ padding: '8px', fontSize: '9px', textAlign: 'center', color: '#ccc' }}>{p.title}</div>
                                 </div>
                             ))}
                         </div>
+
+                        {/* Full Screen Cinematic Overlay */}
+                        {fullScreenVid && (
+                            <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: '#000', zIndex: 3000, display: 'flex', flexDirection: 'column' }}>
+                                <div onClick={() => setFullScreenVid(null)} style={{ padding: '20px', color: '#d4af37', fontSize: '16px', fontWeight: 900, cursor: 'pointer', borderBottom: '1px solid #111', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                    <X size={20} /> RETURN | العـودة
+                                </div>
+                                <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000' }}>
+                                    <video src={fullScreenVid} controls autoPlay playsInline style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                                </div>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
