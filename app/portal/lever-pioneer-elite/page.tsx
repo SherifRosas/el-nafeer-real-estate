@@ -6,13 +6,12 @@ const TITLE = "🚀 AL-NAFEER | LEVER PIONEER ELITE"
 const DESC = "شركة ليفر الرائدة للمصاعد - من قلب الجيزة - هضبة الأهرام. Vertical Excellence Defined."
 const DOMAIN = "https://el-nafeer-real-estate.vercel.app"
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=201111171368";
-const IMG = `${DOMAIN}/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png?v=999_final`
+const IMG = `${DOMAIN}/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png`
 const PAGE_URL = `${DOMAIN}/portal/lever-pioneer-elite`
 
 export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
-  metadataBase: new URL(DOMAIN),
   alternates: {
     canonical: PAGE_URL,
   },
