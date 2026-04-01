@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap, Home } from 'lucide-react'
+import { LEVER_PORTFOLIO } from '@/lib/lever-portfolio'
 
 // Dynamically import the heavy 3D engine
 const Quantum3DLayer = dynamic(() => import('./Quantum3DLayer'), { 
@@ -33,15 +34,8 @@ export default function QuantumPortalAd() {
     const [userLocLink, setUserLocLink] = useState<string | null>(null);
     const [locLoading, setLocLoading] = useState(false);
 
-    const portfolioItems = [
-        { title: "تنفيذ بانورامي خارجي صاعد (ذهبي)", cat: "بانوراما خارجية", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.38.50.mp4" },
-        { title: "تشغيل الأبواب الأوتوماتيكية - لوكس", cat: "أوتوماتيك", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.38.51.mp4" },
-        { title: "مصعد أوتوماتيك حديث (فيديو)", cat: "أوتوماتيك", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.40.240.mp4" },
-        { title: "تجربة فتح نصف أوتوماتيك", cat: "نصف أوتوماتيك", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.40.2522.mp4" },
-        { title: "برج بانورامي واجهة عرض", cat: "بانوراما خارجية", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.40.2566.mp4" },
-        { title: "كابينة بانورامية منحنية", cat: "بانوراما خارجية", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.40.2400.mp4" }
-    ];
-
+    const portfolioItems = LEVER_PORTFOLIO;
+    const dynamicCategories = ['الكل', ...Array.from(new Set(portfolioItems.map(item => item.cat)))];
     const filteredPortfolio = selectedCategory === 'الكل' ? portfolioItems : portfolioItems.filter(item => item.cat === selectedCategory);
 
     useEffect(() => {
@@ -239,7 +233,7 @@ export default function QuantumPortalAd() {
                         <button onClick={() => setActiveModal(null)} style={{ alignSelf: 'flex-end', color: '#fff', background: 'none', border: 'none', fontSize: '30px' }}>×</button>
                         <h2 style={{ textAlign: 'center', color: '#d4af37', fontWeight: 900, marginBottom: '20px' }}>مـعرض الأعـمال</h2>
                         <div style={{ display: 'flex', gap: '8px', marginBottom: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                            {['الكل', 'بانوراما خارجية', 'أوتوماتيك', 'نصف أوتوماتيك'].map(cat => (
+                            {dynamicCategories.map(cat => (
                                 <div key={cat} onClick={() => setSelectedCategory(cat)} style={{ padding: '8px 15px', background: selectedCategory === cat ? '#d4af37' : '#111', color: selectedCategory === cat ? '#000' : '#d4af37', borderRadius: '10px', fontSize: '11px', fontWeight: 900, cursor: 'pointer', border: `1px solid ${selectedCategory === cat ? '#d4af37' : '#333'}` }}>{cat}</div>
                             ))}
                         </div>
