@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Allow: /campaigns/
+Allow: /portal/
+
+Sitemap: https://el-nafeer-real-estate.vercel.app/sitemap.xml
