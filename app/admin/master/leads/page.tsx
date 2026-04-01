@@ -34,9 +34,21 @@ export default async function MasterLeadsPage() {
                         <p className="text-[10px] text-gray-700 font-black uppercase tracking-[0.3em] mb-2 robotic-digits">TOTAL_SIGNALS</p>
                         <p className="text-3xl font-black text-sahara-gold robotic-digits">{leads.length}</p>
                     </div>
+                    <div className="px-10 border-r rtl:border-r-0 rtl:border-l border-white/10 text-center min-w-[200px]">
+                        <p className="text-[10px] text-sahara-gold font-black uppercase tracking-[0.3em] mb-2 robotic-digits">CLICK_MOMENTUM</p>
+                        <div className="flex items-center gap-4">
+                            <div className="flex-1 h-3 bg-white/5 rounded-full overflow-hidden border border-white/5 relative">
+                                <div 
+                                    className="h-full bg-gradient-to-r from-sahara-gold to-white animate-pulse shadow-[0_0_20px_rgba(212,175,55,0.5)] transition-all duration-[2000ms]" 
+                                    style={{ width: `${Math.min((leads.length / 500) * 100, 100)}%` }}
+                                />
+                            </div>
+                            <p className="text-xl font-black text-white robotic-digits">{Math.round((leads.length / 500) * 100)}%</p>
+                        </div>
+                    </div>
                     <div className="px-10 text-center">
-                        <p className="text-[10px] text-gray-700 font-black uppercase tracking-[0.3em] mb-2 robotic-digits">CONVERSION_RATE</p>
-                        <p className="text-3xl font-black text-white robotic-digits">24.8%</p>
+                        <p className="text-[10px] text-gray-700 font-black uppercase tracking-[0.3em] mb-2 robotic-digits">TARGET_500</p>
+                        <p className="text-3xl font-black text-white robotic-digits">{(leads.length / 500 * 100).toFixed(1)}%</p>
                     </div>
                 </div>
             </div>
