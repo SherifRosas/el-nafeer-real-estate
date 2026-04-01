@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
-import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap } from 'lucide-react'
+import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap, Home } from 'lucide-react'
 
 // Dynamically import the heavy 3D engine
 const Quantum3DLayer = dynamic(() => import('./Quantum3DLayer'), { 
@@ -175,8 +175,11 @@ export default function QuantumPortalAd() {
 
             {/* TICKER AT ABSOLUTE ZERO TOP */}
             {isStarted && (
-                <div style={{ position: 'absolute', top: '0', left: '0', width: '100%', padding: '2px 10px', zIndex: 9001, direction: 'rtl', textAlign: 'center' }}>
-                    <div style={{ background: 'rgba(6,182,212,0.02)', border: '1px solid rgba(6,182,212,0.1)', borderRadius: '10px', padding: '6px', fontSize: '8.5px', color: '#fff', lineHeight: '1.2', backdropFilter: 'blur(2px)' }}>
+                <div style={{ position: 'absolute', top: '0', left: '0', width: '100%', padding: '2px 10px', zIndex: 9001, direction: 'rtl', textAlign: 'center', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <a href="/" style={{ background: 'rgba(6,182,212,0.1)', border: '1px solid rgba(6,182,212,0.3)', borderRadius: '8px', padding: '6px', color: '#06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Home size={16} />
+                    </a>
+                    <div style={{ flex: 1, background: 'rgba(6,182,212,0.02)', border: '1px solid rgba(6,182,212,0.1)', borderRadius: '10px', padding: '8px', fontSize: '13px', fontWeight: 'bold', color: '#fff', lineHeight: '1.4', backdropFilter: 'blur(2px)', textShadow: '0 0 10px rgba(0,0,0,0.8)' }}>
                         {displayedText}
                     </div>
                 </div>
