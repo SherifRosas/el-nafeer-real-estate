@@ -7,9 +7,7 @@ const DESC = "ليفر الرائدة للمصاعد - من قلب الجيزة 
 const DOMAIN = "https://el-nafeer-real-estate.vercel.app"
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=201111171368";
 const IMG_RAW = `/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png`
-const IMG = `${DOMAIN}${IMG_RAW}`
-// Vercel Dynamic Signal Optimization (Force-Compacts to ~150KB for WhatsApp)
-const IMG_OPTIMIZED = `${DOMAIN}/_next/image?url=${encodeURIComponent(IMG_RAW)}&w=1200&q=75`
+const IMG = `${DOMAIN}/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png`
 const PAGE_URL = `${DOMAIN}/portal/lever-pioneer-elite`
 
 export const metadata: Metadata = {
@@ -25,10 +23,10 @@ export const metadata: Metadata = {
     siteName: 'Lever Pioneer Elite',
     images: [
       {
-        url: IMG_OPTIMIZED,
+        url: IMG,
         width: 1200,
         height: 630,
-        alt: 'Lever Pioneer Elite Optimized Ad',
+        alt: 'Lever Pioneer Elite Ad Landscape',
       },
     ],
     locale: 'ar_EG',
@@ -38,21 +36,22 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: TITLE,
     description: DESC,
-    images: [IMG_OPTIMIZED],
+    images: [IMG],
   },
   other: {
-    'whatsapp:image': IMG_OPTIMIZED,
+    'whatsapp:image': IMG,
     'whatsapp:title': TITLE,
     'whatsapp:description': DESC,
-    'og:image:url': IMG_OPTIMIZED,
-    'og:image:secure_url': IMG_OPTIMIZED,
-    'og:image:alt': 'Lever Pioneer Elite Custom Elevator Solutions Giza',
+    'og:image': IMG,
+    'og:image:url': IMG,
+    'og:image:secure_url': IMG,
+    'og:image:alt': 'Lever Pioneer Elite Elevator Solutions Giza',
     'og:image:type': 'image/png',
-    'og:image:width': '1024',
-    'og:image:height': '1024',
-    'twitter:image': IMG_OPTIMIZED,
-    'twitter:image:src': IMG_OPTIMIZED,
-    'itemprop:image': IMG_OPTIMIZED,
+    'og:image:width': '1200',
+    'og:image:height': '630',
+    'twitter:image': IMG,
+    'twitter:image:src': IMG,
+    'itemprop:image': IMG,
     'al:web:url': PAGE_URL
   }
 }
