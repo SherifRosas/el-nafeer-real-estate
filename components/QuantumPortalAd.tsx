@@ -26,6 +26,7 @@ export default function QuantumPortalAd() {
     const [displayedText, setDisplayedText] = useState("");
     const [isStarted, setIsStarted] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
+    const typingIntervalRef = useRef<NodeJS.Timeout | null>(null); // EXIT PROTOCOL LOCK
     const [activeModal, setActiveModal] = useState<null | 'quote' | 'portfolio'>(null);
     const [quoteSent, setQuoteSent] = useState(false);
     const [quoteLoading, setQuoteLoading] = useState(false);
@@ -84,17 +85,20 @@ export default function QuantumPortalAd() {
         let idx = 0;
         setDisplayedText(words[0] || ""); 
         idx = 1;
-        const typingInterval = setInterval(() => {
+
+        if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
+        
+        typingIntervalRef.current = setInterval(() => {
             if (idx < words.length) {
                 const nextWord = words[idx];
                 if (nextWord !== undefined) {
                     setDisplayedText(prev => prev + ' ' + nextWord);
                     idx++;
                 } else {
-                    clearInterval(typingInterval);
+                    if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
                 }
             } else { 
-                clearInterval(typingInterval); 
+                if (typingIntervalRef.current) clearInterval(typingIntervalRef.current); 
             }
         }, 350); 
     }
@@ -174,6 +178,7 @@ export default function QuantumPortalAd() {
                         audioRef.current.pause();
                         audioRef.current.currentTime = 0;
                     }
+                    if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
                     setIsStarted(false);
                     setDisplayedText("");
                     setActiveModal(null);
