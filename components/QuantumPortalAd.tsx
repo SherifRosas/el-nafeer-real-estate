@@ -84,25 +84,33 @@ export default function QuantumPortalAd() {
         e.preventDefault();
         setQuoteLoading(true);
         const formData = new FormData(e.currentTarget);
-        const userName = formData.get('userName');
-        const userPhone = formData.get('userPhone');
-        const workType = formData.get('workType');
-        const floors = formData.get('floors');
-        const notes = formData.get('notes');
+        const uName = formData.get('userName');
+        const uPhone = formData.get('userPhone');
+        const eType = formData.get('elevatorType');
+        const eFloors = formData.get('floors');
+        const eShaft = formData.get('shaftSize');
+        const eFound = formData.get('foundations');
+        const eLoc = formData.get('location');
 
-        const fullNotes = `PORTAL_QUOTE: ${workType} | ${floors} Floors | Notes: ${notes}`;
+        const fullNotes = `PORTAL_ADVANCED_LEAD: ${eType} | ${eFloors} Floors | Shaft: ${eShaft} | Foundations: ${eFound} | Loc: ${eLoc}`;
         
-        const payload = { name: userName, phone: userPhone, notes: fullNotes, brandProfileId: LEVER_BRAND_ID, status: 'new' };
+        const payload = { name: uName, phone: uPhone, notes: fullNotes, brandProfileId: LEVER_BRAND_ID, status: 'new' };
         
         try {
             await fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
             setQuoteSent(true);
-            const waMsg = `طلب عرض سعر جديد من النفير:\nالاسم: ${userName}\nالهاتف: ${userPhone}\nنوع العمل: ${workType}\nعدد الطوابق: ${floors}\nملاحظات: ${notes}`;
-            setTimeout(() => { setActiveModal(null); setQuoteSent(false); window.location.href = `https://api.whatsapp.com/send?phone=201111171368&text=${encodeURIComponent(waMsg)}`; }, 2500);
+            
+            const waMsg = `السلام عليكم شركة ليفر الرائدة للمصاعد.\nأنا: ${uName}\nقمت بإرسال طلب عرض سعر فني للمصعد الخاص بي:\n\n• النوع: ${eType}\n• الأدوار: ${eFloors}\n• بئر المصعد: ${eShaft}\n• الأساسات: ${eFound}\n• الموقع: ${eLoc}\n\nأتمنى التواصل بخصوص المواصفات الفنية.`;
+            
+            setTimeout(() => { 
+                setActiveModal(null); 
+                setQuoteSent(false); 
+                window.location.href = `https://api.whatsapp.com/send?phone=201111171368&text=${encodeURIComponent(waMsg)}`; 
+            }, 2500);
         } catch (error) { console.error("Lead error:", error); } finally { setQuoteLoading(false); }
     }
 
-    const CACHE_V = "?v=168.0";
+    const CACHE_V = "?v=169.1";
 
     return (
         <div style={{ position: 'relative', width: '100vw', height: '100vh', backgroundColor: '#000', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -122,7 +130,7 @@ export default function QuantumPortalAd() {
 
             <audio ref={audioRef} loop src="https://audio-previews.elements.envatousercontent.com/files/234765669/preview.mp3" style={{ display: 'none' }} />
 
-            {/* TYPING TICKER (PERSISTENT HEADER) */}
+            {/* TYPING TICKER */}
             {isStarted && (
                 <div style={{ position: 'absolute', top: '10px', left: '0', width: '100%', padding: '10px 20px', zIndex: 9001, direction: 'rtl', textAlign: 'center' }}>
                     <div style={{ background: 'rgba(6,182,212,0.05)', border: '1px solid rgba(6,182,212,0.2)', borderRadius: '15px', padding: '10px', fontSize: '9px', color: '#fff', lineHeight: '1.4', backdropFilter: 'blur(5px)' }}>
@@ -146,22 +154,27 @@ export default function QuantumPortalAd() {
                 
                 {activeModal === 'quote' && (
                     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.9)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
-                        <div style={{ width: '100%', maxWidth: '350px', background: '#0a0a0f', border: '1px solid #06b6d4', borderRadius: '25px', padding: '20px', position: 'relative', overflowY: 'auto', maxHeight: '90vh' }}>
+                        <div style={{ width: '100%', maxWidth: '350px', background: '#0a0a0f', border: '1px solid #06b6d4', borderRadius: '25px', padding: '20px', position: 'relative', overflowY: 'auto', maxHeight: '85vh', direction: 'rtl' }}>
                             <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: 10, right: 15, color: '#666', background: 'none', border: 'none', fontSize: '24px' }}>×</button>
                             <h3 style={{ color: '#06b6d4', textAlign: 'center', fontWeight: 900, marginBottom: '15px' }}>طلب تـسعيرة فـني</h3>
-                            {quoteSent ? ( <div style={{ textAlign: 'center', padding: '30px' }}>✅ تم الإرسال</div> ) : (
-                                <form onSubmit={submitQuoteRequest} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                            {quoteSent ? ( <div style={{ textAlign: 'center', padding: '30px', color: '#fff' }}>✅ تم إرسال الطلب بنجاح</div> ) : (
+                                <form onSubmit={submitQuoteRequest} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                     <input name="userName" required placeholder="الاسم" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
                                     <input name="userPhone" required placeholder="الهاتف" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
-                                    <select name="workType" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }}>
-                                        <option value="بانوراما">بانوراما</option>
-                                        <option value="أوتوماتيك">أوتوماتيك</option>
-                                        <option value="نصف أوتوماتيك">نصف أوتوماتيك</option>
+                                    <select name="elevatorType" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }}>
+                                        <option value="سكني">سكني</option>
+                                        <option value="تجاري">تجاري</option>
+                                        <option value="بانوراما المونيوم">بانوراما المونيوم</option>
                                         <option value="صيانة">صيانة وأعطال</option>
                                     </select>
-                                    <input name="floors" type="number" placeholder="عدد الطوابق" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
-                                    <textarea name="notes" placeholder="ملاحظات الموقع" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px', minHeight: '60px' }} />
-                                    <button type="submit" style={{ background: '#06b6d4', padding: '12px', borderRadius: '10px', fontWeight: 900, color: '#000', fontSize: '14px' }}>تأكـيد الطلـب</button>
+                                    <input name="floors" type="number" placeholder="الأدوار" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
+                                    <input name="shaftSize" placeholder="بئر المصعد (مثلاً 1.5*1.5)" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
+                                    <select name="foundations" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }}>
+                                        <option value="يوجد">الأساسات: يوجد</option>
+                                        <option value="لا يوجد">الأساسات: لا يوجد</option>
+                                    </select>
+                                    <input name="location" placeholder="الموقع (الجيزه - هضبة الأهرام)" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
+                                    <button type="submit" style={{ background: '#06b6d4', padding: '12px', borderRadius: '10px', fontWeight: 900, color: '#000', fontSize: '14px', marginTop: '10px' }}>تأكـيد الطلـب الفـني</button>
                                 </form>
                             )}
                         </div>
