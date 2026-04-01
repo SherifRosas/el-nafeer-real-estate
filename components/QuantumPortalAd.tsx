@@ -167,13 +167,16 @@ export default function QuantumPortalAd() {
 
             <audio ref={audioRef} loop src="https://audio-previews.elements.envatousercontent.com/files/234765669/preview.mp3" style={{ display: 'none' }} />
 
+            {/* ELITE EXIT BUTTON */}
+            <a href="/" style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10000, background: 'rgba(0,0,0,0.5)', border: '1.5px solid rgba(255,255,255,0.3)', borderRadius: '15px', padding: '8px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#fff', backdropFilter: 'blur(15px)', transition: 'all 0.3s ease', textDecoration: 'none', gap: '2px' }}>
+                <X size={22} />
+                <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '1px' }}>إغلاق</span>
+            </a>
+
             {/* TICKER AT ABSOLUTE ZERO TOP */}
             {isStarted && (
-                <div style={{ position: 'absolute', top: '0', left: '0', width: '100%', padding: '2px 10px', zIndex: 9001, direction: 'rtl', textAlign: 'center', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <a href="/" style={{ background: 'rgba(6,182,212,0.1)', border: '1px solid rgba(6,182,212,0.3)', borderRadius: '8px', padding: '6px', color: '#06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Home size={16} />
-                    </a>
-                    <div style={{ flex: 1, background: 'rgba(6,182,212,0.02)', border: '1px solid rgba(6,182,212,0.1)', borderRadius: '10px', padding: '8px', fontSize: '13px', fontWeight: 'bold', color: '#fff', lineHeight: '1.4', backdropFilter: 'blur(2px)', textShadow: '0 0 10px rgba(0,0,0,0.8)' }}>
+                <div style={{ position: 'absolute', top: '15px', left: '20px', width: 'calc(100% - 80px)', zIndex: 9001, direction: 'rtl', textAlign: 'center' }}>
+                    <div style={{ background: 'rgba(6,182,212,0.02)', border: '1px solid rgba(6,182,212,0.1)', borderRadius: '10px', padding: '10px', fontSize: '13px', fontWeight: 'bold', color: '#fff', lineHeight: '1.4', backdropFilter: 'blur(5px)', textShadow: '0 0 10px rgba(0,0,0,0.8)' }}>
                         {displayedText}
                     </div>
                 </div>
