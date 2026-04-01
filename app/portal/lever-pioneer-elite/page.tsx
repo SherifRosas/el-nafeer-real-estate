@@ -2,11 +2,11 @@ import { Metadata } from 'next'
 import QuantumPortalAd from '@/components/QuantumPortalAd'
 
 // --- PORTAL V185 SERVER METADATA (NUCLEAR CACHE BUST) ---
-const TITLE = "💎 LEVER PIONEER | EXCLUSIVE REVEAL"
-const DESC = "ليفر الرائدة للمصاعد - من قلب الجيزة - هضبة الأهرام. Vertical Excellence Defined."
+const TITLE = "🚀 AL-NAFEER | LEVER PIONEER ELITE"
+const DESC = "شركة ليفر الرائدة للمصاعد - من قلب الجيزة - هضبة الأهرام. Vertical Excellence Defined."
 const DOMAIN = "https://el-nafeer-real-estate.vercel.app"
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=201111171368";
-const IMG = `${DOMAIN}/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png`
+const IMG = `${DOMAIN}/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png?v=999_final`
 const PAGE_URL = `${DOMAIN}/portal/lever-pioneer-elite`
 
 export const metadata: Metadata = {
@@ -43,10 +43,13 @@ export const metadata: Metadata = {
     'whatsapp:title': TITLE,
     'whatsapp:description': DESC,
     'og:image:secure_url': IMG,
+    'og:image:alt': 'Lever Pioneer Elite Custom Elevator Solutions Giza',
     'og:image:type': 'image/png',
     'og:image:width': '1200',
     'og:image:height': '1200',
     'twitter:image': IMG,
+    'twitter:image:src': IMG,
+    'itemprop:image': IMG,
     'al:web:url': PAGE_URL
   }
 }
