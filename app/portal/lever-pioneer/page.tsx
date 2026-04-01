@@ -6,7 +6,7 @@ const TITLE = "🏆 LEVER PIONEER | THE ASCENT"
 const DESC = "Unifying Vertical Excellence. The definitive cross-device simulation."
 const DOMAIN = "https://el-nafeer-real-estate.vercel.app"
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=201111171368";
-const IMG = `${DOMAIN}/campaigns/lever-pioneer/pioneer-ultra.png?v=144.00`
+const IMG = `${DOMAIN}/campaigns/lever-pioneer/lever_pioneer_ultimate_v159_0.png?v=163.00`
 const PAGE_URL = `${DOMAIN}/portal/lever-pioneer`
 
 export const metadata: Metadata = {
