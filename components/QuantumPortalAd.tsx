@@ -171,8 +171,8 @@ export default function QuantumPortalAd() {
 
             <audio ref={audioRef} loop src="https://audio-previews.elements.envatousercontent.com/files/234765669/preview.mp3" style={{ display: 'none' }} />
 
-            {/* ELITE EXIT BUTTON - ONLY VISIBLE DURING EXPERIENCE */}
-            {isStarted && (
+            {/* ELITE EXIT BUTTON - ONLY VISIBLE DURING EXPERIENCE & IF NO MODAL IS OPEN */}
+            {isStarted && !activeModal && (
                 <button 
                     onClick={() => {
                         if (audioRef.current) {
