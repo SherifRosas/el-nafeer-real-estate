@@ -171,23 +171,25 @@ export default function QuantumPortalAd() {
 
             <audio ref={audioRef} loop src="https://audio-previews.elements.envatousercontent.com/files/234765669/preview.mp3" style={{ display: 'none' }} />
 
-            {/* ELITE EXIT BUTTON */}
-            <button 
-                onClick={() => {
-                    if (audioRef.current) {
-                        audioRef.current.pause();
-                        audioRef.current.currentTime = 0;
-                    }
-                    if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
-                    setIsStarted(false);
-                    setDisplayedText("");
-                    setActiveModal(null);
-                }}
-                style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10000, background: 'rgba(0,0,0,0.5)', border: '1.5px solid rgba(255,255,255,0.3)', borderRadius: '15px', padding: '8px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#fff', backdropFilter: 'blur(15px)', transition: 'all 0.3s ease', cursor: 'pointer', gap: '2px' }}
-            >
-                <X size={22} />
-                <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '1px' }}>إغلاق</span>
-            </button>
+            {/* ELITE EXIT BUTTON - ONLY VISIBLE DURING EXPERIENCE */}
+            {isStarted && (
+                <button 
+                    onClick={() => {
+                        if (audioRef.current) {
+                            audioRef.current.pause();
+                            audioRef.current.currentTime = 0;
+                        }
+                        if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
+                        setIsStarted(false);
+                        setDisplayedText("");
+                        setActiveModal(null);
+                    }}
+                    style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10000, background: 'rgba(0,0,0,0.5)', border: '1.5px solid rgba(255,255,255,0.3)', borderRadius: '15px', padding: '8px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#fff', backdropFilter: 'blur(15px)', transition: 'all 0.3s ease', cursor: 'pointer', gap: '2px' }}
+                >
+                    <X size={22} />
+                    <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '1px' }}>إغلاق</span>
+                </button>
+            )}
 
             {/* TICKER AT ABSOLUTE ZERO TOP */}
             {isStarted && (
