@@ -11,8 +11,8 @@ const Quantum3DLayer = dynamic(() => import('./Quantum3DLayer'), {
     loading: () => <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div className="w-8 h-8 border-2 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin" /></div>
 })
 
-const DOMAIN = "https://www.al-nafeer.com";
-const AD_IMAGE = "/campaigns/lever-pioneer/lever_pioneer_ultimate_v159_0.png"
+const DOMAIN = "https://el-nafeer-real-estate.vercel.app";
+const AD_IMAGE = "/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png"
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=201111171368";
 const CALL_URL = "tel:+201070615372";
 const LOCATION_URL = "https://www.google.com/maps/place/Al+Omraneya,+Al+Haram,+Giza+Governorate/@29.9656242,31.0922895,17z/data=!4m15!1m8!3m7!1s0x14584fc2bfbefc07:0x5df1948b27a63882!2sAl+Omraneya,+Al+Haram,+Giza+Governorate!3b1!8m2!3d29.9656242!4d31.0922895!16s%2Fg%2F11c659wy1d!3m5!1s0x14584fc2bfbefc07:0x5df1948b27a63882!8m2!3d29.9656242!4d31.0922895!16s%2Fg%2F11c659wy1d?hl=en-EG&entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D";
@@ -91,7 +91,7 @@ export default function QuantumPortalAd() {
         setDisplayedText(words[0] || ""); 
         idx = 1;
         const typingInterval = setInterval(() => {
-            if (idx < words.length) {
+            if (idx < words.length && words[idx]) {
                 setDisplayedText(prev => prev + ' ' + words[idx]);
                 idx++;
             } else { clearInterval(typingInterval); }
