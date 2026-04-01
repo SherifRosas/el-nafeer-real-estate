@@ -145,6 +145,10 @@ export default function QuantumPortalAd() {
                     50% { filter: brightness(1.2) contrast(1.1); }
                     100% { filter: brightness(1) contrast(1); }
                 }
+                @keyframes shiny-shimmer {
+                    0% { background-position: -200px; }
+                    100% { background-position: 200px; }
+                }
             `}} />
             
             {!isStarted && (
@@ -237,11 +241,32 @@ export default function QuantumPortalAd() {
             <div style={{ height: '22vh', width: '100%', background: '#000', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '15px', borderTop: '1px solid #111' }}>
                 {isStarted && (
                     <div style={{ display: 'flex', gap: '15px' }}>
-                        <button onClick={() => setActiveModal('quote')} style={{ background: '#06b6d422', border: '1px solid #06b6d455', color: '#06b6d4', padding: '10px 20px', borderRadius: '12px', fontWeight: 900, fontSize: '11px' }}>طلب سعر</button>
-                        <button onClick={() => setActiveModal('portfolio')} style={{ background: '#d4af3722', border: '1px solid #d4af3755', color: '#d4af37', padding: '10px 20px', borderRadius: '12px', fontWeight: 900, fontSize: '11px' }}>المعرض</button>
+                        <button onClick={() => setActiveModal('quote')} style={{ background: '#06b6d422', border: '1px solid #06b6d455', color: '#06b6d4', padding: '10px 20px', borderRadius: '12px', fontWeight: 900, fontSize: '11px', cursor: 'pointer' }}>طلب سعر</button>
+                        <button onClick={() => setActiveModal('portfolio')} style={{ background: '#d4af3722', border: '1px solid #d4af3755', color: '#d4af37', padding: '10px 20px', borderRadius: '12px', fontWeight: 900, fontSize: '11px', cursor: 'pointer' }}>المعرض</button>
                     </div>
                 )}
-                <div style={{ color: '#fff', fontSize: '8px', opacity: 0.3 }}>ARCHITECTED BY SHERIF ROSAS</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <a 
+                        href="tel:+201065661882" 
+                        style={{ 
+                            display: 'flex', alignItems: 'center', justifyContent: 'center', 
+                            width: '24px', height: '24px', borderRadius: '50%', 
+                            background: 'rgba(6,182,212,0.1)', border: '1px solid #06b6d4', 
+                            color: '#06b6d4', cursor: 'pointer' 
+                        }}
+                        title="Call Sherif Rosas"
+                    >
+                        <Phone size={12} />
+                    </a>
+                    <div style={{ 
+                        fontSize: '9px', fontWeight: 900, letterSpacing: '2px',
+                        background: 'linear-gradient(90deg, #333 0%, #fff 50%, #333 100%)',
+                        backgroundSize: '200px', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+                        animation: 'shiny-shimmer 3s infinite linear'
+                    }}>
+                        ARCHITECTED BY SHERIF ROSAS
+                    </div>
+                </div>
             </div>
         </div>
     );
