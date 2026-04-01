@@ -86,15 +86,22 @@ export default function QuantumPortalAd() {
             }
         }
 
-        const words = fullText.split(' ').filter(w => w.length > 0);
+        const words = fullText.split(' ').filter(w => w && w.trim().length > 0);
         let idx = 0;
         setDisplayedText(words[0] || ""); 
         idx = 1;
         const typingInterval = setInterval(() => {
-            if (idx < words.length && words[idx]) {
-                setDisplayedText(prev => prev + ' ' + words[idx]);
-                idx++;
-            } else { clearInterval(typingInterval); }
+            if (idx < words.length) {
+                const nextWord = words[idx];
+                if (nextWord !== undefined) {
+                    setDisplayedText(prev => prev + ' ' + nextWord);
+                    idx++;
+                } else {
+                    clearInterval(typingInterval);
+                }
+            } else { 
+                clearInterval(typingInterval); 
+            }
         }, 350); 
     }
 
