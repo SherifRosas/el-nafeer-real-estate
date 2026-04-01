@@ -56,9 +56,25 @@ export default function QuantumPortalAd() {
         }
     }, [isStarted]);
 
+    const trackEvent = (action: string, category: string) => {
+        const payload = {
+            category,
+            action,
+            label: 'LEVER_PIONEER_CAMPAIGN_01',
+            timestamp: new Date().toISOString(),
+            userAgent: navigator.userAgent
+        };
+        fetch('/api/analytics/events', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).catch(err => console.log("Silent Analytics Catch:", err));
+    }
+
     const initiateExperience = () => {
         if (isStarted) return;
         setIsStarted(true);
+        trackEvent('EXPERIENCE_START', 'USER_INTERACTION');
         if (audioRef.current) {
             audioRef.current.muted = false;
             audioRef.current.volume = 0.9;
@@ -169,9 +185,9 @@ export default function QuantumPortalAd() {
 
                 {isStarted && !activeModal && (
                     <div style={{ width: '100%', background: 'rgba(0,0,0,0.85)', padding: '6px 0', display: 'flex', justifyContent: 'center', gap: '20px', zIndex: 9000, borderTop: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(3px)' }}>
-                        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(37,211,102,0.05)', border: '1.5px solid #25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#25d366', animation: 'icon-float 3s infinite ease-in-out' }}> <MessageCircle size={17} /> </a>
-                        <a href={CALL_URL} style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: '1.5px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 3.5s infinite ease-in-out' }}> <Phone size={17} /> </a>
-                        <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(212,175,55,0.05)', border: '1.5px solid #d4af37', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d4af37', animation: 'icon-float 4s infinite ease-in-out' }}> <MapPin size={17} /> </a>
+                        <a onClick={() => trackEvent('WHATSAPP_CONTACT', 'LEAD_ATTEMPT')} href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(37,211,102,0.05)', border: '1.5px solid #25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#25d366', animation: 'icon-float 3s infinite ease-in-out' }}> <MessageCircle size={17} /> </a>
+                        <a onClick={() => trackEvent('CALL_CONTACT', 'LEAD_ATTEMPT')} href={CALL_URL} style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: '1.5px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 3.5s infinite ease-in-out' }}> <Phone size={17} /> </a>
+                        <a onClick={() => trackEvent('LOCATION_VIEW', 'INTEREST_ATTEMPT')} href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(212,175,55,0.05)', border: '1.5px solid #d4af37', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d4af37', animation: 'icon-float 4s infinite ease-in-out' }}> <MapPin size={17} /> </a>
                     </div>
                 )}
                 
