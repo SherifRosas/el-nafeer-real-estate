@@ -30,6 +30,8 @@ export default function QuantumPortalAd() {
     const [quoteLoading, setQuoteLoading] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('الكل');
     const [fullScreenVid, setFullScreenVid] = useState<string | null>(null);
+    const [userLocLink, setUserLocLink] = useState<string | null>(null);
+    const [locLoading, setLocLoading] = useState(false);
 
     const portfolioItems = [
         { title: "تنفيذ بانورامي خارجي صاعد (ذهبي)", cat: "بانوراما خارجية", vid: "/campaigns/lever-pioneer/portfolio/videos/WhatsApp Video 2026-03-29 at 20.38.50.mp4" },
@@ -80,6 +82,24 @@ export default function QuantumPortalAd() {
         }, 350); 
     }
 
+    const captureUserLocation = () => {
+        setLocLoading(true);
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((pos) => {
+                const link = `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
+                setUserLocLink(link);
+                setLocLoading(false);
+            }, (err) => {
+                console.error("Loc err:", err);
+                setLocLoading(false);
+                alert("يرجى تفعيل الـ GPS لمشاركة الموقع");
+            });
+        } else {
+            setLocLoading(false);
+            alert("المتصفح لا يدعم تحديد الموقع");
+        }
+    }
+
     const submitQuoteRequest = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setQuoteLoading(true);
@@ -92,7 +112,7 @@ export default function QuantumPortalAd() {
         const eFound = formData.get('foundations');
         const eLoc = formData.get('location');
 
-        const fullNotes = `PORTAL_ADVANCED_LEAD: ${eType} | ${eFloors} Floors | Shaft: ${eShaft} | Foundations: ${eFound} | Loc: ${eLoc}`;
+        const fullNotes = `PORTAL_GPS_LEAD: ${eType} | ${eFloors} Floors | Shaft: ${eShaft} | Found: ${eFound} | Loc: ${eLoc} | Map: ${userLocLink || 'None'}`;
         
         const payload = { name: uName, phone: uPhone, notes: fullNotes, brandProfileId: LEVER_BRAND_ID, status: 'new' };
         
@@ -100,7 +120,7 @@ export default function QuantumPortalAd() {
             await fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
             setQuoteSent(true);
             
-            const waMsg = `السلام عليكم شركة ليفر الرائدة للمصاعد.\nأنا: ${uName}\nقمت بإرسال طلب عرض سعر فني للمصعد الخاص بي:\n\n• النوع: ${eType}\n• الأدوار: ${eFloors}\n• بئر المصعد: ${eShaft}\n• الأساسات: ${eFound}\n• الموقع: ${eLoc}\n\nأتمنى التواصل بخصوص المواصفات الفنية.`;
+            const waMsg = `السلام عليكم شركة ليفر الرائدة للمصاعد.\nأنا: ${uName}\nقمت بإرسال طلب عرض سعر فني للمصعد الخاص بي:\n\n• النوع: ${eType}\n• الأدوار: ${eFloors}\n• بئر المصعد: ${eShaft}\n• الأساسات: ${eFound}\n• الموقع: ${eLoc}\n• خرائط جوجل: ${userLocLink || 'لم يتم التحديد'}\n\nأتمنى التواصل بخصوص المواصفات الفنية.`;
             
             setTimeout(() => { 
                 setActiveModal(null); 
@@ -110,7 +130,7 @@ export default function QuantumPortalAd() {
         } catch (error) { console.error("Lead error:", error); } finally { setQuoteLoading(false); }
     }
 
-    const CACHE_V = "?v=169.1";
+    const CACHE_V = "?v=170.0";
 
     return (
         <div style={{ position: 'relative', width: '100vw', height: '100vh', backgroundColor: '#000', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -161,6 +181,12 @@ export default function QuantumPortalAd() {
                                 <form onSubmit={submitQuoteRequest} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                     <input name="userName" required placeholder="الاسم" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
                                     <input name="userPhone" required placeholder="الهاتف" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
+                                    
+                                    <div onClick={captureUserLocation} style={{ cursor: 'pointer', background: userLocLink ? 'rgba(37,211,102,0.1)' : 'rgba(6,182,212,0.1)', border: `1px solid ${userLocLink ? '#25d366' : '#06b6d4'}`, padding: '10px', borderRadius: '8px', color: userLocLink ? '#25d366' : '#06b6d4', fontSize: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                                        <MapPin size={16} />
+                                        {locLoading ? 'جاري التحديد...' : userLocLink ? '✅ تم تحديد الموقع بنجاح' : '📍 اضغط لمشاركة موقعك الحالي (خرائط جوجل)'}
+                                    </div>
+
                                     <select name="elevatorType" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }}>
                                         <option value="سكني">سكني</option>
                                         <option value="تجاري">تجاري</option>
