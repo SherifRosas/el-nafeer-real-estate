@@ -82,7 +82,6 @@ export default function QuantumPortalAd() {
             const playPromise = audioRef.current.play();
             if (playPromise !== undefined) {
                 playPromise.catch(() => {
-                    // Critical fallback for mobile browsers
                     document.addEventListener('click', () => audioRef.current?.play(), { once: true });
                 });
             }
@@ -165,37 +164,36 @@ export default function QuantumPortalAd() {
                         background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(10px)' 
                     }}
                 >
-                    {/* Atmospheric Preview Background */}
                     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, background: `url(${AD_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(10px) brightness(0.3)' }} />
-                    
                     <div style={{ padding: '20px 50px', border: '2px solid #06b6d4', borderRadius: '25px', color: '#fff', fontWeight: 900, animation: 'pulse-cyan 2s infinite', background: 'rgba(6,182,212,0.1)' }}>TAP_TO_ASCENT</div>
                 </div>
             )}
 
             <audio ref={audioRef} loop src="https://audio-previews.elements.envatousercontent.com/files/234765669/preview.mp3" style={{ display: 'none' }} />
 
-            {/* MASTER INTERACTION SIDEBAR */}
-            {isStarted && !activeModal && (
-                <div style={{ position: 'fixed', left: '20px', top: '50%', transform: 'translateY(-50%)', zIndex: 9500, display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(37,211,102,0.1)', border: '2px solid #25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#25d366', animation: 'icon-float 3s infinite ease-in-out', boxShadow: '0 0 15px rgba(37,211,102,0.3)' }}>
-                        <MessageCircle size={24} />
-                    </a>
-                    <a href={CALL_URL} style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(6,182,212,0.1)', border: '2px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 3.5s infinite ease-in-out', boxShadow: '0 0 15px rgba(6,182,212,0.3)' }}>
-                        <Phone size={24} />
-                    </a>
-                    <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(212,175,55,0.1)', border: '2px solid #d4af37', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d4af37', animation: 'icon-float 4s infinite ease-in-out', boxShadow: '0 0 15px rgba(212,175,55,0.3)' }}>
-                        <MapPin size={24} />
-                    </a>
-                </div>
-            )}
-
-            <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(circle at center, #0a1a1f 0%, #000 100%)' }}>
+            {/* ACTION LAYER - SCALABLE HUB */}
+            <div style={{ flex: 1, position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ flex: 1, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(circle at center, #0a1a1f 0%, #000 100%)' }}>
                     <img src={AD_IMAGE + CACHE_V} alt="Lever" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', animation: isStarted ? 'shimmer-pulse 3s infinite ease-in-out' : 'none' }} />
                 </div>
+
+                {/* HORIZONTAL INTERACTION BAR - LOCATED UNDER ADDRESS */}
+                {isStarted && !activeModal && (
+                    <div style={{ width: '100%', background: 'rgba(0,0,0,0.8)', padding: '15px 0', display: 'flex', justifyContent: 'center', gap: '25px', zIndex: 9000, borderTop: '1px solid rgba(6,182,212,0.2)', backdropFilter: 'blur(10px)' }}>
+                        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(37,211,102,0.1)', border: '2px solid #25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#25d366', animation: 'icon-float 3s infinite ease-in-out', boxShadow: '0 0 15px rgba(37,211,102,0.2)' }}>
+                            <MessageCircle size={24} />
+                        </a>
+                        <a href={CALL_URL} style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(6,182,212,0.1)', border: '2px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 3.5s infinite ease-in-out', boxShadow: '0 0 15px rgba(6,182,212,0.2)' }}>
+                            <Phone size={24} />
+                        </a>
+                        <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(212,175,55,0.1)', border: '2px solid #d4af37', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d4af37', animation: 'icon-float 4s infinite ease-in-out', boxShadow: '0 0 15px rgba(212,175,55,0.2)' }}>
+                            <MapPin size={24} />
+                        </a>
+                    </div>
+                )}
                 
                 {activeModal === 'quote' && (
-                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.9)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
+                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.9)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <div style={{ width: '100%', maxWidth: '400px', background: '#0a0a0f', border: '1px solid #06b6d4', borderRadius: '25px', padding: '25px', position: 'relative' }}>
                             <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: 10, right: 15, color: '#666', background: 'none', border: 'none', fontSize: '24px' }}>×</button>
                             <h3 style={{ color: '#06b6d4', textAlign: 'center', fontWeight: 900 }}>طلب تـسعيرة فـني</h3>
@@ -213,9 +211,9 @@ export default function QuantumPortalAd() {
                 )}
 
                 {activeModal === 'portfolio' && (
-                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.95)', zIndex: 2000, display: 'flex', flexDirection: 'column', padding: '10px', overflowY: 'auto' }}>
+                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.95)', zIndex: 9999, display: 'flex', flexDirection: 'column', padding: '10px', overflowY: 'auto' }}>
                         <button onClick={() => setActiveModal(null)} style={{ alignSelf: 'flex-end', color: '#fff', background: 'none', border: 'none', fontSize: '30px' }}>×</button>
-                        <h3 style={{ textAlign: 'center', color: '#d4af37', fontWeight: 900, marginBottom: '20px' }}>مـعرض الأعـمال</h3>
+                        <h2 style={{ textAlign: 'center', color: '#d4af37', fontWeight: 900, marginBottom: '20px' }}>مـعرض الأعـمال</h2>
                         <div style={{ display: 'flex', gap: '8px', marginBottom: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
                             {['الكل', 'بانوراما خارجية', 'أوتوماتيك', 'نصف أوتوماتيك'].map(cat => (
                                 <div key={cat} onClick={() => setSelectedCategory(cat)} style={{ padding: '8px 15px', background: selectedCategory === cat ? '#d4af37' : '#111', color: selectedCategory === cat ? '#000' : '#d4af37', borderRadius: '10px', fontSize: '11px', fontWeight: 900, cursor: 'pointer', border: `1px solid ${selectedCategory === cat ? '#d4af37' : '#333'}` }}>{cat}</div>
@@ -229,21 +227,21 @@ export default function QuantumPortalAd() {
                                 </div>
                             ))}
                         </div>
-
-                        {/* Full Screen Cinematic Overlay */}
-                        {fullScreenVid && (
-                            <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: '#000', zIndex: 3000, display: 'flex', flexDirection: 'column' }}>
-                                <div onClick={() => setFullScreenVid(null)} style={{ padding: '20px', color: '#d4af37', fontSize: '16px', fontWeight: 900, cursor: 'pointer', borderBottom: '1px solid #111', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                    <X size={20} /> RETURN | العـودة
-                                </div>
-                                <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000' }}>
-                                    <video src={fullScreenVid} controls autoPlay playsInline style={{ maxWidth: '100%', maxHeight: '100%' }} />
-                                </div>
-                            </div>
-                        )}
                     </div>
                 )}
             </div>
+
+            {/* FULL SCREEN VIDEO OVERLAY */}
+            {fullScreenVid && (
+                <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: '#000', zIndex: 30000, display: 'flex', flexDirection: 'column' }}>
+                    <div onClick={() => setFullScreenVid(null)} style={{ padding: '20px', color: '#d4af37', fontSize: '16px', fontWeight: 900, cursor: 'pointer', borderBottom: '1px solid #111', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <X size={20} /> RETURN | العودة
+                    </div>
+                    <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000' }}>
+                        <video src={fullScreenVid} controls autoPlay playsInline style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                    </div>
+                </div>
+            )}
 
             <div style={{ height: '22vh', width: '100%', background: '#000', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '15px', borderTop: '1px solid #111' }}>
                 {isStarted && (
@@ -253,24 +251,10 @@ export default function QuantumPortalAd() {
                     </div>
                 )}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <a 
-                        href="tel:+201065661882" 
-                        style={{ 
-                            display: 'flex', alignItems: 'center', justifyContent: 'center', 
-                            width: '24px', height: '24px', borderRadius: '50%', 
-                            background: 'rgba(6,182,212,0.1)', border: '1px solid #06b6d4', 
-                            color: '#06b6d4', cursor: 'pointer' 
-                        }}
-                        title="Call Sherif Rosas"
-                    >
+                    <a href="tel:+201065661882" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '24px', height: '24px', borderRadius: '50%', background: 'rgba(6,182,212,0.1)', border: '1px solid #06b6d4', color: '#06b6d4', cursor: 'pointer' }}>
                         <Phone size={12} />
                     </a>
-                    <div style={{ 
-                        fontSize: '9px', fontWeight: 900, letterSpacing: '2px',
-                        background: 'linear-gradient(90deg, #333 0%, #fff 50%, #333 100%)',
-                        backgroundSize: '200px', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-                        animation: 'shiny-shimmer 3s infinite linear'
-                    }}>
+                    <div style={{ fontSize: '9px', fontWeight: 900, letterSpacing: '2px', background: 'linear-gradient(90deg, #333 0%, #fff 50%, #333 100%)', backgroundSize: '200px', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', animation: 'shiny-shimmer 3s infinite linear' }}>
                         ARCHITECTED BY SHERIF ROSAS
                     </div>
                 </div>
