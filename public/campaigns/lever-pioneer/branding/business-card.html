@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<!-- VERSION LOCK: v248.0 - VERTICAL TOWER DESIGN -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lever Pioneer - Billionaire Vertical Card (v248.0)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Noto+Kufi+Arabic:wght@400;700&display=swap');
+
+        :root {
+            --obsidian: #0f0f0f;
+            --metallic-blue: #06B6D4;
+            --silver: #E2E8F0;
+            --card-width: 50mm;
+            --card-height: 90mm;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Noto Kufi Arabic', sans-serif;
+            -webkit-print-color-adjust: exact;
+        }
+
+        /* 50x90mm VERTICAL BUSINESS CARD CONTAINER */
+        .business-card {
+            width: var(--card-width);
+            height: var(--card-height);
+            background: linear-gradient(180deg, var(--obsidian) 0%, #1a1a1a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 6mm 4mm;
+            color: var(--silver);
+            text-align: center;
+            print-color-adjust: exact;
+        }
+
+        /* LOGO SECTION (TOP) */
+        .logo-section {
+            margin-bottom: 6mm;
+            z-index: 2;
+        }
+
+        .logo-section img {
+            width: 33mm;
+            height: 33mm;
+            filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.3));
+        }
+
+        /* CONTENT SECTION (MIDDLE) */
+        .content-section {
+            flex: 1;
+            z-index: 2;
+        }
+
+        .title-line-1 {
+            font-size: 13.5pt;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1mm;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .title-line-2 {
+            font-size: 11pt;
+            font-weight: 400;
+            color: var(--silver);
+            margin-bottom: 5mm;
+        }
+
+        .contact-info {
+            font-family: 'Outfit', sans-serif;
+            font-size: 8pt;
+            display: flex;
+            flex-direction: column;
+            gap: 2mm;
+            color: var(--metallic-blue);
+        }
+
+        .contact-info span {
+            color: var(--silver);
+        }
+
+        /* QR SECTION (BOTTOM) */
+        .qr-section {
+            margin-top: auto;
+            z-index: 2;
+        }
+
+        .qr-section img {
+            width: 18mm;
+            height: 18mm;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1.5mm;
+            border-radius: 2mm;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .qr-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 5pt;
+            color: var(--metallic-blue);
+            margin-top: 1.5mm;
+            letter-spacing: 1.5px;
+        }
+
+        /* PRINT MEDIA QUERY */
+        @media print {
+            body { background: none; }
+            .business-card { 
+                box-shadow: none; 
+                margin: 0; 
+                border: none;
+                width: 50mm;
+                height: 90mm;
+            }
+            @page { size: 50mm 90mm; margin: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="business-card">
+        <!-- LOGO (TOP) -->
+        <div class="logo-section">
+            <img src="../lever_pioneer_v318_ultimate.png" alt="Lever Logo">
+        </div>
+
+        <!-- CONTENT (MIDDLE) -->
+        <div class="content-section">
+            <h1 class="title-line-1">شركة ليفر</h1>
+            <h2 class="title-line-2">الرائدة للمصاعد</h2>
+            
+            <div class="contact-info">
+                <div>CALL: <span>01070615372</span></div>
+                <div>WHATSAPP: <span>01111171368</span></div>
+            </div>
+        </div>
+
+        <!-- FUNCTIONAL QR (BOTTOM) -->
+        <div class="qr-section">
+            <img src="qr-code.png" alt="QR Code">
+            <p class="qr-label">SCAN TO ASCENT</p>
+        </div>
+    </div>
+
+</body>
+</html>
