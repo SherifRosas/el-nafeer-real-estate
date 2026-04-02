@@ -6,8 +6,8 @@ const TITLE = "🚀 AL-NAFEER | LEVER PIONEER ELITE 🚀"
 const DESC = "ليفر الرائدة للمصاعد - من قلب الجيزة - هضبة الأهرام. Vertical Excellence Defined."
 const DOMAIN = "https://el-nafeer-real-estate.vercel.app"
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=201111171368";
-const IMG_RAW = `/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png`
-const IMG = `${DOMAIN}/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png?v=318_ultra_elite_refresh`
+const IMG_RAW = `/clients/lever-pioneer/lever_minimalist_profile_v221_00_cleaned_1775081914737.png`
+const IMG = `${DOMAIN}${IMG_RAW}?v=logo_sync_v268`
 const PAGE_URL = `${DOMAIN}/portal/lever-pioneer-elite`
 
 export const metadata: Metadata = {
