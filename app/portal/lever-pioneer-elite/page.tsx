@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { Suspense } from 'react'
 import QuantumPortalAd from '@/components/QuantumPortalAd'
 
 // --- PORTAL V185 SERVER METADATA (NUCLEAR CACHE BUST) ---
@@ -52,7 +53,9 @@ export const metadata: Metadata = {
 export default function PortalPageElite() {
   return (
     <main style={{ backgroundColor: '#000', width: '100%', minHeight: '100vh', position: 'relative' }}>
-      <QuantumPortalAd />
+      <Suspense fallback={<div style={{ backgroundColor: '#000', height: '100vh', width: '100vw' }} />}>
+        <QuantumPortalAd />
+      </Suspense>
     </main>
   )
 }
