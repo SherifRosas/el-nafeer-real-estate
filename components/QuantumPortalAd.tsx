@@ -103,8 +103,9 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
             }
         }
 
-        const retargetText = "نحن شركة ليفر نرحب بكم مجدداً - نخبة القاهرة والجيزة تستحق الأفضل. طلبك الفني القادم يحصل على خصم استراتيجي حصري.";
-        const activeText = isReturningUser ? retargetText : fullText;
+        const v3Text = "عرض حصري لسكان الجيزة وهضبة الأهرام: خصم استراتيجي 15% على عقود التأسيس والصيانة خلال شهر أكتوبر. ليفر.. شريكك في التميز الرأسي.";
+        const retargetText = isReturningUser ? "نحن شركة ليفر نرحب بكم مجدداً - نخبة القاهرة والجيزة تستحق الأفضل. طلبك الفني القادم يحصل على خصم استراتيجي حصري." : fullText;
+        const activeText = variant === 'v3' ? v3Text : retargetText;
         const words = activeText.split(' ').filter(w => w && w.trim().length > 0);
         let idx = 0;
         setDisplayedText(words[0] || ""); 
@@ -181,6 +182,7 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
         <div style={{ position: 'relative', width: '100vw', height: '100vh', backgroundColor: '#000', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             <style dangerouslySetInnerHTML={{ __html: `
                 @keyframes pulse-cyan { 0% { box-shadow: 0 0 10px rgba(6,182,212,0.3); } 50% { box-shadow: 0 0 40px rgba(6,182,212,0.6); } 100% { box-shadow: 0 0 10px rgba(6,182,212,0.3); } }
+                @keyframes pulse-gold { 0% { box-shadow: 0 0 10px rgba(197,160,89,0.3); } 50% { box-shadow: 0 0 40px rgba(197,160,89,0.6); } 100% { box-shadow: 0 0 10px rgba(197,160,89,0.3); } }
                 @keyframes icon-float { 0% { transform: translateY(0) scale(1.02); } 50% { transform: translateY(-2px) scale(1.04); } 100% { transform: translateY(0) scale(1.02); } }
                 @keyframes shimmer-pulse { 0% { filter: brightness(1) contrast(1); } 50% { filter: brightness(1.2) contrast(1.1); } 100% { filter: brightness(1) contrast(1); } }
                 @keyframes shiny-shimmer { 0% { background-position: -200px; } 100% { background-position: 200px; } }
@@ -189,7 +191,7 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
             {!isStarted && (
                 <div onClick={initiateExperience} style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 99999, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(10px)' }}>
                     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, background: `url(${AD_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(10px) brightness(0.3)' }} />
-                    <div style={{ padding: '20px 50px', border: '2px solid #06b6d4', borderRadius: '25px', color: '#fff', fontWeight: 900, animation: 'pulse-cyan 2s infinite', background: 'rgba(6,182,212,0.1)' }}>TAP_TO_ASCENT</div>
+                    <div style={{ padding: '20px 50px', border: `2px solid ${variant === 'v3' ? '#c5a059' : '#06b6d4'}`, borderRadius: '25px', color: '#fff', fontWeight: 900, animation: variant === 'v3' ? 'pulse-gold 2s infinite' : 'pulse-cyan 2s infinite', background: variant === 'v3' ? 'rgba(197,160,89,0.1)' : 'rgba(6,182,212,0.1)' }}>TAP_TO_ASCENT</div>
                 </div>
             )}
 
@@ -218,7 +220,7 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
             {/* TICKER BOX WITH SAFETY BUFFER (80PX RIGHT) */}
             {isStarted && !activeModal && (
                 <div style={{ position: 'absolute', top: '20px', left: '20px', right: '85px', zIndex: 9001, direction: 'rtl', textAlign: 'center' }}>
-                    <div style={{ background: 'rgba(6,182,212,0.02)', border: '1px solid rgba(6,182,212,0.1)', borderRadius: '10px', padding: '10px', fontSize: '13px', fontWeight: 'bold', color: '#fff', lineHeight: '1.4', backdropFilter: 'blur(10px)', textShadow: '0 0 10px rgba(0,0,0,0.8)' }}>
+                    <div style={{ background: variant === 'v3' ? 'rgba(197,160,89,0.02)' : 'rgba(6,182,212,0.02)', border: `1px solid ${variant === 'v3' ? 'rgba(197,160,89,0.1)' : 'rgba(6,182,212,0.1)'}`, borderRadius: '10px', padding: '10px', fontSize: '13px', fontWeight: 'bold', color: '#fff', lineHeight: '1.4', backdropFilter: 'blur(10px)', textShadow: '0 0 10px rgba(0,0,0,0.8)' }}>
                         {displayedText}
                     </div>
                 </div>
@@ -244,7 +246,7 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.9)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
                         <div style={{ width: '100%', maxWidth: '350px', background: '#0a0a0f', border: '1px solid #06b6d4', borderRadius: '25px', padding: '20px', position: 'relative', overflowY: 'auto', maxHeight: '85vh', direction: 'rtl' }}>
                             <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: 10, right: 15, color: '#666', background: 'none', border: 'none', fontSize: '24px' }}>×</button>
-                            <h3 style={{ color: '#06b6d4', textAlign: 'center', fontWeight: 900, marginBottom: '15px' }}>طلب تـسعيرة فـني</h3>
+                            <h3 style={{ color: variant === 'v3' ? '#c5a059' : '#06b6d4', textAlign: 'center', fontWeight: 900, marginBottom: '15px' }}>طلب تـسعيرة فـني</h3>
                             {quoteSent ? ( <div style={{ textAlign: 'center', padding: '30px', color: '#fff' }}>✅ تم إرسال الطلب بنجاح</div> ) : (
                                 <form onSubmit={submitQuoteRequest} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                     <input name="userName" required placeholder="الاسم" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
