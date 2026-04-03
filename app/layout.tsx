@@ -1,6 +1,7 @@
 'use client'
 
 import type { Metadata, Viewport } from "next";
+import { Suspense } from 'react'
 import "./globals.css";
 import { Providers } from "./providers";
 import { usePathname } from 'next/navigation';
@@ -29,7 +30,9 @@ export default function RootLayout({
       <body className="bg-black text-white antialiased">
         <Providers>
           <TrackingScripts />
-          {children}
+          <Suspense fallback={<div className="bg-black min-h-screen" />}>
+            {children}
+          </Suspense>
           {!isPortal && <MasterFooter />}
         </Providers>
       </body>
