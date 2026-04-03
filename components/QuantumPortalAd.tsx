@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap, Home } from 'lucide-react'
@@ -22,7 +23,21 @@ const LOCATION_URL = "https://www.google.com/maps/place/Al+Omraneya,+Al+Haram,+G
 const fullText = "الان من قلب مصر من الجيزة - حدائق الأهرام، تدشن شركة ليفر الرائدة للمصاعد مقرها الجديد. للتواصل اضغط على الأيقونات (واتساب-اتصال-الموقع).";
 const LEVER_BRAND_ID = "62c38934-4c4b-42be-98c9-06cbbee1af19";
 
-export default function QuantumPortalAd() {
+export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | 'v3' }) {
+    const searchParams = useSearchParams();
+    const referralId = searchParams.get('ref') || 'direct';
+    
+    // --- SENTINEL MEMORY (RETARGETING) LOGIC ---
+    const [isReturningUser, setIsReturningUser] = useState(false);
+    useEffect(() => {
+        const hasVisited = localStorage.getItem('LEVER_PORTAL_VISITED');
+        if (hasVisited) {
+            setIsReturningUser(true);
+        } else {
+            localStorage.setItem('LEVER_PORTAL_VISITED', 'true');
+        }
+    }, []);
+
     const [displayedText, setDisplayedText] = useState("");
     const [isStarted, setIsStarted] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -52,10 +67,17 @@ export default function QuantumPortalAd() {
     }, [isStarted]);
 
     const trackEvent = (action: string, category: string) => {
+        // --- GIZA-CAIRO GEOGRAPHIC SIGNAL MAPPING ---
+        let signalLabel = `LEVER_PIONEER_REF_${referralId.toUpperCase()}`;
+        if (referralId === 'ahmed' || referralId === 'hazem') signalLabel = 'GIZA_OWNER_SIGNAL';
+        if (referralId === 'partner' || referralId === 'mohamed') signalLabel = 'CAIRO_PARTNER_SIGNAL';
+        if (referralId === 'sherif') signalLabel = 'MASTER_CAIRO_SIGNAL';
+
         const payload = {
             category,
             action,
-            label: 'LEVER_PIONEER_CAMPAIGN_01',
+            label: signalLabel,
+            location_memory: isReturningUser ? 'RETARGETED_ELITE' : 'NEW_ACQUISITION',
             timestamp: new Date().toISOString(),
             userAgent: navigator.userAgent
         };
@@ -81,7 +103,9 @@ export default function QuantumPortalAd() {
             }
         }
 
-        const words = fullText.split(' ').filter(w => w && w.trim().length > 0);
+        const retargetText = "نحن شركة ليفر نرحب بكم مجدداً - نخبة القاهرة والجيزة تستحق الأفضل. طلبك الفني القادم يحصل على خصم استراتيجي حصري.";
+        const activeText = isReturningUser ? retargetText : fullText;
+        const words = activeText.split(' ').filter(w => w && w.trim().length > 0);
         let idx = 0;
         setDisplayedText(words[0] || ""); 
         idx = 1;
@@ -210,8 +234,8 @@ export default function QuantumPortalAd() {
 
                 {isStarted && !activeModal && (
                     <div style={{ width: '100%', background: 'rgba(0,0,0,0.85)', padding: '6px 0', display: 'flex', justifyContent: 'center', gap: '20px', zIndex: 9000, borderTop: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(3px)' }}>
-                        <a onClick={() => trackEvent('WHATSAPP_CONTACT', 'LEAD_ATTEMPT')} href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(37,211,102,0.05)', border: '1.5px solid #25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#25d366', animation: 'icon-float 3s infinite ease-in-out' }}> <MessageCircle size={17} /> </a>
-                        <a onClick={() => trackEvent('CALL_CONTACT', 'LEAD_ATTEMPT')} href={CALL_URL} style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: '1.5px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 3.5s infinite ease-in-out' }}> <Phone size={17} /> </a>
+                        <a onClick={() => trackEvent('WHATSAPP_CONTACT', 'LEAD_ATTEMPT')} href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(37,211,102,0.05)', border: `1.5px solid ${variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366', animation: 'icon-float 3s infinite ease-in-out' }}> <MessageCircle size={17} /> </a>
+                        <a onClick={() => trackEvent('CALL_CONTACT', 'LEAD_ATTEMPT')} href={CALL_URL} style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: `1.5px solid ${variant === 'v3' || isReturningUser ? '#d4af37' : '#06b6d4'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: variant === 'v3' || isReturningUser ? '#d4af37' : '#06b6d4', animation: 'icon-float 3.5s infinite ease-in-out' }}> <Phone size={17} /> </a>
                         <a onClick={() => trackEvent('LOCATION_VIEW', 'INTEREST_ATTEMPT')} href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(212,175,55,0.05)', border: '1.5px solid #d4af37', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d4af37', animation: 'icon-float 4s infinite ease-in-out' }}> <MapPin size={17} /> </a>
                     </div>
                 )}
@@ -290,17 +314,11 @@ export default function QuantumPortalAd() {
                 </div>
             )}
 
-            {/* ULTRA COMPACT FOOTER (10VH) */}
-            <div style={{ height: '10vh', width: '100%', background: '#000', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '5px', borderTop: '1px solid #111' }}>
-                {isStarted && (
-                    <div style={{ display: 'flex', gap: '12px' }}>
-                        <button onClick={() => setActiveModal('quote')} style={{ background: '#06b6d411', border: '1px solid #06b6d433', color: '#06b6d4', padding: '4px 12px', borderRadius: '10px', fontWeight: 900, fontSize: '9px', cursor: 'pointer' }}>طلب سعر</button>
-                        <button onClick={() => setActiveModal('portfolio')} style={{ background: '#d4af3711', border: '1px solid #d4af3733', color: '#d4af37', padding: '4px 12px', borderRadius: '10px', fontWeight: 900, fontSize: '9px', cursor: 'pointer' }}>المعرض</button>
-                    </div>
-                )}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                    <a href="tel:+201065661882" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: '1px solid #06b6d4', color: '#06b6d4', cursor: 'pointer' }}> <Phone size={9} /> </a>
-                    <div style={{ fontSize: '7.5px', fontWeight: 900, letterSpacing: '1px', background: 'linear-gradient(90deg, #333 0%, #fff 50%, #333 100%)', backgroundSize: '180px', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', animation: 'shiny-shimmer 3s infinite linear' }}> ARCHITECTED BY SHERIF ROSAS </div>
+            {/* RAZOR THIN FOOTER (4VH) */}
+            <div style={{ height: '4vh', width: '100%', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', borderTop: '1px solid #050505' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <a href="tel:+201065661882" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '16px', height: '16px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: '1px solid #06b6d4', color: '#06b6d4', cursor: 'pointer' }}> <Phone size={8} /> </a>
+                    <div style={{ fontSize: '6px', fontWeight: 900, letterSpacing: '1px', background: 'linear-gradient(90deg, #333 0%, #fff 50%, #333 100%)', backgroundSize: '180px', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', animation: 'shiny-shimmer 3s infinite linear' }}> ARCHITECTED BY SHERIF ROSAS </div>
                 </div>
             </div>
         </div>

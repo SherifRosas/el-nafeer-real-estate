@@ -14,12 +14,12 @@ export default function MasterFooter() {
     if (isPortal) return null;
 
     return (
-        <footer className="relative milky-glass border-t border-white/10 py-24 overflow-hidden">
+        <footer className="relative milky-glass border-t border-white/10 py-12 overflow-hidden">
             {/* Digital Grid Overlay */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
 
             <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-12">
                     {/* Unified Logo & Mission */}
                     <div className="lg:col-span-1 space-y-8">
                         <Link href="/" className="flex items-center gap-4 group cursor-pointer inline-flex">
@@ -73,19 +73,7 @@ export default function MasterFooter() {
                                 </div>
                             </div>
 
-                            {/* Master 2: Ahmed Abdel Sattar */}
-                            <div className="group border-t border-white/5 pt-8">
-                                <p className="text-sm font-black tracking-widest uppercase text-white group-hover:text-sahara-gold transition-colors">Ahmed Abdel Sattar</p>
-                                <p className="text-[9px] font-black text-gray-600 uppercase tracking-widest mt-1 mb-3 italic">
-                                    {isArabic ? 'الماستر التنفيذي والتنسيق العام' : 'Executive Master & Coordination'}
-                                </p>
-                                <div className="flex gap-3">
-                                    <a href="tel:+201055907971" className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-sahara-gold hover:text-black transition-all flex items-center justify-center flex-1 gap-2 rtl:flex-row-reverse">
-                                        <span className="text-xs">📞</span>
-                                        <span className="text-[10px] font-black robotic-digits">+20 10 55907971</span>
-                                    </a>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
 
@@ -127,7 +115,7 @@ export default function MasterFooter() {
                 </div>
 
                 {/* Final Protocol Row */}
-                <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+                <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
                     <div className="space-y-1">
                         <p className="text-[10px] font-black text-gray-600 uppercase tracking-[0.4em] robotic-digits">
                             &copy; {new Date().getFullYear()} EL-NAFEER_PRESTIGE_DOMAINS // V3.5_ELITE
