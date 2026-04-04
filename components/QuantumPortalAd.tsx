@@ -235,12 +235,32 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                 </div>
 
                 {isStarted && !activeModal && (
-                    <div style={{ width: '100%', background: 'rgba(0,0,0,0.85)', padding: '12px 0', display: 'flex', justifyContent: 'center', gap: '15px', zIndex: 9000, borderTop: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)' }}>
-                        <a onClick={() => trackEvent('WHATSAPP_CONTACT', 'LEAD_ATTEMPT')} href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(37,211,102,0.05)', border: `1.5px solid ${variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366', animation: 'icon-float 3s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <MessageCircle size={18} /> </a>
-                        <a onClick={() => trackEvent('CALL_CONTACT', 'LEAD_ATTEMPT')} href={CALL_URL} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: `1.5px solid ${variant === 'v3' || isReturningUser ? '#d4af37' : '#06b6d4'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: variant === 'v3' || isReturningUser ? '#d4af37' : '#06b6d4', animation: 'icon-float 3.5s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <Phone size={18} /> </a>
-                        <a onClick={() => trackEvent('LOCATION_VIEW', 'INTEREST_ATTEMPT')} href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(212,175,55,0.05)', border: `1.5px solid #d4af37`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d4af37', animation: 'icon-float 4s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <MapPin size={18} /> </a>
-                        <a onClick={() => { trackEvent('PORTFOLIO_VIEW', 'INTEREST_ATTEMPT'); setActiveModal('portfolio'); }} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(197,160,89,0.05)', border: `1.5px solid #c5a059`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#c5a059', animation: 'icon-float 4.5s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <Layout size={18} /> </a>
-                        <a onClick={() => { trackEvent('QUOTE_REQUEST_START', 'LEAD_ATTEMPT'); setActiveModal('quote'); }} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: `1.5px solid #06b6d4`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 5s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <FileText size={18} /> </a>
+                    <div style={{ width: '100%', background: 'rgba(0,0,0,0.85)', padding: '15px 0', display: 'flex', justifyContent: 'center', gap: '12px', zIndex: 9000, borderTop: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)', direction: 'rtl' }}>
+                        {/* WHATSAPP */}
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                            <a onClick={() => trackEvent('WHATSAPP_CONTACT', 'LEAD_ATTEMPT')} href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(37,211,102,0.05)', border: `1.5px solid ${variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366', animation: 'icon-float 3s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <MessageCircle size={18} /> </a>
+                            <span style={{ fontSize: '9px', fontWeight: 900, color: variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366', opacity: 0.8 }}>واتساب</span>
+                        </div>
+                        {/* CALL */}
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                            <a onClick={() => trackEvent('CALL_CONTACT', 'LEAD_ATTEMPT')} href={CALL_URL} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: `1.5px solid ${variant === 'v3' || isReturningUser ? '#d4af37' : '#06b6d4'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: variant === 'v3' || isReturningUser ? '#d4af37' : '#06b6d4', animation: 'icon-float 3.5s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <Phone size={18} /> </a>
+                            <span style={{ fontSize: '9px', fontWeight: 900, color: variant === 'v3' || isReturningUser ? '#d4af37' : '#06b6d4', opacity: 0.8 }}>اتصال</span>
+                        </div>
+                        {/* LOCATION */}
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                            <a onClick={() => trackEvent('LOCATION_VIEW', 'INTEREST_ATTEMPT')} href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(212,175,55,0.05)', border: `1.5px solid #d4af37`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d4af37', animation: 'icon-float 4s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <MapPin size={18} /> </a>
+                            <span style={{ fontSize: '9px', fontWeight: 900, color: '#d4af37', opacity: 0.8 }}>الموقع</span>
+                        </div>
+                        {/* GALLERY */}
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                            <a onClick={() => { trackEvent('PORTFOLIO_VIEW', 'INTEREST_ATTEMPT'); setActiveModal('portfolio'); }} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(197,160,89,0.05)', border: `1.5px solid #c5a059`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#c5a059', animation: 'icon-float 4.5s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <Layout size={18} /> </a>
+                            <span style={{ fontSize: '9px', fontWeight: 900, color: '#c5a059', opacity: 0.8 }}>المعرض</span>
+                        </div>
+                        {/* QUOTE */}
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                            <a onClick={() => { trackEvent('QUOTE_REQUEST_START', 'LEAD_ATTEMPT'); setActiveModal('quote'); }} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: `1.5px solid #06b6d4`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 5s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <FileText size={18} /> </a>
+                            <span style={{ fontSize: '9px', fontWeight: 900, color: '#06b6d4', opacity: 0.8 }}>طلب سعر</span>
+                        </div>
                     </div>
                 )}
                 
