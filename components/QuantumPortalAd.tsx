@@ -226,16 +226,17 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                 </div>
             )}
 
-            <div style={{ flex: 1, position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ flex: 1, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     {/* CINEMATIC BLUR GLOW TO FILL VOID */}
                     <div style={{ position: 'absolute', width: '100%', height: '100%', background: `url(${AD_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(30px) brightness(0.4)', opacity: 0.5 }} />
                     
                     <img src={AD_IMAGE + CACHE_V} alt="Lever" style={{ position: 'relative', maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', animation: isStarted ? 'shimmer-pulse 3s infinite ease-in-out' : 'none' }} />
                 </div>
 
+                {/* ACTION BAR - ABSOLUTE ANCHOR TO REMOVE VOID */}
                 {isStarted && !activeModal && (
-                    <div style={{ width: '100%', background: 'rgba(0,0,0,0.85)', padding: '15px 0', display: 'flex', justifyContent: 'center', gap: '12px', zIndex: 9000, borderTop: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)', direction: 'rtl' }}>
+                    <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', background: 'rgba(0,0,0,0.85)', padding: '12px 0 25px 0', display: 'flex', justifyContent: 'center', gap: '12px', zIndex: 9000, borderTop: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(15px)', direction: 'rtl' }}>
                         {/* WHATSAPP */}
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                             <a onClick={() => trackEvent('WHATSAPP_CONTACT', 'LEAD_ATTEMPT')} href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(37,211,102,0.05)', border: `1.5px solid ${variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366', animation: 'icon-float 3s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <MessageCircle size={18} /> </a>
