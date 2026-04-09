@@ -46,7 +46,7 @@ export default async function ClientDashboardPage({ params }: PageProps) {
     // Fetch initial events (leads for this brand)
     let initialEvents: any[] = []
     try {
-        const leads = await db.getLeadsByBrandId(brandProfile.id)
+        const leads = await db.getLeadsByBrandProfileId(brandProfile.id)
         initialEvents = leads.map((l: any) => ({
             id: `lead-${l.id}`,
             type: 'LEAD',
