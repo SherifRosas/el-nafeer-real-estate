@@ -11,6 +11,7 @@ interface PageProps {
 }
 
 export default async function ClientDashboardPage({ params }: PageProps) {
+    const { id } = await params
     const session = await getServerSession(authOptions)
 
     if (!session) {
@@ -24,7 +25,7 @@ export default async function ClientDashboardPage({ params }: PageProps) {
     // If id is 'beit-alkhair', we map it to the actual database ID or name
     let brandProfile = null
     try {
-      if (params.id === 'beit-alkhair') {
+      if (id === 'beit-alkhair') {
         const brands = await db.getAllBrandProfiles()
         brandProfile = brands.find(b => b.companyName.includes('Beit Al-Khair'))
       } else {
