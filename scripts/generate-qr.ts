@@ -15,7 +15,6 @@ async function generateQR() {
         // High-fidelity options for print
         const options = {
             errorCorrectionLevel: 'H' as const,
-            type: 'image/png' as const,
             quality: 1,
             margin: 1,
             color: {
