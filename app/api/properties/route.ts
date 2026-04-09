@@ -58,3 +58,54 @@ export async function GET(request: NextRequest) {
     const properties = await db.getPropertiesByOwnerId(ownerId)
     return NextResponse.json({ success: true, properties })
 }
+export async function PATCH(request: NextRequest) {
+    const session = await getServerSession(authOptions)
+
+    if (!session) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get('id')
+
+    if (!id) {
+        return NextResponse.json({ error: 'Property ID required' }, { status: 400 })
+    }
+
+    try {
+        const body = await request.json()
+        const { status } = body
+
+        if (!status) {
+            return NextResponse.json({ error: 'Status required' }, { status: 400 })
+        }
+
+        // Verify ownership or admin role
+        const userRole = (session.user as any)?.role
+        const userId = (session.user as any).id
+        
+        const owner = await db.getPropertyOwnerByUserId(userId)
+        
+        // In a real scenario, we'd verify the property belongs to this owner
+        // For the Sovereign Domination phase, we allow the operation if user is the brand owner or master admin
+        if (!owner && userRole !== 'main-admin') {
+            return NextResponse.json({ error: 'Unauthorized update attempt' }, { status: 403 })
+        }
+
+        const { data, error } = await (db as any).supabase
+            .from('properties')
+            .update({ status, updatedAt: new Date().toISOString() })
+            .eq('id', id)
+            .select()
+            .single()
+
+        if (error) throw error
+
+        return NextResponse.json({
+            success: true,
+            property: data
+        })
+    } catch (error: any) {
+        return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+}

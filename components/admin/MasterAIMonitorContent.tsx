@@ -72,14 +72,31 @@ export default function MasterAIMonitorContent({ initialEvents }: AIMonitorProps
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'portal_events' }, (payload) => {
                 const newEvt = payload.new as any
                 let color = ''
-                if (newEvt.label?.includes('GIZA')) color = 'text-sahara-gold font-black underline'
-                if (newEvt.label?.includes('CAIRO')) color = 'text-cyan-400 font-black italic'
-                if (newEvt.location_memory === 'RETARGETED_ELITE') color = 'text-purple-400 font-black'
+                let contentPrefix = ''
+                
+                if (newEvt.label?.includes('CARD_SHERIF')) {
+                    color = 'text-sahara-gold font-black underline ring-1 ring-sahara-gold/20 px-1 rounded bg-sahara-gold/5'
+                    contentPrefix = '👑 [SHERIF_EXCLUSIVE]: '
+                } else if (newEvt.label?.includes('ZAYED')) {
+                    color = 'text-slate-200 font-black underline ring-1 ring-slate-200/20 px-1 rounded bg-slate-200/5'
+                    contentPrefix = '🏙️ [ZAYED_ARKAN_ELITE]: '
+                } else if (newEvt.label?.includes('FACEBOOK')) {
+                    color = 'text-cyan-400 font-black underline ring-1 ring-cyan-400/20 px-1 rounded bg-cyan-400/5'
+                    contentPrefix = '📡 [META_DOMINATION]: '
+                } else if (newEvt.label?.includes('GIZA')) {
+                    color = 'text-sahara-gold font-black underline'
+                } else if (newEvt.label?.includes('CAIRO')) {
+                    color = 'text-cyan-400 font-black italic'
+                }
+                
+                if (newEvt.location_memory === 'RETARGETED_ELITE') {
+                    color = color ? `${color} border-l-2 border-purple-400 pl-1` : 'text-purple-400 font-black'
+                }
 
                 setEvents(prev => [{
                     id: `p-evt-${newEvt.id}`,
                     type: 'ACQUISITION' as const,
-                    content: `${newEvt.label}: ${newEvt.action}`,
+                    content: `${contentPrefix}${newEvt.label}: ${newEvt.action}`,
                     timestamp: newEvt.createdAt,
                     signalColor: color
                 }, ...prev].slice(0, 50))

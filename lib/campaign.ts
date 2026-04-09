@@ -5,7 +5,7 @@ import { MarketingEngine } from './marketing-engine'
 export interface CreateCampaignInput {
   name: string
   description?: string
-  type: 'social_post' | 'email_campaign' | 'multi_channel'
+  type: 'social_post' | 'email_campaign' | 'multi_channel' | 'physical_bridge'
   platforms: ('facebook' | 'twitter' | 'linkedin' | 'whatsapp' | 'email')[]
   scheduleType: 'once' | 'recurring' | 'interval'
   startDate?: Date

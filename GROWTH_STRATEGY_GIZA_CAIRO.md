@@ -40,20 +40,19 @@ This manifest represents the absolute high-density roadmap for capturing the **C
 
 ## 🏛️ CONVERSION MILESTONES (THE 500-CLICK TARGET)
 
-### MILESTONE 1: THE FIRST 100 CLICKS
-- Focus: **CTR (Click-Through Rate)** optimization.
-- Action: If CTR is < 1.5%, we rotate from Tier 1 (Aggressive) to Tier 3 (Geographic).
+### **STAGE 3: THE PHYSICAL BRIDGE (GIZA OFFICE LOCK)** 🏔️
+- [x] **Asset**: Pioneer Elite Master `...9911.png` archived.
+- [x] **Forensic KPI**: `ref=card_sherif` conversions in the AI Monitor.
+- [x] **Mission**: Established 100/100 physical sovereignty.
 
-### MILESTONE 2: THE LEAD VELOCITY (250 CLICKS)
-- Focus: **Action bar engagement**.
-- Action: Monitor which of the 5 labels (**الموقع** vs **المعرض**) is the primary secondary intent driver.
-
-### MILESTONE 3: ABSOLUTE DOMINATION (500 CLICKS)
-- Focus: **Physical Office Hybrid Leads**.
-- Action: Coordinate the digital tracker data with incoming physical Giza office visits through QR code forensic tracking.
+### **STAGE 4: ACTIVATION & MONITORING (DOMINATION)** 🚀
+- [/] **Execution**: Generating `meta_ad_copy_giza_elite.md` (Tiers 1-3).
+- [ ] **Deployment**: Activate Meta Ads Manager targeting Giza/Cairo elite hubs.
+- [ ] **Monitoring**: Filter AI Monitor by `label: LEVER_PIONEER_REF_FACEBOOK_ELITE`.
+- [ ] **Milestone 1**: Reach the 500-Click Target for ROI validation.
 
 ---
-**Plan Version**: 2.0 (Elite Domination)
+**Plan Version**: 2.2 (Elite Domination)
 **Architect**: Antigravity AI
-**Status**: ACTIVE - PHASE 2 INITIATED
+**Status**: ACTIVE - PHASE 4 DOMINATION INITIATED
 **CWD**: c:\Users\Sherif-Rosas\EL_NAFEER\

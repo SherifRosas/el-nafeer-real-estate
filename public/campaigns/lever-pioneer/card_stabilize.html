@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIONEER_ELITE_STABILIZER // v3.1</title>
+    <style>
+        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+        #canvas-container { position: relative; width: 600px; height: 1050px; border: 2px solid #06b6d4; border-radius: 20px; overflow: hidden; background: #050505; }
+        canvas { width: 100%; height: 100%; }
+        .controls { margin-top: 20px; display: flex; gap: 10px; }
+        button { background: #06b6d4; border: none; padding: 10px 20px; border-radius: 10px; font-weight: 900; cursor: pointer; color: #000; }
+        .status { margin-top: 10px; font-size: 10px; font-family: monospace; color: #sahara-gold; }
+    </style>
+</head>
+<body>
+    <div id="canvas-container">
+        <canvas id="render"></canvas>
+    </div>
+    <div class="controls">
+        <button onclick="downloadMaster()">DOWNLOAD_PRODUCTION_MASTER</button>
+    </div>
+    <div class="status" id="status">STATUS: INITIALIZING_PIXEL_ENGINE...</div>
+
+    <script>
+        const canvas = document.getElementById('render');
+        const ctx = canvas.getContext('2d');
+        const status = document.getElementById('status');
+
+        // FORENSIC PATHS
+        const CARD_BASE = 'lever_official_business_card_pioneer_elite_absolute_final_v458_0_lock_17753832329911.png';
+        const QR_MASTER = 'lever_pioneer_qr.png';
+
+        canvas.width = 1200;
+        canvas.height = 2100;
+
+        async function init() {
+            try {
+                const cardImg = new Image();
+                cardImg.src = CARD_BASE;
+                await new Promise(r => cardImg.onload = r);
+                
+                status.innerText = 'STATUS: DESIGN_LOADED // FLATTENING_PERSPECTIVE...';
+                
+                // SURGICAL CROP & FLATTEN (Removing 3D mockup tilt)
+                // We crop the central 2D portion of the mockup
+                ctx.drawImage(cardImg, 100, 100, cardImg.width - 200, cardImg.height - 200, 0, 0, canvas.width, canvas.height);
+
+                const qrImg = new Image();
+                qrImg.src = QR_MASTER;
+                await new Promise(r => qrImg.onload = r);
+                
+                status.innerText = 'STATUS: RE_MERGING_QR_SOVEREIGNTY...';
+                
+                // PIXEL-PERFECT QR OVERLAY (Centered in the bottom third)
+                const qrSize = 512;
+                const x = (canvas.width - qrSize) / 2;
+                const y = canvas.height - qrSize - 250;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(x - 10, y - 10, qrSize + 20, qrSize + 20);
+                ctx.drawImage(qrImg, x, y, qrSize, qrSize);
+
+                status.innerText = 'STATUS: ABSOLUTE_STABILIZATION_COMPLETE // v3.1_LOCKED';
+            } catch (err) {
+                status.innerText = 'STATUS: ERROR // CHECK_PATHS';
+                console.error(err);
+            }
+        }
+
+        function downloadMaster() {
+            const link = document.createElement('a');
+            link.download = 'lever_pioneer_elite_90deg_production_master.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        init();
+    </script>
+</body>
+</html>

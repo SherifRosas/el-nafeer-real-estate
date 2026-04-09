@@ -5,10 +5,10 @@ import { randomUUID } from 'crypto'
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json()
-        const { category, action, label, userAgent } = body
+        const { category, action, label, userAgent, location_memory } = body
+        
+        console.log("LOGGING_QUANTUM_EVENT:", { label, action, location_memory });
 
-        // We use a generic 'portal_events' table to track these interactions
-        // This ensures the 500-click target is mathematically measured.
         const { error } = await supabase
             .from('portal_events')
             .insert({
@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
                 action: action || 'CLICK',
                 label: label || 'LEVER_PIONEER',
                 userAgent: userAgent || 'Unknown',
+                location_memory: location_memory || 'NEW_ACQUISITION',
                 createdAt: new Date().toISOString()
             })
 

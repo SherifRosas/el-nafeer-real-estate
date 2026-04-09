@@ -17,9 +17,19 @@ This directory contains the final minimalist branding signals for the Lever Pion
    - International branding signal with the regional contact: `+20 11 11171368`.
    - High-luminous Red Digital typography.
 
+4. **OFFICIAL BUSINESS CARD (VERTICAL TOWER)** (`lever_official_business_card_pioneer_elite_absolute_final_v458_0_lock_17753832329911.png`)
+   - High-density "Cyber-Luxe" vertical card design.
+   - 100/100 **User-Verified** Scannable QR integration.
+   - Corrected Formal Arabic: "ليفر الرائدة للمصاعد".
+   - Optimized for Giza/Cairo elite market conversion.
+
+5. **MINIMALIST PROFILE v221.0 CLEANED** (`lever_minimalist_profile_v221_0_cleaned`)
+   - The definitive minimalist circular hub logo.
+   - Cyber-Cyan concentric rings with floating 3D typography.
+
 ---
 
 ### 🏛️ BRANDING STANDARDS
-- **Background**: High-key pristine white (#FFFFFF).
-- **Core Colors**: Lever Metallic Blue, Industrial Silver, Luminous Red-Digital.
+- **Background**: High-key pristine white (#FFFFFF) for profile assets / Cyber-Black (#050505) for command assets.
+- **Core Colors**: Lever Metallic Blue, Industrial Silver, Luminous Red-Digital, Sahara Gold.
 - **Mission**: Vertical Excellence Defined.

@@ -1,4 +1,4 @@
-import { db } from '../lib/supabase'
+import { db, supabase } from '../lib/supabase'
 import { randomUUID } from 'crypto'
 
 async function onboard() {
@@ -50,6 +50,56 @@ async function onboard() {
             console.log('Brand profile orchestrated:', profile.id)
         } else {
             console.log('Brand profile already exists:', existingProfile.id)
+        }
+
+        // 3. Create Campaigns & Executions
+        console.log('Seeding campaign nodes...')
+        
+        const campaignsToSeed = [
+            {
+                name: 'Lever Pioneer Elite - Giza Domination',
+                type: 'multi_channel',
+                platforms: ['facebook', 'whatsapp'],
+                scheduleType: 'once',
+                content: 'Giza Domination Campaign',
+                config: { ref: 'facebook_elite', region: 'Giza' }
+            },
+            {
+                name: 'Lever Pioneer Elite - Zayed Expansion',
+                type: 'multi_channel',
+                platforms: ['facebook', 'whatsapp'],
+                scheduleType: 'once',
+                content: 'Zayed Elite Expansion Campaign',
+                config: { ref: 'zayed_elite', region: 'Zayed' }
+            },
+            {
+                name: 'Lever Pioneer Elite - Physical Bridge',
+                type: 'physical_bridge',
+                platforms: ['whatsapp'],
+                scheduleType: 'once',
+                content: 'Physical-to-Digital Bridge (Business Cards)',
+                config: { ref: 'card_sherif', region: 'Giza' }
+            }
+        ]
+
+        for (const campInput of campaignsToSeed) {
+            console.log(`Checking campaign: ${campInput.name}`)
+            const { data: existingCamps } = await supabase
+                .from('campaigns')
+                .select('*')
+                .eq('name', campInput.name)
+            
+            if (!existingCamps || existingCamps.length === 0) {
+                const now = new Date().toISOString()
+                const campaign = await db.createCampaign({
+                    ...campInput as any,
+                    brandProfileId: existingProfile?.id || user.id, // Direct fallback
+                    status: 'active'
+                })
+                console.log('Campaign Manifested:', campaign.id)
+            } else {
+                console.log('Campaign already sovereign:', existingCamps[0].id)
+            }
         }
 
         console.log('--- ONBOARDING COMPLETE ---')

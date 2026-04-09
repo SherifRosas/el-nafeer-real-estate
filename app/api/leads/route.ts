@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/supabase'
+import { nurture } from '@/lib/nurture'
 
 export async function POST(request: NextRequest) {
     try {
@@ -22,6 +23,10 @@ export async function POST(request: NextRequest) {
             propertyId,
             status: 'new'
         })
+
+        // INITIATE_NEURAL_NURTURE_SEQUENCE (v1.0)
+        // 🛰️ Autonomous follow-up triggered +60s post-capture
+        nurture.initiateSequence(lead)
 
         return NextResponse.json({
             success: true,
