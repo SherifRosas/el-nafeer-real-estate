@@ -72,7 +72,7 @@ export default function BeitAlKhairNeuralGrid({ properties, userRole, onStatusTo
   })
 
   return (
-    <div className="relative w-full aspect-square md:aspect-video bg-black rounded-[4rem] overflow-hidden border border-white/10 shadow-[0_0_120px_rgba(212,175,55,0.15)] touch-none cursor-crosshair">
+    <div className="relative w-full h-full bg-black rounded-[3rem] overflow-hidden border border-white/10 shadow-[0_0_120px_rgba(212,175,55,0.15)] touch-none cursor-crosshair">
       {/* 🌀 CYBER-GRID BACKGROUND */}
       <div className="absolute inset-0 opacity-20 pointer-events-none" 
            style={{ 
