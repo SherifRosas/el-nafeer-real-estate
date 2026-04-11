@@ -1,9 +1,39 @@
 /* Import Digital/Robotic Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* 💎 QUANTUM_LUXE_BRANDING_ANIMATIONS */
+@keyframes quantum-shine {
+  0% { transform: translateX(-150%) skewX(-25deg); }
+  50% { transform: translateX(150%) skewX(-25deg); }
+  100% { transform: translateX(150%) skewX(-25deg); }
+}
+
+@keyframes neural-pulse-heavy {
+  0%, 100% { filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.2)) brightness(1); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 25px rgba(197, 160, 89, 0.6)) brightness(1.2); transform: scale(1.02); }
+}
+
+.quantum-luxe-logo-container {
+  position: relative;
+  overflow: hidden;
+  animation: neural-pulse-heavy 4s ease-in-out infinite;
+}
+
+.quantum-luxe-logo-shine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: quantum-shine 6s infinite;
+  pointer-events: none;
+}
 
 /* ========================================
    CYBERPUNK THEME OVERRIDE - AGGRESSIVE

@@ -11,6 +11,7 @@ export default function MasterFooter() {
 
     // Cinematic Portals should be exclusive and full-screen without the global footer
     const isPortal = pathname?.includes('/portal/') || pathname?.includes('/lever-pioneer/');
+    const isBeitAlKhair = pathname?.includes('/beit-alkhair');
     if (isPortal) return null;
 
     return (
@@ -22,32 +23,35 @@ export default function MasterFooter() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-12">
                     {/* Unified Logo & Mission */}
                     <div className="lg:col-span-1 space-y-8">
-                        <Link href="/" className="flex items-center gap-4 group cursor-pointer inline-flex">
-                            <div className="w-20 h-20 bg-[#0a0a0a] shadow-[0_0_30px_rgba(212,175,55,0.1)] rounded-2xl p-2 flex items-center justify-center relative overflow-hidden transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 border border-sahara-gold/20">
+                        <Link href={isBeitAlKhair ? "/beit-alkhair" : "/"} className="flex items-center gap-4 group cursor-pointer inline-flex">
+                            <div className={`w-20 h-20 bg-[#0a0a0a] shadow-[0_0_30px_rgba(212,175,55,0.1)] rounded-2xl p-2 flex items-center justify-center relative overflow-hidden transition-all duration-500 group-hover:scale-110 border border-sahara-gold/20 ${isBeitAlKhair ? 'quantum-luxe-logo-container' : ''}`}>
                                 <img
-                                    src={isArabic ? '/logos/logo-ar.png' : '/logos/logo-en.png'}
-                                    alt="EL-NAFEER Logo"
-                                    className="w-full h-full object-contain"
+                                    src={isBeitAlKhair ? '/assets/branding/logo.png' : (isArabic ? '/logos/logo-ar.png' : '/logos/logo-en.png')}
+                                    alt={isBeitAlKhair ? "Beit Al-Khair Logo" : "EL-NAFEER Logo"}
+                                    className="w-full h-full object-contain relative z-10"
                                 />
+                                {isBeitAlKhair && <div className="quantum-luxe-logo-shine" />}
                                 <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                             </div>
                             <div>
-                                <h3 className="text-3xl font-black italic tracking-tighter text-white group-hover:text-sahara-gold transition-colors">
-                                    EL-NAFEER
+                                <h3 className={`text-3xl font-black italic tracking-tighter group-hover:text-sahara-gold transition-colors ${isBeitAlKhair ? 'text-luxury-gold' : 'text-white'}`}>
+                                    {isBeitAlKhair ? (isArabic ? "بيت الخير" : "BEIT AL-KHAIR") : "EL-NAFEER"}
                                 </h3>
                                 <div className="h-1 w-12 bg-sahara-gold mt-1 group-hover:w-20 transition-all duration-500" />
                             </div>
                         </Link>
                         <div className="space-y-4">
                             <p className="text-gray-400 font-bold leading-relaxed uppercase tracking-tight text-xs border-l-2 border-sahara-gold/30 pl-4 py-1">
-                                {isArabic
-                                    ? 'التكنولوجيا الرائدة لتجربة عقارية استثنائية في قلب مصر.'
-                                    : 'Pioneering technology for an exceptional real estate experience in the heart of Egypt.'}
+                                {isBeitAlKhair 
+                                    ? (isArabic ? 'بوابة بيع وشراء العقارات في بنها وطوخ.' : 'Real Estate Gateways for Banha & Toukh.')
+                                    : (isArabic ? 'التكنولوجيا الرائدة لتجربة عقارية استثنائية في قلب مصر.' : 'Pioneering technology for an exceptional real estate experience in the heart of Egypt.')
+                                }
                             </p>
                             <p className="text-gray-500 font-bold uppercase text-[10px] leading-relaxed tracking-wider max-w-md italic">
-                                {isArabic
-                                    ? 'نعيد تعريف الفخامة العقارية من خلال قوة الذكاء الاصطناعي وفن التصميم المعاصر.'
-                                    : 'Redefining luxury real estate through the raw power of AI orchestration and contemporary architectural mastery.'}
+                                {isBeitAlKhair
+                                    ? (isArabic ? 'إتقان معماري وسكن يليق بك بضمان بيت الخير.' : 'Architectural mastery and prestige living by Beit Al-Khair.')
+                                    : (isArabic ? 'نعيد تعريف الفخامة العقارية من خلال قوة الذكاء الاصطناعي وفن التصميم المعاصر.' : 'Redefining luxury real estate through the raw power of AI orchestration and contemporary architectural mastery.')
+                                }
                             </p>
                         </div>
                     </div>
