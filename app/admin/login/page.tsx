@@ -20,7 +20,9 @@ export default function AdminLoginPage() {
   useEffect(() => {
     const userRole = (session?.user as any)?.role
     if (status === 'authenticated' && (userRole === 'admin' || userRole === 'main-admin')) {
-      router.push('/admin/master')
+      const searchParams = new URLSearchParams(window.location.search)
+      const callbackUrl = searchParams.get('callbackUrl')
+      router.push(callbackUrl || '/admin/master')
     }
   }, [session, status, router])
 
@@ -41,7 +43,9 @@ export default function AdminLoginPage() {
         setLoading(false)
       } else if (result?.ok) {
         setTimeout(() => {
-          window.location.replace('/admin/master')
+          const searchParams = new URLSearchParams(window.location.search)
+          const callbackUrl = searchParams.get('callbackUrl')
+          window.location.replace(callbackUrl || '/admin/master')
         }, 800)
       }
     } catch (err) {
