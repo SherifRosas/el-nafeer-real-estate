@@ -59,7 +59,7 @@ const CITY_DATA: { [key: string]: CityData } = {
     id: 'toukh',
     name: 'TOUKH_DOM_NODE',
     nameAr: 'طوخ القليوبية',
-    coords: { x: 450, y: 320 },
+    coords: { x: 410, y: 300 },
     landmarks: ['Highway spine'],
     qasrs: [
       { 
