@@ -38,7 +38,7 @@ export default function BeitAlKhairUnifiedConsole({ properties }: UnifiedConsole
 
   const handleQasrSelect = (qasrId: string) => {
     setSelectedQasr(qasrId)
-    // Removed automatic GRID switch to allow MapConsole internal building view to manifest
+    setViewState('GRID') // Manifest the detailed Building-Specific Construction HUD
   }
 
   const filteredProperties = selectedQasr 
