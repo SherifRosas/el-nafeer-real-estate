@@ -57,13 +57,13 @@ export default function BeitAlKhairNeuralGrid({ properties, userRole, onStatusTo
                 <span className="text-[10px] font-black text-sahara-gold uppercase tracking-[0.5em] italic">GEOGRAPHIC_SYNC_ACTIVE</span>
             </div>
             
-            <h2 className="text-6xl font-black text-white italic tracking-[-0.1em] uppercase leading-none mb-4 text-luxury-gold">QASR_{buildingId}</h2>
+            <h2 className="text-6xl font-black text-white italic tracking-[-0.1em] uppercase leading-none mb-4 text-luxury-gold">QASR_{numericId}</h2>
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-10">QALYUBIA_DOMAIN // BEIT_AL_KHAIR</p>
 
             <div className="w-full aspect-square rounded-[3rem] overflow-hidden border border-white/10 relative group mb-8">
                 <img 
                     src={imagePath} 
-                    alt={`Al-Qasr ${buildingId}`}
+                    alt={`Al-Qasr ${numericId}`}
                     className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 hover:scale-110"
                     onError={(e) => {
                         (e.target as HTMLImageElement).src = '/assets/branding/logo.png'
