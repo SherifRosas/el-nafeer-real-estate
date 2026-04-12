@@ -59,16 +59,16 @@ export default function BeitAlKhairUnifiedConsole({ properties }: UnifiedConsole
 
       {/* 🏙️ OFFICIAL_QUANTUM_LOGO_HUD */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 z-[60] flex flex-col items-center gap-2 pointer-events-none group">
-        <div className="quantum-luxe-logo-container w-32 h-32 rounded-3xl overflow-hidden border border-sahara-gold/30 p-2 bg-black/60 backdrop-blur-3xl shadow-[0_0_50px_rgba(197,160,89,0.3)]">
+        <div className="quantum-luxe-logo-container w-32 h-32 overflow-hidden flex items-center justify-center">
           <img 
             src="/assets/branding/logo.png" 
             alt="Beit Al-Khair Official Logo" 
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain brightness-110"
           />
           <div className="quantum-luxe-logo-shine" />
         </div>
-        <div className="flex flex-col items-center">
-          <span className="text-[8px] font-black text-sahara-gold uppercase tracking-[0.8em] italic leading-none ml-2">BEIT AL-KHAIR</span>
+        <div className="flex flex-col items-center -mt-2">
+          <span className="text-[8px] font-black text-sahara-gold uppercase tracking-[0.8em] italic leading-none ml-2 drop-shadow-[0_0_10px_rgba(197,160,89,0.5)]">BEIT AL-KHAIR</span>
           <span className="text-[6px] font-black text-gray-500 uppercase tracking-[0.4em] mt-1">EST. 2024 // QUANTUM_STABILIZED</span>
         </div>
       </div>
