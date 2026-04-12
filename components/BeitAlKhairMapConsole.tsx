@@ -128,36 +128,78 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
                 </div>
               </div>
 
-              <div className="relative flex-1 flex items-center justify-center">
-                  <svg viewBox="0 0 800 500" className="w-full h-full drop-shadow-[0_0_50px_rgba(212,175,55,0.1)]">
+                <div className="relative flex-1 flex items-center justify-center p-4">
+                  <svg 
+                    viewBox="0 0 800 500" 
+                    preserveAspectRatio="xMidYMid meet"
+                    className="w-full h-full max-h-[70vh] drop-shadow-[0_0_50px_rgba(212,175,55,0.05)]"
+                  >
                     <defs>
                       <radialGradient id="nodePulse" cx="50%" cy="50%" r="50%">
                         <stop offset="0%" stopColor="#c5a059" stopOpacity="0.8" />
                         <stop offset="100%" stopColor="#c5a059" stopOpacity="0" />
                       </radialGradient>
+                      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5"/>
+                      </pattern>
                     </defs>
 
-                    {/* 🌊 NILE_RIVER_SPINE (West) */}
-                    <motion.path d="M120,-50 Q160,100 130,250 T140,550" fill="none" stroke="#00ffff" strokeWidth="12" strokeOpacity="0.1" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 4 }} />
+                    {/* 📐 TACTICAL_GRID_OVERLAY */}
+                    <rect width="800" height="500" fill="url(#grid)" />
+
+                    {/* 🌊 NILE_RIVER_SPINE (Delta Artery) */}
+                    <motion.path 
+                      d="M100,-50 C150,150 80,300 120,550" 
+                      fill="none" 
+                      stroke="#00ffff" 
+                      strokeWidth="20" 
+                      strokeOpacity="0.05" 
+                      initial={{ pathLength: 0 }} 
+                      animate={{ pathLength: 1 }} 
+                      transition={{ duration: 4 }} 
+                    />
                     
+                    {/* 🛣️ REGIONAL_RING_ROAD (Tactical Curve) */}
+                    <motion.path 
+                      d="M-50,420 Q400,350 850,420" 
+                      fill="none" 
+                      stroke="rgba(255,255,255,0.05)" 
+                      strokeWidth="40" 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                    />
+                    <text x="400" y="405" className="text-[8px] font-black fill-gray-700 uppercase tracking-[0.8em] pointer-events-none">REGIONAL_RING_ROAD_LINK</text>
+
                     {/* 🛣️ ALEXANDRIA_AGRICULTURE_ROAD (Artery 1) */}
-                    <motion.path d="M250,-20 L350,220 L480,480 L550,600" fill="none" stroke="#c5a059" strokeWidth="4" strokeOpacity="0.15" />
+                    <motion.path 
+                      d="M280,-20 L350,180 L480,320 L600,600" 
+                      fill="none" 
+                      stroke="#c5a059" 
+                      strokeWidth="3" 
+                      strokeOpacity="0.2" 
+                    />
+                    
+                    {/* 🧭 ORIENTATION_MARKERS */}
+                    <text x="400" y="480" className="text-[10px] font-black fill-gray-500 uppercase tracking-[1em] text-center opacity-30">↑ NORTH_DELTA // SOUTH_CAIRO_GIZA ↓</text>
+                    <line x1="100" y1="475" x2="700" y2="475" stroke="rgba(255,255,255,0.1)" strokeWidth="1" strokeDasharray="5,5" />
 
                     {/* 📍 BANHA_DOMINATION_NODE */}
                     <g className="cursor-pointer group" onMouseEnter={() => setHoveredNode('banha')} onMouseLeave={() => setHoveredNode(null)} onClick={() => { setSelectedCity(CITY_DATA.banha); setHoveredNode(null); }}>
-                      <motion.circle cx={CITY_DATA.banha.coords.x} cy={CITY_DATA.banha.coords.y} r="12" fill="#c5a059" animate={{ scale: [1, 1.3, 1] }} transition={{ repeat: Infinity, duration: 3 }} />
-                      <circle cx={CITY_DATA.banha.coords.x} cy={CITY_DATA.banha.coords.y} r="35" fill="url(#nodePulse)" className="animate-pulse" />
-                      <text x={CITY_DATA.banha.coords.x + 20} y={CITY_DATA.banha.coords.y - 10} className="text-xl font-black fill-white uppercase tracking-[0.4em] italic robotic-digits">BANHA</text>
+                      <motion.circle cx={CITY_DATA.banha.coords.x} cy={CITY_DATA.banha.coords.y} r="14" fill="#c5a059" animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 3 }} />
+                      <circle cx={CITY_DATA.banha.coords.x} cy={CITY_DATA.banha.coords.y} r="45" fill="url(#nodePulse)" className="animate-pulse" />
+                      <text x={CITY_DATA.banha.coords.x + 25} y={CITY_DATA.banha.coords.y - 15} className="text-2xl font-black fill-white uppercase tracking-[0.4em] italic robotic-digits drop-shadow-lg">BANHA</text>
+                      <text x={CITY_DATA.banha.coords.x + 25} y={CITY_DATA.banha.coords.y + 5} className="text-[8px] font-black fill-sahara-gold uppercase tracking-[0.2em] opacity-60">HQ_DOMAIN</text>
                     </g>
 
                     {/* 📍 TOUKH_DOMINATION_NODE */}
                     <g className="cursor-pointer group" onMouseEnter={() => setHoveredNode('toukh')} onMouseLeave={() => setHoveredNode(null)} onClick={() => { setSelectedCity(CITY_DATA.toukh); setHoveredNode(null); }}>
                       <motion.circle cx={CITY_DATA.toukh.coords.x} cy={CITY_DATA.toukh.coords.y} r="10" fill="#c5a059" animate={{ scale: [1, 1.4, 1] }} transition={{ repeat: Infinity, duration: 3, delay: 1 }} />
-                      <circle cx={CITY_DATA.toukh.coords.x} cy={CITY_DATA.toukh.coords.y} r="25" fill="url(#nodePulse)" className="animate-pulse" style={{ animationDelay: '1s' }} />
-                      <text x={CITY_DATA.toukh.coords.x + 20} y={CITY_DATA.toukh.coords.y + 10} className="text-xl font-black fill-white uppercase tracking-[0.4em] italic robotic-digits">TOUKH</text>
+                      <circle cx={CITY_DATA.toukh.coords.x} cy={CITY_DATA.toukh.coords.y} r="30" fill="url(#nodePulse)" className="animate-pulse" style={{ animationDelay: '1s' }} />
+                      <text x={CITY_DATA.toukh.coords.x + 25} y={CITY_DATA.toukh.coords.y + 15} className="text-2xl font-black fill-white uppercase tracking-[0.4em] italic robotic-digits drop-shadow-lg">TOUKH</text>
+                      <text x={CITY_DATA.toukh.coords.x + 25} y={CITY_DATA.toukh.coords.y + 30} className="text-[8px] font-black fill-sahara-gold uppercase tracking-[0.2em] opacity-60">SOUTHERN_NODE</text>
                     </g>
                   </svg>
-              </div>
+                </div>
            </div>
         ) : (
           <motion.div 
