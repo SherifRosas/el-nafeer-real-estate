@@ -35,7 +35,7 @@ const CITY_DATA: { [key: string]: CityData } = {
         units: 14, 
         status: 'active',
         phase: 'Flowers District (تقسيم الزهور) // 4th Floor Columns',
-        image: '/assets/buildings/qasr-21.png'
+        image: 'qasr-21.png'
       },
       { 
         id: 'qasr-22', 
@@ -43,7 +43,7 @@ const CITY_DATA: { [key: string]: CityData } = {
         units: 12, 
         status: 'active',
         phase: 'Flowers District (تقسيم الزهور) // Excavation Phase',
-        image: '/assets/buildings/qasr-22.png'
+        image: 'qasr-22.png'
       },
       { 
         id: 'qasr-18', 
@@ -51,7 +51,7 @@ const CITY_DATA: { [key: string]: CityData } = {
         units: 8, 
         status: 'active',
         phase: 'Examination Bridge (كوبري الفحص) // Al-Habitat District',
-        image: '/assets/buildings/qasr-18.png'
+        image: 'qasr-18.png'
       },
     ]
   },
@@ -67,7 +67,8 @@ const CITY_DATA: { [key: string]: CityData } = {
         name: 'AL-QASR 19', 
         units: 5, 
         status: 'active',
-        phase: 'Stabilized'
+        phase: 'Stabilized // Luxury Facade Mastery',
+        image: 'qasr-19.png'
       },
       { 
         id: 'qasr-15', 
@@ -75,7 +76,7 @@ const CITY_DATA: { [key: string]: CityData } = {
         units: 10, 
         status: 'active',
         phase: 'Court St (شارع المحكمة) // Next to Central',
-        image: '/assets/buildings/qasr-15.png'
+        image: 'qasr-15.png'
       },
     ]
   }
@@ -234,7 +235,7 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
                   {q.image ? (
                     <div className="absolute inset-0 z-0">
                       <img 
-                        src={`/brain/0050deeb-1fda-41ae-a73f-1b6e50868d45/${q.image}`} 
+                        src={`/assets/buildings/${q.image}`} 
                         alt={q.name}
                         className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity grayscale-[30%] group-hover:grayscale-0"
                       />
