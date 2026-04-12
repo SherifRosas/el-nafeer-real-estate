@@ -152,7 +152,8 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
 
                     {/* 📍 TOUKH_DOMINATION_NODE */}
                     <g className="cursor-pointer group" onMouseEnter={() => setHoveredNode('toukh')} onMouseLeave={() => setHoveredNode(null)} onClick={() => { setSelectedCity(CITY_DATA.toukh); setHoveredNode(null); }}>
-                      <motion.circle cx={CITY_DATA.toukh.coords.x} cy={CITY_DATA.toukh.coords.y} r="8" fill="#c5a059" animate={{ scale: [1, 1.5, 1] }} transition={{ repeat: Infinity, duration: 3, delay: 1 }} />
+                      <motion.circle cx={CITY_DATA.toukh.coords.x} cy={CITY_DATA.toukh.coords.y} r="10" fill="#c5a059" animate={{ scale: [1, 1.4, 1] }} transition={{ repeat: Infinity, duration: 3, delay: 1 }} />
+                      <circle cx={CITY_DATA.toukh.coords.x} cy={CITY_DATA.toukh.coords.y} r="25" fill="url(#nodePulse)" className="animate-pulse" style={{ animationDelay: '1s' }} />
                       <text x={CITY_DATA.toukh.coords.x + 20} y={CITY_DATA.toukh.coords.y + 10} className="text-xl font-black fill-white uppercase tracking-[0.4em] italic robotic-digits">TOUKH</text>
                     </g>
                   </svg>
