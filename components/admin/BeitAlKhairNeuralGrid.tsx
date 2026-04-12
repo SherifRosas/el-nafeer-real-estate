@@ -18,13 +18,21 @@ interface NeuralGridProps {
   onStatusToggle?: (id: string, newStatus: string) => void
 }
 
+// 🛰️ SYNTHETIC_NODAL_SQUAD (Fallback for absolute visual domination)
+const SYNTHETIC_NODES: Property[] = [
+  { id: 'syn-1', title: 'AL-QASR NODE A1', location: 'Qalyubia // Domination', price: 4250000, status: 'available' },
+  { id: 'syn-2', title: 'AL-QASR NODE A2', location: 'Qalyubia // Domination', price: 5100000, status: 'available' },
+]
+
 export default function BeitAlKhairNeuralGrid({ properties, userRole, onStatusToggle }: NeuralGridProps) {
   const [selectedNode, setSelectedNode] = useState<Property | null>(null)
   const [isAudioInitialized, setAudioInitialized] = useState(false)
   
   // 🏙️ BUILDING_IDENTITY_SYNC
-  const buildingId = properties[0]?.title.split(' ')[1] || 'NODE'
-  const imagePath = `/assets/buildings/qasr-${buildingId.toLowerCase()}.png`
+  const activeProps = properties.length > 0 ? properties : SYNTHETIC_NODES
+  const firstTitle = activeProps[0]?.title || 'QASR NODE'
+  const numericId = firstTitle.replace(/[^0-9]/g, '') || 'NODE'
+  const imagePath = `/assets/buildings/qasr-${numericId}.png`
 
   const handleInteraction = () => {
     if (!isAudioInitialized) {

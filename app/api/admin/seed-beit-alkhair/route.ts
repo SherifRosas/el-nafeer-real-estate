@@ -36,8 +36,10 @@ export async function GET() {
             },
             portfolio: [
                 { title: 'Al-Qasr 21', location: 'New Lotus', status: '60% Complete' },
-                { title: 'Al-Qasr 19', location: 'New Lotus', status: '80% Complete' },
-                { title: 'Al-Qasr 18', location: 'Toukh', status: '20% Complete' }
+                { title: 'Al-Qasr 22', location: 'Flowers District', status: 'Excavation' },
+                { title: 'Al-Qasr 18', location: 'Banha Bridge', status: '20% Complete' },
+                { title: 'Al-Qasr 19', location: 'Toukh South', status: 'Stabilized' },
+                { title: 'Al-Qasr 15', location: 'Toukh Central', status: '90% Complete' }
             ]
         }
 

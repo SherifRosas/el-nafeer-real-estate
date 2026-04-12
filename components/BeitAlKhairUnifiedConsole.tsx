@@ -42,7 +42,11 @@ export default function BeitAlKhairUnifiedConsole({ properties }: UnifiedConsole
   }
 
   const filteredProperties = selectedQasr 
-    ? properties.filter(p => p.title.includes(selectedQasr.replace('_DOM_NODE', '').replace('AL-QASR ', ''))) 
+    ? properties.filter(p => {
+        const qId = selectedQasr.toLowerCase().replace(/[^0-9]/g, '')
+        const pTitle = p.title.toLowerCase()
+        return pTitle.includes(qId) || pTitle.includes(selectedQasr.toLowerCase())
+      }) 
     : properties
 
   return (
