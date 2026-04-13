@@ -22,30 +22,30 @@ export default async function BeitAlKhairPage() {
       <div className="hud-sweep z-[100]" />
       
       {/* 📟 TOP_LEVEL_SYMMETRIC_HEADER */}
-      <header className="flex justify-between items-center mb-1 lg:mb-4 border-b border-sahara-gold/20 pb-1 lg:pb-3 px-1 lg:px-4 relative z-50 bg-black/40 backdrop-blur-md">
-        <div className="flex items-center gap-4 lg:gap-8">
-            <div className="w-12 h-12 lg:w-20 lg:h-20 flex items-center justify-center overflow-hidden rounded-lg">
+      <header className="flex justify-between items-center mb-1 lg:mb-4 border-b border-sahara-gold/10 pb-1 lg:pb-3 px-2 lg:px-6 relative z-50 bg-[#0a0a0a]/80 backdrop-blur-2xl">
+        <div className="flex items-center gap-3 lg:gap-6">
+            <div className="w-10 h-10 lg:w-16 lg:h-16 flex items-center justify-center overflow-hidden rounded-xl border border-sahara-gold/20 bg-black/50 shadow-[0_0_20px_rgba(197,160,89,0.1)]">
                 <img 
                     src="/campaigns/beit-alkhair/official-logo.jpg" 
                     alt="Beit Al-Khair Official" 
-                    className="w-full h-full object-contain brightness-110 contrast-125 hover:scale-110 transition-transform"
+                    className="w-full h-full object-contain brightness-110"
                 />
             </div>
             <div className="flex flex-col">
-                <h1 className="text-xl lg:text-3xl font-black text-white italic uppercase tracking-[-0.02em] leading-none mb-0.5 lg:mb-1 rtl:font-sans">
+                <h1 className="text-sm lg:text-2xl font-bold text-[#fcfcfc] uppercase tracking-wide leading-none mb-0.5 lg:mb-1 !font-['Cairo']">
                   بيت الخير للتطوير العقاري
                 </h1>
-                <div className="flex items-center gap-1.5 lg:gap-2 opacity-60">
-                  <span className="w-1 h-1 lg:w-2 lg:h-2 bg-sahara-gold rounded-full animate-pulse" />
-                  <p className="text-[5px] lg:text-[7px] font-black text-gray-400 uppercase tracking-[0.3em] lg:tracking-[0.6em] robotic-digits leading-none">SOVEREIGN_NETWORK // v3.5.0_PROD</p>
+                <div className="flex items-center gap-1.5 lg:gap-2 opacity-40">
+                  <span className="w-1 h-1 lg:w-1.5 lg:h-1.5 bg-sahara-gold rounded-full" />
+                  <p className="text-[5px] lg:text-[7px] font-black text-white uppercase tracking-[0.2em] lg:tracking-[0.4em] robotic-digits leading-none">BEIT_AL_KHAIR_PLATFORM // v3.5.0-ESTABLISHED</p>
                 </div>
             </div>
         </div>
 
         <div className="flex items-center gap-4 lg:gap-16">
             <div className="flex flex-col items-end">
-                <span className="text-[5px] lg:text-[8px] font-black text-sahara-gold/60 robotic-digits uppercase tracking-widest leading-none mb-1">DOMAIN_HUB</span>
-                <span className="text-[7px] lg:text-xs font-black text-white italic uppercase tracking-[0.1em] lg:tracking-[0.2em] leading-none border-b border-sahara-gold/40">QALYUBIA_IV</span>
+                <span className="text-[5px] lg:text-[7px] font-black text-sahara-gold/50 uppercase tracking-[0.4em] leading-none mb-1">SOVEREIGN_NODE</span>
+                <span className="text-[6px] lg:text-[10px] font-black text-white/80 italic uppercase tracking-[0.1em] border-b border-sahara-gold/20 pb-0.5">QALYUBIA_DOMAIN_IV</span>
             </div>
         </div>
       </header>
