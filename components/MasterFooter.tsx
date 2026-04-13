@@ -12,7 +12,9 @@ export default function MasterFooter() {
     // Cinematic Portals should be exclusive and full-screen without the global footer
     const isPortal = pathname?.includes('/portal/') || pathname?.includes('/lever-pioneer/');
     const isBeitAlKhair = pathname?.includes('/beit-alkhair');
-    if (isPortal) return null;
+
+    // Absolute Tail Removal for elite immersion
+    if (isPortal || isBeitAlKhair) return null;
 
     return (
         <footer className="relative milky-glass border-t border-white/10 py-12 overflow-hidden">

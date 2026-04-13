@@ -116,22 +116,6 @@ export default async function BeitAlKhairPage() {
         </section>
 
       </div>
-
-      {/* 📟 BOTTOM_STATUS_TICKER */}
-      <footer className="relative milky-glass border-t border-white/10 py-2 lg:py-4 overflow-hidden mt-2">
-        <div className="max-w-7xl mx-auto px-4 relative z-10 flex justify-between items-center">
-            <div className="flex items-center gap-3 lg:gap-6 text-[6px] lg:text-[8px] font-black text-gray-600 uppercase tracking-[0.3em] italic leading-none">
-                <div className="flex gap-1">
-                    {[1,2,3].map(i => <div key={i} className="w-1 h-1 bg-sahara-gold rounded-full animate-pulse" />)}
-                </div>
-                ENCRYPTED_NEURAL_UPLINK // ESTABLISHED
-            </div>
-            <div className="flex items-center gap-4 lg:gap-12 text-[6px] lg:text-[10px] font-black leading-none robotic-digits">
-                <span className="text-gray-700 uppercase tracking-[0.2em]">SOVEREIGN_COPYRIGHT // 2026</span>
-                <span className="text-luxury-gold italic tracking-[0.1em] font-extrabold select-none">BEIT_AL_KHAIR_EXEC</span>
-            </div>
-        </div>
-      </footer>
     </main>
   )
 }
