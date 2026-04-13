@@ -176,7 +176,7 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
         } catch (error) { console.error("Lead error:", error); } finally { setQuoteLoading(false); }
     }
 
-    const CACHE_V = "?v=174.0";
+    const CACHE_V = "?v=188.0";
 
     return (
         <div style={{ position: 'relative', width: '100vw', height: '100vh', backgroundColor: '#000', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>

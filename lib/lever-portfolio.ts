@@ -35,11 +35,7 @@ export const LEVER_PORTFOLIO: PortfolioItem[] = [
     // --- مصاعد اتوماتك ---
     { title: "اتوماتك موديل 0", cat: "مصاعد اتوماتك", vid: `${BASE_PATH}/مصاعد اتوماتك/WhatsApp Video0.mp4` },
     { title: "اتوماتك موديل 001", cat: "مصاعد اتوماتك", vid: `${BASE_PATH}/مصاعد اتوماتك/WhatsApp Video001.mp4` },
-    { title: "اتوماتك موديل 002", cat: "مصاعد اتوماتك", vid: `${BASE_PATH}/مصاعد اتوماتك/WhatsApp Video002.mp4` },
-    { title: "اتوماتك موديل 003", cat: "مصاعد اتوماتك", vid: `${BASE_PATH}/مصاعد اتوماتك/WhatsApp Video003.mp4` },
     { title: "اتوماتك موديل 1", cat: "مصاعد اتوماتك", vid: `${BASE_PATH}/مصاعد اتوماتك/WhatsApp Video1.mp4` },
-    { title: "اتوماتك موديل 2", cat: "مصاعد اتوماتك", vid: `${BASE_PATH}/مصاعد اتوماتك/WhatsApp Video2.mp4` },
-    { title: "اتوماتك موديل 3", cat: "مصاعد اتوماتك", vid: `${BASE_PATH}/مصاعد اتوماتك/WhatsApp Video3.mp4` },
 
     // --- مصاعد نصف اتوماتك ---
     { title: "نصف اتوماتك فيديو 01", cat: "مصاعد نصف اتوماتك", vid: `${BASE_PATH}/مصاعد نصف اتوماتك/WhatsApp Video01.mp4` },
