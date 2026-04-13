@@ -315,7 +315,16 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                                         {isImage ? (
                                             <img src={p.vid} alt={p.title} style={{ width: '100%', height: '110px', objectFit: 'cover' }} />
                                         ) : (
-                                            <video src={p.vid} autoPlay muted loop playsInline style={{ width: '100%', height: '110px', objectFit: 'cover' }} />
+                                            <video 
+                                                src={p.vid} 
+                                                autoPlay 
+                                                muted 
+                                                loop 
+                                                playsInline 
+                                                webkit-playsinline="true"
+                                                preload="metadata"
+                                                style={{ width: '100%', height: '110px', objectFit: 'cover' }} 
+                                            />
                                         )}
                                         <div style={{ padding: '8px', fontSize: '8px', textAlign: 'center', color: '#ccc' }}>{p.title}</div>
                                     </div>
@@ -333,7 +342,15 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                         {/\.(jpg|jpeg|png|webp|gif|bmp)$/i.test(fullScreenVid) ? (
                             <img src={fullScreenVid} alt="Full Screen" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
                         ) : (
-                            <video src={fullScreenVid} controls autoPlay playsInline style={{ maxWidth: '100%', maxHeight: '100%' }} /> 
+                            <video 
+                                src={fullScreenVid} 
+                                controls 
+                                autoPlay 
+                                playsInline 
+                                webkit-playsinline="true"
+                                preload="auto"
+                                style={{ maxWidth: '100%', maxHeight: '100%' }} 
+                            /> 
                         )}
                     </div>
                 </div>
