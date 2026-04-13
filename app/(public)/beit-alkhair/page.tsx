@@ -22,31 +22,30 @@ export default async function BeitAlKhairPage() {
       <div className="hud-sweep z-[100]" />
       
       {/* 📟 TOP_LEVEL_SYMMETRIC_HEADER */}
-      <header className="flex justify-between items-end mb-1 lg:mb-4 border-b border-sahara-gold/20 pb-1 lg:pb-3 px-1 lg:px-4 relative z-50">
-        <div className="flex items-center gap-2 lg:gap-8">
-            <div className="w-8 h-8 lg:w-14 lg:h-14 bg-black border border-sahara-gold rounded-lg lg:rounded-2xl flex items-center justify-center font-black text-sahara-gold text-xs lg:text-2xl italic shadow-[0_0_30px_rgba(212,175,55,0.3)] group hover:rotate-6 transition-transform">BK</div>
+      <header className="flex justify-between items-center mb-1 lg:mb-4 border-b border-sahara-gold/20 pb-1 lg:pb-3 px-1 lg:px-4 relative z-50 bg-black/40 backdrop-blur-md">
+        <div className="flex items-center gap-4 lg:gap-8">
+            <div className="w-12 h-12 lg:w-20 lg:h-20 flex items-center justify-center overflow-hidden rounded-lg">
+                <img 
+                    src="/campaigns/beit-alkhair/official-logo.jpg" 
+                    alt="Beit Al-Khair Official" 
+                    className="w-full h-full object-contain brightness-110 contrast-125 hover:scale-110 transition-transform"
+                />
+            </div>
             <div className="flex flex-col">
-                <h1 className="text-lg lg:text-4xl font-black italic uppercase tracking-[-0.05em] leading-none mb-0.5 lg:mb-1 text-luxury-gold">
-                  BEIT AL-KHAIR
+                <h1 className="text-xl lg:text-3xl font-black text-white italic uppercase tracking-[-0.02em] leading-none mb-0.5 lg:mb-1 rtl:font-sans">
+                  بيت الخير للتطوير العقاري
                 </h1>
-                <div className="flex items-center gap-1.5 lg:gap-2">
+                <div className="flex items-center gap-1.5 lg:gap-2 opacity-60">
                   <span className="w-1 h-1 lg:w-2 lg:h-2 bg-sahara-gold rounded-full animate-pulse" />
-                  <p className="text-[5px] lg:text-[8px] font-black text-gray-500 uppercase tracking-[0.3em] lg:tracking-[0.8em] robotic-digits leading-none">SOVEREIGN_NETWORK // v3.0.0_QUANTUM</p>
+                  <p className="text-[5px] lg:text-[7px] font-black text-gray-400 uppercase tracking-[0.3em] lg:tracking-[0.6em] robotic-digits leading-none">SOVEREIGN_NETWORK // v3.5.0_PROD</p>
                 </div>
             </div>
         </div>
 
         <div className="flex items-center gap-4 lg:gap-16">
-            <div className="text-right hidden xl:block">
-                <p className="text-[10px] font-black text-sahara-gold uppercase tracking-[0.5em] mb-1 italic">AMORTIZATION_SYNC_ACTIVE</p>
-                <div className="flex gap-2 justify-end">
-                  {[1,2,3,4,5,6].map(i => <div key={i} className="w-3 h-1 bg-sahara-gold/20 rounded-full" />)}
-                </div>
-            </div>
-            <div className="hidden lg:block w-px h-12 bg-white/10" />
             <div className="flex flex-col items-end">
-                <span className="text-[5px] lg:text-[10px] font-black text-gray-400 robotic-digits uppercase tracking-widest leading-none mb-0.5 lg:mb-2">DOMAIN_COORDINATES</span>
-                <span className="text-[6px] lg:text-xs font-black text-white italic uppercase tracking-[0.1em] lg:tracking-[0.3em] leading-none border-b border-sahara-gold/40 shadow-[0_5px_15px_rgba(212,175,55,0.1)]">QALYUBIA_DOMAIN_HUB</span>
+                <span className="text-[5px] lg:text-[8px] font-black text-sahara-gold/60 robotic-digits uppercase tracking-widest leading-none mb-1">DOMAIN_HUB</span>
+                <span className="text-[7px] lg:text-xs font-black text-white italic uppercase tracking-[0.1em] lg:tracking-[0.2em] leading-none border-b border-sahara-gold/40">QALYUBIA_IV</span>
             </div>
         </div>
       </header>
