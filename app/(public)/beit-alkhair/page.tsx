@@ -16,27 +16,27 @@ export default async function BeitAlKhairPage() {
   )
 
   return (
-    <main className="h-screen w-screen bg-[#050811] text-white overflow-hidden flex flex-col p-3 lg:p-6 selection:bg-sahara-gold selection:text-black font-sans relative">
+    <main className="h-screen w-screen bg-[#050811] text-white overflow-hidden flex flex-col p-2 lg:p-6 selection:bg-sahara-gold selection:text-black font-sans relative">
       {/* 🚀 QUANTUM_HUD_LAYERS */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.05] bg-[url('/grid.svg')] bg-repeat z-0" />
       <div className="hud-sweep z-[100]" />
       
       {/* 📟 TOP_LEVEL_SYMMETRIC_HEADER */}
-      <header className="flex justify-between items-end mb-2 lg:mb-8 border-b border-sahara-gold/20 pb-2 lg:pb-6 px-2 lg:px-4 relative z-50">
-        <div className="flex items-center gap-4 lg:gap-8">
-            <div className="w-10 h-10 lg:w-14 lg:h-14 bg-black border lg:border-2 border-sahara-gold rounded-xl lg:rounded-2xl flex items-center justify-center font-black text-sahara-gold text-lg lg:text-2xl italic shadow-[0_0_30px_rgba(212,175,55,0.3)] group hover:rotate-6 transition-transform">BK</div>
+      <header className="flex justify-between items-end mb-1 lg:mb-4 border-b border-sahara-gold/20 pb-1 lg:pb-3 px-1 lg:px-4 relative z-50">
+        <div className="flex items-center gap-2 lg:gap-8">
+            <div className="w-8 h-8 lg:w-14 lg:h-14 bg-black border border-sahara-gold rounded-lg lg:rounded-2xl flex items-center justify-center font-black text-sahara-gold text-xs lg:text-2xl italic shadow-[0_0_30px_rgba(212,175,55,0.3)] group hover:rotate-6 transition-transform">BK</div>
             <div className="flex flex-col">
-                <h1 className="text-xl lg:text-4xl font-black italic uppercase tracking-[-0.05em] leading-none mb-1 text-luxury-gold">
+                <h1 className="text-lg lg:text-4xl font-black italic uppercase tracking-[-0.05em] leading-none mb-0.5 lg:mb-1 text-luxury-gold">
                   BEIT AL-KHAIR
                 </h1>
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-sahara-gold rounded-full animate-pulse" />
-                  <p className="text-[6px] lg:text-[8px] font-black text-gray-500 uppercase tracking-[0.4em] lg:tracking-[0.8em] robotic-digits">SOVEREIGN_NETWORK // v3.0.0_QUANTUM</p>
+                <div className="flex items-center gap-1.5 lg:gap-2">
+                  <span className="w-1 h-1 lg:w-2 lg:h-2 bg-sahara-gold rounded-full animate-pulse" />
+                  <p className="text-[5px] lg:text-[8px] font-black text-gray-500 uppercase tracking-[0.3em] lg:tracking-[0.8em] robotic-digits leading-none">SOVEREIGN_NETWORK // v3.0.0_QUANTUM</p>
                 </div>
             </div>
         </div>
 
-        <div className="flex items-center gap-6 lg:gap-16">
+        <div className="flex items-center gap-4 lg:gap-16">
             <div className="text-right hidden xl:block">
                 <p className="text-[10px] font-black text-sahara-gold uppercase tracking-[0.5em] mb-1 italic">AMORTIZATION_SYNC_ACTIVE</p>
                 <div className="flex gap-2 justify-end">
@@ -45,8 +45,8 @@ export default async function BeitAlKhairPage() {
             </div>
             <div className="hidden lg:block w-px h-12 bg-white/10" />
             <div className="flex flex-col items-end">
-                <span className="text-[6px] lg:text-[10px] font-black text-gray-400 robotic-digits uppercase tracking-widest leading-none mb-1 lg:mb-2">DOMAIN_COORDINATES</span>
-                <span className="text-[8px] lg:text-xs font-black text-white italic uppercase tracking-[0.2em] lg:tracking-[0.3em] leading-none border-b border-sahara-gold shadow-[0_5px_15px_rgba(212,175,55,0.1)]">QALYUBIA_DOMAIN_HUB</span>
+                <span className="text-[5px] lg:text-[10px] font-black text-gray-400 robotic-digits uppercase tracking-widest leading-none mb-0.5 lg:mb-2">DOMAIN_COORDINATES</span>
+                <span className="text-[6px] lg:text-xs font-black text-white italic uppercase tracking-[0.1em] lg:tracking-[0.3em] leading-none border-b border-sahara-gold/40 shadow-[0_5px_15px_rgba(212,175,55,0.1)]">QALYUBIA_DOMAIN_HUB</span>
             </div>
         </div>
       </header>
@@ -118,16 +118,18 @@ export default async function BeitAlKhairPage() {
       </div>
 
       {/* 📟 BOTTOM_STATUS_TICKER */}
-      <footer className="mt-2 lg:mt-8 border-t border-white/10 pt-2 lg:pt-6 flex justify-between items-center relative z-50 px-2 lg:px-4">
-        <div className="flex items-center gap-3 lg:gap-6 text-[6px] lg:text-[8px] font-black text-gray-600 uppercase tracking-[0.3em] lg:tracking-[0.6em] italic leading-none">
-            <div className="flex gap-1">
-                {[1,2,3].map(i => <div key={i} className="w-1 lg:w-2 h-1 lg:h-2 bg-sahara-gold rounded-full animate-pulse" style={{ animationDelay: `${i*0.2}s` }} />)}
+      <footer className="relative milky-glass border-t border-white/10 py-2 lg:py-4 overflow-hidden mt-2">
+        <div className="max-w-7xl mx-auto px-4 relative z-10 flex justify-between items-center">
+            <div className="flex items-center gap-3 lg:gap-6 text-[6px] lg:text-[8px] font-black text-gray-600 uppercase tracking-[0.3em] italic leading-none">
+                <div className="flex gap-1">
+                    {[1,2,3].map(i => <div key={i} className="w-1 h-1 bg-sahara-gold rounded-full animate-pulse" />)}
+                </div>
+                ENCRYPTED_NEURAL_UPLINK // ESTABLISHED
             </div>
-            ENCRYPTED_NEURAL_UPLINK // ESTABLISHED
-        </div>
-        <div className="flex items-center gap-4 lg:gap-12 text-[6px] lg:text-[10px] font-black leading-none robotic-digits">
-            <span className="text-gray-700 uppercase tracking-[0.2em] lg:tracking-[0.4em]">SOVEREIGN_COPYRIGHT // 2026</span>
-            <span className="text-luxury-gold italic tracking-[0.1em] font-extrabold select-none">BEIT_AL_KHAIR_EXEC</span>
+            <div className="flex items-center gap-4 lg:gap-12 text-[6px] lg:text-[10px] font-black leading-none robotic-digits">
+                <span className="text-gray-700 uppercase tracking-[0.2em]">SOVEREIGN_COPYRIGHT // 2026</span>
+                <span className="text-luxury-gold italic tracking-[0.1em] font-extrabold select-none">BEIT_AL_KHAIR_EXEC</span>
+            </div>
         </div>
       </footer>
     </main>
