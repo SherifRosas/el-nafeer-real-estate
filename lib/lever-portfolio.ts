@@ -39,15 +39,11 @@ export const LEVER_PORTFOLIO: PortfolioItem[] = [
     { title: "اتوماتك موديل 003", cat: "مصاعد اتوماتك", vid: `${BASE_PATH}/مصاعد اتوماتك/WhatsApp Video003.mp4` },
     { title: "اتوماتك موديل 02", cat: "مصاعد اتوماتك", vid: `${BASE_PATH}/مصاعد اتوماتك/WhatsApp Video02.mp4` },
     { title: "اتوماتك موديل 03", cat: "مصاعد اتوماتك", vid: `${BASE_PATH}/مصاعد اتوماتك/WhatsApp Video03.mp4` },
-    { title: "اتوماتك موديل 04", cat: "مصاعد اتوماتك", vid: `${BASE_PATH}/مصاعد اتوماتك/WhatsApp Video04.mp4` },
     { title: "اتوماتك موديل 1", cat: "مصاعد اتوماتك", vid: `${BASE_PATH}/مصاعد اتوماتك/WhatsApp Video1.mp4` },
-    { title: "اتوماتك موديل 2", cat: "مصاعد اتوماتك", vid: `${BASE_PATH}/مصاعد اتوماتك/WhatsApp Video2.mp4` },
-    { title: "اتوماتك موديل 3", cat: "مصاعد اتوماتك", vid: `${BASE_PATH}/مصاعد اتوماتك/WhatsApp Video3.mp4` },
 
     // --- مصاعد نصف اتوماتك ---
     { title: "نصف اتوماتك فيديو 01", cat: "مصاعد نصف اتوماتك", vid: `${BASE_PATH}/مصاعد نصف اتوماتك/WhatsApp Video01.mp4` },
     { title: "نصف اتوماتك فيديو 02", cat: "مصاعد نصف اتوماتك", vid: `${BASE_PATH}/مصاعد نصف اتوماتك/WhatsApp Video02.mp4` },
-    { title: "نصف اتوماتك فيديو 03", cat: "مصاعد نصف اتوماتك", vid: `${BASE_PATH}/مصاعد نصف اتوماتك/WhatsApp Video03.mp4` },
     { title: "نصف اتوماتك صورة 04", cat: "مصاعد نصف اتوماتك", vid: `${BASE_PATH}/مصاعد نصف اتوماتك/WhatsApp Image04.jpeg` },
 
     // --- مصاعد هوم لفت ---
