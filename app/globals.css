@@ -156,15 +156,10 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-display) !important;
-  font-weight: 900 !important;
-  letter-spacing: 0.15em !important;
-  background: var(--gradient-cyber) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-  text-shadow: 0 0 20px rgba(0, 255, 255, 0.3) !important;
-  animation: neonFlicker 3s infinite;
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
 }
 
 h1 {

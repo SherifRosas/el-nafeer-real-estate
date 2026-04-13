@@ -113,21 +113,21 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
       <AnimatePresence mode="wait">
         {!selectedCity ? (
            // ... (Map view content from previous turns)
-           <div className="absolute inset-0 flex flex-col p-16">
-              {/* Telemetry Header */}
-              <div className="flex justify-between items-start mb-12 z-10">
-                <div>
-                  <div className="flex items-center gap-4 mb-3">
-                    <span className="w-3 h-3 bg-sahara-gold rounded-full animate-ping shadow-[0_0_15px_#c5a059]" />
-                    <span className="text-[10px] font-black text-sahara-gold uppercase tracking-[0.6em] italic robotic-digits">GEO_TELEMETRY_DECRYPTED</span>
-                  </div>
-                  <h2 className="text-5xl font-black text-white italic tracking-[-0.05em] uppercase leading-none text-luxury-gold">GEOGRAPHIC_COMMAND</h2>
-                </div>
-                <div className="text-right">
-                  <p className="text-[10px] font-black text-gray-600 uppercase tracking-widest robotic-digits mb-2">LAT: 30.4591 // LONG: 31.1786</p>
-                  <p className="text-[10px] font-black text-sahara-gold uppercase tracking-[0.3em]">RESCANNING_NODAL_FIELD...</p>
-                </div>
-              </div>
+            <div className="absolute inset-0 flex flex-col p-4 lg:p-12">
+               {/* Telemetry Header */}
+               <div className="flex justify-between items-start mb-4 lg:mb-8 z-10">
+                 <div>
+                   <div className="flex items-center gap-2 lg:gap-4 mb-1 lg:mb-2">
+                     <span className="w-2 h-2 bg-sahara-gold rounded-full animate-ping shadow-[0_0_10px_#c5a059]" />
+                     <span className="text-[6px] lg:text-[9px] font-black text-sahara-gold uppercase tracking-[0.4em] lg:tracking-[0.6em] italic robotic-digits">GEO_TELEMETRY_DECRYPTED</span>
+                   </div>
+                   <h2 className="text-xl lg:text-4xl font-black text-white italic tracking-tighter uppercase leading-none text-luxury-gold">GEOGRAPHIC_COMMAND</h2>
+                 </div>
+                 <div className="text-right hidden sm:block">
+                   <p className="text-[8px] lg:text-[10px] font-black text-gray-700 uppercase tracking-widest robotic-digits mb-1">LAT: 30.4591 // LONG: 31.1786</p>
+                   <p className="text-[8px] lg:text-[10px] font-black text-sahara-gold/40 uppercase tracking-[0.2em] lg:tracking-[0.3em]">RESCANNING_NODAL_FIELD...</p>
+                 </div>
+               </div>
 
                 <div className="relative flex-1 flex items-center justify-center p-4">
                   <svg 
@@ -208,18 +208,18 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
-            className="absolute inset-0 flex flex-col p-16 z-20"
+            className="absolute inset-0 flex flex-col p-4 lg:p-14 z-20"
           >
-            <div className="flex justify-between items-center mb-16">
+            <div className="flex justify-between items-center mb-6 lg:mb-12">
               <button 
                 onClick={() => setSelectedCity(null)}
-                className="group flex items-center gap-6 text-sahara-gold hover:text-white transition-all text-xs font-black uppercase tracking-[0.6em] italic"
+                className="group flex items-center gap-3 lg:gap-6 text-sahara-gold hover:text-white transition-all text-[8px] lg:text-xs font-black uppercase tracking-[0.4em] lg:tracking-[0.6em] italic"
               >
-                <span className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-sahara-gold/20 group-hover:bg-sahara-gold group-hover:text-black transition-all">←</span> 
-                GEO_RETURN_CMD
+                <span className="w-8 h-8 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-white/5 flex items-center justify-center border border-sahara-gold/20 group-hover:bg-sahara-gold group-hover:text-black transition-all">←</span> 
+                GEO_RETURN
               </button>
               <div className="text-right">
-                <span className="px-6 py-2 bg-sahara-gold/10 rounded-full border border-sahara-gold/30 text-sahara-gold text-[8px] font-black uppercase tracking-[0.5em] italic">{selectedCity.nameAr} // QALYUBIA</span>
+                <span className="px-3 py-1 lg:px-6 lg:py-2 bg-sahara-gold/10 rounded-full border border-sahara-gold/30 text-sahara-gold text-[6px] lg:text-[8px] font-black uppercase tracking-[0.3em] lg:tracking-[0.5em] italic">{selectedCity.nameAr} // QALYUBIA</span>
               </div>
             </div>
 
