@@ -208,19 +208,19 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
-            className="absolute inset-0 flex flex-col p-4 lg:p-14 z-20"
+            className="absolute inset-0 flex flex-col p-4 lg:p-12 z-20"
           >
-            <div className="flex justify-between items-center mb-6 lg:mb-12">
+            <div className="flex justify-between items-center mb-4 lg:mb-8 pointer-events-none">
+              <div className="pointer-events-auto">
+                <span className="px-3 py-1 bg-sahara-gold/10 rounded-full border border-sahara-gold/30 text-sahara-gold text-[6px] lg:text-[8px] font-black uppercase tracking-[0.3em] lg:tracking-[0.5em] italic">{selectedCity.nameAr} // QALYUBIA</span>
+              </div>
               <button 
                 onClick={() => setSelectedCity(null)}
-                className="group flex items-center gap-3 lg:gap-6 text-sahara-gold hover:text-white transition-all text-[8px] lg:text-xs font-black uppercase tracking-[0.4em] lg:tracking-[0.6em] italic"
+                className="pointer-events-auto w-10 h-10 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-black border border-sahara-gold flex items-center justify-center text-sahara-gold hover:bg-sahara-gold hover:text-black transition-all shadow-[0_0_20px_rgba(197,160,89,0.3)] group"
+                title="GEO_RETURN"
               >
-                <span className="w-8 h-8 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-white/5 flex items-center justify-center border border-sahara-gold/20 group-hover:bg-sahara-gold group-hover:text-black transition-all">←</span> 
-                GEO_RETURN
+                <span className="text-xl group-hover:-translate-x-1 transition-transform">←</span>
               </button>
-              <div className="text-right">
-                <span className="px-3 py-1 lg:px-6 lg:py-2 bg-sahara-gold/10 rounded-full border border-sahara-gold/30 text-sahara-gold text-[6px] lg:text-[8px] font-black uppercase tracking-[0.3em] lg:tracking-[0.5em] italic">{selectedCity.nameAr} // QALYUBIA</span>
-              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 overflow-y-auto pr-8 custom-scrollbar pb-10">

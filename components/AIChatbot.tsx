@@ -317,35 +317,31 @@ export default function AIChatbot() {
       {/* Modern Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-8 right-8 group z-50 flex items-center gap-4"
+        className="fixed bottom-6 right-6 group z-50 flex items-center gap-4"
         aria-label={isArabic ? 'فتح المستشار العقاري' : 'Open Property Consultant'}
       >
         {!isOpen && (
-          <div className="hidden md:block bg-white px-6 py-3 rounded-2xl shadow-2xl border border-gray-100 animate-in fade-in slide-in-from-right-4 duration-500">
-            <p className="text-gray-900 font-black text-sm">
-              {isArabic ? 'تحدث مع مستشارنا العقاري الذكي ✨' : 'Talk to our AI Consultant ✨'}
+          <div className="hidden md:block bg-black/80 backdrop-blur-xl px-5 py-2 rounded-2xl shadow-2xl border border-sahara-gold/30 animate-in fade-in slide-in-from-right-4 duration-500">
+            <p className="text-sahara-gold font-black text-[10px] uppercase tracking-widest italic">
+              {isArabic ? 'استشارة الذكاء الاصطناعي ✨' : 'AI_CONSULT_MASTER ✨'}
             </p>
           </div>
         )}
-        <div className={`w-24 h-24 rounded-[2.5rem] flex items-center justify-center transition-all duration-500 shadow-2xl border-2 ${isOpen ? 'bg-gradient-to-br from-[#ff0055] to-[#a855f7] border-[#ff0055] rotate-180 shadow-[0_0_40px_rgba(255,0,85,0.6)]' : 'bg-gradient-to-br from-[#0a0e27] to-[#050811] border-[#00ffff] hover:scale-110 hover:-rotate-6 hover:shadow-[0_0_40px_rgba(0,255,255,0.8)] shadow-[0_0_30px_rgba(0,255,255,0.4)] animate-[pulse_2s_ease-in-out_infinite]'}`}>
+        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-2xl border-2 ${isOpen ? 'bg-gradient-to-br from-[#ff0055] to-[#a855f7] border-[#ff0055] rotate-180 shadow-[0_0_40px_rgba(255,0,85,0.6)]' : 'bg-black border-sahara-gold/40 hover:border-sahara-gold transition-all hover:scale-110 shadow-[0_0_30px_rgba(197,160,89,0.2)]'}`}>
           {isOpen ? (
-            <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
             <div className="relative flex flex-col items-center justify-center w-full h-full">
               {/* Outer glow ring */}
-              <div className="absolute inset-0 rounded-full border-2 border-[#00ffff]/30 animate-[spin_4s_linear_infinite]" />
-              {/* Inner glow ring */}
-              <div className="absolute inset-1 rounded-full border border-[#a855f7]/30 animate-[spin_6s_linear_infinite_reverse]" />
-              {/* Chat bubble icon */}
-              <svg className="w-10 h-10 relative z-10 text-[#00ffff] drop-shadow-[0_0_10px_rgba(0,255,255,0.8)]" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
+              <div className="absolute inset-0 rounded-full border border-sahara-gold/10 animate-[spin_8s_linear_infinite]" />
+              {/* Robotic Head Icon */}
+              <svg className="w-8 h-8 relative z-10 text-sahara-gold drop-shadow-[0_0_15px_#c5a059]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
               </svg>
-              {/* NAF Badge */}
-              <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-[#00ffff] to-[#a855f7] rounded-lg flex items-center justify-center text-black text-[9px] font-black border-2 border-[#050811] shadow-[0_0_20px_rgba(0,255,255,0.6)] animate-bounce">
-                NAF
-              </div>
+              {/* Quantum Pulse */}
+              <div className="absolute inset-0 rounded-full bg-sahara-gold/5 animate-ping" />
             </div>
           )}
         </div>
