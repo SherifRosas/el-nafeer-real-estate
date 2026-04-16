@@ -7,9 +7,10 @@ import { Zap } from 'lucide-react'
 interface AIChatbotProps {
   vertical?: 'real-estate' | 'elevator'
   initialOpen?: boolean
+  referralContext?: string
 }
 
-export default function AIChatbot({ vertical = 'real-estate', initialOpen = false }: AIChatbotProps) {
+export default function AIChatbot({ vertical = 'real-estate', initialOpen = false, referralContext = 'direct' }: AIChatbotProps) {
   const { language } = useLanguage()
   const isArabic = language === 'ar'
   const [isOpen, setIsOpen] = useState(initialOpen)
@@ -38,6 +39,20 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
           ? 'تهانينا! 🎉 تم تفعيل خصم الـ 15% الخاص بك. من فضلك زودني برقم هاتفك لحجز الخصم وإرسال المقايسة الفنية فوراً.'
           : 'Congratulations! 🎉 Your 15% discount has been activated. Please provide your phone number to reserve the discount and receive your technical quote immediately.'
       }
+
+      // CONTEXTUAL GREETING LOGIC
+      if (referralContext === 'fb_engine_elite' || referralContext === 'fb_organic_day1') {
+        return isArabic 
+          ? 'مرحباً بك! لقد لاحظت اهتمامك بالمحركات الإيطالية المتخصصة لـ 7 أدوار. 🇮🇹⚙️ أنا مستشارك الفني، كيف يمكنني مساعدتك في تفاصيل المقايسة؟'
+          : 'Welcome! I noticed your interest in our 7-floor specialized Italian motors. 🇮🇹⚙️ I am your technical consultant, how can I assist you with the quote details?';
+      }
+      
+      if (referralContext === 'fb_panorama_elite' || referralContext === 'fb_organic_day2') {
+        return isArabic
+          ? 'أهلاً بك في عالم الفخامة! 💎 هل تود معرفة تفاصيل تركيب مصاعد البانوراما الخارجية لمشروعك؟'
+          : 'Welcome to the world of luxury! 💎 Would you like to know the details of installing external panorama elevators for your project?';
+      }
+
       return isArabic
         ? 'مرحباً بك في لـيفر الرائدة للمصاعد! 🇮🇹✨\nأنا مستشارك الفني الذكي. هل تبحث عن مقايسة فنية لمبنى جديد أم صيانة دورية؟\n\n(يرجى تزويدي برقم هاتفك لنتمكن من إرسال عرض السعر الفني إليك فوراً)'
         : 'Welcome to Lever Pioneer Elevators! 🇮🇹✨\nI am your Technical Consultant. Are you looking for a new installation quote or regular maintenance?\n\n(Please provide your phone number so we can send the technical quote to you immediately)'
@@ -119,7 +134,7 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
     }
   }, [])
 
-  // Update welcome message when language or vertical changes
+  // Update welcome message when language, vertical or referral changes
   useEffect(() => {
     if (messages.length === 1) {
       setMessages([
@@ -130,7 +145,7 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
       ])
       setShowSuggestions(true)
     }
-  }, [isArabic, vertical, messages.length])
+  }, [isArabic, vertical, referralContext, messages.length])
 
   const handleSuggestedQuestion = (question: string) => {
     if (loading || !question.trim()) return
@@ -247,7 +262,8 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
 
   return (
     <>
-      <div className={`fixed bottom-24 right-4 w-96 max-w-[calc(100vw-2rem)] h-[550px] bg-white rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)] flex flex-col z-[60] border border-gray-100 overflow-hidden transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100' : 'scale-75 opacity-0 pointer-events-none'}`}>
+      {/* SHIFTED WINDOW TO AVOID OVERLAP WITH BOTTOM ACTIONS */}
+      <div className={`fixed bottom-28 right-4 w-96 max-w-[calc(100vw-2rem)] h-[500px] bg-white rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] flex flex-col z-[100010] border border-gray-100 overflow-hidden transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-75 opacity-0 pointer-events-none translate-y-10'}`}>
         <div className="bg-gradient-to-r from-gray-900 to-black text-white p-5 flex justify-between items-center border-b border-white/10 uppercase italic">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-cyan-500 rounded-xl flex items-center justify-center text-black font-black shadow-[0_0_15px_rgba(6,182,212,0.5)]">
@@ -402,20 +418,21 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
         </div>
       </div>
 
-      {/* Modern Trigger Button */}
+      {/* REPOSITIONED FAB - SOVEREIGN BUBBLE */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 group z-50 flex items-center gap-4"
+        className="fixed bottom-28 right-6 group z-[100015] flex items-center gap-4"
         aria-label={isArabic ? 'فتح المستشار العقاري' : 'Open Property Consultant'}
       >
         {!isOpen && (
-          <div className="hidden md:block bg-black/80 backdrop-blur-xl px-5 py-2 rounded-2xl shadow-2xl border border-sahara-gold/30 animate-in fade-in slide-in-from-right-4 duration-500">
-            <p className="text-sahara-gold font-black text-[10px] uppercase tracking-widest italic">
+          <div className="hidden md:block bg-black/80 backdrop-blur-xl px-4 py-1.5 rounded-full shadow-2xl border border-cyan-500/30 animate-in fade-in slide-in-from-right-4 duration-500">
+            <p className="text-cyan-400 font-black text-[9px] uppercase tracking-widest italic flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse" />
               {isArabic ? (vertical === 'elevator' ? 'استشارة ليفر الرائدة ✨' : 'استشارة النفير الذكية ✨') : 'AI_VERTICAL_CONSULT ✨'}
             </p>
           </div>
         )}
-        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-2xl border-2 ${isOpen ? 'bg-gradient-to-br from-[#ff0055] to-[#a855f7] border-[#ff0055] rotate-180 shadow-[0_0_40px_rgba(255,0,85,0.6)]' : 'bg-black border-sahara-gold/40 hover:border-sahara-gold transition-all hover:scale-110 shadow-[0_0_30px_rgba(197,160,89,0.2)]'}`}>
+        <div className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500 shadow-2xl border-2 ${isOpen ? 'bg-gradient-to-br from-[#ff0055] to-[#a855f7] border-[#ff0055] rotate-180 shadow-[0_0_40px_rgba(255,0,85,0.6)]' : 'bg-black border-cyan-500/40 hover:border-cyan-500 transition-all hover:scale-110 shadow-[0_0_30px_rgba(6,182,212,0.3)]'}`}>
           {isOpen ? (
             <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />

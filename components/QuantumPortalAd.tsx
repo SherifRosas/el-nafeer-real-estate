@@ -23,6 +23,15 @@ const LOCATION_URL = "https://www.google.com/maps/place/Al+Omraneya,+Al+Haram,+G
 const fullText = "الان من قلب مصر من الجيزة - حدائق الأهرام، تدشن شركة ليفر الرائدة للمصاعد مقرها الجديد. للتواصل اضغط على الأيقونات (واتساب-اتصال-الموقع).";
 const LEVER_BRAND_ID = "62c38934-4c4b-42be-98c9-06cbbee1af19";
 
+const HERO_ASSETS: Record<string, string> = {
+    'direct': "/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png",
+    'fb_engine_elite': "/campaigns/lever-pioneer/lever_pioneer_motor_elite_01.png",
+    'fb_panorama_elite': "/campaigns/lever-pioneer/lever_pioneer_ultra_v158_0_animated_core.png",
+    'fb_organic_day1': "/campaigns/lever-pioneer/lever_pioneer_motor_elite_01.png",
+    'fb_organic_day2': "/campaigns/lever-pioneer/lever_pioneer_ultra_v156_0.png",
+    'fb_organic_day3': "/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png"
+};
+
 export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | 'v3' }) {
     const searchParams = useSearchParams();
     const referralId = searchParams.get('ref') || 'direct';
@@ -246,6 +255,31 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
             >
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <div style={{ position: 'absolute', width: '100%', height: '100%', background: `url(${AD_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(30px) brightness(0.4)', opacity: 0.5 }} />
+                    
+                    {/* HERO GLASS FRAME - SOVEREIGN RESTORATION */}
+                    {isStarted && !activeModal && (
+                        <div style={{ 
+                            position: 'relative', 
+                            zIndex: 8000, 
+                            maxWidth: '90%', 
+                            maxHeight: '40vh', 
+                            borderRadius: '30px', 
+                            overflow: 'hidden', 
+                            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 40px rgba(6, 182, 212, 0.2)',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            backdropFilter: 'blur(5px)',
+                            background: 'rgba(255,255,255,0.02)',
+                            transform: 'translateY(-20px)',
+                            pointerEvents: 'none'
+                        }}>
+                            <img 
+                                src={HERO_ASSETS[referralId] || AD_IMAGE} 
+                                alt="Lever Pioneer Elite Asset" 
+                                style={{ width: '100%', height: 'auto', objectFit: 'contain', animation: 'shimmer-pulse 4s infinite ease-in-out' }} 
+                            />
+                        </div>
+                    )}
+
                     {isStarted && <Quantum3DLayer />}
                 </div>
 
@@ -355,9 +389,13 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                 </div>
             </div>
 
-            {/* INTEGRATED SPECIALIZED AI AGENT - ELEVATED Z-INDEX */}
+            {/* INTEGRATED SPECIALIZED AI AGENT - ELEVATED Z-INDEX & REPOSITIONED */}
             <div style={{ position: 'relative', zIndex: 100005 }}>
-                <AIChatbot vertical="elevator" initialOpen={true} />
+                <AIChatbot 
+                    vertical="elevator" 
+                    initialOpen={!isReturningUser && referralId !== 'direct'} 
+                    referralContext={referralId}
+                />
             </div>
 
             {/* MAGNET PROTOCOL: FLASH OFFER POPUP */}
