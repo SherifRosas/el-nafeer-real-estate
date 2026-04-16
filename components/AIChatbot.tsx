@@ -62,64 +62,31 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
       : 'Welcome to EL-NAFEER Real Estate! I\'m your smart property consultant. How can I assist you today?\n\n🏠 Explore available units\n📈 Track your sales (for owners)\n🤝 Book a viewing appointment\n🏢 Information about our projects'
   }
 
-  const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([
-    {
-      role: 'assistant',
-      content: getWelcomeMessage(),
-    },
-  ])
-
-  // Suggested questions based on vertical
-  const getSuggestedQuestions = () => {
-    if (vertical === 'elevator') {
-      return isArabic
-        ? [
-          'طلب عرض سعر فني',
-          'مواصفات المحركات الإيطالية',
-          'عقود صيانة معتمدة',
-          'تركيب مصعد خارجي (بانوراما)',
-          'معاينة فنية للموقع',
-          'مميزات ليفر الرائدة',
-        ]
-        : [
-          'Request a technical quote',
-          'Italian motor specifications',
-          'Certified maintenance contracts',
-          'External elevator (Panorama)',
-          'Technical site inspection',
-          'Lever Pioneer advantages',
-        ]
-    }
-    return isArabic
-      ? [
-        'ما هي العقارات المتاحة حالياً؟',
-        'كيف يمكنني التسجيل كمالك عقار؟',
-        'هل يمكنني معاينة وحدة سكنية؟',
-        'ما هي العروض الحصرية المتاحة؟',
-        'كيف يتم توثيق العقود؟',
-        'ما هي خطوات الشراء الذكي؟',
-      ]
-      : [
-        'What properties are currently available?',
-        'How do I register as a property owner?',
-        'Can I book a property viewing?',
-        'What exclusive offers are available?',
-        'How are contracts documented?',
-        'What are the smart purchase steps?',
-      ]
-  }
-
-  const suggestedQuestions = getSuggestedQuestions()
+  // --- CHATBOT STATE SOVEREIGNTY ---
+  const hasInitialGreeted = useRef(false)
+  const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [showSuggestions, setShowSuggestions] = useState(true)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
+  // Suggested questions based on vertical
+  const getSuggestedQuestions = () => {
+    if (vertical === 'elevator') {
+      return isArabic
+        ? ['طلب عرض سعر فني', 'مواصفات المحركات الإيطالية', 'عقود صيانة معتمدة', 'تركيب مصعد خارجي (بانوراما)', 'معاينة فنية للموقع', 'مميزات ليفر الرائدة']
+        : ['Request a technical quote', 'Italian motor specifications', 'Certified maintenance contracts', 'External elevator (Panorama)', 'Technical site inspection', 'Lever Pioneer advantages']
+    }
+    return isArabic
+      ? ['ما هي العقارات المتاحة حالياً؟', 'كيف يمكنني التسجيل كمالك عقار؟', 'هل يمكنني معاينة وحدة سكنية؟', 'ما هي العروض الحصرية المتاحة؟', 'كيف يتم توثيق العقود؟', 'ما هي خطوات الشراء الذكي؟']
+      : ['What properties are currently available?', 'How do I register as a property owner?', 'Can I book a property viewing?', 'What exclusive offers are available?', 'How are contracts documented?', 'What are the smart purchase steps?']
+  }
+
+  const suggestedQuestions = getSuggestedQuestions()
+
   // Ensure initialOpen works on mount
   useEffect(() => {
-    if (initialOpen) {
-      setIsOpen(true);
-    }
+    if (initialOpen) setIsOpen(true)
   }, [initialOpen])
 
   // Initialize Session
@@ -128,21 +95,17 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
     if (storedSession) {
       setSessionId(storedSession)
     } else {
-      const newId = `sess_${Math.random().toString(36).substr(2, 9)}`
+      const newId = `sess_${Math.random().toString(36).substring(2, 9)}`
       localStorage.setItem('naf_chat_session_id', newId)
       setSessionId(newId)
     }
   }, [])
 
-  // Update welcome message when language, vertical or referral changes
+  // Initialize and Update welcome message PRECISELY ONCE
   useEffect(() => {
-    if (messages.length === 1) {
-      setMessages([
-        {
-          role: 'assistant',
-          content: getWelcomeMessage(),
-        },
-      ])
+    if (!hasInitialGreeted.current && messages.length === 0) {
+      setMessages([{ role: 'assistant', content: getWelcomeMessage() }])
+      hasInitialGreeted.current = true
       setShowSuggestions(true)
     }
   }, [isArabic, vertical, referralContext, messages.length])
