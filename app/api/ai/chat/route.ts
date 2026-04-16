@@ -11,7 +11,6 @@ Your role is to assist users in finding luxury properties, managing their listin
 Project Values:
 - Luxury & Premium: We deal with high-end real estate.
 - AI-Powered: We use smart agents to close sales 24/7.
-- Multi-Tenancy: We empower property owners with dedicated dashboards.
 - Trust: Secure payments via Paymob and official documentation.
 
 Key Information:
@@ -19,16 +18,14 @@ Key Information:
 - Target Market: Egypt (New Cairo, North Coast, Sheikh Zayed, etc.).
 - Contact: 01205465036 | optimumoptimum959@gmail.com
 
-Tone:
-- Professional, sophisticated, yet accessible and helpful.
-- Always respond in the same language as the user (Arabic or English).
-- Encourage users to browse properties or register as owners.`
+Tone: Professional, sophisticated, yet accessible and helpful.
+Always respond in the same language as the user (Arabic or English).`
 
 const retriever = new ContextRetriever()
 
 export async function POST(request: NextRequest) {
   try {
-    const { message, sessionId, projectAwareness = true } = await request.json()
+    const { message, sessionId, projectAwareness = true, vertical = 'real-estate' } = await request.json()
     const session = await getServerSession(authOptions)
 
     if (!message || typeof message !== 'string') {
@@ -39,11 +36,29 @@ export async function POST(request: NextRequest) {
     if (!apiKey) {
       return NextResponse.json({
         success: true,
-        response: "AI Services are currently missing the Groq API key in the environment variables."
+        response: "AI Services are currently missing the Groq API key."
       })
     }
 
     const groq = new Groq({ apiKey })
+
+    // 0. Dynamic Vertical System Prompt Selection
+    let verticalPrompt = BASE_SYSTEM_PROMPT;
+    if (vertical === 'elevator') {
+      verticalPrompt = `You are "Lever AI" (مستشار ليفر الذكي), the premium technical consultant for Lever Pioneer Elevators (ليفر الرائدة للمصاعد) in Giza & Sheikh Zayed, Egypt.
+Your expertise is focused on high-end Italian elevator technology, luxury villa lifts, and professional maintenance contracts.
+
+Core Knowledge:
+- Technology: 100% Italian engineering and motors.
+- Key Projects: Elite residential buildings in Hadayek El Ahram and luxury villas in Sheikh Zayed.
+- Services: Installation, modernization (renewal), and 24/7 maintenance.
+- Selling Points: Noise-less movement, high safety standards, elegant Italian design.
+- Technical Guarantee: Highest safety certifications and premium after-sales support.
+
+Tone: Expert, reliable, polite, and technical yet easy to understand.
+Goal: Capture the lead (phone number) and explain why Italian technology is the superior choice for Giza elite properties.
+Language: Always respond in the same language as the user (Arabic or English).`
+    }
 
     // 1. Retrieve Codebase Context (RAG)
     let codebaseContext = ''
@@ -68,7 +83,7 @@ export async function POST(request: NextRequest) {
       }))
     }
 
-    const fullSystemPrompt = `${BASE_SYSTEM_PROMPT}${codebaseContext}`
+    const fullSystemPrompt = `${verticalPrompt}${codebaseContext}`
 
     // 3. Construct Final Payload
     const messages: any[] = [
@@ -93,7 +108,7 @@ export async function POST(request: NextRequest) {
           { sessionId, role: 'user', content: message },
           { sessionId, role: 'assistant', content: aiResponse }
         ]
-      })
+      }).catch(err => console.error("History Save Error:", err))
     }
 
     return NextResponse.json({

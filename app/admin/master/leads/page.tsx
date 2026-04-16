@@ -3,6 +3,7 @@ import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { db } from '@/lib/supabase'
 import MasterLeadsDashboard from '@/components/admin/MasterLeadsDashboard'
+import ManifestToukhButton from '@/components/admin/ManifestToukhButton'
 
 export default async function MasterLeadsPage() {
     const session = await getServerSession(authOptions)
@@ -28,6 +29,9 @@ export default async function MasterLeadsPage() {
                         GLOBAL_<span className="text-sahara-gold">LEADS</span>_ANALYTICS
                     </h2>
                     <p className="text-gray-500 font-bold text-lg uppercase tracking-tight">REAL-TIME_DATA_STREAMS_FROM_ALL_AI_SUBSYSTEMS</p>
+                    <div className="mt-6">
+                        <ManifestToukhButton />
+                    </div>
                 </div>
                 <div className="flex gap-6 p-6 milky-glass rounded-[3rem] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.3)]">
                     <div className="px-10 border-r rtl:border-r-0 rtl:border-l border-white/10 text-center">

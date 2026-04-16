@@ -2,13 +2,12 @@ import { Metadata } from 'next'
 import { Suspense } from 'react'
 import QuantumPortalAd from '@/components/QuantumPortalAd'
 
-// --- PORTAL V185 SERVER METADATA (NUCLEAR CACHE BUST) ---
+// --- PORTAL V190 SERVER METADATA (SOVEREIGN CACHE BUST) ---
 const TITLE = "🚀 AL-NAFEER | LEVER PIONEER ELITE 🚀"
-const DESC = "ليفر الرائدة للمصاعد - من قلب الجيزة - هضبة الأهرام. Vertical Excellence Defined."
+const DESC = "ليفر الرائدة للمصاعد - التكنولوجيا الإيطالية في قلب الجيزة. Vertical Excellence Defined."
 const DOMAIN = "https://el-nafeer-real-estate.vercel.app"
-const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=201111171368";
 const IMG_RAW = `logo-share-optimized.png`
-const IMG = `${DOMAIN}/${IMG_RAW}?v=OPTIMIZED_v280`
+const IMG = `${DOMAIN}/${IMG_RAW}?v=OPTIMIZED_v290`
 const PAGE_URL = `${DOMAIN}/portal/lever-pioneer-elite`
 
 export const metadata: Metadata = {

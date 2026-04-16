@@ -2,6 +2,7 @@
 
 import { useLanguage } from '../LanguageContext'
 import Link from 'next/link'
+import ManifestToukhButton from './ManifestToukhButton'
 
 interface DashboardProps {
     globalStats: any[]
@@ -71,6 +72,7 @@ export default function MasterDashboardContent({ globalStats, subsystems }: Dash
                         </div>
 
                         <div className="flex flex-wrap gap-8 mt-16 justify-center md:justify-start">
+                            <ManifestToukhButton />
                             <button className="px-12 py-6 bg-white text-black font-black text-[10px] uppercase tracking-[0.4em] rounded-[2rem] shadow-[0_0_50px_rgba(255,255,255,0.1)] hover:bg-sahara-gold transition-all hover:scale-105 active:scale-95 leading-none">
                                 {isArabic ? 'تنفيذ_مستأجر_جديد' : 'EXECUTE_NEW_TENANT'}
                             </button>

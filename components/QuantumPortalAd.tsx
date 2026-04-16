@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { useSearchParams } from 'next/navigation'
-import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap, Home, Layout, FileText } from 'lucide-react'
 import { LEVER_PORTFOLIO } from '@/lib/lever-portfolio'
+import AIChatbot from './AIChatbot'
 
 // Dynamically import the heavy 3D engine
 const Quantum3DLayer = dynamic(() => import('./Quantum3DLayer'), { 
@@ -49,6 +49,7 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
     const [fullScreenVid, setFullScreenVid] = useState<string | null>(null);
     const [userLocLink, setUserLocLink] = useState<string | null>(null);
     const [locLoading, setLocLoading] = useState(false);
+    const [showFlashOffer, setShowFlashOffer] = useState(false);
 
     const portfolioItems = LEVER_PORTFOLIO;
     const dynamicCategories = ['الكل', ...Array.from(new Set(portfolioItems.map(item => item.cat)))];
@@ -66,8 +67,19 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
         }
     }, [isStarted]);
 
+    // --- MAGNET PROTOCOL: FLASH OFFER TRIGGER ---
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            const hasClaimed = localStorage.getItem('LEVER_OFFER_CLAIMED');
+            if (!hasClaimed) {
+                setShowFlashOffer(true);
+                trackEvent('FLASH_OFFER_SHOWN', 'MAGNET_PROTOCOL');
+            }
+        }, 3000); // Trigger after 3 seconds of load
+        return () => clearTimeout(timer);
+    }, []);
+
     const trackEvent = (action: string, category: string) => {
-        // --- GIZA-CAIRO GEOGRAPHIC SIGNAL MAPPING ---
         let signalLabel = `LEVER_PIONEER_REF_${referralId.toUpperCase()}`;
         if (referralId === 'ahmed' || referralId === 'hazem') signalLabel = 'GIZA_OWNER_SIGNAL';
         if (referralId === 'partner' || referralId === 'mohamed') signalLabel = 'CAIRO_PARTNER_SIGNAL';
@@ -176,7 +188,7 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
         } catch (error) { console.error("Lead error:", error); } finally { setQuoteLoading(false); }
     }
 
-    const CACHE_V = "?v=188.0";
+    const CACHE_V = "?v=191.0";
 
     return (
         <div style={{ position: 'relative', width: '100vw', height: '100vh', backgroundColor: '#000', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -197,7 +209,6 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
 
             <audio ref={audioRef} loop src="https://audio-previews.elements.envatousercontent.com/files/234765669/preview.mp3" style={{ display: 'none' }} />
 
-            {/* ELITE EXIT BUTTON - ONLY VISIBLE DURING EXPERIENCE & IF NO MODAL IS OPEN */}
             {isStarted && !activeModal && (
                 <button 
                     onClick={() => {
@@ -217,7 +228,6 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                 </button>
             )}
 
-            {/* TICKER BOX WITH SAFETY BUFFER (80PX RIGHT) */}
             {isStarted && !activeModal && (
                 <div style={{ position: 'absolute', top: '20px', left: '20px', right: '85px', zIndex: 9001, direction: 'rtl', textAlign: 'center' }}>
                     <div style={{ background: variant === 'v3' ? 'rgba(197,160,89,0.02)' : 'rgba(6,182,212,0.02)', border: `1px solid ${variant === 'v3' ? 'rgba(197,160,89,0.1)' : 'rgba(6,182,212,0.1)'}`, borderRadius: '10px', padding: '10px', fontSize: '13px', fontWeight: 'bold', color: '#fff', lineHeight: '1.4', backdropFilter: 'blur(10px)', textShadow: '0 0 10px rgba(0,0,0,0.8)' }}>
@@ -226,38 +236,37 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                 </div>
             )}
 
-            <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+            <div 
+                style={{ flex: 1, position: 'relative', overflow: 'hidden' }} 
+                onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (!isStarted) initiateExperience();
+                }}
+            >
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    {/* CINEMATIC BLUR GLOW TO FILL VOID */}
                     <div style={{ position: 'absolute', width: '100%', height: '100%', background: `url(${AD_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(30px) brightness(0.4)', opacity: 0.5 }} />
-                    
-                    <img src={AD_IMAGE + CACHE_V} alt="Lever" style={{ position: 'relative', maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', animation: isStarted ? 'shimmer-pulse 3s infinite ease-in-out' : 'none' }} />
+                    {isStarted && <Quantum3DLayer />}
                 </div>
 
-                {/* ACTION BAR - ABSOLUTE ANCHOR TO REMOVE VOID */}
                 {isStarted && !activeModal && (
                     <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', background: 'rgba(0,0,0,0.85)', padding: '12px 0 25px 0', display: 'flex', justifyContent: 'center', gap: '12px', zIndex: 9000, borderTop: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(15px)', direction: 'rtl' }}>
-                        {/* WHATSAPP */}
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                             <a onClick={() => trackEvent('WHATSAPP_CONTACT', 'LEAD_ATTEMPT')} href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(37,211,102,0.05)', border: `1.5px solid ${variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366', animation: 'icon-float 3s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <MessageCircle size={18} /> </a>
                             <span style={{ fontSize: '9px', fontWeight: 900, color: variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366', opacity: 0.8 }}>واتساب</span>
                         </div>
-                        {/* CALL */}
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                             <a onClick={() => trackEvent('CALL_CONTACT', 'LEAD_ATTEMPT')} href={CALL_URL} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: `1.5px solid ${variant === 'v3' || isReturningUser ? '#d4af37' : '#06b6d4'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: variant === 'v3' || isReturningUser ? '#d4af37' : '#06b6d4', animation: 'icon-float 3.5s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <Phone size={18} /> </a>
                             <span style={{ fontSize: '9px', fontWeight: 900, color: variant === 'v3' || isReturningUser ? '#d4af37' : '#06b6d4', opacity: 0.8 }}>اتصال</span>
                         </div>
-                        {/* LOCATION */}
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                             <a onClick={() => trackEvent('LOCATION_VIEW', 'INTEREST_ATTEMPT')} href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(212,175,55,0.05)', border: `1.5px solid #d4af37`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d4af37', animation: 'icon-float 4s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <MapPin size={18} /> </a>
                             <span style={{ fontSize: '9px', fontWeight: 900, color: '#d4af37', opacity: 0.8 }}>الموقع</span>
                         </div>
-                        {/* GALLERY */}
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                             <a onClick={() => { trackEvent('PORTFOLIO_VIEW', 'INTEREST_ATTEMPT'); setActiveModal('portfolio'); }} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(197,160,89,0.05)', border: `1.5px solid #c5a059`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#c5a059', animation: 'icon-float 4.5s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <Layout size={18} /> </a>
                             <span style={{ fontSize: '9px', fontWeight: 900, color: '#c5a059', opacity: 0.8 }}>المعرض</span>
                         </div>
-                        {/* QUOTE */}
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                             <a onClick={() => { trackEvent('QUOTE_REQUEST_START', 'LEAD_ATTEMPT'); setActiveModal('quote'); }} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: `1.5px solid #06b6d4`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 5s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <FileText size={18} /> </a>
                             <span style={{ fontSize: '9px', fontWeight: 900, color: '#06b6d4', opacity: 0.8 }}>طلب سعر</span>
@@ -315,16 +324,7 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                                         {isImage ? (
                                             <img src={p.vid} alt={p.title} style={{ width: '100%', height: '110px', objectFit: 'cover' }} />
                                         ) : (
-                                            <video 
-                                                src={p.vid} 
-                                                autoPlay 
-                                                muted 
-                                                loop 
-                                                playsInline 
-                                                webkit-playsinline="true"
-                                                preload="metadata"
-                                                style={{ width: '100%', height: '110px', objectFit: 'cover' }} 
-                                            />
+                                            <video src={p.vid} autoPlay muted loop playsInline webkit-playsinline="true" preload="metadata" style={{ width: '100%', height: '110px', objectFit: 'cover' }} />
                                         )}
                                         <div style={{ padding: '8px', fontSize: '8px', textAlign: 'center', color: '#ccc' }}>{p.title}</div>
                                     </div>
@@ -342,27 +342,51 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                         {/\.(jpg|jpeg|png|webp|gif|bmp)$/i.test(fullScreenVid) ? (
                             <img src={fullScreenVid} alt="Full Screen" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
                         ) : (
-                            <video 
-                                src={fullScreenVid} 
-                                controls 
-                                autoPlay 
-                                playsInline 
-                                webkit-playsinline="true"
-                                preload="auto"
-                                style={{ maxWidth: '100%', maxHeight: '100%' }} 
-                            /> 
+                            <video src={fullScreenVid} controls autoPlay playsInline webkit-playsinline="true" preload="auto" style={{ maxWidth: '100%', maxHeight: '100%' }} /> 
                         )}
                     </div>
                 </div>
             )}
 
-            {/* RAZOR THIN FOOTER (4VH) */}
             <div style={{ height: '4vh', width: '100%', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', borderTop: '1px solid #050505' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <a href="tel:+201065661882" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '16px', height: '16px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: '1px solid #06b6d4', color: '#06b6d4', cursor: 'pointer' }}> <Phone size={8} /> </a>
                     <div style={{ fontSize: '6px', fontWeight: 900, letterSpacing: '1px', background: 'linear-gradient(90deg, #333 0%, #fff 50%, #333 100%)', backgroundSize: '180px', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', animation: 'shiny-shimmer 3s infinite linear' }}> ARCHITECTED BY SHERIF ROSAS </div>
                 </div>
             </div>
+
+            {/* INTEGRATED SPECIALIZED AI AGENT - ELEVATED Z-INDEX */}
+            <div style={{ position: 'relative', zIndex: 100005 }}>
+                <AIChatbot vertical="elevator" initialOpen={true} />
+            </div>
+
+            {/* MAGNET PROTOCOL: FLASH OFFER POPUP */}
+            {showFlashOffer && (
+                <div style={{ position: 'fixed', inset: 0, zIndex: 100010, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.9)', backdropFilter: 'blur(10px)', padding: '20px' }}>
+                    <div style={{ width: '100%', maxWidth: '340px', background: 'linear-gradient(135deg, #0a0a0f 0%, #111 100%)', border: '2px solid #06b6d4', borderRadius: '30px', padding: '30px', position: 'relative', textAlign: 'center', animation: 'pulse-cyan 2s infinite' }}>
+                        <button onClick={() => setShowFlashOffer(false)} style={{ position: 'absolute', top: 15, right: 20, color: '#666', background: 'none', border: 'none', fontSize: '24px', cursor: 'pointer' }}>×</button>
+                        <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(6,182,212,0.1)', border: '1px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 15px auto', color: '#06b6d4' }}>
+                            <div style={{ fontSize: '30px' }}>🎁</div>
+                        </div>
+                        <h2 style={{ color: '#fff', fontSize: '20px', fontWeight: 900, marginBottom: '10px', direction: 'rtl' }}>هدية حصرية لمشاهدين البوابة! 🎁</h2>
+                        <p style={{ color: '#ccc', fontSize: '13px', lineHeight: '1.6', marginBottom: '20px', direction: 'rtl' }}>
+                            لقد تم اختيارك للحصول على **خصم فني استثنائي 15%** على عقود التأسيس أو الصيانة. 
+                            <br/>
+                            <span style={{ color: '#06b6d4', fontSize: '11px' }}>العرض صالح لمدة ٢٤ ساعة فقط.</span>
+                        </p>
+                        <button 
+                            onClick={() => {
+                                setShowFlashOffer(false);
+                                localStorage.setItem('LEVER_OFFER_CLAIMED', 'true');
+                                trackEvent('FLASH_OFFER_CLAIMED', 'MAGNET_PROTOCOL');
+                            }}
+                            style={{ width: '100%', background: '#06b6d4', color: '#000', padding: '15px', borderRadius: '15px', fontWeight: 900, fontSize: '14px', cursor: 'pointer', border: 'none', boxShadow: '0 0 20px rgba(6,182,212,0.4)' }}
+                        >
+                            تفعيل العرض عبر المحادثة الذكية ⚡
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
