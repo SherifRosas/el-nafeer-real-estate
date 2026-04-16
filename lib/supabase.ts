@@ -438,9 +438,26 @@ export const db = {
     images?: string[]
     features?: any
   }) {
+    // Map to snake_case for DB compatibility
+    const dbData = {
+      owner_id: propertyData.ownerId,
+      title: propertyData.title,
+      title_ar: propertyData.titleAr,
+      description: propertyData.description,
+      description_ar: propertyData.descriptionAr,
+      location: propertyData.location,
+      location_ar: propertyData.locationAr,
+      price: propertyData.price,
+      type: propertyData.type,
+      status: propertyData.status,
+      images: propertyData.images,
+      features: propertyData.features,
+      createdAt: new Date().toISOString()
+    }
+
     const { data, error } = await supabase
       .from(TABLES.properties)
-      .insert({ ...propertyData, createdAt: new Date().toISOString() })
+      .insert(dbData)
       .select()
       .single()
 
