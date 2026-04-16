@@ -408,7 +408,7 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
               dir={isArabic ? 'rtl' : 'ltr'}
             />
             <button
-              onClick={handleSend}
+              onClick={() => handleSend()}
               disabled={loading || !input.trim()}
               className="w-12 h-12 bg-cyan-500 rounded-2xl flex items-center justify-center text-black hover:bg-cyan-400 transition-all disabled:opacity-50 shadow-[0_0_20px_rgba(6,182,212,0.4)]"
             >
