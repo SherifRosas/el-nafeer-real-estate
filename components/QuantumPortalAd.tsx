@@ -256,31 +256,36 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <div style={{ position: 'absolute', width: '100%', height: '100%', background: `url(${AD_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(30px) brightness(0.4)', opacity: 0.5 }} />
                     
-                    {/* HERO GLASS FRAME - SOVEREIGN RESTORATION - EXPANDED */}
+                    {/* HERO CINEMATIC FRAME - FULL SCREEN SOVEREIGNTY */}
                     {isStarted && !activeModal && (
                         <div style={{ 
-                            position: 'relative', 
-                            zIndex: 8000, 
-                            width: '95%', 
-                            maxWidth: '600px', 
-                            maxHeight: '60vh', 
-                            borderRadius: '20px', 
-                            overflow: 'hidden', 
-                            boxShadow: '0 30px 60px -12px rgba(0, 0, 0, 0.9), 0 0 50px rgba(6, 182, 212, 0.25)',
-                            border: '1px solid rgba(255, 255, 255, 0.15)',
-                            backdropFilter: 'blur(8px)',
-                            background: 'rgba(255,255,255,0.03)',
-                            transform: 'translateY(-30px)',
+                            position: 'absolute', 
+                            top: 0, 
+                            left: 0,
+                            width: '100%', 
+                            height: '100%', 
+                            zIndex: 1, 
+                            overflow: 'hidden',
                             pointerEvents: 'none',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'
                         }}>
                             <img 
                                 src={HERO_ASSETS[referralId] || AD_IMAGE} 
                                 alt="Lever Pioneer Elite Asset" 
-                                style={{ width: '100%', height: 'auto', objectFit: 'cover', animation: 'shimmer-pulse 5s infinite ease-in-out' }} 
+                                style={{ 
+                                    width: '100%', 
+                                    height: '100%', 
+                                    objectFit: 'cover', 
+                                    opacity: 0.8,
+                                    animation: 'slow-zoom 20s infinite alternate ease-in-out' 
+                                }} 
                             />
+                            {/* Cinematic Overlay to ensure text readability */}
+                            <div style={{
+                                position: 'absolute',
+                                inset: 0,
+                                background: 'radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.4) 100%)',
+                                zIndex: 2
+                            }} />
                         </div>
                     )}
 
