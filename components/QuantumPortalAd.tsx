@@ -398,7 +398,14 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                 </div>
             </div>
 
-            {/* INTEGRATED SPECIALIZED AI AGENT DISABLED AS PER USER REQUEST */}
+            {/* INTEGRATED SPECIALIZED AI AGENT - ELEVATED Z-INDEX & REPOSITIONED */}
+            <div style={{ position: 'relative', zIndex: 100005 }}>
+                <AIChatbot 
+                    vertical="elevator" 
+                    initialOpen={!isReturningUser && referralId !== 'direct'} 
+                    referralContext={referralId}
+                />
+            </div>
 
             {/* MAGNET PROTOCOL: FLASH OFFER POPUP */}
             {showFlashOffer && (
