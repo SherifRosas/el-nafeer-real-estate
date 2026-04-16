@@ -262,9 +262,9 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
 
   return (
     <>
-      {/* SHIFTED WINDOW TO AVOID OVERLAP WITH BOTTOM ACTIONS */}
-      <div className={`fixed bottom-28 right-4 w-96 max-w-[calc(100vw-2rem)] h-[500px] bg-white rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] flex flex-col z-[100010] border border-gray-100 overflow-hidden transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-75 opacity-0 pointer-events-none translate-y-10'}`}>
-        <div className="bg-gradient-to-r from-gray-900 to-black text-white p-5 flex justify-between items-center border-b border-white/10 uppercase italic">
+      {/* SHIFTED WINDOW TO AVOID OVERLAP WITH BOTTOM ACTIONS - GLASS UI REBORN */}
+      <div className={`fixed bottom-28 right-4 w-96 max-w-[calc(100vw-2rem)] h-[500px] bg-black/60 backdrop-blur-3xl rounded-[2.5rem] shadow-[0_25px_60px_rgba(0,0,0,0.8),0_0_40px_rgba(6,182,212,0.1)] flex flex-col z-[100010] border border-white/10 overflow-hidden transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-75 opacity-0 pointer-events-none translate-y-10'}`}>
+        <div className="bg-gradient-to-r from-black/80 to-cyan-950/40 text-white p-5 flex justify-between items-center border-b border-white/5 uppercase italic">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-cyan-500 rounded-xl flex items-center justify-center text-black font-black shadow-[0_0_15px_rgba(6,182,212,0.5)]">
               AI
@@ -328,10 +328,10 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
           </div>
         )}
 
-        <div className="flex-1 overflow-y-auto p-5 space-y-6 bg-gray-50/50">
+        <div className="flex-1 overflow-y-auto p-5 space-y-6">
           {contextUsed && (
             <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-2xl p-2 mb-2 text-center animate-in fade-in duration-500">
-              <p className="text-[8px] text-cyan-600 font-black uppercase tracking-[0.2em]">
+              <p className="text-[8px] text-cyan-400 font-black uppercase tracking-[0.2em]">
                 {isArabic ? 'تم تحميل سياق المشروع والمحادثات السابقة' : 'Codebase Context & History Loaded Success'}
               </p>
             </div>
@@ -347,8 +347,8 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
               >
                 <div
                   className={`max-w-[85%] rounded-[2rem] p-4 ${isUserMsg
-                    ? 'bg-gray-900 text-white rounded-tr-none shadow-xl'
-                    : 'bg-white text-gray-800 rounded-tl-none border border-gray-100 shadow-md'
+                    ? 'bg-cyan-500/20 text-white rounded-tr-none border border-cyan-500/30'
+                    : 'bg-white/5 text-gray-100 rounded-tl-none border border-white/10 backdrop-blur-md'
                     }`}
                   dir={isRtl ? 'rtl' : 'ltr'}
                 >
@@ -384,7 +384,7 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
                     key={idx}
                     onClick={() => handleSuggestedQuestion(question)}
                     disabled={loading}
-                    className="px-4 py-2 bg-white border border-gray-200 rounded-full hover:border-amber-500 hover:text-amber-600 transition-all text-sm font-bold text-gray-600 shadow-sm hover:shadow-md disabled:opacity-50"
+                    className="px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:border-cyan-500 hover:text-cyan-400 transition-all text-sm font-bold text-gray-400 shadow-sm hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] disabled:opacity-50"
                     dir={isArabic ? 'rtl' : 'ltr'}
                   >
                     {question}
@@ -395,22 +395,22 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
           )}
           <div ref={messagesEndRef} />
         </div>
-
-        <div className="p-5 bg-white border-t border-gray-100">
+        <div className="p-5 bg-black/40 border-t border-white/5">
           <div className="flex gap-2">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleSend()}
-              placeholder={isArabic ? 'اكتب استفسارك هنا...' : 'Type your inquiry here...'}
-              className="flex-1 bg-black/40 border-none rounded-2xl px-5 py-4 focus:ring-1 focus:ring-cyan-500/50 transition-all outline-none font-bold text-white placeholder:text-gray-600 italic"
+              onKeyPress={(e) => e.key === 'Enter' && !loading && handleSend()}
+              placeholder={isArabic ? 'اكتب استفسارك هنا...' : 'Type your inquiry...'}
+              className="flex-1 bg-white/5 border border-white/10 rounded-2xl px-5 py-3 text-sm focus:outline-none focus:border-cyan-500 text-white placeholder-gray-500 transition-all"
+              disabled={loading}
               dir={isArabic ? 'rtl' : 'ltr'}
             />
             <button
-              onClick={() => handleSend()}
+              onClick={handleSend}
               disabled={loading || !input.trim()}
-              className="bg-cyan-500 text-black w-14 h-14 rounded-2xl flex items-center justify-center hover:scale-105 active:scale-95 disabled:opacity-50 transition-all shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+              className="w-12 h-12 bg-cyan-500 rounded-2xl flex items-center justify-center text-black hover:bg-cyan-400 transition-all disabled:opacity-50 shadow-[0_0_20px_rgba(6,182,212,0.4)]"
             >
               <span className="text-xl">⚡</span>
             </button>
