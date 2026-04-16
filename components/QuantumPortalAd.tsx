@@ -25,9 +25,9 @@ const LEVER_BRAND_ID = "62c38934-4c4b-42be-98c9-06cbbee1af19";
 
 const HERO_ASSETS: Record<string, string> = {
     'direct': "/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png",
-    'fb_engine_elite': "/campaigns/lever-pioneer/lever_pioneer_motor_elite_01.png",
+    'fb_engine_elite': "/campaigns/lever-pioneer/lever_pioneer_ultra_v158_0_animated_core.png",
     'fb_panorama_elite': "/campaigns/lever-pioneer/lever_pioneer_ultra_v158_0_animated_core.png",
-    'fb_organic_day1': "/campaigns/lever-pioneer/lever_pioneer_motor_elite_01.png",
+    'fb_organic_day1': "/campaigns/lever-pioneer/lever_pioneer_ultra_v156_0.png",
     'fb_organic_day2': "/campaigns/lever-pioneer/lever_pioneer_ultra_v156_0.png",
     'fb_organic_day3': "/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png"
 };
