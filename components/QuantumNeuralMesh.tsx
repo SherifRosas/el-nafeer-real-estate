@@ -61,7 +61,7 @@ export default function QuantumNeuralMesh() {
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] pointer-events-none" />
       
       {/* 🇪🇬 EGY_SILHOUETTE (Subtle Geographic Context) */}
-      <svg className="absolute inset-0 w-full h-full opacity-[0.3]" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+      <svg className="absolute inset-0 w-full h-full opacity-[0.4]" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
         <path 
             d="M30,5 L80,5 L95,40 L85,95 L40,95 L15,40 Z" 
             fill="none" 
@@ -75,8 +75,8 @@ export default function QuantumNeuralMesh() {
       <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
         <defs>
           <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
+            <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.8" />
+            <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0" />
           </radialGradient>
           <filter id="glow">
             <feGaussianBlur stdDeviation="3" result="blur" />
@@ -89,13 +89,13 @@ export default function QuantumNeuralMesh() {
           <motion.path
             key={conn.id}
             initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.8 }}
-            transition={{ duration: 4, delay: Math.random() * 2, repeat: Infinity, repeatType: 'reverse' }}
-            d={`M ${conn.n1.x} ${conn.n1.y} Q ${(conn.n1.x + conn.n2.x)/2 + (Math.random()-0.5)*15} ${(conn.n1.y + conn.n2.y)/2 + (Math.random()-0.5)*15} ${conn.n2.x} ${conn.n2.y}`}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 5, delay: Math.random() * 2, repeat: Infinity, repeatType: 'reverse' }}
+            d={`M ${conn.n1.x} ${conn.n1.y} Q ${(conn.n1.x + conn.n2.x)/2 + (Math.random()-0.5)*20} ${(conn.n1.y + conn.n2.y)/2 + (Math.random()-0.5)*20} ${conn.n2.x} ${conn.n2.y}`}
             fill="none"
-            stroke="#06b6d4"
-            strokeWidth="0.5"
-            strokeDasharray="2 2"
+            stroke="#0ea5e9"
+            strokeWidth="0.8"
+            strokeDasharray="4 4"
           />
         ))}
 
@@ -106,7 +106,7 @@ export default function QuantumNeuralMesh() {
               cx={node.x}
               cy={node.y}
               r={node.priority ? 1.5 : 0.8}
-              fill="#06b6d4"
+              fill="#0ea5e9"
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: [0.6, 1, 0.6] }}
               transition={{ duration: 3, repeat: Infinity, delay: Math.random() * 2 }}

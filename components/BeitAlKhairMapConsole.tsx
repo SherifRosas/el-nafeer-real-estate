@@ -137,7 +137,7 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
   }
 
   return (
-    <div className="relative w-full h-full bg-black/10 rounded-[4rem] overflow-hidden border-2 border-white/5 shadow-[inset_0_0_150px_rgba(0,0,0,0.8)] hud-scanline">
+    <div className="relative w-full h-full bg-black/5 rounded-[4rem] overflow-hidden border-2 border-white/5 shadow-[inset_0_0_150px_rgba(0,0,0,0.5)] hud-scanline">
       
       {/* 🏙️ BUILDING_VIEW_QUANTUM_SYNC */}
       <AnimatePresence mode="wait">
