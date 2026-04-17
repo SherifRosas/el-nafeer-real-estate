@@ -331,51 +331,26 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
             )}
 
             <div 
-                style={{ flex: 1, position: 'relative', overflow: 'hidden' }} 
+                style={{ flex: 1, position: 'relative', overflow: 'hidden', backgroundColor: '#000' }} 
                 onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     if (!isStarted) initiateExperience();
                 }}
             >
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div style={{ position: 'absolute', width: '100%', height: '100%', background: `url(${AD_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(30px) brightness(0.4)', opacity: 0.5 }} />
-                    
-                    {/* HERO CINEMATIC FRAME - FULL SCREEN SOVEREIGNTY */}
-                    {isStarted && !activeModal && (
-                        <div style={{ 
-                            position: 'absolute', 
-                            top: 0, 
-                            left: 0,
-                            width: '100%', 
-                            height: '100%', 
-                            zIndex: 1, 
-                            overflow: 'hidden',
-                            pointerEvents: 'none',
-                        }}>
-                            <img 
-                                src={HERO_ASSETS[referralId] || AD_IMAGE} 
-                                alt="Lever Pioneer Elite Asset" 
-                                style={{ 
-                                    width: '100%', 
-                                    height: '100%', 
-                                    objectFit: 'cover', 
-                                    opacity: 0.8,
-                                    animation: 'slow-zoom 20s infinite alternate ease-in-out' 
-                                }} 
-                            />
-                            {/* Cinematic Overlay to ensure text readability */}
-                            <div style={{
-                                position: 'absolute',
-                                inset: 0,
-                                background: 'radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.4) 100%)',
-                                zIndex: 2
-                            }} />
-                        </div>
+                {/* CINEMATIC BACKGROUND STACK: ENGINE_ELITE PRIMARY LAYER */}
+                <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+                    <img 
+                        src={HERO_ASSETS[referralId] || AD_IMAGE} 
+                        alt="Lever Pioneer Elite"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 1, filter: isStarted ? 'brightness(0.6)' : 'brightness(0.3) blur(10px)', transition: 'all 1s ease' }}
+                    />
+                    {isStarted && (
+                        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.8) 100%)', zIndex: 1 }} />
                     )}
-
-                    {isStarted && <Quantum3DLayer />}
                 </div>
+
+                {isStarted && <Quantum3DLayer />}
 
                 {isStarted && !activeModal && (
                     <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', background: 'rgba(0,0,0,0.85)', padding: '12px 0 25px 0', display: 'flex', justifyContent: 'center', gap: '12px', zIndex: 9000, borderTop: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(15px)', direction: language === 'ar' ? 'rtl' : 'ltr' }}>
