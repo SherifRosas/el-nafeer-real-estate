@@ -227,8 +227,8 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
 
   return (
     <>
-      {/* COMPACT FLOATING WINDOW - PREVENTS VERTICAL OVERLAP WITH AD CONTENT */}
-      <div className={`fixed bottom-26 right-4 w-96 max-w-[calc(100vw-2rem)] h-[400px] bg-black/70 backdrop-blur-3xl rounded-[2.5rem] shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(6,182,212,0.2)] flex flex-col z-[100010] border border-white/10 overflow-hidden transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 pointer-events-none translate-y-10'}`}>
+      {/* STABILIZED FLOATING WINDOW - ENSURES NO CLICK BLOCKING ON BOTTOM ICONS */}
+      <div className={`fixed bottom-36 right-4 w-96 max-w-[calc(100vw-2rem)] h-[400px] bg-black/80 backdrop-blur-3xl rounded-[2.5rem] shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(6,182,212,0.25)] flex flex-col z-[100020] border border-white/10 overflow-hidden transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100 translate-y-0 translate-x-0' : 'scale-95 opacity-0 pointer-events-none translate-y-20 translate-x-10'}`}>
         <div className="bg-gradient-to-r from-black/90 to-cyan-950/50 text-white px-6 py-4 flex justify-between items-center border-b border-white/5 uppercase italic">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 bg-cyan-500 rounded-xl flex items-center justify-center text-black font-black shadow-[0_0_20px_rgba(6,182,212,0.4)] flex-shrink-0">
@@ -383,10 +383,10 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
         </div>
       </div>
 
-      {/* REPOSITIONED FAB - ONLY VISIBLE WHEN CLOSED TO AVOID OVERLAP */}
+      {/* STABILIZED FAB - POSITIONED AWAY FROM BOTTOM ACTION BAR ICONS */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 group z-[100015] flex items-center gap-4 transition-all duration-500 ${isOpen ? 'translate-y-20 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}
+        className={`fixed bottom-32 right-6 group z-[100025] flex items-center gap-4 transition-all duration-500 ${isOpen ? 'translate-y-20 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}
         aria-label={isArabic ? 'فتح المستشار العقاري' : 'Open Property Consultant'}
       >
         {!isOpen && (
