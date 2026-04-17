@@ -227,15 +227,15 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
 
   return (
     <>
-      {/* STABILIZED FLOATING WINDOW - ENSURES NO CLICK BLOCKING ON BOTTOM ICONS */}
-      <div className={`fixed bottom-36 right-4 w-96 max-w-[calc(100vw-2rem)] h-[400px] bg-black/80 backdrop-blur-3xl rounded-[2.5rem] shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(6,182,212,0.25)] flex flex-col z-[100020] border border-white/10 overflow-hidden transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100 translate-y-0 translate-x-0' : 'scale-95 opacity-0 pointer-events-none translate-y-20 translate-x-10'}`}>
+      {/* ULTRA-GLASS VISION WINDOW - OPTIMIZED WIDTH FOR HERO IMAGE VISIBILITY */}
+      <div className={`fixed bottom-36 right-4 w-84 max-w-[calc(100vw-2rem)] h-[400px] bg-black/60 backdrop-blur-3xl rounded-[2.5rem] shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(6,182,212,0.25)] flex flex-col z-[100020] border border-white/10 overflow-hidden transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100 translate-y-0 translate-x-0' : 'scale-95 opacity-0 pointer-events-none translate-y-20 translate-x-10'}`}>
         <div className="bg-gradient-to-r from-black/90 to-cyan-950/50 text-white px-6 py-4 flex justify-between items-center border-b border-white/5 uppercase italic">
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-cyan-500 rounded-xl flex items-center justify-center text-black font-black shadow-[0_0_20px_rgba(6,182,212,0.4)] flex-shrink-0">
+            <div className="w-10 h-10 bg-cyan-500 rounded-xl flex items-center justify-center text-black font-black shadow-[0_0_20px_rgba(6,182,212,0.4)] flex-shrink-0 text-sm">
               AI
             </div>
             <div className="min-w-0">
-              <h3 className="font-black text-xs tracking-tighter text-white uppercase truncate">
+              <h3 className="font-black text-[11px] tracking-tighter text-white uppercase truncate leading-none">
                 {isArabic ? (vertical === 'elevator' ? 'مستشار ليفر الذكي' : 'مستشار النفير العقاري') : (vertical === 'elevator' ? 'PIONEER CONSULTANT' : 'NAFEER INTELLIGENCE')}
               </h3>
               <div className="flex items-center gap-1.5">
