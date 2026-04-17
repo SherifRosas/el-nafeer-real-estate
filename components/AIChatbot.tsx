@@ -70,16 +70,24 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
   const [showSuggestions, setShowSuggestions] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  // Initialize and Sync Welcome Message
+  // --- BILINGUAL SENTINEL INITIALIZATION ---
+  // Initialize and Sync Welcome Message with Real-time Language Switching
   useEffect(() => {
+    const welcome = getWelcomeMessage()
+    
+    // If it's the very first greeting
     if (!hasGreetedRef.current && messages.length === 0) {
-      const welcome = getWelcomeMessage()
       setMessages([{ role: 'assistant', content: welcome }])
       hasGreetedRef.current = true
       const timer = setTimeout(() => setShowSuggestions(true), 800)
       return () => clearTimeout(timer)
+    } 
+    
+    // If the user hasn't typed anything yet but switched languages, update the greeting
+    if (messages.length === 1 && messages[0].role === 'assistant') {
+      setMessages([{ role: 'assistant', content: welcome }])
     }
-  }, [isArabic, vertical, referralContext])
+  }, [language, vertical, referralContext]) // Removed hasGreetedRef check here to allow bilingual updates
 
   // Ensure initialOpen works on mount
   useEffect(() => {
@@ -227,36 +235,36 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
 
   return (
     <>
-      {/* ULTRA-GLASS VISION WINDOW - OPTIMIZED WIDTH FOR HERO IMAGE VISIBILITY */}
-      <div className={`fixed bottom-36 right-4 w-84 max-w-[calc(100vw-2rem)] h-[400px] bg-black/60 backdrop-blur-3xl rounded-[2.5rem] shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_50px_rgba(6,182,212,0.25)] flex flex-col z-[100020] border border-white/10 overflow-hidden transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100 translate-y-0 translate-x-0' : 'scale-95 opacity-0 pointer-events-none translate-y-20 translate-x-10'}`}>
-        <div className="bg-gradient-to-r from-black/90 to-cyan-950/50 text-white px-6 py-4 flex justify-between items-center border-b border-white/5 uppercase italic">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-cyan-500 rounded-xl flex items-center justify-center text-black font-black shadow-[0_0_20px_rgba(6,182,212,0.4)] flex-shrink-0 text-sm">
+      {/* STEALTH-LUXE COMPACT WINDOW - MINIMIZED TO PROTECT AD BRANDING */}
+      <div className={`fixed bottom-[115px] right-4 w-[310px] max-w-[calc(100vw-2rem)] h-[360px] bg-black/50 backdrop-blur-2xl rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_30px_rgba(6,182,212,0.15)] flex flex-col z-[100020] border border-white/5 overflow-hidden transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100 translate-y-0 translate-x-0' : 'scale-90 opacity-0 pointer-events-none translate-y-20 translate-x-10'}`}>
+        <div className="bg-gradient-to-r from-black/80 to-cyan-950/30 text-white px-5 py-3 flex justify-between items-center border-b border-white/5 uppercase italic">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-cyan-500 rounded-lg flex items-center justify-center text-black font-black shadow-[0_0_15px_rgba(6,182,212,0.3)] flex-shrink-0 text-[10px]">
               AI
             </div>
             <div className="min-w-0">
-              <h3 className="font-black text-[11px] tracking-tighter text-white uppercase truncate leading-none">
-                {isArabic ? (vertical === 'elevator' ? 'مستشار ليفر الذكي' : 'مستشار النفير العقاري') : (vertical === 'elevator' ? 'PIONEER CONSULTANT' : 'NAFEER INTELLIGENCE')}
+              <h3 className="font-black text-[9px] tracking-widest text-white uppercase truncate opacity-90">
+                {isArabic ? (vertical === 'elevator' ? 'مستشار ليفر' : 'مستشار النفير') : (vertical === 'elevator' ? 'PIONEER AI' : 'NAFEER AI')}
               </h3>
-              <div className="flex items-center gap-1.5">
-                <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${contextUsed ? 'bg-cyan-400' : 'bg-green-500'}`} />
-                <span className="text-[9px] text-cyan-500/80 uppercase font-bold tracking-widest whitespace-nowrap">
-                  {contextUsed ? (isArabic ? 'تم تفعيل الوعي الكامل' : 'SENTIENT_SYNC_ON') : (isArabic ? 'متصل الآن' : 'CORE_ONLINE')}
+              <div className="flex items-center gap-1">
+                <span className="w-1 h-1 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-[8px] text-cyan-500/60 uppercase font-bold tracking-tighter">
+                  CORE_ONLINE
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <button
               onClick={() => setShowSettings(!showSettings)}
-              className={`p-2 rounded-xl transition-all ${showSettings ? 'bg-cyan-500 text-black shadow-[0_0_15px_rgba(6,182,212,0.5)]' : 'bg-white/5 text-white/30 hover:bg-white/10'}`}
+              className={`p-1.5 rounded-lg transition-all ${showSettings ? 'bg-cyan-500 text-black shadow-[0_0_10px_rgba(6,182,212,0.4)]' : 'text-white/20 hover:bg-white/5'}`}
             >
-              <span className="text-sm">⚙️</span>
+              <span className="text-xs">⚙️</span>
             </button>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-white/50 hover:text-white transition-colors p-2 rounded-xl hover:bg-white/10"
+              className="text-white/30 hover:text-white transition-colors p-1.5 rounded-lg hover:bg-white/5"
               aria-label={isArabic ? 'إغلاق' : 'Close'}
             >
               ✕

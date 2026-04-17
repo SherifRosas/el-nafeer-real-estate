@@ -3,9 +3,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSearchParams } from 'next/navigation'
 import dynamic from 'next/dynamic'
-import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap, Home, Layout, FileText } from 'lucide-react'
+import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap, Home, Layout, FileText, Globe } from 'lucide-react'
 import { LEVER_PORTFOLIO } from '@/lib/lever-portfolio'
 import AIChatbot from './AIChatbot'
+import { useLanguage } from './LanguageContext'
 
 // Dynamically import the heavy 3D engine
 const Quantum3DLayer = dynamic(() => import('./Quantum3DLayer'), { 
@@ -19,8 +20,76 @@ const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=201111171368";
 const CALL_URL = "tel:+201070615372";
 const LOCATION_URL = "https://www.google.com/maps/place/Al+Omraneya,+Al+Haram,+Giza+Governorate/@29.9656242,31.0922895,17z/data=!4m15!1m8!3m7!1s0x14584fc2bfbefc07:0x5df1948b27a63882!2sAl+Omraneya,+Al+Haram,+Giza+Governorate!3b1!8m2!3d29.9656242!4d31.0922895!16s%2Fg%2F11c659wy1d!3m5!1s0x14584fc2bfbefc07:0x5df1948b27a63882!8m2!3d29.9656242!4d31.0922895!16s%2Fg%2F11c659wy1d?hl=en-EG&entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D";
 
-// --- CAMPAIGN CONSTANTS ---
-const fullText = "الان من قلب مصر من الجيزة - حدائق الأهرام، تدشن شركة ليفر الرائدة للمصاعد مقرها الجديد. للتواصل اضغط على الأيقونات (واتساب-اتصال-الموقع).";
+// --- BILINGUAL DICTIONARY MAPPING ---
+const DICTIONARY = {
+    ar: {
+        tap_to_ascent: "TAP_TO_ASCENT | ابدأ التجربة",
+        close: "إغلاق",
+        intro: "الان من قلب مصر من الجيزة - حدائق الأهرام، تدشن شركة ليفر الرائدة للمصاعد مقرها الجديد. للتواصل اضغط على الأيقونات (واتساب-اتصال-الموقع).",
+        offer: "عرض حصري لسكان الجيزة وهضبة الأهرام: خصم استراتيجي 15% على عقود التأسيس والصيانة خلال شهر أكتوبر. ليفر.. شريكك في التميز الرأسي.",
+        retarget: "نحن شركة ليفر نرحب بكم مجدداً - نخبة القاهرة والجيزة تستحق الأفضل. طلبك الفني القادم يحصل على خصم استراتيجي حصري.",
+        wa: "واتساب",
+        call: "اتصال",
+        loc: "الموقع",
+        port: "المعرض",
+        quote: "طلب سعر",
+        form_title: "طلب تـسعيرة فـني",
+        form_success: "✅ تم إرسال الطلب بنجاح",
+        form_name: "الاسم",
+        form_phone: "الهاتف",
+        form_loc_btn: "اضغط لمشاركة موقع العقار (خرائط جوجل)",
+        form_loc_loading: "جاري التحديد...",
+        form_loc_success: "✅ تم تحديد الموقع بنجاح",
+        form_floors: "الأدوار",
+        form_shaft: "بئر المصعد (مثلاً 1.5*1.5)",
+        form_foundations: "الأساسات",
+        form_foundations_yes: "الأساسات: يوجد",
+        form_foundations_no: "الأساسات: لا يوجد",
+        form_loc_text: "الموقع (الجيزه - هضبة الأهرام)",
+        form_submit: "تأكـيد الطلـب الفـني",
+        types: { residential: "سكني", commercial: "تجاري", panorama: "بانوراما المونيوم", maintenance: "صيانة وأعطال" },
+        portfolio_title: "مـعرض الأعـمال",
+        portfolio_all: "الكل",
+        portfolio_return: "العودة",
+        flash_gift: "هدية حصرية لمشاهدين البوابة! 🎁",
+        flash_desc: "لقد تم اختيارك للحصول على **خصم فني استثنائي 15%** على عقود التأسيس أو الصيانة. \n\n العرض صالح لمدة ٢٤ ساعة فقط.",
+        flash_btn: "تفعيل العرض عبر المحادثة الذكية ⚡"
+    },
+    en: {
+        tap_to_ascent: "TAP_TO_ASCENT | START EXPERIENCE",
+        close: "CLOSE",
+        intro: "Now from the heart of Giza - El Haram, Lever Pioneer Elevators inaugurates its new headquarters. Contact us via icons (WhatsApp-Call-Location).",
+        offer: "Exclusive offer for Giza residents: Strategic 15% discount on installation and maintenance contracts this month. Lever.. your vertical partner.",
+        retarget: "Welcome back - the elite of Cairo and Giza deserve the best. Your next technical request gets an exclusive strategic discount.",
+        wa: "WhatsApp",
+        call: "Call",
+        loc: "Location",
+        port: "Portfolio",
+        quote: "Quote",
+        form_title: "Technical Quote Request",
+        form_success: "✅ Request Sent Successfully",
+        form_name: "Name",
+        form_phone: "Phone",
+        form_loc_btn: "Tap to share site location (Google Maps)",
+        form_loc_loading: "Locating...",
+        form_loc_success: "✅ Location Captured",
+        form_floors: "Floors",
+        form_shaft: "Elevator Shaft (e.g. 1.5x1.5)",
+        form_foundations: "Foundations",
+        form_foundations_yes: "Foundations: Yes",
+        form_foundations_no: "Foundations: No",
+        form_loc_text: "Location (Giza - El Haram)",
+        form_submit: "Confirm Technical Request",
+        types: { residential: "Residential", commercial: "Commercial", panorama: "Aluminium Panorama", maintenance: "Maintenance & Repair" },
+        portfolio_title: "Case Studies Portfolio",
+        portfolio_all: "All",
+        portfolio_return: "RETURN",
+        flash_gift: "Exclusive Portal Gift! 🎁",
+        flash_desc: "You have been selected for an **Exclusive 15% Strategic Discount** on installation or maintenance contracts. \n\n Offer valid for 24 hours only.",
+        flash_btn: "Activate Offer via Smart AI ⚡"
+    }
+};
+
 const LEVER_BRAND_ID = "62c38934-4c4b-42be-98c9-06cbbee1af19";
 
 const HERO_ASSETS: Record<string, string> = {
@@ -33,6 +102,8 @@ const HERO_ASSETS: Record<string, string> = {
 };
 
 export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | 'v3' }) {
+    const { language, setLanguage } = useLanguage();
+    const t = DICTIONARY[language];
     const searchParams = useSearchParams();
     const referralId = searchParams.get('ref') || 'direct';
     
@@ -124,9 +195,7 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
             }
         }
 
-        const v3Text = "عرض حصري لسكان الجيزة وهضبة الأهرام: خصم استراتيجي 15% على عقود التأسيس والصيانة خلال شهر أكتوبر. ليفر.. شريكك في التميز الرأسي.";
-        const retargetText = isReturningUser ? "نحن شركة ليفر نرحب بكم مجدداً - نخبة القاهرة والجيزة تستحق الأفضل. طلبك الفني القادم يحصل على خصم استراتيجي حصري." : fullText;
-        const activeText = variant === 'v3' ? v3Text : retargetText;
+        const activeText = variant === 'v3' ? t.offer : (isReturningUser ? t.retarget : t.intro);
         const words = activeText.split(' ').filter(w => w && w.trim().length > 0);
         let idx = 0;
         setDisplayedText(words[0] || ""); 
@@ -187,12 +256,14 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
             await fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
             setQuoteSent(true);
             
-            const waMsg = `السلام عليكم شركة ليفر الرائدة للمصاعد.\nأنا: ${uName}\nقمت بإرسال طلب عرض سعر فني للمصعد الخاص بي:\n\n• النوع: ${eType}\n• الأدوار: ${eFloors}\n• بئر المصعد: ${eShaft}\n• الأساسات: ${eFound}\n• الموقع: ${eLoc}\n• خرائط جوجل: ${userLocLink || 'لم يتم التحديد'}\n\nأتمنى التواصل بخصوص المواصفات الفنية.`;
+            const waMsg = language === 'ar' 
+                ? `السلام عليكم شركة ليفر الرائدة للمصاعد.\nأنا: ${uName}\nقمت بإرسال طلب عرض سعر فني للمصعد الخاص بي:\n\n• النوع: ${eType}\n• الأدوار: ${eFloors}\n• بئر المصعد: ${eShaft}\n• الأساسات: ${eFound}\n• الموقع: ${eLoc}\n• خرائط جوجل: ${userLocLink || 'لم يتم التحديد'}\n\nأتمنى التواصل بخصوص المواصفات الفنية.`
+                : `Hello Lever Pioneer Elevators.\nI am: ${uName}\nI sent a technical quote request for my elevator:\n\n• Type: ${eType}\n• Floors: ${eFloors}\n• Shaft Size: ${eShaft}\n• Foundations: ${eFound}\n• Location: ${eLoc}\n• Maps Link: ${userLocLink || 'Not Specified'}\n\nI look forward to discussing technical specs.`;
             
             setTimeout(() => { 
                 setActiveModal(null); 
                 setQuoteSent(false); 
-                window.location.href = `https://api.whatsapp.com/send?phone=201111171368&text=${encodeURIComponent(waMsg)}`; 
+                window.location.href = `${WHATSAPP_URL}&text=${encodeURIComponent(waMsg)}`; 
             }, 2500);
         } catch (error) { console.error("Lead error:", error); } finally { setQuoteLoading(false); }
     }
@@ -212,7 +283,9 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
             {!isStarted && (
                 <div onClick={initiateExperience} style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 99999, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(10px)' }}>
                     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, background: `url(${AD_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(10px) brightness(0.3)' }} />
-                    <div style={{ padding: '20px 50px', border: `2px solid ${variant === 'v3' ? '#c5a059' : '#06b6d4'}`, borderRadius: '25px', color: '#fff', fontWeight: 900, animation: variant === 'v3' ? 'pulse-gold 2s infinite' : 'pulse-cyan 2s infinite', background: variant === 'v3' ? 'rgba(197,160,89,0.1)' : 'rgba(6,182,212,0.1)' }}>TAP_TO_ASCENT</div>
+                    <div style={{ padding: '20px 50px', border: `2px solid ${variant === 'v3' ? '#c5a059' : '#06b6d4'}`, borderRadius: '25px', color: '#fff', fontWeight: 900, animation: variant === 'v3' ? 'pulse-gold 2s infinite' : 'pulse-cyan 2s infinite', background: variant === 'v3' ? 'rgba(197,160,89,0.1)' : 'rgba(6,182,212,0.1)' }}>
+                        {t.tap_to_ascent}
+                    </div>
                 </div>
             )}
 
@@ -233,12 +306,24 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                     style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10000, background: 'rgba(0,0,0,0.5)', border: '1.5px solid rgba(255,255,255,0.3)', borderRadius: '15px', padding: '8px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#fff', backdropFilter: 'blur(15px)', transition: 'all 0.3s ease', cursor: 'pointer', gap: '2px' }}
                 >
                     <X size={22} />
-                    <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '1px' }}>إغلاق</span>
+                    <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '1px' }}>{t.close}</span>
                 </button>
             )}
 
             {isStarted && !activeModal && (
-                <div style={{ position: 'absolute', top: '20px', left: '20px', right: '85px', zIndex: 9001, direction: 'rtl', textAlign: 'center' }}>
+                <div style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 10000, display: 'flex', gap: '8px' }}>
+                    <button 
+                        onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')}
+                        style={{ background: 'rgba(6,182,212,0.2)', border: '1px solid #06b6d4', borderRadius: '12px', padding: '8px 12px', color: '#fff', fontWeight: 900, fontSize: '11px', backdropFilter: 'blur(15px)', display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', boxShadow: '0 0 15px rgba(6,182,212,0.3)' }}
+                    >
+                        <Globe size={14} className="text-cyan-400" />
+                        {language === 'ar' ? 'ENGLISH' : 'العربية'}
+                    </button>
+                </div>
+            )}
+
+            {isStarted && !activeModal && (
+                <div style={{ position: 'absolute', top: '20px', left: '110px', right: '85px', zIndex: 9001, direction: language === 'ar' ? 'rtl' : 'ltr', textAlign: 'center' }}>
                     <div style={{ background: variant === 'v3' ? 'rgba(197,160,89,0.02)' : 'rgba(6,182,212,0.02)', border: `1px solid ${variant === 'v3' ? 'rgba(197,160,89,0.1)' : 'rgba(6,182,212,0.1)'}`, borderRadius: '10px', padding: '10px', fontSize: '13px', fontWeight: 'bold', color: '#fff', lineHeight: '1.4', backdropFilter: 'blur(10px)', textShadow: '0 0 10px rgba(0,0,0,0.8)' }}>
                         {displayedText}
                     </div>
@@ -293,57 +378,57 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                 </div>
 
                 {isStarted && !activeModal && (
-                    <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', background: 'rgba(0,0,0,0.85)', padding: '12px 0 25px 0', display: 'flex', justifyContent: 'center', gap: '12px', zIndex: 9000, borderTop: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(15px)', direction: 'rtl' }}>
+                    <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', background: 'rgba(0,0,0,0.85)', padding: '12px 0 25px 0', display: 'flex', justifyContent: 'center', gap: '12px', zIndex: 9000, borderTop: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(15px)', direction: language === 'ar' ? 'rtl' : 'ltr' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                             <a onClick={() => trackEvent('WHATSAPP_CONTACT', 'LEAD_ATTEMPT')} href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(37,211,102,0.05)', border: `1.5px solid ${variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366', animation: 'icon-float 3s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <MessageCircle size={18} /> </a>
-                            <span style={{ fontSize: '9px', fontWeight: 900, color: variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366', opacity: 0.8 }}>واتساب</span>
+                            <span style={{ fontSize: '9px', fontWeight: 900, color: variant === 'v3' || isReturningUser ? '#d4af37' : '#25d366', opacity: 0.8 }}>{t.wa}</span>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                             <a onClick={() => trackEvent('CALL_CONTACT', 'LEAD_ATTEMPT')} href={CALL_URL} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: `1.5px solid ${variant === 'v3' || isReturningUser ? '#d4af37' : '#06b6d4'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: variant === 'v3' || isReturningUser ? '#d4af37' : '#06b6d4', animation: 'icon-float 3.5s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <Phone size={18} /> </a>
-                            <span style={{ fontSize: '9px', fontWeight: 900, color: variant === 'v3' || isReturningUser ? '#d4af37' : '#06b6d4', opacity: 0.8 }}>اتصال</span>
+                            <span style={{ fontSize: '9px', fontWeight: 900, color: variant === 'v3' || isReturningUser ? '#d4af37' : '#06b6d4', opacity: 0.8 }}>{t.call}</span>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                             <a onClick={() => trackEvent('LOCATION_VIEW', 'INTEREST_ATTEMPT')} href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(212,175,55,0.05)', border: `1.5px solid #d4af37`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d4af37', animation: 'icon-float 4s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <MapPin size={18} /> </a>
-                            <span style={{ fontSize: '9px', fontWeight: 900, color: '#d4af37', opacity: 0.8 }}>الموقع</span>
+                            <span style={{ fontSize: '9px', fontWeight: 900, color: '#d4af37', opacity: 0.8 }}>{t.loc}</span>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                             <a onClick={() => { trackEvent('PORTFOLIO_VIEW', 'INTEREST_ATTEMPT'); setActiveModal('portfolio'); }} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(197,160,89,0.05)', border: `1.5px solid #c5a059`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#c5a059', animation: 'icon-float 4.5s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <Layout size={18} /> </a>
-                            <span style={{ fontSize: '9px', fontWeight: 900, color: '#c5a059', opacity: 0.8 }}>المعرض</span>
+                            <span style={{ fontSize: '9px', fontWeight: 900, color: '#c5a059', opacity: 0.8 }}>{t.port}</span>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                             <a onClick={() => { trackEvent('QUOTE_REQUEST_START', 'LEAD_ATTEMPT'); setActiveModal('quote'); }} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: `1.5px solid #06b6d4`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 5s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none' }}> <FileText size={18} /> </a>
-                            <span style={{ fontSize: '9px', fontWeight: 900, color: '#06b6d4', opacity: 0.8 }}>طلب سعر</span>
+                            <span style={{ fontSize: '9px', fontWeight: 900, color: '#06b6d4', opacity: 0.8 }}>{t.quote}</span>
                         </div>
                     </div>
                 )}
                 
                 {activeModal === 'quote' && (
                     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.9)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
-                        <div style={{ width: '100%', maxWidth: '350px', background: '#0a0a0f', border: '1px solid #06b6d4', borderRadius: '25px', padding: '20px', position: 'relative', overflowY: 'auto', maxHeight: '85vh', direction: 'rtl' }}>
+                        <div style={{ width: '100%', maxWidth: '350px', background: '#0a0a0f', border: '1px solid #06b6d4', borderRadius: '25px', padding: '20px', position: 'relative', overflowY: 'auto', maxHeight: '85vh', direction: language === 'ar' ? 'rtl' : 'ltr' }}>
                             <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: 10, right: 15, color: '#666', background: 'none', border: 'none', fontSize: '24px' }}>×</button>
-                            <h3 style={{ color: variant === 'v3' ? '#c5a059' : '#06b6d4', textAlign: 'center', fontWeight: 900, marginBottom: '15px' }}>طلب تـسعيرة فـني</h3>
-                            {quoteSent ? ( <div style={{ textAlign: 'center', padding: '30px', color: '#fff' }}>✅ تم إرسال الطلب بنجاح</div> ) : (
+                            <h3 style={{ color: variant === 'v3' ? '#c5a059' : '#06b6d4', textAlign: 'center', fontWeight: 900, marginBottom: '15px' }}>{t.form_title}</h3>
+                            {quoteSent ? ( <div style={{ textAlign: 'center', padding: '30px', color: '#fff' }}>{t.form_success}</div> ) : (
                                 <form onSubmit={submitQuoteRequest} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                    <input name="userName" required placeholder="الاسم" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
-                                    <input name="userPhone" required placeholder="الهاتف" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
+                                    <input name="userName" required placeholder={t.form_name} style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
+                                    <input name="userPhone" required placeholder={t.form_phone} style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
                                     <div onClick={captureUserLocation} style={{ cursor: 'pointer', background: userLocLink ? 'rgba(37,211,102,0.1)' : 'rgba(6,182,212,0.1)', border: `1px solid ${userLocLink ? '#25d366' : '#06b6d4'}`, padding: '10px', borderRadius: '8px', color: userLocLink ? '#25d366' : '#06b6d4', fontSize: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
                                         <MapPin size={16} />
-                                        {locLoading ? 'جاري التحديد...' : userLocLink ? '✅ تم تحديد الموقع بنجاح' : 'اضغط لمشاركة موقع العقار (خرائط جوجل)'}
+                                        {locLoading ? t.form_loc_loading : userLocLink ? t.form_loc_success : t.form_loc_btn}
                                     </div>
                                     <select name="elevatorType" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }}>
-                                        <option value="سكني">سكني</option>
-                                        <option value="تجاري">تجاري</option>
-                                        <option value="بانوراما المونيوم">بانوراما المونيوم</option>
-                                        <option value="صيانة">صيانة وأعطال</option>
+                                        <option value="سكني">{t.types.residential}</option>
+                                        <option value="تجاري">{t.types.commercial}</option>
+                                        <option value="بانوراما المونيوم">{t.types.panorama}</option>
+                                        <option value="صيانة">{t.types.maintenance}</option>
                                     </select>
-                                    <input name="floors" type="number" placeholder="الأدوار" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
-                                    <input name="shaftSize" placeholder="بئر المصعد (مثلاً 1.5*1.5)" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
+                                    <input name="floors" type="number" placeholder={t.form_floors} style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
+                                    <input name="shaftSize" placeholder={t.form_shaft} style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
                                     <select name="foundations" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }}>
-                                        <option value="يوجد">الأساسات: يوجد</option>
-                                        <option value="لا يوجد">الأساسات: لا يوجد</option>
+                                        <option value="يوجد">{t.form_foundations_yes}</option>
+                                        <option value="لا يوجد">{t.form_foundations_no}</option>
                                     </select>
-                                    <input name="location" placeholder="الموقع (الجيزه - هضبة الأهرام)" style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
-                                    <button type="submit" style={{ background: '#06b6d4', padding: '12px', borderRadius: '10px', fontWeight: 900, color: '#000', fontSize: '14px', marginTop: '10px' }}>تأكـيد الطلـب الفـني</button>
+                                    <input name="location" placeholder={t.form_loc_text} style={{ background: '#111', border: '1px solid #333', padding: '10px', borderRadius: '8px', color: '#fff', fontSize: '12px' }} />
+                                    <button type="submit" style={{ background: '#06b6d4', padding: '12px', borderRadius: '10px', fontWeight: 900, color: '#000', fontSize: '14px', marginTop: '10px' }}>{t.form_submit}</button>
                                 </form>
                             )}
                         </div>
@@ -353,10 +438,12 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                 {activeModal === 'portfolio' && (
                     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.95)', zIndex: 9999, display: 'flex', flexDirection: 'column', padding: '10px', overflowY: 'auto' }}>
                         <button onClick={() => setActiveModal(null)} style={{ alignSelf: 'flex-end', color: '#fff', background: 'none', border: 'none', fontSize: '30px' }}>×</button>
-                        <h2 style={{ textAlign: 'center', color: '#d4af37', fontWeight: 900, marginBottom: '20px' }}>مـعرض الأعـمال</h2>
+                        <h2 style={{ textAlign: 'center', color: '#d4af37', fontWeight: 900, marginBottom: '20px' }}>{t.portfolio_title}</h2>
                         <div style={{ display: 'flex', gap: '8px', marginBottom: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                            {dynamicCategories.map(cat => (
-                                <div key={cat} onClick={() => setSelectedCategory(cat)} style={{ padding: '8px 15px', background: selectedCategory === cat ? '#d4af37' : '#111', color: selectedCategory === cat ? '#000' : '#d4af37', borderRadius: '10px', fontSize: '11px', fontWeight: 900, cursor: 'pointer', border: `1px solid ${selectedCategory === cat ? '#d4af37' : '#333'}` }}>{cat}</div>
+                            {['الكل', ...Array.from(new Set(portfolioItems.map(item => item.cat)))].map(cat => (
+                                <div key={cat} onClick={() => setSelectedCategory(cat)} style={{ padding: '8px 15px', background: selectedCategory === cat ? '#d4af37' : '#111', color: selectedCategory === cat ? '#000' : '#d4af37', borderRadius: '10px', fontSize: '11px', fontWeight: 900, cursor: 'pointer', border: `1px solid ${selectedCategory === cat ? '#d4af37' : '#333'}` }}>
+                                    {cat === 'الكل' ? t.portfolio_all : cat}
+                                </div>
                             ))}
                         </div>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '10px', justifyContent: 'center' }}>
@@ -380,7 +467,7 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
 
             {fullScreenVid && (
                 <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: '#000', zIndex: 30000, display: 'flex', flexDirection: 'column' }}>
-                    <div onClick={() => setFullScreenVid(null)} style={{ padding: '20px', color: '#d4af37', fontSize: '16px', fontWeight: 900, cursor: 'pointer', borderBottom: '1px solid #111', display: 'flex', alignItems: 'center', gap: '10px' }}> <X size={20} /> RETURN | العودة </div>
+                    <div onClick={() => setFullScreenVid(null)} style={{ padding: '20px', color: '#d4af37', fontSize: '16px', fontWeight: 900, cursor: 'pointer', borderBottom: '1px solid #111', display: 'flex', alignItems: 'center', gap: '10px' }}> <X size={20} /> {t.portfolio_return} </div>
                     <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000' }}> 
                         {/\.(jpg|jpeg|png|webp|gif|bmp)$/i.test(fullScreenVid) ? (
                             <img src={fullScreenVid} alt="Full Screen" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
@@ -398,7 +485,8 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                 </div>
             </div>
 
-            {/* INTEGRATED SPECIALIZED AI AGENT - ELEVATED Z-INDEX & REPOSITIONED */}
+            {/* INTEGRATED SPECIALIZED AI AGENT - TEMPORARILY DISABLED PER USER REQUEST */}
+            {/* 
             <div style={{ position: 'relative', zIndex: 100005 }}>
                 <AIChatbot 
                     vertical="elevator" 
@@ -406,6 +494,7 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                     referralContext={referralId}
                 />
             </div>
+            */}
 
             {/* MAGNET PROTOCOL: FLASH OFFER POPUP */}
             {showFlashOffer && (
@@ -415,11 +504,9 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                         <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(6,182,212,0.1)', border: '1px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 15px auto', color: '#06b6d4' }}>
                             <div style={{ fontSize: '30px' }}>🎁</div>
                         </div>
-                        <h2 style={{ color: '#fff', fontSize: '20px', fontWeight: 900, marginBottom: '10px', direction: 'rtl' }}>هدية حصرية لمشاهدين البوابة! 🎁</h2>
-                        <p style={{ color: '#ccc', fontSize: '13px', lineHeight: '1.6', marginBottom: '20px', direction: 'rtl' }}>
-                            لقد تم اختيارك للحصول على **خصم فني استثنائي 15%** على عقود التأسيس أو الصيانة. 
-                            <br/>
-                            <span style={{ color: '#06b6d4', fontSize: '11px' }}>العرض صالح لمدة ٢٤ ساعة فقط.</span>
+                        <h2 style={{ color: '#fff', fontSize: '20px', fontWeight: 900, marginBottom: '10px', direction: language === 'ar' ? 'rtl' : 'ltr' }}>{t.flash_gift}</h2>
+                        <p style={{ color: '#ccc', fontSize: '13px', lineHeight: '1.6', marginBottom: '20px', direction: language === 'ar' ? 'rtl' : 'ltr', whiteSpace: 'pre-wrap' }}>
+                            {t.flash_desc}
                         </p>
                         <button 
                             onClick={() => {
@@ -429,7 +516,7 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
                             }}
                             style={{ width: '100%', background: '#06b6d4', color: '#000', padding: '15px', borderRadius: '15px', fontWeight: 900, fontSize: '14px', cursor: 'pointer', border: 'none', boxShadow: '0 0 20px rgba(6,182,212,0.4)' }}
                         >
-                            تفعيل العرض عبر المحادثة الذكية ⚡
+                            {t.flash_btn}
                         </button>
                     </div>
                 </div>
