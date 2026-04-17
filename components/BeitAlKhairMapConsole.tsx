@@ -152,7 +152,7 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
                         {t.telemetry}
                      </span>
                    </div>
-                   <h2 className="text-xl lg:text-4xl font-black text-white italic tracking-tighter uppercase leading-none text-luxury-gold">
+                   <h2 className={`text-xl lg:text-4xl font-black text-white tracking-tighter uppercase leading-none text-luxury-gold ${language === 'en' ? 'italic' : ''}`}>
                         {t.geo_cmd}
                    </h2>
                  </div>

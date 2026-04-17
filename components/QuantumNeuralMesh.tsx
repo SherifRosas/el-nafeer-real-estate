@@ -61,12 +61,12 @@ export default function QuantumNeuralMesh() {
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] pointer-events-none" />
       
       {/* 🇪🇬 EGY_SILHOUETTE (Subtle Geographic Context) */}
-      <svg className="absolute inset-0 w-full h-full opacity-[0.1]" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+      <svg className="absolute inset-0 w-full h-full opacity-[0.3]" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
         <path 
             d="M30,5 L80,5 L95,40 L85,95 L40,95 L15,40 Z" 
             fill="none" 
             stroke="#c5a059" 
-            strokeWidth="0.8" 
+            strokeWidth="1.5" 
             className="animate-pulse"
         />
       </svg>
@@ -79,7 +79,7 @@ export default function QuantumNeuralMesh() {
             <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
           </radialGradient>
           <filter id="glow">
-            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feGaussianBlur stdDeviation="3" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
         </defs>
@@ -89,13 +89,13 @@ export default function QuantumNeuralMesh() {
           <motion.path
             key={conn.id}
             initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.4 }}
+            animate={{ pathLength: 1, opacity: 0.8 }}
             transition={{ duration: 4, delay: Math.random() * 2, repeat: Infinity, repeatType: 'reverse' }}
             d={`M ${conn.n1.x} ${conn.n1.y} Q ${(conn.n1.x + conn.n2.x)/2 + (Math.random()-0.5)*15} ${(conn.n1.y + conn.n2.y)/2 + (Math.random()-0.5)*15} ${conn.n2.x} ${conn.n2.y}`}
             fill="none"
             stroke="#06b6d4"
-            strokeWidth="0.15"
-            strokeDasharray="1 1"
+            strokeWidth="0.5"
+            strokeDasharray="2 2"
           />
         ))}
 
@@ -105,10 +105,10 @@ export default function QuantumNeuralMesh() {
             <motion.circle
               cx={node.x}
               cy={node.y}
-              r={node.priority ? 1.2 : 0.6}
+              r={node.priority ? 1.5 : 0.8}
               fill="#06b6d4"
               initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: [0.5, 1, 0.5] }}
+              animate={{ scale: 1, opacity: [0.6, 1, 0.6] }}
               transition={{ duration: 3, repeat: Infinity, delay: Math.random() * 2 }}
               filter="url(#glow)"
             />
