@@ -5,14 +5,49 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 import BeitAlKhairMapConsole from './BeitAlKhairMapConsole'
 import BeitAlKhairNeuralGrid from './admin/BeitAlKhairNeuralGrid'
 import BeitAlKhairChatbot from './BeitAlKhairChatbot'
+import { useLanguage } from './LanguageContext'
+import { db } from '@/lib/supabase'
 
 interface UnifiedConsoleProps {
-  properties: any[]
+  properties?: any[]
 }
 
-export default function BeitAlKhairUnifiedConsole({ properties }: UnifiedConsoleProps) {
+const DICTIONARY = {
+  ar: {
+    exit: 'الخروج_من_نطاق_النود',
+    loading: 'جاري_تحميل_البيانات...',
+  },
+  en: {
+    exit: 'EXIT_NODE_DOMAIN',
+    loading: 'LOADING_DATA_STREAM...',
+  }
+}
+
+export default function BeitAlKhairUnifiedConsole({ properties: initialProperties }: UnifiedConsoleProps) {
+  const { language } = useLanguage()
+  const t = DICTIONARY[language]
+  
   const [viewState, setViewState] = useState<'MAP' | 'GRID'>('MAP')
   const [selectedQasr, setSelectedQasr] = useState<string | null>(null)
+  const [properties, setProperties] = useState<any[]>(initialProperties || [])
+  const [loading, setLoading] = useState(!initialProperties?.length)
+
+  useEffect(() => {
+    if (!initialProperties?.length) {
+      const fetchData = async () => {
+        const data = await db.getPublicProperties()
+        const filtered = data.filter(p => 
+          p.property_owners?.companyName?.includes('Beit Al-Khair') || 
+          p.location.toLowerCase().includes('lotus') || 
+          p.location.toLowerCase().includes('toukh') ||
+          p.location.toLowerCase().includes('banha')
+        )
+        setProperties(filtered)
+        setLoading(false)
+      }
+      fetchData()
+    }
+  }, [initialProperties])
   
   // 🌌 NEURAL_PARALLAX_DRIFT_ENGINE
   const x = useMotionValue(0)
@@ -48,6 +83,15 @@ export default function BeitAlKhairUnifiedConsole({ properties }: UnifiedConsole
         return pTitle.includes(qId) || pTitle.includes(selectedQasr.toLowerCase())
       }) 
     : properties
+
+  if (loading) return (
+    <div className="w-full h-full flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+            <div className="w-12 h-12 border-4 border-sahara-gold/20 border-t-sahara-gold rounded-full animate-spin" />
+            <span className="text-[10px] font-black text-sahara-gold uppercase tracking-[1em] italic animate-pulse">{t.loading}</span>
+        </div>
+    </div>
+  )
 
   return (
     <div 
@@ -93,8 +137,8 @@ export default function BeitAlKhairUnifiedConsole({ properties }: UnifiedConsole
                     onClick={() => setViewState('MAP')}
                     className="group px-10 py-4 bg-black/80 backdrop-blur-3xl border-2 border-sahara-gold/40 text-sahara-gold rounded-full text-[10px] font-black uppercase tracking-[0.6em] hover:bg-sahara-gold hover:text-black transition-all flex items-center gap-4 shadow-[0_0_40px_rgba(0,0,0,0.5)]"
                 >
-                    <span className="text-xl group-hover:-translate-x-2 transition-transform">←</span> 
-                    EXIT_NODE_DOMAIN
+                    <span className={`text-xl group-hover:-translate-x-2 transition-transform ${language === 'ar' ? 'rotate-180' : ''}`}>←</span> 
+                    {t.exit}
                 </button>
                 </div>
 

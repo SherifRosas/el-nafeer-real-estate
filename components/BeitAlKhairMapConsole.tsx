@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLanguage } from './LanguageContext'
 
 interface QasrNode {
   id: string
@@ -24,8 +25,8 @@ interface CityData {
 const CITY_DATA: { [key: string]: CityData } = {
   banha: {
     id: 'banha',
-    name: 'BANHA_DOM_NODE',
-    nameAr: 'نطاق بنها القليوبية',
+    name: 'BANHA',
+    nameAr: 'بنها',
     coords: { x: 300, y: 180 },
     landmarks: ['Flowers District', 'Examination Bridge', 'Al-Habitat'],
     qasrs: [
@@ -57,8 +58,8 @@ const CITY_DATA: { [key: string]: CityData } = {
   },
   toukh: {
     id: 'toukh',
-    name: 'TOUKH_DOM_NODE',
-    nameAr: 'طوخ القليوبية',
+    name: 'TOUKH',
+    nameAr: 'طوخ',
     coords: { x: 410, y: 300 },
     landmarks: ['Highway spine'],
     qasrs: [
@@ -82,6 +83,33 @@ const CITY_DATA: { [key: string]: CityData } = {
   }
 }
 
+const DICTIONARY = {
+  ar: {
+    geo_cmd: 'القيادة_الجغرافية',
+    telemetry: 'تم_فك_تشفير_القياس_عن_بعد',
+    rescanning: 'إعادة_مسح_النودز...',
+    hq: 'المقر_الرئيسي',
+    south_node: 'النود_الجنوبي',
+    north: '↑ شمال_الدلتا',
+    south: 'جنوب_القاهرة ↓',
+    units: 'الوحدات',
+    sync: 'مزامنة_حيوية',
+    return: 'العودة'
+  },
+  en: {
+    geo_cmd: 'GEOGRAPHIC_COMMAND',
+    telemetry: 'GEO_TELEMETRY_DECRYPTED',
+    rescanning: 'RESCANNING_NODAL_FIELD...',
+    hq: 'HQ_DOMAIN',
+    south_node: 'SOUTHERN_NODE',
+    north: '↑ NORTH_DELTA',
+    south: 'SOUTH_CAIRO_GIZA ↓',
+    units: 'UNITS_LOCATED',
+    sync: 'SYNC_STATUS_LIVE',
+    return: 'GEO_RETURN'
+  }
+}
+
 import { neuralAudio } from '@/lib/neural-audio'
 
 interface MapConsoleProps {
@@ -89,6 +117,9 @@ interface MapConsoleProps {
 }
 
 export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps) {
+  const { language } = useLanguage()
+  const t = DICTIONARY[language]
+  
   const [selectedCity, setSelectedCity] = useState<CityData | null>(null)
   const [hoveredNode, setHoveredNode] = useState<string | null>(null)
 
@@ -106,26 +137,30 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
   }
 
   return (
-    <div className="relative w-full h-full bg-[#050811] rounded-[4rem] overflow-hidden border-2 border-white/5 shadow-[inset_0_0_150px_rgba(0,0,0,0.8)] hud-scanline">
-      {/* ... (Previous Scanline and Header layers remain same) */}
+    <div className="relative w-full h-full bg-black/10 rounded-[4rem] overflow-hidden border-2 border-white/5 shadow-[inset_0_0_150px_rgba(0,0,0,0.8)] hud-scanline">
       
       {/* 🏙️ BUILDING_VIEW_QUANTUM_SYNC */}
       <AnimatePresence mode="wait">
         {!selectedCity ? (
-           // ... (Map view content from previous turns)
             <div className="absolute inset-0 flex flex-col p-4 lg:p-12">
                {/* Telemetry Header */}
                <div className="flex justify-between items-start mb-4 lg:mb-8 z-10">
                  <div>
                    <div className="flex items-center gap-2 lg:gap-4 mb-1 lg:mb-2">
                      <span className="w-2 h-2 bg-sahara-gold rounded-full animate-ping shadow-[0_0_10px_#c5a059]" />
-                     <span className="text-[6px] lg:text-[9px] font-black text-sahara-gold uppercase tracking-[0.4em] lg:tracking-[0.6em] italic robotic-digits">GEO_TELEMETRY_DECRYPTED</span>
+                     <span className="text-[6px] lg:text-[9px] font-black text-sahara-gold uppercase tracking-[0.4em] lg:tracking-[0.6em] italic robotic-digits">
+                        {t.telemetry}
+                     </span>
                    </div>
-                   <h2 className="text-xl lg:text-4xl font-black text-white italic tracking-tighter uppercase leading-none text-luxury-gold">GEOGRAPHIC_COMMAND</h2>
+                   <h2 className="text-xl lg:text-4xl font-black text-white italic tracking-tighter uppercase leading-none text-luxury-gold">
+                        {t.geo_cmd}
+                   </h2>
                  </div>
                  <div className="text-right hidden sm:block">
                    <p className="text-[8px] lg:text-[10px] font-black text-gray-700 uppercase tracking-widest robotic-digits mb-1">LAT: 30.4591 // LONG: 31.1786</p>
-                   <p className="text-[8px] lg:text-[10px] font-black text-sahara-gold/40 uppercase tracking-[0.2em] lg:tracking-[0.3em]">RESCANNING_NODAL_FIELD...</p>
+                   <p className="text-[8px] lg:text-[10px] font-black text-sahara-gold/40 uppercase tracking-[0.2em] lg:tracking-[0.3em] animate-pulse">
+                        {t.rescanning}
+                   </p>
                  </div>
                </div>
 
@@ -140,68 +175,42 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
                         <stop offset="0%" stopColor="#c5a059" stopOpacity="0.8" />
                         <stop offset="100%" stopColor="#c5a059" stopOpacity="0" />
                       </radialGradient>
-                      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5"/>
-                      </pattern>
                     </defs>
 
-                    {/* 📐 TACTICAL_GRID_OVERLAY */}
-                    <rect width="800" height="500" fill="url(#grid)" />
+                    {/* 📐 TACTICAL_GRID_OVERLAY REMOVED FOR CLEAN NEURAL MESH VIEW */}
 
-                    {/* 🌊 NILE_RIVER_SPINE (Delta Artery) */}
-                    <motion.path 
-                      d="M100,-50 C150,150 80,300 120,550" 
-                      fill="none" 
-                      stroke="#00ffff" 
-                      strokeWidth="20" 
-                      strokeOpacity="0.05" 
-                      initial={{ pathLength: 0 }} 
-                      animate={{ pathLength: 1 }} 
-                      transition={{ duration: 4 }} 
-                    />
-                    
-                    {/* 🛣️ REGIONAL_RING_ROAD (Tactical Curve) */}
-                    <motion.path 
-                      d="M-50,420 Q400,350 850,420" 
-                      fill="none" 
-                      stroke="rgba(255,255,255,0.05)" 
-                      strokeWidth="40" 
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                    />
-                    <text x="400" y="405" className="text-[8px] font-black fill-gray-700 uppercase tracking-[0.8em] pointer-events-none">REGIONAL_RING_ROAD_LINK</text>
-
-                    {/* 🛣️ ALEXANDRIA_AGRICULTURE_ROAD (Artery 1) */}
-                    <motion.path 
-                      d="M280,-20 L350,180 L480,320 L600,600" 
-                      fill="none" 
-                      stroke="#c5a059" 
-                      strokeWidth="3" 
-                      strokeOpacity="0.2" 
-                    />
-                    
                     {/* 🧭 ORIENTATION_MARKERS */}
-                    <text x="400" y="480" className="text-[10px] font-black fill-gray-500 uppercase tracking-[1em] text-center opacity-30">↑ NORTH_DELTA // SOUTH_CAIRO_GIZA ↓</text>
+                    <text x="400" y="480" className="text-[10px] font-black fill-gray-500 uppercase tracking-[1em] text-center opacity-30">
+                        {t.north} // {t.south}
+                    </text>
                     <line x1="100" y1="475" x2="700" y2="475" stroke="rgba(255,255,255,0.1)" strokeWidth="1" strokeDasharray="5,5" />
 
                     {/* 📍 BANHA_DOMINATION_NODE */}
                     <g className="cursor-pointer group" onMouseEnter={() => setHoveredNode('banha')} onMouseLeave={() => setHoveredNode(null)} onClick={() => { setSelectedCity(CITY_DATA.banha); setHoveredNode(null); }}>
                       <motion.circle cx={CITY_DATA.banha.coords.x} cy={CITY_DATA.banha.coords.y} r="14" fill="#c5a059" animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 3 }} />
                       <circle cx={CITY_DATA.banha.coords.x} cy={CITY_DATA.banha.coords.y} r="45" fill="url(#nodePulse)" className="animate-pulse" />
-                      <text x={CITY_DATA.banha.coords.x + 25} y={CITY_DATA.banha.coords.y - 15} className="text-2xl font-black fill-white uppercase tracking-[0.4em] italic robotic-digits drop-shadow-lg">BANHA</text>
-                      <text x={CITY_DATA.banha.coords.x + 25} y={CITY_DATA.banha.coords.y + 5} className="text-[8px] font-black fill-sahara-gold uppercase tracking-[0.2em] opacity-60">HQ_DOMAIN</text>
+                      <text x={CITY_DATA.banha.coords.x + 25} y={CITY_DATA.banha.coords.y - 15} className={`text-2xl font-black fill-white uppercase tracking-[0.4em] italic robotic-digits drop-shadow-lg ${language === 'ar' ? 'font-["Cairo"]' : ''}`}>
+                        {language === 'ar' ? CITY_DATA.banha.nameAr : CITY_DATA.banha.name}
+                      </text>
+                      <text x={CITY_DATA.banha.coords.x + 25} y={CITY_DATA.banha.coords.y + 5} className="text-[8px] font-black fill-sahara-gold uppercase tracking-[0.2em] opacity-60 italic">
+                        {t.hq}
+                      </text>
                     </g>
 
                     {/* 📍 TOUKH_DOMINATION_NODE */}
                     <g className="cursor-pointer group" onMouseEnter={() => setHoveredNode('toukh')} onMouseLeave={() => setHoveredNode(null)} onClick={() => { setSelectedCity(CITY_DATA.toukh); setHoveredNode(null); }}>
                       <motion.circle cx={CITY_DATA.toukh.coords.x} cy={CITY_DATA.toukh.coords.y} r="10" fill="#c5a059" animate={{ scale: [1, 1.4, 1] }} transition={{ repeat: Infinity, duration: 3, delay: 1 }} />
                       <circle cx={CITY_DATA.toukh.coords.x} cy={CITY_DATA.toukh.coords.y} r="30" fill="url(#nodePulse)" className="animate-pulse" style={{ animationDelay: '1s' }} />
-                      <text x={CITY_DATA.toukh.coords.x + 25} y={CITY_DATA.toukh.coords.y + 15} className="text-2xl font-black fill-white uppercase tracking-[0.4em] italic robotic-digits drop-shadow-lg">TOUKH</text>
-                      <text x={CITY_DATA.toukh.coords.x + 25} y={CITY_DATA.toukh.coords.y + 30} className="text-[8px] font-black fill-sahara-gold uppercase tracking-[0.2em] opacity-60">SOUTHERN_NODE</text>
+                      <text x={CITY_DATA.toukh.coords.x + 25} y={CITY_DATA.toukh.coords.y + 15} className={`text-2xl font-black fill-white uppercase tracking-[0.4em] italic robotic-digits drop-shadow-lg ${language === 'ar' ? 'font-["Cairo"]' : ''}`}>
+                        {language === 'ar' ? CITY_DATA.toukh.nameAr : CITY_DATA.toukh.name}
+                      </text>
+                      <text x={CITY_DATA.toukh.coords.x + 25} y={CITY_DATA.toukh.coords.y + 30} className="text-[8px] font-black fill-sahara-gold uppercase tracking-[0.2em] opacity-60 italic">
+                        {t.south_node}
+                      </text>
                     </g>
                   </svg>
                 </div>
-           </div>
+            </div>
         ) : (
           <motion.div 
             key="building-view"
@@ -212,14 +221,16 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
           >
             <div className="flex justify-between items-center mb-4 lg:mb-8 pointer-events-none">
               <div className="pointer-events-auto">
-                <span className="px-3 py-1 bg-sahara-gold/10 rounded-full border border-sahara-gold/30 text-sahara-gold text-[6px] lg:text-[8px] font-black uppercase tracking-[0.3em] lg:tracking-[0.5em] italic">{selectedCity.nameAr} // QALYUBIA</span>
+                <span className="px-3 py-1 bg-sahara-gold/10 rounded-full border border-sahara-gold/30 text-sahara-gold text-[6px] lg:text-[8px] font-black uppercase tracking-[0.3em] lg:tracking-[0.5em] italic">
+                    {language === 'ar' ? selectedCity.nameAr : selectedCity.name} // QALYUBIA
+                </span>
               </div>
               <button 
                 onClick={() => setSelectedCity(null)}
                 className="pointer-events-auto w-10 h-10 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-black border border-sahara-gold flex items-center justify-center text-sahara-gold hover:bg-sahara-gold hover:text-black transition-all shadow-[0_0_20px_rgba(197,160,89,0.3)] group"
-                title="GEO_RETURN"
+                title={t.return}
               >
-                <span className="text-xl group-hover:-translate-x-1 transition-transform">←</span>
+                <span className={`text-xl group-hover:-translate-x-1 transition-transform ${language === 'ar' ? 'rotate-180' : ''}`}>←</span>
               </button>
             </div>
 
@@ -231,20 +242,6 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
                   onClick={() => handleQasrInteraction(q)}
                   className="group cursor-pointer prestige-glass rounded-[3.5rem] overflow-hidden hover:border-sahara-gold/50 transition-all flex flex-col relative aspect-[16/10]"
                 >
-                  {/* 🖼️ REAL-WORLD_QUANTUM_VISUAL */}
-                  {q.image ? (
-                    <div className="absolute inset-0 z-0">
-                      <img 
-                        src={`/assets/buildings/${q.image}`} 
-                        alt={q.name}
-                        className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity grayscale-[30%] group-hover:grayscale-0"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                    </div>
-                  ) : (
-                    <div className="absolute inset-0 bg-white/5 z-0" />
-                  )}
-
                   <div className="relative z-10 p-10 flex flex-col h-full justify-between">
                     <div>
                       <div className="flex items-center gap-3 mb-6">
@@ -257,11 +254,11 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
 
                     <div className="flex justify-between items-end bg-black/60 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
                         <div>
-                            <p className="text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1 leading-none">UNITS_LOCATED</p>
+                            <p className="text-[9px] font-black text-gray-500 uppercase tracking-widest mb-1 leading-none">{t.units}</p>
                             <p className="text-3xl font-black text-white robotic-digits italic leading-none">{q.units}</p>
                         </div>
                         <div className="text-right">
-                            <span className="text-[10px] font-black text-sahara-gold uppercase tracking-[0.4em] mb-4 block leading-none underline decoration-sahara-gold/30">SYNC_STATUS_LIVE</span>
+                            <span className="text-[10px] font-black text-sahara-gold uppercase tracking-[0.4em] mb-4 block leading-none underline decoration-sahara-gold/30">{t.sync}</span>
                             <div className="flex gap-1.5 justify-end">
                                 {[1,2,3,4,5].map(i => <div key={i} className="w-1.5 h-1.5 rounded-full bg-sahara-gold/40 animate-pulse" style={{ animationDelay: `${i*0.2}s` }} />)}
                             </div>
