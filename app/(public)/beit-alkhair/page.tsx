@@ -1,8 +1,12 @@
+'use client'
+
+import React, { useState } from 'react'
 import QuantumNeuralMesh from '@/components/QuantumNeuralMesh'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { useLanguage } from '@/components/LanguageContext'
 import BiometricScan from '@/components/BiometricScan'
 import { AnimatePresence, motion } from 'framer-motion'
+import BeitAlKhairUnifiedConsole from '@/components/BeitAlKhairUnifiedConsole'
 
 // --- BEIT AL-KHAIR BILINGUAL DICTIONARY ---
 const DICTIONARY = {
