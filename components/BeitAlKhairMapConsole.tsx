@@ -85,28 +85,28 @@ const CITY_DATA: { [key: string]: CityData } = {
 
 const DICTIONARY = {
   ar: {
-    geo_cmd: 'القيادة_الجغرافية',
-    telemetry: 'تم_فك_تشفير_القياس_عن_بعد',
-    rescanning: 'إعادة_مسح_النودز...',
-    hq: 'المقر_الرئيسي',
-    south_node: 'النود_الجنوبي',
-    north: '↑ شمال_الدلتا',
-    south: 'جنوب_القاهرة ↓',
+    geo_cmd: 'القيادة الجغرافية',
+    telemetry: 'تم فك تشفير البيانات',
+    rescanning: 'إعادة مسح النودز...',
+    hq: 'المقر الرئيسي',
+    south_node: 'النود الجنوبي',
+    north: '↑ شمال الدلتا',
+    south: 'جنوب القاهرة ↓',
     units: 'الوحدات',
-    sync: 'مزامنة_حيوية',
+    sync: 'مزامنة حيوية',
     return: 'العودة'
   },
   en: {
-    geo_cmd: 'GEOGRAPHIC_COMMAND',
-    telemetry: 'GEO_TELEMETRY_DECRYPTED',
-    rescanning: 'RESCANNING_NODAL_FIELD...',
-    hq: 'HQ_DOMAIN',
-    south_node: 'SOUTHERN_NODE',
-    north: '↑ NORTH_DELTA',
-    south: 'SOUTH_CAIRO_GIZA ↓',
-    units: 'UNITS_LOCATED',
-    sync: 'SYNC_STATUS_LIVE',
-    return: 'GEO_RETURN'
+    geo_cmd: 'GEOGRAPHIC COMMAND',
+    telemetry: 'GEO TELEMETRY DECRYPTED',
+    rescanning: 'RESCANNING NODAL FIELD...',
+    hq: 'HQ DOMAIN',
+    south_node: 'SOUTHERN NODE',
+    north: '↑ NORTH DELTA',
+    south: 'SOUTH CAIRO GIZA ↓',
+    units: 'UNITS LOCATED',
+    sync: 'SYNC STATUS LIVE',
+    return: 'GEO RETURN'
   }
 }
 
