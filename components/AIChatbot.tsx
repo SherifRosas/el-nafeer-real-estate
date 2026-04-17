@@ -62,13 +62,41 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
       : 'Welcome to EL-NAFEER Real Estate! I\'m your smart property consultant. How can I assist you today?\n\n🏠 Explore available units\n📈 Track your sales (for owners)\n🤝 Book a viewing appointment\n🏢 Information about our projects'
   }
 
-  // --- CHATBOT STATE SOVEREIGNTY ---
-  const hasInitialGreeted = useRef(false)
+  // --- IRONCLAD SENTINEL INITIALIZATION ---
+  const hasGreetedRef = useRef(false)
   const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  const [showSuggestions, setShowSuggestions] = useState(true)
+  const [showSuggestions, setShowSuggestions] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  // Initialize and Sync Welcome Message
+  useEffect(() => {
+    if (!hasGreetedRef.current && messages.length === 0) {
+      const welcome = getWelcomeMessage()
+      setMessages([{ role: 'assistant', content: welcome }])
+      hasGreetedRef.current = true
+      const timer = setTimeout(() => setShowSuggestions(true), 800)
+      return () => clearTimeout(timer)
+    }
+  }, [isArabic, vertical, referralContext])
+
+  // Ensure initialOpen works on mount
+  useEffect(() => {
+    if (initialOpen) setIsOpen(true)
+  }, [initialOpen])
+
+  // Initialize Session Identity
+  useEffect(() => {
+    const storedSession = localStorage.getItem('naf_chat_session_id')
+    if (storedSession) {
+      setSessionId(storedSession)
+    } else {
+      const newId = `sess_${Math.random().toString(36).substring(2, 9)}`
+      localStorage.setItem('naf_chat_session_id', newId)
+      setSessionId(newId)
+    }
+  }, [])
 
   // Suggested questions based on vertical
   const getSuggestedQuestions = () => {
@@ -83,32 +111,6 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
   }
 
   const suggestedQuestions = getSuggestedQuestions()
-
-  // Ensure initialOpen works on mount
-  useEffect(() => {
-    if (initialOpen) setIsOpen(true)
-  }, [initialOpen])
-
-  // Initialize Session
-  useEffect(() => {
-    const storedSession = localStorage.getItem('naf_chat_session_id')
-    if (storedSession) {
-      setSessionId(storedSession)
-    } else {
-      const newId = `sess_${Math.random().toString(36).substring(2, 9)}`
-      localStorage.setItem('naf_chat_session_id', newId)
-      setSessionId(newId)
-    }
-  }, [])
-
-  // Initialize and Update welcome message PRECISELY ONCE
-  useEffect(() => {
-    if (!hasInitialGreeted.current && messages.length === 0) {
-      setMessages([{ role: 'assistant', content: getWelcomeMessage() }])
-      hasInitialGreeted.current = true
-      setShowSuggestions(true)
-    }
-  }, [isArabic, vertical, referralContext, messages.length])
 
   const handleSuggestedQuestion = (question: string) => {
     if (loading || !question.trim()) return
