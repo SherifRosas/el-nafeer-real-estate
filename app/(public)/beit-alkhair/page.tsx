@@ -1,11 +1,8 @@
-'use client'
-
-import React from 'react'
-import { db } from '@/lib/supabase'
-import BeitAlKhairUnifiedConsole from '@/components/BeitAlKhairUnifiedConsole'
 import QuantumNeuralMesh from '@/components/QuantumNeuralMesh'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { useLanguage } from '@/components/LanguageContext'
+import BiometricScan from '@/components/BiometricScan'
+import { AnimatePresence, motion } from 'framer-motion'
 
 // --- BEIT AL-KHAIR BILINGUAL DICTIONARY ---
 const DICTIONARY = {
@@ -39,13 +36,34 @@ export default function BeitAlKhairPage() {
   const { language } = useLanguage()
   const t = DICTIONARY[language]
   
-  // Note: Properties will be fetched inside the console or passed down if we convert this to a Client Component fully
-  // For now, keeping it consistent with the existing UnifiedConsole logic.
+  const [showScan, setShowScan] = React.useState(true)
   
   return (
-    <main className="h-screen w-screen bg-[#050811] text-white overflow-hidden flex flex-col p-2 lg:p-6 selection:bg-sahara-gold selection:text-black font-sans relative">
-      {/* 🚀 NEURAL_MESH_BASE_LAYER - COVERS ALL OF EGYPT */}
-      <QuantumNeuralMesh />
+    <div className="relative h-screen w-screen overflow-hidden bg-[#050811]">
+      <AnimatePresence mode="wait">
+        {showScan ? (
+          <motion.div
+            key="biometric-scan"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0, filter: 'blur(20px)', scale: 1.1 }}
+            transition={{ duration: 1 }}
+          >
+            <BiometricScan 
+                identityName={language === 'ar' ? 'المستخدم السيادي' : 'SOVEREIGN_CLIENT'} 
+                onComplete={() => setShowScan(false)} 
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="portal-content"
+            initial={{ opacity: 0, scale: 0.9, filter: 'blur(20px)' }}
+            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="h-full w-full"
+          >
+            <main className="h-screen w-screen bg-[#050811] text-white overflow-hidden flex flex-col p-2 lg:p-6 selection:bg-sahara-gold selection:text-black font-sans relative">
+              {/* 🚀 NEURAL_MESH_BASE_LAYER - COVERS ALL OF EGYPT */}
+              <QuantumNeuralMesh />
 
       {/* 📟 TOP_LEVEL_SYMMETRIC_HEADER */}
       <header className="flex justify-between items-center mb-1 lg:mb-4 border-b border-sahara-gold/10 pb-1 lg:pb-3 px-2 lg:px-6 relative z-50 bg-black/40 backdrop-blur-2xl rounded-3xl">
@@ -144,6 +162,10 @@ export default function BeitAlKhairPage() {
         </section>
 
       </div>
-    </main>
+            </main>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   )
 }
