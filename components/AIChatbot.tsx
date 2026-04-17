@@ -227,21 +227,21 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
 
   return (
     <>
-      {/* SHIFTED WINDOW TO AVOID OVERLAP WITH BOTTOM ACTIONS - GLASS UI REBORN */}
-      <div className={`fixed bottom-28 right-4 w-96 max-w-[calc(100vw-2rem)] h-[500px] bg-black/60 backdrop-blur-3xl rounded-[2.5rem] shadow-[0_25px_60px_rgba(0,0,0,0.8),0_0_40px_rgba(6,182,212,0.1)] flex flex-col z-[100010] border border-white/10 overflow-hidden transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-75 opacity-0 pointer-events-none translate-y-10'}`}>
-        <div className="bg-gradient-to-r from-black/80 to-cyan-950/40 text-white p-5 flex justify-between items-center border-b border-white/5 uppercase italic">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-cyan-500 rounded-xl flex items-center justify-center text-black font-black shadow-[0_0_15px_rgba(6,182,212,0.5)]">
+      {/* SHIFTED WINDOW FOR ELITE FLOATING EFFECT - HIGHER Z-INDEX */}
+      <div className={`fixed bottom-32 right-4 w-96 max-w-[calc(100vw-2rem)] h-[480px] bg-black/70 backdrop-blur-3xl rounded-[2.5rem] shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_50px_rgba(6,182,212,0.15)] flex flex-col z-[100010] border border-white/10 overflow-hidden transition-all duration-500 transform ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-90 opacity-0 pointer-events-none translate-y-20'}`}>
+        <div className="bg-gradient-to-r from-black/90 to-cyan-950/50 text-white px-6 py-4 flex justify-between items-center border-b border-white/5 uppercase italic">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 bg-cyan-500 rounded-xl flex items-center justify-center text-black font-black shadow-[0_0_20px_rgba(6,182,212,0.4)] flex-shrink-0">
               AI
             </div>
-            <div>
-              <h3 className="font-black text-sm tracking-tight text-white uppercase italic">
-                {isArabic ? (vertical === 'elevator' ? 'مستشار ليفر الرائدة' : 'مستشار النفير الذكي') : (vertical === 'elevator' ? 'Lever Consultant' : 'Al-Nafeer AI')}
+            <div className="min-w-0">
+              <h3 className="font-black text-xs tracking-tighter text-white uppercase truncate">
+                {isArabic ? (vertical === 'elevator' ? 'مستشار ليفر الذكي' : 'مستشار النفير العقاري') : (vertical === 'elevator' ? 'PIONEER CONSULTANT' : 'NAFEER INTELLIGENCE')}
               </h3>
-              <div className="flex items-center gap-1">
-                <span className={`w-2 h-2 rounded-full animate-pulse shadow-[0_0_5px_rgba(34,197,94,0.8)] ${contextUsed ? 'bg-cyan-400' : 'bg-green-500'}`} />
-                <span className="text-[10px] text-cyan-500/60 uppercase font-black tracking-widest">
-                  {contextUsed ? (isArabic ? 'وعي كامل مفعل' : 'Universal Context Loaded') : (isArabic ? 'متصل الآن' : 'Core Sync Active')}
+              <div className="flex items-center gap-1.5">
+                <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${contextUsed ? 'bg-cyan-400' : 'bg-green-500'}`} />
+                <span className="text-[9px] text-cyan-500/80 uppercase font-bold tracking-widest whitespace-nowrap">
+                  {contextUsed ? (isArabic ? 'تم تفعيل الوعي الكامل' : 'SENTIENT_SYNC_ON') : (isArabic ? 'متصل الآن' : 'CORE_ONLINE')}
                 </span>
               </div>
             </div>
@@ -383,41 +383,32 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
         </div>
       </div>
 
-      {/* REPOSITIONED FAB - SOVEREIGN BUBBLE */}
+      {/* REPOSITIONED FAB - ONLY VISIBLE WHEN CLOSED TO AVOID OVERLAP */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-28 right-6 group z-[100015] flex items-center gap-4"
+        onClick={() => setIsOpen(true)}
+        className={`fixed bottom-6 right-6 group z-[100015] flex items-center gap-4 transition-all duration-500 ${isOpen ? 'translate-y-20 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}
         aria-label={isArabic ? 'فتح المستشار العقاري' : 'Open Property Consultant'}
       >
         {!isOpen && (
-          <div className="hidden md:block bg-black/80 backdrop-blur-xl px-4 py-1.5 rounded-full shadow-2xl border border-cyan-500/30 animate-in fade-in slide-in-from-right-4 duration-500">
-            <p className="text-cyan-400 font-black text-[9px] uppercase tracking-widest italic flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse" />
-              {isArabic ? (vertical === 'elevator' ? 'استشارة ليفر الرائدة ✨' : 'استشارة النفير الذكية ✨') : 'AI_VERTICAL_CONSULT ✨'}
+          <div className="hidden md:block bg-black/90 backdrop-blur-3xl px-5 py-2 rounded-full shadow-2xl border border-cyan-500/40 animate-in fade-in slide-in-from-right-4 duration-500">
+            <p className="text-cyan-400 font-black text-[9px] uppercase tracking-[0.2em] italic flex items-center gap-2">
+              <span className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse" />
+              {isArabic ? (vertical === 'elevator' ? 'استشارة ليفر الرائدة ✨' : 'استشارة النفير الذكية ✨') : 'QUANTUM_AI_INITIATE ✨'}
             </p>
           </div>
         )}
-        <div className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500 shadow-2xl border-2 ${isOpen ? 'bg-gradient-to-br from-[#ff0055] to-[#a855f7] border-[#ff0055] rotate-180 shadow-[0_0_40px_rgba(255,0,85,0.6)]' : 'bg-black border-cyan-500/40 hover:border-cyan-500 transition-all hover:scale-110 shadow-[0_0_30px_rgba(6,182,212,0.3)]'}`}>
-          {isOpen ? (
-            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            <div className="relative flex flex-col items-center justify-center w-full h-full">
-              {/* Outer glow ring */}
-              <div className="absolute inset-0 rounded-full border border-sahara-gold/10 animate-[spin_8s_linear_infinite]" />
-              {/* Vertical Icon Switch */}
-              {vertical === 'elevator' ? (
-                <Zap className="w-8 h-8 relative z-10 text-sahara-gold drop-shadow-[0_0_15px_#c5a059]" />
-              ) : (
-                <svg className="w-8 h-8 relative z-10 text-sahara-gold drop-shadow-[0_0_15px_#c5a059]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-                </svg>
-              )}
-              {/* Quantum Pulse */}
-              <div className="absolute inset-0 rounded-full bg-sahara-gold/5 animate-ping" />
-            </div>
-          )}
+        <div className="w-16 h-16 rounded-full flex items-center justify-center transition-all duration-500 shadow-2xl border-2 bg-black border-cyan-500/40 hover:border-cyan-500 hover:scale-110 shadow-[0_0_40px_rgba(6,182,212,0.3)]">
+          <div className="relative flex flex-col items-center justify-center w-full h-full">
+            <div className="absolute inset-0 rounded-full border border-sahara-gold/10 animate-[spin_8s_linear_infinite]" />
+            {vertical === 'elevator' ? (
+              <Zap className="w-8 h-8 relative z-10 text-sahara-gold drop-shadow-[0_0_15px_#c5a059]" />
+            ) : (
+              <svg className="w-8 h-8 relative z-10 text-sahara-gold drop-shadow-[0_0_15px_#c5a059]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+              </svg>
+            )}
+            <div className="absolute inset-0 rounded-full bg-sahara-gold/5 animate-ping" />
+          </div>
         </div>
       </button>
     </>
