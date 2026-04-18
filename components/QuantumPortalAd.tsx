@@ -333,9 +333,11 @@ export default function QuantumPortalAd({ variant = 'v2' }: { variant?: 'v2' | '
             <div 
                 style={{ flex: 1, position: 'relative', overflow: 'hidden', backgroundColor: '#000' }} 
                 onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (!isStarted) initiateExperience();
+                    if (!isStarted) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        initiateExperience();
+                    }
                 }}
             >
                 {/* CINEMATIC BACKGROUND STACK: ENGINE_ELITE PRIMARY LAYER */}
