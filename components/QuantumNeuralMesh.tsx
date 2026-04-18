@@ -1,7 +1,10 @@
 'use client'
 
-import React, { useMemo } from 'react'
+import React, { useMemo, useRef, Suspense } from 'react'
 import { motion } from 'framer-motion'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Stars, Float, PerspectiveCamera, OrbitControls } from '@react-three/drei'
+import * as THREE from 'three'
 
 interface Node {
   id: number
@@ -9,135 +12,126 @@ interface Node {
   y: number
   label?: string
   priority?: boolean
+  status?: number // 0 to 100 completion
+}
+
+// --- 🪐 DIMENSIONAL_EGYPT_CORE ---
+function EgyptHologram() {
+    const meshRef = useRef<THREE.Group>(null)
+    
+    // Smooth Neural Drift
+    useFrame((state) => {
+        if (meshRef.current) {
+            meshRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.2) * 0.1
+            meshRef.current.rotation.x = Math.cos(state.clock.elapsedTime * 0.1) * 0.05
+        }
+    })
+
+    // Coordinates mapped from SVG space to 3D space
+    const nodes: Node[] = [
+        { id: 1, x: 2, y: 3.5, label: 'TOUKH_CORE', priority: true, status: 85 },
+        { id: 2, x: 2.5, y: 3.2, label: 'BANHA_HQ', priority: true, status: 92 },
+        { id: 3, x: 1.5, y: 3.0, label: 'QALYUB_NODE', priority: true, status: 45 },
+        { id: 4, x: 3, y: 4, label: 'LOTUS_NORTH', priority: true, status: 70 },
+        { id: 5, x: -2, y: 3.5, label: 'ALEXANDRIA', status: 60 },
+        { id: 6, x: 4, y: 2, label: 'CAIRO_EAST', status: 75 },
+        { id: 7, x: -3, y: -5, label: 'LUXOR', status: 30 },
+        { id: 8, x: -4, y: -8, label: 'ASWAN', status: 20 },
+    ]
+
+    const connections = [
+        [1, 2], [1, 3], [2, 3], [1, 4], [3, 6], [6, 7], [7, 8]
+    ]
+
+    return (
+        <group ref={meshRef}>
+            {/* 🇪🇬 EGYPT_SILHOUETTE_WIRE (Stylized Geometry) */}
+            <mesh rotation={[-Math.PI / 2.2, 0, 0]}>
+                <torusGeometry args={[8, 0.02, 16, 100]} />
+                <meshBasicMaterial color="#c5a059" transparent opacity={0.1} />
+            </mesh>
+
+            {/* 🏛️ PROJECT_TELEMETRY_PILLARS */}
+            {nodes.map((node) => (
+                <group key={node.id} position={[node.x, node.y, 0]}>
+                    {/* The "Anchor" Node */}
+                    <mesh>
+                        <sphereGeometry args={[0.1, 16, 16]} />
+                        <meshBasicMaterial color={node.priority ? "#0ea5e9" : "#ffffff"} />
+                    </mesh>
+                    
+                    {/* The Elevation Pillar (Status Driven) */}
+                    <mesh position={[0, (node.status || 0) / 100, 0]}>
+                        <cylinderGeometry args={[0.02, 0.02, (node.status || 0) / 50, 8]} />
+                        <meshBasicMaterial color="#0ea5e9" transparent opacity={0.4} />
+                    </mesh>
+
+                    {/* Glowing Apex */}
+                    <mesh position={[0, (node.status || 0) / 25, 0]}>
+                        <sphereGeometry args={[0.05, 8, 8]} />
+                        <meshBasicMaterial color="#0ea5e9" toneMapped={false} />
+                        <pointLight color="#0ea5e9" intensity={2} distance={3} />
+                    </mesh>
+                </group>
+            ))}
+
+            {/* 🕸️ NEURAL_BEZIER_ARCS */}
+            {connections.map(([id1, id2], idx) => {
+                const n1 = nodes.find(n => n.id === id1)!
+                const n2 = nodes.find(n => n.id === id2)!
+                
+                // Create curved path
+                const curve = new THREE.QuadraticBezierCurve3(
+                    new THREE.Vector3(n1.x, n1.y, 0),
+                    new THREE.Vector3((n1.x + n2.x) / 2, (n1.y + n2.y) / 2, 2.5), // High vertical loft
+                    new THREE.Vector3(n2.x, n2.y, 0)
+                )
+                const points = curve.getPoints(50)
+                const geometry = new THREE.BufferGeometry().setFromPoints(points)
+
+                return (
+                    <line key={idx}>
+                        <primitive object={geometry} attach="geometry" />
+                        <lineBasicMaterial color="#0ea5e9" transparent opacity={0.3} linewidth={2} />
+                    </line>
+                )
+            })}
+        </group>
+    )
 }
 
 export default function QuantumNeuralMesh() {
-  // --- EGYPTIAN DOMAIN COORDINATES (Stylized SVG Mapping) ---
-  // Focusing nodes on Qalyubia/Toukh/Banha cluster + general Egypt coverage
-  const nodes = useMemo(() => [
-    // Core Focus Nodes (Toukh/Banha/Qalyubia Cluster)
-    { id: 1, x: 52, y: 15, label: 'TOUKH_MAIN', priority: true },
-    { id: 2, x: 53.5, y: 16.5, label: 'BANHA_CENTER', priority: true },
-    { id: 3, x: 51, y: 18, label: 'QALYUB_NODE', priority: true },
-    { id: 4, x: 54, y: 13, label: 'LOTUS_NORTH', priority: true },
-    
-    // Greater Egypt Network (Global Coverage)
-    { id: 5, x: 48, y: 15, label: 'ALEXANDRIA' },
-    { id: 6, x: 55, y: 22, label: 'CAIRO_EAST' },
-    { id: 7, x: 50, y: 25, label: 'GIZA_PROXIMITY' },
-    { id: 8, x: 65, y: 40, label: 'HURGHADA' },
-    { id: 9, x: 55, y: 60, label: 'LUXOR' },
-    { id: 10, x: 50, y: 80, label: 'ASWAN' },
-    { id: 11, x: 30, y: 10, label: 'SIWA' },
-    { id: 12, x: 80, y: 15, label: 'SINAI_NORTH' },
-    { id: 13, x: 85, y: 30, label: 'SHARM_EL_SHEIKH' },
-    { id: 14, x: 35, y: 55, label: 'WESTERN_DESERT' },
-  ], [])
-
-  // Generate connection arcs between nodes
-  const connections = useMemo(() => {
-    const lines = []
-    const coreIds = [1, 2, 3, 4]
-    
-    for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-            const n1 = nodes[i]
-            const n2 = nodes[j]
-            const dist = Math.sqrt(Math.pow(n1.x - n2.x, 2) + Math.pow(n1.y - n2.y, 2))
-            
-            // Priority connections for the Toukh cluster or close proximity neighbors
-            if (dist < 25 || (coreIds.includes(n1.id) && coreIds.includes(n2.id))) {
-                lines.push({ id: `${i}-${j}`, n1, n2 })
-            }
-        }
-    }
-    return lines
-  }, [nodes])
-
   return (
     <div className="absolute inset-0 z-0 bg-[#050811] overflow-hidden">
-      {/* 🌌 GOLDEN_STARFIELD_BACKGROUND (Luxe Aesthetic) */}
-      <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_center,_#c5a05922_0%,_transparent_70%)]" />
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] pointer-events-none" />
+      {/* 🌌 GOLDEN_STARFIELD_ATMOSPHERE */}
+      <div className="absolute inset-0 opacity-60 bg-[radial-gradient(circle_at_center,_#c5a05933_0%,_transparent_70%)]" />
       
-      {/* 🇪🇬 EGY_SILHOUETTE (Subtle Geographic Context) */}
-      <svg className="absolute inset-0 w-full h-full opacity-[0.4]" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-        <path 
-            d="M30,5 L80,5 L95,40 L85,95 L40,95 L15,40 Z" 
-            fill="none" 
-            stroke="#c5a059" 
-            strokeWidth="1.5" 
-            className="animate-pulse"
-        />
-      </svg>
+      <Canvas dpr={[1, 2]}>
+          <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={45} />
+          <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} intensity={1} color="#c5a059" />
+          
+          <Suspense fallback={null}>
+              <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
+                  <EgyptHologram />
+              </Float>
+              <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+          </Suspense>
 
-      {/* 🕸️ NEURAL_MESH_LAYERS */}
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0" />
-          </radialGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-        </defs>
-
-        {/* ANCHOR_LINES (Neural Connections) */}
-        {connections.map((conn) => (
-          <motion.path
-            key={conn.id}
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 5, delay: Math.random() * 2, repeat: Infinity, repeatType: 'reverse' }}
-            d={`M ${conn.n1.x} ${conn.n1.y} Q ${(conn.n1.x + conn.n2.x)/2 + (Math.random()-0.5)*20} ${(conn.n1.y + conn.n2.y)/2 + (Math.random()-0.5)*20} ${conn.n2.x} ${conn.n2.y}`}
-            fill="none"
-            stroke="#0ea5e9"
-            strokeWidth="0.8"
-            strokeDasharray="4 4"
+          {/* Neutral Parallax controls - Restricted */}
+          <OrbitControls 
+            enableZoom={false} 
+            enablePan={false} 
+            maxPolarAngle={Math.PI / 1.8} 
+            minPolarAngle={Math.PI / 2.2}
           />
-        ))}
-
-        {/* SOVEREIGN_NODES */}
-        {nodes.map((node) => (
-          <g key={node.id}>
-            <motion.circle
-              cx={node.x}
-              cy={node.y}
-              r={node.priority ? 1.5 : 0.8}
-              fill="#0ea5e9"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: [0.6, 1, 0.6] }}
-              transition={{ duration: 3, repeat: Infinity, delay: Math.random() * 2 }}
-              filter="url(#glow)"
-            />
-            {node.priority && (
-              <motion.circle
-                cx={node.x}
-                cy={node.y}
-                r={2}
-                fill="url(#nodeGlow)"
-                animate={{ scale: [1, 1.5, 1], opacity: [0.1, 0.3, 0.1] }}
-                transition={{ duration: 4, repeat: Infinity }}
-              />
-            )}
-            
-            {/* NODE_LABELS_HUD (The Gerry Bax Inspiration) */}
-            {node.priority && (
-                <text x={node.x + 1} y={node.y + 1} className="text-[1.5px] font-black fill-cyan-400 opacity-60 uppercase tracking-widest italic" style={{ fontSize: '0.8px' }}>
-                    {node.label}_ACTIVE
-                </text>
-            )}
-          </g>
-        ))}
-      </svg>
+      </Canvas>
 
       {/* 🏆 GLOBAL_TITLE_OVERLAY_HUD */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
         <motion.div 
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 0.15, y: 0 }}
+            animate={{ opacity: 0.25, y: 0 }}
             transition={{ duration: 2 }}
             className="flex flex-col items-center gap-4"
         >
@@ -151,6 +145,8 @@ export default function QuantumNeuralMesh() {
             </div>
         </motion.div>
       </div>
+
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.08] pointer-events-none z-20" />
     </div>
   )
 }
