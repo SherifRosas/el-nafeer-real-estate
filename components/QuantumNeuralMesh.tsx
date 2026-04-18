@@ -107,9 +107,9 @@ export default function QuantumNeuralMesh() {
       <div className="absolute inset-0 opacity-60 bg-[radial-gradient(circle_at_center,_#c5a05933_0%,_transparent_70%)]" />
       
       <Canvas dpr={[1, 2]}>
-          <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={45} />
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} intensity={1} color="#c5a059" />
+          <PerspectiveCamera makeDefault position={[0, 0, 18]} fov={45} />
+          <ambientLight intensity={1.5} />
+          <pointLight position={[10, 10, 10]} intensity={3} color="#c5a059" />
           
           <Suspense fallback={null}>
               <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
@@ -122,8 +122,8 @@ export default function QuantumNeuralMesh() {
           <OrbitControls 
             enableZoom={false} 
             enablePan={false} 
-            maxPolarAngle={Math.PI / 1.8} 
-            minPolarAngle={Math.PI / 2.2}
+            maxPolarAngle={Math.PI / 1.7} 
+            minPolarAngle={Math.PI / 2.3}
           />
       </Canvas>
 
