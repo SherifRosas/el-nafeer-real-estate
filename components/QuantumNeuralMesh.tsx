@@ -162,24 +162,24 @@ export default function QuantumNeuralMesh() {
       <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_70%_30%,_#c5a05933_0%,_transparent_60%)]" />
       
       <Canvas dpr={[1, 2]}>
-          <PerspectiveCamera makeDefault position={[0, 0, 20]} fov={45} />
-          <ambientLight intensity={0.8} />
-          <pointLight position={[20, 20, 20]} intensity={5} color="#c5a059" />
-          <pointLight position={[-20, -10, 10]} intensity={2} color="#0c4a6e" />
+          <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={45} />
+          <ambientLight intensity={1} />
+          <pointLight position={[20, 20, 20]} intensity={8} color="#c5a059" />
+          <pointLight position={[-20, -10, 10]} intensity={4} color="#0ea5e9" />
           
           <Suspense fallback={null}>
               <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.2}>
                   <GerryBaxGlobe />
               </Float>
               {/* Dense Starfield for Gerry Bax aesthetic */}
-              <Stars radius={100} depth={50} count={8000} factor={6} saturation={0} fade speed={1.5} />
+              <Stars radius={100} depth={50} count={10000} factor={6} saturation={0} fade speed={1.5} />
           </Suspense>
 
           <OrbitControls 
             enableZoom={false} 
             enablePan={false} 
-            maxPolarAngle={Math.PI / 1.6} 
-            minPolarAngle={Math.PI / 2.4}
+            maxPolarAngle={Math.PI / 1.5} 
+            minPolarAngle={Math.PI / 2.5}
           />
       </Canvas>
 

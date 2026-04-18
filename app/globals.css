@@ -361,9 +361,9 @@ select:focus {
 header,
 .header,
 [role="banner"] {
-  background: var(--bg-card) !important;
-  border-bottom: 2px solid var(--neon-cyan) !important;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3) !important;
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--neon-cyan);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
   position: relative;
 }
 
@@ -384,12 +384,12 @@ header::after {
 .prestige-card,
 [class*="container"],
 section {
-  background: var(--bg-card) !important;
-  border: 1px solid var(--neon-cyan) !important;
-  border-radius: var(--radius-lg) !important;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2) !important;
-  padding: 1.5rem !important;
-  transition: var(--transition-normal) !important;
+  background: var(--bg-card);
+  border: 1px solid var(--neon-cyan);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  padding: 1.5rem;
+  transition: var(--transition-normal);
 }
 
 .card:hover,

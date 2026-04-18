@@ -70,7 +70,7 @@ export default function BeitAlKhairPage() {
               <QuantumNeuralMesh />
 
       {/* 📟 TOP_LEVEL_SYMMETRIC_HEADER */}
-      <header className="flex justify-between items-center mb-1 lg:mb-4 border-b border-sahara-gold/10 pb-1 lg:pb-3 px-2 lg:px-6 relative z-50 bg-black/40 backdrop-blur-2xl rounded-3xl">
+      <header className="flex justify-between items-center mb-1 lg:mb-4 border-b border-sahara-gold/10 pb-1 lg:pb-3 px-2 lg:px-6 relative z-50 bg-transparent rounded-3xl">
         <div className="flex items-center gap-3 lg:gap-6">
             <div className="w-10 h-10 lg:w-16 lg:h-16 flex items-center justify-center overflow-hidden rounded-xl border border-sahara-gold/20 bg-black/50 shadow-[0_0_20px_rgba(197,160,89,0.1)]">
                 <img 
