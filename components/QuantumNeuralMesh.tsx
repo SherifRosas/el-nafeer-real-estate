@@ -157,7 +157,7 @@ function GerryBaxGlobe() {
 
 export default function QuantumNeuralMesh() {
   return (
-    <div className="absolute inset-0 z-0 bg-[#05111d] overflow-hidden">
+    <div className="absolute inset-0 z-0 bg-transparent overflow-hidden">
       {/* 🌌 CINEMATIC_GRADIENT_SHELL */}
       <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_70%_30%,_#c5a05933_0%,_transparent_60%)]" />
       

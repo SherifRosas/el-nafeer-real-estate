@@ -65,7 +65,7 @@ export default function BeitAlKhairPage() {
             transition={{ duration: 1.2, ease: "easeOut" }}
             className="h-full w-full"
           >
-            <main className="h-screen w-screen bg-[#050811] text-white overflow-hidden flex flex-col p-2 lg:p-6 selection:bg-sahara-gold selection:text-black font-sans relative">
+            <main className="h-screen w-screen bg-transparent text-white overflow-hidden flex flex-col p-2 lg:p-6 selection:bg-sahara-gold selection:text-black font-sans relative">
               {/* 🚀 NEURAL_MESH_BASE_LAYER - COVERS ALL OF EGYPT */}
               <QuantumNeuralMesh />
 
@@ -158,7 +158,7 @@ export default function BeitAlKhairPage() {
         </aside>
 
         {/* 🕸️ THE_NEURAL_COMMAND_CENTER (Quantum Unified Console) */}
-        <section className="lg:col-span-9 sovereign-glass backdrop-blur-sm rounded-[2rem] lg:rounded-[4rem] relative overflow-hidden order-1 lg:order-2">
+        <section className="lg:col-span-9 sovereign-glass backdrop-blur-none rounded-[2rem] lg:rounded-[4rem] relative overflow-hidden order-1 lg:order-2">
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none" />
             <BeitAlKhairUnifiedConsole 
               properties={[]} 

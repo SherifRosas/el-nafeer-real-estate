@@ -68,7 +68,7 @@ export default function BeitAlKhairChatbot() {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
-              className="absolute bottom-24 right-0 w-[400px] h-[600px] bg-[#020202] rounded-[3rem] border border-sahara-gold/40 shadow-[0_0_100px_rgba(212,175,55,0.2)] flex flex-col overflow-hidden"
+              className="absolute bottom-24 right-0 w-[400px] h-[600px] bg-black/20 backdrop-blur-3xl rounded-[3rem] border border-sahara-gold/40 shadow-[0_0_100px_rgba(212,175,55,0.2)] flex flex-col overflow-hidden"
             >
               {/* Chat Header */}
               <div className="p-8 border-b border-white/10 bg-gradient-to-r from-sahara-gold/10 to-transparent flex justify-between items-center">
@@ -134,7 +134,7 @@ export default function BeitAlKhairChatbot() {
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsOpen(!isOpen)}
           className={`w-20 h-20 rounded-[2rem] border-2 shadow-[0_20px_60px_rgba(0,0,0,0.4)] flex items-center justify-center transition-all duration-500 overflow-hidden ${
-            isOpen ? 'bg-red-500 border-red-500 rotate-45 shadow-[0_0_40px_rgba(239,68,68,0.5)]' : 'bg-[#020202] border-sahara-gold/40 shadow-[0_0_40px_rgba(197,160,89,0.3)]'
+            isOpen ? 'bg-red-500/80 backdrop-blur-md border-red-500 rotate-45 shadow-[0_0_40px_rgba(239,68,68,0.5)]' : 'prestige-glass shadow-[0_0_40px_rgba(197,160,89,0.3)]'
           }`}
         >
           {isOpen ? (
