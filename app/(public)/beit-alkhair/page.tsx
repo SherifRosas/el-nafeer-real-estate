@@ -158,7 +158,7 @@ export default function BeitAlKhairPage() {
         </aside>
 
         {/* 🕸️ THE_NEURAL_COMMAND_CENTER (Quantum Unified Console) */}
-        <section className="lg:col-span-9 bg-black/40 backdrop-blur-3xl rounded-[2rem] lg:rounded-[4rem] border-2 border-white/5 relative overflow-hidden order-1 lg:order-2 shadow-[inset_0_0_100px_rgba(0,0,0,1)]">
+        <section className="lg:col-span-9 bg-transparent backdrop-blur-sm rounded-[2rem] lg:rounded-[4rem] border-2 border-white/5 relative overflow-hidden order-1 lg:order-2">
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none" />
             <BeitAlKhairUnifiedConsole 
               properties={[]} 
