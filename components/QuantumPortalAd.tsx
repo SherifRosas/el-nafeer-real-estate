@@ -299,37 +299,38 @@ export default function QuantumPortalAd({ variant = 'v2', autoStart = false }: {
 
             <div style={{ flex: 1, position: 'relative', overflow: 'hidden', background: 'transparent' }}>
                 {/* INTERACTIVE ACTION BAR */}
+                {/* 🚀 IMPERIAL_ACTION_BAR (v5.0_SUPREME_ELITE) */}
                 {!activeModal && (
-                    <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', background: 'rgba(0,0,0,0.85)', padding: '15px 0 30px 0', display: 'flex', justifyContent: 'center', gap: '15px', zIndex: 100050, borderTop: '1px solid rgba(6,182,212,0.2)', backdropFilter: 'blur(25px)', direction: language === 'ar' ? 'rtl' : 'ltr', pointerEvents: 'auto' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
-                            <a onClick={() => trackEvent('WHATSAPP_CONTACT', 'LEAD_ATTEMPT')} href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(37,211,102,0.05)', border: '1.5px solid #25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#25d366', animation: 'icon-float 3s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none', pointerEvents: 'auto' }}>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.2h.5"/><path d="m22 2-7 20-4-9-9-4Z"/></svg>
+                    <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', background: 'rgba(0,0,0,0.92)', padding: '15px 0 35px 0', display: 'flex', justifyContent: 'center', gap: '15px', zIndex: 100050, borderTop: '2.5px solid rgba(6,182,212,0.4)', backdropFilter: 'blur(35px)', direction: language === 'ar' ? 'rtl' : 'ltr', pointerEvents: 'auto' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                            <a onClick={() => trackEvent('WHATSAPP_CONTACT', 'LEAD_ATTEMPT')} href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(37,211,102,0.08)', border: '2px solid #25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#25d366', animation: 'icon-float 3s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none', pointerEvents: 'auto', boxShadow: '0 0 15px rgba(37,211,102,0.2)' }}>
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.2h.5"/><path d="m22 2-7 20-4-9-9-4Z"/></svg>
                             </a>
-                            <span style={{ fontSize: '10px', fontWeight: 900, color: '#25d366', opacity: 0.9 }}>{t.wa}</span>
+                            <span style={{ fontSize: '10px', fontWeight: 900, color: '#25d366', opacity: 1, letterSpacing: '1px' }}>{t.wa}</span>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
-                            <a onClick={() => trackEvent('CALL_CONTACT', 'LEAD_ATTEMPT')} href={CALL_URL} style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: '1.5px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 3.5s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none', pointerEvents: 'auto' }}>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                            <a onClick={() => trackEvent('CALL_CONTACT', 'LEAD_ATTEMPT')} href={CALL_URL} style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(6,182,212,0.08)', border: '2px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 3.5s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none', pointerEvents: 'auto', boxShadow: '0 0 15px rgba(6,182,212,0.2)' }}>
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                             </a>
-                            <span style={{ fontSize: '10px', fontWeight: 900, color: '#06b6d4', opacity: 0.9 }}>{t.call}</span>
+                            <span style={{ fontSize: '10px', fontWeight: 900, color: '#06b6d4', opacity: 1, letterSpacing: '1px' }}>{t.call}</span>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
-                            <a onClick={() => trackEvent('LOCATION_VIEW', 'INTEREST_ATTEMPT')} href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(6,182,212,0.05)', border: '1.5px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 4s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none', pointerEvents: 'auto' }}>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                            <a onClick={() => trackEvent('LOCATION_VIEW', 'INTEREST_ATTEMPT')} href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(6,182,212,0.08)', border: '2px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 4s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none', pointerEvents: 'auto', boxShadow: '0 0 15px rgba(6,182,212,0.2)' }}>
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                             </a>
-                            <span style={{ fontSize: '10px', fontWeight: 900, color: '#06b6d4', opacity: 0.9 }}>{t.loc}</span>
+                            <span style={{ fontSize: '10px', fontWeight: 900, color: '#06b6d4', opacity: 1, letterSpacing: '1px' }}>{t.loc}</span>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
-                            <button onClick={() => { trackEvent('PORTFOLIO_VIEW', 'INTEREST_ATTEMPT'); setActiveModal('portfolio'); }} style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(6,182,212,0.1)', border: '1.5px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 4.5s infinite ease-in-out', cursor: 'pointer', pointerEvents: 'auto' }}>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M16 5V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2"/><circle cx="18" cy="18" r="3"/><path d="m20.5 20.5 1.5 1.5"/></svg>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                            <button onClick={() => { trackEvent('PORTFOLIO_VIEW', 'INTEREST_ATTEMPT'); setActiveModal('portfolio'); }} style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(6,182,212,0.12)', border: '2px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 4.5s infinite ease-in-out', cursor: 'pointer', pointerEvents: 'auto' }}>
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M16 5V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2"/><circle cx="18" cy="18" r="3"/><path d="m20.5 20.5 1.5 1.5"/></svg>
                             </button>
-                            <span style={{ fontSize: '10px', fontWeight: 900, color: '#06b6d4', opacity: 0.9 }}>{t.port}</span>
+                            <span style={{ fontSize: '10px', fontWeight: 900, color: '#06b6d4', opacity: 1, letterSpacing: '1px' }}>{t.port}</span>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
-                            <button onClick={() => { trackEvent('QUOTE_REQUEST_START', 'LEAD_ATTEMPT'); setActiveModal('quote'); }} style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(6,182,212,0.1)', border: '1.5px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 5s infinite ease-in-out', cursor: 'pointer', pointerEvents: 'auto' }}>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14.5 2 14.5 7.5 20 7.5"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                            <button onClick={() => { trackEvent('QUOTE_REQUEST_START', 'LEAD_ATTEMPT'); setActiveModal('quote'); }} style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(6,182,212,0.2)', border: '2px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 5s infinite ease-in-out', cursor: 'pointer', pointerEvents: 'auto', boxShadow: '0 0 20px #06b6d4' }}>
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14.5 2 14.5 7.5 20 7.5"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
                             </button>
-                            <span style={{ fontSize: '10px', fontWeight: 900, color: '#06b6d4', opacity: 0.9 }}>{t.quote}</span>
+                            <span style={{ fontSize: '10px', fontWeight: 900, color: '#06b6d4', opacity: 1, letterSpacing: '1px' }}>{t.quote}</span>
                         </div>
                     </div>
                 )}
@@ -397,9 +398,9 @@ export default function QuantumPortalAd({ variant = 'v2', autoStart = false }: {
                 </div>
             )}
 
-            <div style={{ height: '5vh', width: '100%', background: 'rgba(0,0,0,0.95)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderTop: '1px solid rgba(6,182,212,0.1)' }}>
-                <div style={{ fontSize: '7px', fontWeight: 900, letterSpacing: '2px', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase' }}> 
-                    ARCHITECTED_BY_SHERIF_ROSAS // v4.6_ELITE_PORTAL
+            <div style={{ height: '5vh', width: '100%', background: 'rgba(0,0,0,0.98)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderTop: '1.5px solid rgba(6,182,212,0.2)' }}>
+                <div style={{ fontSize: '7px', fontWeight: 900, letterSpacing: '2px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}> 
+                    ARCHITECTED_BY_SHERIF_ROSAS // v5.0_SUPREME_ELITE
                 </div>
             </div>
 
