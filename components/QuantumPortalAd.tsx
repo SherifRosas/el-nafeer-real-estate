@@ -249,7 +249,13 @@ export default function QuantumPortalAd({ variant = 'v2', autoStart = false }: {
                 <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.4) 100%)', pointerEvents: 'none' }} />
             </div>
 
-            <audio ref={audioRef} loop src="https://audio-previews.elements.envatousercontent.com/files/234765669/preview.mp3" style={{ display: 'none' }} />
+            <audio 
+                ref={audioRef} 
+                loop 
+                src="https://audio-previews.elements.envatousercontent.com/files/234765669/preview.mp3" 
+                style={{ display: 'none' }} 
+                onError={(e) => console.warn('Sovereign Audio Bridge: Stream Blocked (403). Proceeding with Visual Manifestation.')}
+            />
 
             {/* 📦 PORTAL_UI_HUD_OVERLAYS */}
             {!activeModal && (

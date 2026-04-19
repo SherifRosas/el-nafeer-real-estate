@@ -172,9 +172,9 @@ export default function QuantumNeuralMesh({ variant = 'gold' }: QuantumNeuralMes
       
       <Canvas dpr={[1, 2]}>
           <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={45} />
-          <ambientLight intensity={1.2} />
-          <pointLight position={[20, 20, 20]} intensity={5} color={accentColor} />
-          <pointLight position={[-20, -10, 10]} intensity={3} color={variant === 'cyan' ? "#fcfcfc" : "#0ea5e9"} />
+          <ambientLight intensity={0.5} />
+          <pointLight position={[20, 20, 20]} intensity={10} color={accentColor} />
+          <pointLight position={[-20, -10, 10]} intensity={5} color={variant === 'cyan' ? "#fcfcfc" : "#0ea5e9"} />
           
           <Suspense fallback={null}>
               <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.2}>
