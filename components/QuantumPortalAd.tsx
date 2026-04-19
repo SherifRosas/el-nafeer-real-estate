@@ -11,7 +11,7 @@ import QuantumNeuralMesh from './QuantumNeuralMesh'
 import GizaHorizonMesh from './GizaHorizonMesh'
 
 const DOMAIN = "https://el-nafeer-real-estate.vercel.app";
-const AD_IMAGE = "/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png"
+const AD_IMAGE = "/campaigns/lever-pioneer/branding/qr-code.png"
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=201111171368";
 const CALL_URL = "tel:+201070615372";
 const LOCATION_URL = "https://www.google.com/maps/place/Al+Omraneya,+Al+Haram,+Giza+Governorate/@29.9656242,31.0922895,17z/data=!4m15!1m8!3m7!1s0x14584fc2bfbefc07:0x5df1948b27a63882!2sAl+Omraneya,+Al+Haram,+Giza+Governorate!3b1!8m2!3d29.9656242!4d31.0922895!16s%2Fg%2F11c659wy1d!3m5!1s0x14584fc2bfbefc07:0x5df1948b27a63882!8m2!3d29.9656242!4d31.0922895!16s%2Fg%2F11c659wy1d?hl=en-EG&entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D";
@@ -283,6 +283,8 @@ export default function QuantumPortalAd({ variant = 'v2', autoStart = false }: {
                             style={{ background: 'rgba(6,182,212,0.2)', border: '1px solid #06b6d4', borderRadius: '12px', padding: '8px 12px', color: '#fff', fontWeight: 900, fontSize: '11px', backdropFilter: 'blur(15px)', display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', boxShadow: '0 0 15px rgba(6,182,212,0.3)' }}
                         >
                             <Globe size={14} className="text-cyan-400" />
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-cyan-400"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                             {language === 'ar' ? 'ENGLISH' : 'العربية'}
                         </button>
                     </div>
@@ -397,7 +399,7 @@ export default function QuantumPortalAd({ variant = 'v2', autoStart = false }: {
 
             <div style={{ height: '5vh', width: '100%', background: 'rgba(0,0,0,0.95)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderTop: '1px solid rgba(6,182,212,0.1)' }}>
                 <div style={{ fontSize: '7px', fontWeight: 900, letterSpacing: '2px', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase' }}> 
-                    ARCHITECTED_BY_SHERIF_ROSAS // v4.0_DYNAMIC
+                    ARCHITECTED_BY_SHERIF_ROSAS // v4.6_ELITE_PORTAL
                 </div>
             </div>
 

@@ -90,20 +90,21 @@ function ElevatorCabin() {
                 <planeGeometry args={[1.5, 1.5]} />
                 <meshStandardMaterial 
                     transparent 
-                    opacity={0.85} 
+                    opacity={0.9} 
                     emissive="#0ea5e9" 
-                    emissiveIntensity={5}
-                    map={new THREE.TextureLoader().load('/logos/logo-ar.png')}
+                    emissiveIntensity={6}
+                    map={new THREE.TextureLoader().load('/campaigns/lever-pioneer/branding/qr-code.png')}
+                    alphaTest={0.05}
                 />
             </mesh>
             
             <Html transform position={[0, -0.6, -1.89]} scale={0.5}>
-                <div className="flex flex-col items-center gap-2 select-none pointer-events-none drop-shadow-[0_0_15px_rgba(14,165,233,0.5)]">
+                <div className="flex flex-col items-center gap-2 select-none pointer-events-none drop-shadow-[0_0_20px_rgba(14,165,233,0.6)]">
                     <h2 className="text-4xl font-black italic text-sky-400 tracking-widest uppercase">LEVER PIONEER</h2>
                     <div className="flex items-center gap-4">
-                        <div className="h-[2px] w-24 bg-sky-500/80 shadow-[0_0_20px_#0ea5e9]" />
-                        <span className="text-[12px] font-black text-white tracking-[1.4em] uppercase">GIZA_HORIZON_v4.5</span>
-                        <div className="h-[2px] w-24 bg-sky-500/80 shadow-[0_0_20px_#0ea5e9]" />
+                        <div className="h-[2px] w-24 bg-sky-500/80 shadow-[0_0_25px_#0ea5e9]" />
+                        <span className="text-[12px] font-black text-white tracking-[1.4em] uppercase">GIZA_HORIZON_v4.6</span>
+                        <div className="h-[2px] w-24 bg-sky-500/80 shadow-[0_0_25px_#0ea5e9]" />
                     </div>
                 </div>
             </Html>
