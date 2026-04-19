@@ -15,10 +15,14 @@ interface Node {
   status?: number // 0 to 100 completion
 }
 
+interface QuantumNeuralMeshProps {
+  variant?: 'gold' | 'cyan'
+}
+
 // --- 🌅 GERRY_BAX_HORIZON_SHADER ---
-const AtmosphereShader = {
+const getAtmosphereShader = (color: string) => ({
     uniforms: {
-        glowColor: { value: new THREE.Color('#c5a059') },
+        glowColor: { value: new THREE.Color(color) },
         viewVector: { value: new THREE.Vector3(0, 0, 5) }
     },
     vertexShader: `
@@ -38,12 +42,14 @@ const AtmosphereShader = {
             gl_FragColor = vec4( glow, 1.0 );
         }
     `
-}
+})
 
 // --- 🌏 GERRY_BAX_GLOBE_CORE ---
-function GerryBaxGlobe() {
+function GerryBaxGlobe({ variant = 'gold' }: { variant: 'gold' | 'cyan' }) {
     const groupRef = useRef<THREE.Group>(null)
     const atmosphereRef = useRef<THREE.Mesh>(null)
+    
+    const accentColor = variant === 'cyan' ? '#0ea5e9' : '#c5a059'
     
     // Autonomous Global Drift
     useFrame((state) => {
@@ -54,13 +60,15 @@ function GerryBaxGlobe() {
     })
 
     const nodes: Node[] = [
-        { id: 1, x: 2, y: 3.5, label: 'TOUKH_CORE', priority: true, status: 85 },
-        { id: 2, x: 2.5, y: 3.2, label: 'BANHA_HQ', priority: true, status: 92 },
-        { id: 3, x: 1.5, y: 3.0, label: 'QALYUB_DIV', priority: true, status: 45 },
-        { id: 4, x: 3, y: 4, label: 'LOTUS_NORTH', priority: true, status: 70 },
-        { id: 5, x: 1.2, y: 4.5, label: 'DOMINANCE_NODE', status: 60 },
-        { id: 6, x: 3.8, y: 1.8, label: 'DELTA_LINK', status: 75 },
+        { id: 1, x: 2, y: 3.5, label: variant === 'cyan' ? 'PIONEER_CORE' : 'TOUKH_CORE', priority: true, status: 85 },
+        { id: 2, x: 2.5, y: 3.2, label: variant === 'cyan' ? 'ZAYED_HQ' : 'BANHA_HQ', priority: true, status: 92 },
+        { id: 3, x: 1.5, y: 3.0, label: 'ELITE_NODE', priority: true, status: 45 },
+        { id: 4, x: 3, y: 4, label: 'CAIRO_LINK', priority: true, status: 70 },
+        { id: 5, x: 1.2, y: 4.5, label: 'SOVEREIGN_NODE', status: 60 },
+        { id: 6, x: 3.8, y: 1.8, label: 'DELTA_STREAM', status: 75 },
     ]
+
+    const shader = useMemo(() => getAtmosphereShader(accentColor), [accentColor])
 
     return (
         <group ref={groupRef}>
@@ -69,7 +77,7 @@ function GerryBaxGlobe() {
                 <sphereGeometry args={[7, 64, 64]} />
                 <meshStandardMaterial 
                     color="#050811" 
-                    emissive="#c5a059" 
+                    emissive={accentColor} 
                     emissiveIntensity={0.02} 
                     wireframe={false} 
                     roughness={0.5} 
@@ -82,7 +90,7 @@ function GerryBaxGlobe() {
                 <sphereGeometry args={[7, 64, 64]} />
                 <shaderMaterial 
                     attach="material"
-                    args={[AtmosphereShader]}
+                    args={[shader]}
                     side={THREE.BackSide}
                     transparent={true}
                     blending={THREE.AdditiveBlending}
@@ -93,11 +101,11 @@ function GerryBaxGlobe() {
             <group rotation={[Math.PI / 4, 0.2, 0]}>
                 <mesh>
                     <torusGeometry args={[9, 0.01, 16, 120]} />
-                    <meshBasicMaterial color="#c5a059" transparent opacity={0.15} />
+                    <meshBasicMaterial color={accentColor} transparent opacity={0.15} />
                 </mesh>
                 <mesh rotation={[Math.PI / 2, 0, 0]}>
                     <torusGeometry args={[8.5, 0.005, 16, 120]} />
-                    <meshBasicMaterial color="#0ea5e9" transparent opacity={0.05} />
+                    <meshBasicMaterial color={variant === 'cyan' ? "#fcfcfc" : "#0ea5e9"} transparent opacity={0.05} />
                 </mesh>
             </group>
 
@@ -107,38 +115,37 @@ function GerryBaxGlobe() {
                     {/* The Anchor Point */}
                     <mesh>
                         <sphereGeometry args={[0.08, 16, 16]} />
-                        <meshBasicMaterial color={node.priority ? "#0ea5e9" : "#ffffff"} />
+                        <meshBasicMaterial color={node.priority ? accentColor : "#ffffff"} />
                     </mesh>
 
                     {/* Status Pillar (Completion) */}
                     <mesh position={[0, (node.status || 0) / 100, 0]}>
                         <cylinderGeometry args={[0.01, 0.01, (node.status || 0) / 50, 8]} />
-                        <meshBasicMaterial color="#0ea5e9" transparent opacity={0.3} />
+                        <meshBasicMaterial color={accentColor} transparent opacity={0.3} />
                     </mesh>
 
                     {/* Glowing Apex & Point Light */}
                     <mesh position={[0, (node.status || 0) / 25, 0]}>
                         <sphereGeometry args={[0.04, 8, 8]} />
-                        <meshBasicMaterial color="#0ea5e9" toneMapped={false} />
-                        <pointLight color="#0ea5e9" intensity={3} distance={5} />
+                        <meshBasicMaterial color={accentColor} toneMapped={false} />
+                        <pointLight color={accentColor} intensity={3} distance={5} />
                     </mesh>
 
                     {/* 📊 HUD_DATA_TAG */}
                     <Html distanceFactor={10} position={[0.2, 0.5, 0]} transform>
-                        <div className="bg-black/80 backdrop-blur-3xl border border-cyan-500/30 p-2 rounded-lg pointer-events-none whitespace-nowrap">
+                        <div className={`bg-black/80 backdrop-blur-3xl border ${variant === 'cyan' ? 'border-sky-500/30' : 'border-cyan-500/30'} p-2 rounded-lg pointer-events-none whitespace-nowrap`}>
                             <div className="flex items-center gap-2">
-                                <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse" />
+                                <span className={`w-1.5 h-1.5 ${variant === 'cyan' ? 'bg-sky-400' : 'bg-cyan-400'} rounded-full animate-pulse`} />
                                 <span className="text-[6px] font-black text-white/80 uppercase tracking-widest robotic-digits">{node.label}</span>
                             </div>
-                            <div className="h-[1px] w-full bg-cyan-400/20 my-1" />
-                            <div className="text-[5px] font-black text-cyan-400 robotic-digits">STATUS: {node.status}% // ACTIVE</div>
+                            <div className={`h-[1px] w-full ${variant === 'cyan' ? 'bg-sky-400/20' : 'bg-cyan-400/20'} my-1`} />
+                            <div className={`text-[5px] font-black ${variant === 'cyan' ? 'text-sky-400' : 'text-cyan-400'} robotic-digits`}>STATUS: {node.status}% // ACTIVE</div>
                         </div>
                     </Html>
                 </group>
             ))}
 
             {/* 🕸️ NEURAL_ARC_SYSTEM */}
-            {/* Logic simplified for atmospheric mimicry */}
             {[...Array(5)].map((_, i) => (
                 <line key={i}>
                     <primitive object={new THREE.BufferGeometry().setFromPoints(
@@ -148,30 +155,31 @@ function GerryBaxGlobe() {
                             new THREE.Vector3(nodes[i % nodes.length].x, nodes[i % nodes.length].y, 6.5)
                         ).getPoints(50)
                     )} attach="geometry" />
-                    <lineBasicMaterial color="#0ea5e9" transparent opacity={0.2} />
+                    <lineBasicMaterial color={accentColor} transparent opacity={0.2} />
                 </line>
             ))}
         </group>
     )
 }
 
-export default function QuantumNeuralMesh() {
+export default function QuantumNeuralMesh({ variant = 'gold' }: QuantumNeuralMeshProps) {
+  const accentColor = variant === 'cyan' ? '#0ea5e9' : '#c5a059'
+  
   return (
     <div className="absolute inset-0 z-0 bg-transparent overflow-hidden">
       {/* 🌌 CINEMATIC_GRADIENT_SHELL */}
-      <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_70%_30%,_#c5a05933_0%,_transparent_60%)]" />
+      <div className={`absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_70%_30%,_${accentColor}33_0%,_transparent_60%)]`} />
       
       <Canvas dpr={[1, 2]}>
           <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={45} />
           <ambientLight intensity={1} />
-          <pointLight position={[20, 20, 20]} intensity={8} color="#c5a059" />
-          <pointLight position={[-20, -10, 10]} intensity={4} color="#0ea5e9" />
+          <pointLight position={[20, 20, 20]} intensity={8} color={accentColor} />
+          <pointLight position={[-20, -10, 10]} intensity={4} color={variant === 'cyan' ? "#fcfcfc" : "#0ea5e9"} />
           
           <Suspense fallback={null}>
               <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.2}>
-                  <GerryBaxGlobe />
+                  <GerryBaxGlobe variant={variant} />
               </Float>
-              {/* Dense Starfield for Gerry Bax aesthetic */}
               <Stars radius={100} depth={50} count={10000} factor={6} saturation={0} fade speed={1.5} />
           </Suspense>
 
@@ -183,10 +191,6 @@ export default function QuantumNeuralMesh() {
           />
       </Canvas>
 
-      {/* 🏙️ CITY_LIGHTS_SCANLINE_OVERLAY */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] pointer-events-none z-10" />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] opacity-[0.2] pointer-events-none z-20" style={{ backgroundSize: '100% 4px, 3px 100%' }} />
-
       {/* 🏺 BRAND_SOVEREIGNTY_OVERLAY */}
       <div className="absolute inset-x-0 bottom-24 flex items-center justify-center pointer-events-none z-30">
         <motion.div 
@@ -195,13 +199,13 @@ export default function QuantumNeuralMesh() {
             transition={{ duration: 3 }}
             className="flex flex-col items-center gap-2"
         >
-            <h2 className="text-[80px] font-black italic uppercase tracking-[0.5em] text-cyan-400 opacity-30 select-none">
-                BEIT AL-KHAIR
+            <h2 className={`text-[80px] font-black italic uppercase tracking-[0.5em] ${variant === 'cyan' ? 'text-sky-400' : 'text-cyan-400'} opacity-30 select-none`}>
+                {variant === 'cyan' ? 'LEVER ELEVATORS' : 'BEIT AL-KHAIR'}
             </h2>
             <div className="flex items-center gap-6">
-                <div className="h-[1px] w-32 bg-gradient-to-r from-transparent to-cyan-400" />
+                <div className={`h-[1px] w-32 bg-gradient-to-r from-transparent ${variant === 'cyan' ? 'to-sky-400' : 'to-cyan-400'}`} />
                 <span className="text-xs font-black italic tracking-[1.5em] text-white/30 robotic-digits">GLOBAL_SOVEREIGNTY_v4.0</span>
-                <div className="h-[1px] w-32 bg-gradient-to-l from-transparent to-cyan-400" />
+                <div className={`h-[1px] w-32 bg-gradient-to-l from-transparent ${variant === 'cyan' ? 'to-sky-400' : 'to-cyan-400'}`} />
             </div>
         </motion.div>
       </div>
