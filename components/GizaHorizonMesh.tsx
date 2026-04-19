@@ -86,17 +86,19 @@ function ElevatorCabin() {
             </mesh>
 
             {/* 🏺 HOLOGRAPHIC_BRAND_HUB (High-Fidelity Restoration) */}
-            <mesh position={[0, 0.5, -1.9]}>
-                <planeGeometry args={[1.5, 1.5]} />
-                <meshStandardMaterial 
-                    transparent 
-                    opacity={0.95} 
-                    emissive="#0ea5e9" 
-                    emissiveIntensity={8}
-                    map={new THREE.TextureLoader().load('/campaigns/lever-pioneer/pioneer-ultra.png')}
-                    alphaTest={0.01}
-                />
-            </mesh>
+            <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
+                <mesh position={[0, 0.5, -1.9]}>
+                    <planeGeometry args={[1.5, 1.5]} />
+                    <meshStandardMaterial 
+                        transparent 
+                        opacity={0.95} 
+                        emissive="#0ea5e9" 
+                        emissiveIntensity={1.2}
+                        map={new THREE.TextureLoader().load('/campaigns/lever-pioneer/pioneer-ultra.png')}
+                        alphaTest={0.5}
+                    />
+                </mesh>
+            </Float>
             
             <Html transform position={[0, -0.6, -1.89]} scale={0.5}>
                 <div className="flex flex-col items-center gap-2 select-none pointer-events-none drop-shadow-[0_0_25px_rgba(14,165,233,0.7)]">

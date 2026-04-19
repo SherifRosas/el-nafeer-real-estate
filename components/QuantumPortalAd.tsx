@@ -7,22 +7,18 @@ import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap, Home, Layo
 import { LEVER_PORTFOLIO } from '@/lib/lever-portfolio'
 import AIChatbot from './AIChatbot'
 import { useLanguage } from './LanguageContext'
-import QuantumNeuralMesh from './QuantumNeuralMesh'
 import GizaHorizonMesh from './GizaHorizonMesh'
 
-const DOMAIN = "https://el-nafeer-real-estate.vercel.app";
-const AD_IMAGE = "/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png"
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=201111171368";
 const CALL_URL = "tel:+201070615372";
 const LOCATION_URL = "https://www.google.com/maps/place/Al+Omraneya,+Al+Haram,+Giza+Governorate/@29.9656242,31.0922895,17z/data=!4m15!1m8!3m7!1s0x14584fc2bfbefc07:0x5df1948b27a63882!2sAl+Omraneya,+Al+Haram,+Giza+Governorate!3b1!8m2!3d29.9656242!4d31.0922895!16s%2Fg%2F11c659wy1d!3m5!1s0x14584fc2bfbefc07:0x5df1948b27a63882!8m2!3d29.9656242!4d31.0922895!16s%2Fg%2F11c659wy1d?hl=en-EG&entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D";
 
-// --- BILINGUAL DICTIONARY MAPPING ---
 const DICTIONARY = {
     ar: {
         tap_to_ascent: "TAP_TO_ASCENT | ابدأ التجربة",
         close: "إغلاق",
         intro: "مرحباً بكم في تجربة GIZA_HORIZON من قلب مصر. شركة ليفر الرائدة للمصاعد تأخذكم في رحلة نحو القمة. للتواصل اضغط على الأيقونات.",
-        offer: "عرض حصري لسكان الجيزة وهضبة الأهرام: خصم استراتيجي 15% على عقود التأسيس والصيانة خلال شهر أكتوبر. ليفر.. شريكك في التميز الرأسي.",
+        offer: "عرض حصري لسكان الجيزة وهضبة الأهرام: خصم استراتيجى 15% على عقود التأسيس والصيانة. ليفر.. شريكك في التميز الرأسي.",
         retarget: "نحن شركة ليفر نرحب بكم مجدداً - نخبة القاهرة والجيزة تستحق الأفضل. طلبك الفني القادم يحصل على خصم استراتيجي حصري.",
         wa: "واتساب",
         call: "اتصال",
@@ -37,15 +33,9 @@ const DICTIONARY = {
         form_loc_loading: "جاري التحديد...",
         form_loc_success: "✅ تم تحديد الموقع بنجاح",
         form_floors: "الأدوار",
-        form_shaft: "بئر المصعد (مثلاً 1.5*1.5)",
-        form_foundations: "الأساسات",
-        form_foundations_yes: "الأساسات: يوجد",
-        form_foundations_no: "الأساسات: لا يوجد",
-        form_loc_text: "الموقع (الجيزه - هضبة الأهرام)",
         form_submit: "تأكـيد الطلـب الفـني",
         types: { residential: "سكني", commercial: "تجاري", panorama: "بانوراما المونيوم", maintenance: "صيانة وأعطال" },
         portfolio_title: "مـعرض الأعـمال",
-        portfolio_all: "الكل",
         portfolio_return: "العودة",
         flash_gift: "هدية حصرية لمشاهدين البوابة! 🎁",
         flash_desc: "لقد تم اختيارك للحصول على **خصم فني استثنائي 15%** على عقود التأسيس أو الصيانة. \n\n العرض صالح لمدة ٢٤ ساعة فقط.",
@@ -55,7 +45,7 @@ const DICTIONARY = {
         tap_to_ascent: "TAP_TO_ASCENT | START EXPERIENCE",
         close: "CLOSE",
         intro: "Welcome to the GIZA_HORIZON experience. Lever Pioneer Elevators takes you on a journey to the summit. Contact us via the interactive icons.",
-        offer: "Exclusive offer for Giza residents: Strategic 15% discount on installation and maintenance contracts this month. Lever.. your vertical partner.",
+        offer: "Exclusive offer for Giza residents: Strategic 15% discount on installation and maintenance contracts. Lever.. your vertical partner.",
         retarget: "Welcome back - the elite of Cairo and Giza deserve the best. Your next technical request gets an exclusive strategic discount.",
         wa: "WhatsApp",
         call: "Call",
@@ -70,15 +60,9 @@ const DICTIONARY = {
         form_loc_loading: "Locating...",
         form_loc_success: "✅ Location Captured",
         form_floors: "Floors",
-        form_shaft: "Elevator Shaft (e.g. 1.5x1.5)",
-        form_foundations: "Foundations",
-        form_foundations_yes: "Foundations: Yes",
-        form_foundations_no: "Foundations: No",
-        form_loc_text: "Location (Giza - El Haram)",
         form_submit: "Confirm Technical Request",
         types: { residential: "Residential", commercial: "Commercial", panorama: "Aluminium Panorama", maintenance: "Maintenance & Repair" },
         portfolio_title: "Case Studies Portfolio",
-        portfolio_all: "All",
         portfolio_return: "RETURN",
         flash_gift: "Exclusive Portal Gift! 🎁",
         flash_desc: "You have been selected for an **Exclusive 15% Strategic Discount** on installation or maintenance contracts. \n\n Offer valid for 24 hours only.",
@@ -88,21 +72,17 @@ const DICTIONARY = {
 
 const LEVER_BRAND_ID = "62c38934-4c4b-42be-98c9-06cbbee1af19";
 
-export default function QuantumPortalAd({ variant = 'v2', autoStart = false }: { variant?: 'v2' | 'v3', autoStart?: boolean }) {
+export default function QuantumPortalAd({ autoStart = false }) {
     const { language, setLanguage } = useLanguage();
     const t = DICTIONARY[language];
     const searchParams = useSearchParams();
     const referralId = searchParams.get('ref') || 'direct';
     
-    // --- SENTINEL MEMORY (RETARGETING) LOGIC ---
     const [isReturningUser, setIsReturningUser] = useState(false);
     useEffect(() => {
         const hasVisited = localStorage.getItem('LEVER_PORTAL_VISITED');
-        if (hasVisited) {
-            setIsReturningUser(true);
-        } else {
-            localStorage.setItem('LEVER_PORTAL_VISITED', 'true');
-        }
+        if (hasVisited) setIsReturningUser(true);
+        else localStorage.setItem('LEVER_PORTAL_VISITED', 'true');
     }, []);
 
     const [displayedText, setDisplayedText] = useState("");
@@ -112,320 +92,186 @@ export default function QuantumPortalAd({ variant = 'v2', autoStart = false }: {
     const [activeModal, setActiveModal] = useState<null | 'quote' | 'portfolio'>(null);
     const [quoteSent, setQuoteSent] = useState(false);
     const [quoteLoading, setQuoteLoading] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState('الكل');
     const [fullScreenVid, setFullScreenVid] = useState<string | null>(null);
     const [userLocLink, setUserLocLink] = useState<string | null>(null);
     const [locLoading, setLocLoading] = useState(false);
     const [showFlashOffer, setShowFlashOffer] = useState(false);
 
-    const portfolioItems = LEVER_PORTFOLIO;
-    const filteredPortfolio = selectedCategory === 'الكل' ? portfolioItems : portfolioItems.filter(item => item.cat === selectedCategory);
-
-    // --- MAGNET PROTOCOL: FLASH OFFER TRIGGER ---
     useEffect(() => {
         const timer = setTimeout(() => {
-            const hasClaimed = localStorage.getItem('LEVER_OFFER_CLAIMED');
-            if (isStarted && !hasClaimed) {
-                setShowFlashOffer(true);
-            }
-        }, 3000);
+            if (isStarted && !localStorage.getItem('LEVER_OFFER_CLAIMED')) setShowFlashOffer(true);
+        }, 5000);
         return () => clearTimeout(timer);
     }, [isStarted]);
 
     const trackEvent = (action: string, category: string) => {
-        const payload = {
-            category,
-            action,
-            label: `LEVER_PIONEER_REF_${referralId.toUpperCase()}`,
-            location_memory: isReturningUser ? 'RETARGETED_ELITE' : 'NEW_ACQUISITION',
-            timestamp: new Date().toISOString(),
-            userAgent: navigator.userAgent
-        };
-        fetch('/api/analytics/events', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        }).catch(err => console.log("Silent Analytics Catch:", err));
+        const payload = { category, action, label: `LEVER_PIONEER_STABILITY_v5.6`, timestamp: new Date().toISOString() };
+        fetch('/api/analytics/events', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(() => {});
     }
 
     const initiateExperience = () => {
         if (isStarted) return;
         setIsStarted(true);
-        trackEvent('EXPERIENCE_START', 'USER_INTERACTION');
-        if (audioRef.current) {
-            audioRef.current.muted = false;
-            audioRef.current.volume = 0.9;
-            const playPromise = audioRef.current.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(() => {
-                    document.addEventListener('click', () => audioRef.current?.play(), { once: true });
-                });
-            }
-        }
+        if (audioRef.current) { audioRef.current.muted = false; audioRef.current.play().catch(() => {}); }
 
         const activeText = isReturningUser ? t.retarget : t.intro;
         const words = activeText.split(' ').filter(w => w && w.trim().length > 0);
         let idx = 0;
-        setDisplayedText(words[0] || ""); 
+        setDisplayedText(words[0] || "");
         idx = 1;
 
         if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
-        
         typingIntervalRef.current = setInterval(() => {
             if (idx < words.length) {
-                const nextWord = words[idx];
-                if (nextWord !== undefined) {
-                    setDisplayedText(prev => prev + ' ' + nextWord);
-                    idx++;
-                } else {
-                    if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
-                }
-            } else { 
-                if (typingIntervalRef.current) clearInterval(typingIntervalRef.current); 
-            }
-        }, 350); 
+                setDisplayedText(prev => prev + ' ' + words[idx]);
+                idx++;
+            } else { if (typingIntervalRef.current) clearInterval(typingIntervalRef.current); }
+        }, 350);
     }
 
     const captureUserLocation = () => {
         setLocLoading(true);
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((pos) => {
-                const link = `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
-                setUserLocLink(link);
+                setUserLocLink(`https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`);
                 setLocLoading(false);
-            }, (err) => {
-                console.error("Loc err:", err);
-                setLocLoading(false);
-                alert("يرجى تفعيل الـ GPS لمشاركة الموقع");
-            });
-        } else {
-            setLocLoading(false);
-            alert("المتصفح لا يدعم تحديد الموقع");
-        }
+            }, () => setLocLoading(false));
+        } else setLocLoading(false);
     }
 
     const submitQuoteRequest = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setQuoteLoading(true);
         const formData = new FormData(e.currentTarget);
-        const uName = formData.get('userName');
-        const uPhone = formData.get('userPhone');
-        const eType = formData.get('elevatorType');
-        const eFloors = formData.get('floors');
-        const eShaft = formData.get('shaftSize');
-        const eFound = formData.get('foundations');
-        const eLoc = formData.get('location');
-
-        const fullNotes = `PORTAL_GPS_LEAD: ${eType} | ${eFloors} Floors | Shaft: ${eShaft} | Found: ${eFound} | Loc: ${eLoc} | Map: ${userLocLink || 'None'}`;
-        
-        const payload = { name: uName, phone: uPhone, notes: fullNotes, brandProfileId: LEVER_BRAND_ID, status: 'new' };
-        
+        const payload = { 
+            name: formData.get('userName'), 
+            phone: formData.get('userPhone'), 
+            notes: `v5.6_LOCKED: ${formData.get('elevatorType')} | Floors: ${formData.get('floors')} | GPS: ${userLocLink || 'No'}`,
+            brandProfileId: LEVER_BRAND_ID 
+        };
         try {
             await fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
             setQuoteSent(true);
-            
-            const waMsg = language === 'ar' 
-                ? `السلام عليكم شركة ليفر الرائدة للمصاعد.\nأنا: ${uName}\nقمت بإرسال طلب عرض سعر فني للمصعد الخاص بي:\n\n• النوع: ${eType}\n• الأدوار: ${eFloors}\n• بئر المصعد: ${eShaft}\n• الأساسات: ${eFound}\n• الموقع: ${eLoc}\n• خرائط جوجل: ${userLocLink || 'لم يتم التحديد'}\n\nأتمنى التواصل بخصوص المواصفات الفنية.`
-                : `Hello Lever Pioneer Elevators.\nI am: ${uName}\nI sent a technical quote request for my elevator:\n\n• Type: ${eType}\n• Floors: ${eFloors}\n• Shaft Size: ${eShaft}\n• Foundations: ${eFound}\n• Location: ${eLoc}\n• Maps Link: ${userLocLink || 'Not Specified'}\n\nI look forward to discussing technical specs.`;
-            
-            setTimeout(() => { 
-                setActiveModal(null); 
-                setQuoteSent(false); 
-                window.location.href = `${WHATSAPP_URL}&text=${encodeURIComponent(waMsg)}`; 
-            }, 2500);
-        } catch (error) { console.error("Lead error:", error); } finally { setQuoteLoading(false); }
+            setTimeout(() => { setActiveModal(null); setQuoteSent(false); }, 3000);
+        } catch (error) { console.error(error); } finally { setQuoteLoading(false); }
     }
 
     return (
-        <div style={{ position: 'relative', width: '100vw', height: '100vh', background: 'transparent', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ position: 'relative', width: '100vw', height: '100vh', background: '#000', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             <style dangerouslySetInnerHTML={{ __html: `
                 @keyframes pulse-cyan { 0% { box-shadow: 0 0 10px rgba(6,182,212,0.3); } 50% { box-shadow: 0 0 40px rgba(6,182,212,0.6); } 100% { box-shadow: 0 0 10px rgba(6,182,212,0.3); } }
-                @keyframes icon-float { 0% { transform: translateY(0) scale(1.02); } 50% { transform: translateY(-2px) scale(1.04); } 100% { transform: translateY(0) scale(1.02); } }
-                @keyframes shiny-shimmer { 0% { background-position: -200px; } 100% { background-position: 200px; } }
+                @keyframes icon-float { 0% { transform: translateY(0); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0); } }
             `}} />
             
-            {/* 🌌 GIZA_HORIZON_3D_BACKGROUND_LAYER */}
             <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
                 <GizaHorizonMesh />
-                <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.6) 100%)', pointerEvents: 'none' }} />
             </div>
 
-            <audio 
-                ref={audioRef} 
-                loop 
-                src="https://audio-previews.elements.envatousercontent.com/files/234765669/preview.mp3" 
-                style={{ display: 'none' }} 
-                onError={(e) => console.warn('Sovereign Audio Bridge: Stream Blocked (403). Proceeding with Visual Manifestation.')}
-            />
+            {!isStarted && (
+                <div onClick={initiateExperience} style={{ position: 'absolute', inset: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(5px)', cursor: 'pointer' }}>
+                    <div style={{ padding: '20px 40px', background: 'rgba(6,182,212,0.2)', border: '2px solid #06b6d4', borderRadius: '50px', color: '#fff', fontWeight: 900, fontSize: '18px', letterSpacing: '2px', animation: 'pulse-cyan 2s infinite' }}>
+                        {t.tap_to_ascent}
+                    </div>
+                </div>
+            )}
 
-            {/* 📦 PORTAL_UI_HUD_OVERLAYS */}
-            {!activeModal && (
+            {isStarted && !activeModal && (
                 <>
-                    <button 
-                        onClick={() => {
-                            if (audioRef.current) {
-                                audioRef.current.pause();
-                                audioRef.current.currentTime = 0;
-                            }
-                            if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
-                            setIsStarted(false);
-                            setDisplayedText("");
-                        }}
-                        style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10000, background: 'rgba(0,0,0,0.5)', border: '1.5px solid rgba(255,255,255,0.3)', borderRadius: '15px', padding: '8px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#fff', backdropFilter: 'blur(15px)', transition: 'all 0.3s ease', cursor: 'pointer', gap: '2px' }}
-                    >
-                        <X size={22} />
-                        <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '1px' }}>{t.close}</span>
-                    </button>
-
-                    <div style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 10000, display: 'flex', gap: '8px' }}>
-                        <button 
-                            onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')}
-                            style={{ background: 'rgba(6,182,212,0.2)', border: '1px solid #06b6d4', borderRadius: '12px', padding: '8px 12px', color: '#fff', fontWeight: 900, fontSize: '11px', backdropFilter: 'blur(15px)', display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', boxShadow: '0 0 15px rgba(6,182,212,0.3)' }}
-                        >
-                            <Globe size={14} className="text-cyan-400" />
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-cyan-400"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10000 }}>
+                        <button onClick={() => setIsStarted(false)} style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid #fff3', borderRadius: '12px', padding: '8px 15px', color: '#fff', fontWeight: 900, cursor: 'pointer' }}>{t.close}</button>
+                    </div>
+                    <div style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 10000 }}>
+                        <button onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')} style={{ background: 'rgba(6,182,212,0.2)', border: '1px solid #06b6d4', borderRadius: '12px', padding: '8px 15px', color: '#fff', fontWeight: 900, cursor: 'pointer' }}>
+                            <Globe size={16} style={{ display: 'inline', marginRight: '5px' }} />
                             {language === 'ar' ? 'ENGLISH' : 'العربية'}
                         </button>
                     </div>
-
-                    <div style={{ position: 'absolute', top: '80px', left: '20px', right: '20px', zIndex: 9001, direction: language === 'ar' ? 'rtl' : 'ltr', textAlign: 'center' }}>
-                        <div style={{ background: 'rgba(6,182,212,0.05)', border: '1px solid rgba(6,182,212,0.1)', borderRadius: '20px', padding: '15px', fontSize: '14px', fontWeight: 'bold', color: '#fff', lineHeight: '1.6', backdropFilter: 'blur(20px)', textShadow: '0 0 15px rgba(0,0,0,1)' }}>
+                    <div style={{ position: 'absolute', top: '80px', left: '20px', right: '20px', zIndex: 9000, textAlign: 'center' }}>
+                        <div style={{ background: 'rgba(0,0,0,0.6)', border: '1px solid #06b6d444', borderRadius: '20px', padding: '20px', color: '#fff', fontWeight: 'bold', backdropFilter: 'blur(10px)' }}>
                             {displayedText}
                         </div>
+                    </div>
+
+                    <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', background: 'rgba(0,0,0,0.9)', padding: '20px 0 45px 0', display: 'flex', justifyContent: 'center', gap: '20px', borderTop: '2px solid #06b6d466', backdropFilter: 'blur(20px)' }}>
+                         {[
+                             { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.2h.5"/><path d="m22 2-7 20-4-9-9-4Z"/></svg>, label: t.wa, color: '#25d366', url: WHATSAPP_URL },
+                             { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>, label: t.call, color: '#06b6d4', url: CALL_URL },
+                             { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>, label: t.loc, color: '#06b6d4', url: LOCATION_URL },
+                             { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 8h10"/><path d="M7 12h10"/><path d="M7 16h10"/></svg>, label: t.port, color: '#06b6d4', action: () => setActiveModal('portfolio') },
+                             { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14.5 2 14.5 7.5 20 7.5"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>, label: t.quote, color: '#fff', action: () => setActiveModal('quote') }
+                         ].map((btn, i) => (
+                             <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px' }}>
+                                 <a onClick={btn.action} href={btn.url} target={btn.url ? "_blank" : undefined} style={{ width: '55px', height: '55px', borderRadius: '50%', border: `2.5px solid ${btn.color}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: btn.color, animation: `icon-float ${3+i*0.5}s infinite ease-in-out`, cursor: 'pointer', background: 'rgba(0,0,0,0.4)', textDecoration: 'none' }}>
+                                     {btn.icon}
+                                 </a>
+                                 <span style={{ fontSize: '10px', fontWeight: 900, color: btn.color, textTransform: 'uppercase' }}>{btn.label}</span>
+                             </div>
+                         ))}
                     </div>
                 </>
             )}
 
-            <div style={{ flex: 1, position: 'relative', overflow: 'hidden', background: 'transparent' }}>
-                {/* INTERACTIVE ACTION BAR */}
-                {/* 🚀 IMPERIAL_ACTION_BAR (v5.0_SUPREME_ELITE) */}
-                {!activeModal && (
-                    <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', background: 'rgba(0,0,0,0.92)', padding: '15px 0 35px 0', display: 'flex', justifyContent: 'center', gap: '15px', zIndex: 100050, borderTop: '2.5px solid rgba(6,182,212,0.4)', backdropFilter: 'blur(35px)', direction: language === 'ar' ? 'rtl' : 'ltr', pointerEvents: 'auto' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-                            <a onClick={() => trackEvent('WHATSAPP_CONTACT', 'LEAD_ATTEMPT')} href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(37,211,102,0.08)', border: '2px solid #25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#25d366', animation: 'icon-float 3s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none', pointerEvents: 'auto', boxShadow: '0 0 15px rgba(37,211,102,0.2)' }}>
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.2h.5"/><path d="m22 2-7 20-4-9-9-4Z"/></svg>
-                            </a>
-                            <span style={{ fontSize: '10px', fontWeight: 900, color: '#25d366', opacity: 1, letterSpacing: '1px' }}>{t.wa}</span>
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-                            <a onClick={() => trackEvent('CALL_CONTACT', 'LEAD_ATTEMPT')} href={CALL_URL} style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(6,182,212,0.08)', border: '2px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 3.5s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none', pointerEvents: 'auto', boxShadow: '0 0 15px rgba(6,182,212,0.2)' }}>
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                            </a>
-                            <span style={{ fontSize: '10px', fontWeight: 900, color: '#06b6d4', opacity: 1, letterSpacing: '1px' }}>{t.call}</span>
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-                            <a onClick={() => trackEvent('LOCATION_VIEW', 'INTEREST_ATTEMPT')} href={LOCATION_URL} target="_blank" rel="noopener noreferrer" style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(6,182,212,0.08)', border: '2px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 4s infinite ease-in-out', cursor: 'pointer', textDecoration: 'none', pointerEvents: 'auto', boxShadow: '0 0 15px rgba(6,182,212,0.2)' }}>
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            </a>
-                            <span style={{ fontSize: '10px', fontWeight: 900, color: '#06b6d4', opacity: 1, letterSpacing: '1px' }}>{t.loc}</span>
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-                            <button onClick={() => { trackEvent('PORTFOLIO_VIEW', 'INTEREST_ATTEMPT'); setActiveModal('portfolio'); }} style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(6,182,212,0.12)', border: '2px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 4.5s infinite ease-in-out', cursor: 'pointer', pointerEvents: 'auto' }}>
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M16 5V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2"/><circle cx="18" cy="18" r="3"/><path d="m20.5 20.5 1.5 1.5"/></svg>
-                            </button>
-                            <span style={{ fontSize: '10px', fontWeight: 900, color: '#06b6d4', opacity: 1, letterSpacing: '1px' }}>{t.port}</span>
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-                            <button onClick={() => { trackEvent('QUOTE_REQUEST_START', 'LEAD_ATTEMPT'); setActiveModal('quote'); }} style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(6,182,212,0.2)', border: '2px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 5s infinite ease-in-out', cursor: 'pointer', pointerEvents: 'auto', boxShadow: '0 0 20px #06b6d4' }}>
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14.5 2 14.5 7.5 20 7.5"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
-                            </button>
-                            <span style={{ fontSize: '10px', fontWeight: 900, color: '#06b6d4', opacity: 1, letterSpacing: '1px' }}>{t.quote}</span>
-                        </div>
-                    </div>
-                )}
-                
-                {activeModal === 'quote' && (
-                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.9)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
-                        <div style={{ width: '100%', maxWidth: '380px', background: '#0a0a0f', border: '1px solid #06b6d4', borderRadius: '30px', padding: '25px', position: 'relative', overflowY: 'auto', maxHeight: '90vh', direction: language === 'ar' ? 'rtl' : 'ltr', boxShadow: '0 0 50px rgba(6,182,212,0.2)' }}>
-                            <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: 15, right: 20, color: '#666', background: 'none', border: 'none', fontSize: '24px' }}>✕</button>
-                            <h3 style={{ color: '#06b6d4', textAlign: 'center', fontWeight: 900, marginBottom: '20px', fontSize: '18px' }}>{t.form_title}</h3>
-                            {quoteSent ? ( <div style={{ textAlign: 'center', padding: '40px', color: '#fff', fontSize: '16px' }}>{t.form_success}</div> ) : (
-                                <form onSubmit={submitQuoteRequest} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                                    <input name="userName" required placeholder={t.form_name} style={{ background: '#111', border: '1px solid #333', padding: '14px', borderRadius: '12px', color: '#fff', fontSize: '13px' }} />
-                                    <input name="userPhone" required placeholder={t.form_phone} style={{ background: '#111', border: '1px solid #333', padding: '14px', borderRadius: '12px', color: '#fff', fontSize: '13px' }} />
-                                    <div onClick={captureUserLocation} style={{ cursor: 'pointer', background: userLocLink ? 'rgba(37,211,102,0.1)' : 'rgba(6,182,212,0.1)', border: `1px solid ${userLocLink ? '#25d366' : '#06b6d4'}`, padding: '14px', borderRadius: '12px', color: userLocLink ? '#25d366' : '#06b6d4', fontSize: '13px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
-                                        <MapPin size={18} />
-                                        {locLoading ? t.form_loc_loading : userLocLink ? t.form_loc_success : t.form_loc_btn}
-                                    </div>
-                                    <select name="elevatorType" style={{ background: '#111', border: '1px solid #333', padding: '14px', borderRadius: '12px', color: '#fff', fontSize: '13px' }}>
-                                        <option value="سكني">{t.types.residential}</option>
-                                        <option value="تجاري">{t.types.commercial}</option>
-                                        <option value="بانوراما المونيوم">{t.types.panorama}</option>
-                                        <option value="صيانة">{t.types.maintenance}</option>
-                                    </select>
-                                    <input name="floors" type="number" placeholder={t.form_floors} style={{ background: '#111', border: '1px solid #333', padding: '14px', borderRadius: '12px', color: '#fff', fontSize: '13px' }} />
-                                    <button type="submit" style={{ background: '#06b6d4', padding: '16px', borderRadius: '15px', fontWeight: 900, color: '#000', fontSize: '16px', marginTop: '10px', boxShadow: '0 10px 20px rgba(6,182,212,0.3)' }}>{t.form_submit}</button>
-                                </form>
-                            )}
-                        </div>
-                    </div>
-                )}
-
-                {activeModal === 'portfolio' && (
-                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.95)', zIndex: 9999, display: 'flex', flexDirection: 'column', padding: '20px', overflowY: 'auto' }}>
-                        <button onClick={() => setActiveModal(null)} style={{ alignSelf: 'flex-end', color: '#fff', background: 'none', border: 'none', fontSize: '30px' }}>✕</button>
-                        <h2 style={{ textAlign: 'center', color: '#06b6d4', fontWeight: 900, marginBottom: '30px' }}>{t.portfolio_title}</h2>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '15px', justifyContent: 'center' }}>
-                            {filteredPortfolio.map((p, idx) => {
-                                const isImage = /\.(jpg|jpeg|png|webp|gif|bmp)$/i.test(p.vid);
-                                return (
-                                    <div key={idx} onClick={() => setFullScreenVid(p.vid)} style={{ background: '#050505', border: '1px solid #222', borderRadius: '20px', overflow: 'hidden', cursor: 'pointer' }}>
-                                        {isImage ? (
-                                            <img src={p.vid} alt={p.title} style={{ width: '100%', height: '120px', objectFit: 'cover' }} />
-                                        ) : (
-                                            <video src={p.vid} autoPlay muted loop playsInline style={{ width: '100%', height: '120px', objectFit: 'cover' }} />
-                                        )}
-                                        <div style={{ padding: '10px', fontSize: '9px', textAlign: 'center', color: '#ccc', fontWeight: 'bold' }}>{p.title}</div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                )}
-            </div>
-
-            {fullScreenVid && (
-                <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: '#000', zIndex: 30000, display: 'flex', flexDirection: 'column' }}>
-                    <div onClick={() => setFullScreenVid(null)} style={{ padding: '20px', color: '#06b6d4', fontSize: '18px', fontWeight: 900, cursor: 'pointer', borderBottom: '1px solid #111', display: 'flex', alignItems: 'center', gap: '10px' }}> <X size={24} /> {t.portfolio_return} </div>
-                    <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000' }}> 
-                        {/\.(jpg|jpeg|png|webp|gif|bmp)$/i.test(fullScreenVid) ? (
-                            <img src={fullScreenVid} alt="Full Screen" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
-                        ) : (
-                            <video src={fullScreenVid} controls autoPlay playsInline style={{ maxWidth: '100%', maxHeight: '100%' }} /> 
+            {activeModal === 'quote' && (
+                <div style={{ position: 'absolute', inset: 0, zIndex: 20000, background: 'rgba(0,0,0,0.9)', padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ width: '100%', maxWidth: '400px', background: '#0a0a0a', border: '1px solid #06b6d4', borderRadius: '30px', padding: '30px', position: 'relative' }}>
+                        <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: 20, right: 20, color: '#fff', background: 'none', border: 'none', fontSize: '20px' }}>✕</button>
+                        <h3 style={{ color: '#06b6d4', textAlign: 'center', fontWeight: 900, marginBottom: '20px' }}>{t.form_title}</h3>
+                        {quoteSent ? <div style={{ color: '#fff', textAlign: 'center', padding: '40px' }}>{t.form_success}</div> : (
+                            <form onSubmit={submitQuoteRequest} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                                <input name="userName" required placeholder={t.form_name} style={{ background: '#111', border: '1px solid #333', padding: '15px', borderRadius: '15px', color: '#fff' }} />
+                                <input name="userPhone" required placeholder={t.form_phone} style={{ background: '#111', border: '1px solid #333', padding: '15px', borderRadius: '15px', color: '#fff' }} />
+                                <div onClick={captureUserLocation} style={{ padding: '15px', background: 'rgba(6,182,212,0.1)', border: '1px dashed #06b6d4', borderRadius: '15px', color: '#06b6d4', textAlign: 'center', cursor: 'pointer' }}>
+                                    {locLoading ? t.form_loc_loading : userLocLink ? t.form_loc_success : t.form_loc_btn}
+                                </div>
+                                <select name="elevatorType" style={{ background: '#111', border: '1px solid #333', padding: '15px', borderRadius: '15px', color: '#fff' }}>
+                                    <option value="سكني">{t.types.residential}</option>
+                                    <option value="تجاري">{t.types.commercial}</option>
+                                    <option value="صيانة">{t.types.maintenance}</option>
+                                </select>
+                                <input name="floors" type="number" placeholder={t.form_floors} style={{ background: '#111', border: '1px solid #333', padding: '15px', borderRadius: '15px', color: '#fff' }} />
+                                <button type="submit" style={{ background: '#06b6d4', padding: '18px', borderRadius: '15px', fontWeight: 900, color: '#000', fontSize: '16px' }}>{t.form_submit}</button>
+                            </form>
                         )}
                     </div>
                 </div>
             )}
 
-            <div style={{ height: '5vh', width: '100%', background: 'rgba(0,0,0,0.98)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderTop: '1.5px solid rgba(6,182,212,0.2)' }}>
-                <div style={{ fontSize: '7px', fontWeight: 900, letterSpacing: '2px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}> 
-                    ARCHITECTED_BY_SHERIF_ROSAS // v5.5_AESTHETIC_RESTORATION
+            {activeModal === 'portfolio' && (
+                <div style={{ position: 'absolute', inset: 0, zIndex: 20000, background: 'rgba(0,0,0,0.98)', padding: '20px', overflowY: 'auto' }}>
+                    <button onClick={() => setActiveModal(null)} style={{ color: '#fff', fontSize: '30px', float: language === 'ar' ? 'left' : 'right' }}>✕</button>
+                    <h2 style={{ color: '#06b6d4', textAlign: 'center', fontWeight: 900, margin: '40px 0' }}>{t.portfolio_title}</h2>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '20px' }}>
+                        {LEVER_PORTFOLIO.map((p, i) => (
+                            <div key={i} onClick={() => setFullScreenVid(p.vid)} style={{ background: '#111', borderRadius: '15px', overflow: 'hidden', cursor: 'pointer', border: '1px solid #222' }}>
+                                {/\.(jpg|jpeg|png|webp)$/i.test(p.vid) ? <img src={p.vid} style={{ width: '100%', height: '100px', objectFit: 'cover' }} /> : <video src={p.vid} muted style={{ width: '100%', height: '100px', objectFit: 'cover' }} />}
+                                <div style={{ padding: '10px', fontSize: '10px', color: '#fff', textAlign: 'center' }}>{p.title}</div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
+            )}
+
+            {fullScreenVid && (
+                <div style={{ position: 'fixed', inset: 0, zIndex: 30000, background: '#000', display: 'flex', flexDirection: 'column' }}>
+                    <button onClick={() => setFullScreenVid(null)} style={{ padding: '20px', color: '#06b6d4', fontWeight: 900 }}>✕ {t.portfolio_return}</button>
+                    <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        {/\.(jpg|jpeg|png|webp)$/i.test(fullScreenVid) ? <img src={fullScreenVid} style={{ maxWidth: '100%', maxHeight: '100%' }} /> : <video src={fullScreenVid} controls autoPlay style={{ maxWidth: '100%', maxHeight: '100%' }} />}
+                    </div>
+                </div>
+            )}
+
+            <div style={{ height: '3vh', width: '100%', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '8px', color: '#444', letterSpacing: '2px' }}>
+                ARCHITECTED_BY_SHERIF_ROSAS // v5.6_MEANINGFUL_LOCKED
             </div>
 
-            {/* MAGNET PROTOCOL: FLASH OFFER POPUP */}
             {showFlashOffer && (
-                <div style={{ position: 'fixed', inset: 0, zIndex: 100010, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.9)', backdropFilter: 'blur(15px)', padding: '20px' }}>
-                    <div style={{ width: '100%', maxWidth: '360px', background: 'linear-gradient(135deg, #0a0a0f 0%, #111 100%)', border: '2px solid #06b6d4', borderRadius: '35px', padding: '35px', position: 'relative', textAlign: 'center', animation: 'pulse-cyan 2s infinite' }}>
-                        <button onClick={() => setShowFlashOffer(false)} style={{ position: 'absolute', top: 20, right: 25, color: '#666', background: 'none', border: 'none', fontSize: '24px', cursor: 'pointer' }}>✕</button>
-                        <div style={{ width: '70px', height: '70px', borderRadius: '50%', background: 'rgba(6,182,212,0.1)', border: '1px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px auto', color: '#06b6d4' }}>
-                            <div style={{ fontSize: '35px' }}>🎁</div>
-                        </div>
-                        <h2 style={{ color: '#fff', fontSize: '22px', fontWeight: 900, marginBottom: '15px', direction: language === 'ar' ? 'rtl' : 'ltr' }}>{t.flash_gift}</h2>
-                        <p style={{ color: '#ccc', fontSize: '14px', lineHeight: '1.7', marginBottom: '25px', direction: language === 'ar' ? 'rtl' : 'ltr' }}>
-                            {t.flash_desc}
-                        </p>
-                        <button 
-                            onClick={() => {
-                                setShowFlashOffer(false);
-                                localStorage.setItem('LEVER_OFFER_CLAIMED', 'true');
-                                trackEvent('FLASH_OFFER_CLAIMED', 'MAGNET_PROTOCOL');
-                            }}
-                            style={{ width: '100%', background: '#06b6d4', color: '#000', padding: '18px', borderRadius: '20px', fontWeight: 900, fontSize: '15px', cursor: 'pointer', border: 'none', boxShadow: '0 15px 30px rgba(6,182,212,0.4)' }}
-                        >
-                            {t.flash_btn}
-                        </button>
+                <div style={{ position: 'fixed', inset: 0, zIndex: 100010, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(10px)', padding: '20px' }}>
+                    <div style={{ width: '100%', maxWidth: '360px', background: '#0a0a0f', border: '2px solid #06b6d4', borderRadius: '35px', padding: '35px', textAlign: 'center' }}>
+                        <button onClick={() => setShowFlashOffer(false)} style={{ position: 'absolute', top: 20, right: 25, color: '#666', fontSize: '24px' }}>✕</button>
+                        <div style={{ fontSize: '40px', marginBottom: '20px' }}>🎁</div>
+                        <h2 style={{ color: '#fff', fontSize: '20px', fontWeight: 900, marginBottom: '15px' }}>{t.flash_gift}</h2>
+                        <p style={{ color: '#ccc', fontSize: '14px', lineHeight: '1.6', marginBottom: '25px' }}>{t.flash_desc}</p>
+                        <button onClick={() => { setShowFlashOffer(false); localStorage.setItem('LEVER_OFFER_CLAIMED', 'true'); window.location.href = WHATSAPP_URL; }} style={{ width: '100%', background: '#06b6d4', color: '#000', padding: '18px', borderRadius: '20px', fontWeight: 900 }}>{t.flash_btn}</button>
                     </div>
                 </div>
             )}
