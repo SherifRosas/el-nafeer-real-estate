@@ -74,7 +74,7 @@ function GerryBaxGlobe({ variant = 'gold' }: { variant: 'gold' | 'cyan' }) {
         <group ref={groupRef}>
             {/* 🌌 MAIN_SPHERE_GRID (The Gerry Bax Look) */}
             <mesh>
-                <sphereGeometry args={[7, 64, 64]} />
+                <sphereGeometry args={[5, 32, 32]} />
                 <meshStandardMaterial 
                     color="#050a15" 
                     emissive={accentColor} 
@@ -87,7 +87,7 @@ function GerryBaxGlobe({ variant = 'gold' }: { variant: 'gold' | 'cyan' }) {
 
             {/* 🌅 HORIZON_GLOW_ATMOSPHERE */}
             <mesh ref={atmosphereRef} scale={[1.1, 1.1, 1.1]}>
-                <sphereGeometry args={[7, 64, 64]} />
+                <sphereGeometry args={[5, 32, 32]} />
                 <shaderMaterial 
                     attach="material"
                     args={[shader]}
