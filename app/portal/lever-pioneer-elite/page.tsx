@@ -9,7 +9,7 @@ export default function PortalPageElite() {
   const [showScan, setShowScan] = useState(true)
 
   return (
-    <main style={{ backgroundColor: '#000', width: '100%', minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
+    <main style={{ background: 'transparent', width: '100%', minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
         <AnimatePresence mode="wait">
             {showScan ? (
                 <motion.div

@@ -236,7 +236,7 @@ export default function QuantumPortalAd({ variant = 'v2', autoStart = false }: {
     }
 
     return (
-        <div style={{ position: 'relative', width: '100vw', height: '100vh', backgroundColor: '#000', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ position: 'relative', width: '100vw', height: '100vh', background: 'transparent', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             <style dangerouslySetInnerHTML={{ __html: `
                 @keyframes pulse-cyan { 0% { box-shadow: 0 0 10px rgba(6,182,212,0.3); } 50% { box-shadow: 0 0 40px rgba(6,182,212,0.6); } 100% { box-shadow: 0 0 10px rgba(6,182,212,0.3); } }
                 @keyframes icon-float { 0% { transform: translateY(0) scale(1.02); } 50% { transform: translateY(-2px) scale(1.04); } 100% { transform: translateY(0) scale(1.02); } }
