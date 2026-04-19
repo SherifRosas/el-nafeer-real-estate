@@ -30,7 +30,7 @@ const getAtmosphereShader = (color: string) => ({
         void main() {
             vec3 vNormal = normalize( normalMatrix * normal );
             vec3 vNormel = normalize( normalMatrix * vec3(0,0,1) );
-            intensity = pow( 0.6 - dot(vNormal, vNormel), 2.0 );
+            intensity = pow( 0.85 - dot(vNormal, vNormel), 1.5 );
             gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
         }
     `,
@@ -76,12 +76,12 @@ function GerryBaxGlobe({ variant = 'gold' }: { variant: 'gold' | 'cyan' }) {
             <mesh>
                 <sphereGeometry args={[7, 64, 64]} />
                 <meshStandardMaterial 
-                    color="#050811" 
+                    color="#0a1a2f" 
                     emissive={accentColor} 
-                    emissiveIntensity={0.02} 
+                    emissiveIntensity={variant === 'cyan' ? 0.8 : 0.4} 
                     wireframe={false} 
-                    roughness={0.5} 
-                    metalness={0.3}
+                    roughness={0.3} 
+                    metalness={0.6}
                 />
             </mesh>
 
@@ -172,9 +172,9 @@ export default function QuantumNeuralMesh({ variant = 'gold' }: QuantumNeuralMes
       
       <Canvas dpr={[1, 2]}>
           <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={45} />
-          <ambientLight intensity={1} />
-          <pointLight position={[20, 20, 20]} intensity={8} color={accentColor} />
-          <pointLight position={[-20, -10, 10]} intensity={4} color={variant === 'cyan' ? "#fcfcfc" : "#0ea5e9"} />
+          <ambientLight intensity={1.5} />
+          <pointLight position={[20, 20, 20]} intensity={15} color={accentColor} />
+          <pointLight position={[-20, -10, 10]} intensity={10} color={variant === 'cyan' ? "#fcfcfc" : "#0ea5e9"} />
           
           <Suspense fallback={null}>
               <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.2}>
