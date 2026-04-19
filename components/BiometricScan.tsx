@@ -30,7 +30,7 @@ export default function BiometricScan({ onComplete, identityName = 'SOVEREIGN_US
       }, 30)
 
       await new Promise(r => setTimeout(r, 1800))
-      setStatus('VAIDATING_IDENTITY_MATCH')
+      setStatus('VALIDATING_IDENTITY_MATCH')
       
       await new Promise(r => setTimeout(r, 1200))
       setStatus('SOVEREIGN_ACCESS_GRANTED')
@@ -77,7 +77,7 @@ export default function BiometricScan({ onComplete, identityName = 'SOVEREIGN_US
                 {/* STATUS_READOUTS */}
                 <div className="text-center space-y-3">
                     <p className="text-[10px] text-cyan-400/50 uppercase tracking-[0.5em] italic">{status}</p>
-                    <h2 className="text-2xl lg:text-3xl font-black text-white italic tracking-tighter uppercase leading-none">
+                    <h2 className="text-xl lg:text-2xl font-black text-white italic tracking-[0.1em] uppercase leading-tight break-all">
                         {identityName}
                     </h2>
                 </div>
