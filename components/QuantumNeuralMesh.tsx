@@ -78,7 +78,7 @@ function GerryBaxGlobe({ variant = 'gold' }: { variant: 'gold' | 'cyan' }) {
                 <meshStandardMaterial 
                     color="#050a15" 
                     emissive={accentColor} 
-                    emissiveIntensity={variant === 'cyan' ? 0.3 : 0.4} 
+                    emissiveIntensity={variant === 'cyan' ? 0.25 : 0.4} 
                     wireframe={false} 
                     roughness={0.4} 
                     metalness={0.5}
@@ -171,8 +171,8 @@ export default function QuantumNeuralMesh({ variant = 'gold' }: QuantumNeuralMes
       <div className={`absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_70%_30%,_${accentColor}33_0%,_transparent_60%)]`} />
       
       <Canvas dpr={[1, 2]}>
-          <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={45} />
-          <ambientLight intensity={0.3} />
+          <PerspectiveCamera makeDefault position={[0, 0, 25]} fov={45} />
+          <ambientLight intensity={0.2} />
           <pointLight position={[20, 20, 20]} intensity={10} color={accentColor} />
           <pointLight position={[-20, -10, 10]} intensity={5} color={variant === 'cyan' ? "#fcfcfc" : "#0ea5e9"} />
           
