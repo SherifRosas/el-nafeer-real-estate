@@ -74,11 +74,11 @@ function GerryBaxGlobe({ variant = 'gold' }: { variant: 'gold' | 'cyan' }) {
         <group ref={groupRef}>
             {/* 🌌 MAIN_SPHERE_GRID (The Gerry Bax Look) */}
             <mesh>
-                <sphereGeometry args={[5, 32, 32]} />
+                <sphereGeometry args={[3.5, 32, 32]} />
                 <meshStandardMaterial 
                     color="#050a15" 
                     emissive={accentColor} 
-                    emissiveIntensity={variant === 'cyan' ? 0.35 : 0.4} 
+                    emissiveIntensity={variant === 'cyan' ? 0.5 : 0.4} 
                     wireframe={false} 
                     roughness={0.4} 
                     metalness={0.5}
@@ -87,7 +87,7 @@ function GerryBaxGlobe({ variant = 'gold' }: { variant: 'gold' | 'cyan' }) {
 
             {/* 🌅 HORIZON_GLOW_ATMOSPHERE */}
             <mesh ref={atmosphereRef} scale={[1.1, 1.1, 1.1]}>
-                <sphereGeometry args={[5, 32, 32]} />
+                <sphereGeometry args={[3.5, 32, 32]} />
                 <shaderMaterial 
                     attach="material"
                     args={[shader]}
