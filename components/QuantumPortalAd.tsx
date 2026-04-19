@@ -8,6 +8,7 @@ import { LEVER_PORTFOLIO } from '@/lib/lever-portfolio'
 import AIChatbot from './AIChatbot'
 import { useLanguage } from './LanguageContext'
 import QuantumNeuralMesh from './QuantumNeuralMesh'
+import GizaHorizonMesh from './GizaHorizonMesh'
 
 const DOMAIN = "https://el-nafeer-real-estate.vercel.app";
 const AD_IMAGE = "/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png"
@@ -20,7 +21,7 @@ const DICTIONARY = {
     ar: {
         tap_to_ascent: "TAP_TO_ASCENT | ابدأ التجربة",
         close: "إغلاق",
-        intro: "الان من قلب مصر من الجيزة - حدائق الأهرام، تدشن شركة ليفر الرائدة للمصاعد مقرها الجديد. للتواصل اضغط على الأيقونات (واتساب-اتصال-الموقع).",
+        intro: "مرحباً بكم في تجربة GIZA_HORIZON من قلب مصر. شركة ليفر الرائدة للمصاعد تأخذكم في رحلة نحو القمة. للتواصل اضغط على الأيقونات.",
         offer: "عرض حصري لسكان الجيزة وهضبة الأهرام: خصم استراتيجي 15% على عقود التأسيس والصيانة خلال شهر أكتوبر. ليفر.. شريكك في التميز الرأسي.",
         retarget: "نحن شركة ليفر نرحب بكم مجدداً - نخبة القاهرة والجيزة تستحق الأفضل. طلبك الفني القادم يحصل على خصم استراتيجي حصري.",
         wa: "واتساب",
@@ -53,7 +54,7 @@ const DICTIONARY = {
     en: {
         tap_to_ascent: "TAP_TO_ASCENT | START EXPERIENCE",
         close: "CLOSE",
-        intro: "Now from the heart of Giza - El Haram, Lever Pioneer Elevators inaugurates its new headquarters. Contact us via icons (WhatsApp-Call-Location).",
+        intro: "Welcome to the GIZA_HORIZON experience. Lever Pioneer Elevators takes you on a journey to the summit. Contact us via the interactive icons.",
         offer: "Exclusive offer for Giza residents: Strategic 15% discount on installation and maintenance contracts this month. Lever.. your vertical partner.",
         retarget: "Welcome back - the elite of Cairo and Giza deserve the best. Your next technical request gets an exclusive strategic discount.",
         wa: "WhatsApp",
@@ -243,10 +244,10 @@ export default function QuantumPortalAd({ variant = 'v2', autoStart = false }: {
                 @keyframes shiny-shimmer { 0% { background-position: -200px; } 100% { background-position: 200px; } }
             `}} />
             
-            {/* 🌌 SOVEREIGN_3D_BACKGROUND_LAYER (Variant: Cyan) */}
+            {/* 🌌 GIZA_HORIZON_3D_BACKGROUND_LAYER */}
             <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-                <QuantumNeuralMesh variant="cyan" />
-                <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.4) 100%)', pointerEvents: 'none' }} />
+                <GizaHorizonMesh />
+                <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.6) 100%)', pointerEvents: 'none' }} />
             </div>
 
             <audio 
