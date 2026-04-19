@@ -46,7 +46,12 @@ export default function BiometricScan({ onComplete, identityName = 'SOVEREIGN_US
     <div className="fixed inset-0 z-[100000] bg-[#050811] flex flex-col items-center justify-center overflow-hidden font-mono">
       {/* 🔮 BACKGROUND_ATMOSPHERE */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#c5a05911_0%,_transparent_70%)]" />
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] pointer-events-none" />
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+        style={{ 
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` 
+        }} 
+      />
       
       {/* 📟 SCAN_UI_CONTAINER */}
       <div className="relative z-10 w-[300px] lg:w-[450px]">

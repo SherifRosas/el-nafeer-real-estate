@@ -102,7 +102,7 @@ export default function ClientSovereignDashboard({ brandProfile, initialEvents }
                     </div>
                     <div>
                         <div className="flex items-center gap-2 text-sahara-gold font-black tracking-[0.4em] text-[10px] uppercase italic opacity-80">
-                            <Shield size={12} />
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                             {isArabic ? 'منصة_العميل_السيادية' : 'CLIENT_SOVEREIGN_NODE'}
                         </div>
                         <h2 className="text-3xl md:text-4xl font-black tracking-tighter italic uppercase text-white leading-none">
@@ -129,7 +129,7 @@ export default function ClientSovereignDashboard({ brandProfile, initialEvents }
                 <div className="lg:col-span-1 milky-glass rounded-[2.5rem] p-8 border border-white/5 shadow-lg flex flex-col justify-between relative overflow-hidden">
                    <div className="space-y-1">
                       <div className="flex items-center gap-2 text-[9px] font-black text-sahara-gold uppercase tracking-[0.3em] mb-4">
-                        <DollarSign size={10} /> LIVE_AD_SPEND
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> LIVE_AD_SPEND
                       </div>
                       <p className="text-4xl font-black text-white robotic-digits">${spendData?.totalSpend || '0.00'}</p>
                       <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">{isArabic ? 'التكلفة_لكل_عميل' : 'COST_PER_ACQUISITION'}: <span className="text-sahara-gold">${spendData?.costPerLead || '0.00'}</span></p>
@@ -164,7 +164,7 @@ export default function ClientSovereignDashboard({ brandProfile, initialEvents }
                 <div className="lg:col-span-1 milky-glass rounded-[2.5rem] p-8 border border-white/5 shadow-lg flex flex-col justify-between">
                    <div className="space-y-1">
                       <div className="flex items-center gap-2 text-[9px] font-black text-sahara-gold uppercase tracking-[0.3em] mb-4">
-                        <BarChart3 size={10} /> NODAL_TRAFFIC
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg> NODAL_TRAFFIC
                       </div>
                       <p className="text-4xl font-black text-white robotic-digits">{events.filter(e => e.type === 'LEAD').length + 8}</p>
                       <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">{isArabic ? 'إجمالي_الإشارات' : 'TOTAL_SIGNALS'}</p>
