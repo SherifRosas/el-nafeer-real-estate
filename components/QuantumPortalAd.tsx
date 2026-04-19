@@ -11,7 +11,7 @@ import QuantumNeuralMesh from './QuantumNeuralMesh'
 import GizaHorizonMesh from './GizaHorizonMesh'
 
 const DOMAIN = "https://el-nafeer-real-estate.vercel.app";
-const AD_IMAGE = "/campaigns/lever-pioneer/branding/qr-code.png"
+const AD_IMAGE = "/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png"
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=201111171368";
 const CALL_URL = "tel:+201070615372";
 const LOCATION_URL = "https://www.google.com/maps/place/Al+Omraneya,+Al+Haram,+Giza+Governorate/@29.9656242,31.0922895,17z/data=!4m15!1m8!3m7!1s0x14584fc2bfbefc07:0x5df1948b27a63882!2sAl+Omraneya,+Al+Haram,+Giza+Governorate!3b1!8m2!3d29.9656242!4d31.0922895!16s%2Fg%2F11c659wy1d!3m5!1s0x14584fc2bfbefc07:0x5df1948b27a63882!8m2!3d29.9656242!4d31.0922895!16s%2Fg%2F11c659wy1d?hl=en-EG&entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D";
@@ -400,7 +400,7 @@ export default function QuantumPortalAd({ variant = 'v2', autoStart = false }: {
 
             <div style={{ height: '5vh', width: '100%', background: 'rgba(0,0,0,0.98)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderTop: '1.5px solid rgba(6,182,212,0.2)' }}>
                 <div style={{ fontSize: '7px', fontWeight: 900, letterSpacing: '2px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}> 
-                    ARCHITECTED_BY_SHERIF_ROSAS // v5.0_SUPREME_ELITE
+                    ARCHITECTED_BY_SHERIF_ROSAS // v5.5_AESTHETIC_RESTORATION
                 </div>
             </div>
 
