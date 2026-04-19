@@ -306,13 +306,13 @@ export default function QuantumPortalAd({ variant = 'v2', autoStart = false }: {
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                             <button onClick={() => { trackEvent('PORTFOLIO_VIEW', 'INTEREST_ATTEMPT'); setActiveModal('portfolio'); }} style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(6,182,212,0.1)', border: '1.5px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 4.5s infinite ease-in-out', cursor: 'pointer', pointerEvents: 'auto' }}>
-                                <Globe size={20} />
+                                <ShieldCheck size={20} />
                             </button>
                             <span style={{ fontSize: '10px', fontWeight: 900, color: '#06b6d4', opacity: 0.9 }}>{t.port}</span>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
                             <button onClick={() => { trackEvent('QUOTE_REQUEST_START', 'LEAD_ATTEMPT'); setActiveModal('quote'); }} style={{ width: '45px', height: '45px', borderRadius: '50%', background: 'rgba(6,182,212,0.1)', border: '1.5px solid #06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#06b6d4', animation: 'icon-float 5s infinite ease-in-out', cursor: 'pointer', pointerEvents: 'auto' }}>
-                                <Activity size={20} />
+                                <Zap size={20} />
                             </button>
                             <span style={{ fontSize: '10px', fontWeight: 900, color: '#06b6d4', opacity: 0.9 }}>{t.quote}</span>
                         </div>
