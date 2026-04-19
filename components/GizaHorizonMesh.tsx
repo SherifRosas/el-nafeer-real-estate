@@ -85,24 +85,25 @@ function ElevatorCabin() {
                 />
             </mesh>
 
-            {/* 🏺 HOLOGRAPHIC_BRAND_HUB */}
-            <Html transform position={[0, 0.5, -1.9]} scale={0.5}>
-                <div className="flex flex-col items-center gap-6 select-none pointer-events-none">
-                    <div className="w-48 h-48 bg-white/10 backdrop-blur-3xl rounded-3xl p-6 border border-sky-500/30 flex items-center justify-center relative overflow-hidden group">
-                        <img 
-                            src="/logos/logo-ar.png" 
-                            alt="LEVER PIONEER" 
-                            className="w-full h-full object-contain relative z-10"
-                        />
-                        <div className="absolute inset-0 bg-sky-500/20 blur-3xl animate-pulse" />
-                    </div>
-                    <div className="text-center">
-                        <h2 className="text-4xl font-black italic text-sky-400 tracking-widest uppercase mb-2">LEVER PIONEER</h2>
-                        <div className="flex items-center gap-4">
-                            <div className="h-[1px] w-12 bg-sky-500/50" />
-                            <span className="text-[10px] font-black text-white/40 tracking-[1em] uppercase">GIZA_ASCENT_v4.5</span>
-                            <div className="h-[1px] w-12 bg-sky-500/50" />
-                        </div>
+            {/* 🏺 HOLOGRAPHIC_BRAND_HUB (3D Manifestation) */}
+            <mesh position={[0, 0.5, -1.9]}>
+                <planeGeometry args={[1.5, 1.5]} />
+                <meshStandardMaterial 
+                    transparent 
+                    opacity={0.85} 
+                    emissive="#0ea5e9" 
+                    emissiveIntensity={5}
+                    map={new THREE.TextureLoader().load('/logos/logo-ar.png')}
+                />
+            </mesh>
+            
+            <Html transform position={[0, -0.6, -1.89]} scale={0.5}>
+                <div className="flex flex-col items-center gap-2 select-none pointer-events-none drop-shadow-[0_0_15px_rgba(14,165,233,0.5)]">
+                    <h2 className="text-4xl font-black italic text-sky-400 tracking-widest uppercase">LEVER PIONEER</h2>
+                    <div className="flex items-center gap-4">
+                        <div className="h-[2px] w-24 bg-sky-500/80 shadow-[0_0_20px_#0ea5e9]" />
+                        <span className="text-[12px] font-black text-white tracking-[1.4em] uppercase">GIZA_HORIZON_v4.5</span>
+                        <div className="h-[2px] w-24 bg-sky-500/80 shadow-[0_0_20px_#0ea5e9]" />
                     </div>
                 </div>
             </Html>
@@ -116,16 +117,16 @@ export default function GizaHorizonMesh() {
             <Canvas shadows={false} dpr={[1, 2]}>
                 <PerspectiveCamera makeDefault position={[0, 0, 3]} fov={50} />
                 
-                {/* 🌅 ULTIMATE_GIZA_SUNSET */}
+                {/* 🌅 ULTIMATE_GIZA_SUNSET (High Intensity Burst) */}
                 <Sky
                   distance={450000}
-                  sunPosition={[0, -0.015, -1]} // Deep horizon sunset
-                  inclination={0.5}
+                  sunPosition={[0, -0.012, -1]} 
+                  inclination={0.52}
                   azimuth={0.25}
-                  turbidity={8}
-                  rayleigh={6}
-                  mieCoefficient={0.005}
-                  mieDirectionalG={0.8}
+                  turbidity={10}
+                  rayleigh={8}
+                  mieCoefficient={0.008}
+                  mieDirectionalG={0.85}
                 />
                 
                 <ambientLight intensity={0.4} />
