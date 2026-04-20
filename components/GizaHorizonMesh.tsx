@@ -45,8 +45,8 @@ function ElevatorCabin() {
     const groupRef = useRef<THREE.Group>(null)
     const [floor, setFloor] = useState(1)
     
-    // 🏺 IDENTITY_MANIFEST
-    const logoTexture = useTexture('/campaigns/lever-pioneer/lever_minimalist_profile_v221_0_cleaned_1775081914737.png')
+    // 🏺 ULTIMATE_IDENTITY_MANIFEST
+    const logoTexture = useTexture('/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png')
     
     // 🚀 CONTINUOUS_ASCENT_ENGINE
     useFrame((state) => {
@@ -65,10 +65,10 @@ function ElevatorCabin() {
     return (
         <group ref={groupRef}>
             {/* 👁️ INTERNAL_CAMERA_LOCK: Parented to the vessel's movement */}
-            <PerspectiveCamera makeDefault position={[0, 0, 1.5]} fov={60} />
+            <PerspectiveCamera makeDefault position={[0, 0, 1.5]} fov={62} />
             
             {/* Internal Vessel Lighting */}
-            <pointLight position={[0, 1, 0]} intensity={0.5} color="#fff" />
+            <pointLight position={[0, 1, 0]} intensity={0.4} color="#fff" />
 
             {/* Bottom Base */}
             <mesh position={[0, -1.8, 0]}>
@@ -102,27 +102,27 @@ function ElevatorCabin() {
                 />
             </mesh>
 
-            {/* 🏺 HOLOGRAPHIC_BRAND_HUB (100/100 Manifestation) */}
+            {/* 🏺 HOLOGRAPHIC_BRAND_HUB (Ultimate v318 Manifestation) */}
             <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
-                <mesh position={[0, 0.8, -1.9]}>
-                    <planeGeometry args={[1.5, 1.5]} />
+                <mesh position={[0, 0.85, -1.9]}>
+                    <planeGeometry args={[1.8, 1.8]} />
                     <meshStandardMaterial 
                         transparent 
                         opacity={0.95} 
                         map={logoTexture}
                         emissive="#fff" 
-                        emissiveIntensity={0.15}
+                        emissiveIntensity={0.10}
                         alphaTest={0.5}
                     />
                 </mesh>
             </Float>
 
             {/* 🔢 MODERN_FANCY_DIGITS (Floor Tracking HUD) */}
-            <Html transform position={[0, -0.6, -1.89]} scale={0.5}>
+            <Html transform position={[0, -0.65, -1.89]} scale={0.5}>
                 <div className="flex flex-col items-center gap-4 select-none pointer-events-none">
-                    <div className="flex flex-col items-center bg-black/40 backdrop-blur-xl border-y-2 border-sky-500/50 px-12 py-6 rounded-2xl shadow-[0_0_50px_rgba(14,165,233,0.3)]">
-                        <span className="text-[10px] text-sky-400 font-black tracking-[0.6em] uppercase mb-2">FLR_LEVEL</span>
-                        <h2 className="text-8xl font-black text-white tabular-nums tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+                    <div className="flex flex-col items-center bg-black/50 backdrop-blur-3xl border-y-2 border-amber-500/50 px-14 py-8 rounded-3xl shadow-[0_0_60px_rgba(251,191,36,0.2)]">
+                        <span className="text-[11px] text-amber-400 font-black tracking-[0.8em] uppercase mb-3">ASCENT_LEVEL</span>
+                        <h2 className="text-9xl font-black text-white tabular-nums tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]">
                             {floor < 10 ? `0${floor}` : floor}
                         </h2>
                     </div>
