@@ -64,6 +64,12 @@ function ElevatorCabin() {
 
     return (
         <group ref={groupRef}>
+            {/* 👁️ INTERNAL_CAMERA_LOCK: Parented to the vessel's movement */}
+            <PerspectiveCamera makeDefault position={[0, 0, 1.5]} fov={60} />
+            
+            {/* Internal Vessel Lighting */}
+            <pointLight position={[0, 1, 0]} intensity={0.5} color="#fff" />
+
             {/* Bottom Base */}
             <mesh position={[0, -1.8, 0]}>
                 <boxGeometry args={[4, 0.2, 4]} />
@@ -124,7 +130,7 @@ function ElevatorCabin() {
                         <h2 className="text-2xl font-black italic text-sky-400 tracking-widest uppercase">LEVER PIONEER</h2>
                         <div className="flex items-center gap-4">
                             <div className="h-[1px] w-20 bg-sky-500/50" />
-                            <span className="text-[10px] font-black text-white/60 tracking-[1em] uppercase">SUNSHINE_ASCENT_v6.4</span>
+                            <span className="text-[10px] font-black text-white/60 tracking-[1em] uppercase">SUNSHINE_ASCENT_v7.5</span>
                             <div className="h-[1px] w-20 bg-sky-500/50" />
                         </div>
                     </div>
@@ -138,7 +144,6 @@ export default function GizaHorizonMesh() {
     return (
         <div className="absolute inset-0 z-0 bg-transparent overflow-hidden">
             <Canvas shadows={false} dpr={[1, 2]}>
-                <PerspectiveCamera makeDefault position={[0, 0, 3]} fov={50} />
                 
                 {/* 🌅 ULTIMATE_GIZA_SUNSHINE (High-Noon Clarity) */}
                 <Sky
