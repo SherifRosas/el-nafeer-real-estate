@@ -42,12 +42,19 @@ function Pyramid({ position, scale }: PyramidProps) {
 
 function ElevatorCabin() {
     const groupRef = useRef<THREE.Group>(null)
+    const [floor, setFloor] = useState(1)
     
-    // Smooth Ascent Logic
+    // 🚀 CONTINUOUS_ASCENT_ENGINE
     useFrame((state) => {
         if (groupRef.current) {
-            // Simulate vertical rise
-            groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.1) * 0.5
+            // Steady vertical rise synchronized with the cinematic journey
+            const time = state.clock.elapsedTime
+            const speed = 0.5
+            groupRef.current.position.y = (time * speed) % 50 
+            
+            // Derive "Fancy Digits" floor number
+            const currentFloor = Math.floor((groupRef.current.position.y * 2) + 1)
+            if (currentFloor !== floor) setFloor(currentFloor)
         }
     })
 
@@ -69,11 +76,11 @@ function ElevatorCabin() {
             {[[1.9, 0, 1.9], [-1.9, 0, 1.9], [1.9, 0, -1.9], [-1.9, 0, -1.9]].map((pos, i) => (
                 <mesh key={i} position={pos as [number, number, number]}>
                     <boxGeometry args={[0.2, 4, 0.2]} />
-                    <meshStandardMaterial color="#0ea5e9" emissive="#0ea5e9" emissiveIntensity={0.5} />
+                    <meshStandardMaterial color="#0ea5e9" emissive="#0ea5e9" emissiveIntensity={0.8} />
                 </mesh>
             ))}
 
-            {/* Rear Wall (Glass with Logo) */}
+            {/* Rear Wall (Glass with Identity Logo) */}
             <mesh position={[0, 0, -1.95]}>
                 <boxGeometry args={[3.8, 4, 0.05]} />
                 <meshStandardMaterial 
@@ -85,28 +92,37 @@ function ElevatorCabin() {
                 />
             </mesh>
 
-            {/* 🏺 HOLOGRAPHIC_BRAND_HUB (High-Fidelity Restoration) */}
+            {/* 🏺 HOLOGRAPHIC_BRAND_HUB (100/100 Manifestation) */}
             <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
-                <mesh position={[0, 0.5, -1.9]}>
+                <mesh position={[0, 0.8, -1.9]}>
                     <planeGeometry args={[1.5, 1.5]} />
                     <meshStandardMaterial 
                         transparent 
                         opacity={0.95} 
-                        emissive="#0ea5e9" 
-                        emissiveIntensity={1.2}
-                        map={new THREE.TextureLoader().load('/campaigns/lever-pioneer/pioneer-ultra.png')}
+                        emissive="#fff" 
+                        emissiveIntensity={0.25}
+                        map={new THREE.TextureLoader().load('/campaigns/lever-pioneer/lever_minimalist_profile_v221_0_cleaned_1775081914737.png')}
                         alphaTest={0.5}
                     />
                 </mesh>
             </Float>
-            
+
+            {/* 🔢 MODERN_FANCY_DIGITS (Floor Tracking HUD) */}
             <Html transform position={[0, -0.6, -1.89]} scale={0.5}>
-                <div className="flex flex-col items-center gap-2 select-none pointer-events-none drop-shadow-[0_0_25px_rgba(14,165,233,0.7)]">
-                    <h2 className="text-4xl font-black italic text-sky-400 tracking-widest uppercase">LEVER PIONEER</h2>
-                    <div className="flex items-center gap-4">
-                        <div className="h-[2px] w-24 bg-sky-500/80 shadow-[0_0_30px_#0ea5e9]" />
-                        <span className="text-[12px] font-black text-white tracking-[1.4em] uppercase">GIZA_HORIZON_v5.5</span>
-                        <div className="h-[2px] w-24 bg-sky-500/80 shadow-[0_0_30px_#0ea5e9]" />
+                <div className="flex flex-col items-center gap-4 select-none pointer-events-none">
+                    <div className="flex flex-col items-center bg-black/40 backdrop-blur-xl border-y-2 border-sky-500/50 px-12 py-6 rounded-2xl shadow-[0_0_50px_rgba(14,165,233,0.3)]">
+                        <span className="text-[10px] text-sky-400 font-black tracking-[0.6em] uppercase mb-2">FLR_LEVEL</span>
+                        <h2 className="text-8xl font-black text-white tabular-nums tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+                            {floor < 10 ? `0${floor}` : floor}
+                        </h2>
+                    </div>
+                    <div className="flex flex-col items-center gap-1">
+                        <h2 className="text-2xl font-black italic text-sky-400 tracking-widest uppercase">LEVER PIONEER</h2>
+                        <div className="flex items-center gap-4">
+                            <div className="h-[1px] w-20 bg-sky-500/50" />
+                            <span className="text-[10px] font-black text-white/60 tracking-[1em] uppercase">SUNSHINE_ASCENT_v6.4</span>
+                            <div className="h-[1px] w-20 bg-sky-500/50" />
+                        </div>
                     </div>
                 </div>
             </Html>
@@ -120,29 +136,28 @@ export default function GizaHorizonMesh() {
             <Canvas shadows={false} dpr={[1, 2]}>
                 <PerspectiveCamera makeDefault position={[0, 0, 3]} fov={50} />
                 
-                {/* 🌅 ULTIMATE_GIZA_SUNSET (High Intensity Burst) */}
+                {/* 🌅 ULTIMATE_GIZA_SUNSHINE (High-Noon Clarity) */}
                 <Sky
                   distance={450000}
-                  sunPosition={[0, -0.012, -1]} 
-                  inclination={0.52}
+                  sunPosition={[0, 1, -1]} 
+                  inclination={0.5}
                   azimuth={0.25}
-                  turbidity={10}
-                  rayleigh={8}
-                  mieCoefficient={0.008}
-                  mieDirectionalG={0.85}
+                  turbidity={0.2}
+                  rayleigh={1.2}
+                  mieCoefficient={0.005}
+                  mieDirectionalG={0.8}
                 />
                 
-                <ambientLight intensity={0.4} />
-                <pointLight position={[5, 5, 5]} intensity={1} color="#fb923c" /> {/* Sunset Light */}
-                <pointLight position={[-5, 2, -5]} intensity={0.5} color="#0ea5e9" /> {/* Cyber Cyan Fill */}
-
-                <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+                <ambientLight intensity={1.2} />
+                <directionalLight position={[10, 10, 5]} intensity={2.5} color="#fff" />
+                <pointLight position={[5, 5, 5]} intensity={1.5} color="#fff" />
+                <pointLight position={[-5, 2, -5]} intensity={0.8} color="#0ea5e9" />
 
                 <Suspense fallback={null}>
                     {/* The Ascending Cabin */}
                     <ElevatorCabin />
                     
-                    {/* The Giza Plateau */}
+                    {/* The Giza Plateau (Three Pyramids) */}
                     <group position={[0, -8, -40]} rotation={[0, Math.PI / 4, 0]}>
                         <Pyramid position={[0, 0, 0]} scale={[25, 25, 25]} />
                         <Pyramid position={[-30, 0, 15]} scale={[20, 20, 20]} />
@@ -151,7 +166,7 @@ export default function GizaHorizonMesh() {
                         {/* Sand Plane */}
                         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.1, 0]}>
                             <planeGeometry args={[200, 200]} />
-                            <meshStandardMaterial color="#1a120b" roughness={1} />
+                            <meshStandardMaterial color="#fcd34d" roughness={0.6} metalness={0.1} />
                         </mesh>
                     </group>
 
@@ -160,8 +175,8 @@ export default function GizaHorizonMesh() {
 
             </Canvas>
             
-            {/* Cinematic Overlay Script */}
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black via-transparent to-black/40" />
+            {/* Cinematic High-Noon Overlay */}
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/20 via-transparent to-white/10" />
         </div>
     )
 }
