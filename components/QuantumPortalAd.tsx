@@ -17,7 +17,7 @@ const DICTIONARY = {
     ar: {
         tap_to_ascent: "TAP_TO_ASCENT | ابدأ صعود الهضبة",
         close: "إغلاق",
-        intro: "أهلاً بكم في صعود هضبة الجيزة مع شركة ليفر. استمتعوا برؤية الأهرامات تحت شمس الظهيرة الصافية. ليفر.. شريكك في التميز الرأسي.",
+        intro: "أهلاً بكم في صعود هضبة الجيزة مع شركة ليفر. استمتعوا برؤية الأهرامات تحت أضواء الغسق المهيبة. ليفر.. شريكك في التميز الرأسي.",
         offer: "عرض حصري في هضبة الأهرام: خصم استراتيجي 15% على عقود التأسيس والصيانة. ليفر.. القمة هي وجهتنا.",
         retarget: "نُحب رؤيتكم مجدداً في رحاب الأهرامات. شركة ليفر تمنحكم خصماً استثنائياً لصعودكم القادم نحو القمة.",
         wa: "واتساب",
@@ -44,7 +44,7 @@ const DICTIONARY = {
     en: {
         tap_to_ascent: "TAP_TO_ASCENT | START PLATEAU ASCENT",
         close: "CLOSE",
-        intro: "Welcome to the Giza Plateau ascent with Lever Pioneer. Experience the majesty of the pyramids under the brilliant high-noon sun. Lever.. your partner in vertical excellence.",
+        intro: "Welcome to the Giza Plateau with Lever Pioneer. Experience the majesty of the pyramids under the majestic dusk horizon. Lever.. your partner in vertical excellence.",
         offer: "Exclusive Giza Plateau offer: Strategic 15% discount on installation and maintenance. Lever.. the summit is our destination.",
         retarget: "Welcome back to the Giza horizon. Lever Pioneer offers you a strategic discount for your next ascent to the summit.",
         wa: "WhatsApp",
@@ -181,23 +181,23 @@ export default function QuantumPortalAd({ autoStart = false }) {
                         <button onClick={() => setIsStarted(false)} style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid #fff3', borderRadius: '12px', padding: '8px 15px', color: '#fff', fontWeight: 900, cursor: 'pointer' }}>{t.close}</button>
                     </div>
                     <div style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 10000 }}>
-                        <button onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')} style={{ background: 'rgba(251,191,36,0.2)', border: '2px solid #fbbf24', borderRadius: '15px', padding: '10px 18px', color: '#fff', fontWeight: 900, cursor: 'pointer', backdropFilter: 'blur(15px)', boxShadow: '0 0 20px rgba(251,191,36,0.3)' }}>
+                        <button onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')} style={{ background: 'rgba(6,182,212,0.1)', border: '2px solid #06b6d4', borderRadius: '15px', padding: '10px 18px', color: '#fff', fontWeight: 900, cursor: 'pointer', backdropFilter: 'blur(15px)', boxShadow: '0 0 20px rgba(6,182,212,0.2)' }}>
                             <Globe size={18} style={{ display: 'inline', marginRight: '8px' }} />
                             {language === 'ar' ? 'ENGLISH' : 'العربية'}
                         </button>
                     </div>
                     <div style={{ position: 'absolute', top: '100px', left: '20px', right: '20px', zIndex: 9000, textAlign: 'center' }}>
-                        <div style={{ background: 'rgba(0,0,0,0.7)', border: '1px solid #fbbf2444', borderRadius: '25px', padding: '25px', color: '#fff', fontWeight: 'bold', backdropFilter: 'blur(15px)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', fontSize: '15px', lineHeight: '1.6' }}>
+                        <div style={{ background: 'rgba(0,0,0,0.7)', border: '1px solid #06b6d433', borderRadius: '25px', padding: '25px', color: '#fff', fontWeight: 'bold', backdropFilter: 'blur(15px)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', fontSize: '15px', lineHeight: '1.6' }}>
                             {displayedText}
                         </div>
                     </div>
 
-                    <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', background: 'rgba(0,0,0,0.96)', padding: '20px 0 50px 0', display: 'flex', justifyContent: 'center', gap: '22px', borderTop: '2.5px solid #fbbf2488', backdropFilter: 'blur(30px)' }}>
+                    <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', background: 'rgba(0,0,0,0.96)', padding: '20px 0 50px 0', display: 'flex', justifyContent: 'center', gap: '22px', borderTop: '2.5px solid #06b6d488', backdropFilter: 'blur(30px)' }}>
                          {[
                              { icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.2h.5"/><path d="m22 2-7 20-4-9-9-4Z"/></svg>, label: t.wa, color: '#25d366', url: WHATSAPP_URL },
-                             { icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>, label: t.call, color: '#fbbf24', url: CALL_URL },
-                             { icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>, label: t.loc, color: '#fbbf24', url: LOCATION_URL },
-                             { icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 8h10"/><path d="M7 12h10"/><path d="M7 16h10"/></svg>, label: t.port, color: '#fbbf24', action: () => setActiveModal('portfolio') },
+                             { icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>, label: t.call, color: '#06b6d4', url: CALL_URL },
+                             { icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>, label: t.loc, color: '#06b6d4', url: LOCATION_URL },
+                             { icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 8h10"/><path d="M7 12h10"/><path d="M7 16h10"/></svg>, label: t.port, color: '#06b6d4', action: () => setActiveModal('portfolio') },
                              { icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14.5 2 14.5 7.5 20 7.5"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>, label: t.quote, color: '#fff', action: () => setActiveModal('quote') }
                          ].map((btn, i) => (
                              <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>

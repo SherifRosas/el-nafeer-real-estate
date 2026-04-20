@@ -43,33 +43,12 @@ function Pyramid({ position, scale }: PyramidProps) {
 
 function ElevatorCabin() {
     const groupRef = useRef<THREE.Group>(null)
-    const [floor, setFloor] = useState(1)
     
-    // 🏺 ULTIMATE_IDENTITY_MANIFEST
-    const logoTexture = useTexture('/campaigns/lever-pioneer/lever_pioneer_v318_ultimate.png')
+    // 🏺 IDENTITY_MANIFEST (v5.6_STABLE)
+    const logoTexture = useTexture('/campaigns/lever-pioneer/lever_minimalist_profile_v221_0_cleaned_1775081914737.png')
     
-    // 🚀 CONTINUOUS_ASCENT_ENGINE
-    useFrame((state) => {
-        if (groupRef.current) {
-            // Steady vertical rise synchronized with the cinematic journey
-            const time = state.clock.elapsedTime
-            const speed = 0.5
-            groupRef.current.position.y = (time * speed) % 50 
-            
-            // Derive "Fancy Digits" floor number
-            const currentFloor = Math.floor((groupRef.current.position.y * 2) + 1)
-            if (currentFloor !== floor) setFloor(currentFloor)
-        }
-    })
-
     return (
         <group ref={groupRef}>
-            {/* 👁️ INTERNAL_CAMERA_LOCK: Parented to the vessel's movement */}
-            <PerspectiveCamera makeDefault position={[0, 0, 1.5]} fov={62} />
-            
-            {/* Internal Vessel Lighting */}
-            <pointLight position={[0, 1, 0]} intensity={0.4} color="#fff" />
-
             {/* Bottom Base */}
             <mesh position={[0, -1.8, 0]}>
                 <boxGeometry args={[4, 0.2, 4]} />
@@ -102,40 +81,20 @@ function ElevatorCabin() {
                 />
             </mesh>
 
-            {/* 🏺 HOLOGRAPHIC_BRAND_HUB (Ultimate v318 Manifestation) */}
+            {/* 🏺 HOLOGRAPHIC_BRAND_HUB (v5.6 Manifestation) */}
             <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
-                <mesh position={[0, 0.85, -1.9]}>
-                    <planeGeometry args={[1.8, 1.8]} />
+                <mesh position={[0, 0.8, -1.9]}>
+                    <planeGeometry args={[1.5, 1.5]} />
                     <meshStandardMaterial 
                         transparent 
                         opacity={0.95} 
                         map={logoTexture}
                         emissive="#fff" 
-                        emissiveIntensity={0.10}
+                        emissiveIntensity={0.15}
                         alphaTest={0.5}
                     />
                 </mesh>
             </Float>
-
-            {/* 🔢 MODERN_FANCY_DIGITS (Floor Tracking HUD) */}
-            <Html transform position={[0, -0.65, -1.89]} scale={0.5}>
-                <div className="flex flex-col items-center gap-4 select-none pointer-events-none">
-                    <div className="flex flex-col items-center bg-black/50 backdrop-blur-3xl border-y-2 border-amber-500/50 px-14 py-8 rounded-3xl shadow-[0_0_60px_rgba(251,191,36,0.2)]">
-                        <span className="text-[11px] text-amber-400 font-black tracking-[0.8em] uppercase mb-3">ASCENT_LEVEL</span>
-                        <h2 className="text-9xl font-black text-white tabular-nums tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]">
-                            {floor < 10 ? `0${floor}` : floor}
-                        </h2>
-                    </div>
-                    <div className="flex flex-col items-center gap-1">
-                        <h2 className="text-2xl font-black italic text-sky-400 tracking-widest uppercase">LEVER PIONEER</h2>
-                        <div className="flex items-center gap-4">
-                            <div className="h-[1px] w-20 bg-sky-500/50" />
-                            <span className="text-[10px] font-black text-white/60 tracking-[1em] uppercase">SUNSHINE_ASCENT_v7.5</span>
-                            <div className="h-[1px] w-20 bg-sky-500/50" />
-                        </div>
-                    </div>
-                </div>
-            </Html>
         </group>
     )
 }
@@ -144,23 +103,21 @@ export default function GizaHorizonMesh() {
     return (
         <div className="absolute inset-0 z-0 bg-transparent overflow-hidden">
             <Canvas shadows={false} dpr={[1, 2]}>
+                <PerspectiveCamera makeDefault position={[0, 0, 3]} fov={50} />
                 
-                {/* 🌅 ULTIMATE_GIZA_SUNSHINE (High-Noon Clarity) */}
+                {/* 🌅 THE_10_DAY_SUNSET (Dusk Silhouette) */}
                 <Sky
-                  distance={450000}
-                  sunPosition={[0, 1, -1]} 
-                  inclination={0.5}
-                  azimuth={0.25}
-                  turbidity={0.2}
-                  rayleigh={1.2}
-                  mieCoefficient={0.005}
-                  mieDirectionalG={0.8}
+                    turbidity={10}
+                    rayleigh={3}
+                    inclination={0.51} 
+                    azimuth={0.25}
+                    distance={450000}
                 />
                 
-                <ambientLight intensity={1.2} />
-                <directionalLight position={[10, 10, 5]} intensity={2.5} color="#fff" />
-                <pointLight position={[5, 5, 5]} intensity={1.5} color="#fff" />
-                <pointLight position={[-5, 2, -5]} intensity={0.8} color="#0ea5e9" />
+                <ambientLight intensity={0.8} />
+                <directionalLight position={[10, 10, 5]} intensity={1.5} color="#fff" />
+                <pointLight position={[5, 5, 5]} intensity={1} color="#fbbf24" />
+                <pointLight position={[-5, 2, -5]} intensity={0.5} color="#0ea5e9" />
 
                 <Suspense fallback={null}>
                     {/* The Ascending Cabin */}
@@ -184,8 +141,8 @@ export default function GizaHorizonMesh() {
 
             </Canvas>
             
-            {/* Cinematic High-Noon Overlay */}
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/20 via-transparent to-white/10" />
+            {/* Cinematic Sunset Overlay */}
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/20 via-transparent to-orange-500/5" />
         </div>
     )
 }
