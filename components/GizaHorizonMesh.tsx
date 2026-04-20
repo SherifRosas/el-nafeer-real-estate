@@ -9,7 +9,8 @@ import {
     Float, 
     Stars, 
     Html,
-    MeshDistortMaterial
+    MeshDistortMaterial,
+    useTexture
 } from '@react-three/drei'
 import * as THREE from 'three'
 
@@ -43,6 +44,9 @@ function Pyramid({ position, scale }: PyramidProps) {
 function ElevatorCabin() {
     const groupRef = useRef<THREE.Group>(null)
     const [floor, setFloor] = useState(1)
+    
+    // 🏺 IDENTITY_MANIFEST
+    const logoTexture = useTexture('/campaigns/lever-pioneer/lever_minimalist_profile_v221_0_cleaned_1775081914737.png')
     
     // 🚀 CONTINUOUS_ASCENT_ENGINE
     useFrame((state) => {
@@ -99,9 +103,9 @@ function ElevatorCabin() {
                     <meshStandardMaterial 
                         transparent 
                         opacity={0.95} 
+                        map={logoTexture}
                         emissive="#fff" 
-                        emissiveIntensity={0.25}
-                        map={new THREE.TextureLoader().load('/campaigns/lever-pioneer/lever_minimalist_profile_v221_0_cleaned_1775081914737.png')}
+                        emissiveIntensity={0.15}
                         alphaTest={0.5}
                     />
                 </mesh>
