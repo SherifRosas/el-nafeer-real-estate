@@ -7,14 +7,18 @@ import { Sparkles, PerspectiveCamera } from '@react-three/drei'
 export default function AdvancedLeverMesh() {
     return (
         <div className="absolute inset-0 z-0 bg-[#020205] overflow-hidden">
-            {/* Cinematic Slow Zoom Background wrapper */}
-            {/* ⚠️ ARCHITECT INSTRUCTION: Rename your specific AD Image to 'the-ascension-ad.png' 
-                and place it in 'public/campaigns/lever-pioneer/' OR update the URL below. */}
+            {/* Blurred Background to fill Ultra-Wide Monitor pillar-boxes gracefully */}
             <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-cinematic-zoom opacity-100"
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30 blur-3xl scale-110"
+                style={{ backgroundImage: "url('/campaigns/lever-pioneer/the-ascension-ad.png')" }}
+            />
+
+            {/* Cinematic Slow Zoom Background wrapper - Fits uncropped on desktop, covers on mobile */}
+            <div 
+                className="absolute inset-0 bg-cover md:bg-contain bg-center bg-no-repeat animate-cinematic-zoom opacity-100"
                 style={{ 
                     backgroundImage: "url('/campaigns/lever-pioneer/the-ascension-ad.png')",
-                    backgroundPosition: "center 20%" // Anchors to show upper architecture well
+                    backgroundPosition: "center" 
                 }}
             />
             
