@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import QuantumNeuralMesh from '@/components/QuantumNeuralMesh'
+import AdvancedBeitAlKhairMesh from '@/components/AdvancedBeitAlKhairMesh'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { useLanguage } from '@/components/LanguageContext'
 import BiometricScan from '@/components/BiometricScan'
@@ -12,27 +12,27 @@ import BeitAlKhairUnifiedConsole from '@/components/BeitAlKhairUnifiedConsole'
 const DICTIONARY = {
   ar: {
     title: 'بيت الخير للتطوير العقاري',
-    subtitle: 'منصة بيت الخير | الإصدار ٣.٥.٠ - مستقر',
-    node: 'عقدة_سيادية',
-    domain: 'نطاق_القليوبية_٤',
-    console_title: 'وحدة التحكم',
-    console_subtitle: 'النظام',
-    intel_stream: 'تدفق_معلومات_الآدمن',
-    reservation: 'ابدأ_الحجز_الآن',
-    status: 'مستقر',
-    footer_text: 'تأسيس الهيمنة السيادية للنود...'
+    subtitle: 'أنظمة الذكاء العقاري | حجز مباشر',
+    node: 'فرصة_حصرية',
+    domain: 'مشاريع_القليوبية',
+    console_title: 'المبيعات',
+    console_subtitle: 'إدارة',
+    intel_stream: 'أنظمة_السداد_الذكية',
+    reservation: 'احجز_وحدتك_الآن',
+    status: 'متاح',
+    footer_text: 'تأمين مستقبلك العقاري في قلب طوخ وبنها...'
   },
   en: {
     title: 'BEIT AL-KHAIR REAL ESTATE',
-    subtitle: 'BEIT_AL_KHAIR_PLATFORM // v3.5.0-ESTABLISHED',
-    node: 'SOVEREIGN_NODE',
-    domain: 'QALYUBIA_DOMAIN_IV',
-    console_title: 'CONSOLE',
-    console_subtitle: 'SYSTEM',
-    intel_stream: 'ADMIN_INTEL_STREAM',
-    reservation: 'INITIATE_RESERVATION',
-    status: 'STABLE',
-    footer_text: 'ESTABLISHING_SOVEREIGN_NODE_DOMINANCE...'
+    subtitle: 'SMART REAL_ESTATE // DIRECT_BOOKING',
+    node: 'EXCLUSIVE_ACCESS',
+    domain: 'QALYUBIA_PROJECTS',
+    console_title: 'SALES',
+    console_subtitle: 'MANAGEMENT',
+    intel_stream: 'PAYMENT_SYSTEMS',
+    reservation: 'BOOK_YOUR_UNIT',
+    status: 'AVAILABLE',
+    footer_text: 'SECURING_YOUR_REAL_ESTATE_FUTURE_IN_TOUKH...'
   }
 }
 
@@ -86,8 +86,8 @@ export default function BeitAlKhairPage() {
             className="h-full w-full"
           >
             <main className="h-screen w-screen bg-transparent text-white overflow-hidden flex flex-col p-2 lg:p-6 selection:bg-sahara-gold selection:text-black font-sans relative">
-              {/* 🚀 NEURAL_MESH_BASE_LAYER - COVERS ALL OF EGYPT */}
-              <QuantumNeuralMesh />
+              {/* 🚀 ARCHITECTURAL_BASE_LAYER */}
+              <AdvancedBeitAlKhairMesh />
 
       {/* 📟 TOP_LEVEL_SYMMETRIC_HEADER */}
       <header className="flex justify-between items-center mb-1 lg:mb-4 border-b border-sahara-gold/10 pb-1 lg:pb-3 px-2 lg:px-6 relative z-50 bg-transparent rounded-3xl">
