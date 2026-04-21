@@ -2,7 +2,7 @@
 
 import React, { useState, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import QuantumPortalAd from '@/components/QuantumPortalAd'
+import AdvancedLeverPortal from '@/components/AdvancedLeverPortal'
 import BiometricScan from '@/components/BiometricScan'
 
 export default function PortalPageElite() {
@@ -31,7 +31,7 @@ export default function PortalPageElite() {
                     transition={{ duration: 1.2, ease: "easeOut" }}
                 >
                     <Suspense fallback={<div style={{ backgroundColor: '#000', height: '100vh', width: '100vw' }} />}>
-                        <QuantumPortalAd autoStart={true} />
+                        <AdvancedLeverPortal />
                     </Suspense>
                 </motion.div>
             )}
