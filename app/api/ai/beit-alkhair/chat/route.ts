@@ -36,18 +36,69 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Inbound signal missing' }, { status: 400 })
     }
 
+    // 🔬 DYNAMIC_FINANCIAL_DETECTION (The Brain Upgrade)
+    let injectedMathContext = "";
+    let exactCalculationsText = "";
+    
+    const messageLower = message.toLowerCase();
+    const isAskingForMath = messageLower.includes('تقسيط') || messageLower.includes('قسط') || messageLower.includes('installments') || messageLower.includes('سعر') || messageLower.includes('price');
+    
+    if (isAskingForMath) {
+        // Attempt to extract digits (e.g. 5000000 or 150)
+        let extractedNumbers = message.match(/\d+(?:,\d+)*(?:\.\d+)?/g);
+        let totalPrice = 5000000; // Default Qasr 18 Price
+        let area = 150; // Default SQM
+        
+        if (extractedNumbers && extractedNumbers.length >= 1) {
+            let n1 = parseInt(extractedNumbers[0].replace(/,/g, ''));
+            if (n1 > 500000) totalPrice = n1;
+            else if (n1 > 50 && n1 < 500) area = n1;
+        }
+        if (extractedNumbers && extractedNumbers.length >= 2) {
+            let n2 = parseInt(extractedNumbers[1].replace(/,/g, ''));
+            if (n2 > 500000 && totalPrice === 5000000) totalPrice = n2;
+            else if (n2 > 50 && n2 < 500 && area === 150) area = n2;
+        }
+
+        const amortization = calculateReducingBalance({
+            totalPrice: totalPrice,
+            areaSqm: area,
+            downPaymentPercent: BEIT_AL_KHAIR_RULES.DOWN_PAYMENT,
+            annualInterestRate: BEIT_AL_KHAIR_RULES.ANNUAL_INTEREST,
+            years: 3
+        });
+
+        exactCalculationsText = `
+        🏦 القيمة الإجمالية: ${totalPrice.toLocaleString()} ج.م
+        📐 سعر المتر التقريبي: ${amortization.pricePerSqm.toLocaleString()} ج.م/م٢
+        💰 مقدم الحجز السيادي (40%): ${amortization.downPayment.toLocaleString()} ج.م
+        🗓️ القسط الشهري (على ثلاث سنوات رصيد متناقص 10%): ${amortization.monthlyPayment.toLocaleString()} ج.م
+        📅 القسط الربع سنوي: ${amortization.quarterlyPayment.toLocaleString()} ج.م
+        `;
+
+        injectedMathContext = `
+        CRITICAL INSTRUCTION: The user is asking for a quote. You MUST NOT calculate anything yourself. 
+        You MUST repeat the exact following calculations explicitly in your Arabic response: 
+        ${exactCalculationsText}
+        Make it sound luxurious and elite. End by asking if they want to physically visit the Al-Qasr site.
+        `;
+    }
+
+    const finalSystemPrompt = BEIT_AL_KHAIR_SYSTEM_PROMPT + "\n\n" + injectedMathContext;
+
     const apiKey = process.env.GROQ_API_KEY
     if (!apiKey) {
-      return NextResponse.json({ success: true, response: "FINANCIAL_AI_OFFLINE: Missing API Key" })
+      if (isAskingForMath) {
+          // If no API Key, deliver the exact math directly! (Absolute Determinism)
+          return NextResponse.json({ success: true, response: `(النظام_الاحتياطي_يعمل)\n\nبناءً على المعطيات التحليلية، الخطة المالية لوحدتك الرئاسية كالتالي:\n${exactCalculationsText}\n\nهل ترغب في تحديد موعد لمعاينة الموقع في طوخ؟` })
+      }
+      return NextResponse.json({ success: true, response: "مرحباً. نظام الذكاء الاصطناعي المركزي في حالة تحديث. يرجى ترك رقم هاتفك وسيقوم مستشارك الملكي بالتواصل معك فوراً." })
     }
 
     const groq = new Groq({ apiKey })
 
-    // 🔬 DYNAMIC_FINANCIAL_DETECTION
-    // We can potentially extract numbers here to use the actual utility calculation
-    // For now, we rely on the LLM's capability or simple regex extraction
     const messages: any[] = [
-      { role: 'system', content: BEIT_AL_KHAIR_SYSTEM_PROMPT },
+      { role: 'system', content: finalSystemPrompt },
       { role: 'user', content: message }
     ]
 
@@ -55,7 +106,7 @@ export async function POST(request: NextRequest) {
       model: 'llama-3.1-8b-instant',
       messages,
       max_tokens: 800,
-      temperature: 0.5, // Lower temperature for more accurate math
+      temperature: 0.2, // Extremely low for strict obedience to injected math
     })
 
     const aiResponse = completion.choices[0]?.message?.content || ''

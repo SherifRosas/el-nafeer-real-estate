@@ -33,7 +33,6 @@ const DICTIONARY = {
     reservation: 'INITIATE_RESERVATION',
     status: 'STABLE',
     footer_text: 'ESTABLISHING_SOVEREIGN_NODE_DOMINANCE...'
-  }
 }
 
 export default function BeitAlKhairPage() {
@@ -44,6 +43,26 @@ export default function BeitAlKhairPage() {
   
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-[#050811]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "RealEstateAgent",
+            "name": "Beit Al-Khair Real Estate Development",
+            "image": "https://el-nafeer-real-estate.vercel.app/campaigns/beit-alkhair/official-logo.jpg",
+            "description": "Leading Real Estate Developer in Qalyubia, specializing in luxury Smart-Home Qasrs in Toukh and Banha.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Toukh",
+              "addressRegion": "Al Qalyubia Governorate",
+              "addressCountry": "EG"
+            },
+            "telephone": "+201033332112",
+            "priceRange": "$$$$"
+          })
+        }}
+      />
       <AnimatePresence mode="wait">
         {showScan ? (
           <motion.div
