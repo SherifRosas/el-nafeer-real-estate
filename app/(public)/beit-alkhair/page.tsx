@@ -33,6 +33,7 @@ const DICTIONARY = {
     reservation: 'INITIATE_RESERVATION',
     status: 'STABLE',
     footer_text: 'ESTABLISHING_SOVEREIGN_NODE_DOMINANCE...'
+  }
 }
 
 export default function BeitAlKhairPage() {
