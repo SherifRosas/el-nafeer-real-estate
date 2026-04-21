@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: 'Experience absolute urban dominance with the Lever Pioneer Metropolitan Sovereign Ascent. Advanced cinematic elevator solutions for the Cairo Skyline.',
   openGraph: {
     title: 'ليفر الرائدة للمصاعد | Lever Pioneer',
-    description: 'تدشن شركة ليفر الرائدة للمصاعد مقرها الجديد بقلب الجيزة حدائق الأهرام. تكنولوجيا ألمانية وتصميم عصري.',
+    description: 'تدشن شركة ليفر الرائدة للمصاعد مقرها الجديد بقلب الجيزة حدائق الأهرام. تكنولوجيا إيطالية وتصميم عصري.',
     url: 'https://el-nafeer-real-estate.vercel.app/portal/lever-pioneer-sovereign',
     siteName: 'Lever Pioneer Elevators',
     images: [
