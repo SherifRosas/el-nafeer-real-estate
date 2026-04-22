@@ -479,3 +479,10 @@ This iteration focuses intensely on recovering lost Facebook organic viewership 
 - **Dual-Stream Matrix**: Split the telecom URLs inside `AdvancedLeverPortal.tsx`.
 - **Marketing Net**: Generic Call and WhatsApp nodes now securely point to `+201070615372`.
 - **Master Direct**: The "Architected By Sherif Rosas" signature block was explicitly decoupled to permanently route high-tier signals directly to the Sovereign Line `+201065661882`.
+
+---
+
+### 🎨 Version 10.4.0 (Cinematic Luxury Aesthetic Reset)
+- **The Visual Paradigm Demilitarized**: Eradicated the Sci-Fi "QuantumNeuralMesh" from the Beit Al-Khair portal, replacing it with a hyper-realistic, 8k cinematic architectural rendering of a luxury Toukh Qasr (`AdvancedBeitAlKhairMesh`).
+- **Lexical Detoxification**: Rewrote the entire bilingual `DICTIONARY` inside `app/(public)/beit-alkhair/page.tsx`. Military-grade terminology (e.g., "Sovereign Node", "Telemetry Decrypted") was completely rewritten into high-end real estate vocabulary ("Exclusive opportunity", "Smart Payment Systems", "Book Your Unit").
+- **Grid Layout Solidification (Mobile Supremacy)**: Restructured `BeitAlKhairMapConsole.tsx` to display an elegant Grid of properties immediately. Purged the 3D Parallax Wobble engine from `BeitAlKhairUnifiedConsole.tsx` and removed restrictive bounding boxes to ensure cards render as massive, scrollable iOS-style panels (`min-h-[400px]`) without overlapping text on smaller devices.

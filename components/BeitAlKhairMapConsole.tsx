@@ -133,6 +133,18 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
     <div className="relative w-full h-full bg-transparent rounded-[4rem] overflow-hidden pointer-events-none">
       <div className="absolute inset-0 z-0 pointer-events-auto" />
       
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes lidar-scan {
+            0% { top: -10%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 110%; opacity: 0; }
+        }
+        .animate-lidar {
+            animation: lidar-scan 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+      `}} />
+      
       <div className="absolute inset-0 flex flex-col p-4 lg:p-12 z-20">
         {/* Luxury Header */}
         <div className="flex justify-between items-end mb-8 border-b border-sahara-gold/20 pb-6 pointer-events-none">
@@ -158,6 +170,26 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
                 className="group cursor-pointer prestige-glass bg-black/40 backdrop-blur-3xl rounded-[3rem] overflow-hidden border border-white/5 hover:border-sahara-gold/50 transition-all flex flex-col relative min-h-[400px] shadow-[0_0_50px_rgba(0,0,0,0.5)]"
             >
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-0 pointer-events-none" />
+                
+                {/* 🩻 LiDAR Scanning Array */}
+                <div className="absolute left-0 right-0 h-[2px] bg-sahara-gold/80 shadow-[0_0_15px_#c5a059] z-0 animate-lidar pointer-events-none before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-b before:from-sahara-gold/40 before:to-transparent before:h-[50px] before:-top-[50px]" />
+
+                {/* 🩻 Live Architectural Blueprint Framing */}
+                <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-transparent group-hover:border-sahara-gold/80 transition-all duration-500 rounded-tl-lg z-20 pointer-events-none" />
+                <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-transparent group-hover:border-sahara-gold/80 transition-all duration-500 rounded-tr-lg z-20 pointer-events-none" />
+                <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-transparent group-hover:border-sahara-gold/80 transition-all duration-500 rounded-bl-lg z-20 pointer-events-none" />
+                <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-transparent group-hover:border-sahara-gold/80 transition-all duration-500 rounded-br-lg z-20 pointer-events-none" />
+
+                {/* 🩻 Coordinate Data Trackers */}
+                <div className="absolute top-[30%] right-6 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100 z-20 pointer-events-none flex items-center gap-2">
+                    <span className="text-[6px] font-black tracking-widest text-sahara-gold uppercase robotic-digits">[SYS_TRACKING]</span>
+                    <span className="w-1.5 h-1.5 bg-sahara-gold rounded-full animate-ping" />
+                </div>
+                <div className="absolute top-[60%] left-6 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200 z-20 pointer-events-none flex items-center gap-2">
+                    <span className="w-0.5 h-3 bg-cyan-400 animate-pulse" />
+                    <span className="text-[6px] font-black tracking-widest text-cyan-400 uppercase robotic-digits">[EVAL_DOM]</span>
+                </div>
+
                 <div className="relative z-10 p-8 flex flex-col h-full justify-between">
                 <div>
                     <div className="flex justify-between items-center mb-4">
