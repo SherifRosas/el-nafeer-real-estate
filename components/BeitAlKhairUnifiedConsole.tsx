@@ -105,21 +105,9 @@ export default function BeitAlKhairUnifiedConsole({ properties: initialPropertie
 
   return (
     <div 
-      className="w-full h-full relative overflow-hidden flex flex-col perspective-1000 p-4"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => { x.set(0); y.set(0); }}
+      className="w-full h-full relative overflow-hidden flex flex-col p-4"
     >
-      {/* 🔮 QUANTUM_HUD_OVERLAY_ELEMENTS */}
-      <div className="absolute top-0 left-0 w-20 h-20 border-t-4 border-l-4 border-sahara-gold/40 rounded-tl-[3rem] z-50 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-20 h-20 border-t-4 border-r-4 border-sahara-gold/40 rounded-tr-[3rem] z-50 pointer-events-none" />
-      <div className="absolute bottom-12 left-0 w-20 h-20 border-b-4 border-l-4 border-sahara-gold/40 rounded-bl-[3rem] z-50 pointer-events-none" />
-      <div className="absolute bottom-12 right-0 w-20 h-20 border-b-4 border-r-4 border-sahara-gold/40 rounded-br-[3rem] z-50 pointer-events-none" />
-
-
-      <motion.div 
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="w-full h-full relative z-10"
-      >
+      <div className="w-full h-full relative z-10">
         <AnimatePresence mode="wait">
             {viewState === 'MAP' ? (
             <motion.div 
@@ -161,7 +149,7 @@ export default function BeitAlKhairUnifiedConsole({ properties: initialPropertie
             </motion.div>
             )}
         </AnimatePresence>
-      </motion.div>
+      </div>
 
       {/* 🤖 THE_FINANCIAL_ORCHESTRATOR */}
       <BeitAlKhairChatbot />

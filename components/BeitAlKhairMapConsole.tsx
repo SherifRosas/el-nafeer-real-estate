@@ -109,6 +109,19 @@ interface MapConsoleProps {
 export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps) {
   const { language } = useLanguage()
   const t = DICTIONARY[language]
+
+  const handleQasrInteraction = (q: QasrNode) => {
+    if (q.id === 'qasr-22') {
+      neuralAudio.playHeavyMachinery()
+    } else if (q.id === 'qasr-18') {
+      neuralAudio.playBridgeSync()
+    } else if (q.id === 'qasr-15') {
+      neuralAudio.playCentralSync()
+    } else {
+      neuralAudio.playNodeDecrypt()
+    }
+    onQasrSelect(q.id)
+  }
   
   // Flatten all Qasrs for direct display
   const allQasrs = [
@@ -142,7 +155,7 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
                 key={q.id}
                 whileHover={{ scale: 1.02, translateY: -5 }}
                 onClick={() => handleQasrInteraction(q)}
-                className="group cursor-pointer prestige-glass bg-black/40 backdrop-blur-3xl rounded-[3rem] overflow-hidden border border-white/5 hover:border-sahara-gold/50 transition-all flex flex-col relative aspect-[4/5] shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+                className="group cursor-pointer prestige-glass bg-black/40 backdrop-blur-3xl rounded-[3rem] overflow-hidden border border-white/5 hover:border-sahara-gold/50 transition-all flex flex-col relative min-h-[400px] shadow-[0_0_50px_rgba(0,0,0,0.5)]"
             >
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-0 pointer-events-none" />
                 <div className="relative z-10 p-8 flex flex-col h-full justify-between">
