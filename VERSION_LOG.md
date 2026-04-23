@@ -486,3 +486,11 @@ This iteration focuses intensely on recovering lost Facebook organic viewership 
 - **The Visual Paradigm Demilitarized**: Eradicated the Sci-Fi "QuantumNeuralMesh" from the Beit Al-Khair portal, replacing it with a hyper-realistic, 8k cinematic architectural rendering of a luxury Toukh Qasr (`AdvancedBeitAlKhairMesh`).
 - **Lexical Detoxification**: Rewrote the entire bilingual `DICTIONARY` inside `app/(public)/beit-alkhair/page.tsx`. Military-grade terminology (e.g., "Sovereign Node", "Telemetry Decrypted") was completely rewritten into high-end real estate vocabulary ("Exclusive opportunity", "Smart Payment Systems", "Book Your Unit").
 - **Grid Layout Solidification (Mobile Supremacy)**: Restructured `BeitAlKhairMapConsole.tsx` to display an elegant Grid of properties immediately. Purged the 3D Parallax Wobble engine from `BeitAlKhairUnifiedConsole.tsx` and removed restrictive bounding boxes to ensure cards render as massive, scrollable iOS-style panels (`min-h-[400px]`) without overlapping text on smaller devices.
+
+---
+
+### 🛡️ Version 10.5.0 (Holographic Sync & Security Lockdown)
+- **Holographic Intel Matrix**: Injected animated LiDAR scanning arrays and dynamic blueprint framing into the property cards, emulating high-end AI architectural video editing styles.
+- **Live Inventory Synchronization**: Fully decoupled the Map Console from hardcoded data; it now dynamically calculates projects and available units from the live Supabase properties stream, rendering real uploaded project images and metadata.
+- **Detailed View Refinement**: Upgraded the internal `BeitAlKhairNeuralGrid` to the Cinematic Luxury theme, fixing mobile back-button overlaps and purging the remaining "hacker-logs" and military terminology from the property detail view.
+- **Sovereign Security Hardening**: Successfully neutralized 19 Supabase security vulnerabilities by enabling Row Level Security (RLS) across 15 core tables and defining strict, case-sensitive access policies to protect sensitive revenue, user, and settings data.

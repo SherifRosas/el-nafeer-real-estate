@@ -103,14 +103,15 @@ const DICTIONARY = {
 import { neuralAudio } from '@/lib/neural-audio'
 
 interface MapConsoleProps {
+  properties?: any[]
   onQasrSelect: (qasrId: string) => void
 }
 
-export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps) {
+export default function BeitAlKhairMapConsole({ properties, onQasrSelect }: MapConsoleProps) {
   const { language } = useLanguage()
   const t = DICTIONARY[language]
 
-  const handleQasrInteraction = (q: QasrNode) => {
+  const handleQasrInteraction = (q: any) => {
     if (q.id === 'qasr-22') {
       neuralAudio.playHeavyMachinery()
     } else if (q.id === 'qasr-18') {
@@ -123,11 +124,39 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
     onQasrSelect(q.id)
   }
   
-  // Flatten all Qasrs for direct display
-  const allQasrs = [
-      ...CITY_DATA.banha.qasrs.map(q => ({ ...q, city: CITY_DATA.banha })),
-      ...CITY_DATA.toukh.qasrs.map(q => ({ ...q, city: CITY_DATA.toukh }))
-  ]
+  // Condense uploaded properties into specific Qasr projects
+  const loadedQasrs = properties?.reduce((acc: any, p: any) => {
+    // Extract base name, e.g. "Qasr 21" or "Qasr 19" from the uploaded title
+    const qasrName = p.title.replace(/\(.*?\)/g, '').split('-')[0].trim() || 'Beit AlKhair Project';
+    if (!acc[qasrName]) {
+      // Find the first image from the db array or fallback to the cinematic visual
+      let finalImg = '/campaigns/beit-alkhair/qasr_toukh_cinematic.png';
+      if (p.imageUrls && p.imageUrls.length > 0) finalImg = p.imageUrls[0];
+      else if (p.imageUrl) finalImg = p.imageUrl;
+      
+      acc[qasrName] = {
+        id: qasrName, 
+        name: qasrName,
+        phase: p.location || 'Qalyubia / Premium Sector',
+        city: { 
+            name: p.location?.toLowerCase().includes('banha') || p.location?.includes('بنها') ? 'BANHA' : 'TOUKH', 
+            nameAr: p.location?.toLowerCase().includes('banha') || p.location?.includes('بنها') ? 'بنها' : 'طوخ' 
+        },
+        units: 0,
+        image: finalImg
+      }
+    }
+    acc[qasrName].units += 1;
+    return acc;
+  }, {})
+
+  // Map to array or fallback to hardcoded if DB is empty
+  const allQasrs = properties?.length 
+    ? Object.values(loadedQasrs) as QasrNode[] 
+    : [
+        ...CITY_DATA.banha.qasrs.map(q => ({ ...q, city: CITY_DATA.banha })),
+        ...CITY_DATA.toukh.qasrs.map(q => ({ ...q, city: CITY_DATA.toukh }))
+      ]
 
   return (
     <div className="relative w-full h-full bg-transparent rounded-[4rem] overflow-hidden pointer-events-none">
@@ -161,7 +190,7 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
             </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 overflow-y-auto pr-4 custom-scrollbar pb-10 pointer-events-auto h-full items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 overflow-y-auto pr-2 pb-32 pointer-events-auto h-full items-start [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-sahara-gold/20 [&::-webkit-scrollbar-track]:bg-transparent">
             {allQasrs.map((q) => (
             <motion.div 
                 key={q.id}
@@ -169,23 +198,27 @@ export default function BeitAlKhairMapConsole({ onQasrSelect }: MapConsoleProps)
                 onClick={() => handleQasrInteraction(q)}
                 className="group cursor-pointer prestige-glass bg-black/40 backdrop-blur-3xl rounded-[3rem] overflow-hidden border border-white/5 hover:border-sahara-gold/50 transition-all flex flex-col relative min-h-[400px] shadow-[0_0_50px_rgba(0,0,0,0.5)]"
             >
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-0 pointer-events-none" />
+                <div 
+                    className="absolute inset-0 bg-cover bg-center z-[-1] opacity-50 group-hover:scale-110 group-hover:opacity-90 transition-all duration-[2000ms] ease-out mix-blend-luminosity group-hover:mix-blend-normal"
+                    style={{ backgroundImage: `url('${(q as any).image || '/campaigns/beit-alkhair/qasr_toukh_cinematic.png'}')` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-0 pointer-events-none" />
                 
                 {/* 🩻 LiDAR Scanning Array */}
                 <div className="absolute left-0 right-0 h-[2px] bg-sahara-gold/80 shadow-[0_0_15px_#c5a059] z-0 animate-lidar pointer-events-none before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-b before:from-sahara-gold/40 before:to-transparent before:h-[50px] before:-top-[50px]" />
 
-                {/* 🩻 Live Architectural Blueprint Framing */}
-                <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-transparent group-hover:border-sahara-gold/80 transition-all duration-500 rounded-tl-lg z-20 pointer-events-none" />
-                <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-transparent group-hover:border-sahara-gold/80 transition-all duration-500 rounded-tr-lg z-20 pointer-events-none" />
-                <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-transparent group-hover:border-sahara-gold/80 transition-all duration-500 rounded-bl-lg z-20 pointer-events-none" />
-                <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-transparent group-hover:border-sahara-gold/80 transition-all duration-500 rounded-br-lg z-20 pointer-events-none" />
+                {/* 🩻 Live Architectural Blueprint Framing (Active on Mobile) */}
+                <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-sahara-gold/40 group-hover:border-sahara-gold/80 transition-all duration-500 rounded-tl-lg z-20 pointer-events-none" />
+                <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-sahara-gold/40 group-hover:border-sahara-gold/80 transition-all duration-500 rounded-tr-lg z-20 pointer-events-none" />
+                <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-sahara-gold/40 group-hover:border-sahara-gold/80 transition-all duration-500 rounded-bl-lg z-20 pointer-events-none" />
+                <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-sahara-gold/40 group-hover:border-sahara-gold/80 transition-all duration-500 rounded-br-lg z-20 pointer-events-none" />
 
                 {/* 🩻 Coordinate Data Trackers */}
-                <div className="absolute top-[30%] right-6 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100 z-20 pointer-events-none flex items-center gap-2">
+                <div className="absolute top-[30%] right-6 opacity-60 group-hover:opacity-100 transition-all duration-700 z-20 pointer-events-none flex items-center gap-2">
                     <span className="text-[6px] font-black tracking-widest text-sahara-gold uppercase robotic-digits">[SYS_TRACKING]</span>
                     <span className="w-1.5 h-1.5 bg-sahara-gold rounded-full animate-ping" />
                 </div>
-                <div className="absolute top-[60%] left-6 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200 z-20 pointer-events-none flex items-center gap-2">
+                <div className="absolute top-[60%] left-6 opacity-60 group-hover:opacity-100 transition-all duration-700 z-20 pointer-events-none flex items-center gap-2">
                     <span className="w-0.5 h-3 bg-cyan-400 animate-pulse" />
                     <span className="text-[6px] font-black tracking-widest text-cyan-400 uppercase robotic-digits">[EVAL_DOM]</span>
                 </div>

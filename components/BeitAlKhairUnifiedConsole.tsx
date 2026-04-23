@@ -14,12 +14,12 @@ interface UnifiedConsoleProps {
 
 const DICTIONARY = {
   ar: {
-    exit: 'الخروج_من_نطاق_النود',
+    exit: 'العودة_للمشاريع',
     loading: 'جاري_تحميل_البيانات...',
   },
   en: {
-    exit: 'EXIT_NODE_DOMAIN',
-    loading: 'LOADING_DATA_STREAM...',
+    exit: 'BACK_TO_PORTFOLIO',
+    loading: 'LOADING_DATA...',
   }
 }
 
@@ -118,7 +118,7 @@ export default function BeitAlKhairUnifiedConsole({ properties: initialPropertie
                 transition={{ duration: 1.2, ease: "anticipate" }}
                 className="w-full h-full"
             >
-                <BeitAlKhairMapConsole onQasrSelect={handleQasrSelect} />
+                <BeitAlKhairMapConsole properties={properties} onQasrSelect={handleQasrSelect} />
             </motion.div>
             ) : (
             <motion.div 
@@ -127,16 +127,16 @@ export default function BeitAlKhairUnifiedConsole({ properties: initialPropertie
                 animate={{ opacity: 1, x: 0, filter: "brightness(1)" }}
                 exit={{ opacity: 0, x: -200, filter: "brightness(0)" }}
                 transition={{ duration: 1, ease: "circOut" }}
-                className="w-full h-full relative"
+                className="w-full h-full relative flex flex-col"
             >
                 {/* Back Button HUD */}
-                <div className="absolute top-10 left-10 z-[100]">
+                <div className="relative z-[100] mb-4 flex justify-start pl-2 lg:absolute lg:top-8 lg:left-8 w-full lg:w-auto">
                 <button 
                     onClick={() => setViewState('MAP')}
-                    className="group px-10 py-4 bg-black/80 backdrop-blur-3xl border-2 border-sahara-gold/40 text-sahara-gold rounded-full text-[10px] font-black uppercase tracking-[0.6em] hover:bg-sahara-gold hover:text-black transition-all flex items-center gap-4 shadow-[0_0_40px_rgba(0,0,0,0.5)]"
+                    className="group px-6 py-3 lg:px-10 lg:py-4 bg-red-600/90 backdrop-blur-3xl border border-white/40 text-white rounded-full text-[8px] lg:text-[10px] font-black uppercase tracking-[0.4em] lg:tracking-[0.6em] hover:bg-white hover:text-red-600 transition-all flex items-center gap-2 lg:gap-4 shadow-[0_0_40px_rgba(255,0,0,0.5)]"
                 >
                     <span className={`text-xl group-hover:-translate-x-2 transition-transform ${language === 'ar' ? 'rotate-180' : ''}`}>←</span> 
-                    {t.exit}
+                    {language === 'ar' ? 'تحديث_النظام_الآن' : 'FORCE_SYNC_ACTIVE'}
                 </button>
                 </div>
 
