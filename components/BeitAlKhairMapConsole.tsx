@@ -11,6 +11,10 @@ interface QasrNode {
   status: 'active' | 'full'
   phase: string
   image?: string
+  city?: {
+    name: string
+    nameAr: string
+  }
 }
 
 interface CityData {
@@ -227,7 +231,7 @@ export default function BeitAlKhairMapConsole({ properties, onQasrSelect }: MapC
                 <div>
                     <div className="flex justify-between items-center mb-4">
                         <span className="px-3 py-1 bg-sahara-gold/10 rounded-full border border-sahara-gold/30 text-sahara-gold text-[7px] font-black uppercase tracking-[0.4em] italic">
-                            {language === 'ar' ? q.city.nameAr : q.city.name}
+                            {language === 'ar' ? q.city?.nameAr : q.city?.name}
                         </span>
                         <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white/50 group-hover:bg-sahara-gold group-hover:text-black transition-all">
                             →
