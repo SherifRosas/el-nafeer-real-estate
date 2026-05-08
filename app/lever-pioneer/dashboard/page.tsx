@@ -5,6 +5,8 @@ export const metadata = {
     title: 'LEVER PIONEER | BRAND NEXUS',
 }
 
+export const dynamic = 'force-dynamic'
+
 export default async function LeverDashboardPage() {
     const LEVER_BRAND_ID = "62c38934-4c4b-42be-98c9-06cbbee1af19"
     
