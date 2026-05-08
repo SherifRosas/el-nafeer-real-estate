@@ -133,14 +133,14 @@ export default function BeitAlKhairUnifiedConsole({ properties: initialPropertie
                 <div className="relative z-[100] mb-4 flex justify-start pl-2 lg:absolute lg:top-8 lg:left-8 w-full lg:w-auto">
                 <button 
                     onClick={() => setViewState('MAP')}
-                    className="group px-6 py-3 lg:px-10 lg:py-4 bg-red-600/90 backdrop-blur-3xl border border-white/40 text-white rounded-full text-[8px] lg:text-[10px] font-black uppercase tracking-[0.4em] lg:tracking-[0.6em] hover:bg-white hover:text-red-600 transition-all flex items-center gap-2 lg:gap-4 shadow-[0_0_40px_rgba(255,0,0,0.5)]"
+                    className="group px-6 py-3 lg:px-10 lg:py-4 bg-black/60 backdrop-blur-3xl border border-sahara-gold/40 text-sahara-gold rounded-full text-[8px] lg:text-[10px] font-black uppercase tracking-[0.4em] lg:tracking-[0.6em] hover:bg-sahara-gold hover:text-black transition-all flex items-center gap-2 lg:gap-4 shadow-[0_0_40px_rgba(0,0,0,0.5)]"
                 >
                     <span className={`text-xl group-hover:-translate-x-2 transition-transform ${language === 'ar' ? 'rotate-180' : ''}`}>←</span> 
-                    {language === 'ar' ? 'تحديث_النظام_الآن' : 'FORCE_SYNC_ACTIVE'}
+                    {t.exit}
                 </button>
                 </div>
 
-                <div className="w-full h-full prestige-glass rounded-[4rem] overflow-hidden">
+                <div className="w-full flex-1 prestige-glass rounded-[4rem] overflow-hidden lg:mt-24">
                     <BeitAlKhairNeuralGrid 
                         properties={filteredProperties} 
                         userRole="customer" 

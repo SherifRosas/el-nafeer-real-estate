@@ -24,18 +24,29 @@ export const metadata: Metadata = {
 }
 
 export default function MetropolitanPortalPage() {
-  return (
-    <main className="w-screen h-screen bg-black overflow-hidden">
-      <Suspense fallback={
-        <div className="w-full h-full flex flex-col items-center justify-center bg-black gap-6">
-          <div className="w-24 h-24 border-2 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin" />
-          <span className="text-[10px] text-cyan-500 font-black tracking-[0.5em] uppercase animate-pulse">
-            INITIALIZING_NEURAL_SOVEREIGNTY...
-          </span>
-        </div>
-      }>
-        <AdvancedLeverPortal />
-      </Suspense>
+    <main className="w-screen h-screen bg-black overflow-hidden flex flex-col items-center justify-center p-8 relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-cyan-900/20 via-black to-black opacity-50" />
+      
+      <div className="relative z-10 prestige-glass p-12 md:p-20 rounded-[4rem] border border-cyan-500/20 max-w-3xl w-full text-center shadow-[0_0_100px_rgba(6,182,212,0.1)]">
+          <div className="w-24 h-24 mx-auto mb-10 relative">
+              <div className="absolute inset-0 border-2 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin" />
+              <div className="absolute inset-4 border border-cyan-500/40 rounded-full flex items-center justify-center">
+                  <span className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_10px_#06b6d4]" />
+              </div>
+          </div>
+          
+          <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-[0.2em] mb-4">CAMPAIGN PAUSED</h1>
+          <p className="text-cyan-500 text-xs md:text-sm tracking-[0.5em] uppercase font-black mb-10">METROPOLITAN_SOVEREIGN_ASCENT // UNAVAILABLE</p>
+          
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent mb-10" />
+          
+          <p className="text-gray-400 text-sm md:text-base max-w-lg mx-auto font-light leading-relaxed mb-12">
+            The direct booking portal for Lever Pioneer's Metropolitan Sovereign Ascent is currently undergoing maintenance or has concluded its active phase.
+          </p>
+
+          <a href="/" className="inline-block px-10 py-4 bg-cyan-950/40 border border-cyan-500/30 text-cyan-500 text-xs font-black uppercase tracking-widest rounded-full hover:bg-cyan-500 hover:text-black transition-all">
+            RETURN TO NAFEER ELITE
+          </a>
+      </div>
     </main>
-  )
 }

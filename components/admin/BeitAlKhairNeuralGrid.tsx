@@ -10,6 +10,9 @@ interface Property {
   location: string
   price: number
   status: string // available, sold
+  images?: string[]
+  imageUrls?: string[]
+  imageUrl?: string
 }
 
 interface NeuralGridProps {
@@ -32,7 +35,16 @@ export default function BeitAlKhairNeuralGrid({ properties, userRole, onStatusTo
   const activeProps = properties.length > 0 ? properties : SYNTHETIC_NODES
   const firstTitle = activeProps[0]?.title || 'QASR NODE'
   const numericId = firstTitle.replace(/[^0-9]/g, '') || 'NODE'
-  const imagePath = `/assets/buildings/qasr-${numericId}.png`
+  
+  // Extract real database image uploaded by user, or fallback to the cinematic 8k visual
+  let resolvedImagePath = '/campaigns/beit-alkhair/qasr_toukh_cinematic.png'
+  if (activeProps[0]) {
+    const p = activeProps[0] as any
+    if (p.images && p.images.length > 0) resolvedImagePath = p.images[0]
+    else if (p.imageUrls && p.imageUrls.length > 0) resolvedImagePath = p.imageUrls[0]
+    else if (p.imageUrl) resolvedImagePath = p.imageUrl
+  }
+  const imagePath = resolvedImagePath
 
   const handleInteraction = () => {
     if (!isAudioInitialized) {
@@ -60,13 +72,13 @@ export default function BeitAlKhairNeuralGrid({ properties, userRole, onStatusTo
             <h2 className="text-4xl lg:text-6xl font-black text-white italic tracking-[-0.1em] uppercase leading-none mb-4 text-luxury-gold">{numericId === 'NODE' ? firstTitle : `QASR_${numericId}`}</h2>
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-10">QALYUBIA // BEIT AL-KHAIR PORTFOLIO</p>
 
-            <div className="w-full aspect-square rounded-[3rem] overflow-hidden border border-white/10 relative group mb-8">
+            <div className="w-full flex-1 min-h-[200px] max-h-[40vh] rounded-[3rem] overflow-hidden border border-white/10 relative group mb-8">
                 <img 
                     src={imagePath} 
                     alt={`Al-Qasr ${numericId}`}
-                    className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 hover:scale-110"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
                     onError={(e) => {
-                        (e.target as HTMLImageElement).src = '/assets/branding/logo.png'
+                        (e.target as HTMLImageElement).src = '/campaigns/beit-alkhair/qasr_toukh_cinematic.png'
                     }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
