@@ -23,7 +23,7 @@ export default function HomeContent() {
   const logoSrc = isArabic ? '/logos/logo-ar.png' : '/logos/logo-en.png'
 
   return (
-    <div className="relative z-10 px-6 md:px-12 py-16 lg:py-32 overflow-hidden max-w-full">
+    <div className="relative z-10 px-6 md:px-12 py-16 lg:py-24 overflow-hidden max-w-full">
       {/* Dynamic Background Mesh */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[url('/grid.svg')] bg-repeat" />
 
@@ -31,184 +31,123 @@ export default function HomeContent() {
       <div className="absolute top-0 right-0 w-[400px] md:w-[700px] h-[400px] md:h-[700px] bg-sahara-gold/[0.03] blur-[120px] -mr-32 -mt-32 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] md:w-[700px] h-[400px] md:h-[700px] bg-cyan-500/[0.03] blur-[120px] -ml-32 -mb-32 pointer-events-none" />
 
-      {/* Hero Section with Coin Logos */}
-      <div className="max-w-7xl mx-auto text-center mb-32 relative">
+      {/* === HERO SECTION: AGENCY BRANDING === */}
+      <div className="max-w-7xl mx-auto text-center mb-24 relative">
         
-        {/* === COIN FLIP LOGO SHOWCASE === */}
-        <div className="mb-20 flex justify-center">
-          <div 
-            className="relative cursor-pointer group coin-perspective"
-            onClick={() => setIsFlipped(prev => !prev)}
-          >
-            {/* Outer Glow Ring */}
-            <div className="absolute inset-[-20px] rounded-full border border-sahara-gold/20 animate-[spin_20s_linear_infinite] group-hover:border-sahara-gold/40 transition-all" />
-            <div className="absolute inset-[-35px] rounded-full border border-cyan-500/10 animate-[spin_30s_linear_infinite_reverse]" />
-            
-            {/* Pulsing Glow Behind Coin */}
-            <div className="absolute inset-[-10px] bg-sahara-gold/10 rounded-full blur-[60px] animate-pulse" />
-            <div className="absolute inset-[-10px] bg-cyan-500/5 rounded-full blur-[80px] animate-pulse delay-500" />
-
-            {/* The Coin Container */}
-            <div 
-              className={`w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 relative coin-inner ${isFlipped ? 'flipped' : ''}`}
-            >
-              {/* Front Face - English Logo */}
-              <div 
-                className="absolute inset-0 rounded-full overflow-hidden border-2 border-sahara-gold/30 shadow-[0_0_60px_rgba(212,175,55,0.15),inset_0_0_30px_rgba(212,175,55,0.05)] coin-face"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111] to-[#0a0a0a]" />
-                <img 
-                  src="/logos/logo-en.png" 
-                  alt="EL-NAFEER English Logo"
-                  className="w-full h-full object-contain p-4 relative z-10 drop-shadow-[0_0_20px_rgba(212,175,55,0.3)]"
-                />
-                {/* Coin Edge Shimmer */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent rounded-full pointer-events-none" />
-              </div>
-
-              {/* Back Face - Arabic Logo */}
-              <div 
-                className="absolute inset-0 rounded-full overflow-hidden border-2 border-cyan-500/30 shadow-[0_0_60px_rgba(6,182,212,0.15),inset_0_0_30px_rgba(6,182,212,0.05)] coin-face-back"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111] to-[#0a0a0a]" />
-                <img 
-                  src="/logos/logo-ar.png" 
-                  alt="EL-NAFEER Arabic Logo"
-                  className="w-full h-full object-contain p-6 relative z-10 drop-shadow-[0_0_20px_rgba(6,182,212,0.3)]"
-                />
-                {/* Coin Edge Shimmer */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent rounded-full pointer-events-none" />
-              </div>
-            </div>
-
-            {/* Tap to Flip Hint */}
-            <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-[9px] font-black text-gray-700 uppercase tracking-[0.5em] opacity-0 group-hover:opacity-100 transition-opacity robotic-digits whitespace-nowrap">
-              {isArabic ? 'اضغط_للتبديل' : 'TAP_TO_FLIP'}
-            </div>
-          </div>
-        </div>
-
         {/* Version Badge */}
         <div className="inline-flex items-center gap-3 px-6 py-2 rounded-xl border border-white/10 milky-glass mb-10 liquid-gloss prestige-card group">
           <span className="w-2 h-2 bg-sahara-gold rounded-full animate-pulse shadow-[0_0_15px_rgba(212,175,55,1)]" />
-          <span className="text-[10px] font-black text-gray-300 group-hover:text-sahara-gold transition-colors uppercase tracking-[0.4em] robotic-digits">ESTABLISHMENT_PROTOCOL_v3.5_RELEASE</span>
+          <span className="text-[10px] font-black text-gray-300 group-hover:text-sahara-gold transition-colors uppercase tracking-[0.4em] robotic-digits">EL_NAFEER_SOVEREIGN_AGENCY_v4.0</span>
         </div>
 
-        <h1 className="text-5xl md:text-[clamp(3rem,8vw,9rem)] font-black mb-12 tracking-tighter uppercase italic leading-[0.85] animate-in fade-in transition-all duration-700">
-          <span className="text-white block mb-6">{isArabic ? 'النفير' : 'EL-NAFEER'}</span>
-          <span className="block transition-all duration-1000 text-sahara-gold drop-shadow-[0_0_50px_rgba(212,175,55,0.3)] hover:scale-105 transform cursor-default">
-            {isArabic ? 'العقارات النخبة' : 'ELITE_PROPERTIES'}
+        <h1 className="text-6xl md:text-[clamp(4rem,10vw,12rem)] font-black mb-8 tracking-tighter uppercase italic leading-[0.85] animate-in fade-in transition-all duration-700">
+          <span className="text-white block mb-2">{isArabic ? 'النفير' : 'EL-NAFEER'}</span>
+          <span className="block text-2xl md:text-5xl transition-all duration-1000 text-sahara-gold drop-shadow-[0_0_50px_rgba(212,175,55,0.3)] hover:scale-105 transform cursor-default tracking-[0.2em] md:tracking-[0.5em]">
+            {isArabic ? 'القيادة الرقمية السيادية' : 'SOVEREIGN_TECH_AGENCY'}
           </span>
         </h1>
 
-        <p className="text-xl md:text-2xl text-gray-400 font-bold max-w-4xl mx-auto leading-tight mb-24 uppercase tracking-tighter opacity-80 border-y border-white/5 py-8">
+        <p className="text-sm md:text-xl text-gray-400 font-bold max-w-4xl mx-auto leading-relaxed mb-16 uppercase tracking-[0.2em] opacity-80 py-4">
           {isArabic
-            ? 'الاندماج التام بين ذكاء الآلة والتفوق العقاري المطلق.'
-            : 'The total fusion of machine intelligence and absolute real estate dominance.'}
+            ? 'نحن لا نصمم مواقع إلكترونية. نحن نهندس منصات قيادة سينمائية مدعومة بالذكاء الاصطناعي لكبرى شركات التطوير العقاري والمؤسسات الصناعية في مصر والمملكة العربية السعودية.'
+            : 'We do not build websites. We engineer cinematic AI command centers for elite real estate developers and industrial enterprises across Egypt and KSA.'}
         </p>
 
         {/* Action Node Buttons */}
-        <div className="flex flex-wrap justify-center gap-10 mb-32 relative z-20">
-          <Link
-            href="/properties"
-            className="group relative px-16 py-10 bg-white text-black rounded-2xl font-black text-xs uppercase tracking-[0.4em] overflow-hidden transition-all hover:scale-110 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.2)]"
+        <div className="flex flex-wrap justify-center gap-6 relative z-20">
+          <a
+            href="https://wa.me/201033332112?text=I%20want%20to%20build%20a%20Sovereign%20Command%20Center%20with%20EL-NAFEER"
+            className="group relative px-12 py-6 bg-sahara-gold text-black rounded-2xl font-black text-xs uppercase tracking-[0.4em] overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(212,175,55,0.4)]"
           >
-            <div className="absolute inset-0 bg-sahara-gold translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-            <span className="relative z-10 group-hover:text-black">{isArabic ? 'تحميل الأصول' : 'LOAD_MASTER_ASSETS'}</span>
-          </Link>
-          <Link
-            href="/apply"
-            className="group relative px-16 py-10 bg-white/5 border border-white/10 text-white rounded-2xl font-black text-xs uppercase tracking-[0.4em] overflow-hidden transition-all hover:bg-white/10 hover:border-sahara-gold/50 milky-glass"
-          >
-            <span className="relative z-10">{isArabic ? 'بدء التحليل' : 'INITIATE_ANALYSIS'}</span>
-          </Link>
+            <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+            <span className="relative z-10 group-hover:text-black flex items-center gap-3">
+              <span>{isArabic ? 'تواصل مع الإدارة' : 'CONTACT_DIRECTOR'}</span>
+              <span className="text-lg">⚡</span>
+            </span>
+          </a>
         </div>
       </div>
 
-      {/* Robotic Metrics Mesh */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-40 border-t border-b border-white/10 py-24 milky-glass relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-sahara-gold/[0.02] to-transparent pointer-events-none" />
-        {[
-          { label: isArabic ? 'الإحداثيات' : 'COORDINATES', value: 'CAIRO_EGY_02' },
-          { label: isArabic ? 'الحالة التشغيلية' : 'SYSTEM_STATUS', value: 'OPERATIONAL_STABLE' },
-          { label: isArabic ? 'نواة المعالجة' : 'NEURAL_CORE', value: 'ROBOTIC_ZENITH_X1' },
-        ].map((metric) => (
-          <div key={metric.label} className="text-center group px-12 relative">
-            <div className="text-[10px] font-black text-gray-600 uppercase tracking-[0.5em] mb-4 group-hover:text-sahara-gold transition-colors robotic-digits">
-              {metric.label}
-            </div>
-            <div className="text-2xl font-black text-white italic tracking-tighter uppercase group-hover:text-white transition-colors robotic-digits">
-              {metric.value}
-            </div>
-            <div className="absolute bottom-[-24px] left-1/2 -translate-x-1/2 w-0 h-[2px] bg-sahara-gold group-hover:w-full transition-all duration-700" />
-          </div>
-        ))}
-      </div>
-
-      {/* Specialized Nodes */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 mb-40">
-        {/* Node A: Transaction Engine */}
-        <div className="rounded-[2.5rem] p-16 md:p-24 relative group overflow-hidden milky-glass hover:border-sahara-gold/40 transition-all duration-500 hover:translate-y-[-10px]">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-sahara-gold/[0.05] blur-[100px] group-hover:opacity-100 opacity-0 transition-opacity" />
-          <div className="relative z-10">
-            <div className="w-24 h-24 bg-white/5 rounded-3xl flex items-center justify-center text-sahara-gold mb-12 border border-white/10 shadow-2xl group-hover:scale-110 transition-transform">
-              <span className="text-4xl">⚙️</span>
-            </div>
-            <h2 className="text-4xl font-black mb-8 italic tracking-tighter uppercase text-white group-hover:text-sahara-gold transition-colors">
-              {isArabic ? 'محرك الصفقات' : 'TRANSACTION_ENGINE'}
+      {/* === THE PORTFOLIO: LIVE DEMOS === */}
+      <div className="max-w-7xl mx-auto mb-32">
+        <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-black italic tracking-tighter uppercase text-white mb-4">
+              {isArabic ? 'محفظة المشاريع الحية' : 'LIVE_PORTFOLIO_NODES'}
             </h2>
-            <p className="text-sm text-gray-500 font-bold leading-relaxed uppercase tracking-widest leading-[2]">
-              {isArabic
-                ? 'استخدام خوارزميات الذكاء الاصطناعي لتحليل السوق وإغلاق الصفقات العقارية بدقة متناهية.'
-                : 'Utilizing neural market analysis to verify and close high-prestige real estate nodes with robotic precision.'}
-            </p>
-          </div>
+            <div className="w-24 h-1 bg-sahara-gold mx-auto shadow-[0_0_15px_#c5a059]" />
         </div>
 
-        {/* Node B: Asset Protocol */}
-        <div className="rounded-[2.5rem] p-16 md:p-24 relative group overflow-hidden milky-glass hover:border-cyan-500/40 transition-all duration-500 hover:translate-y-[-10px]">
-          <div className="absolute bottom-0 right-0 w-80 h-80 bg-cyan-500/[0.05] blur-[100px] group-hover:opacity-100 opacity-0 transition-opacity" />
-          <div className="relative z-10">
-            <div className="w-24 h-24 bg-white/5 rounded-3xl flex items-center justify-center text-cyan-400 mb-12 border border-white/10 shadow-2xl group-hover:scale-110 transition-transform">
-              <span className="text-4xl">🛰️</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+          
+          {/* REAL ESTATE ENGINE (KSA & EGYPT) */}
+          <Link href="/beit-alkhair" className="col-span-1 rounded-[3rem] p-8 md:p-12 relative group overflow-hidden bg-black/40 border border-sahara-gold/20 hover:border-sahara-gold/60 transition-all duration-700 shadow-[0_0_50px_rgba(212,175,55,0.05)] hover:shadow-[0_0_100px_rgba(212,175,55,0.2)] hover:-translate-y-2">
+            <div className="absolute inset-0 bg-gradient-to-br from-sahara-gold/[0.05] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-sahara-gold/10 blur-[120px] pointer-events-none" />
+            
+            <div className="relative z-10 flex flex-col h-full">
+              <div className="w-16 h-16 bg-sahara-gold/10 rounded-2xl flex items-center justify-center text-sahara-gold border border-sahara-gold/30 mb-8 shadow-xl">
+                <span className="text-2xl">🏗️</span>
+              </div>
+              
+              <h3 className="text-3xl md:text-4xl font-black italic tracking-tighter uppercase text-white mb-2">
+                  {isArabic ? 'القطاع العقاري' : 'REAL_ESTATE_ENGINE'}
+              </h3>
+              <p className="text-[10px] font-black text-sahara-gold uppercase tracking-[0.4em] mb-6">
+                EGYPT // KSA VISION 2030
+              </p>
+              
+              <p className="text-sm text-gray-400 font-bold leading-relaxed uppercase tracking-[0.1em] mb-12 flex-1">
+                  {isArabic 
+                      ? 'منصة المبيعات السينمائية الأقوى للمطورين العقاريين. تتميز بالخرائط العصبية الثلاثية الأبعاد، عرض حي للوحدات، ومستشار ذكاء اصطناعي.'
+                      : 'The ultimate cinematic sales platform for elite developers. Featuring 3D neural maps, live unit tracking, and AI-driven client consultation.'}
+              </p>
+              
+              <div className="flex justify-between items-center border-t border-sahara-gold/20 pt-6">
+                <div className="px-6 py-3 bg-sahara-gold text-black rounded-xl font-black text-[10px] uppercase tracking-[0.3em] group-hover:scale-105 transition-all">
+                     {isArabic ? 'فتح مشروع بيت الخير' : 'LAUNCH_BEIT_ALKHAIR'}
+                </div>
+                <span className="text-white opacity-50 group-hover:opacity-100 group-hover:translate-x-2 transition-all">➔</span>
+              </div>
             </div>
-            <h2 className="text-4xl font-black mb-8 italic tracking-tighter uppercase text-white group-hover:text-cyan-400 transition-colors">
-              {isArabic ? 'بروتوكول الأصول' : 'ASSET_PROTOCOL'}
-            </h2>
-            <p className="text-sm text-gray-500 font-bold leading-relaxed uppercase tracking-widest leading-[2]">
-              {isArabic
-                ? 'نظام مركزي لملاك العقارات يسمح بمراقبة الأداء المالي والنمو الاستراتيجي للمحفظة العقارية.'
-                : 'Centralized orchestration node for asset owners, managing financial trajectory and strategic portfolio growth.'}
-            </p>
-          </div>
-        </div>
+          </Link>
 
-        {/* Node C: Neural Real Estate AI (Quantum-9) */}
-        <Link href="/quantum-9" className="col-span-1 md:col-span-2 rounded-[2.5rem] p-16 md:p-24 relative group overflow-hidden bg-black/40 border-2 border-emerald-500/10 hover:border-emerald-500/40 transition-all duration-700 shadow-[0_0_50px_rgba(16,185,129,0.05)] hover:shadow-[0_0_100px_rgba(16,185,129,0.1)]">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/[0.05] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-          <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
-            <div className="w-24 h-24 bg-emerald-500/10 rounded-full flex items-center justify-center text-emerald-400 border border-emerald-500/20 group-hover:scale-110 transition-transform duration-700 shadow-2xl">
-              <span className="text-4xl animate-pulse">💎</span>
+          {/* INDUSTRIAL ENGINE (EGYPT) */}
+          <Link href="/portal/lever-pioneer-sovereign" className="col-span-1 rounded-[3rem] p-8 md:p-12 relative group overflow-hidden bg-black/40 border border-cyan-500/20 hover:border-cyan-500/60 transition-all duration-700 shadow-[0_0_50px_rgba(6,182,212,0.05)] hover:shadow-[0_0_100px_rgba(6,182,212,0.2)] hover:-translate-y-2">
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/[0.05] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[120px] pointer-events-none" />
+            
+            <div className="relative z-10 flex flex-col h-full">
+              <div className="w-16 h-16 bg-cyan-500/10 rounded-2xl flex items-center justify-center text-cyan-400 border border-cyan-500/30 mb-8 shadow-xl">
+                <span className="text-2xl">⚙️</span>
+              </div>
+              
+              <h3 className="text-3xl md:text-4xl font-black italic tracking-tighter uppercase text-white mb-2">
+                  {isArabic ? 'القطاع الصناعي والهندسي' : 'INDUSTRIAL_ENGINE'}
+              </h3>
+              <p className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.4em] mb-6">
+                HEAVY_MACHINERY // AUTOMOTIVE
+              </p>
+              
+              <p className="text-sm text-gray-400 font-bold leading-relaxed uppercase tracking-[0.1em] mb-12 flex-1">
+                  {isArabic 
+                      ? 'غرفة تحكم رقمية للمصانع، شركات المصاعد، والسيارات الفارهة. مزودة بأنظمة تتبع جرد ولوحات بيانات سيادية.'
+                      : 'Digital command rooms for factories, elevator firms, and luxury automotive. Equipped with inventory tracking and sovereign data dashes.'}
+              </p>
+              
+              <div className="flex justify-between items-center border-t border-cyan-500/20 pt-6">
+                <div className="px-6 py-3 bg-cyan-500 text-black rounded-xl font-black text-[10px] uppercase tracking-[0.3em] group-hover:scale-105 transition-all">
+                     {isArabic ? 'فتح مشروع روساس' : 'LAUNCH_ROSSAS_ELITE'}
+                </div>
+                <span className="text-white opacity-50 group-hover:opacity-100 group-hover:translate-x-2 transition-all">➔</span>
+              </div>
             </div>
-            <div className="flex-1 text-center md:text-left">
-                <h2 className="text-4xl md:text-5xl font-black italic tracking-tighter uppercase text-white group-hover:text-emerald-400 transition-colors mb-4">
-                    {isArabic ? 'الذكاء الاصطناعي العقاري' : 'NEURAL_REAL_ESTATE_AI'}
-                </h2>
-                <p className="text-sm text-gray-400 font-bold leading-relaxed uppercase tracking-[0.3em] font-mono opacity-60">
-                    {isArabic 
-                        ? 'نظام ترويج عقاري متصل بالجيل التاسع من واجهة كوانتم التفاعلية.'
-                        : 'Proprietary property promotion protocol connected to Quantum-9 interactive interfaces.'}
-                </p>
-            </div>
-            <div className="px-10 py-5 bg-white text-black rounded-full font-black text-xs uppercase tracking-[0.5em] group-hover:bg-emerald-500 group-hover:text-white transition-all shadow-xl">
-                 {isArabic ? 'فتح النواة' : 'OPEN_NODE'}
-            </div>
-          </div>
-        </Link>
+          </Link>
+
+        </div>
       </div>
 
       {/* Global Status Bar */}
-      <div className="max-w-7xl mx-auto mb-20 p-8 rounded-2xl border border-white/5 flex flex-wrap justify-between items-center gap-6 milky-glass">
+      <div className="max-w-7xl mx-auto mb-10 p-8 rounded-[2rem] border border-white/5 flex flex-wrap justify-between items-center gap-6 milky-glass">
         <div className="flex items-center gap-6">
           <div className="flex gap-2">
             {['delay-75', 'delay-150', 'delay-300'].map((delay, i) => (
@@ -216,20 +155,11 @@ export default function HomeContent() {
             ))}
           </div>
           <p className="text-[10px] font-black text-gray-600 uppercase tracking-[0.4em] robotic-digits">
-            NETWORK_UPTIME: 99.99% // RE_EGY_GRID_ACTIVE
+            EL_NAFEER_MAIN_SERVER: 99.99% // SECURE
           </p>
         </div>
-        <div className="text-[10px] font-black text-sahara-gold bg-sahara-gold/10 px-4 py-2 rounded-lg robotic-digits">
-          ENCRYPTED_LINK_ESTABLISHED
-        </div>
-      </div>
-
-      {/* Floating AI Drone Visual */}
-      <div className="fixed top-1/2 right-12 w-32 h-32 pointer-events-none z-0 opacity-10 hidden xl:block">
-        <div className="absolute inset-0 bg-cyan-500/20 blur-3xl animate-pulse" />
-        <div className="w-full h-full border border-cyan-500/30 rounded-full animate-[spin_10s_linear_infinite] flex items-center justify-center">
-          <div className="w-[80%] h-[80%] border border-cyan-500/20 rounded-full animate-[spin_5s_linear_infinite_reverse]" />
-          <div className="absolute w-4 h-4 bg-cyan-500 rounded-full shadow-[0_0_20px_rgba(6,182,212,1)]" />
+        <div className="text-[10px] font-black text-sahara-gold bg-sahara-gold/10 px-6 py-3 rounded-xl robotic-digits">
+          AGENCY_PORTFOLIO_ONLINE
         </div>
       </div>
     </div>

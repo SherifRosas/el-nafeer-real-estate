@@ -34,17 +34,26 @@ export default function BeitAlKhairNeuralGrid({ properties, userRole, onStatusTo
   // 🏙️ BUILDING_IDENTITY_SYNC
   const activeProps = properties.length > 0 ? properties : SYNTHETIC_NODES
   const firstTitle = activeProps[0]?.title || 'QASR NODE'
-  const numericId = firstTitle.replace(/[^0-9]/g, '') || 'NODE'
+  const numericId = firstTitle.match(/\d+/)?.[0] || 'NODE'
   
-  // Extract real database image uploaded by user, or fallback to the cinematic 8k visual
-  let resolvedImagePath = '/campaigns/beit-alkhair/qasr_toukh_cinematic.png'
+  // Extract real database images uploaded by user, or fallback to the cinematic 8k visual
+  let resolvedImages: string[] = ['/campaigns/beit-alkhair/qasr_toukh_cinematic.png']
   if (activeProps[0]) {
     const p = activeProps[0] as any
-    if (p.images && p.images.length > 0) resolvedImagePath = p.images[0]
-    else if (p.imageUrls && p.imageUrls.length > 0) resolvedImagePath = p.imageUrls[0]
-    else if (p.imageUrl) resolvedImagePath = p.imageUrl
+    if (p.images && p.images.length > 0) resolvedImages = p.images
+    else if (p.imageUrls && p.imageUrls.length > 0) resolvedImages = p.imageUrls
+    else if (p.imageUrl) resolvedImages = [p.imageUrl]
   }
-  const imagePath = resolvedImagePath
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  useEffect(() => {
+    if (resolvedImages.length <= 1) return
+    const interval = setInterval(() => {
+      setCurrentImageIndex(prev => (prev + 1) % resolvedImages.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [resolvedImages])
 
   const handleInteraction = () => {
     if (!isAudioInitialized) {
@@ -72,18 +81,35 @@ export default function BeitAlKhairNeuralGrid({ properties, userRole, onStatusTo
             <h2 className="text-4xl lg:text-6xl font-black text-white italic tracking-[-0.1em] uppercase leading-none mb-4 text-luxury-gold">{numericId === 'NODE' ? firstTitle : `QASR_${numericId}`}</h2>
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-10">QALYUBIA // BEIT AL-KHAIR PORTFOLIO</p>
 
-            <div className="w-full flex-1 min-h-[200px] max-h-[40vh] rounded-[3rem] overflow-hidden border border-white/10 relative group mb-8">
-                <img 
-                    src={imagePath} 
-                    alt={`Al-Qasr ${numericId}`}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
-                    onError={(e) => {
-                        (e.target as HTMLImageElement).src = '/campaigns/beit-alkhair/qasr_toukh_cinematic.png'
-                    }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                <div className="absolute bottom-6 left-6 flex items-center gap-3">
-                    <span className="px-4 py-2 bg-black/60 backdrop-blur-md rounded-full border border-sahara-gold/40 text-sahara-gold text-[8px] font-black uppercase tracking-widest">3D_MANIFEST_STABLE</span>
+            <div className="w-full flex-1 min-h-[200px] max-h-[40vh] rounded-[3rem] overflow-hidden border border-white/10 relative group mb-8 bg-black">
+                <AnimatePresence mode="wait">
+                    <motion.img 
+                        key={currentImageIndex}
+                        initial={{ opacity: 0, scale: 1.05 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1 }}
+                        src={resolvedImages[currentImageIndex]} 
+                        alt={`Al-Qasr ${numericId} Telemetry`}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        onError={(e) => {
+                            (e.target as HTMLImageElement).src = '/campaigns/beit-alkhair/qasr_toukh_cinematic.png'
+                        }}
+                    />
+                </AnimatePresence>
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent pointer-events-none" />
+                <div className="absolute bottom-6 left-6 flex flex-col gap-2 z-20">
+                    <div className="flex items-center gap-3">
+                        <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse shadow-[0_0_10px_#ef4444]" />
+                        <span className="px-4 py-2 bg-black/60 backdrop-blur-md rounded-full border border-red-500/40 text-red-400 text-[8px] font-black uppercase tracking-widest">LIVE_CONSTRUCTION_FEED</span>
+                    </div>
+                    {resolvedImages.length > 1 && (
+                        <div className="flex gap-1 ml-1 mt-1">
+                            {resolvedImages.map((_, idx) => (
+                                <div key={idx} className={`h-1 rounded-full transition-all duration-500 ${idx === currentImageIndex ? 'w-4 bg-red-500' : 'w-1 bg-white/20'}`} />
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
 

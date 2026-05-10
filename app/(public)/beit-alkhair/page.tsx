@@ -90,19 +90,19 @@ export default function BeitAlKhairPage() {
               <AdvancedBeitAlKhairMesh />
 
       {/* 📟 TOP_LEVEL_SYMMETRIC_HEADER */}
-      <header className="flex justify-between items-center mb-1 lg:mb-4 border-b border-sahara-gold/10 pb-1 lg:pb-3 px-2 lg:px-6 relative z-50 bg-transparent rounded-3xl">
-        <div className="flex items-center gap-3 lg:gap-6">
-            <div className="w-10 h-10 lg:w-16 lg:h-16 flex items-center justify-center overflow-hidden rounded-xl border border-sahara-gold/20 bg-black/50 shadow-[0_0_20px_rgba(197,160,89,0.1)]">
+      <div className="flex justify-between items-center mb-1 lg:mb-2 border-b border-sahara-gold/10 pb-1 lg:pb-2 px-2 lg:px-4 relative z-50 bg-transparent rounded-2xl">
+        <div className="flex items-center gap-2 lg:gap-4">
+            <div className="w-6 h-6 lg:w-12 lg:h-12 flex items-center justify-center overflow-hidden rounded-lg border border-sahara-gold/20 bg-black/50 shadow-[0_0_20px_rgba(197,160,89,0.1)]">
                 <img 
                     src="/campaigns/beit-alkhair/official-logo.jpg" 
                     alt="Beit Al-Khair Official" 
                     className="w-full h-full object-contain brightness-110"
                 />
             </div>
-            <div className="flex flex-col">
-                <h1 className={`text-sm lg:text-2xl font-bold text-[#fcfcfc] uppercase tracking-wide leading-none mb-0.5 lg:mb-1 ${language === 'ar' ? 'font-["Cairo"]' : ''}`}>
+            <div className="flex flex-col justify-center">
+                <p className={`text-[10px] lg:text-xl font-bold text-[#fcfcfc] uppercase tracking-wide leading-none mb-0.5 ${language === 'ar' ? 'font-["Cairo"]' : ''}`}>
                   {t.title}
-                </h1>
+                </p>
                 <div className="flex items-center gap-1.5 lg:gap-2 opacity-40">
                   <span className="w-1 h-1 lg:w-1.5 lg:h-1.5 bg-sahara-gold rounded-full" />
                   <p className="text-[5px] lg:text-[7px] font-black text-white uppercase tracking-[0.2em] lg:tracking-[0.4em] robotic-digits leading-none">
@@ -119,7 +119,7 @@ export default function BeitAlKhairPage() {
                 <span className="text-[6px] lg:text-[10px] font-black text-white/80 italic uppercase tracking-[0.1em] border-b border-sahara-gold/20 pb-0.5">{t.domain}</span>
             </div>
         </div>
-      </header>
+      </div>
 
       {/* 🕹️ MAIN_CONSOLE_BODY */}
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-8 min-h-0 relative z-40">
