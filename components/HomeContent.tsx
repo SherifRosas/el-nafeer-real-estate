@@ -112,7 +112,7 @@ export default function HomeContent() {
           </Link>
 
           {/* INDUSTRIAL ENGINE (EGYPT) */}
-          <Link href="/portal/lever-pioneer-sovereign" className="col-span-1 rounded-[3rem] p-8 md:p-12 relative group overflow-hidden bg-black/40 border border-cyan-500/20 hover:border-cyan-500/60 transition-all duration-700 shadow-[0_0_50px_rgba(6,182,212,0.05)] hover:shadow-[0_0_100px_rgba(6,182,212,0.2)] hover:-translate-y-2">
+          <Link href="/portal/lever-pioneer-elite" className="col-span-1 rounded-[3rem] p-8 md:p-12 relative group overflow-hidden bg-black/40 border border-cyan-500/20 hover:border-cyan-500/60 transition-all duration-700 shadow-[0_0_50px_rgba(6,182,212,0.05)] hover:shadow-[0_0_100px_rgba(6,182,212,0.2)] hover:-translate-y-2">
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/[0.05] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[120px] pointer-events-none" />
             
