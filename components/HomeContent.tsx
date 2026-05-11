@@ -1,86 +1,150 @@
 'use client'
 
 import Link from 'next/link'
-import SocialShare from '@/components/SocialShare'
 import { useLanguage } from './LanguageContext'
 import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 
 export default function HomeContent() {
   const { language } = useLanguage()
   const isArabic = language === 'ar'
-  const [isFlipped, setIsFlipped] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [digits, setDigits] = useState('000.000.000')
 
   useEffect(() => {
     setMounted(true)
-    // Auto-flip the coin every 4 seconds
-    const flipTimer = setInterval(() => {
-      setIsFlipped(prev => !prev)
-    }, 4000)
-    return () => clearInterval(flipTimer)
+    // Fancy data running in the background
+    const interval = setInterval(() => {
+      setDigits((Math.random() * 999999999).toFixed(0).padStart(9, '0').replace(/\B(?=(\d{3})+(?!\d))/g, "."))
+    }, 150)
+    return () => clearInterval(interval)
   }, [])
 
-  const logoSrc = isArabic ? '/logos/logo-ar.png' : '/logos/logo-en.png'
+  if (!mounted) return null;
+
   return (
-    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-12 overflow-hidden">
-      {/* Absolute Minimalist Background */}
-      <div className="absolute inset-0 bg-black" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-sahara-gold/[0.02] blur-[150px] pointer-events-none rounded-full" />
+    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-12 overflow-hidden bg-[#030712] selection:bg-[#D4AF37] selection:text-[#030712] font-sans">
+      
+      {/* === ROYAL CYBER AMBIENCE === */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Deep Blue/Gold Glows */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-[radial-gradient(ellipse_at_center,_rgba(212,175,55,0.05)_0%,_rgba(15,23,42,0)_70%)] rounded-full blur-[80px]" />
+        <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,_rgba(30,58,138,0.1)_0%,_rgba(3,7,18,0)_70%)] rounded-full blur-[100px]" />
+        
+        {/* Milky Silver Grid Overlay */}
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03]" />
+
+        {/* Floating Modern Digits */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.15 }}
+          transition={{ duration: 2 }}
+          className="absolute top-10 left-10 text-4xl font-black text-slate-500 robotic-digits tracking-[0.5em] blur-[1px]"
+        >
+          {digits}
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.2 }}
+          transition={{ duration: 2, delay: 0.5 }}
+          className="absolute bottom-20 right-10 text-2xl font-black text-[#D4AF37] robotic-digits tracking-[0.5em] rotate-90 blur-[1px]"
+        >
+          {digits}
+        </motion.div>
+      </div>
 
       {/* === CORE BRANDING === */}
-      <div className="relative z-20 text-center mb-16">
-        <h1 className="text-5xl md:text-[8rem] font-black tracking-tighter uppercase italic leading-none mb-4 text-white drop-shadow-2xl">
+      <motion.div 
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className="relative z-20 text-center mb-24 mt-10"
+      >
+        <h1 className="text-6xl md:text-[9rem] font-black tracking-tighter uppercase italic leading-none mb-6 text-slate-100 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
           {isArabic ? 'النفير' : 'EL-NAFEER'}
         </h1>
-        <h2 className="text-sm md:text-2xl font-bold tracking-[0.4em] md:tracking-[0.8em] uppercase text-sahara-gold opacity-90">
-          {isArabic ? 'القيادة التقنية السيادية' : 'SOVEREIGN TECH AGENCY'}
-        </h2>
-      </div>
+        <div className="flex items-center justify-center gap-6">
+          <div className="h-[1px] w-12 md:w-32 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-50" />
+          <h2 className="text-xs md:text-xl font-bold tracking-[0.6em] md:tracking-[1em] uppercase text-[#D4AF37] drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]">
+            {isArabic ? 'وكالة التقنية السيادية' : 'SOVEREIGN TECH AGENCY'}
+          </h2>
+          <div className="h-[1px] w-12 md:w-32 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-50" />
+        </div>
+      </motion.div>
 
-      {/* === SLEEK PORTFOLIO LINKS === */}
-      <div className="relative z-20 flex flex-col md:flex-row gap-6 md:gap-12 w-full max-w-4xl mx-auto mb-16">
+      {/* === LUXURY PORTFOLIO LINKS === */}
+      <div className="relative z-20 flex flex-col md:flex-row gap-8 md:gap-16 w-full max-w-5xl mx-auto mb-24">
         
         {/* Real Estate Link */}
-        <Link 
-          href="/beit-alkhair" 
-          className="flex-1 group relative p-8 border-y border-white/10 hover:border-sahara-gold/50 transition-all duration-500 bg-black/50 backdrop-blur-sm flex flex-col items-center justify-center text-center overflow-hidden"
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="flex-1"
         >
-          <div className="absolute inset-0 bg-sahara-gold/[0.02] translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
-          <span className="text-3xl mb-4 opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">🏗️</span>
-          <h3 className="text-xl font-black italic tracking-[0.2em] uppercase text-white mb-2">
-            {isArabic ? 'القطاع العقاري' : 'REAL ESTATE'}
-          </h3>
-          <p className="text-[10px] text-sahara-gold tracking-[0.3em] uppercase opacity-60">
-            LIVE COMMAND CENTER
-          </p>
-        </Link>
+          <Link 
+            href="/beit-alkhair" 
+            className="group relative block p-12 bg-slate-900/40 backdrop-blur-xl rounded-2xl border border-slate-700/50 shadow-[0_0_50px_rgba(0,0,0,0.5)] hover:shadow-[0_0_80px_rgba(212,175,55,0.15)] hover:border-[#D4AF37]/50 hover:-translate-y-2 transition-all duration-700 flex flex-col items-center text-center overflow-hidden"
+          >
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#D4AF37]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            
+            <span className="text-5xl mb-6 opacity-70 group-hover:opacity-100 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.8)] transition-all duration-500">🏛️</span>
+            <h3 className="text-2xl font-black italic tracking-[0.2em] uppercase text-slate-200 group-hover:text-white mb-3 transition-colors">
+              {isArabic ? 'القطاع العقاري' : 'REAL ESTATE'}
+            </h3>
+            <p className="text-[9px] font-bold text-[#D4AF37] tracking-[0.4em] uppercase">
+              PRESTIGE COMMAND CENTER
+            </p>
+          </Link>
+        </motion.div>
 
         {/* Industrial Link */}
-        <Link 
-          href="/portal/lever-pioneer-elite" 
-          className="flex-1 group relative p-8 border-y border-white/10 hover:border-cyan-500/50 transition-all duration-500 bg-black/50 backdrop-blur-sm flex flex-col items-center justify-center text-center overflow-hidden"
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="flex-1"
         >
-          <div className="absolute inset-0 bg-cyan-500/[0.02] translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
-          <span className="text-3xl mb-4 opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">⚙️</span>
-          <h3 className="text-xl font-black italic tracking-[0.2em] uppercase text-white mb-2">
-            {isArabic ? 'القطاع الصناعي' : 'INDUSTRIAL'}
-          </h3>
-          <p className="text-[10px] text-cyan-400 tracking-[0.3em] uppercase opacity-60">
-            ELITE COMMAND CENTER
-          </p>
-        </Link>
+          <Link 
+            href="/portal/lever-pioneer-elite" 
+            className="group relative block p-12 bg-slate-900/40 backdrop-blur-xl rounded-2xl border border-slate-700/50 shadow-[0_0_50px_rgba(0,0,0,0.5)] hover:shadow-[0_0_80px_rgba(56,189,248,0.15)] hover:border-sky-400/50 hover:-translate-y-2 transition-all duration-700 flex flex-col items-center text-center overflow-hidden"
+          >
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sky-400 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-b from-sky-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            
+            <span className="text-5xl mb-6 opacity-70 group-hover:opacity-100 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(56,189,248,0.8)] transition-all duration-500">⚙️</span>
+            <h3 className="text-2xl font-black italic tracking-[0.2em] uppercase text-slate-200 group-hover:text-white mb-3 transition-colors">
+              {isArabic ? 'القطاع الصناعي' : 'INDUSTRIAL'}
+            </h3>
+            <p className="text-[9px] font-bold text-sky-400 tracking-[0.4em] uppercase">
+              ELITE COMMAND CENTER
+            </p>
+          </Link>
+        </motion.div>
 
       </div>
 
-      {/* === CONTACT / ACTION === */}
-      <div className="relative z-20">
+      {/* === VIP CONTACT ACTION === */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.8 }}
+        className="relative z-20"
+      >
         <a
           href="https://wa.me/201558408659?text=I%20want%20to%20build%20a%20Sovereign%20Command%20Center%20with%20EL-NAFEER"
-          className="inline-block px-10 py-4 border border-white/20 text-white text-[10px] md:text-xs font-black tracking-[0.5em] uppercase hover:bg-white hover:text-black transition-all duration-500"
+          className="group relative inline-flex items-center justify-center px-12 py-5 bg-slate-800/80 backdrop-blur-md text-slate-200 border border-slate-600/50 text-[10px] md:text-xs font-bold tracking-[0.5em] uppercase overflow-hidden rounded-sm hover:border-[#D4AF37]/80 hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-500"
         >
-          {isArabic ? 'تواصل مع الإدارة العليا' : 'INITIATE CONTACT'}
+          <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#D4AF37]/20 to-transparent -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+          <span className="relative z-10 flex items-center gap-3 group-hover:text-[#D4AF37] transition-colors">
+            {isArabic ? 'بدء التواصل السيادي' : 'INITIATE VIP CONTACT'}
+            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#D4AF37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </span>
         </a>
-      </div>
+      </motion.div>
     </div>
   )
 }
