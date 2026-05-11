@@ -1,14 +1,12 @@
 import ContentProtection from '@/components/ContentProtection'
 import AIChatbot from '@/components/AIChatbot'
 import HomeContent from '@/components/HomeContent'
-import NavigationHeader from '@/components/NavigationHeader'
 
 export default async function HomePage() {
   return (
     <>
       <ContentProtection />
       <div className="min-h-screen bg-[#020202] text-white">
-        <NavigationHeader />
 
         {/* Global HUD Frame Accents */}
         <div className="fixed inset-0 pointer-events-none z-50">
