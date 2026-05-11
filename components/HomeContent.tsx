@@ -21,7 +21,7 @@ export default function HomeContent() {
   }, [])
 
   const logoSrc = isArabic ? '/logos/logo-ar.png' : '/logos/logo-en.png'
-
+  return (
     <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-12 overflow-hidden">
       {/* Absolute Minimalist Background */}
       <div className="absolute inset-0 bg-black" />
@@ -75,7 +75,7 @@ export default function HomeContent() {
       {/* === CONTACT / ACTION === */}
       <div className="relative z-20">
         <a
-          href="https://wa.me/201033332112?text=I%20want%20to%20build%20a%20Sovereign%20Command%20Center%20with%20EL-NAFEER"
+          href="https://wa.me/201558408659?text=I%20want%20to%20build%20a%20Sovereign%20Command%20Center%20with%20EL-NAFEER"
           className="inline-block px-10 py-4 border border-white/20 text-white text-[10px] md:text-xs font-black tracking-[0.5em] uppercase hover:bg-white hover:text-black transition-all duration-500"
         >
           {isArabic ? 'تواصل مع الإدارة العليا' : 'INITIATE CONTACT'}
