@@ -72,9 +72,8 @@ export default function MasterFooter() {
                                     {isArabic ? 'مطور الذكاء الاصطناعي وماستر المنصة' : 'AI Developer & Platform Master'}
                                 </p>
                                 <div className="flex gap-3">
-                                    <a href="tel:+201065661882" className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-sahara-gold hover:text-black transition-all flex items-center justify-center flex-1 gap-2 rtl:flex-row-reverse">
-                                        <span className="text-xs">📞</span>
-                                        <span className="text-[10px] font-black robotic-digits">+20 106 566 1882</span>
+                                    <a href="tel:+201065661882" className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg hover:bg-sahara-gold hover:text-black transition-all flex items-center justify-center">
+                                        <span className="text-sm">📞</span>
                                     </a>
                                 </div>
                             </div>
