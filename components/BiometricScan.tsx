@@ -80,10 +80,10 @@ export default function BiometricScan({ onComplete, identityName = 'SOVEREIGN_US
                 </div>
 
                 {/* STATUS_READOUTS */}
-                <div className="text-center space-y-3">
-                    <p className="text-[10px] text-cyan-400/50 uppercase tracking-[0.5em] italic">{status}</p>
-                    <h2 className="text-xl lg:text-2xl font-black text-white italic tracking-[0.1em] uppercase leading-tight break-all">
-                        {identityName}
+                <div className="text-center space-y-4 w-full px-4">
+                    <p className="text-[10px] text-cyan-400/50 uppercase tracking-[0.5em] italic truncate">{status}</p>
+                    <h2 className="text-lg lg:text-xl font-black text-white italic tracking-[0.2em] uppercase leading-relaxed break-words word-break">
+                        {identityName.replace(/_/g, ' ')}
                     </h2>
                 </div>
 
