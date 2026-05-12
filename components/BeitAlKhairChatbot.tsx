@@ -128,24 +128,30 @@ export default function BeitAlKhairChatbot() {
           )}
         </AnimatePresence>
 
-        {/* Floating Trigger */}
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+        {/* STABILIZED FAB - ROBOTIC SHINY ORB (BEIT AL-KHAIR EDITION) */}
+        <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`w-20 h-20 rounded-[2rem] border-2 shadow-[0_20px_60px_rgba(0,0,0,0.4)] flex items-center justify-center transition-all duration-500 overflow-hidden ${
-            isOpen ? 'bg-red-500/80 backdrop-blur-md border-red-500 rotate-45 shadow-[0_0_40px_rgba(239,68,68,0.5)]' : 'prestige-glass shadow-[0_0_40px_rgba(197,160,89,0.3)]'
-          }`}
+          className={`fixed bottom-12 right-6 z-[100025] transition-all duration-700 ${isOpen ? 'translate-y-32 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100 hover:-translate-y-2'}`}
+          aria-label="Open Property Consultant"
         >
-          {isOpen ? (
-            <span className="text-white text-2xl -rotate-45">✕</span>
-          ) : (
-            <div className="relative flex flex-col items-center">
-                <span className="text-sahara-gold text-2xl mb-1">🏦</span>
-                <span className="text-[6px] font-bold text-sahara-gold tracking-widest leading-none">AI_CONSULT</span>
-            </div>
-          )}
-        </motion.button>
+          <div className="relative w-20 h-20 rounded-full flex items-center justify-center bg-black/80 backdrop-blur-xl border border-sahara-gold/50 shadow-[0_0_50px_rgba(212,175,55,0.4)] hover:shadow-[0_0_80px_rgba(255,255,255,0.4)] hover:border-white transition-all duration-500 overflow-hidden group">
+            
+            {/* Robotic Rotating Rings */}
+            <div className="absolute inset-0 rounded-full border-[2px] border-dashed border-sahara-gold/40 animate-[spin_10s_linear_infinite] group-hover:border-white/50 group-hover:animate-[spin_5s_linear_infinite]" />
+            <div className="absolute inset-2 rounded-full border border-sahara-gold/20 animate-[spin_6s_linear_infinite_reverse] group-hover:border-white/40" />
+
+            {/* Shiny Core Glow */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(212,175,55,0.4)_0%,_rgba(0,0,0,0)_70%)] group-hover:bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.4)_0%,_rgba(0,0,0,0)_70%)] transition-colors duration-500" />
+            
+            {/* Pulsing Inner Core */}
+            <div className="absolute inset-0 rounded-full bg-sahara-gold/10 animate-ping group-hover:bg-white/20" />
+
+            {/* Core Icon */}
+            <span className="text-3xl relative z-10 text-sahara-gold group-hover:text-white drop-shadow-[0_0_15px_#d4af37] group-hover:drop-shadow-[0_0_20px_#ffffff] transition-all duration-500 transform group-hover:scale-110">
+              🏦
+            </span>
+          </div>
+        </button>
       </div>
     </>
   )
