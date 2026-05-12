@@ -391,32 +391,32 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
         </div>
       </div>
 
-      {/* STABILIZED FAB - POSITIONED AWAY FROM BOTTOM ACTION BAR ICONS */}
+      {/* STABILIZED FAB - ROBOTIC SHINY ORB (NO TAIL) */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-32 right-6 group z-[100025] flex items-center gap-4 transition-all duration-500 ${isOpen ? 'translate-y-20 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}
+        className={`fixed bottom-12 right-6 z-[100025] transition-all duration-700 ${isOpen ? 'translate-y-32 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100 hover:-translate-y-2'}`}
         aria-label={isArabic ? 'فتح المستشار العقاري' : 'Open Property Consultant'}
       >
-        {!isOpen && (
-          <div className="hidden md:block bg-black/90 backdrop-blur-3xl px-5 py-2 rounded-full shadow-2xl border border-cyan-500/40 animate-in fade-in slide-in-from-right-4 duration-500">
-            <p className="text-cyan-400 font-black text-[9px] uppercase tracking-[0.2em] italic flex items-center gap-2">
-              <span className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse" />
-              {isArabic ? (vertical === 'elevator' ? 'استشارة ليفر الرائدة ✨' : 'استشارة النفير الذكية ✨') : 'QUANTUM_AI_INITIATE ✨'}
-            </p>
-          </div>
-        )}
-        <div className="w-16 h-16 rounded-full flex items-center justify-center transition-all duration-500 shadow-2xl border-2 bg-black border-cyan-500/40 hover:border-cyan-500 hover:scale-110 shadow-[0_0_40px_rgba(6,182,212,0.3)]">
-          <div className="relative flex flex-col items-center justify-center w-full h-full">
-            <div className="absolute inset-0 rounded-full border border-sahara-gold/10 animate-[spin_8s_linear_infinite]" />
-            {vertical === 'elevator' ? (
-              <Zap className="w-8 h-8 relative z-10 text-sahara-gold drop-shadow-[0_0_15px_#c5a059]" />
-            ) : (
-              <svg className="w-8 h-8 relative z-10 text-sahara-gold drop-shadow-[0_0_15px_#c5a059]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-              </svg>
-            )}
-            <div className="absolute inset-0 rounded-full bg-sahara-gold/5 animate-ping" />
-          </div>
+        <div className="relative w-20 h-20 rounded-full flex items-center justify-center bg-black/80 backdrop-blur-xl border border-cyan-400/50 shadow-[0_0_50px_rgba(6,182,212,0.4)] hover:shadow-[0_0_80px_rgba(212,175,55,0.6)] hover:border-sahara-gold transition-all duration-500 overflow-hidden group">
+          
+          {/* Robotic Rotating Rings */}
+          <div className="absolute inset-0 rounded-full border-[2px] border-dashed border-cyan-500/30 animate-[spin_10s_linear_infinite] group-hover:border-sahara-gold/50 group-hover:animate-[spin_5s_linear_infinite]" />
+          <div className="absolute inset-2 rounded-full border border-cyan-400/20 animate-[spin_6s_linear_infinite_reverse] group-hover:border-sahara-gold/40" />
+
+          {/* Shiny Core Glow */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(6,182,212,0.4)_0%,_rgba(0,0,0,0)_70%)] group-hover:bg-[radial-gradient(circle_at_center,_rgba(212,175,55,0.4)_0%,_rgba(0,0,0,0)_70%)] transition-colors duration-500" />
+          
+          {/* Pulsing Inner Core */}
+          <div className="absolute inset-0 rounded-full bg-cyan-400/10 animate-ping group-hover:bg-sahara-gold/20" />
+
+          {/* Core Icon */}
+          {vertical === 'elevator' ? (
+            <Zap className="w-8 h-8 relative z-10 text-cyan-400 group-hover:text-sahara-gold drop-shadow-[0_0_15px_#06b6d4] group-hover:drop-shadow-[0_0_20px_#d4af37] transition-all duration-500" />
+          ) : (
+            <svg className="w-9 h-9 relative z-10 text-cyan-400 group-hover:text-sahara-gold drop-shadow-[0_0_15px_#06b6d4] group-hover:drop-shadow-[0_0_20px_#d4af37] transition-all duration-500 transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+            </svg>
+          )}
         </div>
       </button>
     </>
