@@ -1,195 +1,110 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AdvancedBeitAlKhairMesh from '@/components/AdvancedBeitAlKhairMesh'
-import LanguageSwitcher from '@/components/LanguageSwitcher'
-import { useLanguage } from '@/components/LanguageContext'
-import BiometricScan from '@/components/BiometricScan'
-import { AnimatePresence, motion } from 'framer-motion'
-import BeitAlKhairUnifiedConsole from '@/components/BeitAlKhairUnifiedConsole'
-
-// --- BEIT AL-KHAIR BILINGUAL DICTIONARY ---
-const DICTIONARY = {
-  ar: {
-    title: 'بيت الخير للتطوير العقاري',
-    subtitle: 'أنظمة الذكاء العقاري | حجز مباشر',
-    node: 'فرصة_حصرية',
-    domain: 'مشاريع_القليوبية',
-    console_title: 'المبيعات',
-    console_subtitle: 'إدارة',
-    intel_stream: 'أنظمة_السداد_الذكية',
-    reservation: 'احجز_وحدتك_الآن',
-    status: 'متاح',
-    footer_text: 'تأمين مستقبلك العقاري في قلب طوخ وبنها...'
-  },
-  en: {
-    title: 'BEIT AL-KHAIR REAL ESTATE',
-    subtitle: 'SMART REAL_ESTATE // DIRECT_BOOKING',
-    node: 'EXCLUSIVE_ACCESS',
-    domain: 'QALYUBIA_PROJECTS',
-    console_title: 'SALES',
-    console_subtitle: 'MANAGEMENT',
-    intel_stream: 'PAYMENT_SYSTEMS',
-    reservation: 'BOOK_YOUR_UNIT',
-    status: 'AVAILABLE',
-    footer_text: 'SECURING_YOUR_REAL_ESTATE_FUTURE_IN_TOUKH...'
-  }
-}
+import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 export default function BeitAlKhairPage() {
-  const { language } = useLanguage()
-  const t = DICTIONARY[language]
-  
-  const [showScan, setShowScan] = React.useState(true)
-  
+  const [dots, setDots] = useState('...')
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDots(d => d.length >= 3 ? '.' : d + '.')
+    }, 600)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
-    <div className="relative h-screen w-screen overflow-hidden bg-[#050811]">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "RealEstateAgent",
-            "name": "Beit Al-Khair Real Estate Development",
-            "image": "https://el-nafeer-real-estate.vercel.app/campaigns/beit-alkhair/official-logo.jpg",
-            "description": "Leading Real Estate Developer in Qalyubia, specializing in luxury Smart-Home Qasrs in Toukh and Banha.",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Toukh",
-              "addressRegion": "Al Qalyubia Governorate",
-              "addressCountry": "EG"
-            },
-            "telephone": "+201033332112",
-            "priceRange": "$$$$"
-          })
-        }}
-      />
-      <AnimatePresence mode="wait">
-        {showScan ? (
-          <motion.div
-            key="biometric-scan"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0, filter: 'blur(20px)', scale: 1.1 }}
-            transition={{ duration: 1 }}
+    <div className="relative h-screen w-screen overflow-hidden bg-[#050811] flex items-center justify-center">
+      <AdvancedBeitAlKhairMesh />
+      <div className="absolute inset-0 bg-black/60 z-10" />
+
+      <div className="relative z-20 flex flex-col items-center justify-center text-center px-6 max-w-2xl mx-auto">
+
+        {/* Logo */}
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="mb-8"
+        >
+          <div className="w-20 h-20 mx-auto mb-4 rounded-2xl border border-sahara-gold/30 bg-black/50 flex items-center justify-center shadow-[0_0_40px_rgba(212,175,55,0.2)]">
+            <img src="/campaigns/beit-alkhair/official-logo.jpg" alt="Beit Al-Khair" className="w-full h-full object-contain rounded-2xl" />
+          </div>
+          <p className="text-[9px] font-black text-sahara-gold/60 tracking-[0.5em] uppercase">BEIT AL-KHAIR REAL ESTATE</p>
+        </motion.div>
+
+        {/* Main Heading */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="mb-6"
+        >
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="h-[1px] w-16 bg-gradient-to-r from-transparent via-sahara-gold to-transparent" />
+            <span className="text-[8px] font-black text-sahara-gold/50 tracking-[0.6em] uppercase">SYSTEM_STATUS</span>
+            <div className="h-[1px] w-16 bg-gradient-to-r from-transparent via-sahara-gold to-transparent" />
+          </div>
+          <h1 className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-white leading-tight mb-3">
+            تحت التطوير
+          </h1>
+          <h2 className="text-xl md:text-2xl font-black italic uppercase tracking-widest text-sahara-gold">
+            UNDER DEVELOPMENT
+          </h2>
+        </motion.div>
+
+        {/* Status Box */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="mb-10 w-full max-w-md"
+        >
+          <div className="bg-black/40 backdrop-blur-xl border border-sahara-gold/20 rounded-2xl p-6 text-right space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-sahara-gold font-black text-xs font-mono">{dots}</span>
+              <p className="text-gray-400 text-xs font-bold">نعمل على إطلاق المنصة قريباً</p>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
+              <p className="text-gray-500 text-[10px] uppercase tracking-widest font-mono">INITIALIZING_SYSTEMS</p>
+            </div>
+            <div className="w-full bg-white/5 rounded-full h-1 overflow-hidden">
+              <motion.div
+                className="h-full bg-gradient-to-r from-sahara-gold via-yellow-300 to-sahara-gold"
+                initial={{ width: '0%' }}
+                animate={{ width: '72%' }}
+                transition={{ duration: 2, delay: 1, ease: 'easeOut' }}
+              />
+            </div>
+            <p className="text-sahara-gold/40 text-[9px] font-mono text-left">72% COMPLETE</p>
+          </div>
+        </motion.div>
+
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+          className="flex flex-col sm:flex-row gap-4"
+        >
+          <a
+            href="https://wa.me/201033332112?text=أريد الاستفسار عن مشاريع بيت الخير العقارية"
+            className="px-8 py-4 bg-sahara-gold text-black font-black text-xs tracking-widest uppercase rounded-xl hover:scale-105 transition-all shadow-[0_0_30px_rgba(212,175,55,0.3)] flex items-center gap-2 justify-center"
           >
-            <BiometricScan 
-                identityName={language === 'ar' ? 'المستخدم السيادي' : 'SOVEREIGN_CLIENT'} 
-                onComplete={() => setShowScan(false)} 
-            />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="portal-content"
-            initial={{ opacity: 0, scale: 0.9, filter: 'blur(20px)' }}
-            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="h-full w-full"
+            <span>📞</span> تواصل معنا
+          </a>
+          <Link
+            href="/"
+            className="px-8 py-4 bg-black/50 backdrop-blur border border-white/10 text-white font-black text-xs tracking-widest uppercase rounded-xl hover:border-sahara-gold/50 transition-all flex items-center gap-2 justify-center"
           >
-            <main className="h-screen w-screen bg-transparent text-white overflow-hidden flex flex-col p-2 lg:p-6 selection:bg-sahara-gold selection:text-black font-sans relative">
-              {/* 🚀 ARCHITECTURAL_BASE_LAYER */}
-              <AdvancedBeitAlKhairMesh />
-
-      {/* 📟 TOP_LEVEL_SYMMETRIC_HEADER */}
-      <div className="flex justify-between items-center mb-1 lg:mb-2 border-b border-sahara-gold/10 pb-1 lg:pb-2 px-2 lg:px-4 relative z-50 bg-transparent rounded-2xl">
-        <div className="flex items-center gap-2 lg:gap-4">
-            <div className="w-6 h-6 lg:w-12 lg:h-12 flex items-center justify-center overflow-hidden rounded-lg border border-sahara-gold/20 bg-black/50 shadow-[0_0_20px_rgba(197,160,89,0.1)]">
-                <img 
-                    src="/campaigns/beit-alkhair/official-logo.jpg" 
-                    alt="Beit Al-Khair Official" 
-                    className="w-full h-full object-contain brightness-110"
-                />
-            </div>
-            <div className="flex flex-col justify-center">
-                <p className={`text-[10px] lg:text-xl font-bold text-[#fcfcfc] uppercase tracking-wide leading-none mb-0.5 ${language === 'ar' ? 'font-["Cairo"]' : ''}`}>
-                  {t.title}
-                </p>
-                <div className="flex items-center gap-1.5 lg:gap-2 opacity-40">
-                  <span className="w-1 h-1 lg:w-1.5 lg:h-1.5 bg-sahara-gold rounded-full" />
-                  <p className="text-[5px] lg:text-[7px] font-black text-white uppercase tracking-[0.2em] lg:tracking-[0.4em] robotic-digits leading-none">
-                    {t.subtitle}
-                  </p>
-                </div>
-            </div>
-        </div>
-
-        <div className="flex items-center gap-4 lg:gap-16">
-            <LanguageSwitcher />
-            <div className="flex flex-col items-end hidden sm:flex">
-                <span className="text-[5px] lg:text-[7px] font-black text-sahara-gold/50 uppercase tracking-[0.4em] leading-none mb-1">{t.node}</span>
-                <span className="text-[6px] lg:text-[10px] font-black text-white/80 italic uppercase tracking-[0.1em] border-b border-sahara-gold/20 pb-0.5">{t.domain}</span>
-            </div>
-        </div>
-      </div>
-
-      {/* 🕹️ MAIN_CONSOLE_BODY */}
-      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-8 min-h-0 relative z-40">
-        
-        {/* 📋 TACTICAL_SIDEBAR */}
-        <aside className="lg:col-span-3 hidden lg:flex flex-col gap-6 min-h-0 order-2 lg:order-1">
-            {/* Project HUD */}
-            <div className="flex-1 prestige-glass rounded-[3.5rem] p-10 flex flex-col justify-between relative group overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-transparent via-sahara-gold to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-br from-sahara-gold/5 via-transparent to-transparent pointer-events-none" />
-                
-                <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-4 h-[1px] bg-sahara-gold shadow-[0_0_10px_#c5a059]" />
-                      <span className="text-[9px] font-black text-sahara-gold uppercase tracking-[0.6em] italic">{t.intel_stream}</span>
-                    </div>
-                    <h2 className="text-5xl font-black italic uppercase tracking-tighter text-white leading-[0.8] mb-4">
-                      {t.console_subtitle}<br/><span className="text-luxury-gold">{t.console_title}</span>
-                    </h2>
-                </div>
-
-                <div className="space-y-8">
-                    {[
-                        { label: 'FINANCE_ENGINE_v3', value: '10%_REDUCING' },
-                        { label: 'LIQUIDITY_MANDATE', value: '40%_DOWN' },
-                        { label: 'SYNC_PERIOD', value: '12-36_MO' }
-                    ].map((item, idx) => (
-                        <div key={idx} className="space-y-2">
-                            <p className="text-[8px] font-black text-gray-600 uppercase tracking-widest leading-none">{item.label}</p>
-                            <p className="text-xs font-black text-white uppercase tracking-[0.3em] robotic-digits border-l-2 border-sahara-gold/20 pl-4">{item.value}</p>
-                        </div>
-                    ))}
-                </div>
-
-                <div className="pt-8 border-t border-white/10">
-                   <p className="text-[9px] font-black text-gray-500 uppercase tracking-widest leading-relaxed italic opacity-60">
-                       {t.footer_text}
-                   </p>
-                </div>
-            </div>
-
-            {/* CTA_BUTTON_LUXE */}
-            <div className="bg-sahara-gold rounded-[3rem] p-8 shadow-[0_30px_80px_rgba(212,175,55,0.25)] flex flex-col gap-4 group cursor-pointer hover:scale-[1.03] transition-all hover:rotate-1 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-                <a 
-                    href="https://wa.me/201033332112?text=I%20am%20interested%20in%20Beit%20Al-Khair%20Quantum%20Acquisition%20(Ref:beit-alkhair-quantum)"
-                    className="flex flex-col gap-3"
-                >
-                    <div className="flex justify-between items-center">
-                        <span className="text-[10px] font-black text-black/60 uppercase tracking-[0.5em]">DIRECT_LINK</span>
-                        <div className="w-10 h-10 bg-black rounded-xl flex items-center justify-center text-sahara-gold animate-bounce">⚡</div>
-                    </div>
-                    <span className="text-xl font-black text-black uppercase tracking-tighter italic leading-none">{t.reservation}</span>
-                </a>
-            </div>
-        </aside>
-
-        {/* 🕸️ THE_NEURAL_COMMAND_CENTER (Quantum Unified Console) */}
-        <section className="lg:col-span-9 sovereign-glass backdrop-blur-none rounded-[2rem] lg:rounded-[4rem] relative overflow-hidden order-1 lg:order-2">
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none" />
-            <BeitAlKhairUnifiedConsole 
-              properties={[]} 
-            />
-        </section>
+            ← العودة للرئيسية
+          </Link>
+        </motion.div>
 
       </div>
-            </main>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   )
 }
