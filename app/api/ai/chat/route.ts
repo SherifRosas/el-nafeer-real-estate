@@ -65,24 +65,32 @@ Language: Always respond in the same language as the user (Arabic or English).`
     // 1. Retrieve Codebase Context (RAG)
     let codebaseContext = ''
     if (projectAwareness) {
-      const snippets = await retriever.retrieveRelevantContext(message)
-      if (snippets.length > 0) {
-        codebaseContext = `\n\n[RELEVANT_CODEBASE_CONTEXT]:\n${snippets.join('\n')}\n`
+      try {
+        const snippets = await retriever.retrieveRelevantContext(message)
+        if (snippets.length > 0) {
+          codebaseContext = `\n\n[RELEVANT_CODEBASE_CONTEXT]:\n${snippets.join('\n')}\n`
+        }
+      } catch (ragError) {
+        console.warn("RAG Context retrieval bypassed due to missing API Keys.")
       }
     }
 
     // 2. Retrieve Past Conversations
     let historyContext: any[] = []
     if (sessionId) {
-      const pastMessages = await prisma.chatMessage.findMany({
-        where: { sessionId },
-        orderBy: { createdAt: 'desc' },
-        take: 10
-      })
-      historyContext = pastMessages.reverse().map(m => ({
-        role: m.role as 'user' | 'assistant',
-        content: m.content
-      }))
+      try {
+        const pastMessages = await prisma.chatMessage.findMany({
+          where: { sessionId },
+          orderBy: { createdAt: 'desc' },
+          take: 10
+        })
+        historyContext = pastMessages.reverse().map(m => ({
+          role: m.role as 'user' | 'assistant',
+          content: m.content
+        }))
+      } catch (dbError) {
+        console.warn("Database history retrieval bypassed due to DB connection failure.")
+      }
     }
 
     const fullSystemPrompt = `${verticalPrompt}${codebaseContext}`

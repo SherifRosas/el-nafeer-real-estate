@@ -177,7 +177,7 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
 
     try {
       const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 12000)
+      const timeoutId = setTimeout(() => controller.abort(), 30000) // Increased to 30s to prevent local dev timeouts
 
       const response = await fetch('/api/ai/chat', {
         method: 'POST',
@@ -216,16 +216,17 @@ export default function AIChatbot({ vertical = 'real-estate', initialOpen = fals
         ])
         if (data.contextUsed) setContextUsed(true)
       } else {
-        const errorMsg = isArabic
-          ? 'عذراً، حدث خطأ. يرجى المحاولة مرة أخرى لاحقاً.'
-          : 'I apologize, but I encountered an error. Please try again later.'
-        setMessages((prev) => [
-          ...prev,
-          { role: 'assistant', content: errorMsg },
-        ])
+        throw new Error('API returned unsuccessful response')
       }
     } catch (error: any) {
-      // Silent error handler
+      console.error("Chat Error:", error);
+      const errorMsg = isArabic
+        ? 'عذراً، استغرق الاتصال وقتاً أطول من المتوقع. يرجى المحاولة مرة أخرى.'
+        : 'Connection timed out. Please try again.'
+      setMessages((prev) => [
+        ...prev,
+        { role: 'assistant', content: errorMsg },
+      ])
     } finally {
       setLoading(false)
     }
