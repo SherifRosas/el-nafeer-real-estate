@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 export default function HomeContent() {
-  const { language } = useLanguage()
+  const { language, setLanguage } = useLanguage()
   const isArabic = language === 'ar'
   const [mounted, setMounted] = useState(false)
   const [digits, setDigits] = useState('000.000.000')
@@ -25,6 +25,16 @@ export default function HomeContent() {
   return (
     <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-12 overflow-hidden bg-[#030712] selection:bg-[#D4AF37] selection:text-[#030712] font-sans">
       
+      {/* === LANGUAGE SWITCHER === */}
+      <div className="absolute top-6 right-6 z-[200]">
+        <button 
+          onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')}
+          className="flex items-center gap-2 px-4 py-2 bg-slate-900/50 backdrop-blur-md border border-slate-700/50 rounded-lg text-slate-400 hover:text-[#D4AF37] hover:border-[#D4AF37]/50 font-black tracking-widest text-[10px] uppercase transition-all shadow-xl"
+        >
+          <span>{language === 'ar' ? 'EN' : 'العربية'}</span>
+        </button>
+      </div>
+
       {/* === ROYAL CYBER AMBIENCE === */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Deep Blue/Gold Glows */}
@@ -37,9 +47,9 @@ export default function HomeContent() {
         {/* Floating Modern Digits */}
         <motion.div 
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.15 }}
+          animate={{ opacity: 0.3 }}
           transition={{ duration: 2 }}
-          className="absolute top-10 left-10 text-4xl font-black text-slate-500 robotic-digits tracking-[0.5em] blur-[1px]"
+          className="absolute top-10 left-4 md:left-10 text-3xl md:text-6xl font-mono font-black text-slate-700 tracking-[0.3em] md:tracking-[0.6em] robotic-digits"
         >
           {digits}
         </motion.div>
@@ -47,7 +57,7 @@ export default function HomeContent() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.2 }}
           transition={{ duration: 2, delay: 0.5 }}
-          className="absolute bottom-20 right-10 text-2xl font-black text-[#D4AF37] robotic-digits tracking-[0.5em] rotate-90 blur-[1px]"
+          className="absolute bottom-20 right-4 md:right-10 text-2xl md:text-4xl font-mono font-black text-[#D4AF37] tracking-[0.3em] md:tracking-[0.6em] rotate-90 robotic-digits"
         >
           {digits}
         </motion.div>
@@ -58,17 +68,17 @@ export default function HomeContent() {
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-20 text-center mb-24 mt-10"
+        className="relative z-20 text-center mb-16 md:mb-24 mt-10 w-full"
       >
-        <h1 className="text-6xl md:text-[9rem] font-black tracking-tighter uppercase italic leading-none mb-6 text-slate-100 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+        <h1 className="text-5xl md:text-[9rem] font-black tracking-tighter uppercase italic leading-none mb-4 md:mb-6 text-slate-100 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
           {isArabic ? 'النفير' : 'EL-NAFEER'}
         </h1>
-        <div className="flex items-center justify-center gap-6">
-          <div className="h-[1px] w-12 md:w-32 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-50" />
-          <h2 className="text-xs md:text-xl font-bold tracking-[0.6em] md:tracking-[1em] uppercase text-[#D4AF37] drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]">
+        <div className="flex items-center justify-center gap-2 md:gap-6 w-full px-4">
+          <div className="h-[1px] flex-1 md:w-32 md:flex-none bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-50" />
+          <h2 className="text-[9px] md:text-xl font-bold tracking-[0.2em] md:tracking-[0.6em] uppercase text-[#D4AF37] drop-shadow-[0_0_10px_rgba(212,175,55,0.5)] whitespace-nowrap">
             {isArabic ? 'وكالة التقنية السيادية' : 'SOVEREIGN TECH AGENCY'}
           </h2>
-          <div className="h-[1px] w-12 md:w-32 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-50" />
+          <div className="h-[1px] flex-1 md:w-32 md:flex-none bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-50" />
         </div>
       </motion.div>
 
