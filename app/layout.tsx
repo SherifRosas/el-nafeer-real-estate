@@ -1,23 +1,28 @@
-'use client'
-
 import type { Metadata, Viewport } from "next";
 import { Suspense } from 'react'
 import "./globals.css";
 import { Providers } from "./providers";
-import { usePathname } from 'next/navigation';
-
 import MasterFooter from "@/components/MasterFooter";
 import TrackingScripts from "@/components/analytics/TrackingScripts";
+import PortalLayoutWrapper from "@/components/PortalLayoutWrapper";
+
+export const metadata: Metadata = {
+  title: "EL NAFEER | Sovereign Real Estate & Industrial Tech",
+  description: "Billionaire-grade real estate acquisition and industrial engineering portal.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-  // Cinematic Portals should be exclusive and full-screen without the global footer
-  const isPortal = pathname?.includes('/portal/') || pathname?.includes('/lever-pioneer/');
-
   return (
     <html lang="ar" dir="rtl">
       <head>
@@ -33,13 +38,13 @@ export default function RootLayout({
       <body className="bg-black text-white antialiased">
         <Providers>
           <TrackingScripts />
-          <Suspense fallback={<div className="bg-black min-h-screen" />}>
-            {children}
-          </Suspense>
-          {!isPortal && <MasterFooter />}
+          <PortalLayoutWrapper>
+            <Suspense fallback={<div className="bg-black min-h-screen" />}>
+              {children}
+            </Suspense>
+          </PortalLayoutWrapper>
         </Providers>
       </body>
     </html>
   );
 }
-

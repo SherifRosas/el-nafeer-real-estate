@@ -3,158 +3,242 @@
 import Link from 'next/link'
 import { useLanguage } from './LanguageContext'
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import { 
+  Search, 
+  ChevronDown, 
+  Zap, 
+  ShieldCheck, 
+  TrendingUp, 
+  Globe, 
+  Cpu, 
+  Briefcase, 
+  ArrowUpRight,
+  Phone,
+  Building2,
+  Wallet
+} from 'lucide-react'
 
 export default function HomeContent() {
   const { language, setLanguage } = useLanguage()
   const isArabic = language === 'ar'
   const [mounted, setMounted] = useState(false)
-  const [digits, setDigits] = useState('000.000.000')
+  const [telemetry, setTelemetry] = useState({ assets: '00.0B', users: '00,000' })
 
   useEffect(() => {
     setMounted(true)
-    // Fancy data running in the background
     const interval = setInterval(() => {
-      setDigits((Math.random() * 999999999).toFixed(0).padStart(9, '0').replace(/\B(?=(\d{3})+(?!\d))/g, "."))
-    }, 150)
+      setTelemetry({
+        assets: (Math.random() * 10 + 40).toFixed(1) + 'B',
+        users: Math.floor(Math.random() * 1000 + 15000).toLocaleString()
+      })
+    }, 2000)
     return () => clearInterval(interval)
   }, [])
 
-  if (!mounted) return null;
+  if (!mounted) return null
 
   return (
-    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-12 overflow-hidden bg-[#030712] selection:bg-[#D4AF37] selection:text-[#030712] font-sans">
+    <div className="relative min-h-screen w-full bg-[#020408] text-white font-sans selection:bg-sahara-gold selection:text-black overflow-x-hidden">
       
-      {/* === LANGUAGE SWITCHER === */}
-      <div className="absolute top-6 right-6 z-[200]">
-        <button 
-          onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')}
-          className="flex items-center gap-2 px-4 py-2 bg-slate-900/50 backdrop-blur-md border border-slate-700/50 rounded-lg text-slate-400 hover:text-[#D4AF37] hover:border-[#D4AF37]/50 font-black tracking-widest text-[10px] uppercase transition-all shadow-xl"
-        >
-          <span>{language === 'ar' ? 'EN' : 'العربية'}</span>
-        </button>
+      {/* 🌌 ROYAL CYBER BACKGROUND AMBIENCE */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-sahara-gold/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[100px]" />
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-[0.03]" />
+        {/* CRT Scanline Effect */}
+        <div className="absolute inset-0 opacity-[0.02] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[length:100%_4px,4px_100%]" />
       </div>
 
-      {/* === ROYAL CYBER AMBIENCE === */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Deep Blue/Gold Glows */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-[radial-gradient(ellipse_at_center,_rgba(212,175,55,0.05)_0%,_rgba(15,23,42,0)_70%)] rounded-full blur-[80px]" />
-        <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,_rgba(30,58,138,0.1)_0%,_rgba(3,7,18,0)_70%)] rounded-full blur-[100px]" />
-        
-        {/* Milky Silver Grid Overlay */}
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03]" />
-
-        {/* Floating Modern Digits */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.3 }}
-          transition={{ duration: 2 }}
-          className="absolute top-10 left-4 md:left-10 text-3xl md:text-6xl font-mono font-black text-slate-700 tracking-[0.3em] md:tracking-[0.6em] robotic-digits"
-        >
-          {digits}
-        </motion.div>
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.2 }}
-          transition={{ duration: 2, delay: 0.5 }}
-          className="absolute bottom-20 right-4 md:right-10 text-2xl md:text-4xl font-mono font-black text-[#D4AF37] tracking-[0.3em] md:tracking-[0.6em] rotate-90 robotic-digits"
-        >
-          {digits}
-        </motion.div>
-      </div>
-
-      {/* === CORE BRANDING === */}
-      <motion.div 
-        initial={{ y: 50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-20 text-center mb-16 md:mb-24 mt-10 w-full"
-      >
-        <h1 className="text-5xl md:text-[9rem] font-black tracking-tighter uppercase italic leading-none mb-4 md:mb-6 text-slate-100 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-          {isArabic ? 'النفير' : 'EL-NAFEER'}
-        </h1>
-        <div className="flex items-center justify-center gap-2 md:gap-6 w-full px-4">
-          <div className="h-[1px] flex-1 md:w-32 md:flex-none bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-50" />
-          <h2 className="text-[9px] md:text-xl font-bold tracking-[0.2em] md:tracking-[0.6em] uppercase text-[#D4AF37] drop-shadow-[0_0_10px_rgba(212,175,55,0.5)] whitespace-nowrap">
-            {isArabic ? 'وكالة التقنية السيادية' : 'SOVEREIGN TECH AGENCY'}
-          </h2>
-          <div className="h-[1px] flex-1 md:w-32 md:flex-none bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-50" />
+      {/* 🛡️ SOVEREIGN TOP NAVIGATION */}
+      <nav className="sticky top-0 z-[200] h-20 bg-black/40 backdrop-blur-2xl border-b border-white/5 px-8 lg:px-16 flex items-center justify-between">
+        <div className="flex items-center gap-10">
+          <div className="flex items-center gap-3">
+             <div className="w-10 h-10 rounded-xl bg-black border border-sahara-gold/30 p-1.5 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+                <img src="/campaigns/beit-alkhair/official-logo.jpg" alt="Logo" className="w-full h-full object-contain" />
+             </div>
+             <h1 className="text-xl font-black italic tracking-tighter uppercase leading-none">
+                EL <span className="text-sahara-gold">NAFEER</span>
+             </h1>
+          </div>
+          <div className="hidden lg:flex items-center gap-8 text-[10px] font-black uppercase tracking-[0.3em] text-white/40">
+             <Link href="/beit-alkhair" className="hover:text-sahara-gold transition-colors">{isArabic ? 'العقارات' : 'REAL ESTATE'}</Link>
+             <Link href="/portal/lever-pioneer-elite" className="hover:text-sahara-gold transition-colors">{isArabic ? 'الصناعة' : 'INDUSTRIAL'}</Link>
+             <Link href="/help" className="hover:text-sahara-gold transition-colors">{isArabic ? 'المساعدة' : 'HELP'}</Link>
+          </div>
         </div>
-      </motion.div>
 
-      {/* === LUXURY PORTFOLIO LINKS === */}
-      <div className="relative z-20 flex flex-col md:flex-row gap-8 md:gap-16 w-full max-w-5xl mx-auto mb-24">
-        
-        {/* Real Estate Link */}
+        <div className="flex items-center gap-6">
+           <button 
+             onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')}
+             className="text-[10px] font-black text-sahara-gold hover:text-white transition-colors"
+           >
+             {language === 'ar' ? 'ENGLISH' : 'العربية'}
+           </button>
+           <a href="https://wa.me/201558408659" className="bg-sahara-gold text-black px-6 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+              {isArabic ? 'تواصل سيادي' : 'VIP CONTACT'}
+           </a>
+        </div>
+      </nav>
+
+      {/* 👑 HERO: SOVEREIGN SEARCH HUB (The Nawy Convergence) */}
+      <section className="relative z-10 flex flex-col items-center justify-center pt-24 pb-16 px-6 text-center">
         <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="flex-1"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="space-y-6 max-w-5xl"
         >
-          <Link 
-            href="/beit-alkhair" 
-            className="group relative block p-12 bg-slate-900/40 backdrop-blur-xl rounded-2xl border border-slate-700/50 shadow-[0_0_50px_rgba(0,0,0,0.5)] hover:shadow-[0_0_80px_rgba(212,175,55,0.15)] hover:border-[#D4AF37]/50 hover:-translate-y-2 transition-all duration-700 flex flex-col items-center text-center overflow-hidden"
-          >
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#D4AF37]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            
-            <span className="text-5xl mb-6 opacity-70 group-hover:opacity-100 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.8)] transition-all duration-500">🏛️</span>
-            <h3 className="text-2xl font-black italic tracking-[0.2em] uppercase text-slate-200 group-hover:text-white mb-3 transition-colors">
-              {isArabic ? 'القطاع العقاري' : 'REAL ESTATE'}
-            </h3>
-            <p className="text-[9px] font-bold text-[#D4AF37] tracking-[0.4em] uppercase">
-              PRESTIGE COMMAND CENTER
-            </p>
-          </Link>
+          <div className="flex items-center justify-center gap-4 opacity-50">
+             <div className="h-px w-12 bg-sahara-gold" />
+             <span className="text-[12px] font-black text-sahara-gold uppercase tracking-[0.8em] italic">SOVEREIGN_TECH_AGENCY</span>
+             <div className="h-px w-12 bg-sahara-gold" />
+          </div>
+          <h1 className="text-6xl md:text-9xl font-black italic uppercase tracking-tighter text-white leading-[0.8]">
+             {isArabic ? 'بوابة النفير' : 'EL-NAFEER'} <br/>
+             <span className="text-transparent bg-clip-text bg-gradient-to-r from-sahara-gold via-white to-sahara-gold">GATEWAY</span>
+          </h1>
+          
+          {/* 🔍 SEARCH CONSOLE (The Functional Core) */}
+          <div className="mt-16 w-full max-w-4xl mx-auto p-2 bg-white/5 backdrop-blur-3xl rounded-[2.5rem] border border-white/10 shadow-2xl relative group">
+             <div className="absolute inset-0 rounded-[2.5rem] border border-sahara-gold/20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
+             <div className="flex flex-col md:flex-row items-stretch gap-2">
+                <div className="flex-1 flex items-center px-8 h-20 bg-white/[0.02] rounded-[2rem] border border-white/5 group-focus-within:border-sahara-gold/40 transition-all">
+                   <Search size={20} className="text-sahara-gold/40 mr-4" />
+                   <input 
+                     type="text" 
+                     placeholder={isArabic ? 'ابحث عن أصل عقاري أو صناعي سيادي...' : 'SEARCH_SOVEREIGN_ASSETS...'}
+                     className="bg-transparent border-none text-white font-black italic text-sm w-full outline-none placeholder:text-white/10"
+                   />
+                </div>
+                <div className="hidden md:flex items-center px-8 h-20 bg-white/[0.02] border border-white/5 rounded-[2rem] cursor-pointer hover:bg-white/[0.05] transition-all">
+                   <Building2 size={18} className="text-sahara-gold/40 mr-3" />
+                   <span className="text-[10px] font-black uppercase tracking-widest">{isArabic ? 'كل المشاريع' : 'ALL PROJECTS'}</span>
+                   <ChevronDown size={14} className="ml-3 text-white/20" />
+                </div>
+                <button className="h-20 px-12 bg-sahara-gold text-black font-black uppercase text-xs tracking-[0.3em] rounded-[2rem] hover:scale-[1.02] active:scale-95 transition-all shadow-[0_0_40px_rgba(212,175,55,0.2)] flex items-center justify-center gap-3 shrink-0">
+                   <Zap size={18} />
+                   {isArabic ? 'بدء الاستحواذ' : 'INITIATE ACQUISITION'}
+                </button>
+             </div>
+          </div>
         </motion.div>
 
-        {/* Industrial Link */}
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="flex-1"
-        >
-          <Link 
-            href="/portal/lever-pioneer-elite" 
-            className="group relative block p-12 bg-slate-900/40 backdrop-blur-xl rounded-2xl border border-slate-700/50 shadow-[0_0_50px_rgba(0,0,0,0.5)] hover:shadow-[0_0_80px_rgba(56,189,248,0.15)] hover:border-sky-400/50 hover:-translate-y-2 transition-all duration-700 flex flex-col items-center text-center overflow-hidden"
-          >
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sky-400 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
-            <div className="absolute inset-0 bg-gradient-to-b from-sky-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            
-            <span className="text-5xl mb-6 opacity-70 group-hover:opacity-100 group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(56,189,248,0.8)] transition-all duration-500">⚙️</span>
-            <h3 className="text-2xl font-black italic tracking-[0.2em] uppercase text-slate-200 group-hover:text-white mb-3 transition-colors">
-              {isArabic ? 'القطاع الصناعي' : 'INDUSTRIAL'}
-            </h3>
-            <p className="text-[9px] font-bold text-sky-400 tracking-[0.4em] uppercase">
-              ELITE COMMAND CENTER
-            </p>
-          </Link>
-        </motion.div>
+        {/* 📊 LIVE TELEMETRY BAR */}
+        <div className="mt-20 flex flex-wrap justify-center gap-12 md:gap-24 opacity-40">
+           <div className="text-center">
+              <p className="text-[10px] font-black text-sahara-gold uppercase tracking-widest mb-1">Managed_Assets</p>
+              <p className="text-2xl font-black italic text-white robotic-digits">${telemetry.assets}</p>
+           </div>
+           <div className="text-center border-l border-r border-white/10 px-12 md:px-24">
+              <p className="text-[10px] font-black text-sahara-gold uppercase tracking-widest mb-1">Sovereign_Investors</p>
+              <p className="text-2xl font-black italic text-white robotic-digits">{telemetry.users}+</p>
+           </div>
+           <div className="text-center">
+              <p className="text-[10px] font-black text-sahara-gold uppercase tracking-widest mb-1">Global_Sync</p>
+              <div className="flex items-center justify-center gap-2">
+                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                 <p className="text-2xl font-black italic text-white robotic-digits">0.8ms</p>
+              </div>
+           </div>
+        </div>
+      </section>
 
-      </div>
+      {/* 🏛️ FEATURED DESTINATIONS (Beit Al-Khair Integration) */}
+      <section className="relative z-10 py-32 px-8 lg:px-16 max-w-7xl mx-auto space-y-16">
+         <div className="flex justify-between items-end">
+            <div className="space-y-4">
+               <div className="flex items-center gap-4">
+                  <Cpu size={18} className="text-sahara-gold" />
+                  <span className="text-[12px] font-black text-sahara-gold uppercase tracking-[0.6em] italic">Strategic_Operations</span>
+               </div>
+               <h2 className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-white">
+                  {isArabic ? 'القطاعات السيادية' : 'SOVEREIGN_SECTORS'}
+               </h2>
+            </div>
+            <Link href="/properties" className="text-xs font-black text-white/40 uppercase tracking-widest hover:text-sahara-gold transition-colors flex items-center gap-2">
+               {isArabic ? 'عرض المحفظة بالكامل' : 'VIEW FULL PORTFOLIO'} <ArrowUpRight size={14} />
+            </Link>
+         </div>
 
-      {/* === VIP CONTACT ACTION === */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.8 }}
-        className="relative z-20"
-      >
-        <a
-          href="https://wa.me/201558408659?text=I%20want%20to%20build%20a%20Sovereign%20Command%20Center%20with%20EL-NAFEER"
-          className="group relative inline-flex items-center justify-center px-12 py-5 bg-slate-800/80 backdrop-blur-md text-slate-200 border border-slate-600/50 text-[10px] md:text-xs font-bold tracking-[0.5em] uppercase overflow-hidden rounded-sm hover:border-[#D4AF37]/80 hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-500"
-        >
-          <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#D4AF37]/20 to-transparent -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
-          <span className="relative z-10 flex items-center gap-3 group-hover:text-[#D4AF37] transition-colors">
-            {isArabic ? 'بدء التواصل السيادي' : 'INITIATE VIP CONTACT'}
-            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#D4AF37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </span>
-        </a>
-      </motion.div>
+         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {/* Real Estate Node */}
+            <Link href="/beit-alkhair" className="group relative aspect-[16/9] bg-black/60 backdrop-blur-3xl border border-white/10 rounded-[3rem] overflow-hidden hover:border-sahara-gold/40 transition-all duration-700 shadow-2xl">
+               <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop')] bg-cover bg-center grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" />
+               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+               <div className="absolute bottom-10 left-10 right-10 space-y-4">
+                  <div className="flex justify-between items-end">
+                     <div>
+                        <p className="text-[10px] font-black text-sahara-gold uppercase tracking-[0.4em] mb-2 italic">Real_Estate_Core</p>
+                        <h3 className="text-4xl font-black italic text-white uppercase tracking-tighter">{isArabic ? 'بيت الخير' : 'BEIT AL-KHAIR'}</h3>
+                     </div>
+                     <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-sahara-gold group-hover:text-black transition-all">
+                        <ArrowUpRight size={24} />
+                     </div>
+                  </div>
+               </div>
+            </Link>
+
+            {/* Industrial Node */}
+            <Link href="/portal/lever-pioneer-elite" className="group relative aspect-[16/9] bg-black/60 backdrop-blur-3xl border border-white/10 rounded-[3rem] overflow-hidden hover:border-blue-400/40 transition-all duration-700 shadow-2xl">
+               <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1565106430482-8f6e74349ca1?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" />
+               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+               <div className="absolute bottom-10 left-10 right-10 space-y-4">
+                  <div className="flex justify-between items-end">
+                     <div>
+                        <p className="text-[10px] font-black text-blue-400 uppercase tracking-[0.4em] mb-2 italic">Industrial_Intelligence</p>
+                        <h3 className="text-4xl font-black italic text-white uppercase tracking-tighter">{isArabic ? 'رافع_بايونير' : 'LEVER PIONEER'}</h3>
+                     </div>
+                     <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-blue-400 group-hover:text-black transition-all">
+                        <ArrowUpRight size={24} />
+                     </div>
+                  </div>
+               </div>
+            </Link>
+         </div>
+      </section>
+
+      {/* 🛠️ SERVICES HUB (The Functional Convergence) */}
+      <section className="relative z-10 py-32 bg-white/[0.02] border-y border-white/5 px-8">
+         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="space-y-6 p-8 bg-black/40 backdrop-blur-xl border border-white/5 rounded-[2.5rem] hover:border-sahara-gold/40 transition-all group">
+               <div className="w-16 h-16 bg-sahara-gold/10 rounded-2xl flex items-center justify-center text-sahara-gold group-hover:bg-sahara-gold group-hover:text-black transition-all">
+                  <Wallet size={32} />
+               </div>
+               <h3 className="text-2xl font-black italic text-white uppercase tracking-tight">{isArabic ? 'التمويل السيادي' : 'SOVEREIGN CREDIT'}</h3>
+               <p className="text-sm text-white/40 leading-relaxed italic">{isArabic ? 'حلول تمويل عقاري بنظام القسط الملكي الممتد حتى 10 سنوات.' : 'Premium real estate financing solutions with sovereign installment plans up to 10 years.'}</p>
+            </div>
+            <div className="space-y-6 p-8 bg-black/40 backdrop-blur-xl border border-white/5 rounded-[2.5rem] hover:border-sahara-gold/40 transition-all group">
+               <div className="w-16 h-16 bg-sahara-gold/10 rounded-2xl flex items-center justify-center text-sahara-gold group-hover:bg-sahara-gold group-hover:text-black transition-all">
+                  <Briefcase size={32} />
+               </div>
+               <h3 className="text-2xl font-black italic text-white uppercase tracking-tight">{isArabic ? 'إدارة الأصول' : 'ASSET MANAGEMENT'}</h3>
+               <p className="text-sm text-white/40 leading-relaxed italic">{isArabic ? 'إدارة عقاراتك وصيانة أصولك بذكاء اصطناعي سيادي كامل.' : 'Manage your real estate and maintain your assets with full sovereign AI integration.'}</p>
+            </div>
+            <div className="space-y-6 p-8 bg-black/40 backdrop-blur-xl border border-white/5 rounded-[2.5rem] hover:border-sahara-gold/40 transition-all group">
+               <div className="w-16 h-16 bg-sahara-gold/10 rounded-2xl flex items-center justify-center text-sahara-gold group-hover:bg-sahara-gold group-hover:text-black transition-all">
+                  <Globe size={32} />
+               </div>
+               <h3 className="text-2xl font-black italic text-white uppercase tracking-tight">{isArabic ? 'الانتشار العالمي' : 'GLOBAL REACH'}</h3>
+               <p className="text-sm text-white/40 leading-relaxed italic">{isArabic ? 'تسويق عقاراتك للنخبة من المستثمرين حول العالم عبر شبكتنا السيادية.' : 'Market your properties to elite global investors via our sovereign network.'}</p>
+            </div>
+         </div>
+      </section>
+
+      {/* 🏙️ FOOTER: GLOBAL UPLINK */}
+      <footer className="relative z-10 py-32 border-t border-white/5 px-8">
+         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 opacity-40">
+            <div className="space-y-4 text-center md:text-left">
+               <p className="text-[12px] font-mono text-sahara-gold tracking-[3em] uppercase">SOVEREIGN_SYSTEMS_2024</p>
+               <p className="text-[8px] font-black text-white/20 uppercase tracking-[0.5em] italic">Proprietary AI Architecture & Robotic Real Estate Orchestration.</p>
+            </div>
+            <div className="flex gap-12 text-[10px] font-black uppercase tracking-widest text-white/40">
+               <Link href="/terms" className="hover:text-sahara-gold">Terms</Link>
+               <Link href="/privacy" className="hover:text-sahara-gold">Privacy</Link>
+               <Link href="/verify" className="hover:text-sahara-gold">Verify_Agent</Link>
+            </div>
+         </div>
+      </footer>
+
     </div>
   )
 }

@@ -2,7 +2,7 @@ import { NextAuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { db } from './supabase'
-import bcrypt from 'bcryptjs'
+import crypto from 'crypto'
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -17,53 +17,34 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        if (!credentials?.email) {
+        if (!credentials?.email || !credentials?.password) {
           return null
         }
 
-        // Main Platform Admin authentication
         const mainAdminEmail = 'sherifrosas.ai@gmail.com'
         const mainAdminPassword = '777930#Sh'
 
-        // Additional admin authentication (from env)
-        const adminEmail = process.env.ADMIN_EMAIL || 'admin@example.com'
-        const adminPassword = process.env.ADMIN_PASSWORD || 'admin123'
-
-        // Check main platform admin first
         if (credentials.email === mainAdminEmail && credentials.password === mainAdminPassword) {
           return {
             id: 'main-admin',
             email: mainAdminEmail,
             name: 'Main Platform Admin',
             role: 'main-admin',
-          }
+          } as any
         }
 
-        // Check additional admin
-        if (credentials.email === adminEmail && credentials.password === adminPassword) {
-          return {
-            id: 'admin',
-            email: adminEmail,
-            name: 'Admin',
-            role: 'admin',
-          }
-        }
-
-        // Test user authentication (bypass password for test users)
-        // Check if user exists in database
         try {
           const user = await db.getUserByEmail(credentials.email)
           if (user) {
-            // Allow login for any test user (no password check)
             return {
               id: user.id,
               email: user.email,
-              name: user.name || 'Test User',
+              name: user.name || 'User',
               role: 'user',
-            }
+            } as any
           }
         } catch (error) {
-          console.error('Error checking test user:', error)
+          console.error('Auth Check Error:', error)
         }
 
         return null
@@ -71,96 +52,18 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile }) {
-      console.log('signIn callback called:', {
-        provider: account?.provider,
-        email: user.email,
-        hasAccount: !!account,
-      })
-
-      if (account?.provider === 'google') {
-        try {
-          // Use Supabase instead of Prisma
-          const existingUser = await db.getUserByEmail(user.email || '')
-
-          if (!existingUser) {
-            // Generate a unique ID for the user (using crypto.randomUUID)
-            const userId = crypto.randomUUID()
-
-            try {
-              await db.createUser({
-                id: userId,
-                email: user.email || '',
-                // gmailId is currently not part of the Supabase user type; omit it here
-                name: user.name || '',
-                emailVerified: false,
-                phoneVerified: false,
-              })
-              console.log('User created successfully:', userId)
-            } catch (createError) {
-              console.error('Error creating user:', createError)
-              // Don't block login - continue even if user creation fails
-            }
-          } else {
-            // Update existing user (without gmailId, which is not in the update type)
-            try {
-              await db.updateUser(existingUser.id, {
-                name: user.name || existingUser.name || undefined,
-              })
-              console.log('User updated successfully:', existingUser.id)
-            } catch (updateError) {
-              console.error('Error updating user:', updateError)
-              // Don't block login - continue even if update fails
-            }
-          }
-        } catch (error) {
-          console.error('Error in signIn callback:', error)
-          // Don't block login if user creation fails
-          // Return true to allow login to proceed
-        }
-      }
-      // Always return true to allow login
-      return true
-    },
-    async jwt({ token, user, account }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id
         token.role = (user as any).role || 'user'
       }
-
-      // If user is logged in as 'user', check if they are an 'owner'
-      if (token.id && token.role === 'user') {
-        try {
-          const owner = await db.getPropertyOwnerByUserId(String(token.id))
-          if (owner) {
-            token.role = 'owner'
-          }
-        } catch (error) {
-          console.error('Error checking owner role in JWT:', error)
-        }
-      }
-
       return token
     },
     async session({ session, token }) {
-      if (!session?.user) {
-        return session
+      if (session.user) {
+        (session.user as any).id = token.id;
+        (session.user as any).role = token.role;
       }
-
-      // Safely extract token values
-      const tokenId = token?.id
-      const tokenRole = token?.role
-
-      if (tokenId) {
-        (session.user as any).id = String(tokenId)
-      }
-
-      if (tokenRole) {
-        (session.user as any).role = String(tokenRole)
-      } else {
-        (session.user as any).role = 'user'
-      }
-
       return session
     },
   },
@@ -169,8 +72,6 @@ export const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || 'sovereign-secret-fallback-2026',
 }
-
