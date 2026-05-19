@@ -23,7 +23,7 @@ import {
 } from 'lucide-react'
 
 // 💎 Elite Asset Node (The "Lovely" Look)
-const AssetNode = ({ title, price, location, area, beds, baths, image, i, isArabic }) => (
+const AssetNode = ({ title, price, location, area, beds, baths, image, i, isArabic }: any) => (
   <motion.div 
     initial={{ opacity: 0, scale: 0.95, y: 30 }}
     whileInView={{ opacity: 1, scale: 1, y: 0 }}

@@ -84,7 +84,7 @@ function QuantumMetric({ label, value, unit, icon: Icon }: any) {
                 <span className="text-[10px] text-cyan-500/60 font-bold uppercase">{unit}</span>
             </div>
             <div className="w-full bg-cyan-900/30 h-[2px] mt-2 rounded-full overflow-hidden">
-                <motion.div 
+                <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${Math.random() * 100}%` }}
                     transition={{ duration: 2, repeat: Infinity, repeatType: 'reverse' }}
@@ -127,9 +127,9 @@ export default function AdvancedLeverPortal() {
         setDisplayedText(""); // Instantly wipe text on language switch
         const words = t.intro.split(' ');
         let idx = 0;
-        
+
         if (typingTimerRef.current) clearInterval(typingTimerRef.current);
-        
+
         typingTimerRef.current = setInterval(() => {
             if (idx < words.length) {
                 const word = words[idx];
@@ -182,11 +182,11 @@ export default function AdvancedLeverPortal() {
         e.preventDefault();
         setQuoteLoading(true);
         const formData = new FormData(e.currentTarget);
-        const payload = { 
-            name: formData.get('userName'), 
-            phone: formData.get('userPhone'), 
+        const payload = {
+            name: formData.get('userName'),
+            phone: formData.get('userPhone'),
             notes: `[METRO_ASCENT_LEAD] Type: ${formData.get('elevatorType')} | Floors: ${formData.get('floors')} | GPS: ${userLocLink || 'None'} | User Notes: ${formData.get('userNotes')}`,
-            brandProfileId: LEVER_BRAND_ID 
+            brandProfileId: LEVER_BRAND_ID
         };
         try {
             await fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
@@ -201,7 +201,7 @@ export default function AdvancedLeverPortal() {
                 <AdvancedLeverMesh />
             </div>
 
-            <audio 
+            <audio
                 ref={audioRef}
                 src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
                 loop
@@ -210,7 +210,7 @@ export default function AdvancedLeverPortal() {
 
             <AnimatePresence mode="wait">
                 {!isStarted && (
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0, scale: 1.1 }}
@@ -220,7 +220,7 @@ export default function AdvancedLeverPortal() {
                     >
                         <div className="relative pointer-events-none">
                             <div className="absolute -inset-20 bg-cyan-500/10 blur-[120px] rounded-full group-hover:bg-cyan-500/20 transition-all duration-1000" />
-                            <motion.div 
+                            <motion.div
                                 className="relative px-8 md:px-16 py-6 md:py-8 bg-black/90 border border-cyan-500/40 rounded-3xl text-white font-black tracking-[0.4em] md:tracking-[0.6em] uppercase flex flex-col items-center gap-4 shadow-[0_0_80px_rgba(6,182,212,0.15)] ring-1 ring-white/5 text-center"
                             >
                                 <span className="text-xs md:text-sm border-b border-cyan-500/30 pb-2 mb-2 w-full text-center">{mounted ? t.tap_to_ascent : ""}</span>
@@ -239,7 +239,7 @@ export default function AdvancedLeverPortal() {
                 <div className="absolute inset-0 z-[100] flex flex-col pointer-events-none p-2 md:p-6 safe-area-inset">
                     {/* TOP LEFT: ESCAPE / EXIT */}
                     <div className="absolute top-4 left-4 md:top-6 md:left-6 z-[200] pointer-events-auto">
-                        <button 
+                        <button
                             onClick={() => setIsStarted(false)}
                             className="flex items-center gap-2 px-4 py-2 bg-black/40 backdrop-blur-md border border-white/10 rounded-full text-white/50 hover:text-red-400 hover:border-red-500/40 font-black tracking-widest text-[10px] uppercase transition-all shadow-xl group"
                         >
@@ -250,7 +250,7 @@ export default function AdvancedLeverPortal() {
 
                     {/* TOP RIGHT: MINIMAL CONFIG CLUSTER (Language Only) */}
                     <div className="absolute top-4 right-4 md:top-6 md:right-6 flex flex-row items-center gap-2 pointer-events-auto z-[200]">
-                        <button 
+                        <button
                             onClick={() => mounted && setLanguage(language === 'ar' ? 'en' : 'ar')}
                             className="w-10 h-10 flex items-center justify-center bg-black/40 backdrop-blur-xl border border-white/10 rounded-xl text-[10px] text-white/70 font-black hover:text-cyan-400 hover:border-cyan-500/40 transition-all shadow-xl"
                         >
@@ -261,7 +261,7 @@ export default function AdvancedLeverPortal() {
                     <div className="mt-auto flex flex-col md:flex-row gap-6 md:gap-8 items-end justify-between w-full">
                         {/* LEFT/BOTTOM: The Transparent Float Dialogue */}
                         <div className="max-w-lg pointer-events-auto self-start md:self-end">
-                            <motion.div 
+                            <motion.div
                                 initial={{ y: 20, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 className="bg-transparent relative overflow-hidden group pointer-events-auto"
@@ -310,12 +310,9 @@ export default function AdvancedLeverPortal() {
                             </span>
                             <div className="flex items-center gap-3">
                                 <span className="relative text-xl font-black text-white tracking-[0.4em] uppercase transition-all group-hover:text-cyan-400 group-hover:tracking-[0.6em] duration-700">
-                                    EL NAFEER ADS
+                                    SHERIF ROSAS
                                 </span>
-                                <a href="https://wa.me/201558408659" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-white transition-all duration-300 hover:scale-125 z-[300]">
-                                    <MessageCircle size={18} className="animate-pulse" />
-                                </a>
-                                <a href="tel:+201065661882" className="text-cyan-400 hover:text-white transition-all duration-300 hover:scale-125 z-[300]">
+                                <a href="tel:+201065661882" className="text-white/30 hover:text-cyan-400 transition-all duration-300 hover:scale-125 z-[300]">
                                     <Phone size={18} className="animate-pulse" />
                                 </a>
                             </div>
@@ -352,7 +349,7 @@ export default function AdvancedLeverPortal() {
                             {quoteSent ? <div className="text-white text-center py-20 font-black tracking-[0.4em] uppercase animate-pulse">{t.form_success}</div> : (
                                 <form onSubmit={submitQuoteRequest} className="flex flex-col gap-4" dir="auto">
                                     <input name="userName" required placeholder={t.form_name} className="w-full bg-white/5 border border-cyan-500/30 p-5 rounded-2xl text-white placeholder:text-white/40 focus:border-cyan-400 outline-none transition-all shadow-inner" />
-                                    
+
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <input name="userPhone" required placeholder={t.form_phone} className="w-full bg-white/5 border border-cyan-500/30 p-5 rounded-2xl text-white placeholder:text-white/40 focus:border-cyan-400 outline-none transition-all shadow-inner" />
                                         <select name="elevatorType" required defaultValue="" className="w-full bg-white/5 border border-cyan-500/30 p-5 rounded-2xl text-white focus:border-cyan-400 outline-none transition-all shadow-inner appearance-none">
@@ -363,9 +360,9 @@ export default function AdvancedLeverPortal() {
                                             <option value="Maintenance">{t.types.maintenance}</option>
                                         </select>
                                     </div>
-                                    
+
                                     <input name="floors" type="number" placeholder={t.form_floors} className="w-full bg-white/5 border border-cyan-500/30 p-5 rounded-2xl text-white placeholder:text-white/40 focus:border-cyan-400 outline-none transition-all shadow-inner" />
-                                    
+
                                     <textarea name="userNotes" rows={2} placeholder={t.form_notes} className="w-full bg-white/5 border border-cyan-500/30 p-5 rounded-2xl text-white placeholder:text-white/40 focus:border-cyan-400 outline-none transition-all shadow-inner resize-none" />
 
                                     <button type="button" onClick={captureUserLocation} className="w-full bg-cyan-900/20 border border-cyan-500/40 p-5 rounded-2xl text-cyan-400 font-black tracking-widest uppercase hover:bg-cyan-900/40 transition-all flex justify-center items-center gap-3">
