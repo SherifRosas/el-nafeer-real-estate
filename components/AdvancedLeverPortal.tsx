@@ -72,28 +72,6 @@ const DICTIONARY = {
     }
 };
 
-function QuantumMetric({ label, value, unit, icon: Icon }: any) {
-    return (
-        <div className="flex flex-col gap-1 bg-black/40 backdrop-blur-md border border-cyan-500/20 p-4 rounded-xl shadow-lg">
-            <div className="flex items-center gap-2 text-cyan-400 text-[10px] font-black tracking-widest uppercase mb-1">
-                <Icon size={12} />
-                <span>{label}</span>
-            </div>
-            <div className="flex items-baseline gap-1">
-                <span className="text-2xl font-black text-white tabular-nums">{value}</span>
-                <span className="text-[10px] text-cyan-500/60 font-bold uppercase">{unit}</span>
-            </div>
-            <div className="w-full bg-cyan-900/30 h-[2px] mt-2 rounded-full overflow-hidden">
-                <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${Math.random() * 100}%` }}
-                    transition={{ duration: 2, repeat: Infinity, repeatType: 'reverse' }}
-                    className="h-full bg-cyan-400"
-                />
-            </div>
-        </div>
-    )
-}
 
 export default function AdvancedLeverPortal() {
     const { language, setLanguage } = useLanguage();
@@ -145,20 +123,6 @@ export default function AdvancedLeverPortal() {
         };
     }, [isStarted, language, t.intro]);
 
-    // Quantum Metrics Simulation
-    const [metrics, setMetrics] = useState({ gw: 1.024, nl: 12, av: 450 });
-
-    useEffect(() => {
-        if (!isStarted) return;
-        const interval = setInterval(() => {
-            setMetrics({
-                gw: Number((1 + Math.random() * 0.05).toFixed(3)),
-                nl: Math.floor(8 + Math.random() * 10),
-                av: Math.floor(440 + Math.random() * 20)
-            });
-        }, 1500);
-        return () => clearInterval(interval);
-    }, [isStarted]);
 
     const startExperience = () => {
         setIsStarted(true);
