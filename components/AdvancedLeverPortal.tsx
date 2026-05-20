@@ -274,9 +274,12 @@ export default function AdvancedLeverPortal() {
                             </span>
                             <div className="flex items-center gap-3">
                                 <span className="relative text-xl font-black text-white tracking-[0.4em] uppercase transition-all group-hover:text-cyan-400 group-hover:tracking-[0.6em] duration-700">
-                                    SHERIF ROSAS
+                                    EL NAFEER ADS
                                 </span>
-                                <a href="tel:+201065661882" className="text-white/30 hover:text-cyan-400 transition-all duration-300 hover:scale-125 z-[300]">
+                                <a href="https://wa.me/201558408659" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-white transition-all duration-300 hover:scale-125 z-[300]">
+                                    <MessageCircle size={18} className="animate-pulse" />
+                                </a>
+                                <a href="tel:+201065661882" className="text-cyan-400 hover:text-white transition-all duration-300 hover:scale-125 z-[300]">
                                     <Phone size={18} className="animate-pulse" />
                                 </a>
                             </div>
