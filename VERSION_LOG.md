@@ -494,3 +494,26 @@ This iteration focuses intensely on recovering lost Facebook organic viewership 
 - **Live Inventory Synchronization**: Fully decoupled the Map Console from hardcoded data; it now dynamically calculates projects and available units from the live Supabase properties stream, rendering real uploaded project images and metadata.
 - **Detailed View Refinement**: Upgraded the internal `BeitAlKhairNeuralGrid` to the Cinematic Luxury theme, fixing mobile back-button overlaps and purging the remaining "hacker-logs" and military terminology from the property detail view.
 - **Sovereign Security Hardening**: Successfully neutralized 19 Supabase security vulnerabilities by enabling Row Level Security (RLS) across 15 core tables and defining strict, case-sensitive access policies to protect sensitive revenue, user, and settings data.
+
+---
+
+### 💬 Version 11.0.0 (Command Center & Social Domination) - 2026-06-21
+- **Live Chat Logs API Endpoint**: Created a GET API route at `/api/dashboard/messages` to fetch database chat logs dynamically.
+- **Glassmorphic Chat History Modal**: Upgraded `DashboardClient.tsx` with a modern chat logs pop-up viewer featuring custom bubble styling and auto-scroll functionality.
+- **Real-Time Polling Synchronization**: Wired the chat logs viewer into the 3-second dashboard polling loop, enabling real-time conversation tracking with leads.
+- **B2B Social Campaign Deployment**: Published the 5th Reel on the Facebook Page using a custom python compiled audio/visual asset, and launched a dental clinic acquisition campaign inside active local professional groups.
+
+---
+
+### 🏥 Version 11.1.0 (Dynamic Clinical Command Center) - 2026-06-21
+- **Dynamic Industry Selector**: Added a high-fidelity toggle button inside `DashboardClient.tsx` allowing users to switch dynamically between **Real Estate** and **Clinical / Medical** views.
+- **Clinical Terminology Mapping**: Integrated a localized vocabulary map mapping stats and table columns dynamically (e.g., changing "Investors" to "Patients", "Viewings Booked" to "Appointments Booked", and "Property Interest" to "Medical Inquiry / Symptoms").
+- **Cool Medical White Theme**: Built a fully responsive slate-white theme override class `.theme-clinical` in `globals.css` using slate-blue backgrounds, clean white cards, and medical blue/teal variables to meet clinical preferences.
+- **CSS-Driven Sidebar Subtext**: Implemented a CSS pseudo-element rule that automatically updates the sidebar branding subtext from "Sovereign Real Estate" to "Sovereign Healthcare" instantly.
+
+---
+
+### 🏥 Version 11.1.1 (Clinic Default & Redirect Production Deployment) - 2026-06-22
+- **Default Clinic State**: Initialized the default industry state to `'clinic'` inside `DashboardClient.tsx` to display the clinical command center layout by default.
+- **Default Clinical Redirect**: Configured `app/demo/route.ts` to route demo visits by default to the Arabic clinical WhatsApp pre-filled greeting message: `"مرحباً! أود تجربة ديمو نظام العيادات الذكي لوكالة النفير 🏥"`.
+- **Production Deployment**: Successfully deployed to Vercel production at `https://el-nafeer-systems.vercel.app` after optimizing upload payloads with a `.vercelignore` rule.
