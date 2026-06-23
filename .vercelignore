@@ -1,0 +1,32 @@
+# Vercel Deployment Ignores
+.next
+node_modules
+.vercel
+.git
+tmp
+.qodo
+.cache
+*.log
+*.mp4
+*.mp3
+*.pdf
+*.zip
+*.rar
+*.dll
+*.node
+chat_history.json
+dev.db
+dev.db-journal
+
+# Exclude heavy directories absolutely from root
+/public/campaigns/lever-pioneer
+/public/campaigns/beit-alkhair
+/public/campaigns/al-nafeer
+/public/uploads
+/public/logos
+/public/clients
+/public/assets
+/realstatecompany
+/images
+/scripts
+/lib/ai/project_index.json
