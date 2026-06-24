@@ -18,6 +18,7 @@ We successfully adapted the SaaS Dashboard to target Clinics by default, built a
    * Created a high-fidelity interactive portal at `/portal/dr-shimaa-sovereign`.
    * **Visual Mesh:** Built [DrShimaaClinicalMesh.tsx](file:///c:/Users/Sherif-Rosas/EL_NAFEER/components/DrShimaaClinicalMesh.tsx) which uses React Three Fiber to drift gold, white, and teal sparkles over a slow-zooming background graphic.
    * **Custom Background Design:** Regenerated `shimaa_portal_bg.png` using Dr. Shimaa's actual face profile headshot so that the doctor represented wears a light pink floral hijab and matches Dr. Shimaa's face.
+   * **Light Link-Preview Asset:** Generated [shimaa_og_light.png](file:///c:/Users/Sherif-Rosas/EL_NAFEER/public/campaigns/dr-shimaa/shimaa_og_light.png), a clean, light-colored clinical OpenGraph preview card containing her hijab portrait and the Arabic clinical credentials, and updated `app/portal/dr-shimaa-sovereign/page.tsx` metadata.
    * **Bilingual Portal:** Built [DrShimaaClinicalPortal.tsx](file:///c:/Users/Sherif-Rosas/EL_NAFEER/components/DrShimaaClinicalPortal.tsx) containing ambient audio, typewriter credentials, specialized service cards, and an appointment booking form with GPS telemetry capture.
    * **Database Onboarding:** Built [onboard-dr-shimaa.ts](file:///c:/Users/Sherif-Rosas/EL_NAFEER/scripts/onboard-dr-shimaa.ts) to seed her brand profile in the PostgreSQL database.
 4. **Vercel Deploy Optimization:**
