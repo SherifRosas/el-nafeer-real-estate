@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     siteName: 'Dr. Shimaa Belal Clinic',
     images: [
       {
-        url: 'https://el-nafeer-real-estate.vercel.app/campaigns/dr-shimaa/shimaa_og_light.png?v=sovereign-2',
+        url: 'https://el-nafeer-real-estate.vercel.app/campaigns/dr-shimaa/shimaa_og_light.png?v=sovereign-noface-v1',
         width: 1200,
         height: 630,
         alt: 'Dr. Shimaa Belal Clinic Sovereign Portal'
