@@ -115,12 +115,45 @@ export default function DrShimaaClinicalPortal() {
     const [locLoading, setLocLoading] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     
+    const [workingHours, setWorkingHours] = useState({ start: "13:30", end: "20:30" });
+    const [availableTimes, setAvailableTimes] = useState<string[]>([]);
+    
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const typingTimerRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         setMounted(true);
+        fetch('/api/dr-shimaa-settings')
+            .then(res => res.json())
+            .then(data => {
+                if (data.workingHours) {
+                    setWorkingHours(data.workingHours);
+                }
+            })
+            .catch(console.error);
     }, []);
+
+    useEffect(() => {
+        const generateTimeSlots = (start: string, end: string) => {
+            const slots = [];
+            const [startHr, startMin] = start.split(':').map(Number);
+            const [endHr, endMin] = end.split(':').map(Number);
+            
+            let current = new Date();
+            current.setHours(startHr, startMin, 0, 0);
+            
+            const endTime = new Date();
+            endTime.setHours(endHr, endMin, 0, 0);
+            
+            while (current <= endTime) {
+                slots.push(current.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }));
+                current.setMinutes(current.getMinutes() + 15);
+            }
+            return slots;
+        };
+        
+        setAvailableTimes(generateTimeSlots(workingHours.start, workingHours.end));
+    }, [workingHours]);
 
     // Clinical Typing Engine
     useEffect(() => {
@@ -179,7 +212,7 @@ export default function DrShimaaClinicalPortal() {
         const payload = {
             name: formData.get('userName'),
             phone: formData.get('userPhone'),
-            notes: `[SHIMAA_CLINICAL_PORTAL] Service: ${formData.get('serviceType')} | Visit Date: ${formData.get('visitDate')} | GPS Location: ${userLocLink || 'None'} | Notes: ${formData.get('userNotes')}`,
+            notes: `[SHIMAA_CLINICAL_PORTAL] Service: ${formData.get('serviceType')} | Visit Date: ${formData.get('visitDate')} | Time: ${formData.get('visitTime')} | GPS Location: ${userLocLink || 'None'} | Notes: ${formData.get('userNotes')}`,
             brandProfileId: SHIMAA_BRAND_ID
         };
         try {
@@ -425,12 +458,25 @@ export default function DrShimaaClinicalPortal() {
                                             <option value="Infertility" className="bg-black">{t.types.delayed}</option>
                                         </select>
 
-                                        <input 
-                                            type="date" 
-                                            name="visitDate" 
-                                            required 
-                                            className="w-full bg-white/5 border border-sky-500/20 p-4 rounded-xl text-white focus:border-sky-400 outline-none text-sm transition-all" 
-                                        />
+                                        <div className="flex gap-2 w-full">
+                                            <input 
+                                                type="date" 
+                                                name="visitDate" 
+                                                required 
+                                                className="w-1/2 bg-white/5 border border-sky-500/20 p-4 rounded-xl text-white focus:border-sky-400 outline-none text-sm transition-all" 
+                                            />
+                                            <select 
+                                                name="visitTime" 
+                                                required 
+                                                defaultValue="" 
+                                                className="w-1/2 bg-white/5 border border-sky-500/20 p-4 rounded-xl text-white focus:border-sky-400 outline-none text-sm transition-all appearance-none"
+                                            >
+                                                <option value="" disabled className="bg-black text-white/50">{language === 'ar' ? "الوقت المفضل" : "Time"}</option>
+                                                {availableTimes.map((time, idx) => (
+                                                    <option key={idx} value={time} className="bg-black">{time}</option>
+                                                ))}
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <textarea 
