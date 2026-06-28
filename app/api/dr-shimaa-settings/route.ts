@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/db';
 
 const SHIMAA_BRAND_ID = "dr-shimaa-obgyn-profile-uuid-v100";
 
