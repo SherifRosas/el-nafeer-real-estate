@@ -297,7 +297,7 @@ export default function AdvancedLeverPortal() {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {LEVER_PORTFOLIO.map((p, i) => (
                                 <motion.div key={i} whileHover={{ y: -10 }} onClick={() => setFullScreenVid(p.vid)} className="group cursor-pointer bg-white/5 border border-white/10 rounded-3xl overflow-hidden aspect-video relative">
-                                    {/\.(jpg|jpeg|png|webp)$/i.test(p.vid) ? <img src={p.vid} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" alt={p.title} /> : <video src={p.vid} muted className="w-full h-full object-cover opacity-60 group-hover:opacity-100" />}
+                                    {/\.(jpg|jpeg|png|webp)$/i.test(p.vid) ? <img src={encodeURI(p.vid)} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" alt={p.title} /> : <video src={encodeURI(p.vid)} muted className="w-full h-full object-cover opacity-60 group-hover:opacity-100" />}
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all flex flex-col justify-end p-6">
                                         <span className="text-white font-black tracking-widest text-xs uppercase">{p.title}</span>
                                         <div className="w-10 h-1 bg-cyan-500 mt-2" />
@@ -353,7 +353,7 @@ export default function AdvancedLeverPortal() {
                         <X size={24} /> {t.portfolio_return}
                     </button>
                     <div className="flex-1 flex items-center justify-center p-6">
-                        {/\.(jpg|jpeg|png|webp)$/i.test(fullScreenVid) ? <img src={fullScreenVid} className="max-w-full max-h-full shadow-2xl rounded-2xl" /> : <video src={fullScreenVid} controls autoPlay className="max-w-full max-h-full shadow-2xl rounded-2xl" />}
+                        {/\.(jpg|jpeg|png|webp)$/i.test(fullScreenVid) ? <img src={encodeURI(fullScreenVid)} className="max-w-full max-h-full shadow-2xl rounded-2xl" /> : <video src={encodeURI(fullScreenVid)} controls autoPlay className="max-w-full max-h-full shadow-2xl rounded-2xl" />}
                     </div>
                 </div>
             )}

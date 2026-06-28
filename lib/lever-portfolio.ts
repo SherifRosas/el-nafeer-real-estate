@@ -48,7 +48,7 @@ export const LEVER_PORTFOLIO: PortfolioItem[] = [
     { title: "هوم لفت 05", cat: "مصاعد هوم لفت", vid: `${BASE_PATH}/مصاعد هوم لفت/WhatsApp Image3.jpeg` },
 
     // --- صور ---
-    { title: "صورة المعرض 01", cat: "صور", vid: `${BASE_PATH}/صور/WhatsApp Image01` },
+    { title: "صورة المعرض 01", cat: "صور", vid: `${BASE_PATH}/صور/WhatsApp Image01.jpeg` },
     { title: "صورة المعرض 02", cat: "صور", vid: `${BASE_PATH}/صور/WhatsApp Image02.jpeg` },
     { title: "صورة المعرض 03", cat: "صور", vid: `${BASE_PATH}/صور/WhatsApp Image03.jpeg` },
     { title: "صورة المعرض 04", cat: "صور", vid: `${BASE_PATH}/صور/WhatsApp Image04.jpeg` },
