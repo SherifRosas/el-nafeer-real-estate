@@ -38,7 +38,7 @@ async function onboard() {
                 industry: 'Obstetrics & Gynecology (نساء وتوليد)',
                 serviceArea: 'Helwan, Giza, Cairo',
                 location: 'Helwan University, Giza, Egypt',
-                logoUrl: '/campaigns/dr-shimaa/logo.jpg',
+                logoUrl: '/campaigns/dr-shimaa/logo.png',
                 contactDetails: {
                     phone: '+201555699437',
                     whatsapp: '+201224576070',
