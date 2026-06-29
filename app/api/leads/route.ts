@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/lib/supabase'
+import { prisma } from '@/lib/db'
 import { nurture } from '@/lib/nurture'
 
 export async function POST(request: NextRequest) {
@@ -14,14 +14,16 @@ export async function POST(request: NextRequest) {
             )
         }
 
-        const lead = await db.createLead({
-            name,
-            phone,
-            email,
-            notes,
-            brandProfileId,
-            propertyId,
-            status: 'new'
+        const lead = await prisma.lead.create({
+            data: {
+                name,
+                phone,
+                email,
+                notes,
+                brandProfileId,
+                propertyId,
+                status: 'new'
+            }
         })
 
         // INITIATE_NEURAL_NURTURE_SEQUENCE (v1.0)
@@ -54,7 +56,10 @@ export async function PATCH(request: NextRequest) {
             )
         }
 
-        const updatedLead = await db.updateLead(id, { status })
+        const updatedLead = await prisma.lead.update({
+            where: { id },
+            data: { status }
+        })
 
         return NextResponse.json({
             success: true,
