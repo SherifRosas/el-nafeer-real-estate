@@ -5,14 +5,16 @@ import OpenAI from 'openai'
 // We will instantiate locally here, but in production we'd use the global db instance
 import { prisma } from '../db'
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY || process.env.GROQ_API_KEY // fallback to groq if they use it for openai compat
+// Initialize inside the function or provide a fallback for build time
+const getOpenAI = () => new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY || "dummy-key-for-build"
 })
 
 /**
  * Generate a vector embedding for clinical text
  */
 export async function generateClinicalEmbedding(text: string): Promise<number[]> {
+    const openai = getOpenAI()
     const response = await openai.embeddings.create({
         model: 'text-embedding-3-small',
         input: text,
