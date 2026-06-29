@@ -3,12 +3,14 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("EL_NAFEER_DB_URL")
-  directUrl = env("DIRECT_URL")
+  provider   = "postgresql"
+  url        = env("EL_NAFEER_DB_URL")
+  directUrl  = env("DIRECT_URL")
+  extensions = [vector]
 }
 
 model User {
@@ -30,6 +32,7 @@ model User {
   propertyOwner     PropertyOwner?
   brandProfile      BrandProfile?
   chatSessions      ChatSession[]
+  patientProfile    Patient?
 
   @@map("users")
 }
@@ -250,6 +253,7 @@ model BrandProfile {
   user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   campaigns       Campaign[]
   leads           Lead[]
+  patients        Patient[]
   
   @@map("brand_profiles")
 }
@@ -334,4 +338,90 @@ model AgentTask {
   @@map("agent_tasks")
 }
 
+model Patient {
+  id              String      @id @default(cuid())
+  userId          String?     @unique // If they have an account
+  brandProfileId  String      // To link specifically to Dr. Shimaa's clinic
+  name            String
+  phone           String
+  dateOfBirth     DateTime?
+  bloodType       String?
+  allergies       String?
+  medicalHistory  String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
 
+  encounters      ClinicalEncounter[]
+  embeddings      PatientEmbedding[]
+  prescriptions   Prescription[]
+  documents       MedicalDocument[]
+
+  brandProfile    BrandProfile @relation(fields: [brandProfileId], references: [id], onDelete: Cascade)
+  user            User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("patients")
+}
+
+model ClinicalEncounter {
+  id              String      @id @default(cuid())
+  patientId       String
+  date            DateTime    @default(now())
+  type            String      // consultation, follow-up, ultrasound, delivery
+  symptoms        String?
+  vitals          Json?       // bp, weight, temp
+  diagnosis       String?
+  treatmentPlan   String?
+  doctorNotes     String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  patient         Patient     @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  prescriptions   Prescription[]
+  embeddings      PatientEmbedding[]
+
+  @@map("clinical_encounters")
+}
+
+model Prescription {
+  id              String      @id @default(cuid())
+  patientId       String
+  encounterId     String?
+  medicationName  String
+  dosage          String
+  frequency       String
+  duration        String
+  notes           String?
+  issuedAt        DateTime    @default(now())
+
+  patient         Patient           @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  encounter       ClinicalEncounter? @relation(fields: [encounterId], references: [id], onDelete: SetNull)
+
+  @@map("prescriptions")
+}
+
+model MedicalDocument {
+  id              String      @id @default(cuid())
+  patientId       String
+  title           String
+  type            String      // lab_result, ultrasound, referral
+  fileUrl         String
+  uploadDate      DateTime    @default(now())
+
+  patient         Patient     @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@map("medical_documents")
+}
+
+model PatientEmbedding {
+  id              String      @id @default(cuid())
+  patientId       String
+  encounterId     String?
+  content         String      // The text that was embedded
+  embedding       Unsupported("vector(1536)") // OpenAI embeddings are 1536 dimensions
+  createdAt       DateTime    @default(now())
+
+  patient         Patient           @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  encounter       ClinicalEncounter? @relation(fields: [encounterId], references: [id], onDelete: Cascade)
+
+  @@map("patient_embeddings")
+}
