@@ -111,8 +111,6 @@ export default function DrShimaaClinicalPortal() {
     const [activeModal, setActiveModal] = useState<null | 'book' | 'services'>(null);
     const [bookingSent, setBookingSent] = useState(false);
     const [bookingLoading, setBookingLoading] = useState(false);
-    const [userLocLink, setUserLocLink] = useState<string | null>(null);
-    const [locLoading, setLocLoading] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     
     const [workingHours, setWorkingHours] = useState({ start: "13:30", end: "20:30" });
@@ -195,16 +193,6 @@ export default function DrShimaaClinicalPortal() {
         }
     }
 
-    const captureUserLocation = () => {
-        setLocLoading(true);
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((pos) => {
-                setUserLocLink(`https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`);
-                setLocLoading(false);
-            }, () => setLocLoading(false));
-        } else setLocLoading(false);
-    }
-
     const submitBookingRequest = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setBookingLoading(true);
@@ -212,7 +200,7 @@ export default function DrShimaaClinicalPortal() {
         const payload = {
             name: formData.get('userName'),
             phone: formData.get('userPhone'),
-            notes: `[SHIMAA_CLINICAL_PORTAL] Service: ${formData.get('serviceType')} | Visit Date: ${formData.get('visitDate')} | Time: ${formData.get('visitTime')} | GPS Location: ${userLocLink || 'None'} | Notes: ${formData.get('userNotes')}`,
+            notes: `[SHIMAA_CLINICAL_PORTAL] Service: ${formData.get('serviceType')} | Visit Date: ${formData.get('visitDate')} | Time: ${formData.get('visitTime')} | Notes: ${formData.get('userNotes')}`,
             brandProfileId: SHIMAA_BRAND_ID
         };
         try {
@@ -486,14 +474,7 @@ export default function DrShimaaClinicalPortal() {
                                         className="w-full bg-white/5 border border-sky-500/20 p-4 rounded-xl text-white placeholder:text-white/30 focus:border-sky-400 outline-none text-sm transition-all resize-none" 
                                     />
 
-                                    <button 
-                                        type="button" 
-                                        onClick={captureUserLocation} 
-                                        className="w-full bg-sky-950/20 border border-sky-500/30 p-4 rounded-xl text-sky-400 font-bold text-xs tracking-wider uppercase hover:bg-sky-950/40 transition-all flex justify-center items-center gap-2"
-                                    >
-                                        <MapPin size={16} />
-                                        {locLoading ? t.form_loc_loading : userLocLink ? t.form_loc_success : t.form_loc_btn}
-                                    </button>
+
 
                                     <button 
                                         type="submit" 
