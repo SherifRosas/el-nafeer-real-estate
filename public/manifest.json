@@ -1,19 +1,22 @@
 {
-  "name": "Job Advertisement System",
-  "short_name": "Job App",
-  "description": "Egyptian Ministry of Education Job Advertisement System",
-  "start_url": "/",
+  "name": "Dr. Shimaa Belal Clinic",
+  "short_name": "Dr. Shimaa",
+  "description": "Sovereign Clinical Portal for Dr. Shimaa Belal",
+  "start_url": "/portal/dr-shimaa-sovereign",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#2563eb",
-  "orientation": "portrait-primary",
+  "background_color": "#000000",
+  "theme_color": "#0ea5e9",
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "/campaigns/dr-shimaa/shimaa_og_light.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/campaigns/dr-shimaa/shimaa_og_light.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ]
 }
-
