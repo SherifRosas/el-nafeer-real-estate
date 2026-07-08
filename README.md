@@ -1,171 +1,51 @@
-# EL NAFEER - Real Estate Platform
+# El Nafeer Real Estate & Lever Pioneer Elevators
 
-A comprehensive real estate marketplace platform for buying, selling, and renting properties with advanced lead management and owner dashboards.
-
-## Features
-
-- ✅ Property listings with images and detailed descriptions
-- ✅ Advanced search and filtering
-- ✅ Lead management system
-- ✅ Property owner dashboards
-- ✅ Email notifications
-- ✅ Admin dashboard with full control
-- ✅ User authentication with Gmail
-- ✅ Responsive design
-- ✅ Bilingual support (Arabic/English)
-- ✅ Mobile-friendly interface
-
-## Technology Stack
-
-- **Framework**: Next.js 16+ with TypeScript
-- **Database**: PostgreSQL with Prisma ORM
-- **Authentication**: NextAuth.js with Gmail OAuth
-- **Styling**: Tailwind CSS with RTL support
-- **Internationalization**: next-intl
-- **Image Handling**: Optimized image uploads
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+ 
-- PostgreSQL database
-- npm or yarn
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd el-nafeer-real-estate
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Set up environment variables:
-```bash
-cp .env.local.example .env.local
-```
-
-Edit `.env.local` with your configuration (see `REQUIRED_CONFIGURATION.md`)
-
-4. Set up the database:
-```bash
-npx prisma generate
-npx prisma db push
-```
-
-5. Run the development server:
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Environment Variables
-
-See `.env.local` for configuration.
-
-Key variables:
-- `DATABASE_URL` - PostgreSQL connection string (Supabase)
-- `NEXTAUTH_SECRET` - NextAuth secret key
-- `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` - Google OAuth credentials
-- `NEXTAUTH_URL` - Your application URL
-- `ADMIN_EMAIL` - Admin contact email
-
-## Project Structure
-
-```
-el-nafeer-real-estate/
-├── app/
-│   ├── (public)/          # Public pages
-│   ├── admin/             # Admin dashboard
-│   ├── owner/             # Property owner dashboard
-│   └── api/               # API routes
-├── components/            # React components
-├── lib/                   # Utility functions
-├── prisma/                # Database schema
-└── public/                # Static assets
-```
-
-## Key Features
-
-### For Buyers/Renters
-- Browse property listings
-- Advanced filters (location, price, features)
-- Contact property owners
-- Save favorite properties
-- View property details and images
-
-### For Property Owners
-- Create and manage property listings
-- Upload multiple property images
-- Track leads and inquiries
-- Manage property status
-- View contact information from interested buyers
-
-### For Administrators
-- Full platform control
-- User and property management
-- Analytics and reporting
-- Settings management
-- Support and troubleshooting
-
-## Admin Access
-
-Default admin credentials (change in production):
-- Email: Set via `ADMIN_EMAIL` env variable
-- Password: Set via `ADMIN_PASSWORD` env variable
-
-## Property Management
-
-Property owners can:
-- List new properties with detailed information
-- Upload multiple images
-- Set pricing and availability
-- Track interested buyers
-- Manage property status (available, sold, reserved)
-
-## Development
-
-```bash
-# Development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
-
-# Database commands
-npm run db:generate  # Generate Prisma client
-npm run db:push      # Push schema to database
-npm run db:studio    # Open Prisma Studio
-```
-
-## Security Notes
-
-- Secure user authentication with NextAuth
-- All API routes are protected
-- User data encryption
-- Input validation on all forms
-- Secure password hashing
-- Protected admin panel
-
-## License
-
-This project is provided as-is for real estate marketplace operations.
-
-## Support
-
-For issues or questions, please contact the development team.
+This repository houses the digital ecosystem for the **El Nafeer Real Estate** platform and its premium elevator division, **Lever Pioneer Elevators (ليفر الرائدة للمصاعد)**.
 
 ---
 
-**Status**: Production Ready (with proper environment configuration)
+## 🏗️ Core Architecture
+- **Framework & Speed:** Built on [Next.js (App Router)](https://nextjs.org/) and deployed on Vercel for lightning-fast global edge delivery.
+- **Styling:** Tailwind CSS, utilizing precision styling and custom A4 Print targeting.
+- **Database:** PostgreSQL backend connected via [Prisma ORM](https://www.prisma.io/).
 
+---
 
+## 🛡️ The Sovereign Elite Portal (`/portal/lever-pioneer-elite`)
+An ultra-premium, highly exclusive "Millionaire-Tier" digital gateway targeting high-net-worth clients (The Giza Elite).
+- **Biometric Entry:** Features an animated, cinematic biometric scanning sequence before granting portal access, designed to emulate a bespoke, highly classified engineering firm.
+- **Premium Aesthetics:** Dark mode, glassmorphism, and gold accents convey absolute authority and exclusivity.
+
+---
+
+## 📄 The 4-Page Digital Quotation Engine (`/lever-pioneer/quote-template`)
+A mathematically perfect digital replica of the physical Lever Pioneer contracts, engineered for flawless PDF exporting and direct printing.
+
+### Page Breakdown:
+1. **Page 1 (Primary Specs):** Detailed breakdown of Control Panel, Machine, and Landing Doors.
+2. **Page 2 (Secondary Specs):** Continuation of technical components (Oil Machine, Safety Doors, Intercom, Rails, etc.).
+3. **Page 3 (Warranties):** Free Maintenance & Warranty clauses presented in premium, highly readable bulleted lists.
+4. **Page 4 (Technical Contract):** "العقد الفني" - A blank, reusable contract template featuring a dual-signature block (First Party & Second Party).
+
+### Print & Export Mastery
+- **CSS `page-break` Engine:** The browser's native printing is overridden to mathematically slice the document into exactly **4 perfect A4 pages**.
+- **Zero Bleed:** Eliminated all dark-mode background bleeding and floating element overlaps for flawless `Ctrl+P` PDF exports.
+
+---
+
+## 👑 Brand Authority & Identity
+Every digital asset is meticulously branded to project dominance in the market.
+- **Dynamic Header:** Features a massive 160px Lever Pioneer 3D logo anchored between bold English and Arabic typography.
+- **Professional Footer:** A sleek, symmetrical 2-line footer present on every page:
+  - *Line 1:* Commercial Registration (23012) & Tax ID (276800419) separated by premium gold dots.
+  - *Line 2:* Address (الدقهليه المنصوره مركز ومدينة السنبلاوين) & 3 Phone Numbers paired with premium SVG icons.
+
+---
+
+## 📱 WhatsApp Link Mastery
+Secured social sharing via the **"Static HTML Bridge" Strategy**.
+- By creating links like `wa-elite.html`, we completely bypass Vercel's caching logic. This guarantees that shared links will *always* load a beautiful, rich preview showing the exact giant logo, Arabic titles, and descriptions requested.
+
+---
+
+*This ecosystem is engineered for absolute scalability, premium client acquisition, and zero-compromise aesthetics.*
