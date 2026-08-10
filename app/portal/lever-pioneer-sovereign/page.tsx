@@ -42,7 +42,7 @@ export default function MetropolitanPortalPage() {
               <div className="h-px w-full bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent mb-10" />
               
               <p className="text-gray-400 text-sm md:text-base max-w-lg mx-auto font-light leading-relaxed mb-12">
-                The direct booking portal for Lever Pioneer's Metropolitan Sovereign Ascent is currently undergoing maintenance or has concluded its active phase. Please use the new elite access node.
+                The direct booking portal for Lever Pioneer&apos;s Metropolitan Sovereign Ascent is currently undergoing maintenance or has concluded its active phase. Please use the new elite access node.
               </p>
 
               <a href="/" className="inline-block px-10 py-4 bg-cyan-950/40 border border-cyan-500/30 text-cyan-500 text-xs font-black uppercase tracking-widest rounded-full hover:bg-cyan-500 hover:text-black transition-all">

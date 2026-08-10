@@ -25,7 +25,7 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/lever-pioneer/:path*',
+        source: '/lever-pioneer/((?!ad-v5|dashboard|quote|request-quote|official-quote).*)',
         destination: '/portal/lever-pioneer',
         permanent: false,
       },

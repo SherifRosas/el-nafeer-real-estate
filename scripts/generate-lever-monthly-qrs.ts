@@ -7,7 +7,7 @@ const CAMPAIGNS = [
         name: "infinity_gate",
         url: "https://el-nafeer-real-estate.vercel.app/portal/lever-pioneer-elite?ref=infinity_gate",
         filename: "lever_infinity_gate_qr.png"
-    ,
+    },
     {
         name: "engineer_stability",
         url: "https://el-nafeer-real-estate.vercel.app/portal/lever-pioneer-elite?ref=engineer_stability",
@@ -29,7 +29,7 @@ async function generateQRs() {
                 color: {
                     dark: '#0ea5e9', // Lever Cyan
                     light: '#000000' // Cyber-Black
-                ,
+                },
                 width: 1024,
                 margin: 2
             });

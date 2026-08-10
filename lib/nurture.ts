@@ -10,10 +10,10 @@ export interface Lead {
   id: string
   name: string
   phone: string
-  email?: string
-  brandProfileId?: string
-  propertyId?: string
-  notes?: string
+  email?: string | null
+  brandProfileId?: string | null
+  propertyId?: string | null
+  notes?: string | null
 }
 
 export const nurture = {

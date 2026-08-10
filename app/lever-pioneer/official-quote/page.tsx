@@ -2,9 +2,10 @@ import { Suspense } from 'react'
 import { Metadata } from 'next'
 import QuantumPortalAd from '@/components/QuantumPortalAd'
 
-const TITLE = "ليفر الرائدة للمصاعد | Lever Pioneer"
+const TITLE = "طلب عرض سعر لتركيب مصعد | ليفر الرائدة للمصاعد"
 const DESC = "طلب عرض سعر لتركيب مصعد"
 const DOMAIN = "https://el-nafeer-real-estate.vercel.app"
+const IMAGE = `${DOMAIN}/lever-pioneer-share.png?v=20`
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -13,28 +14,21 @@ export const metadata: Metadata = {
   openGraph: {
     title: TITLE,
     description: DESC,
-    url: `${DOMAIN}/lever-pioneer/ad-v5`,
-    siteName: 'Lever Pioneer',
+    url: `${DOMAIN}/lever-pioneer/official-quote`,
+    siteName: 'ليفر الرائدة للمصاعد',
     locale: 'ar_EG',
     type: 'website',
-    images: [
-      {
-        url: '/lever-pioneer-share.png?v=15',
-        width: 712,
-        height: 744,
-        alt: 'Lever Pioneer Elevators Logo',
-      }
-    ]
+    images: [{ url: IMAGE, width: 450, height: 450, alt: 'ليفر الرائدة للمصاعد' }]
   },
   twitter: {
     card: 'summary_large_image',
     title: TITLE,
     description: DESC,
-    images: ['/lever-pioneer-share.png?v=15'],
+    images: [IMAGE],
   }
 }
 
-export default function LegacyPortalPage() {
+export default function LeverPioneerOfficialQuotePage() {
   return (
     <main style={{ backgroundColor: '#000', width: '100vw', height: '100dvh', overflow: 'hidden', position: 'fixed', inset: 0 }}>
       <Suspense fallback={<div style={{ backgroundColor: '#000', height: '100vh', width: '100vw' }} />}>

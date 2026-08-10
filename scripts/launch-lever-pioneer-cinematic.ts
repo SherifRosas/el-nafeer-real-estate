@@ -22,7 +22,7 @@ async function main() {
             location: 'Cairo, Giza - Hadayek Al-Ahram (Fourth Gate)',
             contactDetails: {
                 phone: '+201070615372', // Lever Main
-                whatsapp: '+201111171368', // WhatsApp Node
+                whatsapp: '+201070615372', // WhatsApp Node
                 elNafeerPlatform: '01065661882' // El Nafeer Global Platform
             }
         }

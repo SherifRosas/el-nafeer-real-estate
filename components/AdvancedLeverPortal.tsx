@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Phone, MessageCircle, MapPin, X, Globe, Activity, ShieldCheck, Zap, Gauge, Layout, FileText, ChevronLeft, Music, Volume2 } from 'lucide-react'
+import { useSearchParams } from 'next/navigation'
 import { useLanguage } from './LanguageContext'
 import { LEVER_PORTFOLIO } from '@/lib/lever-portfolio'
 import { neuralAudio } from '@/lib/neural-audio'
@@ -15,7 +16,7 @@ const LEVER_BRAND_ID = "62c38934-4c4b-42be-98c9-06cbbee1af19";
 
 const DICTIONARY = {
     ar: {
-        tap_to_ascent: "ليفر الرائدة للمصاعد | LEVER_PIONEER",
+        tap_to_ascent: "اضغط للدخول | ليفر الرائدة للمصاعد | LEVER_PIONEER",
         close: "إغلاق",
         intro: "تدشن شركة ليفر الرائدة للمصاعد مقرها الجديد بقلب الجيزة حدائق الأهرام البوابة الثانية القديمة \"341 ط\". للتواصل المباشر مع مستشارك الفني أو الوصول لموقعنا، اضغط على الأيقونات التفاعلية أدناه.",
         quantum_label: "قياسات الكم الرقمية",
@@ -27,7 +28,7 @@ const DICTIONARY = {
         loc: "الموقع",
         port: "المعرض",
         quote: "طلب عرض",
-        form_title: "طلب تـسعيرة فـنية",
+        form_title: "طلب عرض سعر لتركيب مصعد",
         form_success: "✅ تم إرسال الطلب بنجاح",
         form_name: "الاسم",
         form_phone: "الهاتف",
@@ -40,10 +41,12 @@ const DICTIONARY = {
         form_floors: "عدد الأدوار (اختياري)",
         form_type: "نوع المصعد",
         form_notes: "ملاحظات إضافية (اختياري)",
+        copy_link: "نسخ رابط الدخول",
+        link_copied: "✅ تم نسخ الرابط!",
         types: { residential: "سكني", commercial: "تجاري", panorama: "بانوراما المونيوم", maintenance: "صيانة وتحديث" }
     },
     en: {
-        tap_to_ascent: "LEVER PIONEER ELEVATORS | ASCENT_START",
+        tap_to_ascent: "CLICK TO ENTER | LEVER PIONEER ELEVATORS",
         close: "CLOSE",
         intro: "Lever Pioneer Elevators inaugurates its new headquarters in the heart of Giza, Hadayek El Ahram, Old Second Gate \"341 T\". Connect with your technical consultant or navigate to our site via the nodes below.",
         quantum_label: "Quantum Telemetry Hub",
@@ -68,6 +71,8 @@ const DICTIONARY = {
         form_floors: "Number of Floors (Optional)",
         form_type: "Elevator Type",
         form_notes: "Additional Notes (Optional)",
+        copy_link: "Share Login Link",
+        link_copied: "✅ Link Copied!",
         types: { residential: "Residential", commercial: "Commercial", panorama: "Aluminium Panorama", maintenance: "Maintenance & Modernization" }
     }
 };
@@ -76,15 +81,19 @@ const DICTIONARY = {
 export default function AdvancedLeverPortal() {
     const { language, setLanguage } = useLanguage();
     const t = DICTIONARY[language];
-    const [isStarted, setIsStarted] = useState(false);
+    const searchParams = useSearchParams();
+    const modalParam = searchParams?.get('modal');
+
+    const [isStarted, setIsStarted] = useState(modalParam === 'quote');
     const [mounted, setMounted] = useState(false);
     const [displayedText, setDisplayedText] = useState("");
-    const [activeModal, setActiveModal] = useState<null | 'quote' | 'portfolio'>(null);
+    const [activeModal, setActiveModal] = useState<null | 'quote' | 'portfolio'>(modalParam === 'quote' ? 'quote' : null);
     const [quoteSent, setQuoteSent] = useState(false);
     const [quoteLoading, setQuoteLoading] = useState(false);
     const [fullScreenVid, setFullScreenVid] = useState<string | null>(null);
     const [userLocLink, setUserLocLink] = useState<string | null>(null);
     const [locLoading, setLocLoading] = useState(false);
+    const [showToast, setShowToast] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const typingTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -123,6 +132,13 @@ export default function AdvancedLeverPortal() {
         };
     }, [isStarted, language, t.intro]);
 
+    useEffect(() => {
+        if (modalParam === 'quote') {
+            setIsStarted(true);
+            setActiveModal('quote');
+        }
+    }, [modalParam]);
+
 
     const startExperience = () => {
         setIsStarted(true);
@@ -146,17 +162,46 @@ export default function AdvancedLeverPortal() {
         e.preventDefault();
         setQuoteLoading(true);
         const formData = new FormData(e.currentTarget);
+        const userName = formData.get('userName') as string;
+        const userPhone = formData.get('userPhone') as string;
+        const elevatorType = formData.get('elevatorType') as string;
+        const floors = formData.get('floors') as string;
+        const userNotes = formData.get('userNotes') as string;
+
         const payload = {
-            name: formData.get('userName'),
-            phone: formData.get('userPhone'),
-            notes: `[METRO_ASCENT_LEAD] Type: ${formData.get('elevatorType')} | Floors: ${formData.get('floors')} | GPS: ${userLocLink || 'None'} | User Notes: ${formData.get('userNotes')}`,
+            name: userName,
+            phone: userPhone,
+            notes: `[METRO_ASCENT_LEAD] Type: ${elevatorType} | Floors: ${floors} | GPS: ${userLocLink || 'None'} | User Notes: ${userNotes || ''}`,
             brandProfileId: LEVER_BRAND_ID
         };
         try {
             await fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
             setQuoteSent(true);
-            setTimeout(() => { setActiveModal(null); setQuoteSent(false); }, 3000);
+
+            // Construct WhatsApp message
+            const arabicType = t.types[elevatorType.toLowerCase() as keyof typeof t.types] || elevatorType;
+            const isAr = language === 'ar';
+            const messageText = isAr 
+                ? `طلب عرض سعر لتركيب مصعد:\n- الاسم: ${userName}\n- الهاتف: ${userPhone}\n- نوع المصعد: ${arabicType}\n- عدد الأدوار: ${floors}\n` + (userLocLink ? `- موقع العقار: ${userLocLink}\n` : '') + (userNotes ? `- ملاحظات: ${userNotes}\n` : '')
+                : `Elevator Installation Price Quote Request:\n- Name: ${userName}\n- Phone: ${userPhone}\n- Type: ${arabicType}\n- Floors: ${floors}\n` + (userLocLink ? `- Location: ${userLocLink}\n` : '') + (userNotes ? `- Notes: ${userNotes}\n` : '');
+
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=201070615372&text=${encodeURIComponent(messageText)}`;
+
+            setTimeout(() => { 
+                setActiveModal(null); 
+                setQuoteSent(false); 
+                window.location.href = whatsappUrl;
+            }, 2000);
         } catch (error) { console.error(error); } finally { setQuoteLoading(false); }
+    }
+
+    const handleCopyLink = () => {
+        navigator.clipboard.writeText("https://el-nafeer-real-estate.vercel.app/portal/lever-pioneer-elite")
+            .then(() => {
+                setShowToast(true);
+                setTimeout(() => setShowToast(false), 2000);
+            })
+            .catch(err => console.error("Could not copy link: ", err));
     }
 
     return (
@@ -310,7 +355,19 @@ export default function AdvancedLeverPortal() {
 
                 {activeModal === 'quote' && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[20000] bg-black/95 backdrop-blur-3xl flex items-center justify-center p-6">
-                        <div className="w-full max-w-xl bg-black border-2 border-cyan-500/40 rounded-[40px] p-12 relative shadow-[0_0_100px_rgba(6,182,212,0.15)]">
+                        <div className="w-full max-w-xl bg-black border-2 border-cyan-500/40 rounded-[40px] p-12 relative shadow-[0_0_100px_rgba(6,182,212,0.15)] max-h-[90vh] overflow-y-auto">
+                            <AnimatePresence>
+                                {showToast && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -10 }}
+                                        className="absolute top-4 left-1/2 -translate-x-1/2 bg-cyan-950/90 border border-cyan-500 text-cyan-400 px-6 py-3 rounded-full text-xs font-black tracking-wider shadow-[0_0_20px_rgba(34,211,238,0.4)] z-[30000]"
+                                    >
+                                        {t.link_copied}
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                             <button onClick={() => setActiveModal(null)} className="absolute top-8 right-8 text-white/40 hover:text-white"><X size={24} /></button>
                             <h3 className="text-2xl font-black text-cyan-400 tracking-widest uppercase text-center mb-10">{t.form_title}</h3>
                             {quoteSent ? <div className="text-white text-center py-20 font-black tracking-[0.4em] uppercase animate-pulse">{t.form_success}</div> : (
@@ -339,6 +396,14 @@ export default function AdvancedLeverPortal() {
 
                                     <button type="submit" disabled={quoteLoading} className="w-full bg-cyan-500 p-6 opacity-90 rounded-2xl text-black font-black tracking-[0.5em] uppercase hover:bg-white hover:opacity-100 transition-all shadow-[0_0_40px_rgba(6,182,212,0.4)] disabled:opacity-50 mt-2">
                                         {quoteLoading ? '...' : t.form_submit}
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        onClick={handleCopyLink}
+                                        className="w-full bg-cyan-950/20 border border-cyan-500/40 p-5 rounded-2xl text-cyan-400 font-black tracking-widest uppercase hover:bg-cyan-900/40 hover:text-white transition-all flex justify-center items-center gap-3 mt-2 shadow-[inset_0_0_15px_rgba(6,182,212,0.1)]"
+                                    >
+                                        {t.copy_link}
                                     </button>
                                 </form>
                             )}

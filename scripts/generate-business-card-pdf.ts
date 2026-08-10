@@ -54,7 +54,7 @@ async function generateBusinessCard() {
 
         // 6. Add Contacts
         doc.setFontSize(6);
-        doc.text("01070615372 | 01111171368", 85, 24, { align: "right" });
+        doc.text("01070615372", 85, 24, { align: "right" });
 
         // 7. Inject the Functional QR Code (Bottom Right)
         doc.addImage(qrDataUrl, "PNG", 68, 28, 18, 18);

@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
 
         // INITIATE_NEURAL_NURTURE_SEQUENCE (v1.0)
         // 🛰️ Autonomous follow-up triggered +60s post-capture
-        nurture.initiateSequence(lead)
+        nurture.initiateSequence(lead as any)
 
         return NextResponse.json({
             success: true,

@@ -258,16 +258,16 @@ export default function QuotationTemplatePage() {
                         <table className="w-full text-[13px] border-collapse">
                             <tbody>
                                 <SectionHeader en="FIRST PARTY" ar="الطرف الأول" />
-                                <TableRow labelEn="Date" labelAr="التاريخ" valueEn="" valueAr="2024/1/28" isDark={false} />
+                                <TableRow labelEn="Date" labelAr="التاريخ" valueEn="" valueAr="" isDark={false} />
                                 <TableRow labelEn="Company Name" labelAr="اسم الشركة" valueEn="" valueAr="ليفر الرائدة للمصاعد والسلالم الكهربائية" isDark={true} />
                                 <TableRow labelEn="Address" labelAr="العنوان" valueEn="" valueAr="المنصورة - السنبلاوين" isDark={false} />
                                 <TableRow labelEn="Contacts" labelAr="ارقام التواصل" valueEn="" valueAr="01070615372 - 01068560962" isDark={true} isLast={true} />
 
                                 <SectionHeader en="SECOND PARTY" ar="الطرف الثاني" />
                                 <TableRow labelEn="Client Name" labelAr="اسم العميل" valueEn="" valueAr="" isDark={false} />
-                                <TableRow labelEn="Project Address" labelAr="عنوان المشروع" valueEn="" valueAr="ابو راضي شارع ابو الغيت - بالمحله" isDark={true} />
-                                <TableRow labelEn="Units" labelAr="العدد" valueEn="" valueAr="1" isDark={false} />
-                                <TableRow labelEn="Elevator Type" labelAr="نوع المصعد" valueEn="" valueAr="مصعد مع غرفة ماكينات" isDark={true} isLast={true} />
+                                <TableRow labelEn="Project Address" labelAr="عنوان المشروع" valueEn="" valueAr="" isDark={true} />
+                                <TableRow labelEn="Units" labelAr="العدد" valueEn="" valueAr="" isDark={false} />
+                                <TableRow labelEn="Elevator Type" labelAr="نوع المصعد" valueEn="" valueAr="" isDark={true} isLast={true} />
                             </tbody>
                         </table>
 

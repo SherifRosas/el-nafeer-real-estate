@@ -72,7 +72,7 @@ export default function LeverPioneerLanding() {
                             <a href="https://www.google.com/maps?q=29.9656242,31.0922895" target="_blank" rel="noopener noreferrer" className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-widest hover:bg-sahara-gold hover:text-black transition-all flex items-center gap-2">
                                 📍 {isArabic ? 'القاهرة والجيزة' : 'CAIRO_&_GIZA'}
                             </a>
-                            <a href="https://wa.me/201111171368" target="_blank" rel="noopener noreferrer" className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-widest hover:bg-green-600 hover:text-white transition-all flex items-center gap-2">
+                            <a href="https://wa.me/201070615372" target="_blank" rel="noopener noreferrer" className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-widest hover:bg-green-600 hover:text-white transition-all flex items-center gap-2">
                                 💬 {isArabic ? 'واتساب' : 'WHATSAPP_SIGNAL'}
                             </a>
                             <a href="tel:+201070615372" className="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all flex items-center gap-2">
@@ -212,7 +212,7 @@ export default function LeverPioneerLanding() {
             </footer>
             {/* Floating Communication Bar */}
             <div className="fixed bottom-8 right-8 z-[100] flex flex-col gap-4 animate-in slide-in-from-bottom-10 duration-1000 delay-1000 mb-safe">
-                <a href="https://wa.me/201111171368" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-green-600 flex items-center justify-center text-2xl shadow-[0_10px_30px_rgba(22,163,74,0.4)] hover:scale-110 active:scale-95 transition-all group relative">
+                <a href="https://wa.me/201070615372" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-green-600 flex items-center justify-center text-2xl shadow-[0_10px_30px_rgba(22,163,74,0.4)] hover:scale-110 active:scale-95 transition-all group relative">
                     <span className="absolute right-full mr-4 px-4 py-2 rounded-xl bg-black/80 border border-white/10 text-[9px] font-black uppercase tracking-widest text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">WHATSAPP</span>
                     💬
                 </a>

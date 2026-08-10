@@ -18,7 +18,7 @@ async function generateQR() {
             color: {
                 dark: '#0ea5e9', // Lever Cyan 
                 light: '#000000' // Cyber-Black
-            ,
+            },
             width: 1024,
             margin: 2
         });

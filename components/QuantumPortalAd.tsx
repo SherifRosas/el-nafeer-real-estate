@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useSearchParams } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { Phone, MessageCircle, MapPin, X, Activity, ShieldCheck, Zap, Home, Layout, FileText, Globe } from 'lucide-react'
@@ -9,13 +10,13 @@ import AIChatbot from './AIChatbot'
 import { useLanguage } from './LanguageContext'
 import GizaHorizonMesh from './GizaHorizonMesh'
 
-const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=201111171368";
+const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=201070615372";
 const CALL_URL = "tel:+201070615372";
 const LOCATION_URL = "https://www.google.com/maps/place/Al+Omraneya,+Al+Haram,+Giza+Governorate/@29.9656242,31.0922895,17z/data=!4m15!1m8!3m7!1s0x14584fc2bfbefc07:0x5df1948b27a63882!2sAl+Omraneya,+Al+Haram,+Giza+Governorate!3b1!8m2!3d29.9656242!4d31.0922895!16s%2Fg%2F11c659wy1d!3m5!1s0x14584fc2bfbefc07:0x5df1948b27a63882!8m2!3d29.9656242!4d31.0922895!16s%2Fg%2F11c659wy1d?hl=en-EG&entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D";
 
 const DICTIONARY = {
     ar: {
-        tap_to_ascent: "TAP_TO_ASCENT | ابدأ صعود الهضبة",
+        tap_to_ascent: "اضغط للدخول | ابدأ صعود الهضبة | LEVER_PIONEER",
         close: "إغلاق",
         intro: "أهلاً بكم في صعود هضبة الجيزة مع شركة ليفر. استمتعوا برؤية الأهرامات تحت أضواء الغسق المهيبة. ليفر.. شريكك في التميز الرأسي.",
         offer: "عرض حصري في هضبة الأهرام: خصم استراتيجي 15% على عقود التأسيس والصيانة. ليفر.. القمة هي وجهتنا.",
@@ -25,7 +26,7 @@ const DICTIONARY = {
         loc: "الموقع",
         port: "المعرض",
         quote: "طلب سعر",
-        form_title: "طلب تـسعيرة فـني",
+        form_title: "طلب عرض سعر لتركيب مصعد",
         form_success: "✅ تم إرسال الطلب بنجاح",
         form_name: "الاسم",
         form_phone: "الهاتف",
@@ -39,10 +40,12 @@ const DICTIONARY = {
         portfolio_return: "العودة",
         flash_gift: "هدية حصرية لمشاهدين البوابة! 🎁",
         flash_desc: "لقد تم اختيارك للحصول على **خصم فني استثنائي 15%** على عقود التأسيس أو الصيانة. \n\n العرض صالح لمدة ٢٤ ساعة فقط.",
-        flash_btn: "تفعيل العرض عبر المحادثة الذكية ⚡"
+        flash_btn: "تفعيل العرض عبر المحادثة الذكية ⚡",
+        copy_link: "نسخ رابط الدخول",
+        link_copied: "✅ تم نسخ الرابط!"
     },
     en: {
-        tap_to_ascent: "TAP_TO_ASCENT | START PLATEAU ASCENT",
+        tap_to_ascent: "CLICK TO ENTER | START PLATEAU ASCENT",
         close: "CLOSE",
         intro: "Welcome to the Giza Plateau with Lever Pioneer. Experience the majesty of the pyramids under the majestic dusk horizon. Lever.. your partner in vertical excellence.",
         offer: "Exclusive Giza Plateau offer: Strategic 15% discount on installation and maintenance. Lever.. the summit is our destination.",
@@ -66,7 +69,9 @@ const DICTIONARY = {
         portfolio_return: "RETURN",
         flash_gift: "Exclusive Portal Gift! 🎁",
         flash_desc: "You have been selected for an **Exclusive 15% Strategic Discount** on installation or maintenance contracts. \n\n Offer valid for 24 hours only.",
-        flash_btn: "Activate Offer via Smart AI ⚡"
+        flash_btn: "Activate Offer via Smart AI ⚡",
+        copy_link: "Share Login Link",
+        link_copied: "✅ Link Copied!"
     }
 };
 
@@ -77,6 +82,7 @@ export default function QuantumPortalAd({ autoStart = false }) {
     const t = DICTIONARY[language];
     const searchParams = useSearchParams();
     const referralId = searchParams.get('ref') || 'direct';
+    const modalParam = searchParams.get('modal');
     
     const [isReturningUser, setIsReturningUser] = useState(false);
     useEffect(() => {
@@ -86,33 +92,44 @@ export default function QuantumPortalAd({ autoStart = false }) {
     }, []);
 
     const [displayedText, setDisplayedText] = useState("");
-    const [isStarted, setIsStarted] = useState(autoStart);
+    const [isStarted, setIsStarted] = useState(autoStart || modalParam === 'quote');
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const typingIntervalRef = useRef<NodeJS.Timeout | null>(null);
-    const [activeModal, setActiveModal] = useState<null | 'quote' | 'portfolio'>(null);
+    const [activeModal, setActiveModal] = useState<null | 'quote' | 'portfolio'>(modalParam === 'quote' ? 'quote' : null);
     const [quoteSent, setQuoteSent] = useState(false);
     const [quoteLoading, setQuoteLoading] = useState(false);
     const [fullScreenVid, setFullScreenVid] = useState<string | null>(null);
     const [userLocLink, setUserLocLink] = useState<string | null>(null);
     const [locLoading, setLocLoading] = useState(false);
     const [showFlashOffer, setShowFlashOffer] = useState(false);
+    const [showToast, setShowToast] = useState(false);
 
     useEffect(() => {
+        if (modalParam === 'quote') return;
         const timer = setTimeout(() => {
             if (isStarted && !localStorage.getItem('LEVER_OFFER_CLAIMED')) setShowFlashOffer(true);
         }, 5000);
         return () => clearTimeout(timer);
-    }, [isStarted]);
+    }, [isStarted, modalParam]);
+
+    useEffect(() => {
+        if (modalParam === 'quote') {
+            setIsStarted(true);
+            setActiveModal('quote');
+        }
+    }, [modalParam]);
 
     const trackEvent = (action: string, category: string) => {
         const payload = { category, action, label: `LEVER_PIONEER_STABILITY_v5.6`, timestamp: new Date().toISOString() };
         fetch('/api/analytics/events', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(() => {});
     }
 
-    const initiateExperience = () => {
-        if (isStarted) return;
-        setIsStarted(true);
-        if (audioRef.current) { audioRef.current.muted = false; audioRef.current.play().catch(() => {}); }
+    useEffect(() => {
+        if (!isStarted) {
+            setDisplayedText("");
+            if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
+            return;
+        }
 
         const activeText = isReturningUser ? t.retarget : t.intro;
         const words = activeText.split(' ').filter(w => w && w.trim().length > 0);
@@ -123,10 +140,21 @@ export default function QuantumPortalAd({ autoStart = false }) {
         if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
         typingIntervalRef.current = setInterval(() => {
             if (idx < words.length) {
-                setDisplayedText(prev => prev + ' ' + words[idx]);
+                const currentWord = words[idx];
+                if (currentWord) setDisplayedText(prev => prev + ' ' + currentWord);
                 idx++;
             } else { if (typingIntervalRef.current) clearInterval(typingIntervalRef.current); }
         }, 350);
+
+        return () => {
+            if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
+        };
+    }, [isStarted, isReturningUser, t.intro, t.retarget]);
+
+    const initiateExperience = () => {
+        if (isStarted) return;
+        setIsStarted(true);
+        if (audioRef.current) { audioRef.current.muted = false; audioRef.current.play().catch(() => {}); }
     }
 
     const captureUserLocation = () => {
@@ -143,17 +171,51 @@ export default function QuantumPortalAd({ autoStart = false }) {
         e.preventDefault();
         setQuoteLoading(true);
         const formData = new FormData(e.currentTarget);
+        const userName = formData.get('userName') as string;
+        const userPhone = formData.get('userPhone') as string;
+        const elevatorType = formData.get('elevatorType') as string;
+        const floors = formData.get('floors') as string;
+
         const payload = { 
-            name: formData.get('userName'), 
-            phone: formData.get('userPhone'), 
-            notes: `v5.6_LOCKED: ${formData.get('elevatorType')} | Floors: ${formData.get('floors')} | GPS: ${userLocLink || 'No'}`,
+            name: userName, 
+            phone: userPhone, 
+            notes: `v5.6_LOCKED: ${elevatorType} | Floors: ${floors} | GPS: ${userLocLink || 'No'}`,
             brandProfileId: LEVER_BRAND_ID 
         };
         try {
             await fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
             setQuoteSent(true);
-            setTimeout(() => { setActiveModal(null); setQuoteSent(false); }, 3000);
+
+            // Construct WhatsApp message
+            const arabicType = t.types[elevatorType.toLowerCase() as keyof typeof t.types] || elevatorType;
+            const messageText = `طلب عرض سعر لتركيب مصعد:\n` +
+                `- الاسم: ${userName}\n` +
+                `- الهاتف: ${userPhone}\n` +
+                `- نوع المصعد: ${arabicType}\n` +
+                `- عدد الأدوار: ${floors}\n` +
+                (userLocLink ? `- موقع العقار: ${userLocLink}\n` : '');
+
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=201070615372&text=${encodeURIComponent(messageText)}`;
+
+            setTimeout(() => { 
+                // 1. Trigger WhatsApp to open
+                window.location.href = whatsappUrl;
+                
+                // 2. Redirect the current browser window to the elite portal
+                setTimeout(() => {
+                    window.location.href = 'https://el-nafeer-real-estate.vercel.app/portal/lever-pioneer-elite';
+                }, 500);
+            }, 2000);
         } catch (error) { console.error(error); } finally { setQuoteLoading(false); }
+    }
+
+    const handleCopyLink = () => {
+        navigator.clipboard.writeText("https://el-nafeer-real-estate.vercel.app/portal/lever-pioneer-elite")
+            .then(() => {
+                setShowToast(true);
+                setTimeout(() => setShowToast(false), 2000);
+            })
+            .catch(err => console.error("Could not copy link: ", err));
     }
 
     return (
@@ -213,8 +275,36 @@ export default function QuantumPortalAd({ autoStart = false }) {
 
             {activeModal === 'quote' && (
                 <div style={{ position: 'absolute', inset: 0, zIndex: 20000, background: 'rgba(0,0,0,0.9)', padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div style={{ width: '100%', maxWidth: '400px', background: '#0a0a0a', border: '1px solid #06b6d4', borderRadius: '30px', padding: '30px', position: 'relative' }}>
-                        <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: 20, right: 20, color: '#fff', background: 'none', border: 'none', fontSize: '20px' }}>✕</button>
+                    <div style={{ width: '100%', maxWidth: '400px', background: '#0a0a0a', border: '1px solid #06b6d4', borderRadius: '30px', padding: '30px', position: 'relative', maxHeight: '90vh', overflowY: 'auto' }}>
+                        <AnimatePresence>
+                            {showToast && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -10 }}
+                                    style={{
+                                        position: 'absolute',
+                                        top: '15px',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        background: 'rgba(6, 182, 212, 0.95)',
+                                        border: '1px solid #06b6d4',
+                                        color: '#000',
+                                        padding: '10px 20px',
+                                        borderRadius: '25px',
+                                        fontSize: '12px',
+                                        fontWeight: 900,
+                                        letterSpacing: '1px',
+                                        boxShadow: '0 0 20px rgba(6, 182, 212, 0.4)',
+                                        zIndex: 30000,
+                                        width: 'max-content'
+                                    }}
+                                >
+                                    {t.link_copied}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                        <button onClick={() => setActiveModal(null)} style={{ position: 'absolute', top: 20, right: 20, color: '#fff', background: 'none', border: 'none', fontSize: '20px', cursor: 'pointer' }}>✕</button>
                         <h3 style={{ color: '#06b6d4', textAlign: 'center', fontWeight: 900, marginBottom: '20px' }}>{t.form_title}</h3>
                         {quoteSent ? <div style={{ color: '#fff', textAlign: 'center', padding: '40px' }}>{t.form_success}</div> : (
                             <form onSubmit={submitQuoteRequest} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
@@ -230,6 +320,26 @@ export default function QuantumPortalAd({ autoStart = false }) {
                                 </select>
                                 <input name="floors" type="number" placeholder={t.form_floors} style={{ background: '#111', border: '1px solid #333', padding: '15px', borderRadius: '15px', color: '#fff' }} />
                                 <button type="submit" style={{ background: '#06b6d4', padding: '18px', borderRadius: '15px', fontWeight: 900, color: '#000', fontSize: '16px' }}>{t.form_submit}</button>
+                                
+                                <button 
+                                    type="button" 
+                                    onClick={handleCopyLink} 
+                                    style={{ 
+                                        background: 'rgba(6, 182, 212, 0.1)', 
+                                        border: '1px solid rgba(6, 182, 212, 0.4)', 
+                                        padding: '15px', 
+                                        borderRadius: '15px', 
+                                        fontWeight: 900, 
+                                        color: '#06b6d4', 
+                                        fontSize: '14px', 
+                                        cursor: 'pointer', 
+                                        marginTop: '5px',
+                                        transition: 'all 0.3s ease',
+                                        boxShadow: 'inset 0 0 10px rgba(6, 182, 212, 0.05)'
+                                    }}
+                                >
+                                    {t.copy_link}
+                                </button>
                             </form>
                         )}
                     </div>
