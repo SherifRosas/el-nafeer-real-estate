@@ -62,7 +62,7 @@ export default function NarcoPage() {
       </div>
 
       {/* Visual Breadcrumbs */}
-      <nav className="relative z-10 container mx-auto px-4 py-4 text-sm text-gray-400">
+      <nav className="relative z-10 container mx-auto px-4 py-4 pt-10 text-sm text-gray-400">
         <ol className="flex items-center gap-2">
           <li><a href="/" className="hover:text-[#ff6900] transition-colors p-2 -m-2">الرئيسية</a></li>
           <li>/</li>
