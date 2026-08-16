@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next';
+﻿import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin/', '/dashboard/'],
     },
-    sitemap: 'https://el-nafeer-systems.vercel.app/sitemap.xml',
+    sitemap: 'https://el-nafeer-real-estate.vercel.app/sitemap.xml',
   };
 }
