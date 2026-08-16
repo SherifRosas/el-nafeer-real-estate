@@ -221,15 +221,32 @@ export default function NarcoPage() {
 
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-white/10 bg-black/80 backdrop-blur-md pb-24 md:pb-8 pt-12 text-center">
+      {/* Footer - Cinematic El-Nafeer Tech Style */}
+      <footer className="relative z-20 border-t border-white/5 bg-[#050814] pt-8 pb-32 md:pb-12">
         <div className="container mx-auto px-4">
-          <p className="text-gray-500 mb-6 text-base">مؤسسة ناركو التجارية - رواد استيراد الحطب والفحم الإفريقي في المملكة العربية السعودية.</p>
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
-            <a href="/" className="hover:text-white p-2 -m-2 min-h-[48px] min-w-[48px] flex items-center justify-center">الرئيسية</a>
-            <a href="#products" className="hover:text-white p-2 -m-2 min-h-[48px] min-w-[48px] flex items-center justify-center">المنتجات</a>
-            <button type="button" className="hover:text-white p-2 -m-2 min-h-[48px] min-w-[48px] flex items-center justify-center cursor-pointer">الشروط والأحكام</button>
-            <a href="#contact" className="hover:text-white p-2 -m-2 min-h-[48px] min-w-[48px] flex items-center justify-center">تواصل معنا</a>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 border border-white/10 rounded-2xl p-6 md:px-10 bg-[#0B1221]/80 backdrop-blur-xl shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+            
+            {/* Arabic Links & Copyright */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-right order-2 md:order-1">
+              <div className="flex items-center gap-4 mb-3">
+                <a href="#" className="text-[#00d2ff] font-bold text-lg hover:text-white transition-colors drop-shadow-[0_0_10px_rgba(0,210,255,0.8)]">سياسة الخصوصية</a>
+                <span className="text-[#00d2ff]/50 font-light">|</span>
+                <a href="#" className="text-[#00d2ff] font-bold text-lg hover:text-white transition-colors drop-shadow-[0_0_10px_rgba(0,210,255,0.8)]">شروط الخدمة</a>
+              </div>
+              <p className="text-[#64748b] text-sm font-medium">جميع الحقوق محفوظة © مؤسسة ناركو ٢٠٢٤</p>
+            </div>
+
+            {/* Architecture By & Phone */}
+            <div className="flex items-center gap-6 order-1 md:order-2" dir="ltr">
+              <div className="flex flex-col items-end text-right">
+                <span className="text-[#64748b] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase mb-1">Architecture By</span>
+                <span className="text-[#00d2ff] font-black text-xl md:text-2xl drop-shadow-[0_0_15px_rgba(0,210,255,0.8)] tracking-wide">El-Nafeer Tech</span>
+              </div>
+              <a href="tel:+966500000000" className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-[#00d2ff]/30 flex items-center justify-center bg-black/50 hover:bg-[#00d2ff]/10 hover:border-[#00d2ff] transition-all duration-300 group shadow-[inset_0_0_15px_rgba(0,210,255,0.15)]">
+                <Phone className="w-6 h-6 md:w-7 md:h-7 text-[#00d2ff] group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(0,210,255,1)]" />
+              </a>
+            </div>
+
           </div>
         </div>
       </footer>
