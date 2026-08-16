@@ -139,8 +139,8 @@ export default function NarcoChatBot() {
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full py-2 rounded-lg bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] text-xs font-medium hover:bg-[#25D366]/20 transition-all"
           >
-            <MessageCircle className="w-3.5 h-3.5" />
-            <span>تحدث مع إنسان عبر واتساب</span>
+            <MessageCircle className="w-3 h-3" />
+            <span>التواصل المباشر مع المبيعات</span>
           </a>
         </div>
       </div>
