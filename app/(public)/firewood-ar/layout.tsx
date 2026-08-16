@@ -47,10 +47,126 @@ export default function NarcoLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "مؤسسة ناركو لتجارة الحطب والفحم الإفريقي",
+    "url": "https://el-nafeer-real-estate.vercel.app/حطب-أفريقي",
+    "logo": "https://el-nafeer-real-estate.vercel.app/campaigns/narco/logo.jpg",
+    "image": "https://el-nafeer-real-estate.vercel.app/campaigns/narco/logo.jpg",
+    "description": "أفضل أنواع الحطب الأفريقي المستورد والفحم للشواء والتدفئة في السعودية. عروض جملة حصرية وتوصيل سريع.",
+    "telephone": "+966500000000",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "الرياض",
+      "addressRegion": "منطقة الرياض",
+      "addressCountry": "SA"
+    },
+    "openingHours": "Mo-Su 00:00-23:59",
+    "paymentAccepted": "Cash, Mada, STC Pay, Bank Transfer",
+    "areaServed": ["Riyadh", "Jeddah", "Makkah", "Madinah", "Dammam"]
+  };
+
+  const firewoodSchema = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "حطب سمر أفريقي مستورد - ناركو",
+    "image": ["https://el-nafeer-real-estate.vercel.app/campaigns/narco/logo.jpg"],
+    "description": "حطب سمر أفريقي فاخر للتدفئة والشواء. جودة عالية، سريع الاشتعال، ويدوم طويلاً بلا دخان.",
+    "brand": { "@type": "Brand", "name": "ناركو (Narco)" },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://el-nafeer-real-estate.vercel.app/حطب-أفريقي",
+      "priceCurrency": "SAR",
+      "price": "400",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition"
+    }
+  };
+
+  const charcoalSchema = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "فحم شواء أفريقي فاخر - ناركو",
+    "image": ["https://el-nafeer-real-estate.vercel.app/campaigns/narco/logo.jpg"],
+    "description": "فحم شواء أفريقي نخب أول. حرارة عالية، رماد قليل، ومثالي للمطاعم والمشويات.",
+    "brand": { "@type": "Brand", "name": "ناركو (Narco)" },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://el-nafeer-real-estate.vercel.app/حطب-أفريقي",
+      "priceCurrency": "SAR",
+      "price": "250",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition"
+    }
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "ما هو حطب السمر الأفريقي وما هي مميزاته؟",
+        "acceptedAnswer": { "@type": "Answer", "text": "حطب السمر الأفريقي هو من أجود أنواع الحطب المستخدم للتدفئة والشواء. يتميز بسرعة اشتعاله، وقوة حرارته، وطول فترة بقائه جمراً، بالإضافة إلى قلة الدخان المنبعث منه." }
+      },
+      {
+        "@type": "Question",
+        "name": "هل تقومون بالتوصيل لجميع مناطق المملكة؟",
+        "acceptedAnswer": { "@type": "Answer", "text": "نعم، نقدم خدمة توصيل آمنة وسريعة لجميع مناطق المملكة العربية السعودية. أسطولنا يغطي الرياض، جدة، الدمام، وكافة المدن الكبرى لضمان وصول طلبك في أسرع وقت." }
+      },
+      {
+        "@type": "Question",
+        "name": "ما هي أسعار الجملة للكميات الكبيرة؟",
+        "acceptedAnswer": { "@type": "Answer", "text": "نوفر أسعاراً تنافسية جداً وعروضاً خاصة لطلبات الجملة للمطاعم، والمقاهي، والمخيمات. يرجى التواصل معنا عبر الواتساب للحصول على تسعيرة دقيقة بناءً على الكمية المطلوبة." }
+      },
+      {
+        "@type": "Question",
+        "name": "هل فحم ناركو مناسب للشواء في المطاعم؟",
+        "acceptedAnswer": { "@type": "Answer", "text": "بالتأكيد. فحم ناركو الأفريقي نخب أول، مثالي للمطاعم والمشويات الاحترافية. يعطي حرارة عالية وثابتة، ولا يترك رماداً كثيفاً، مما يحافظ على طعم اللحم الأصلي." }
+      },
+      {
+        "@type": "Question",
+        "name": "هل يمكنني طلب عينات لتجربة الجودة قبل الشراء بكميات؟",
+        "acceptedAnswer": { "@type": "Answer", "text": "نعم، نحن نثق في جودة منتجاتنا. يمكن ترتيب إرسال عينات تجريبية للمطاعم والتجار والمشترين بالجملة. تواصل مع فريق المبيعات لتنسيق ذلك." }
+      },
+      {
+        "@type": "Question",
+        "name": "ما هي طرق الدفع المتاحة لديكم؟",
+        "acceptedAnswer": { "@type": "Answer", "text": "نقبل الدفع النقدي (كاش)، مدى، STC Pay، والتحويل البنكي. نحرص على توفير خيارات مرنة لتسهيل عملية الشراء لعملائنا." }
+      }
+    ]
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "الرئيسية",
+        "item": "https://el-nafeer-real-estate.vercel.app"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "ناركو - حطب أفريقي",
+        "item": "https://el-nafeer-real-estate.vercel.app/حطب-أفريقي"
+      }
+    ]
+  };
+
   return (
     <>
       <meta name="geo.region" content="SA" />
       <meta name="geo.placename" content="Riyadh" />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(firewoodSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(charcoalSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       {children}
     </>
   );

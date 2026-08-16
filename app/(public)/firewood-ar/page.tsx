@@ -4,88 +4,11 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Phone, MapPin, ShieldCheck, Flame, ArrowRight, MessageCircle, Star, ChevronDown } from "lucide-react";
-import Script from "next/script";
 
 export default function NarcoPage() {
   const shouldReduceMotion = useReducedMotion();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  // Toggle for real review numbers (Waiting on Client)
-  const showReviewData = false;
-
-  // 1. LocalBusiness Schema
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "مؤسسة ناركو لتجارة الحطب والفحم الإفريقي",
-    "url": "https://el-nafeer-real-estate.vercel.app/حطب-أفريقي",
-    "logo": "https://el-nafeer-real-estate.vercel.app/campaigns/narco/logo.jpg",
-    "image": "https://el-nafeer-real-estate.vercel.app/campaigns/narco/logo.jpg",
-    "description": "أفضل أنواع الحطب الأفريقي المستورد والفحم للشواء والتدفئة في السعودية. عروض جملة حصرية وتوصيل سريع.",
-    "telephone": "+966500000000",
-    "priceRange": "$$",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "الرياض",
-      "addressRegion": "منطقة الرياض",
-      "addressCountry": "SA"
-    },
-    "openingHours": "Mo-Su 00:00-23:59",
-    "paymentAccepted": "Cash, Mada, STC Pay, Bank Transfer",
-    "areaServed": ["Riyadh", "Jeddah", "Makkah", "Madinah", "Dammam"]
-  };
-
-  // 2. Product Schema: Firewood
-  const firewoodSchema = {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    "name": "حطب سمر أفريقي مستورد - ناركو",
-    "image": ["https://el-nafeer-real-estate.vercel.app/campaigns/narco/logo.jpg"],
-    "description": "حطب سمر أفريقي فاخر للتدفئة والشواء. جودة عالية، سريع الاشتعال، ويدوم طويلاً بلا دخان.",
-    "brand": { "@type": "Brand", "name": "ناركو (Narco)" },
-    "offers": {
-      "@type": "Offer",
-      "url": "https://el-nafeer-real-estate.vercel.app/حطب-أفريقي",
-      "priceCurrency": "SAR",
-      "price": "400",
-      "availability": "https://schema.org/InStock",
-      "itemCondition": "https://schema.org/NewCondition"
-    },
-    ...(showReviewData ? {
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "289"
-      }
-    } : {})
-  };
-
-  // 3. Product Schema: Charcoal
-  const charcoalSchema = {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    "name": "فحم شواء أفريقي فاخر - ناركو",
-    "image": ["https://el-nafeer-real-estate.vercel.app/campaigns/narco/logo.jpg"],
-    "description": "فحم شواء أفريقي نخب أول. حرارة عالية، رماد قليل، ومثالي للمطاعم والمشويات.",
-    "brand": { "@type": "Brand", "name": "ناركو (Narco)" },
-    "offers": {
-      "@type": "Offer",
-      "url": "https://el-nafeer-real-estate.vercel.app/حطب-أفريقي",
-      "priceCurrency": "SAR",
-      "price": "250",
-      "availability": "https://schema.org/InStock",
-      "itemCondition": "https://schema.org/NewCondition"
-    },
-    ...(showReviewData ? {
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "reviewCount": "158"
-      }
-    } : {})
-  };
-
-  // 4. FAQ Schema
   const faqs = [
     {
       q: "ما هو حطب السمر الأفريقي وما هي مميزاته؟",
@@ -113,38 +36,7 @@ export default function NarcoPage() {
     }
   ];
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.a
-      }
-    }))
-  };
 
-  // 5. Breadcrumb Schema
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "الرئيسية",
-        "item": "https://el-nafeer-real-estate.vercel.app"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "ناركو - حطب أفريقي",
-        "item": "https://el-nafeer-real-estate.vercel.app/حطب-أفريقي"
-      }
-    ]
-  };
 
   const animationProps = shouldReduceMotion ? { initial: { opacity: 1, y: 0 }, whileInView: { opacity: 1, y: 0 } } : {
     initial: { opacity: 0, y: 20 },
@@ -154,13 +46,6 @@ export default function NarcoPage() {
 
   return (
     <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden selection:bg-[#ff6900] selection:text-white relative pb-24 md:pb-0">
-      {/* JSON-LD Schemas */}
-      <Script id="local-business-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <Script id="firewood-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(firewoodSchema) }} />
-      <Script id="charcoal-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(charcoalSchema) }} />
-      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <Script id="breadcrumb-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-
       {/* Cinematic Background */}
       <div className="fixed inset-0 z-0 opacity-20 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
