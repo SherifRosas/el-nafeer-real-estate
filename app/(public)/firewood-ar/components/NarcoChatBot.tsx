@@ -25,6 +25,38 @@ export default function NarcoChatBot() {
     if (!isOpen) setHasNewMessage(false);
   };
 
+  const generateBotResponse = (userText: string): string => {
+    const text = userText.trim();
+    const numberMatch = text.match(/\d+/);
+
+    if (text.includes("حطب") || text.includes("سمر")) {
+      if (numberMatch) {
+        const qty = parseInt(numberMatch[0]);
+        return `تكلفة ${qty} طن من حطب السمر هي ${qty * 400} ريال. للطلب يرجى التواصل مع المبيعات عبر الواتساب بالأسفل.`;
+      }
+      return "سعر طن حطب السمر الإفريقي المستورد هو 400 ريال. كم طن تحتاج لتفصيل التكلفة؟ (اكتب الرقم فقط)";
+    }
+
+    if (text.includes("فحم") || text.includes("شواء")) {
+      if (numberMatch) {
+        const qty = parseInt(numberMatch[0]);
+        return `تكلفة ${qty} طن من فحم الشواء هي ${qty * 250} ريال. للطلب يرجى التواصل مع المبيعات عبر الواتساب بالأسفل.`;
+      }
+      return "سعر طن فحم الشواء الإفريقي هو 250 ريال. كم طن تحتاج لتفصيل التكلفة؟ (اكتب الرقم فقط)";
+    }
+
+    if (text.includes("توصيل") || text.includes("مطاعم") || text.includes("مناطق")) {
+      return "نوفر خدمة توصيل سريعة لجميع مناطق المملكة (الرياض، جدة، الدمام وغيرها) ولدينا عروض خاصة جداً للمطاعم للكميات الكبيرة.";
+    }
+
+    if (numberMatch) {
+      const qty = parseInt(numberMatch[0]);
+      return `إذا كنت تقصد ${qty} طن من الحطب فالسعر ${qty * 400} ريال، وإذا كان فحم فالتكلفة ${qty * 250} ريال. اضغط على زر الواتساب لإتمام الطلب.`;
+    }
+
+    return "شكراً لتواصلك معنا. لخدمة أسرع وتسعيرة دقيقة، نرجو الضغط على زر الواتساب بالأسفل للتحدث مع المبيعات مباشرة.";
+  };
+
   const handleSend = (textParam?: string) => {
     const textToSend = typeof textParam === "string" ? textParam : input;
     if (!textToSend.trim()) return;
@@ -34,10 +66,11 @@ export default function NarcoChatBot() {
     setMessages(newMessages);
     if (typeof textParam !== "string") setInput("");
 
-    // Simulate bot response
+    // Simulate smart bot response
     setTimeout(() => {
-      setMessages([...newMessages, { role: "bot", text: "شكراً لتواصلك معنا. لخدمة أسرع وتسعيرة دقيقة، نرجو الضغط على زر الواتساب بالأسفل للتحدث مع المبيعات مباشرة." }]);
-    }, 1000);
+      const botReply = generateBotResponse(textToSend);
+      setMessages([...newMessages, { role: "bot", text: botReply }]);
+    }, 800);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
