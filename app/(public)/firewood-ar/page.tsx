@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Phone, MapPin, ShieldCheck, Flame, ArrowRight, MessageCircle, Star, ChevronDown } from "lucide-react";
+import NarcoChatBot from "./components/NarcoChatBot";
 
 export default function NarcoPage() {
   const shouldReduceMotion = useReducedMotion();
@@ -268,6 +269,9 @@ export default function NarcoPage() {
           <span>تواصل عبر واتساب فوراً</span>
         </a>
       </div>
+      
+      {/* Smart Assistant Chat Bot */}
+      <NarcoChatBot />
     </div>
   );
 }
