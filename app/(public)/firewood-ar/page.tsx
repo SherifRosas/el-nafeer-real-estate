@@ -46,11 +46,11 @@ export default function NarcoPage() {
 
   return (
     <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden selection:bg-[#ff6900] selection:text-white relative pb-24 md:pb-0">
-      {/* Cinematic Background */}
+      {/* Cinematic Background - Teal & Orange Lighting */}
       <div className="fixed inset-0 z-0 opacity-20 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#ff6900] rounded-full blur-[120px] opacity-10 mix-blend-screen" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#ff3300] rounded-full blur-[120px] opacity-10 mix-blend-screen" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#00d2ff] rounded-full blur-[120px] opacity-10 mix-blend-screen" />
       </div>
 
       {/* Visual Breadcrumbs */}
@@ -103,8 +103,8 @@ export default function NarcoPage() {
               { icon: ShieldCheck, title: "عروض جملة للشركات", desc: "أسعار خاصة جداً للكميات الكبيرة والمطاعم والمشويات والمقاهي." },
               { icon: MapPin, title: "توصيل شامل وسريع", desc: "أسطول متكامل يغطي جميع مناطق ومدن المملكة العربية السعودية بفعالية." },
             ].map((feature, idx) => (
-              <motion.div key={idx} {...animationProps} transition={{ delay: shouldReduceMotion ? 0 : idx * 0.2 }} className="bg-white/5 border border-white/10 p-8 rounded-2xl hover:border-[#ff6900]/50 transition-colors duration-300 group">
-                <feature.icon className="w-12 h-12 text-[#ff6900] mb-6 group-hover:scale-110 transition-transform duration-300" />
+              <motion.div key={idx} {...animationProps} transition={{ delay: shouldReduceMotion ? 0 : idx * 0.2 }} className="bg-white/5 border border-white/10 p-8 rounded-2xl hover:border-[#00d2ff]/50 hover:shadow-[0_0_20px_rgba(0,210,255,0.1)] transition-all duration-300 group">
+                <feature.icon className="w-12 h-12 text-[#ff6900] mb-6 group-hover:scale-110 group-hover:text-[#00d2ff] transition-all duration-300" />
                 <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
                 <p className="text-gray-400 text-base leading-relaxed">{feature.desc}</p>
               </motion.div>
@@ -137,16 +137,16 @@ export default function NarcoPage() {
             </motion.div>
             
             {/* Product 2 */}
-            <motion.div {...animationProps} transition={{ delay: 0.2 }} className="bg-gradient-to-b from-[#1a1a1a] to-black border border-[#333] rounded-3xl overflow-hidden flex flex-col">
-              <div className="h-64 w-full bg-gradient-to-tr from-[#222] to-[#0a0a0a] relative flex items-center justify-center border-b border-[#333]">
-                <Flame className="w-24 h-24 text-gray-500 opacity-50" />
+            <motion.div {...animationProps} transition={{ delay: 0.2 }} className="bg-gradient-to-b from-[#1a1a1a] to-black border border-[#333] rounded-3xl overflow-hidden flex flex-col group hover:border-[#00d2ff]/30 transition-colors duration-300">
+              <div className="h-64 w-full bg-gradient-to-tr from-[#091524] to-[#0a0a0a] relative flex items-center justify-center border-b border-[#333] group-hover:border-[#00d2ff]/30 transition-colors duration-300">
+                <Flame className="w-24 h-24 text-[#00d2ff] opacity-30 group-hover:opacity-60 transition-opacity duration-300" />
               </div>
               <div className="p-8 flex-1 flex flex-col">
                 <h3 className="text-2xl font-bold mb-2">فحم شواء أفريقي نخب أول</h3>
                 <p className="text-gray-400 mb-6 text-base leading-relaxed">فحم مخصص للمطاعم والمشاوي. يشتعل بسهولة ولا يترك رماداً يفسد تجربة الشواء. الخيار الأول للمطاعم الكبرى.</p>
                 <div className="mt-auto flex items-center justify-between">
                   <span className="text-3xl font-bold text-white">250 <span className="text-lg text-gray-500 font-normal">ريال / طن</span></span>
-                  <a href="https://wa.me/966500000000?text=أريد طلب عرض سعر لفحم الشواء الإفريقي" target="_blank" rel="noopener noreferrer" className="bg-white/10 hover:bg-[#ff6900] transition-colors p-3 rounded-xl min-w-[48px] min-h-[48px] flex items-center justify-center">
+                  <a href="https://wa.me/966500000000?text=أريد طلب عرض سعر لفحم الشواء الإفريقي" target="_blank" rel="noopener noreferrer" className="bg-white/10 hover:bg-[#00d2ff] hover:shadow-[0_0_15px_rgba(0,210,255,0.4)] transition-all p-3 rounded-xl min-w-[48px] min-h-[48px] flex items-center justify-center">
                     <ArrowRight className="w-5 h-5 rotate-180" />
                   </a>
                 </div>
@@ -173,10 +173,10 @@ export default function NarcoPage() {
                 </div>
                 <p className="text-gray-300 text-lg mb-6 leading-relaxed">"{review.text}"</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#ff6900] to-[#ff3300] flex items-center justify-center font-bold">{review.name.charAt(0)}</div>
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#ff6900] to-[#00d2ff] flex items-center justify-center font-bold">{review.name.charAt(0)}</div>
                   <div>
                     <div className="font-bold text-white">{review.name}</div>
-                    <div className="text-sm text-gray-500">{review.role}</div>
+                    <div className="text-sm text-[#00d2ff]/70">{review.role}</div>
                   </div>
                 </div>
               </motion.div>
@@ -197,7 +197,7 @@ export default function NarcoPage() {
                   className="w-full px-6 py-5 text-right flex items-center justify-between min-h-[60px]"
                 >
                   <span className="font-bold text-lg">{faq.q}</span>
-                  <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${openFaq === idx ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${openFaq === idx ? 'rotate-180 text-[#00d2ff]' : 'text-gray-400'}`} />
                 </button>
                 <div className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${openFaq === idx ? 'max-h-40 pb-5 opacity-100' : 'max-h-0 opacity-0'}`}>
                   <p className="text-gray-400 text-base leading-relaxed">{faq.a}</p>
@@ -207,13 +207,16 @@ export default function NarcoPage() {
           </div>
         </section>
 
-        {/* Final CTA - H2 */}
-        <section id="contact" className="w-full max-w-4xl bg-gradient-to-r from-[#ff6900]/20 to-[#ff3300]/20 border border-[#ff6900]/30 rounded-3xl p-8 md:p-16 text-center">
-          <motion.h2 {...animationProps} className="text-3xl md:text-5xl font-bold mb-6 text-white">
+        {/* Final CTA - Navy/Cyan Transition to Footer */}
+        <section id="contact" className="w-full max-w-4xl bg-gradient-to-b from-[#1a1a1a] to-[#0B1221] border border-[#00d2ff]/20 rounded-3xl p-8 md:p-16 text-center shadow-[0_20px_50px_rgba(0,210,255,0.05)] relative overflow-hidden">
+          {/* Cyber Glow Overlay inside CTA */}
+          <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#00d2ff]/10 via-transparent to-transparent pointer-events-none" />
+          
+          <motion.h2 {...animationProps} className="relative z-10 text-3xl md:text-5xl font-bold mb-6 text-white">
             جاهز لطلب أفضل حطب في السعودية؟
           </motion.h2>
-          <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">تواصل معنا الآن للحصول على تسعيرة الجملة المخصصة، أو للاستفسار عن منتجاتنا وتفاصيل التوصيل لمنطقتك.</p>
-          <a href="tel:+966500000000" className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#ff6900] to-[#ff3300] text-white px-8 py-5 rounded-xl font-bold text-xl hover:shadow-[0_0_30px_rgba(255,105,0,0.5)] transition-all duration-300 transform hover:-translate-y-1 min-w-[200px] min-h-[56px]">
+          <p className="relative z-10 text-gray-300 text-lg mb-8 max-w-2xl mx-auto">تواصل معنا الآن للحصول على تسعيرة الجملة المخصصة، أو للاستفسار عن منتجاتنا وتفاصيل التوصيل لمنطقتك.</p>
+          <a href="tel:+966500000000" className="relative z-10 inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00d2ff] to-[#0077b6] text-white px-8 py-5 rounded-xl font-bold text-xl hover:shadow-[0_0_30px_rgba(0,210,255,0.5)] transition-all duration-300 transform hover:-translate-y-1 min-w-[200px] min-h-[56px]">
             <Phone className="w-6 h-6" />
             <span>اتصل بالمبيعات</span>
           </a>
