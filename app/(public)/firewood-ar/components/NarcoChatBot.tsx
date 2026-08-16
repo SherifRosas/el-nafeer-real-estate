@@ -13,18 +13,26 @@ export default function NarcoChatBot() {
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const suggestedInputs = [
+    "بكم طن حطب السمر؟",
+    "هل توصلون للمطاعم؟",
+    "أريد عرض سعر لفحم الشواء",
+    "ما هي مناطق التوصيل؟"
+  ];
+
   const handleToggle = () => {
     setIsOpen(!isOpen);
     if (!isOpen) setHasNewMessage(false);
   };
 
-  const handleSend = () => {
-    if (!input.trim()) return;
+  const handleSend = (textParam?: string) => {
+    const textToSend = typeof textParam === "string" ? textParam : input;
+    if (!textToSend.trim()) return;
     
     // Add user message
-    const newMessages = [...messages, { role: "user", text: input }];
+    const newMessages = [...messages, { role: "user", text: textToSend }];
     setMessages(newMessages);
-    setInput("");
+    if (typeof textParam !== "string") setInput("");
 
     // Simulate bot response
     setTimeout(() => {
@@ -83,6 +91,22 @@ export default function NarcoChatBot() {
               </div>
             </div>
           ))}
+
+          {/* Quick Suggestions (Only show initially) */}
+          {messages.length === 1 && (
+            <div className="flex flex-wrap gap-2 mt-2 justify-start" dir="rtl">
+              {suggestedInputs.map((suggestion, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleSend(suggestion)}
+                  className="bg-white/5 border border-white/10 hover:bg-[#ff6900]/20 hover:border-[#ff6900]/30 hover:text-[#ff6900] text-gray-300 text-xs px-3 py-2 rounded-xl transition-all duration-300"
+                >
+                  {suggestion}
+                </button>
+              ))}
+            </div>
+          )}
+
           <div ref={messagesEndRef} />
         </div>
 
