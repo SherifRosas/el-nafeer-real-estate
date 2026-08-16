@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
@@ -51,13 +51,13 @@ export default function NarcoPage() {
       "availability": "https://schema.org/InStock",
       "itemCondition": "https://schema.org/NewCondition"
     },
-    ...(showReviewData && {
+    ...(showReviewData ? {
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.9",
         "reviewCount": "289"
       }
-    })
+    } : {})
   };
 
   // 3. Product Schema: Charcoal
@@ -76,13 +76,13 @@ export default function NarcoPage() {
       "availability": "https://schema.org/InStock",
       "itemCondition": "https://schema.org/NewCondition"
     },
-    ...(showReviewData && {
+    ...(showReviewData ? {
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.8",
         "reviewCount": "158"
       }
-    })
+    } : {})
   };
 
   // 4. FAQ Schema
