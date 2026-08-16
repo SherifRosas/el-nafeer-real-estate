@@ -55,7 +55,7 @@ export default function NarcoLayout({
     "logo": "https://el-nafeer-real-estate.vercel.app/campaigns/narco/logo.jpg",
     "image": "https://el-nafeer-real-estate.vercel.app/campaigns/narco/logo.jpg",
     "description": "أفضل أنواع الحطب الأفريقي المستورد والفحم للشواء والتدفئة في السعودية. عروض جملة حصرية وتوصيل سريع.",
-    "telephone": "+966500000000",
+    "telephone": "+966559715915",
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",

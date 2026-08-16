@@ -46,6 +46,13 @@ export default function NarcoPage() {
 
   return (
     <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden selection:bg-[#ff6900] selection:text-white relative pb-24 md:pb-0">
+      
+      {/* Version & Build Info */}
+      <div className="absolute top-0 left-0 w-full bg-black/50 backdrop-blur-md text-[10px] md:text-xs text-gray-500 py-1 px-4 flex justify-between items-center z-50 border-b border-white/5 font-mono">
+        <span className="text-[#00d2ff]">V1.0.3</span>
+        <span>Build: 16-08-2026 22:50 AST</span>
+      </div>
+
       {/* Cinematic Background - Teal & Orange Lighting */}
       <div className="fixed inset-0 z-0 opacity-20 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
@@ -129,7 +136,7 @@ export default function NarcoPage() {
                 <p className="text-gray-400 mb-6 text-base leading-relaxed">حطب سمر فاخر مثالي للتدفئة. يضمن لك حرارة عالية ويدوم لفترات طويلة جداً. متوفر بكميات تجارية لتجار الجملة.</p>
                 <div className="mt-auto flex items-center justify-between">
                   <span className="text-3xl font-bold text-white">400 <span className="text-lg text-gray-500 font-normal">ريال / طن</span></span>
-                  <a href="https://wa.me/966500000000?text=أريد طلب عرض سعر لحطب السمر الإفريقي المستورد" target="_blank" rel="noopener noreferrer" className="bg-white/10 hover:bg-[#ff6900] transition-colors p-3 rounded-xl min-w-[48px] min-h-[48px] flex items-center justify-center">
+                  <a href="https://wa.me/966559715915?text=أريد طلب عرض سعر لحطب السمر الإفريقي المستورد" target="_blank" rel="noopener noreferrer" className="bg-white/10 hover:bg-[#ff6900] transition-colors p-3 rounded-xl min-w-[48px] min-h-[48px] flex items-center justify-center">
                     <ArrowRight className="w-5 h-5 rotate-180" />
                   </a>
                 </div>
@@ -146,7 +153,7 @@ export default function NarcoPage() {
                 <p className="text-gray-400 mb-6 text-base leading-relaxed">فحم مخصص للمطاعم والمشاوي. يشتعل بسهولة ولا يترك رماداً يفسد تجربة الشواء. الخيار الأول للمطاعم الكبرى.</p>
                 <div className="mt-auto flex items-center justify-between">
                   <span className="text-3xl font-bold text-white">250 <span className="text-lg text-gray-500 font-normal">ريال / طن</span></span>
-                  <a href="https://wa.me/966500000000?text=أريد طلب عرض سعر لفحم الشواء الإفريقي" target="_blank" rel="noopener noreferrer" className="bg-white/10 hover:bg-[#00d2ff] hover:shadow-[0_0_15px_rgba(0,210,255,0.4)] transition-all p-3 rounded-xl min-w-[48px] min-h-[48px] flex items-center justify-center">
+                  <a href="https://wa.me/966559715915?text=أريد طلب عرض سعر لفحم الشواء الإفريقي" target="_blank" rel="noopener noreferrer" className="bg-white/10 hover:bg-[#00d2ff] hover:shadow-[0_0_15px_rgba(0,210,255,0.4)] transition-all p-3 rounded-xl min-w-[48px] min-h-[48px] flex items-center justify-center">
                     <ArrowRight className="w-5 h-5 rotate-180" />
                   </a>
                 </div>
@@ -216,7 +223,7 @@ export default function NarcoPage() {
             جاهز لطلب أفضل حطب في السعودية؟
           </motion.h2>
           <p className="relative z-10 text-gray-300 text-lg mb-8 max-w-2xl mx-auto">تواصل معنا الآن للحصول على تسعيرة الجملة المخصصة، أو للاستفسار عن منتجاتنا وتفاصيل التوصيل لمنطقتك.</p>
-          <a href="tel:+966500000000" className="relative z-10 inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00d2ff] to-[#0077b6] text-white px-8 py-5 rounded-xl font-bold text-xl hover:shadow-[0_0_30px_rgba(0,210,255,0.5)] transition-all duration-300 transform hover:-translate-y-1 min-w-[200px] min-h-[56px]">
+          <a href="tel:+966559715915" className="relative z-10 inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#00d2ff] to-[#0077b6] text-white px-8 py-5 rounded-xl font-bold text-xl hover:shadow-[0_0_30px_rgba(0,210,255,0.5)] transition-all duration-300 transform hover:-translate-y-1 min-w-[200px] min-h-[56px]">
             <Phone className="w-6 h-6" />
             <span>اتصل بالمبيعات</span>
           </a>
@@ -245,7 +252,7 @@ export default function NarcoPage() {
                 <span className="text-[#64748b] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase mb-1">Architecture By</span>
                 <span className="text-[#00d2ff] font-black text-xl md:text-2xl drop-shadow-[0_0_15px_rgba(0,210,255,0.8)] tracking-wide">El-Nafeer Tech</span>
               </div>
-              <a href="tel:+966500000000" className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-[#00d2ff]/30 flex items-center justify-center bg-black/50 hover:bg-[#00d2ff]/10 hover:border-[#00d2ff] transition-all duration-300 group shadow-[inset_0_0_15px_rgba(0,210,255,0.15)]">
+              <a href="tel:+201065661882" className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-[#00d2ff]/30 flex items-center justify-center bg-black/50 hover:bg-[#00d2ff]/10 hover:border-[#00d2ff] transition-all duration-300 group shadow-[inset_0_0_15px_rgba(0,210,255,0.15)]">
                 <Phone className="w-6 h-6 md:w-7 md:h-7 text-[#00d2ff] group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(0,210,255,1)]" />
               </a>
             </div>
@@ -256,7 +263,7 @@ export default function NarcoPage() {
 
       {/* Sticky Mobile CTA */}
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/90 to-transparent z-50 md:hidden flex justify-center pointer-events-none">
-        <a href="https://wa.me/966500000000" className="pointer-events-auto flex w-full max-w-sm items-center justify-center gap-3 bg-[#25D366] text-white px-6 py-4 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(37,211,102,0.3)] min-h-[56px]">
+        <a href="https://wa.me/966559715915" className="pointer-events-auto flex w-full max-w-sm items-center justify-center gap-3 bg-[#25D366] text-white px-6 py-4 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(37,211,102,0.3)] min-h-[56px]">
           <MessageCircle className="w-6 h-6" />
           <span>تواصل عبر واتساب فوراً</span>
         </a>
