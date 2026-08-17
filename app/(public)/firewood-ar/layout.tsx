@@ -68,35 +68,35 @@ export default function NarcoLayout({
     "areaServed": ["Riyadh", "Jeddah", "Makkah", "Madinah", "Dammam"]
   };
 
-  const firewoodSchema = {
+  const firewood10kgSchema = {
     "@context": "https://schema.org/",
     "@type": "Product",
-    "name": "حطب سمر أفريقي مستورد - ناركو",
-    "image": ["https://el-nafeer-real-estate.vercel.app/campaigns/narco/logo.jpg"],
-    "description": "حطب سمر أفريقي فاخر للتدفئة والشواء. جودة عالية، سريع الاشتعال، ويدوم طويلاً بلا دخان.",
+    "name": "كيس حطب سمر أفريقي 10 كجم - ناركو",
+    "image": ["https://el-nafeer-real-estate.vercel.app/campaigns/narco/10kg_sack.jpg"],
+    "description": "حطب سمر أفريقي فاخر للتدفئة. جودة عالية، سريع الاشتعال في كيس وزن 10 كجم للعائلات والمخيمات.",
     "brand": { "@type": "Brand", "name": "ناركو (Narco)" },
     "offers": {
       "@type": "Offer",
       "url": "https://el-nafeer-real-estate.vercel.app/حطب-أفريقي",
       "priceCurrency": "SAR",
-      "price": "400",
+      "price": "32",
       "availability": "https://schema.org/InStock",
       "itemCondition": "https://schema.org/NewCondition"
     }
   };
 
-  const charcoalSchema = {
+  const firewood5kgSchema = {
     "@context": "https://schema.org/",
     "@type": "Product",
-    "name": "فحم شواء أفريقي فاخر - ناركو",
-    "image": ["https://el-nafeer-real-estate.vercel.app/campaigns/narco/logo.jpg"],
-    "description": "فحم شواء أفريقي نخب أول. حرارة عالية، رماد قليل، ومثالي للمطاعم والمشويات.",
+    "name": "كيس حطب سمر أفريقي 5 كجم - ناركو",
+    "image": ["https://el-nafeer-real-estate.vercel.app/campaigns/narco/5kg_sack.jpg"],
+    "description": "حطب سمر أفريقي فاخر في كيس وزن 5 كجم. مثالي للرحلات السريعة والشواء السهل.",
     "brand": { "@type": "Brand", "name": "ناركو (Narco)" },
     "offers": {
       "@type": "Offer",
       "url": "https://el-nafeer-real-estate.vercel.app/حطب-أفريقي",
       "priceCurrency": "SAR",
-      "price": "250",
+      "price": "18",
       "availability": "https://schema.org/InStock",
       "itemCondition": "https://schema.org/NewCondition"
     }
@@ -163,8 +163,8 @@ export default function NarcoLayout({
       <meta name="geo.region" content="SA" />
       <meta name="geo.placename" content="Riyadh" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(firewoodSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(charcoalSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(firewood10kgSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(firewood5kgSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       {children}

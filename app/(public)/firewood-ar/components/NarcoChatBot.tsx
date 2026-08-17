@@ -14,9 +14,9 @@ export default function NarcoChatBot() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const suggestedInputs = [
-    "بكم طن حطب السمر؟",
-    "هل توصلون للمطاعم؟",
-    "أريد عرض سعر لفحم الشواء",
+    "بكم أكياس حطب السمر؟",
+    "هل توصلون للبيوت؟",
+    "أريد طلب الحطب الآن",
     "ما هي مناطق التوصيل؟"
   ];
 
@@ -27,34 +27,16 @@ export default function NarcoChatBot() {
 
   const generateBotResponse = (userText: string): string => {
     const text = userText.trim();
-    const numberMatch = text.match(/\d+/);
 
-    if (text.includes("حطب") || text.includes("سمر")) {
-      if (numberMatch) {
-        const qty = parseInt(numberMatch[0]);
-        return `تكلفة ${qty} طن من حطب السمر هي ${qty * 400} ريال. للطلب يرجى التواصل مع المبيعات عبر الواتساب بالأسفل.`;
-      }
-      return "سعر طن حطب السمر الإفريقي المستورد هو 400 ريال. كم طن تحتاج لتفصيل التكلفة؟ (اكتب الرقم فقط)";
+    if (text.includes("حطب") || text.includes("سمر") || text.includes("سعر") || text.includes("بكم")) {
+      return "أسعارنا الحالية لحطب السمر الإفريقي: كيس 10 كجم بـ 32 ريال، وكيس 5 كجم بـ 18 ريال. للطلب يرجى التواصل مع المبيعات عبر زر الواتساب أدناه.";
     }
 
-    if (text.includes("فحم") || text.includes("شواء")) {
-      if (numberMatch) {
-        const qty = parseInt(numberMatch[0]);
-        return `تكلفة ${qty} طن من فحم الشواء هي ${qty * 250} ريال. للطلب يرجى التواصل مع المبيعات عبر الواتساب بالأسفل.`;
-      }
-      return "سعر طن فحم الشواء الإفريقي هو 250 ريال. كم طن تحتاج لتفصيل التكلفة؟ (اكتب الرقم فقط)";
+    if (text.includes("توصيل") || text.includes("مناطق") || text.includes("بيت")) {
+      return "نوفر خدمة توصيل سريعة ومريحة لجميع مناطق المملكة. يصلك الحطب لغاية باب بيتك أو مخيمك.";
     }
 
-    if (text.includes("توصيل") || text.includes("مطاعم") || text.includes("مناطق")) {
-      return "نوفر خدمة توصيل سريعة لجميع مناطق المملكة (الرياض، جدة، الدمام وغيرها) ولدينا عروض خاصة جداً للمطاعم للكميات الكبيرة.";
-    }
-
-    if (numberMatch) {
-      const qty = parseInt(numberMatch[0]);
-      return `إذا كنت تقصد ${qty} طن من الحطب فالسعر ${qty * 400} ريال، وإذا كان فحم فالتكلفة ${qty * 250} ريال. اضغط على زر الواتساب لإتمام الطلب.`;
-    }
-
-    return "شكراً لتواصلك معنا. لخدمة أسرع وتسعيرة دقيقة، نرجو الضغط على زر الواتساب بالأسفل للتحدث مع المبيعات مباشرة.";
+    return "شكراً لتواصلك معنا. لإتمام طلبك أو لأي استفسارات أخرى، نرجو الضغط على زر الواتساب بالأسفل للتحدث مع المبيعات مباشرة.";
   };
 
   const handleSend = (textParam?: string) => {
@@ -125,7 +107,7 @@ export default function NarcoChatBot() {
             </div>
           ))}
 
-          {/* Quick Suggestions (Only show initially) */}
+          {/* Quick Suggestions */}
           {messages.length === 1 && (
             <div className="flex flex-wrap gap-2 mt-2 justify-start" dir="rtl">
               {suggestedInputs.map((suggestion, idx) => (
@@ -143,7 +125,7 @@ export default function NarcoChatBot() {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input Area (From User Snippet) */}
+        {/* Input Area */}
         <div className="p-4 bg-[#111] border-t border-[#333]">
           <div className="flex items-center gap-2 mb-2" dir="rtl">
             <input
@@ -165,15 +147,14 @@ export default function NarcoChatBot() {
             </button>
           </div>
 
-          {/* WhatsApp Direct Link */}
           <a
-            href="https://wa.me/966559715915?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D8%AB%20%D9%85%D8%B9%20%D9%81%D8%B1%D9%8A%D9%82%20%D9%86%D8%A7%D8%B1%D9%83%D9%88"
+            href="https://wa.me/966559715915?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%B7%D9%84%D8%A8%20%D8%AD%D8%B7%D8%A8%20%D9%85%D9%86%20%D9%86%D8%A7%D8%B1%D9%83%D9%88"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full py-2 rounded-lg bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] text-xs font-medium hover:bg-[#25D366]/20 transition-all"
           >
             <MessageCircle className="w-3 h-3" />
-            <span>التواصل المباشر مع المبيعات</span>
+            <span>التواصل المباشر لطلب الحطب</span>
           </a>
         </div>
       </div>
@@ -192,7 +173,6 @@ export default function NarcoChatBot() {
         }}
         aria-label="فتح المحادثة"
       >
-        {/* Fire glow */}
         <div
           className="absolute inset-0 rounded-full animate-ping opacity-20"
           style={{
@@ -201,10 +181,8 @@ export default function NarcoChatBot() {
           }}
         />
 
-        {/* Icon (flame when closed, X when open) */}
         <Flame className="w-6 h-6 text-white relative z-10" />
 
-        {/* Unread badge */}
         {hasNewMessage && !isOpen && (
           <span className="absolute -top-1 -left-1 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center border-2 border-[#0a0a0a] z-20">
             1
