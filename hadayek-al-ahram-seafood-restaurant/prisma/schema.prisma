@@ -1,0 +1,169 @@
+// prisma/schema.prisma
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// -------------------------------------------------------------
+// 1. MENU MANAGEMENT (Bilingual Columns)
+// -------------------------------------------------------------
+
+model Category {
+  id        String     @id @default(uuid())
+  nameAr    String     // e.g., أسماك مشوية ومقلية
+  nameEn    String     // e.g., Grilled & Fried Fish
+  slug      String     @unique
+  image     String?
+  menuItems MenuItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model MenuItem {
+  id               String            @id @default(uuid())
+  nameAr           String            // e.g., سمك بلطي وجبة
+  nameEn           String            // e.g., Tilapia Meal
+  descriptionAr    String            // e.g., سمكة بلطي طازجة 450 جرام مع أرز وسلطة
+  descriptionEn    String            // e.g., Fresh Tilapia ~450g served with rice and salad
+  price            Decimal           @db.Decimal(10, 2)
+  rawWeightGrams   Int?              // raw weight (e.g. 450)
+  image            String?
+  isAvailable      Boolean           @default(true)
+  categoryId       String
+  category         Category          @relation(fields: [categoryId], references: [id])
+  orderItems       OrderItem[]
+  reservationItems ReservationItem[]
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+}
+
+// -------------------------------------------------------------
+// 2. SEATING & RESERVATIONS (With pre-ordered food option)
+// -------------------------------------------------------------
+
+enum TableStatus {
+  AVAILABLE
+  RESERVED
+  OCCUPIED
+}
+
+model Table {
+  id           String        @id @default(uuid())
+  tableNumber  Int           @unique
+  capacity     Int           // Capacity (e.g., 4 seats)
+  status       TableStatus   @default(AVAILABLE)
+  reservations Reservation[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+model Reservation {
+  id                String            @id @default(uuid())
+  customerName      String
+  customerPhone     String
+  dateTime          DateTime          // Reservation date & time
+  numberOfGuests    Int
+  tableId           String
+  table             Table             @relation(fields: [tableId], references: [id])
+  preferredLanguage String            @default("ar") // "ar" or "en" (for AI SMS/WhatsApp alerts)
+  status            ReservationStatus @default(PENDING)
+  notes             String?
+  preOrderItems     ReservationItem[] // Allows guests to pre-order food to reduce waiting time
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+}
+
+model ReservationItem {
+  id            String      @id @default(uuid())
+  reservationId String
+  reservation   Reservation @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+  menuItemId    String
+  menuItem      MenuItem    @relation(fields: [menuItemId], references: [id])
+  quantity      Int
+}
+
+// -------------------------------------------------------------
+// 3. SALES & INTAKE CHANNELS (POS & Delivery Integrations)
+// -------------------------------------------------------------
+
+enum OrderSource {
+  POS           // In-restaurant cashier/dine-in
+  TAKEAWAY      // Walk-in pickup
+  TALABAT       // Delivery channel
+  ELMENUS       // Delivery channel
+}
+
+enum OrderStatus {
+  RECEIVED
+  PREPARING
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+model Order {
+  id              String      @id @default(uuid())
+  source          OrderSource @default(POS)
+  status          OrderStatus @default(RECEIVED)
+  totalPrice      Decimal     @db.Decimal(10, 2)
+  cogsAmount      Decimal     @db.Decimal(10, 2) // COGS cost for AI financial audits
+  deliveryAddress String?
+  customerPhone   String?
+  items           OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model OrderItem {
+  id         String   @id @default(uuid())
+  orderId    String
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItemId String
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id])
+  quantity   Int
+  unitPrice  Decimal  @db.Decimal(10, 2)
+}
+
+// -------------------------------------------------------------
+// 4. STAFF ROSTER & TIMESHEET (AI Roster Auditing)
+// -------------------------------------------------------------
+
+enum StaffRole {
+  HEAD_CHEF
+  ASSISTANT_CHEF
+  WAITER
+  CASHIER
+  CLEANER
+}
+
+model Staff {
+  id         String    @id @default(uuid())
+  name       String
+  role       StaffRole
+  phone      String
+  hourlyRate Decimal   @db.Decimal(10, 2)
+  shifts     Shift[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Shift {
+  id        String    @id @default(uuid())
+  staffId   String
+  staff     Staff     @relation(fields: [staffId], references: [id], onDelete: Cascade)
+  startTime DateTime
+  endTime   DateTime?
+  totalPaid Decimal?  @db.Decimal(10, 2) // Auto-calculated when clock-out ends
+}

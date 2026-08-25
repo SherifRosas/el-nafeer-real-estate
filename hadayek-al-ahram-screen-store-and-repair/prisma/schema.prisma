@@ -1,0 +1,95 @@
+// hadayek-al-ahram-screen-store-and-repair/prisma/schema.prisma
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// -------------------------------------------------------------
+// 1. CUSTOMER PROFILES (Data Collection)
+// -------------------------------------------------------------
+model Customer {
+  id        String      @id @default(uuid())
+  name      String      // Full name of customer
+  phone     String      @unique // Main mobile number (used as WhatsApp check)
+  address   String?     // Address in Hadayek Al-Ahram (e.g. Area G, Gate 4)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  repairs   RepairJob[]
+}
+
+// -------------------------------------------------------------
+// 2. WAREHOUSE INVENTORY (Showcase screens)
+// -------------------------------------------------------------
+enum ScreenCondition {
+  NEW
+  REFURBISHED
+  FOR_PARTS
+}
+
+enum ScreenStatus {
+  AVAILABLE
+  RESERVED
+  SOLD
+}
+
+model Screen {
+  id           String          @id @default(uuid())
+  brand        String          // e.g. LG, Samsung, Sony, Toshiba, Tornado
+  model        String          // Manufacturer model number
+  size         Int             // Screen diagonal size in inches (e.g. 55)
+  type         String          // e.g. LED, OLED, QLED, NanoCell, Smart, Android
+  condition    ScreenCondition @default(NEW)
+  price        Decimal         @db.Decimal(10, 2) // Retails sales price in EGP
+  status       ScreenStatus    @default(AVAILABLE)
+  warehouseLoc String?         // Bin code (e.g. Section B4, Shelf 2)
+  notes        String?         // Scratch details, screen specs
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+// -------------------------------------------------------------
+// 3. REPAIR JOBS & FINANCIAL AUDITING (QR Code Driven)
+// -------------------------------------------------------------
+enum RepairStatus {
+  RECEIVED
+  INSPECTING
+  REPAIRED
+  READY_FOR_PICKUP
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PARTIAL
+  PAID
+}
+
+model RepairJob {
+  id            String       @id @default(uuid())
+  ticketNumber  String       @unique // Short format (e.g. EKW-260801)
+  customerId    String
+  customer      Customer     @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  deviceModel   String       // Model name of TV / Smartphone / Tablet
+  issue         String       // Customer description of failure
+  status        RepairStatus @default(RECEIVED)
+  
+  // Financial breakdown
+  estimatedCost Decimal      @db.Decimal(10, 2)
+  partsUsed     String?      // List of replacement parts used
+  partsCost     Decimal      @default(0) @db.Decimal(10, 2)
+  laborCost     Decimal      @default(0) @db.Decimal(10, 2)
+  totalCost     Decimal      @default(0) @db.Decimal(10, 2) // partsCost + laborCost
+  
+  paymentStatus PaymentStatus @default(UNPAID)
+  paymentMethod String?       // Cash, Visa, InstaPay, Vodafone Cash
+  
+  qrCodeUrl     String?      // Path to generated QR image asset
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}

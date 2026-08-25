@@ -517,3 +517,85 @@ This iteration focuses intensely on recovering lost Facebook organic viewership 
 - **Default Clinic State**: Initialized the default industry state to `'clinic'` inside `DashboardClient.tsx` to display the clinical command center layout by default.
 - **Default Clinical Redirect**: Configured `app/demo/route.ts` to route demo visits by default to the Arabic clinical WhatsApp pre-filled greeting message: `"مرحباً! أود تجربة ديمو نظام العيادات الذكي لوكالة النفير 🏥"`.
 - **Production Deployment**: Successfully deployed to Vercel production at `https://el-nafeer-systems.vercel.app` after optimizing upload payloads with a `.vercelignore` rule.
+
+---
+
+## [23.0.1-narco-b2c-retail] - 2026-08-18
+
+### 🚀 Milestone: Narco B2C Retail Conversion
+
+This version marks the complete pivot of the Narco platform from a B2B Wholesale model (selling by the ton to restaurants) to a B2C Retail model (selling 10KG and 5KG premium sacks to families).
+
+### Added
+- **Premium Retail Imaging**: Integrated photorealistic 8k AI renders of 10KG and 5KG luxury woven sacks.
+- **Dynamic Pricing Constants**: Hardcoded `PRICE_10KG` and `PRICE_5KG` at the top of the frontend for instant, sub-10-second price adjustments.
+- **B2C Schema Metadata**: Restructured Google Rich Snippet JSON-LD schemas to index the new retail products, prices, and high-res imagery for superior SEO CTR.
+
+### Removed
+- **Wholesale Terminology**: Purged all references to "طن" (Tons), "جملة" (Wholesale), and "مطاعم" (Restaurants).
+- **Calculator ChatBot**: Stripped the complex calculator logic from the AI Assistant. It now delivers a direct, high-conversion price quote for the retail sacks.
+
+### Technical Notes
+- Build Status: ✅ SUCCESS (Zero TypeScript Errors)
+- Architecture: 100% Client-Ready for Immediate Traffic.
+
+---
+
+## [24.0.0-hadayek-screen-shop] - 2026-08-24
+
+### 🚀 Milestone: El-Ekhwa Screen Sales & Repair Shop Onboarding
+
+This version marks the successful business onboarding, physical storefront redesign, and database modeling for the client "El-Ekhwa Screens & Repair" in Hadayek Al-Ahram.
+
+### Added
+- **Storefront Facelift Designs**:
+  - Detailed three design scenarios: Scenario 1 (Budget: 9,600 EGP), Scenario 2 (Premium: 33,000 EGP), and Scenario 3 (Optimized Hybrid - Recommended: 21,600 EGP).
+  - Designed the visual TV-bezel signboard, left column advertising board, and glass sliding door QR code layouts.
+  - Generated photorealistic 3D visual mockups for all three scenarios using reference storefront images.
+- **Bilingual Implementation Deliverables**:
+  - `brand_and_storefront.md` — Layout guidelines, signage specifications, and cost breakdown sheets.
+  - `feasibility_study.md` — Financial models, CapEx/OpEx breakdowns, and payback calculations showing a 0.92-month payback period.
+  - `3d_brand_visualization.md` — Prompts catalog for generating 3D renders of signs, UIs, and receipts.
+  - `project_roadmap.md` — 6-week timeline combining construction and coding tasks.
+  - `storefront_implementation_arabic.html` — A fully styled responsive Arabic HTML document detailing construction guidelines, installation workflows, and raw material alternatives.
+- **Digital Infrastructure Specifications**:
+  - `system_architecture.md` — Technical stack (Next.js, Supabase, Prisma), chatbot flows, and QR code billing system details.
+  - `prisma/schema.prisma` — Client-specific PostgreSQL schema definitions for `Customer`, `Screen` (inventory), and `RepairJob` (tickets).
+  - `prisma/seed.ts` — Seeding scripts with mock customer data and repair invoices.
+  - `public/wa-repair-preview.html` — Static HTML bridge implementing the WhatsApp rich preview caching strategy.
+
+### Technical Notes
+- Build Status: ✅ SUCCESS (Schemas verified and mockups generated)
+- Directory: `C:\Users\Sherif-Rosas\EL_NAFEER\hadayek-al-ahram-screen-store-and-repair`
+- Design Renders: Saved inside the conversation artifacts directory and embedded directly inside the design documents.
+
+---
+
+## [25.0.0-hadayek-seafood-restaurant] - 2026-08-25
+
+### 🚀 Milestone: El-Gamel Seafood Restaurant Onboarding & 3D Brand Visualization
+
+This version marks the successful business onboarding, photorealistic 3D brand visualization, database modeling, and static WhatsApp crawler bridge setup for the client "El-Gamel Seafood Restaurant" in Hadayek Al-Ahram.
+
+### Added
+- **3D Visual Brand Book**:
+  - Generated photorealistic 3D visual mockups for the primary embossed gold shark calligraphy sculpture, double-sided backlit storefront sign, open menu page layout, branded delivery packaging, and wainscoted dining room interior.
+- **Bilingual Implementation Deliverables**:
+  - `brand_and_storefront.md` — Frontage cladding guidelines, roller-shutter door allocations, and interior layout specifications.
+  - `feasibility_study.md` — Dual financial models (1.35M EGP Scenario 1 vs. 600k EGP Scenario 2), competitor menu pricing (El Morshedy benchmarks), break-even targets, and local validation (Egyptian MSME baseline & Profit Cash).
+  - `brand_identity_guide.md` — Midnight Navy, Gold, and Sandstone Cream palette codes, typography rules (Cairo + Tajawal), and 4 design concepts.
+  - `3d_brand_visualization.md` — Prompts catalog and photorealistic rendering directory.
+  - `project_roadmap.md` — 8-week launch timeline combining civil work and database tasks.
+- **Digital Infrastructure Specifications**:
+  - `system_architecture.md` — Technical stack (Next.js, Supabase, Prisma), reservation logic with pre-ordering, and local Google SEO strategies.
+  - `prisma/schema.prisma` — Relational schema definitions for `Category`, `MenuItem`, `Table`, `Reservation`, `Order`, and `Staff` (timesheets).
+  - `prisma/seed.ts` — Seeding script to initialize categories, fish meals (incorporating the raw 450g Tilapia meal), 8 tables, and 6 staff entries.
+  - `public/wa-preview.html` — Static HTML bridge implementing the WhatsApp rich preview caching strategy.
+
+### Technical Notes
+- Build Status: ✅ SUCCESS (Schemas verified and mockups generated)
+- Directory: `C:\Users\Sherif-Rosas\EL_NAFEER\hadayek-al-ahram-seafood-restaurant`
+- Design Renders: Saved inside the conversation brain directory and embedded directly inside the design documents.
+
+---
+

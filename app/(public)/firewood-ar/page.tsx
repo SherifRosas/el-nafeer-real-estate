@@ -48,8 +48,8 @@ export default function NarcoPage() {
       
       {/* Version & Build Info */}
       <div className="absolute top-0 left-0 w-full bg-black/50 backdrop-blur-md text-[10px] md:text-xs text-gray-500 py-1 px-4 flex justify-between items-center z-50 border-b border-white/5 font-mono">
-        <span className="text-[#00d2ff]">V19.0.4 - B2C Retail</span>
-        <span>Build: 16-08-2026 23:37 AST</span>
+        <span className="text-[#00d2ff]">V23.0.1 - B2C Retail</span>
+        <span>Build: 18-08-2026 04:30 AST</span>
       </div>
 
       {/* Cinematic Background - Teal & Orange Lighting */}
