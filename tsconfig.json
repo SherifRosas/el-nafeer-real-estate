@@ -37,6 +37,8 @@
   ],
   "exclude": [
     "node_modules",
-    "scripts"
+    "scripts",
+    "hadayek-al-ahram-screen-store-and-repair",
+    "hadayek-al-ahram-seafood-restaurant"
   ]
 }
