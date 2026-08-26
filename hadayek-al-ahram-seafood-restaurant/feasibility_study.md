@@ -9,46 +9,48 @@
 ## 1. Executive Summary & Strategic Mismatch Warning / الملخص التنفيذي وتنبيه عدم التوافق الاستراتيجي
 
 ### English:
-The client's update of the shop parameters to **150 m²** and a monthly rent of **75,000 EGP** introduces a critical mismatch with the initial **600,000 EGP total budget**. 
+The client's update of the shop parameters to **150 m²** and a monthly rent of **75,000 EGP** is now feasible with the updated **1,000,000 EGP total budget** (an increase from the initial 600,000 EGP), though it requires cost optimizations compared to the ideal **1,350,000 EGP** premium setup.
 
-> [!WARNING]
-> **CRITICAL BUDGET RISK ANALYSIS**
-> *   **Lease Setup Cost:** Commercial leases typically require a **3-month security deposit + 1-month advance rent**. For a 75,000 EGP rent, the upfront cash outlay is **300,000 EGP** (50% of the entire 600,000 EGP budget) before a single brick is laid.
-> *   **Fit-Out Cost:** Sizing up to 150 m² requires substantial partitioning, commercial exhaust ducting, and piping. At an economical rate of 2,500 EGP/m² for restaurant fit-outs, construction alone will cost **375,000 EGP**.
-> *   **Conclusion:** Attempting to lease this 150 m² space with a 600,000 EGP budget will result in bankruptcy before launch.
+> [!NOTE]
+> **BUDGET OPTIMIZATION ANALYSIS**
+> *   **Lease Setup Cost:** Commercial leases typically require a **3-month security deposit + 1-month advance rent**. For a 75,000 EGP rent, the upfront cash outlay is **300,000 EGP** (30% of the updated 1,000,000 EGP budget) before a single brick is laid.
+> *   **Fit-Out & Equipment:** Sizing up to 150 m² requires substantial partitioning, commercial exhaust ducting, and kitchen equipment. To stay within the 1,000,000 EGP limit, we must optimize CapEx by utilizing basic finishes, sourcing reliable used kitchen equipment, and scaling down initial dining area seating.
+> *   **Conclusion:** Attempting to lease this 150 m² space with a 1,000,000 EGP budget is feasible, but requires strict budget control and cost-cutting measures during construction and equipment sourcing.
 
-#### Two Strategic Paths Forward:
-1.  **Scenario 1 (Recommended): Raise Capital to 1,350,000 EGP.** Fully utilize the 150 m² space for a premium Hybrid model (Dine-in + Takeaway + High-Volume Delivery). The spacious area can host 24+ diners, creating a highly profitable local landmark that easily offsets the 75k EGP monthly rent.
-2.  **Scenario 2: Scale Down the Shop.** Reject this 150 m² shop and search for a smaller takeaway-focused unit of **40–50 m²** on the same street, aiming for a rent of **20,000–25,000 EGP/month** to stay within the 600,000 EGP budget limit.
+#### Three Strategic Paths Forward:
+1.  **Scenario 1 (Recommended): Optimized Hybrid Model (1,000,000 EGP).** Launch the 150 m² dine-in and delivery restaurant by optimizing CapEx (economical fit-out, essential/used kitchen equipment, simple facade, basic POS) to stay exactly within the 1,000,000 EGP limit.
+2.  **Scenario 2: Premium Hybrid Model (1,350,000 EGP).** Raise an additional 350,000 EGP to execute a premium fit-out, brand new high-end equipment, complete facade cladding, and a larger working capital safety net.
+3.  **Scenario 3: Scale Down to Takeaway (450,000 EGP).** Search for a smaller takeaway/delivery unit of **40–50 m²** (rent: 20,000–25,000 EGP/month) to launch with less than half the budget, preserving over 500,000 EGP as a huge cash reserve.
 
 ### بالعربية:
-إن تحديث المعطيات لمساحة **150 متر مربع** بإيجار شهري قدره **75,000 جنيه** يُشكل عدم توافق جوهري وحاسم مع الميزانية الإجمالية المحددة مسبقاً (600,000 جنيه).
+إن تحديث المعطيات لمساحة **150 متر مربع** بإيجار شهري قدره **75,000 جنيه** أصبح قابلاً للتنفيذ مع زيادة رأس المال إلى **1,000,000 جنيه** (بعد أن كان 600,000 جنيه)، ولكنه يتطلب نموذجاً مرشداً مقارنة بالنموذج المتميز الذي يتطلب **1,350,000 جنيه**.
 
-> [!WARNING]
-> **تحليل المخاطر الحرجة للميزانية**
-> *   **تكلفة حجز الإيجار:** تتطلب عقود الإيجار التجاري عادةً **تأمين لمدة 3 أشهر + شهر مقدم**. مع إيجار 75,000 جنيه، تبلغ الدفعة النقدية الأولى المطلوبة **300,000 جنيه** (أي 50% من إجمالي ميزانيتك البالغة 600,000 جنيه) قبل بدء أي أعمال تشطيب.
-> *   **تكلفة التشطيب:** تشطيب مساحة 150 متر مربع يتطلب قواطع طوب وسيراميك وأنظمة تهوية للمطابخ التجارية. باحتساب التكلفة الاقتصادية (2,500 جنيه للمتر المربع لتشطيب المطاعم)، ستبلغ تكلفة التشطيبات وحدها **375,000 جنيه**.
-> *   **الخلاصة:** محاولة استئجار هذه المساحة الكبيرة بميزانية 600,000 جنيه فقط ستؤدي إلى عجز مالي وإفلاس المشروع قبل الافتتاح.
+> [!NOTE]
+> **تحليل تحسين الميزانية**
+> *   **تكلفة حجز الإيجار:** تتطلب عقود الإيجار التجاري عادةً **تأمين لمدة 3 أشهر + شهر مقدم**. مع إيجار 75,000 جنيه، تبلغ الدفعة النقدية الأولى المطلوبة **300,000 جنيه** (أي 30% من رأس المال الجديد البالغ 1,000,000 جنيه) قبل بدء أي أعمال تشطيب.
+> *   **التشطيب والمعدات:** تشطيب مساحة 150 متر مربع وتجهيز المطبخ يتطلب إدارة صارمة للتكاليف. للالتزام بحدود المليون جنيه، يجب استخدام تشطيبات اقتصادية، وشراء بعض المعدات الأساسية المستعملة بحالة ممتازة، وتأجيل النفقات غير الضرورية.
+> *   **الخلاصة:** رأس المال الجديد البالغ 1,000,000 جنيه يجعل المشروع ممكناً وقابلاً للنجاح، بشرط ترشيد النفقات الرأسمالية (بخلاف الميزانية السابقة البالغة 600,000 جنيه والتي كانت مستحيلة تماماً).
 
-#### مساران استراتيجيان للمضي قدماً:
-1.  **السيناريو الأول (موصى به): زيادة رأس المال إلى 1,350,000 جنيه.** للاستفادة الكاملة من مساحة 150 متر مربع لإنشاء مطعم بنموذج هجين (صالة طعام + تيك أواي + ديليفري مكثف). المساحة الواسعة تتسع لـ 24 فرد على الأقل، مما يخلق علامة تجارية محلية قوية تعوض قيمة الإيجار المرتفعة.
-2.  **السيناريو الثاني: تصغير مساحة المحل.** رفض استئجار هذا المحل والبحث عن محل أصغر مخصص للتيك أواي والديليفري بمساحة **40-50 متر مربع** في نفس الشارع، بإيجار يتراوح بين **20,000 إلى 25,000 جنيه شهرياً** ليبقى المشروع متوافقاً مع ميزانية 600,000 جنيه.
+#### ثلاثة مسارات استراتيجية للمضي قدماً:
+1.  **السيناريو الأول (موصى به): التشغيل الهجين المرشد (1,000,000 جنيه).** تأسيس مطعم الصالة والتوصيل بمساحة 150م² مع تطبيق خطة ترشيد النفقات (تشطيب اقتصادي، معدات مطبخ أساسية ومستعملة، واجهة بسيطة، ونظام محاسبة أساسي) للالتزام بحدود رأس المال الحالي.
+2.  **السيناريو الثاني: النموذج المتميز بالكامل (1,350,000 جنيه).** زيادة رأس المال بمقدار 350,000 جنيه لتشطيب الصالة والمطبخ بأعلى جودة وشراء معدات جديدة تماماً وواجهة كلادينج فاخرة وسيولة تشغيلية مريحة.
+3.  **السيناريو الثالث: تصغير مساحة المحل وتوفير سيولة (450,000 جنيه).** البحث عن محل أصغر للتيك أواي والديليفري بمساحة **40-50 متر مربع** في نفس الشارع بإيجار **20,000-25,000 جنيه**، مما يتيح تأسيس المشروع بتكلفة اقتصادية والاحتفاظ بنصف مليون جنيه كسيولة أمان.
 
 ---
 
 ## 2. Capital Expenditure (CapEx) Breakdown / تفاصيل النفقات الرأسمالية (CapEx)
 
-| Category / الفئة | Description / الوصف | Realistic (EGP) / تكلفة واقعية | 600k Cap (EGP) / سقف 600 ألف |
+| Category / الفئة | Description / الوصف | Premium / النموذج المتميز | Optimized Cap / سقف المليون المرشد |
 | :--- | :--- | :--- | :--- |
-| **Rent & Lease / الإيجار والتأمين** | 3 Months Deposit + 1 Month Advance / تأمين 3 أشهر + شهر مقدم | 300,000 EGP | 300,000 EGP *(Deficit / عجز)* |
-| **Civil Fit-Out / الأعمال المدنية والتشطيب**| Floor tiling, kitchen walls, grease traps, heavy gas, 15m chimney / تكسية سيراميك، عزل، سباكة غاز، ومدخنة 15 متر للسطح | 350,000 EGP | 150,000 EGP *(Substandard / ضعيف)* |
-| **Kitchen Equipment / معدات المطبخ** | Double gas grill, 3 deep fryers, freezer, display table / شواية غاز مزدوجة، 3 قلايات عميقة، ثلاجات، طاولة عرض ثلج | 320,000 EGP | 100,000 EGP *(Insufficient / غير كافٍ)* |
-| **Dining Room / صالة الطعام** | 8 Tables, 24 chairs, 5 HP AC unit / 8 طاولات، 24 كرسي، تكييف 5 حصان للصالة | 80,000 EGP | 0 EGP *(No Dine-In / لا صالة)* |
-| **Facade & Cladding / الواجهة والكلادينج**| L-shaped LED backlit signs, composite panels / واجهة كلادينج زاوية، حروف أكريليك مضيئة LED | 80,000 EGP | 20,000 EGP *(Poor Signage / واجهة متواضعة)* |
-| **Permits & Licenses / التراخيص** | Commercial & health licenses, civil defense / السجل التجاري، الشهادات الصحية، وتصريح الدفاع المدني | 40,000 EGP | 30,000 EGP |
-| **AI Portal & POS / نظام المحاسبة والذكاء**| Cloud POS, kitchen display, inventory tablet / كاشير سحابي، شاشة مطبخ، تابلت إدارة المخزون | 20,000 EGP | 10,000 EGP |
-| **Working Capital / رأس المال العامل**| Raw materials, packaging, salaries for month 1 / بضاعة سمك وجمبري أولية، عبوات تغليف، رواتب الشهر الأول | 160,000 EGP | -10,000 EGP *(Negative Cash / سيولة سالبة)* |
-| **TOTAL / الإجمالي** | | **1,350,000 EGP** | **600,000 EGP (Unfeasible / غير ممكن)** |
+| **Rent & Lease / الإيجار والتأمين** | 3 Months Deposit + 1 Month Advance / تأمين 3 أشهر + شهر مقدم | 300,000 EGP | 300,000 EGP *(Fixed / ثابت)* |
+| **Civil Fit-Out / الأعمال المدنية والتشطيب**| Floor tiling, kitchen walls, grease traps, heavy gas, 15m chimney / تكسية سيراميك، عزل، سباكة غاز، ومدخنة 15 متر للسطح | 350,000 EGP | 220,000 EGP *(Basic finishes / تشطيب أساسي)* |
+| **Kitchen Equipment / معدات المطبخ** | Double gas grill, 3 deep fryers, freezer, display table / شواية غاز مزدوجة، 3 قلايات عميقة، ثلاجات، طاولة عرض ثلج | 320,000 EGP | 240,000 EGP *(Essential & used / أساسي ومستعمل)* |
+| **Dining Room / صالة الطعام** | 8 Tables, 24 chairs, 5 HP AC unit / 8 طاولات، 24 كرسي، تكييف 5 حصان للصالة | 80,000 EGP | 40,000 EGP *(Simple furniture / أثاث بسيط)* |
+| **Facade & Cladding / الواجهة والكلادينج**| L-shaped LED backlit signs, composite panels / واجهة كلادينج زاوية، حروف أكريليك مضيئة LED | 80,000 EGP | 40,000 EGP *(Simple banner / لافتة مبسطة)* |
+| **Permits & Licenses / التراخيص** | Commercial & health licenses, civil defense / السجل التجاري، الشهادات الصحية، وتصريح الدفاع المدني | 40,000 EGP | 30,000 EGP *(Essential / تراخيص أساسية)* |
+| **AI Portal & POS / نظام المحاسبة والذكاء**| Cloud POS, kitchen display, inventory tablet / كاشير سحابي، شاشة مطبخ، تابلت إدارة المخزون | 20,000 EGP | 10,000 EGP *(Basic POS / كاشير أساسي)* |
+| **Working Capital / رأس المال العامل**| Raw materials, packaging, salaries for month 1 / بضاعة سمك وجمبري أولية، عبوات تغليف، رواتب الشهر الأول | 160,000 EGP | 120,000 EGP *(Reduced buffer / سيولة مخفضة)* |
+| **TOTAL / الإجمالي** | | **1,350,000 EGP** | **1,000,000 EGP (Feasible / ممكن)** |
 
 ---
 
@@ -168,7 +170,7 @@ To maximize margins, the restaurant must focus on high-margin **meals**, **soups
 #### Growth Targets (With Dine-In & Delivery Channels):
 *   **Months 1-3:** Target 40 orders/day (30 delivery/takeaway, 10 dine-in). Monthly Revenue: 336,000 EGP. Net Profit: ~18,800 EGP/month.
 *   **Months 4-6:** Target 60 orders/day (45 delivery/takeaway, 15 dine-in). Monthly Revenue: 504,000 EGP. Net Profit: ~111,200 EGP/month.
-*   **Estimated ROI Timeline:** 12 to 15 months from launch (based on 1.35M EGP CapEx).
+*   **Estimated ROI Timeline:** 10 to 12 months for the optimized 1,000,000 EGP CapEx model, and 12 to 15 months for the premium 1,350,000 EGP CapEx model.
 
 ### بالعربية:
 *   **متوسط قيمة الفاتورة/الطلب:** 280 جنيه مصري.
@@ -182,7 +184,7 @@ To maximize margins, the restaurant must focus on high-margin **meals**, **soups
 #### أهداف النمو (تشمل الصالة وتطبيقات التوصيل):
 *   **الشهور 1-3:** استهداف 40 طلب/يوم (30 ديليفري وتيك أواي، 10 صالة). الإيراد الشهري: 336,000 جنيه. صافي الربح: ~18,800 جنيه شهرياً.
 *   **الشهور 4-6:** استهداف 60 طلب/يوم (45 ديليفري وتيك أواي، 15 صالة). الإيراد الشهري: 504,000 جنيه. صافي الربح: ~111,200 جنيه شهرياً.
-*   **المدة المتوقعة لاسترداد الاستثمار (ROI):** من 12 إلى 15 شهراً من تاريخ الافتتاح (بناءً على رأس مال تأسيسي 1.35 مليون جنيه).
+*   **المدة المتوقعة لاسترداد الاستثمار (ROI):** من 10 إلى 12 شهراً بناءً على نموذج الميزانية المرشدة (1,000,000 جنيه)، ومن 12 إلى 15 شهراً بناءً على النموذج المتميز (1,350,000 جنيه).
 
 ---
 
@@ -193,7 +195,7 @@ To ensure our financial figures are anchored in Egypt's current economic climate
 
 1.  **The Budget Contrast (Stall vs. Restaurant):**
     *   *MSME Baseline:* A simple, small fish stall (50 m², takeaway-only, 2 workers) requires a starting capital of **~177,000 EGP**.
-    *   *Our Mismatch Validation:* This proves that our **600,000 EGP budget is strictly for a takeaway/stall model** (supporting Scenario 2). For a **150 m² dine-in restaurant** opposite Al-Hadaeq Club with high-capacity extraction and 5 staff members, our **1,350,000 EGP** target is the correct commercial benchmark.
+    *   *Our Budget Validation:* This proves that while a **600,000 EGP budget** is strictly for a takeaway/stall model, our updated **1,000,000 EGP budget** allows us to target the **150 m² dine-in restaurant** opposite Al-Hadaeq Club by employing cost optimizations (as in Scenario 1). The **1,350,000 EGP** target remains the ideal benchmark for a fully premium setup.
 2.  **Kitchen Equipment Validation (Profit Cash Benchmarks):**
     *   *Commercial Chillers:* 25,000 – 80,000 EGP each (Our estimate: 2 units = 100,000 EGP).
     *   *Cooking Equipment (Ovens, Grills, Fryers):* Ovens (15k-65k EGP), Grills (7k-35k EGP), Steam heaters (6k-15k EGP).
@@ -209,7 +211,7 @@ To ensure our financial figures are anchored in Egypt's current economic climate
 
 1.  **مقارنة الميزانية (محل صغير ضد مطعم):**
     *   *مؤشر المشروعات الصغيرة:* يتطلب محل السمك الصغير (مساحة 50م²، تيك أواي فقط، وعاملين اثنين) رأس مال تأسيسي يقدر بـ **~177,000 جنيه**.
-    *   *تأكيد الفارق:* هذا يؤكد أن ميزانية **600,000 جنيه تكفي فقط لتأسيس محل تيك أواي دليفري بسيط** (المسار الثاني). أما بالنسبة لمطعم صالة بمساحة **150م²** أمام نادي حدائق الأهرام ويحتاج مداخن ضخمة و5 موظفين، فإن الرقم المستهدف **1,350,000 جنيه** هو التقدير التجاري الواقعي السليم.
+    *   *تأكيد الميزانية:* هذا يؤكد أنه في حين أن ميزانية **600,000 جنيه** تكفي فقط لتأسيس محل تيك أواي دليفري بسيط، فإن رأس المال الجديد البالغ **1,000,000 جنيه** تمكننا من تشغيل مطعم الصالة بمساحة **150م²** أمام نادي حدائق الأهرام عند تطبيق نموذج ترشيد النفقات (السيناريو الأول)، بينما يظل مبلغ **1,350,000 جنيه** هو التقدير التجاري المثالي للتشغيل الفاخر بالكامل.
 2.  **التحقق من تكاليف معدات المطبخ (مؤشرات بروفيت كاش):**
     *   *الثلاجات الكبيرة:* 25,000 - 80,000 جنيه للثلاجة الواحدة (تقديرنا: ثلاجتين = 100,000 جنيه).
     *   *معدات الطهي (أفران، شوايات، قلايات):* الأفران (15k-65k جنيه)، الشوايات (7k-35k جنيه)، مقالي وسخانات بخار (6k-15k جنيه).

@@ -599,3 +599,24 @@ This version marks the successful business onboarding, photorealistic 3D brand v
 
 ---
 
+## [26.0.0-la-playa-chalet-rentals] - 2026-08-25
+
+### 🚀 Milestone: La Playa Chalet Rentals Platform Integration
+
+This version marks the seamless integration of a premium, foreigner-focused chalet rental platform (La Playa Village, Ras Sudr) into the existing monolithic `el-nafeer-real-estate` architecture.
+
+### Added
+- **Premium Isolated Styling**: Created `la-playa.module.css` utilizing CSS Modules to apply glassmorphism, resort gradients, and micro-animations strictly to the La Playa scope, preventing style leakage into the main corporate app.
+- **Kitesurfing-Optimized Landing Page**: Developed `app/(public)/la-playa/page.tsx` with a heavy focus on Ras Sudr's wind sports value proposition, integrated trust elements (Pay on Arrival via Stripe hold), and embedded Google Maps for locational trust.
+- **Hybrid Chatbot Widget**: Engineered `ChatbotWidget.tsx`, a floating conversational UI that handles the booking journey (Name -> Phone -> Dates) via both clickable quick-actions and free-text inputs.
+- **Booking API with Zod Validation**: Built `app/api/la-playa/book/route.ts` to securely intercept chatbot payloads, validate them server-side, and insert them into the `Lead` model.
+- **Strict Data Isolation**: Reused the existing `Property` and `PropertyOwner` Prisma models, but implemented a strict `features: { category: "LA_PLAYA_RENTAL" }` JSON tagging mechanism to prevent rental chalets from bleeding into the main Real Estate sales listings.
+- **Seed Scripts**: Provided `scripts/seed-la-playa.ts` to initialize Dr. Shimaa's listing and verify the isolated data models.
+
+### Technical Notes
+- **Hardware Optimization**: Adhered strictly to local disk space constraints (< 3GB free) by bypassing any new NPM package installations and serving all rich media exclusively via external Unsplash CDNs.
+- **Environment Troubleshooting**: Navigated and resolved Supabase pooler connection issues and database hibernation states between Vercel deployments and local `.env` configurations.
+- Build Status: ✅ SUCCESS 
+- Architecture: "Website-First, Chatbot-Assisted" model ensuring high SEO indexability for foreign Google searches.
+
+---
