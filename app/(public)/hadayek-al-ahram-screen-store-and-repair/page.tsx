@@ -38,7 +38,7 @@ export default async function ScreenStorePage() {
   // Note: NO AI or Chatbot components are imported or rendered on this page as requested.
 
   return (
-    <main className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 font-sans" dir="ltr">
+    <main className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 font-sans" dir="rtl">
       {/* Inject JSON-LD */}
       <Script
         id="store-jsonld"
@@ -49,17 +49,17 @@ export default async function ScreenStorePage() {
       <div className="max-w-7xl mx-auto">
         <header className="mb-12 text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-            El-Ekhwa Screens
+            شاشات الإخوة
           </h1>
           <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">
-            Discover our premium selection of screens for sale and expert repair services in Hadayek Al-Ahram.
+            اكتشف تشكيلتنا المتميزة من الشاشات للبيع وخدمات الصيانة الاحترافية في حدائق الأهرام.
           </p>
         </header>
 
         {screens.length === 0 ? (
           <div className="text-center py-24 bg-white rounded-2xl shadow-sm border border-slate-200">
-            <h2 className="text-2xl text-slate-600 font-semibold">No screens available right now.</h2>
-            <p className="text-slate-500 mt-2">Check back soon for new inventory!</p>
+            <h2 className="text-2xl text-slate-600 font-semibold">لا توجد شاشات متاحة حالياً.</h2>
+            <p className="text-slate-500 mt-2">تحقق قريباً من المخزون الجديد!</p>
           </div>
         ) : (
           /* 4. Responsive CSS Grid: 2 cols on mobile, 3 on desktop */
@@ -79,7 +79,7 @@ export default async function ScreenStorePage() {
                   />
                   {screen.discountPrice < screen.basePrice && (
                     <div className="absolute top-3 left-3 bg-red-600 text-white text-[10px] md:text-xs font-bold px-2 py-1 rounded-md shadow-sm uppercase tracking-wide">
-                      Sale
+                      تخفيض
                     </div>
                   )}
                 </div>
@@ -91,10 +91,10 @@ export default async function ScreenStorePage() {
                   
                   <div className="mt-auto pt-4 flex flex-col gap-1 border-t border-slate-100">
                     <span className="text-slate-400 line-through text-xs md:text-sm font-medium">
-                      EGP {screen.basePrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      {screen.basePrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ج.م
                     </span>
                     <span className="text-red-600 font-extrabold text-lg md:text-2xl">
-                      EGP {screen.discountPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      {screen.discountPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ج.م
                     </span>
                   </div>
                   
@@ -102,7 +102,7 @@ export default async function ScreenStorePage() {
                     href={`/hadayek-al-ahram-screen-store-and-repair/${screen.id}`}
                     className="mt-6 w-full inline-flex items-center justify-center bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2.5 md:py-3 px-4 rounded-xl transition-colors text-sm md:text-base shadow-md hover:shadow-lg"
                   >
-                    View Details
+                    عرض التفاصيل
                   </Link>
                 </div>
               </div>

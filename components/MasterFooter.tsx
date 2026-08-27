@@ -26,7 +26,7 @@ export default function MasterFooter() {
                 <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-12 mb-8">
                     {/* Unified Logo & Mission */}
                     <div className="flex items-center justify-center md:justify-start">
-                        <Link href={isBeitAlKhair ? "/beit-alkhair" : "/"} className="flex items-center gap-5 group cursor-pointer inline-flex">
+                        <Link href={isBeitAlKhair ? "/beit-alkhair" : "/"} dir="ltr" className="flex items-center gap-5 group cursor-pointer inline-flex">
                             <div className={`w-12 h-12 md:w-16 md:h-16 bg-[#0a0a0a] shadow-[0_0_10px_rgba(212,175,55,0.2)] rounded-xl p-1.5 flex items-center justify-center relative overflow-hidden transition-all duration-500 group-hover:scale-105 group-hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] border border-sahara-gold/30 ${isBeitAlKhair ? 'quantum-luxe-logo-container' : ''}`}>
                                 <img
                                     src={isBeitAlKhair ? '/assets/branding/logo.png' : (isArabic ? '/logos/logo-ar.png' : '/logos/logo-en.png')}

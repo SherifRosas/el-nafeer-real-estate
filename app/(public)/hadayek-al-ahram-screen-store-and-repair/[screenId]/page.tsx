@@ -43,14 +43,14 @@ export default async function ScreenDetailPage({ params }: { params: Promise<{ s
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 font-sans" dir="ltr">
+    <main className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 font-sans" dir="rtl">
       <div className="max-w-7xl mx-auto mb-6">
         <Link 
           href="/hadayek-al-ahram-screen-store-and-repair" 
           className="text-slate-500 hover:text-slate-900 font-medium inline-flex items-center gap-2 transition-colors"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-          Back to Store
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="rotate-180"><path d="m15 18-6-6 6-6"/></svg>
+          العودة للمتجر
         </Link>
       </div>
 
@@ -67,7 +67,7 @@ export default async function ScreenDetailPage({ params }: { params: Promise<{ s
             />
             {screen.discountPrice < screen.basePrice && (
               <div className="absolute top-8 left-8 bg-red-600 text-white font-black px-4 py-2 rounded-lg shadow-lg uppercase tracking-wider text-sm">
-                SALE
+                تخفيض
               </div>
             )}
           </div>
@@ -81,20 +81,20 @@ export default async function ScreenDetailPage({ params }: { params: Promise<{ s
               
               <div className="flex items-end gap-4 mt-6">
                 <span className="text-4xl lg:text-5xl font-black text-red-600">
-                  EGP {screen.discountPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  {screen.discountPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ج.م
                 </span>
                 {screen.discountPrice < screen.basePrice && (
                   <span className="text-xl lg:text-2xl text-slate-400 line-through font-medium mb-1">
-                    EGP {screen.basePrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    {screen.basePrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ج.م
                   </span>
                 )}
               </div>
             </div>
 
             <div className="prose prose-slate prose-lg max-w-none mb-12 border-t border-slate-100 pt-8">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">About this product</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-4">تفاصيل المنتج</h3>
               <p className="text-slate-600 leading-relaxed whitespace-pre-wrap">
-                {screen.description || 'Premium quality screen. Contact us for detailed specifications.'}
+                {screen.description || 'شاشة عالية الجودة. تواصل معنا لمزيد من التفاصيل.'}
               </p>
             </div>
 
@@ -110,7 +110,7 @@ export default async function ScreenDetailPage({ params }: { params: Promise<{ s
       {/* Slide-out Checkout Panel Container (Hidden by default) */}
       <div id="checkout-panel" className="hidden fixed inset-y-0 right-0 w-full md:w-[500px] bg-white shadow-[0_0_50px_rgba(0,0,0,0.15)] z-50 transform transition-transform border-l border-slate-200 overflow-y-auto">
          <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-100 sticky top-0 bg-white/90 backdrop-blur-md p-6 lg:px-8 z-10">
-            <h2 className="text-2xl font-extrabold text-slate-900">Checkout</h2>
+            <h2 className="text-2xl font-extrabold text-slate-900">تأكيد الطلب</h2>
             <ClosePanelButton />
          </div>
          
