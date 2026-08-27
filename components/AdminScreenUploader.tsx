@@ -4,7 +4,7 @@ import { useActionState } from "react"
 import { useFormStatus } from "react-dom"
 import { addScreenAction } from "@/app/actions/screen-actions"
 
-const initialState = {
+const initialState: any = {
   message: "",
   error: "",
   success: false
