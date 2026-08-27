@@ -620,3 +620,25 @@ This version marks the seamless integration of a premium, foreigner-focused chal
 - Architecture: "Website-First, Chatbot-Assisted" model ensuring high SEO indexability for foreign Google searches.
 
 ---
+
+## [19.0.1-screen-orders-dashboard] - 2026-08-27
+
+### 🚀 Milestone: Screen Orders Admin Dashboard & Checkout Resiliency
+
+This version introduces a complete admin pipeline for processing incoming screen orders, resolving strict validation constraints, and protecting server bandwidth through on-device image compression.
+
+### Added
+- **Incoming Receipts Dashboard**: Engineered `/admin/screen-orders` to display all submitted orders, complete with high-res receipt thumbnails, order statuses, and colored delivery badges.
+- **WhatsApp Direct Confirmation**: Embedded a single-click "Confirm" action that automatically strips non-numeric characters from the customer's phone number, injects the `+20` prefix, and pre-fills an Arabic WhatsApp confirmation message with the screen name and order ID.
+- **Client-Side Image Compression**: Integrated `browser-image-compression` into the checkout widget to safely handle massive 10MB+ iPhone receipt photos, compressing them below 1MB locally before pushing to Vercel/Supabase, fully preventing `413 Payload Too Large` crashes.
+
+### Fixed
+- **Phone Validation Rigidity**: Loosened the Zod regex to safely accept `+20`, `0020`, spaces, and dashes, making the form highly robust against diverse user input formatting.
+- **Location Constraints**: Dropped the shipping address character limit to 3 characters and explicitly guided users to paste Google Maps links instead of typing raw addresses.
+- **Supabase Storage Blocks**: Configured Public bucket RLS policies via SQL injection to allow anonymous checkout insertions into the `receipt-uploads` bucket without breaking Supabase security rules.
+
+### Technical Notes
+- Build Status: ✅ SUCCESS
+- Architecture: End-to-End Sales Loop (Frontend -> Supabase -> Admin Dashboard -> WhatsApp Finalization) is fully complete and operational.
+
+---

@@ -425,3 +425,30 @@ model PatientEmbedding {
 
   @@map("patient_embeddings")
 }
+
+model Screen {
+  id            String   @id @default(cuid())
+  name          String
+  description   String?
+  basePrice     Float
+  discountPrice Float
+  imageUrl      String
+  inStock       Boolean  @default(true)
+  createdAt     DateTime @default(now())
+
+  orders        Order[]
+}
+
+model Order {
+  id              String   @id @default(cuid())
+  screenId        String
+  customerName    String
+  customerPhone   String
+  deliveryType    String   // 'PICKUP' or 'SHIPPING'
+  shippingAddress String?
+  receiptImageUrl String
+  status          String   @default("PENDING_REVIEW")
+  createdAt       DateTime @default(now())
+
+  screen          Screen   @relation(fields: [screenId], references: [id])
+}
