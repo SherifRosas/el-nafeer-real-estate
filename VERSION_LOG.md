@@ -642,3 +642,23 @@ This version introduces a complete admin pipeline for processing incoming screen
 - Architecture: End-to-End Sales Loop (Frontend -> Supabase -> Admin Dashboard -> WhatsApp Finalization) is fully complete and operational.
 
 ---
+
+## [19.0.3-screen-store-localization] - 2026-08-27
+
+### 🚀 Milestone: Screen Store Arabic Localization & UI Hardening
+
+This version addresses critical Right-to-Left (RTL) layout issues and fully localizes the Hadayek Al-Ahram Screen Store interface to Arabic to match the primary demographic.
+
+### Added
+- **Arabic UI Translation**: Fully translated the El-Ekhwa Screen Store interface, including standardizing terms ("عرض التفاصيل" for View Details, "تخفيض" for Sale, "تأكيد الطلب" for Checkout).
+- **RTL Layout Orientation**: Flipped the entire grid layout and navigation components of the Screen Store to `dir="rtl"` to align with Arabic reading patterns and enhance local user experience.
+
+### Fixed
+- **MasterFooter Bidirectional Overlap**: Resolved a critical UI bug where the global Arabic RTL setting caused the English "EL-NAFEER" brand text to collapse over the logo icon. Implemented a strict `dir="ltr"` lock exclusively on the brand container to maintain perfect alignment.
+- **Strict TypeScript Action Types**: Bypassed a strict React 19 `useActionState` typing mismatch in the `AdminScreenUploader` that was causing Vercel builds to crash.
+
+### Technical Notes
+- Build Status: ✅ SUCCESS
+- Architecture: Achieved 100% Arabic UI consistency for public-facing storefronts while preserving English branding elements safely.
+
+---
