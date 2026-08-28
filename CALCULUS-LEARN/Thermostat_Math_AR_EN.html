@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The AI Nervous System: Full Masterclass Guide</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --background: #f8fafc;
+            --card-bg: #ffffff;
+            --text-en: #334155;
+            --text-ar: #1e293b;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--background);
+            color: var(--text-en);
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .title-ar {
+            font-size: 2rem;
+            font-family: 'Tajawal', 'Arial', sans-serif;
+            color: var(--text-ar);
+            direction: rtl;
+        }
+
+        .subtitle {
+            margin-top: 1rem;
+            font-style: italic;
+            color: #64748b;
+        }
+
+        .phase-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        .phase-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .en-section {
+            direction: ltr;
+            text-align: left;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f1f5f9;
+            border-left: 4px solid var(--primary);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .ar-section {
+            direction: rtl;
+            text-align: right;
+            font-family: 'Tajawal', 'Arial', sans-serif;
+            font-size: 1.1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-right: 4px solid #10b981;
+            border-radius: 8px 0 0 8px;
+        }
+
+        code {
+            background: #cbd5e1;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+        }
+
+        .math-block {
+            background: #1e293b;
+            color: #10b981;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>The AI Nervous System: Full Masterclass Guide</h1>
+        <div class="title-ar">الجهاز العصبي للذكاء الاصطناعي: الدليل الشامل</div>
+        <p class="subtitle">This document is a complete bilingual representation of how to build an Autonomous Machine, based on "Artificial Intelligence: A Modern Approach" (AIMA) - Chapter 2.</p>
+        <p class="subtitle" dir="rtl">هذا المستند هو تمثيل كامل ثنائي اللغة لكيفية بناء آلة مستقلة، بناءً على كتاب "الذكاء الاصطناعي: مقاربة حديثة" - الفصل الثاني.</p>
+    </header>
+
+    <!-- SECTION 1 -->
+    <div class="phase-card">
+        <div class="phase-title">
+            <h2>1. What is an Intelligent Agent?</h2>
+            <h2 dir="rtl">1. ما هو الوكيل الذكي؟</h2>
+        </div>
+        <div class="en-section">
+            <strong>English:</strong> An Intelligent Agent is any system that can perceive its environment, make decisions, and take actions to maximize its success. It is not just a script; it is a "living" mathematical loop.<br><br>
+            <strong>Formula:</strong> <br>
+            <div class="math-block">Action = Brain(Sensor(Environment))</div>
+        </div>
+        <div class="ar-section">
+            <strong>العربية:</strong> الوكيل الذكي هو أي نظام يمكنه إدراك بيئته، اتخاذ القرارات، واتخاذ الإجراءات لزيادة نجاحه إلى أقصى حد. إنه ليس مجرد كود برمجي؛ بل هو حلقة رياضية "حية".<br><br>
+            <strong>المعادلة:</strong>
+            <div class="math-block">الإجراء = الدماغ(المستشعر(البيئة))</div>
+        </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="phase-card">
+        <div class="phase-title">
+            <h2>2. Phase 1: Sensors & Perception</h2>
+            <h2 dir="rtl">2. المرحلة 1: المستشعرات والإدراك</h2>
+        </div>
+        <div class="en-section">
+            <strong>English:</strong> A machine cannot think if it cannot see. A <strong>Sensor</strong> is the "Eye" of the machine. The data it captures is called a <strong>Percept</strong>.<br>
+            <ul>
+                <li>In hardware: A thermometer, a camera, or a microphone.</li>
+                <li>In software: Reading an API (like Facebook Views) or reading a database.</li>
+            </ul>
+            <em>Key Logic:</em> The sensor must have <strong>Memory</strong> to detect <em>Changes</em> (Delta) over time (Time t vs Time t-1).
+        </div>
+        <div class="ar-section">
+            <strong>العربية:</strong> الآلة لا تستطيع التفكير إذا كانت لا تستطيع الرؤية. <strong>المستشعر (Sensor)</strong> هو "عين" الآلة. البيانات التي يلتقطها تسمى <strong>الإدراك (Percept)</strong>.<br>
+            <ul>
+                <li>في الأجهزة: مقياس حرارة، كاميرا، أو ميكروفون.</li>
+                <li>في البرمجيات: قراءة واجهة برمجة التطبيقات (مثل مشاهدات فيسبوك) أو قراءة قاعدة بيانات.</li>
+            </ul>
+            <em>المنطق الأساسي:</em> يجب أن يحتوي المستشعر على <strong>ذاكرة (Memory)</strong> لاكتشاف <em>التغييرات</em> بمرور الوقت (الوقت t مقابل الوقت t-1).
+        </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="phase-card">
+        <div class="phase-title">
+            <h2>3. Phase 2: The Agent Function / Brain</h2>
+            <h2 dir="rtl">3. المرحلة 2: دالة الوكيل / الدماغ</h2>
+        </div>
+        <div class="en-section">
+            <strong>English:</strong> The "Brain" is just a mathematical mapping. It takes the Percept (Input) and maps it to an Action (Output). This is written as the function <code>A(T)</code>.<br><br>
+            If <code>T</code> (Temperature) is a <strong>Scalar</strong> (single number like 72), the brain uses simple logic:
+            <ul><li><code>if (T > 72) return "COOL"</code></li></ul>
+            If <code>T</code> is a <strong>Vector</strong> (multiple numbers like <code>[72, 45, 1]</code>), the brain uses complex logic to process multiple variables.<br><br>
+            <strong>Example 2: A Vector (Two Sensors)</strong><br>
+            If the machine has a Temperature sensor and a Humidity sensor, the input becomes a Vector array: <code>V = [Temperature, Humidity]</code>.<br>
+            Example: <code>V = [75, 80]</code> (75°F and 80% Humidity).<br>
+            The Brain logic becomes multi-dimensional:
+            <ul><li><code>if (V[0] > 72 AND V[1] > 60) return "TURN_ON_DEHUMIDIFIER"</code></li></ul>
+        </div>
+        <div class="ar-section">
+            <strong>العربية:</strong> "الدماغ" هو مجرد تعيين رياضي (Mathematical Mapping). يأخذ الإدراك (المدخلات) ويحوله إلى إجراء (المخرجات). تُكتب هذه الدالة كـ <code>A(T)</code>.<br><br>
+            إذا كانت <code>T</code> (الحرارة) <strong>قيمة مفردة (Scalar)</strong> (رقم واحد مثل 72)، يستخدم الدماغ منطقاً بسيطاً:
+            <ul><li><code>if (T > 72) return "COOL"</code></li></ul>
+            إذا كانت <code>T</code> <strong>متجهاً (Vector)</strong> (عدة أرقام مثل <code>[72, 45, 1]</code>)، يستخدم الدماغ منطقاً معقداً لمعالجة عدة متغيرات.<br><br>
+            <strong>المثال الثاني: المتجه (مستشعران)</strong><br>
+            إذا كان الروبوت يمتلك مستشعر حرارة ومستشعر رطوبة، يصبح المدخل مصفوفة متجهة: <code>V = [الحرارة، الرطوبة]</code>.<br>
+            مثال: <code>V = [75, 80]</code> (75 درجة فهرنهايت و 80% رطوبة).<br>
+            يصبح منطق الدماغ متعدد الأبعاد:
+            <ul><li><code>if (V[0] > 72 AND V[1] > 60) return "TURN_ON_DEHUMIDIFIER"</code></li></ul>
+        </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="phase-card">
+        <div class="phase-title">
+            <h2>4. Phase 3: Actuators & Motor System</h2>
+            <h2 dir="rtl">4. المرحلة 3: المشغلات والنظام الحركي</h2>
+        </div>
+        <div class="en-section">
+            <strong>English:</strong> If a machine only has sensors, it is paralyzed. It needs <strong>Actuators</strong> to physically alter the universe around it.
+            <ul>
+                <li>In hardware: A robotic arm, a wheel, or an electrical Relay switch turning on the AC.</li>
+                <li>In software: Writing a file to a hard drive, sending a Discord message, or executing a stock trade.</li>
+            </ul>
+        </div>
+        <div class="ar-section">
+            <strong>العربية:</strong> إذا كانت الآلة تمتلك مستشعرات فقط، فهي مشلولة. تحتاج إلى <strong>مشغلات (Actuators)</strong> لتغيير الكون من حولها فيزيائياً.
+            <ul>
+                <li>في الأجهزة: ذراع آلي، عجلة، أو مفتاح كهربائي (Relay) لتشغيل التكييف.</li>
+                <li>في البرمجيات: كتابة ملف على القرص الصلب، إرسال رسالة على ديسكورد، أو تنفيذ صفقة أسهم.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="phase-card">
+        <div class="phase-title">
+            <h2>5. Phase 4: The Event Loop</h2>
+            <h2 dir="rtl">5. المرحلة 4: حلقة الحدث</h2>
+        </div>
+        <div class="en-section">
+            <strong>English:</strong> A nervous system never sleeps. The <strong>Event Loop</strong> is the heartbeat (the Clock). Computers operate in <em>Discrete Time</em> (ticks). We use tools like <code>setInterval</code> to force the machine to constantly repeat the cycle:
+            <ol>
+                <li>Breathe in (Perceive)</li>
+                <li>Think (Decide)</li>
+                <li>Breathe out (Act)</li>
+            </ol>
+        </div>
+        <div class="ar-section">
+            <strong>العربية:</strong> الجهاز العصبي لا ينام أبداً. <strong>حلقة الحدث (Event Loop)</strong> هي نبض القلب (الساعة). تعمل أجهزة الكمبيوتر في <em>وقت متقطع (Discrete Time)</em> (نبضات). نستخدم أدوات مثل <code>setInterval</code> لإجبار الآلة على تكرار الدورة باستمرار:
+            <ol>
+                <li>شهيق (إدراك)</li>
+                <li>تفكير (اتخاذ قرار)</li>
+                <li>زفير (تنفيذ إجراء)</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- SECTION 6 -->
+    <div class="phase-card">
+        <div class="phase-title">
+            <h2>6. How to Connect Hardware to Software</h2>
+            <h2 dir="rtl">6. كيفية ربط الأجهزة بالبرمجيات</h2>
+        </div>
+        <div class="en-section">
+            <strong>English:</strong> To bridge the gap between the physical and digital world:
+            <ol>
+                <li><strong>Sensors (Thermistor):</strong> Senses physical heat as an electrical voltage.</li>
+                <li><strong>Translation (Microcontroller like Arduino):</strong> Converts electrical voltage into a digital number (ADC - Analog to Digital Converter).</li>
+                <li><strong>Communication:</strong> Sends the number to Node.js via Serial Cable (USB) or Wi-Fi.</li>
+                <li><strong>Action (Actuator):</strong> Node.js calculates the decision and sends an electrical signal back to the Arduino to flick a physical Relay switch.</li>
+            </ol>
+        </div>
+        <div class="ar-section">
+            <strong>العربية:</strong> لسد الفجوة بين العالم المادي والرقمي:
+            <ol>
+                <li><strong>المستشعرات (Thermistor):</strong> يستشعر الحرارة الفيزيائية كجهد كهربائي.</li>
+                <li><strong>الترجمة (متحكم دقيق مثل Arduino):</strong> يحول الجهد الكهربائي إلى رقم (ADC - محول تناظري إلى رقمي).</li>
+                <li><strong>الاتصال:</strong> يرسل الرقم إلى Node.js عبر كابل USB أو Wi-Fi.</li>
+                <li><strong>التنفيذ (Actuator):</strong> يحسب Node.js القرار ويرسل إشارة كهربائية مرة أخرى إلى الأردوينو لتشغيل مفتاح كهربائي فعلي (Relay).</li>
+            </ol>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

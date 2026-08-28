@@ -144,6 +144,20 @@ export async function deleteScreenAction(id: string) {
       }
     }
 
+    // Find and clean up any associated orders to prevent Foreign Key errors
+    const orders = await prisma.order.findMany({ where: { screenId: id } })
+    if (orders.length > 0) {
+      const receiptFileNames = orders
+        .map(o => o.receiptImageUrl.split('/').pop())
+        .filter(Boolean) as string[]
+      
+      if (receiptFileNames.length > 0) {
+        await supabase.storage.from('receipt-uploads').remove(receiptFileNames)
+      }
+      // Delete the order records
+      await prisma.order.deleteMany({ where: { screenId: id } })
+    }
+
     await prisma.screen.delete({ where: { id } })
     revalidatePath("/admin/screen-uploader")
     revalidatePath("/hadayek-al-ahram-screen-store-and-repair")
