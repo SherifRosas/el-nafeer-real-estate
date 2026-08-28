@@ -17,6 +17,13 @@ export function getDatabaseUrl(): string {
         url = url.substring(5).trim()
       }
       if (url.startsWith('postgresql://') || url.startsWith('postgres://')) {
+        // 🔥 VERCEL TIMEOUT FIX: Auto-convert direct connection (5432) to pooler (6543)
+        if (url.includes(':5432')) {
+          let [base] = url.split('?');
+          base = base.replace(':5432', ':6543');
+          url = base + '?pgbouncer=true&connection_limit=1';
+          console.log('🔥 VERCEL TIMEOUT FIX: Converted DB URL to Pooler Mode.');
+        }
         return url
       }
     }
