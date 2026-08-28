@@ -70,7 +70,7 @@ export default function AdminLoginPage() {
         <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-white/[0.02] blur-[150px] rounded-full animate-pulse delay-1000" />
       </div>
 
-      <div className="max-w-xl w-full relative z-10 transition-all duration-1000 animate-in fade-in zoom-in-95">
+      <div className="max-w-xl w-full relative z-10">
         {/* Visual Identity HUD */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-4 px-6 py-2 rounded-full border border-white/10 milky-glass mb-10 shadow-xl">
