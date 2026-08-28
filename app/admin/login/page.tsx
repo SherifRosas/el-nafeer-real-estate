@@ -132,6 +132,7 @@ export default function AdminLoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                autoComplete="username"
                 className="w-full bg-black/40 border border-white/5 rounded-[2.5rem] px-10 py-6 text-white font-black italic focus:border-sahara-gold/50 outline-none transition-all robotic-digits lowercase"
                 style={{ color: '#ffffff', backgroundColor: 'rgba(0,0,0,0.4)' }}
                 placeholder="operator@nexus.ai / 010xxxxxxxx"
@@ -149,6 +150,7 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                autoComplete="current-password"
                 className="w-full bg-black/40 border border-white/5 rounded-[2.5rem] px-10 py-6 text-white font-black italic focus:border-sahara-gold/50 outline-none transition-all robotic-digits"
                 style={{ color: '#ffffff', backgroundColor: 'rgba(0,0,0,0.4)' }}
                 placeholder="••••••••••••"
