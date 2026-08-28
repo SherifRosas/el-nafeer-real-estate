@@ -16,13 +16,18 @@ export default function AdminLoginPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  // Redirect if already logged in as admin
+  // Redirect if already logged in as admin or screen-admin
   useEffect(() => {
     const userRole = (session?.user as any)?.role
-    if (status === 'authenticated' && (userRole === 'admin' || userRole === 'main-admin')) {
+    if (status === 'authenticated') {
       const searchParams = new URLSearchParams(window.location.search)
       const callbackUrl = searchParams.get('callbackUrl')
-      router.push(callbackUrl || '/admin/master')
+      
+      if (userRole === 'screen-admin') {
+        router.push(callbackUrl || '/admin/screen-uploader')
+      } else if (userRole === 'admin' || userRole === 'main-admin') {
+        router.push(callbackUrl || '/admin/master')
+      }
     }
   }, [session, status, router])
 
@@ -42,10 +47,11 @@ export default function AdminLoginPage() {
         setError(isArabic ? 'بوابة الوصول مرفوضة. يرجى التحقق من بيانات الاعتماد.' : 'ACCESS_DENIED. PLEASE_VERIFY_CREDENTIALS.')
         setLoading(false)
       } else if (result?.ok) {
+        // Redirection is handled by the useEffect above, but we can do a fallback reload
         setTimeout(() => {
           const searchParams = new URLSearchParams(window.location.search)
           const callbackUrl = searchParams.get('callbackUrl')
-          window.location.replace(callbackUrl || '/admin/master')
+          window.location.replace(callbackUrl || '/admin') // Base admin route handles role routing
         }, 800)
       }
     } catch (err) {
@@ -118,18 +124,18 @@ export default function AdminLoginPage() {
           <form onSubmit={handleSubmit} className="space-y-10">
             <div className="space-y-4">
               <label className="text-[9px] text-gray-600 font-black uppercase tracking-[0.5em] px-4 robotic-digits" htmlFor="email">
-                {isArabic ? 'البريد_الإلكتروني' : 'OPERATOR_ID'}
+                {isArabic ? 'البريد_الإلكتروني / رقم_الهاتف' : 'OPERATOR_ID / PHONE'}
               </label>
               <input
                 id="email"
-                type="email"
+                type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 className="w-full bg-black/40 border border-white/5 rounded-[2.5rem] px-10 py-6 text-white font-black italic focus:border-sahara-gold/50 outline-none transition-all robotic-digits lowercase"
                 style={{ color: '#ffffff', backgroundColor: 'rgba(0,0,0,0.4)' }}
-                placeholder="operator@nexus.ai"
-                title={isArabic ? 'البريد الإلكتروني' : 'Operator Email'}
+                placeholder="operator@nexus.ai / 010xxxxxxxx"
+                title={isArabic ? 'البريد الإلكتروني / رقم الهاتف' : 'Operator Email or Phone'}
               />
             </div>
 

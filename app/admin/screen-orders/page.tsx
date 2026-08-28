@@ -1,11 +1,21 @@
 import { prisma } from "@/lib/db"
 import Link from "next/link"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
+import { redirect } from "next/navigation"
 
 export const metadata = {
   title: 'Screen Orders | Admin Dashboard',
 }
 
 export default async function ScreenOrdersPage() {
+  const session = await getServerSession(authOptions)
+  const userRole = (session?.user as any)?.role
+
+  if (!session || (userRole !== 'screen-admin' && userRole !== 'main-admin')) {
+    redirect('/admin/login?callbackUrl=/admin/screen-orders')
+  }
+
   const orders = await prisma.order.findMany({
     include: { screen: true },
     orderBy: { createdAt: 'desc' }

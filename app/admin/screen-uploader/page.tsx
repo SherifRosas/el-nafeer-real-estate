@@ -1,12 +1,22 @@
 import AdminScreenUploader from "@/components/AdminScreenUploader"
 import AdminScreenList from "@/components/AdminScreenList"
 import { prisma } from "@/lib/db"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
+import { redirect } from "next/navigation"
 
 export const metadata = {
   title: 'Upload Screen | Admin Dashboard',
 }
 
 export default async function ScreenUploaderPage() {
+  const session = await getServerSession(authOptions)
+  const userRole = (session?.user as any)?.role
+
+  if (!session || (userRole !== 'screen-admin' && userRole !== 'main-admin')) {
+    redirect('/admin/login?callbackUrl=/admin/screen-uploader')
+  }
+
   const screens = await prisma.screen.findMany({
     orderBy: { createdAt: 'desc' }
   })

@@ -13,7 +13,7 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: 'Email', type: 'email' },
+        email: { label: 'Email or Phone', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
@@ -30,6 +30,26 @@ export const authOptions: NextAuthOptions = {
             email: mainAdminEmail,
             name: 'Main Platform Admin',
             role: 'main-admin',
+          } as any
+        }
+
+        // Screen Admin Authentication (Phone Numbers)
+        const screenAdminPhone1 = '01065661882'
+        const screenAdminPhone2 = '01288341064'
+        const screenAdminPhone2WithSpace = '012 88341064'
+        const screenAdminPassword = '1521997#Sh'
+
+        if (
+          (credentials.email === screenAdminPhone1 || 
+           credentials.email === screenAdminPhone2 || 
+           credentials.email === screenAdminPhone2WithSpace) && 
+          credentials.password === screenAdminPassword
+        ) {
+          return {
+            id: 'screen-admin',
+            email: credentials.email, // Storing phone as the email identifier
+            name: 'Screen Store Admin',
+            role: 'screen-admin',
           } as any
         }
 
