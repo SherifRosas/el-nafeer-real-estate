@@ -38,7 +38,7 @@ export default async function ScreenStorePage() {
   // Note: NO AI or Chatbot components are imported or rendered on this page as requested.
 
   return (
-    <main className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 font-sans" dir="rtl">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Inject JSON-LD */}
       <Script
         id="store-jsonld"
@@ -46,16 +46,7 @@ export default async function ScreenStorePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <div className="max-w-7xl mx-auto">
-        <header className="mb-12 text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-            شاشات الإخوة
-          </h1>
-          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">
-            اكتشف تشكيلتنا المتميزة من الشاشات للبيع وخدمات الصيانة الاحترافية في حدائق الأهرام.
-          </p>
-        </header>
-
+      <div className="max-w-7xl mx-auto pt-8">
         {screens.length === 0 ? (
           <div className="text-center py-24 bg-white rounded-2xl shadow-sm border border-slate-200">
             <h2 className="text-2xl text-slate-600 font-semibold">لا توجد شاشات متاحة حالياً.</h2>

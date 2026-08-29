@@ -43,8 +43,8 @@ export default async function ScreenDetailPage({ params }: { params: Promise<{ s
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 font-sans" dir="rtl">
-      <div className="max-w-7xl mx-auto mb-6">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto mb-6 pt-8">
         <Link 
           href="/hadayek-al-ahram-screen-store-and-repair" 
           className="text-slate-500 hover:text-slate-900 font-medium inline-flex items-center gap-2 transition-colors"

@@ -96,7 +96,7 @@ To win the client's approval, we present two cost scenarios, showing how we mini
 | **Labor & Installation / المصنعية والتركيب** | Local workshop installation. | 2,000 EGP |
 | **TOTAL (Budget) / إجمالي الميزانية الاقتصادية** | | **9,600 EGP** |
 
-![Scenario 1 - Smart Budget Facelift](/C:/Users/Sherif-Rosas/.gemini/antigravity/brain/d05be4bf-d355-4ae0-9634-ead171fcc1de/budget_facelift_1787535710234.jpg)
+![Scenario 1 - Smart Budget Facelift](file:///C:/Users/Sherif-Rosas/.gemini/antigravity/brain/d05be4bf-d355-4ae0-9634-ead171fcc1de/budget_facelift_1787535710234.jpg)
 
 ### Scenario 2: The Modern Tech Facelift (High Visibility & Maximum Trust)
 *Provides a high-end electronic showroom look that matches major repair chains.*
@@ -111,7 +111,7 @@ To win the client's approval, we present two cost scenarios, showing how we mini
 | **Labor & Installation / المصنعية والتركيب** | Professional signboard company installation. | 4,500 EGP |
 | **TOTAL (Premium) / إجمالي الميزانية الممتازة** | | **33,000 EGP** |
 
-![Scenario 2 - Modern Tech Facelift](/C:/Users/Sherif-Rosas/.gemini/antigravity/brain/d05be4bf-d355-4ae0-9634-ead171fcc1de/modern_tech_facelift_1787535823587.jpg)
+![Scenario 2 - Modern Tech Facelift](file:///C:/Users/Sherif-Rosas/.gemini/antigravity/brain/d05be4bf-d355-4ae0-9634-ead171fcc1de/modern_tech_facelift_1787535823587.jpg)
 
 ### Scenario 3: The Hybrid Tech Facelift (Medium Cost & High Impact - Recommended)
 *Balances low implementation cost with high-end tech visibility. Offloads details to the left column advertising board and places the interactive QR code inside the glass door for maximum weather protection.*
@@ -127,7 +127,7 @@ To win the client's approval, we present two cost scenarios, showing how we mini
 | **Labor & Installation / المصنعية والتركيب** | Professional installation of signboard, advertising board, and door decals. | 3,500 EGP |
 | **TOTAL (Hybrid) / إجمالي الميزانية المتوسطة** | | **21,600 EGP** |
 
-![Scenario 3 - Hybrid Tech Facelift](/C:/Users/Sherif-Rosas/.gemini/antigravity/brain/d05be4bf-d355-4ae0-9634-ead171fcc1de/optimized_storefront_1787571298829.jpg)
+![Scenario 3 - Hybrid Tech Facelift](file:///C:/Users/Sherif-Rosas/.gemini/antigravity/brain/d05be4bf-d355-4ae0-9634-ead171fcc1de/optimized_storefront_1787571298829.jpg)
 
 ---
 
