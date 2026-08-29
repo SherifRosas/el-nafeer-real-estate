@@ -38,8 +38,8 @@ export default function AdminLoginPage() {
 
     try {
       const result = await signIn('credentials', {
-        email,
-        password,
+        email: email.trim(),
+        password: password.trim(),
         redirect: false,
       })
 
@@ -62,12 +62,14 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#020202] flex items-center justify-center p-6 relative overflow-hidden">
-      {/* Cyber Grid Background */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03] bg-[url('/grid.svg')] bg-repeat shadow-inner" />
+    <div className="min-h-screen bg-[#050B14] flex items-center justify-center p-6 relative overflow-hidden">
+      {/* Quantum Luxury Background */}
+      <div className="absolute inset-0 bg-[url('/ad-v2-quantum.png')] bg-cover bg-center opacity-10 mix-blend-screen" />
+      <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-[#050B14]/90 to-[#0A192F]/90 backdrop-blur-[2px]" />
+      <div className="absolute inset-0 pointer-events-none opacity-[0.05] bg-[url('/grid.svg')] bg-repeat shadow-inner" />
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-sahara-gold/[0.03] blur-[150px] rounded-full animate-pulse" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-white/[0.02] blur-[150px] rounded-full animate-pulse delay-1000" />
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-sahara-gold/[0.05] blur-[150px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-cyan-500/[0.03] blur-[150px] rounded-full animate-pulse delay-1000" />
       </div>
 
       <div className="max-w-xl w-full relative z-10">
