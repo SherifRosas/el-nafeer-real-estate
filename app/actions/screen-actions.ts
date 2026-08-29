@@ -164,7 +164,7 @@ export async function deleteScreenAction(id: string) {
     return { success: true }
   } catch (error: any) {
     console.error("Delete error:", error)
-    return { error: "Failed to delete screen." }
+    return { error: `Failed to delete screen: ${error?.message || 'Unknown error'}` }
   }
 }
 
