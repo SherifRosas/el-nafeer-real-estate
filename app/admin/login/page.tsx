@@ -71,13 +71,13 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen bg-[#050B14] flex items-center justify-center p-6 relative overflow-hidden">
-      {/* Quantum Luxury Background */}
-      <div className="absolute inset-0 bg-[url('/ad-v2-quantum.png')] bg-cover bg-center opacity-10 mix-blend-screen" />
-      <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-[#050B14]/90 to-[#0A192F]/90 backdrop-blur-[2px]" />
-      <div className="absolute inset-0 pointer-events-none opacity-[0.05] bg-[url('/grid.svg')] bg-repeat shadow-inner" />
+      {/* Quantum Luxury Background - BRIGHTENED */}
+      <div className="absolute inset-0 bg-[url('/ad-v2-quantum.png')] bg-cover bg-center opacity-40 mix-blend-screen" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0a1930]/70 via-[#050B14]/80 to-[#122340]/90 backdrop-blur-[4px]" />
+      <div className="absolute inset-0 pointer-events-none opacity-20 bg-[url('/grid.svg')] bg-repeat shadow-inner" />
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-sahara-gold/[0.05] blur-[150px] rounded-full animate-pulse" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-cyan-500/[0.03] blur-[150px] rounded-full animate-pulse delay-1000" />
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-sahara-gold/20 blur-[120px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-cyan-500/20 blur-[120px] rounded-full animate-pulse delay-1000" />
       </div>
 
       <div className="max-w-xl w-full relative z-10">
@@ -101,9 +101,9 @@ export default function AdminLoginPage() {
           </p>
         </div>
 
-        <div className="milky-glass rounded-[4rem] border border-white/10 p-12 md:p-16 shadow-[0_40px_100px_rgba(0,0,0,0.8)] relative overflow-hidden group">
+        <div className="milky-glass rounded-[4rem] border-2 border-white/20 p-12 md:p-16 shadow-[0_40px_100px_rgba(0,0,0,0.5),0_0_30px_rgba(212,175,55,0.1)] relative overflow-hidden group bg-white/[0.03]">
           {/* Interior HUD Lines */}
-          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-sahara-gold/30 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-1000" />
+          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-sahara-gold to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-1000" />
 
           {/* Default Creds Info HUD (Sleek) */}
           <div className="mb-12 p-8 rounded-3xl bg-white/[0.02] border border-white/5 relative group/info hover:border-sahara-gold/20 transition-all">
@@ -133,7 +133,7 @@ export default function AdminLoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-10">
             <div className="space-y-4">
-              <label className="text-[9px] text-gray-600 font-black uppercase tracking-[0.5em] px-4 robotic-digits" htmlFor="email">
+              <label className="text-xs text-cyan-200 font-black uppercase tracking-[0.3em] px-4 robotic-digits" htmlFor="email">
                 {isArabic ? 'البريد_الإلكتروني / رقم_الهاتف' : 'OPERATOR_ID / PHONE'}
               </label>
               <input
@@ -143,15 +143,14 @@ export default function AdminLoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 autoComplete="username"
-                className="w-full bg-black/40 border border-white/5 rounded-[2.5rem] px-10 py-6 text-white font-black italic focus:border-sahara-gold/50 outline-none transition-all robotic-digits lowercase"
-                style={{ color: '#ffffff', backgroundColor: 'rgba(0,0,0,0.4)' }}
+                className="w-full bg-[#111a2c]/80 border-2 border-white/20 rounded-[2.5rem] px-10 py-6 text-white font-black text-lg focus:border-sahara-gold focus:bg-[#1a263d] outline-none transition-all robotic-digits lowercase shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] placeholder:text-gray-400"
                 placeholder="operator@nexus.ai / 010xxxxxxxx"
                 title={isArabic ? 'البريد الإلكتروني / رقم الهاتف' : 'Operator Email or Phone'}
               />
             </div>
 
             <div className="space-y-4">
-              <label className="text-[9px] text-gray-600 font-black uppercase tracking-[0.5em] px-4 robotic-digits" htmlFor="password">
+              <label className="text-xs text-cyan-200 font-black uppercase tracking-[0.3em] px-4 robotic-digits" htmlFor="password">
                 {isArabic ? 'كلمة_السر' : 'SECURITY_TOKEN'}
               </label>
               <input
@@ -161,8 +160,7 @@ export default function AdminLoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 autoComplete="current-password"
-                className="w-full bg-black/40 border border-white/5 rounded-[2.5rem] px-10 py-6 text-white font-black italic focus:border-sahara-gold/50 outline-none transition-all robotic-digits"
-                style={{ color: '#ffffff', backgroundColor: 'rgba(0,0,0,0.4)' }}
+                className="w-full bg-[#111a2c]/80 border-2 border-white/20 rounded-[2.5rem] px-10 py-6 text-white font-black text-lg focus:border-sahara-gold focus:bg-[#1a263d] outline-none transition-all robotic-digits shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] placeholder:text-gray-400"
                 placeholder="••••••••••••"
                 title={isArabic ? 'كلمة السر' : 'Security Token'}
               />
