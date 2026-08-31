@@ -5,7 +5,8 @@ import Script from 'next/script'
 export default function TrackingScripts() {
     return (
         <>
-            {/* Google Analytics 4 */}
+            {/* Google Analytics 4 - Commented out until real ID is provided to prevent console errors */}
+            {/* 
             <Script
                 strategy="afterInteractive"
                 src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`}
@@ -24,8 +25,7 @@ export default function TrackingScripts() {
                     `,
                 }}
             />
-
-
+            */}
         </>
     )
 }
