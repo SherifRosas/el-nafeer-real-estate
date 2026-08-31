@@ -24,7 +24,11 @@ export default function AdminLoginPage() {
     const searchParams = new URLSearchParams(window.location.search)
     const callbackUrl = searchParams.get('callbackUrl')
     if (userRole === 'screen-admin') {
-      router.push(callbackUrl || '/admin/screen-uploader')
+      if (callbackUrl && !callbackUrl.endsWith('/admin') && !callbackUrl.endsWith('/admin/login') && !callbackUrl.includes('/admin/master')) {
+        router.push(callbackUrl)
+      } else {
+        router.push('/admin/screen-uploader')
+      }
     } else {
       router.push(callbackUrl || '/admin/master')
     }

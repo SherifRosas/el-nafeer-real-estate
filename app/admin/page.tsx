@@ -20,6 +20,11 @@ export default async function AdminDashboard() {
     redirect('/admin/master')
   }
 
+  // 📺 SCREEN_ADMIN_CHANNELS
+  if (userRole === 'screen-admin') {
+    redirect('/admin/screen-uploader')
+  }
+
   // 🏢 CLIENT_OWNER_CHANNELS
   try {
       const brandProfile = await db.getBrandProfileByUserId(userId)
