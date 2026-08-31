@@ -37,8 +37,16 @@ export default function AdminLoginPage() {
     setLoading(true)
 
     try {
+      // Aggressive normalization for phone numbers
+      // 1. Convert Eastern Arabic numerals to Western Arabic
+      // 2. Remove all spaces, tabs, and non-breaking spaces
+      const normalizedEmail = email
+        .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d).toString())
+        .replace(/[\s\uFEFF\xA0]/g, '')
+        .trim();
+
       const result = await signIn('credentials', {
-        email: email.trim(),
+        email: normalizedEmail,
         password: password.trim(),
         redirect: false,
       })
