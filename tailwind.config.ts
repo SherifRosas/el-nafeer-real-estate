@@ -11,6 +11,9 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        'sahara-gold': "#D4AF37",
+        'sahara-gold-light': "#F5D77F",
+        'sahara-gold-dark': "#997A15",
       },
     },
   },

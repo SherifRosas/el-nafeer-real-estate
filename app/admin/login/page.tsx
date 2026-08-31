@@ -118,22 +118,22 @@ export default function AdminLoginPage() {
                 <span className="text-sahara-gold font-bold">{userIdentifier}</span>
                 <span className="text-[10px] text-gray-400 block mt-1 uppercase tracking-widest robotic-digits">Role: {userRole}</span>
               </p>
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <button
                   type="button"
                   onClick={handleContinueToDashboard}
-                  className="flex-1 py-3 px-5 bg-sahara-gold text-black rounded-2xl font-black text-[11px] uppercase tracking-wider hover:bg-yellow-400 transition-all flex items-center justify-center gap-2 shadow-lg"
+                  className="flex-1 py-4 px-6 bg-[#D4AF37] hover:bg-[#ebd074] text-black font-black text-xs uppercase tracking-wider rounded-2xl transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(212,175,55,0.4)] active:scale-95"
                 >
                   <span>{isArabic ? 'المتابعة للوحة التحكم' : 'CONTINUE_TO_DASHBOARD'}</span>
-                  <ArrowRight size={14} className="rtl:rotate-180" />
+                  <ArrowRight size={16} className="rtl:rotate-180 text-black font-black" />
                 </button>
                 <button
                   type="button"
                   onClick={() => signOut({ callbackUrl: '/admin/login' })}
-                  className="py-3 px-5 bg-red-500/20 text-red-300 border border-red-500/30 rounded-2xl font-black text-[11px] uppercase tracking-wider hover:bg-red-500/30 transition-all flex items-center justify-center gap-2"
+                  className="py-4 px-6 bg-red-500/20 hover:bg-red-500/30 text-red-300 hover:text-white border border-red-500/40 font-bold text-xs uppercase tracking-wider rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-95"
                 >
-                  <LogOut size={14} />
-                  <span>{isArabic ? 'تسجيل الخروج (Sign Out)' : 'SIGN_OUT'}</span>
+                  <LogOut size={16} />
+                  <span>{isArabic ? 'تسجيل الخروج (SIGN OUT)' : 'SIGN_OUT'}</span>
                 </button>
               </div>
             </div>
