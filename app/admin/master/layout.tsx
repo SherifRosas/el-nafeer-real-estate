@@ -116,13 +116,22 @@ export default function MasterDashboardLayout({
         {/* Transparent Header Hook (Optional) */}
         <header className="h-20 w-full flex items-center justify-between px-10 absolute top-0 z-20 pointer-events-none">
           <div />
-          <div className="flex items-center gap-8 pointer-events-auto bg-black/40 backdrop-blur-xl px-6 py-2 rounded-full border border-white/5">
+          <div className="flex items-center gap-6 pointer-events-auto bg-black/60 backdrop-blur-xl px-6 py-2.5 rounded-full border border-white/10 shadow-2xl">
             <div className="flex items-center gap-3">
               <span className="w-2 h-2 bg-sahara-gold rounded-full animate-pulse" />
               <p className="text-[9px] font-black text-white/40 uppercase tracking-[0.4em] robotic-digits">UPLINK_SECURE: 0.8ms</p>
             </div>
             <div className="w-[1px] h-4 bg-white/10" />
             <p className="text-[10px] font-black text-sahara-gold uppercase tracking-widest">{isArabic ? 'شريف رصاص' : 'SHERIF_ROSAS'}</p>
+            <div className="w-[1px] h-4 bg-white/10" />
+            <button
+              onClick={() => signOut({ callbackUrl: '/admin/login' })}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 border border-red-500/20 transition-all font-bold text-[10px] uppercase tracking-wider"
+              title="Sign Out"
+            >
+              <LogOut size={13} />
+              <span>{isArabic ? 'خروج' : 'LOGOUT'}</span>
+            </button>
           </div>
         </header>
 

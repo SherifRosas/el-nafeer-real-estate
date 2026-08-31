@@ -1,5 +1,6 @@
 import AdminScreenUploader from "@/components/AdminScreenUploader"
 import AdminScreenList from "@/components/AdminScreenList"
+import AdminLogoutButton from "@/components/AdminLogoutButton"
 import { prisma } from "@/lib/db"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
@@ -24,9 +25,12 @@ export default async function ScreenUploaderPage() {
   return (
     <div style={{ padding: "2rem", minHeight: "100vh", backgroundColor: "#0f172a", color: "#f8fafc" }}>
       <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-        <h1 style={{ fontSize: "2rem", marginBottom: "2rem", borderBottom: "1px solid #334155", paddingBottom: "1rem" }}>
-          📺 Screen Management
-        </h1>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem", borderBottom: "1px solid #334155", paddingBottom: "1rem" }}>
+          <h1 style={{ fontSize: "2rem", margin: 0 }}>
+            📺 Screen Management
+          </h1>
+          <AdminLogoutButton />
+        </div>
         
         <AdminScreenUploader />
         

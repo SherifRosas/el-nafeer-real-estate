@@ -1,9 +1,10 @@
 'use client'
 
-import { signIn, useSession } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useLanguage } from '@/components/LanguageContext'
+import { LogOut, ArrowRight, ShieldCheck } from 'lucide-react'
 
 export default function AdminLoginPage() {
   const router = useRouter()
@@ -16,20 +17,18 @@ export default function AdminLoginPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  // Redirect if already logged in as admin or screen-admin
-  useEffect(() => {
-    const userRole = (session?.user as any)?.role
-    if (status === 'authenticated') {
-      const searchParams = new URLSearchParams(window.location.search)
-      const callbackUrl = searchParams.get('callbackUrl')
-      
-      if (userRole === 'screen-admin') {
-        router.push(callbackUrl || '/admin/screen-uploader')
-      } else if (userRole === 'admin' || userRole === 'main-admin') {
-        router.push(callbackUrl || '/admin/master')
-      }
+  const userRole = (session?.user as any)?.role
+  const userIdentifier = session?.user?.name || session?.user?.email || 'Active Admin'
+
+  const handleContinueToDashboard = () => {
+    const searchParams = new URLSearchParams(window.location.search)
+    const callbackUrl = searchParams.get('callbackUrl')
+    if (userRole === 'screen-admin') {
+      router.push(callbackUrl || '/admin/screen-uploader')
+    } else {
+      router.push(callbackUrl || '/admin/master')
     }
-  }, [session, status, router])
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -104,6 +103,41 @@ export default function AdminLoginPage() {
         <div className="milky-glass rounded-[4rem] border-2 border-white/20 p-12 md:p-16 shadow-[0_40px_100px_rgba(0,0,0,0.5),0_0_30px_rgba(212,175,55,0.1)] relative overflow-hidden group bg-white/[0.03]">
           {/* Interior HUD Lines */}
           <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-sahara-gold to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-1000" />
+
+          {/* ACTIVE SESSION CARD IF AUTHENTICATED */}
+          {status === 'authenticated' && (
+            <div className="mb-10 p-6 rounded-3xl bg-sahara-gold/10 border-2 border-sahara-gold/30 shadow-[0_0_30px_rgba(212,175,55,0.15)] animate-in fade-in">
+              <div className="flex items-center gap-3 mb-3">
+                <ShieldCheck size={20} className="text-sahara-gold" />
+                <p className="text-xs font-black text-white uppercase tracking-wider">
+                  {isArabic ? 'جلسة نشطة حالياً' : 'ACTIVE_SESSION_DETECTED'}
+                </p>
+              </div>
+              <p className="text-xs text-gray-300 mb-6 font-medium">
+                {isArabic ? `أنت مسجل حالياً كـ: ` : `Logged in as: `}
+                <span className="text-sahara-gold font-bold">{userIdentifier}</span>
+                <span className="text-[10px] text-gray-400 block mt-1 uppercase tracking-widest robotic-digits">Role: {userRole}</span>
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button
+                  type="button"
+                  onClick={handleContinueToDashboard}
+                  className="flex-1 py-3 px-5 bg-sahara-gold text-black rounded-2xl font-black text-[11px] uppercase tracking-wider hover:bg-yellow-400 transition-all flex items-center justify-center gap-2 shadow-lg"
+                >
+                  <span>{isArabic ? 'المتابعة للوحة التحكم' : 'CONTINUE_TO_DASHBOARD'}</span>
+                  <ArrowRight size={14} className="rtl:rotate-180" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => signOut({ callbackUrl: '/admin/login' })}
+                  className="py-3 px-5 bg-red-500/20 text-red-300 border border-red-500/30 rounded-2xl font-black text-[11px] uppercase tracking-wider hover:bg-red-500/30 transition-all flex items-center justify-center gap-2"
+                >
+                  <LogOut size={14} />
+                  <span>{isArabic ? 'تسجيل الخروج (Sign Out)' : 'SIGN_OUT'}</span>
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Default Creds Info HUD (Sleek) */}
           <div className="mb-12 p-8 rounded-3xl bg-white/[0.02] border border-white/5 relative group/info hover:border-sahara-gold/20 transition-all">
