@@ -58,12 +58,20 @@ export default function AdminLoginPage() {
         setError(isArabic ? 'بوابة الوصول مرفوضة. يرجى التحقق من بيانات الاعتماد.' : 'ACCESS_DENIED. PLEASE_VERIFY_CREDENTIALS.')
         setLoading(false)
       } else if (result?.ok) {
-        // Redirection is handled by the useEffect above, but we can do a fallback reload
-        setTimeout(() => {
-          const searchParams = new URLSearchParams(window.location.search)
-          const callbackUrl = searchParams.get('callbackUrl')
-          window.location.replace(callbackUrl || '/admin') // Base admin route handles role routing
-        }, 800)
+        const searchParams = new URLSearchParams(window.location.search)
+        const callbackUrl = searchParams.get('callbackUrl')
+        
+        const isScreenPhone = normalizedEmail.includes('01065661882') || normalizedEmail.includes('01288341064') || normalizedEmail.includes('012 88341064')
+        
+        if (isScreenPhone) {
+          window.location.href = '/admin/screen-uploader'
+        } else if (normalizedEmail.toLowerCase() === 'sherifrosas.ai@gmail.com') {
+          window.location.href = '/admin/master'
+        } else if (callbackUrl && !callbackUrl.endsWith('/admin/login')) {
+          window.location.href = callbackUrl
+        } else {
+          window.location.href = '/admin'
+        }
       }
     } catch (err) {
       setError('CRITICAL_SYSTEM_ERROR')
