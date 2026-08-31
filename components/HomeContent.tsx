@@ -55,7 +55,7 @@ export default function HomeContent() {
         <div className="flex items-center gap-10">
           <div className="flex items-center gap-3">
              <div className="w-10 h-10 rounded-xl bg-black border border-sahara-gold/30 p-1.5 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-                <img src="/campaigns/beit-alkhair/official-logo.jpg" alt="Logo" className="w-full h-full object-contain" />
+                <img src="/beit-alkhair-logo.jpg" alt="Logo" className="w-full h-full object-contain" />
              </div>
              <h1 className="text-xl font-black italic tracking-tighter uppercase leading-none">
                 EL <span className="text-sahara-gold">NAFEER</span>

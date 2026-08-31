@@ -131,7 +131,7 @@ export default function MasterDashboardContent({ globalStats, subsystems }: Dash
                         </div>
                         <div className="flex items-center gap-4 bg-white/5 p-2 rounded-2xl border border-white/10">
                             <div className="w-10 h-10 rounded-xl bg-black flex items-center justify-center border border-white/10 overflow-hidden">
-                                <img src="/campaigns/beit-alkhair/official-logo.jpg" alt="Admin" className="w-full h-full object-cover" />
+                                <img src="/beit-alkhair-logo.jpg" alt="Admin" className="w-full h-full object-cover" />
                             </div>
                             <div className="hidden sm:block">
                                 <p className="text-[9px] font-black text-sahara-gold uppercase tracking-widest">ADMIN_SOVEREIGN</p>

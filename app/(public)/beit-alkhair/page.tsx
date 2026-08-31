@@ -145,7 +145,7 @@ export default function BeitAlKhairPage() {
           >
              <div className="w-14 h-14 rounded-2xl overflow-hidden border border-sahara-gold/40 bg-black p-2 shadow-[0_0_30px_rgba(212,175,55,0.25)] relative group">
                 <div className="absolute inset-0 bg-sahara-gold/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <img src="/campaigns/beit-alkhair/official-logo.jpg" alt="Logo" className="w-full h-full object-contain relative z-10" />
+                <img src="/beit-alkhair-logo.jpg" alt="Logo" className="w-full h-full object-contain relative z-10" />
              </div>
              <div className="hidden md:block">
                 <h1 className="text-2xl font-black italic tracking-tighter leading-none uppercase">
