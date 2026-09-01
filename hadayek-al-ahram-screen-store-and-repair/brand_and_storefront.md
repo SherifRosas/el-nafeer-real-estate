@@ -1,4 +1,7 @@
-# Branding & Storefront Design / هوية العلامة التجارية وتصميم الواجهة
++
+
+
+-p9ii9i9i9i8u8u8u8u7y777y6666tt5r5r4434333322q1`    szzxznm,# Branding & Storefront Design / هوية العلامة التجارية وتصميم الواجهة
 **Project / المشروع:** El-Ekhwa Screens & Repair / الأخوة للشاشات والصيانة  
 **Location / الموقع:** Hadayek Al-Ahram, Giza / حدائق الأهرام، الجيزة  
 **Date / التاريخ:** August 2026 / أغسطس 2026  

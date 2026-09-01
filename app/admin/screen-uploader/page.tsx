@@ -2,7 +2,7 @@ import AdminScreenUploader from "@/components/AdminScreenUploader"
 import AdminScreenList from "@/components/AdminScreenList"
 import AdminLogoutButton from "@/components/AdminLogoutButton"
 import { prisma } from "@/lib/db"
-import { getServerSession } from "next-auth"
+import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import { redirect } from "next/navigation"
 
@@ -24,6 +24,8 @@ export default async function ScreenUploaderPage() {
     userEmail === '01288341064' || 
     userEmail === '012 88341064' || 
     userEmail === 'sherifrosas.ai@gmail.com'
+
+  console.log('[SCREEN UPLOADER] Server Check:', { session, userRole, userEmail, isAuthorized })
 
   if (!session || !isAuthorized) {
     redirect('/admin/login?callbackUrl=/admin/screen-uploader')
