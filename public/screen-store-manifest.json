@@ -1,0 +1,17 @@
+{
+  "name": "Screen Store & Repair | Hadayek Al-Ahram",
+  "short_name": "Screen Store",
+  "description": "Top quality TV and computer screens for sale and professional screen repair services in Hadayek Al-Ahram, Giza.",
+  "start_url": "/hadayek-al-ahram-screen-store-and-repair",
+  "display": "standalone",
+  "background_color": "#0a0b0e",
+  "theme_color": "#0ea5e9",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/screen-store-logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

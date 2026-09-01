@@ -7,6 +7,7 @@ import { prisma } from '@/lib/db'
 export const metadata: Metadata = {
   title: 'Screens for Sale & Repair | Hadayek Al-Ahram',
   description: 'Top quality TV and computer screens for sale and professional screen repair services in Hadayek Al-Ahram, Giza.',
+  manifest: '/screen-store-manifest.json',
 }
 
 export default async function ScreenStorePage() {
