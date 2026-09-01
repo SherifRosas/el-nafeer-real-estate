@@ -10,17 +10,33 @@ export const metadata = {
   title: 'Upload Screen | Admin Dashboard',
 }
 
+export const dynamic = 'force-dynamic'
+
 export default async function ScreenUploaderPage() {
   const session = await getServerSession(authOptions)
   const userRole = (session?.user as any)?.role
+  const userEmail = session?.user?.email
 
-  if (!session || (userRole !== 'screen-admin' && userRole !== 'main-admin')) {
+  const isAuthorized = 
+    userRole === 'screen-admin' || 
+    userRole === 'main-admin' || 
+    userEmail === '01065661882' || 
+    userEmail === '01288341064' || 
+    userEmail === '012 88341064' || 
+    userEmail === 'sherifrosas.ai@gmail.com'
+
+  if (!session || !isAuthorized) {
     redirect('/admin/login?callbackUrl=/admin/screen-uploader')
   }
 
-  const screens = await prisma.screen.findMany({
-    orderBy: { createdAt: 'desc' }
-  })
+  let screens: any[] = []
+  try {
+    screens = await prisma.screen.findMany({
+      orderBy: { createdAt: 'desc' }
+    })
+  } catch (error) {
+    console.error('Database query error in ScreenUploaderPage:', error)
+  }
 
   return (
     <div style={{ padding: "2rem", minHeight: "100vh", backgroundColor: "#0f172a", color: "#f8fafc" }}>

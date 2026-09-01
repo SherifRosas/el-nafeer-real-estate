@@ -8,18 +8,34 @@ export const metadata = {
   title: 'Screen Orders | Admin Dashboard',
 }
 
+export const dynamic = 'force-dynamic'
+
 export default async function ScreenOrdersPage() {
   const session = await getServerSession(authOptions)
   const userRole = (session?.user as any)?.role
+  const userEmail = session?.user?.email
 
-  if (!session || (userRole !== 'screen-admin' && userRole !== 'main-admin')) {
+  const isAuthorized = 
+    userRole === 'screen-admin' || 
+    userRole === 'main-admin' || 
+    userEmail === '01065661882' || 
+    userEmail === '01288341064' || 
+    userEmail === '012 88341064' || 
+    userEmail === 'sherifrosas.ai@gmail.com'
+
+  if (!session || !isAuthorized) {
     redirect('/admin/login?callbackUrl=/admin/screen-orders')
   }
 
-  const orders = await prisma.order.findMany({
-    include: { screen: true },
-    orderBy: { createdAt: 'desc' }
-  })
+  let orders: any[] = []
+  try {
+    orders = await prisma.order.findMany({
+      include: { screen: true },
+      orderBy: { createdAt: 'desc' }
+    })
+  } catch (error) {
+    console.error('Database query error in ScreenOrdersPage:', error)
+  }
 
   return (
     <div dir="ltr" className="min-h-screen bg-slate-900 text-slate-100 p-8 font-sans">
