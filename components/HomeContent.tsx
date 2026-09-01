@@ -160,7 +160,7 @@ export default function HomeContent() {
             </Link>
          </div>
 
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Real Estate Node */}
             <Link href="/beit-alkhair" className="group relative aspect-[16/9] bg-black/60 backdrop-blur-3xl border border-white/10 rounded-[3rem] overflow-hidden hover:border-sahara-gold/40 transition-all duration-700 shadow-2xl">
                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop')] bg-cover bg-center grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" />
@@ -189,6 +189,23 @@ export default function HomeContent() {
                         <h3 className="text-4xl font-black italic text-white uppercase tracking-tighter">{isArabic ? 'رافع_بايونير' : 'LEVER PIONEER'}</h3>
                      </div>
                      <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-blue-400 group-hover:text-black transition-all">
+                        <ArrowUpRight size={24} />
+                     </div>
+                  </div>
+               </div>
+            </Link>
+
+            {/* Hardware Retail Node */}
+            <Link href="/hadayek-al-ahram-screen-store-and-repair" className="group relative aspect-[16/9] bg-black/60 backdrop-blur-3xl border border-white/10 rounded-[3rem] overflow-hidden hover:border-purple-400/40 transition-all duration-700 shadow-2xl">
+               <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1593640408182-31c70c8268f5?q=80&w=2042&auto=format&fit=crop')] bg-cover bg-center grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" />
+               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+               <div className="absolute bottom-10 left-10 right-10 space-y-4">
+                  <div className="flex justify-between items-end">
+                     <div>
+                        <p className="text-[10px] font-black text-purple-400 uppercase tracking-[0.4em] mb-2 italic">Hardware_Retail_Core</p>
+                        <h3 className="text-3xl font-black italic text-white uppercase tracking-tighter">{isArabic ? 'متجر الشاشات' : 'SCREEN STORE'}</h3>
+                     </div>
+                     <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-purple-400 group-hover:text-black transition-all">
                         <ArrowUpRight size={24} />
                      </div>
                   </div>
