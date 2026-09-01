@@ -452,3 +452,14 @@ model Order {
 
   screen          Screen   @relation(fields: [screenId], references: [id])
 }
+
+model RepairLead {
+  id          String   @id @default(cuid())
+  phone       String
+  brand       String
+  description String
+  status      String   @default("new")
+  createdAt   DateTime @default(now())
+
+  @@map("repair_leads")
+}

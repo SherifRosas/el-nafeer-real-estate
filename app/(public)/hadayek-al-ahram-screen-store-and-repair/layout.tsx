@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ShieldCheck } from 'lucide-react'
+import RepairLeadWidget from '@/components/RepairLeadWidget'
 
 export default function ScreenStoreLayout({
   children,
@@ -61,6 +62,9 @@ export default function ScreenStoreLayout({
       <div className="pb-16">
         {children}
       </div>
+
+      {/* Floating Repair Lead Widget */}
+      <RepairLeadWidget />
     </div>
   )
 }
