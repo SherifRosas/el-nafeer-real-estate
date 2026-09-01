@@ -55,13 +55,19 @@ export const authOptions: NextAuthOptions = {
 
         try {
           const user = await db.getUserByEmail(credentials.email)
-          if (user) {
-            return {
-              id: user.id,
-              email: user.email,
-              name: user.name || 'User',
-              role: 'user',
-            } as any
+          if (user && user.password) {
+            // Verify password using bcrypt if user has a hashed password
+            const bcrypt = require('bcryptjs');
+            const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
+            
+            if (isPasswordValid) {
+              return {
+                id: user.id,
+                email: user.email,
+                name: user.name || 'User',
+                role: user.role || 'user',
+              } as any
+            }
           }
         } catch (error) {
           console.error('Auth Check Error:', error)
