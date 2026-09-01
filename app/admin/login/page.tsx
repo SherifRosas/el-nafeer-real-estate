@@ -81,14 +81,14 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#050B14] flex items-center justify-center p-6 relative overflow-hidden">
-      {/* Quantum Luxury Background - BRIGHTENED */}
-      <div className="absolute inset-0 bg-[url('/ad-v2-quantum.png')] bg-cover bg-center opacity-40 mix-blend-screen" />
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0a1930]/70 via-[#050B14]/80 to-[#122340]/90 backdrop-blur-[4px]" />
-      <div className="absolute inset-0 pointer-events-none opacity-20 bg-[url('/grid.svg')] bg-repeat shadow-inner" />
+    <div className="min-h-screen bg-[#030712] flex items-center justify-center p-6 relative overflow-hidden">
+      {/* Quantum Luxury Cyber Background - Pure Geometric Mesh & Ambient Glow */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0a1526] via-[#030712] to-[#0d1f38]" />
+      <div className="absolute inset-0 pointer-events-none opacity-25 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:24px_24px]" />
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-sahara-gold/20 blur-[120px] rounded-full animate-pulse" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-cyan-500/20 blur-[120px] rounded-full animate-pulse delay-1000" />
+        <div className="absolute top-[-25%] left-[-15%] w-[65%] h-[65%] bg-sahara-gold/15 blur-[140px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[-25%] right-[-15%] w-[60%] h-[60%] bg-cyan-500/15 blur-[140px] rounded-full animate-pulse delay-1000" />
+        <div className="absolute top-[40%] right-[30%] w-[35%] h-[35%] bg-indigo-500/10 blur-[100px] rounded-full" />
       </div>
 
       <div className="max-w-xl w-full relative z-10">
