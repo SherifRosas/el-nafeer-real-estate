@@ -20,18 +20,13 @@ export default function AdminLoginPage() {
   const userRole = (session?.user as any)?.role
   const userIdentifier = session?.user?.name || session?.user?.email || 'Active Admin'
 
-  const handleContinueToDashboard = () => {
-    const searchParams = new URLSearchParams(window.location.search)
-    const callbackUrl = searchParams.get('callbackUrl')
-    if (userRole === 'screen-admin') {
-      if (callbackUrl && !callbackUrl.endsWith('/admin') && !callbackUrl.endsWith('/admin/login') && !callbackUrl.includes('/admin/master')) {
-        router.push(callbackUrl)
-      } else {
-        router.push('/admin/screen-uploader')
-      }
-    } else {
-      router.push(callbackUrl || '/admin/master')
-    }
+  const dashboardTarget = (userRole === 'admin' || userRole === 'main-admin') 
+    ? '/admin/master' 
+    : '/admin/screen-uploader'
+
+  const handleContinueToDashboard = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault()
+    window.location.href = dashboardTarget
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -131,14 +126,14 @@ export default function AdminLoginPage() {
                 <span className="text-[10px] text-gray-400 block mt-1 uppercase tracking-widest robotic-digits">Role: {userRole}</span>
               </p>
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <button
-                  type="button"
+                <a
+                  href={dashboardTarget}
                   onClick={handleContinueToDashboard}
-                  className="flex-1 py-4 px-6 bg-[#D4AF37] hover:bg-[#ebd074] text-black font-black text-xs uppercase tracking-wider rounded-2xl transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(212,175,55,0.4)] active:scale-95"
+                  className="flex-1 py-4 px-6 bg-[#D4AF37] hover:bg-[#ebd074] text-black font-black text-xs uppercase tracking-wider rounded-2xl transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(212,175,55,0.4)] active:scale-95 cursor-pointer no-underline"
                 >
                   <span>{isArabic ? 'المتابعة للوحة التحكم' : 'CONTINUE_TO_DASHBOARD'}</span>
                   <ArrowRight size={16} className="rtl:rotate-180 text-black font-black" />
-                </button>
+                </a>
                 <button
                   type="button"
                   onClick={() => signOut({ callbackUrl: '/admin/login' })}
