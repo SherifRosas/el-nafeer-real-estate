@@ -1,8 +1,9 @@
 "use client"
 
-import { useActionState, useRef, useState } from "react"
+import { useActionState, useRef, useState, startTransition } from "react"
 import { useFormStatus } from "react-dom"
 import { addScreenAction } from "@/app/actions/screen-actions"
+import imageCompression from "browser-image-compression"
 
 const initialState: any = {
   message: "",
@@ -32,7 +33,38 @@ export default function AdminScreenUploader() {
   const [nameVal, setNameVal] = useState("")
   const [descVal, setDescVal] = useState("")
   const [isGenerating, setIsGenerating] = useState(false)
+  const [isCompressing, setIsCompressing] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    
+    const form = e.currentTarget
+    const formData = new FormData(form)
+    const file = formData.get("image") as File
+
+    if (file && file.size > 1024 * 1024) { // If larger than 1MB, compress it
+      setIsCompressing(true)
+      try {
+        const options = {
+          maxSizeMB: 1,
+          maxWidthOrHeight: 1200,
+          useWebWorker: true
+        }
+        const compressedFile = await imageCompression(file, options)
+        formData.set("image", compressedFile, compressedFile.name)
+      } catch (error) {
+        console.error("Compression error:", error)
+        alert("Failed to compress image. Proceeding with original...")
+      } finally {
+        setIsCompressing(false)
+      }
+    }
+
+    startTransition(() => {
+      formAction(formData)
+    })
+  }
 
   const handleAutoFill = async () => {
     const fileInput = fileInputRef.current
@@ -106,8 +138,13 @@ export default function AdminScreenUploader() {
           {state.message}
         </p>
       )}
+      {isCompressing && (
+        <p className="font-bold p-3 mb-4 bg-amber-900/30 text-amber-400 border border-amber-900/50 rounded-md text-left animate-pulse">
+          Optimizing image size for upload...
+        </p>
+      )}
 
-      <form action={formAction} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         
         <label className="flex flex-col gap-1.5 text-left">
           <strong className="text-sm text-slate-300">Screen Name</strong>
