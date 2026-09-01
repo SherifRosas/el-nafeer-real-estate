@@ -1,3 +1,6 @@
+import Link from 'next/link'
+import { ShieldCheck } from 'lucide-react'
+
 export default function ScreenStoreLayout({
   children,
 }: {
@@ -5,6 +8,18 @@ export default function ScreenStoreLayout({
 }) {
   return (
     <div className="min-h-screen bg-slate-50 font-sans" dir="rtl">
+      
+      {/* Utility Top Bar */}
+      <div className="bg-[#0a0b0e] py-2 px-6 flex justify-end border-b border-slate-800">
+        <Link 
+          href="/admin/login?callbackUrl=/admin/screen-uploader" 
+          className="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-sky-400 transition-colors"
+        >
+          <ShieldCheck size={14} />
+          <span>إدارة المتجر</span>
+        </Link>
+      </div>
+
       {/* The "Banner" / Storefront Header mimicking the Facelift Image */}
       <div className="bg-[#111318] pt-6 pb-8 px-4 border-b-8 border-slate-900 shadow-2xl relative overflow-hidden">
         {/* Subtle background glow mimicking streetlights */}
