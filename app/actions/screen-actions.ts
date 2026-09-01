@@ -62,6 +62,9 @@ export async function addScreenAction(prevState: any, formData: FormData) {
       }
     })
 
+    revalidatePath("/admin/screen-uploader")
+    revalidatePath("/hadayek-al-ahram-screen-store-and-repair")
+
     return { success: true, message: "Screen added successfully!", screenId: newScreen.id }
 
   } catch (error: any) {
