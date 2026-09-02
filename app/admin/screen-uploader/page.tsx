@@ -45,7 +45,7 @@ export default async function ScreenUploaderPage() {
       <div style={{ maxWidth: "800px", margin: "0 auto" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem", borderBottom: "1px solid #334155", paddingBottom: "1rem" }}>
           <h1 style={{ fontSize: "2rem", margin: 0 }}>
-            📺 Screen Management
+            📺 إدارة الشاشات
           </h1>
           <AdminLogoutButton />
         </div>

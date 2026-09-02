@@ -22,7 +22,7 @@ function SubmitButton({ isCompressing }: { isCompressing: boolean }) {
         isBusy ? "bg-slate-600 cursor-not-allowed" : "bg-sky-500 hover:bg-sky-600"
       }`}
     >
-      {isBusy ? "Processing..." : "Add Screen"}
+      {isBusy ? "جاري المعالجة..." : "إضافة الشاشة"}
     </button>
   )
 }
@@ -57,7 +57,7 @@ export default function AdminScreenUploader() {
         formData.set("image", compressedFile, compressedFile.name)
       } catch (error) {
         console.error("Compression error:", error)
-        alert("Failed to compress image. Proceeding with original...")
+        alert("فشل في ضغط الصورة. سيتم استخدام الصورة الأصلية...")
       } finally {
         setIsCompressing(false)
       }
@@ -71,7 +71,7 @@ export default function AdminScreenUploader() {
   const handleAutoFill = async () => {
     const fileInput = fileInputRef.current
     if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
-      alert("Please choose an image file first!")
+      alert("الرجاء اختيار صورة الشاشة أولاً!")
       return
     }
 
@@ -120,36 +120,36 @@ export default function AdminScreenUploader() {
       
     } catch (error) {
       console.error(error)
-      alert("AI Generation failed. Please try again or write it manually.")
+      alert("فشل التوليد بالذكاء الاصطناعي. يرجى المحاولة مرة أخرى أو الكتابة يدوياً.")
     } finally {
       setIsGenerating(false)
     }
   }
 
   return (
-    <div dir="ltr" className="max-w-lg mx-auto my-8 p-8 bg-slate-800 border border-slate-700 rounded-xl shadow-lg text-slate-100 font-sans">
-      <h2 className="text-2xl font-bold mb-6 text-white text-left">Upload New Screen</h2>
+    <div dir="rtl" className="max-w-lg mx-auto my-8 p-8 bg-slate-800 border border-slate-700 rounded-xl shadow-lg text-slate-100 font-sans">
+      <h2 className="text-2xl font-bold mb-6 text-white text-right">رفع شاشة جديدة</h2>
       
       {state?.error && (
-        <p className="font-bold p-3 mb-4 bg-red-900/30 text-red-400 border border-red-900/50 rounded-md text-left">
+        <p className="font-bold p-3 mb-4 bg-red-900/30 text-red-400 border border-red-900/50 rounded-md text-right">
           {state.error}
         </p>
       )}
       {state?.success && (
-        <p className="font-bold p-3 mb-4 bg-green-900/30 text-green-400 border border-green-900/50 rounded-md text-left">
+        <p className="font-bold p-3 mb-4 bg-green-900/30 text-green-400 border border-green-900/50 rounded-md text-right">
           {state.message}
         </p>
       )}
       {isCompressing && (
-        <p className="font-bold p-3 mb-4 bg-amber-900/30 text-amber-400 border border-amber-900/50 rounded-md text-left animate-pulse">
-          Optimizing image size for upload...
+        <p className="font-bold p-3 mb-4 bg-amber-900/30 text-amber-400 border border-amber-900/50 rounded-md text-right animate-pulse">
+          جاري ضغط وتحسين حجم الصورة للرفع...
         </p>
       )}
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         
-        <label className="flex flex-col gap-1.5 text-left">
-          <strong className="text-sm text-slate-300">Screen Name</strong>
+        <label className="flex flex-col gap-1.5 text-right">
+          <strong className="text-sm text-slate-300">اسم الشاشة</strong>
           <input 
             type="text" 
             name="name" 
@@ -160,8 +160,8 @@ export default function AdminScreenUploader() {
           />
         </label>
         
-        <label className="flex flex-col gap-1.5 text-left">
-          <strong className="text-sm text-slate-300">Description</strong>
+        <label className="flex flex-col gap-1.5 text-right">
+          <strong className="text-sm text-slate-300">الوصف</strong>
           <textarea 
             name="description" 
             rows={4} 
@@ -171,8 +171,8 @@ export default function AdminScreenUploader() {
           />
         </label>
 
-        <label className="flex flex-col gap-1.5 text-left">
-          <strong className="text-sm text-slate-300">Base Price (EGP)</strong>
+        <label className="flex flex-col gap-1.5 text-right">
+          <strong className="text-sm text-slate-300">السعر الأساسي (ج.م)</strong>
           <input 
             type="number" 
             step="0.01" 
@@ -182,8 +182,8 @@ export default function AdminScreenUploader() {
           />
         </label>
 
-        <label className="flex flex-col gap-1.5 text-left">
-          <strong className="text-sm text-slate-300">Discount Price (EGP)</strong>
+        <label className="flex flex-col gap-1.5 text-right">
+          <strong className="text-sm text-slate-300">سعر التخفيض (ج.م)</strong>
           <input 
             type="number" 
             step="0.01" 
@@ -193,16 +193,16 @@ export default function AdminScreenUploader() {
           />
         </label>
 
-        <label className="flex flex-col gap-1.5 text-left">
-          <div className="flex justify-between items-center">
-            <strong className="text-sm text-slate-300">📸 Image File (Gallery)</strong>
+        <label className="flex flex-col gap-1.5 text-right">
+          <div className="flex justify-between items-center flex-row-reverse">
+            <strong className="text-sm text-slate-300">📸 صورة الشاشة (من المعرض)</strong>
             <button 
               type="button" 
               onClick={handleAutoFill}
               disabled={isGenerating}
               className="text-xs bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 border border-amber-500/50 py-1 px-3 rounded-full font-bold transition-all flex items-center gap-2"
             >
-              {isGenerating ? "Processing..." : "✨ Auto-Fill Name & Desc"}
+              {isGenerating ? "جاري المعالجة..." : "✨ تعبئة تلقائية بالذكاء الاصطناعي"}
             </button>
           </div>
           <input 
@@ -211,7 +211,8 @@ export default function AdminScreenUploader() {
             ref={fileInputRef}
             accept="image/*" 
             required 
-            className="p-2.5 bg-slate-900 border border-slate-600 rounded-md text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-sky-500 file:text-white hover:file:bg-sky-600 cursor-pointer" 
+            className="p-2.5 bg-slate-900 border border-slate-600 rounded-md text-slate-300 file:ml-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-sky-500 file:text-white hover:file:bg-sky-600 cursor-pointer text-left" 
+            dir="ltr"
           />
         </label>
 

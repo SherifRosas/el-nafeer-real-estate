@@ -11,7 +11,7 @@ export default function AdminLogoutButton({ className = '' }: { className?: stri
       title="تسجيل الخروج"
     >
       <LogOut size={16} />
-      <span>تسجيل الخروج (Sign Out)</span>
+      <span>تسجيل الخروج</span>
     </button>
   )
 }
