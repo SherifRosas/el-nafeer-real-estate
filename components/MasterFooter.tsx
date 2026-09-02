@@ -14,8 +14,10 @@ export default function MasterFooter() {
     const isBeitAlKhair = pathname?.includes('/beit-alkhair');
     const isNarco = pathname?.includes('/حطب-أفريقي') || pathname?.includes('/firewood') || pathname?.includes(encodeURI('/حطب-أفريقي'));
 
-    // Absolute Tail Removal for elite immersion
-    if (isPortal || isBeitAlKhair || isNarco) return null;
+    const isStore = pathname?.includes('/hadayek-al-ahram') || pathname?.includes('/admin');
+
+    // Absolute Tail Removal for elite immersion and custom store/admin layouts
+    if (isPortal || isBeitAlKhair || isNarco || isStore) return null;
 
     return (
         <footer className="relative milky-glass border-t border-white/10 py-6 overflow-hidden">
@@ -56,14 +58,9 @@ export default function MasterFooter() {
                             <p className="text-[9px] font-black text-gray-600 uppercase tracking-widest mt-1 mb-2 italic">
                                 {isArabic ? 'مطور الذكاء الاصطناعي وماستر المنصة' : 'AI Developer & Platform Master'}
                             </p>
-                            <div className="flex items-center justify-center md:justify-end gap-3">
-                                <a href="https://www.google.com/maps/place/29%C2%B057'55.9%22N+31%C2%B005'38.1%22E/@29.9655372,31.0913469,17z/data=!3m1!4b1!4m4!3m3!8m2!3d29.9655372!4d31.0939218?hl=en&entry=ttu&g_ep=EgoyMDI2MDgzMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white/5 border border-white/10 rounded-lg hover:bg-sahara-gold hover:text-black transition-all flex items-center justify-center">
-                                    <span className="text-sm">📍</span>
-                                </a>
-                                <a href="tel:+201065661882" className="w-8 h-8 bg-white/5 border border-white/10 rounded-lg hover:bg-sahara-gold hover:text-black transition-all flex items-center justify-center">
-                                    <span className="text-sm">📞</span>
-                                </a>
-                            </div>
+                            <a href="tel:+201065661882" className="w-8 h-8 bg-white/5 border border-white/10 rounded-lg hover:bg-sahara-gold hover:text-black transition-all flex items-center justify-center">
+                                <span className="text-sm">📞</span>
+                            </a>
                         </div>
                     </div>
                 </div>

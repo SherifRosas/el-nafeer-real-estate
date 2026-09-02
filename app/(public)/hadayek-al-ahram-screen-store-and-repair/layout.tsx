@@ -11,7 +11,16 @@ export default function ScreenStoreLayout({
     <div className="min-h-screen bg-slate-50 font-sans" dir="rtl">
       
       {/* Utility Top Bar */}
-      <div className="bg-[#0a0b0e] py-2 px-6 flex justify-end border-b border-slate-800">
+      <div className="bg-[#0a0b0e] py-2 px-6 flex justify-between items-center border-b border-slate-800">
+        <a 
+          href="https://www.google.com/maps/place/29%C2%B057'55.9%22N+31%C2%B005'38.1%22E/@29.9655372,31.0913469,17z/data=!3m1!4b1!4m4!3m3!8m2!3d29.9655372!4d31.0939218?hl=en&entry=ttu&g_ep=EgoyMDI2MDgzMC4wIKXMDSoASAFQAw%3D%3D" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-xs font-bold text-amber-400 hover:text-amber-300 transition-colors"
+        >
+          <span className="text-sm">📍</span>
+          <span>موقع المعرض</span>
+        </a>
         <Link 
           href="/admin/login?callbackUrl=/admin/screen-uploader" 
           className="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-sky-400 transition-colors"
