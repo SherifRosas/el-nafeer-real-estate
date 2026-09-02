@@ -11,17 +11,18 @@ const initialState: any = {
   success: false
 }
 
-function SubmitButton() {
+function SubmitButton({ isCompressing }: { isCompressing: boolean }) {
   const { pending } = useFormStatus()
+  const isBusy = pending || isCompressing
   return (
     <button 
       type="submit" 
-      disabled={pending}
+      disabled={isBusy}
       className={`w-full py-3 px-4 rounded-md font-bold text-white transition-colors mt-4 ${
-        pending ? "bg-slate-600 cursor-not-allowed" : "bg-sky-500 hover:bg-sky-600"
+        isBusy ? "bg-slate-600 cursor-not-allowed" : "bg-sky-500 hover:bg-sky-600"
       }`}
     >
-      {pending ? "Uploading..." : "Add Screen"}
+      {isBusy ? "Processing..." : "Add Screen"}
     </button>
   )
 }
@@ -38,6 +39,7 @@ export default function AdminScreenUploader() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (isCompressing) return
     
     const form = e.currentTarget
     const formData = new FormData(form)
@@ -213,7 +215,7 @@ export default function AdminScreenUploader() {
           />
         </label>
 
-        <SubmitButton />
+        <SubmitButton isCompressing={isCompressing} />
       </form>
     </div>
   )
