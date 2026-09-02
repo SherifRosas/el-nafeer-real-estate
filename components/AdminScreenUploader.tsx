@@ -193,7 +193,7 @@ export default function AdminScreenUploader() {
 
         <label className="flex flex-col gap-1.5 text-left">
           <div className="flex justify-between items-center">
-            <strong className="text-sm text-slate-300">📸 Image File (Camera)</strong>
+            <strong className="text-sm text-slate-300">📸 Image File (Gallery)</strong>
             <button 
               type="button" 
               onClick={handleAutoFill}
@@ -208,7 +208,6 @@ export default function AdminScreenUploader() {
             name="image" 
             ref={fileInputRef}
             accept="image/*" 
-            capture="environment"
             required 
             className="p-2.5 bg-slate-900 border border-slate-600 rounded-md text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-sky-500 file:text-white hover:file:bg-sky-600 cursor-pointer" 
           />
