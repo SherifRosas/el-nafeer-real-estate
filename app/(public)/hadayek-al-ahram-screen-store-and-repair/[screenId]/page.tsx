@@ -95,6 +95,15 @@ export default async function ScreenDetailPage({ params }: { params: Promise<{ s
                   <span className="text-lg">🚚</span>
                   <span className="text-sm font-bold tracking-wide">التوصيل للجيزة والقاهرة: 500 ج.م</span>
                 </div>
+
+                {/* Azmyco-style Warranty Trust Badge */}
+                <div className="mt-2 inline-flex items-center gap-3 bg-[#e8f5e9] border border-[#a5d6a7] text-[#2e7d32] px-4 py-3 rounded-lg self-start shadow-sm w-full md:w-auto">
+                  <span className="text-xl">✅</span>
+                  <div className="flex flex-col">
+                    <span className="text-base font-extrabold">المنتج بضمان الوكيل</span>
+                    <span className="text-sm font-semibold opacity-90">مركز الخدمة والصيانة 19960</span>
+                  </div>
+                </div>
               </div>
             </div>
 
