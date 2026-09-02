@@ -68,7 +68,7 @@ export default function ScreenStoreLayout({
         </div>
       </div>
 
-      <div className="pb-16">
+      <div className="pb-24">
         {children}
       </div>
 

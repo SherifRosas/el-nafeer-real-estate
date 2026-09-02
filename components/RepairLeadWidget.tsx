@@ -47,11 +47,11 @@ export default function RepairLeadWidget() {
       {/* Floating Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-bold py-3 px-6 rounded-full shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-all duration-300 flex items-center gap-2 hover:scale-105"
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-bold py-2.5 px-4 md:py-3 md:px-6 rounded-full shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-all duration-300 flex items-center gap-2 hover:scale-105"
         style={{ direction: 'rtl' }}
       >
-        <span>عطل في الشاشة؟ كلمنا</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <span className="text-xs md:text-base whitespace-nowrap">عطل في الشاشة؟ كلمنا</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="md:w-5 md:h-5">
           <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
         </svg>
       </button>

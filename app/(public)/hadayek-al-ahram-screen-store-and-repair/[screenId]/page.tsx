@@ -79,15 +79,22 @@ export default async function ScreenDetailPage({ params }: { params: Promise<{ s
                 {screen.name}
               </h1>
               
-              <div className="flex items-end gap-4 mt-6">
-                <span className="text-4xl lg:text-5xl font-black text-red-600">
-                  {screen.discountPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ج.م
-                </span>
-                {screen.discountPrice < screen.basePrice && (
-                  <span className="text-xl lg:text-2xl text-slate-400 line-through font-medium mb-1">
-                    {screen.basePrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ج.م
+              <div className="flex flex-col mt-6 gap-3">
+                <div className="flex items-end gap-4">
+                  <span className="text-4xl lg:text-5xl font-black text-red-600">
+                    {screen.discountPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ج.م
                   </span>
-                )}
+                  {screen.discountPrice < screen.basePrice && (
+                    <span className="text-xl lg:text-2xl text-slate-400 line-through font-medium mb-1">
+                      {screen.basePrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ج.م
+                    </span>
+                  )}
+                </div>
+                
+                <div className="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-700 px-3 py-2 rounded-lg self-start">
+                  <span className="text-lg">🚚</span>
+                  <span className="text-sm font-bold tracking-wide">التوصيل للجيزة والقاهرة: 500 ج.م</span>
+                </div>
               </div>
             </div>
 
