@@ -10,6 +10,7 @@ export async function addScreenAction(prevState: any, formData: FormData) {
     const description = formData.get("description") as string
     const basePriceStr = formData.get("basePrice") as string
     const discountPriceStr = formData.get("discountPrice") as string
+    const quantityStr = formData.get("quantity") as string
     const imageFile = formData.get("image") as File
 
     if (!name || !basePriceStr || !discountPriceStr || !imageFile) {
@@ -18,9 +19,13 @@ export async function addScreenAction(prevState: any, formData: FormData) {
 
     const basePrice = parseFloat(basePriceStr)
     const discountPrice = parseFloat(discountPriceStr)
+    const quantity = quantityStr ? parseInt(quantityStr, 10) : 1
 
     if (isNaN(basePrice) || basePrice <= 0 || isNaN(discountPrice) || discountPrice <= 0) {
       return { error: "Prices must be positive numbers." }
+    }
+    if (isNaN(quantity) || quantity < 0) {
+      return { error: "Quantity must be a valid number." }
     }
 
     // Upload image to Supabase
@@ -58,6 +63,7 @@ export async function addScreenAction(prevState: any, formData: FormData) {
         description: description || null,
         basePrice,
         discountPrice,
+        quantity,
         imageUrl,
       }
     })
@@ -177,6 +183,7 @@ export async function updateScreenAction(id: string, formData: FormData) {
     const description = formData.get("description") as string
     const basePriceStr = formData.get("basePrice") as string
     const discountPriceStr = formData.get("discountPrice") as string
+    const quantityStr = formData.get("quantity") as string
     const inStockStr = formData.get("inStock") as string
 
     if (!name || !basePriceStr || !discountPriceStr) {
@@ -185,10 +192,14 @@ export async function updateScreenAction(id: string, formData: FormData) {
 
     const basePrice = parseFloat(basePriceStr)
     const discountPrice = parseFloat(discountPriceStr)
+    const quantity = quantityStr ? parseInt(quantityStr, 10) : 1
     const inStock = inStockStr === "true"
 
     if (isNaN(basePrice) || basePrice <= 0 || isNaN(discountPrice) || discountPrice <= 0) {
       return { error: "Prices must be positive numbers." }
+    }
+    if (isNaN(quantity) || quantity < 0) {
+      return { error: "Quantity must be a valid number." }
     }
 
     await prisma.screen.update({
@@ -198,6 +209,7 @@ export async function updateScreenAction(id: string, formData: FormData) {
         description: description || null,
         basePrice,
         discountPrice,
+        quantity,
         inStock
       }
     })

@@ -30,12 +30,26 @@ function SubmitButton({ isCompressing }: { isCompressing: boolean }) {
 export default function AdminScreenUploader() {
   const [state, formAction] = useActionState(addScreenAction, initialState)
   
-  // Controlled inputs for AI population
+  // Controlled inputs for AI population and calculations
   const [nameVal, setNameVal] = useState("")
   const [descVal, setDescVal] = useState("")
+  const [discountPriceVal, setDiscountPriceVal] = useState("")
+  const [quantityVal, setQuantityVal] = useState("1")
   const [isGenerating, setIsGenerating] = useState(false)
   const [isCompressing, setIsCompressing] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  // Calculations for Finance Box
+  const parsedDiscount = parseFloat(discountPriceVal) || 0
+  const parsedQuantity = parseInt(quantityVal, 10) || 1
+  const webOwnerCommissionPerScreen = 1000
+  
+  // Total Web Owner Profit = quantity * 1000
+  const totalWebOwnerProfit = parsedQuantity * webOwnerCommissionPerScreen
+  
+  // The Shop Profit per screen = Selling Price - 1000
+  const shopNetPerScreen = parsedDiscount > webOwnerCommissionPerScreen ? parsedDiscount - webOwnerCommissionPerScreen : 0
+  const totalShopProfit = parsedQuantity * shopNetPerScreen
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -182,16 +196,59 @@ export default function AdminScreenUploader() {
           />
         </label>
 
-        <label className="flex flex-col gap-1.5 text-right">
-          <strong className="text-sm text-slate-300">سعر التخفيض (ج.م)</strong>
-          <input 
-            type="number" 
-            step="0.01" 
-            name="discountPrice" 
-            required 
-            className="p-2.5 bg-slate-900 border border-slate-600 rounded-md text-white placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" 
-          />
-        </label>
+        <div className="flex gap-4 w-full">
+          <label className="flex flex-col gap-1.5 text-right flex-1">
+            <strong className="text-sm text-slate-300">سعر البيع/التخفيض (ج.م)</strong>
+            <input 
+              type="number" 
+              step="0.01" 
+              name="discountPrice" 
+              value={discountPriceVal}
+              onChange={(e) => setDiscountPriceVal(e.target.value)}
+              required 
+              className="p-2.5 bg-slate-900 border border-slate-600 rounded-md text-white placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" 
+            />
+          </label>
+
+          <label className="flex flex-col gap-1.5 text-right w-1/3">
+            <strong className="text-sm text-slate-300">الكمية بالمخزن</strong>
+            <input 
+              type="number" 
+              name="quantity"
+              value={quantityVal}
+              onChange={(e) => setQuantityVal(e.target.value)}
+              min="1"
+              required 
+              className="p-2.5 bg-slate-900 border border-slate-600 rounded-md text-white placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-center font-bold" 
+            />
+          </label>
+        </div>
+
+        {/* Finance Calculator Box */}
+        {(parsedDiscount > 0 && parsedQuantity > 0) && (
+          <div className="bg-slate-900/50 border border-sky-500/30 p-4 rounded-lg my-2 flex flex-col gap-3">
+            <h3 className="font-bold text-sky-400 text-sm border-b border-sky-500/20 pb-2">📊 حاسبة الأرباح (Finance Preview)</h3>
+            
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-slate-400">سعر البيع الإجمالي ({parsedQuantity} شاشة):</span>
+              <span className="font-bold text-white">{(parsedDiscount * parsedQuantity).toLocaleString()} ج.م</span>
+            </div>
+            
+            <div className="flex justify-between items-center text-sm bg-green-900/20 p-2 rounded">
+              <span className="text-green-400 font-semibold">أرباح مالك الموقع (Web Owner):</span>
+              <span className="font-bold text-green-400">{totalWebOwnerProfit.toLocaleString()} ج.م</span>
+            </div>
+
+            <div className="flex justify-between items-center text-sm bg-amber-900/20 p-2 rounded">
+              <span className="text-amber-400 font-semibold">صافي أرباح المعرض (Shop Net):</span>
+              <span className="font-bold text-amber-400">{totalShopProfit.toLocaleString()} ج.م</span>
+            </div>
+            
+            <p className="text-[10px] text-slate-500 text-center mt-1">
+              ملاحظة: العمولة الثابتة 1000 ج.م لكل شاشة تباع.
+            </p>
+          </div>
+        )}
 
         <label className="flex flex-col gap-1.5 text-right">
           <div className="flex justify-between items-center flex-row-reverse">

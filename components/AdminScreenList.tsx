@@ -11,6 +11,7 @@ type Screen = {
   discountPrice: number
   imageUrl: string
   inStock: boolean
+  quantity: number
 }
 
 export default function AdminScreenList({ screens }: { screens: Screen[] }) {
@@ -58,7 +59,13 @@ export default function AdminScreenList({ screens }: { screens: Screen[] }) {
       <h2 className="text-2xl font-bold text-white mb-4 text-right">إدارة الشاشات المرفوعة</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {screens.map(screen => (
+        {screens.map(screen => {
+          const webOwnerCommission = 1000
+          const shopNetPerScreen = screen.discountPrice > webOwnerCommission ? screen.discountPrice - webOwnerCommission : 0
+          const totalWebOwnerProfit = screen.quantity * webOwnerCommission
+          const totalShopProfit = screen.quantity * shopNetPerScreen
+
+          return (
           <div key={screen.id} className="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden shadow-lg flex flex-col">
             
             {editingId === screen.id ? (
@@ -98,16 +105,31 @@ export default function AdminScreenList({ screens }: { screens: Screen[] }) {
                   />
                 </div>
                 
-                <label className="flex items-center gap-2 text-slate-300">
-                  <input 
-                    type="checkbox" 
-                    name="inStock" 
-                    value="true" 
-                    defaultChecked={screen.inStock} 
-                    className="w-5 h-5 rounded border-slate-600 text-sky-500 bg-slate-900 ml-2"
-                  />
-                  متوفر (يظهر للعملاء)
-                </label>
+                <div className="flex items-center gap-4">
+                  <label className="flex items-center gap-2 text-slate-300 flex-1">
+                    <input 
+                      type="number" 
+                      name="quantity" 
+                      defaultValue={screen.quantity} 
+                      min="0"
+                      required 
+                      placeholder="الكمية"
+                      className="p-2 w-20 bg-slate-900 border border-slate-600 rounded text-white text-center ml-2" 
+                    />
+                    الكمية
+                  </label>
+
+                  <label className="flex items-center gap-2 text-slate-300">
+                    <input 
+                      type="checkbox" 
+                      name="inStock" 
+                      value="true" 
+                      defaultChecked={screen.inStock} 
+                      className="w-5 h-5 rounded border-slate-600 text-sky-500 bg-slate-900 ml-2"
+                    />
+                    متوفر
+                  </label>
+                </div>
                 
                 <div className="flex gap-3 mt-auto pt-4">
                   <button 
@@ -134,8 +156,11 @@ export default function AdminScreenList({ screens }: { screens: Screen[] }) {
                     alt={screen.name} 
                     className="w-full h-full object-cover transition-transform group-hover:scale-110"
                   />
+                  <div className="absolute top-3 right-3 bg-slate-800/80 backdrop-blur text-white text-xs font-bold px-3 py-1.5 rounded-full border border-slate-600 shadow">
+                    المخزون: {screen.quantity}
+                  </div>
                   {!screen.inStock && (
-                    <div className="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded shadow">
+                    <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded shadow">
                       نفذت الكمية
                     </div>
                   )}
@@ -146,6 +171,21 @@ export default function AdminScreenList({ screens }: { screens: Screen[] }) {
                   <div className="flex items-baseline gap-2 mb-4 justify-end">
                     <span className="text-2xl font-black text-red-400">{screen.discountPrice} ج.م</span>
                     <span className="text-sm text-slate-500 line-through">{screen.basePrice} ج.م</span>
+                  </div>
+
+                  <div className="bg-slate-900/50 p-3 rounded-lg border border-slate-700/50 flex flex-col gap-1.5 mb-4 text-xs font-medium">
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">الكمية الكلية:</span>
+                      <span className="text-white">{screen.quantity} وحدة</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-amber-400">أرباح المعرض (الصافي):</span>
+                      <span className="text-amber-400">{totalShopProfit.toLocaleString()} ج.م</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-green-400">أرباح مالك الموقع:</span>
+                      <span className="text-green-400">{totalWebOwnerProfit.toLocaleString()} ج.م</span>
+                    </div>
                   </div>
                   
                   <div className="flex gap-3 mt-auto pt-4 border-t border-slate-700">
@@ -175,7 +215,7 @@ export default function AdminScreenList({ screens }: { screens: Screen[] }) {
               </>
             )}
           </div>
-        ))}
+        )})}
       </div>
     </div>
   )

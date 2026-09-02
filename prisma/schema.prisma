@@ -434,6 +434,7 @@ model Screen {
   discountPrice Float
   imageUrl      String
   inStock       Boolean  @default(true)
+  quantity      Int      @default(1)
   createdAt     DateTime @default(now())
 
   orders        Order[]
