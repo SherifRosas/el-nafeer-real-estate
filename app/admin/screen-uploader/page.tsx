@@ -41,7 +41,7 @@ export default async function ScreenUploaderPage() {
   }
 
   return (
-    <div style={{ padding: "2rem", minHeight: "100vh", backgroundColor: "#0f172a", color: "#f8fafc" }}>
+    <div style={{ padding: "2rem", backgroundColor: "#0f172a", color: "#f8fafc" }}>
       <div style={{ maxWidth: "800px", margin: "0 auto" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem", borderBottom: "1px solid #334155", paddingBottom: "1rem" }}>
           <h1 style={{ fontSize: "2rem", margin: 0 }}>
