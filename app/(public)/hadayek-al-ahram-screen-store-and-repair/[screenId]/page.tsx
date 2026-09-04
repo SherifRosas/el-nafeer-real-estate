@@ -59,12 +59,14 @@ export default async function ScreenDetailPage({ params }: { params: Promise<{ s
           
           {/* Left: Image Showcase */}
           <div className="relative w-full aspect-square lg:aspect-auto lg:min-h-[600px] bg-slate-100/50 p-8 md:p-12 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-100">
-            {/* Standard img tag to prevent Next/Image Supabase domain issues */}
-            <img 
-              src={screen.imageUrl} 
-              alt={screen.name}
-              className="w-full h-full object-contain max-h-[500px] drop-shadow-2xl transition-transform hover:scale-105 duration-500"
-            />
+            {/* Standard img tag wrapped in link for fullscreen view */}
+            <a href={screen.imageUrl} target="_blank" rel="noopener noreferrer" className="w-full h-full flex items-center justify-center cursor-zoom-in">
+              <img 
+                src={screen.imageUrl} 
+                alt={screen.name}
+                className="w-full h-full object-contain max-h-[500px] drop-shadow-2xl transition-transform hover:scale-105 duration-500"
+              />
+            </a>
             {screen.discountPrice < screen.basePrice && (
               <div className="absolute top-8 left-8 bg-red-600 text-white font-black px-4 py-2 rounded-lg shadow-lg uppercase tracking-wider text-sm">
                 تخفيض

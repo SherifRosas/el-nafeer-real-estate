@@ -27,7 +27,7 @@ export default function CheckoutWidget({
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
-  const shippingCost = deliveryType === 'SHIPPING' ? 50 : 0
+  const shippingCost = deliveryType === 'SHIPPING' ? 500 : 0
   const totalPrice = discountPrice + shippingCost
 
   const handleNextStep1 = () => {
@@ -203,7 +203,7 @@ export default function CheckoutWidget({
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${deliveryType === 'SHIPPING' ? 'text-slate-900' : 'text-slate-300'}`}><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
                 <span className="font-bold text-lg">Shipping</span>
-                <span className={`text-sm font-medium ${deliveryType === 'SHIPPING' ? 'text-slate-500' : 'text-slate-400'}`}>+50 EGP</span>
+                <span className={`text-sm font-medium ${deliveryType === 'SHIPPING' ? 'text-slate-500' : 'text-slate-400'}`}>+500 EGP</span>
               </button>
             </div>
 

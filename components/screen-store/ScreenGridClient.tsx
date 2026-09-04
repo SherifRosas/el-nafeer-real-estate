@@ -86,7 +86,10 @@ export default function ScreenGridClient({ screens }: { screens: Screen[] }) {
                 key={screen.id} 
                 className="group flex flex-col bg-white border border-slate-200/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="relative w-full aspect-square md:aspect-[4/3] bg-slate-100 overflow-hidden border-b border-slate-100 p-4">
+                <Link 
+                  href={`/hadayek-al-ahram-screen-store-and-repair/${screen.id}`}
+                  className="relative block w-full aspect-square md:aspect-[4/3] bg-slate-100 overflow-hidden border-b border-slate-100 p-4 cursor-pointer"
+                >
                   {/* Small Brand Logo/Text */}
                   {brand !== 'OTHER' && (
                     <div className="absolute top-3 right-3 z-10 bg-white/90 backdrop-blur-sm px-2 py-1 rounded shadow-sm text-[10px] md:text-xs font-black tracking-widest text-slate-800">
@@ -107,7 +110,7 @@ export default function ScreenGridClient({ screens }: { screens: Screen[] }) {
                     className="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500"
                     loading="lazy"
                   />
-                </div>
+                </Link>
                 
                 <div className="p-4 md:p-6 flex flex-col flex-grow">
                   <h3 className="text-base md:text-xl font-bold text-slate-900 mb-2 line-clamp-2 leading-tight">
