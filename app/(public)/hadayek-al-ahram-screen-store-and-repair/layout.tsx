@@ -1,5 +1,15 @@
 import Link from 'next/link'
 import { ShieldCheck } from 'lucide-react'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "معرض الأخوه لبيع الشاشات | القاهرة، الجيزة، و 6 أكتوبر",
+  description: "أقوى عروض الشاشات في الجيزة والقاهرة و٦ أكتوبر. بيع وشراء أحدث الشاشات بضمان حقيقي وتوصيل سريع.",
+  openGraph: {
+    title: "معرض الأخوه لبيع الشاشات | القاهرة، الجيزة، و 6 أكتوبر",
+    description: "أقوى عروض الشاشات في الجيزة والقاهرة و٦ أكتوبر. بيع وشراء أحدث الشاشات بضمان حقيقي.",
+  }
+}
 
 export default function ScreenStoreLayout({
   children,
