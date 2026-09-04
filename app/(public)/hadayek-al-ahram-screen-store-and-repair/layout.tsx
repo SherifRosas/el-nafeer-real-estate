@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { ShieldCheck } from 'lucide-react'
-import RepairLeadWidget from '@/components/RepairLeadWidget'
 
 export default function ScreenStoreLayout({
   children,
@@ -85,10 +84,10 @@ export default function ScreenStoreLayout({
                   textShadow: '0 0 8px rgba(0,255,255,0.8), 0 0 15px rgba(0,255,255,0.5), 0 0 30px rgba(0,255,255,0.3)',
                   WebkitTextStroke: '1px rgba(255,255,255,0.2)'
                 }}>
-              الأخوة للشاشات والصيانة
+              معرض الأخوه لبيع الشاشات
             </h1>
             <p className="text-cyan-200/80 text-sm md:text-lg font-medium mt-2 tracking-wide max-w-2xl mx-auto relative z-10 drop-shadow-md">
-              بيع وشراء الشاشات | صيانة احترافية | حدائق الأهرام
+              بيع وشراء أحدث الشاشات | حدائق الأهرام
             </p>
           </div>
 
@@ -101,9 +100,6 @@ export default function ScreenStoreLayout({
       <div className="pb-24">
         {children}
       </div>
-
-      {/* Floating Repair Lead Widget */}
-      <RepairLeadWidget />
     </div>
   )
 }
