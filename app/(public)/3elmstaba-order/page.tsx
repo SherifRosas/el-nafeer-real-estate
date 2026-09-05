@@ -90,7 +90,7 @@ export default function OrderingApp() {
               <span className="text-2xl">🥙</span>
             </div>
             <div>
-              <h1 className="font-bold text-slate-800 leading-tight" dir="ltr" style={{textAlign: "right"}}>3Elmastaba Shawarma</h1>
+              <h1 className="font-bold text-slate-800 leading-tight" dir="ltr" style={{textAlign: "right"}}>3Elmstaba Cafe</h1>
               <p className="text-xs text-orange-500 font-medium">طوخ • توصيل أونلاين</p>
             </div>
           </div>
@@ -114,7 +114,7 @@ export default function OrderingApp() {
         {view === 'menu' && (
           <div className="space-y-6 animate-in fade-in">
             {/* Banner */}
-            <div className="relative w-full h-40 rounded-xl overflow-hidden shadow-md">
+            <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-md">
               <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-400 opacity-90 z-10 flex flex-col justify-center px-6">
                 <h2 className="text-2xl font-bold text-white mb-1">نفسك في شاورما؟</h2>
                 <p className="text-orange-100 text-sm">اطلب دلوقتي، ادفع بفودافون كاش، ويوصلك لحد باب البيت في طوخ.</p>
