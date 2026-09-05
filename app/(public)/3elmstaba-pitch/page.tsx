@@ -116,7 +116,7 @@ export default function PitchPage() {
           </div>
 
           {/* Card 4: Consultant with Image */}
-          <div className="bg-[#111827] rounded-xl overflow-hidden border-l-4 border-l-cyan-500 shadow-lg mt-6 mb-12">
+          <div className="bg-[#111827] rounded-xl overflow-hidden border-l-4 border-l-cyan-500 shadow-lg mt-6">
             <div className="p-5">
               <h3 className="text-cyan-400 font-bold text-xs tracking-wider mb-4 uppercase">Business Advisory Response & Cloud Kitchen Concept</h3>
               
@@ -149,6 +149,27 @@ export default function PitchPage() {
                 </ul>
               </div>
 
+            </div>
+          </div>
+
+          {/* Card 5: Consultant - Real World Execution */}
+          <div className="bg-[#111827] rounded-xl overflow-hidden border-l-4 border-l-cyan-500 shadow-lg mt-6 mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="p-5">
+              <h3 className="text-cyan-400 font-bold text-xs tracking-wider mb-4 uppercase">Cost-Optimized Real-World Implementation</h3>
+              
+              <p className="text-slate-200 leading-relaxed text-sm mb-5">
+                While the AI concept illustrates the vision, we can execute this in reality with <strong className="text-green-400">minimal capital investment</strong>. The barrier to entry is extremely low because we will repurpose the existing café aesthetic rather than fighting against it.
+              </p>
+
+              {/* Boxed Highlights */}
+              <div className="bg-[#0f172a] rounded-lg border border-green-500/30 p-4">
+                <h4 className="text-green-400 font-bold mb-3">Low-Budget Execution Steps:</h4>
+                <ul className="space-y-3 text-sm text-slate-300 list-disc list-inside">
+                  <li><strong className="text-white">Repurpose the Striped Fence:</strong> No costly masonry required. We simply make a small carpentry cut to create a pick-up window in the existing green/red/wood striped fence.</li>
+                  <li><strong className="text-white">Vinyl Over Digital:</strong> Instead of expensive digital screens, we print high-quality vinyl banners/lightboxes and hang them directly from the metal roll-up shutter box.</li>
+                  <li><strong className="text-white">Utilize Existing Atmosphere:</strong> We keep the existing hanging Edison bulbs and the beautiful face mural intact, maintaining the authentic street-art vibe while saving on painting and lighting costs.</li>
+                </ul>
+              </div>
             </div>
           </div>
 
