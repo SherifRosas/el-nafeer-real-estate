@@ -5,12 +5,31 @@ import Image from 'next/image';
 import { ShoppingCart, Plus, Minus, ArrowRight, CheckCircle2, MessageCircle } from 'lucide-react';
 
 const MENU_ITEMS = [
-  { id: '1', name: 'Meat Shawarma Sandwich', description: 'Authentic Syrian style with tahini', price: 65, category: 'Shawarma' },
-  { id: '2', name: 'Chicken Shawarma Sandwich', description: 'With extra garlic dip (Toumiya)', price: 55, category: 'Shawarma' },
-  { id: '3', name: 'Meat Shawarma Meal (Fatteh)', description: 'Served with rice, toasted bread, and nuts', price: 120, category: 'Meals' },
-  { id: '4', name: 'Chicken Shawarma Meal (Fatteh)', description: 'Served with rice, toasted bread, and garlic dip', price: 110, category: 'Meals' },
-  { id: '5', name: 'Extra Garlic Dip (Toumiya)', description: '', price: 15, category: 'Extras' },
-  { id: '6', name: 'Fries', description: 'Crispy golden fries', price: 25, category: 'Extras' },
+  // Sandwiches
+  { id: '1', name: 'Chicken Shawarma (French Bread)', description: 'Authentic Syrian style', price: 98, category: 'Sandwiches' },
+  { id: '2', name: 'Meat Shawarma (French Bread)', description: 'Premium meat with tahini', price: 104, category: 'Sandwiches' },
+  { id: '3', name: 'Mix Shawarma (French Bread)', description: 'Best of both worlds', price: 100, category: 'Sandwiches' },
+  { id: '4', name: 'Shish Tawook (French Bread)', description: 'Grilled chicken cubes', price: 98, category: 'Sandwiches' },
+  { id: '5', name: 'Zinger Sandwich', description: 'Flavorful chicken sandwich with mayo', price: 98, category: 'Sandwiches' },
+  { id: '6', name: 'Chicken Fajita (French Bread)', description: 'With peppers and onions', price: 91, category: 'Sandwiches' },
+  { id: '7', name: 'Kofta (French Bread)', description: 'Grilled seasoned minced meat', price: 85, category: 'Sandwiches' },
+  { id: '8', name: 'Super Crunchy (French Bread)', description: 'Extra crispy chicken', price: 104, category: 'Sandwiches' },
+  
+  // Meals
+  { id: '9', name: 'Chicken Shawarma Plate', description: 'With fries, kubba, sambousek, rice & toumiya', price: 170, category: 'Meals' },
+  { id: '10', name: 'Meat Shawarma Plate', description: 'With fries, kubba, sambousek, rice & tahini', price: 182, category: 'Meals' },
+  { id: '11', name: 'Mix Shawarma Plate', description: 'With fries, kubba, sambousek, rice & dips', price: 175, category: 'Meals' },
+  { id: '12', name: 'Crispy 3 Pieces Meal', description: 'With rice, fries, toumiya & bread', price: 163, category: 'Meals' },
+  { id: '13', name: 'Zinger 3 Pieces Meal', description: 'With rice, fries, toumiya & bread', price: 163, category: 'Meals' },
+  { id: '14', name: 'Shish 2 Skewers Meal', description: 'With rice, fries, toumiya & bread', price: 169, category: 'Meals' },
+
+  // Extras & Sides
+  { id: '15', name: 'Extra Chicken Shawarma', description: 'With mushroom and mozzarella', price: 117, category: 'Extras' },
+  { id: '16', name: 'Extra Meat Shawarma', description: 'With mushroom and mozzarella', price: 130, category: 'Extras' },
+  { id: '17', name: 'Cheese Fries', description: 'Crispy french fries topped with melted cheese', price: 52, category: 'Extras' },
+  { id: '18', name: 'French Fries Sandwich', description: 'In french bread', price: 40, category: 'Extras' },
+  { id: '19', name: 'Kubba Plate', description: '2 pieces with sambousek and toumiya', price: 30, category: 'Extras' },
+  { id: '20', name: 'Plain Basmati Rice', description: 'Fragrant long-grain rice', price: 46, category: 'Extras' },
 ];
 
 const VODAFONE_CASH_NUMBER = "010xxxxxxxxx"; // Placeholder for the actual number
@@ -67,12 +86,13 @@ export default function OrderingApp() {
       <header className="bg-white shadow-sm sticky top-0 z-40">
         <div className="max-w-lg mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
-              3E
+            <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md overflow-hidden relative">
+              {/* If you have a real logo, replace this 🥙 with an <Image /> tag pointing to your logo! */}
+              <span className="text-2xl">🥙</span>
             </div>
             <div>
-              <h1 className="font-bold text-slate-800 leading-tight">3Elmstaba Delivery</h1>
-              <p className="text-xs text-orange-500 font-medium">Tokh City • Syrian Shawarma</p>
+              <h1 className="font-bold text-slate-800 leading-tight">3Elmastaba Shawarma</h1>
+              <p className="text-xs text-orange-500 font-medium">Tokh City • Online Delivery</p>
             </div>
           </div>
           {view === 'menu' && cartItemCount > 0 && (
@@ -108,7 +128,7 @@ export default function OrderingApp() {
             </div>
 
             {/* Categories */}
-            {['Shawarma', 'Meals', 'Extras'].map(category => (
+            {['Sandwiches', 'Meals', 'Extras'].map(category => (
               <div key={category}>
                 <h3 className="font-bold text-slate-800 text-lg mb-3 border-b border-slate-200 pb-2">{category}</h3>
                 <div className="space-y-3">
