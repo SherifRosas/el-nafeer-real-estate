@@ -90,7 +90,7 @@ export default function OrderingApp() {
               <span className="text-2xl">🥙</span>
             </div>
             <div>
-              <h1 className="font-bold text-slate-800 leading-tight" dir="ltr" style={{textAlign: "right"}}>3Elmstaba Cafe</h1>
+              <h1 className="font-bold text-slate-800 leading-tight" dir="ltr" style={{textAlign: "right"}}>3Elmstaba Shawarma</h1>
               <p className="text-xs text-orange-500 font-medium">طوخ • توصيل أونلاين</p>
             </div>
           </div>
